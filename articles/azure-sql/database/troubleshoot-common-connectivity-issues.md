@@ -12,13 +12,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: carlrab, vanto
 origin.date: 01/14/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: 797bea61529996e32a700c6418b5e6c597b6a20b
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 2c43454fb0ea396501b45b519873e71247c86eb8
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227648"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223279"
 ---
 # <a name="troubleshoot-transient-connection-errors-in-sql-database-and-sql-managed-instance"></a>排查 SQL 数据库和 SQL 托管实例中的临时连接错误
 
@@ -106,7 +106,7 @@ ms.locfileid: "86227648"
 - 通过使用“Console.ReadLine”  方法或具有“确定”按钮的对话框暂停进一步执行。 将计算机接入网络后，用户按 Enter 键。
 - 重新尝试连接，预期会成功。
 
-#### <a name="test-by-misspelling-the-database-name-when-connecting"></a>通过在连接时拼错数据库名称进行测试
+#### <a name="test-by-misspelling-the-user-name-when-connecting"></a>通过在连接时拼错用户名进行测试
 
 在首次连接尝试之前，程序可以故意拼错用户名。 错误为：
 
@@ -149,8 +149,8 @@ ms.locfileid: "86227648"
 
 **ConnectRetryCount** 和 **ConnectRetryInterval** 参数使 **SqlConnection** 对象在重试连接操作时不用通知或麻烦你的程序（例如，将控制权返还给你的程序）。 在以下情况下可能会进行重试：
 
-- mySqlConnection.Open 方法调用
-- mySqlConnection.Execute 方法调用
+- SqlConnection.Open 方法调用
+- SqlConnection.Execute 方法调用
 
 有个很微妙的地方。 如果正在执行查询时发生暂时性错误，**SqlConnection** 对象不会重试连接操作。 肯定不会重试查询。 但是， **SqlConnection** 在发送要执行的查询前会非常快速地检查连接。 如果快速检查检测到连接问题， **SqlConnection** 会重试连接操作。 如果重试成功，则会发送查询以执行。
 
@@ -357,7 +357,7 @@ Enterprise Library 6 (EntLib60) 是 .NET 类的框架，可帮助你实施云服
 以下是 EntLib60 相关信息的某些链接：
 
 - 免费书籍下载：[Microsoft Enterprise Library 版本 2 开发人员指南](https://www.microsoft.com/download/details.aspx?id=41145)
-- 最佳做法：[有关重试的一般性指南](https://docs.microsoft.com/architecture/best-practices/transient-faults)深入探讨了重试逻辑。
+- 最佳做法：[有关重试的一般性指南](https://docs.microsoft.com/azure/architecture/best-practices/transient-faults)深入探讨了重试逻辑。
 - NuGet 下载：[Enterprise Library - 暂时性故障处理应用程序块 6.0](https://www.nuget.org/packages/EnterpriseLibrary.TransientFaultHandling/)。
 
 <a id="entlib60-the-logging-block" name="entlib60-the-logging-block"></a>

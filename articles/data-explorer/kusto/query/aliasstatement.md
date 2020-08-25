@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/31/2020
+ms.date: 08/18/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: a163e3a4a26fe674b34718d30db6e5d9edd62994
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.openlocfilehash: 9137e9761f08b74ff132fb25635865578c614aa6
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509556"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515792"
 ---
 # <a name="alias-statement"></a>Alias 语句
 

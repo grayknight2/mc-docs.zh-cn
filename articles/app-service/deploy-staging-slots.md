@@ -3,20 +3,21 @@ title: 设置过渡环境
 description: 了解如何将应用部署到非生产槽并自动交换到生产环境中。 提高可靠性并消除部署中的应用停机时间。
 ms.assetid: e224fc4f-800d-469a-8d6a-72bcde612450
 ms.topic: article
-origin.date: 03/04/2020
-ms.date: 05/22/2020
+origin.date: 04/30/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
-ms.openlocfilehash: 548dba77a8805986ddd8d03cd5f5df0316573480
-ms.sourcegitcommit: 981a75a78f8cf74ab5a76f9e6b0dc5978387be4b
+ms.custom: fasttrack-edit
+ms.openlocfilehash: c4fc194d4bbd8da0d74732802e5b984f5980b82c
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83801193"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227941"
 ---
 # <a name="set-up-staging-environments-in-azure-app-service"></a>设置 Azure 应用服务中的过渡环境
 <a name="Overview"></a>
 
-将 Web 应用、移动后端和 API 应用部署到 [Azure 应用服务](https://docs.azure.cn/app-service/overview)时，如果是在“标准”、“高级”或“独立”应用服务计划层中运行，则可以使用单独的部署槽而不是默认的生产槽。 部署槽是具有自身主机名的实时应用。 两个部署槽（包括生产槽）之间的应用内容与配置元素可以交换。 
+将 Web 应用、Linux 上的 Web 应用、移动后端或 API 应用部署到 [Azure 应用服务](https://docs.azure.cn/app-service/overview)时，如果应用在“标准”、“高级”或“隔离”应用服务计划层中运行，则可以使用单独的部署槽，而不是默认的生产槽。 部署槽是具有自身主机名的实时应用。 两个部署槽（包括生产槽）之间的应用内容与配置元素可以交换。 
 
 将应用程序部署到非生产槽具有以下优点：
 
@@ -24,7 +25,7 @@ ms.locfileid: "83801193"
 * 首先将应用部署到槽，然后将其交换到生产，这确保槽的所有实例都已准备好，然后交换到生产。 部署应用时，这样可避免停机。 流量重定向是无缝的，且不会因交换操作而删除任何请求。 当不需要预交换验证时，可以通过配置[自动交换](#Auto-Swap)来自动化这整个工作流。
 * 交换后，具有以前分阶段应用的槽现在具有以前的生产应用。 如果交换到生产槽的更改与预期不同，可以立即执行同一交换来收回“上一已知的良好站点”。
 
-每种应用服务计划层支持不同数量的部署槽。 使用部署槽不会产生额外的费用。 若要了解应用层支持的槽数，请参阅[应用服务限制](https://docs.azure.cn/azure-subscription-service-limits#app-service-limits)。 
+每种应用服务计划层支持不同数量的部署槽。 使用部署槽不会产生额外的费用。 若要了解应用层支持的槽数，请参阅[应用服务限制](../azure-resource-manager/management/azure-subscription-service-limits.md#app-service-limits)。 
 
 若要将应用缩放到其他层，请确保目标层支持应用业已使用的槽数。 例如，如果应用有 5 个以上的槽，则不能向下缩放到“标准”层，因为“标准”层只支持 5 个部署槽 。 
 
@@ -59,7 +60,7 @@ ms.locfileid: "83801193"
    
     ![部署槽标题](./media/web-sites-staged-publishing/StagingTitle.png)
 
-    过渡槽具有管理页面，就像任何其他应用服务应用一样。 可以更改此槽的配置。 为了提醒你正在查看的是部署槽，应用名称会显示为“\<app-name>/\<slot-name>”，应用类型为“应用服务(槽)”。 也可以将槽视为资源组中具有相同名称的单独应用。
+    过渡槽具有管理页面，就像任何其他应用服务应用一样。 可以更改此槽的配置。 为了提醒你正在查看的是部署槽，应用名称会显示为“\<app-name>/\<slot-name>”，应用类型会显示为“应用服务(槽)”。 也可以将槽视为资源组中具有相同名称的单独应用。
 
 6. 选择此槽资源页中的应用 URL。 部署槽有其自己的主机名，同时也是动态应用。 若要限制对部署槽的公共访问权限，请参阅 [Azure 应用服务 IP 限制](app-service-ip-restrictions.md)。
 
@@ -174,8 +175,8 @@ ms.locfileid: "83801193"
 
 ## <a name="configure-auto-swap"></a>配置自动交换
 
-<!-- > [!NOTE] -->
-<!-- > Auto swap isn't supported in web apps on Linux. -->
+> [!NOTE]
+> Linux 上的 Web 应用中不支持自动交换。
 
 自动交换简化了 Azure DevOps 方案，在此方案中，可连续部署应用，无需冷启动且不会给应用的客户造成停机。 启用从某个槽到生产槽的自动交换后，每次将代码更改推送到该槽时，应用服务会在源槽中预热后自动[将应用交换到生产槽](#swap-operation-steps)中。
 
@@ -185,7 +186,7 @@ ms.locfileid: "83801193"
 
 若要配置自动交换：
 
-1. 转到应用的资源页。 选择“部署槽” > “\<所需的源槽>” > “配置” > “常规设置”。 
+1. 转到应用的资源页。 选择“部署槽” > “\<desired source slot>” > “配置” > “常规设置”。
    
 2. 对于“启用自动交换”，请选择“打开”。  为“自动交换部署槽”选择所需的目标槽，然后选择在命令栏上“保存”。  
    
@@ -201,12 +202,14 @@ ms.locfileid: "83801193"
 
 某些应用在交换之前可能需要执行自定义的预热操作。 web.config 中的 `applicationInitialization` 配置元素可用于指定自定义初始化操作。 [交换操作](#AboutConfiguration)在与目标槽交换之前等待此自定义预热操作完成。 以下是 web.config 片段的示例。
 
-    <system.webServer>
-        <applicationInitialization>
-            <add initializationPage="/" hostName="[app hostname]" />
-            <add initializationPage="/Home/About" hostName="[app hostname]" />
-        </applicationInitialization>
-    </system.webServer>
+```xml
+<system.webServer>
+    <applicationInitialization>
+        <add initializationPage="/" hostName="[app hostname]" />
+        <add initializationPage="/Home/About" hostName="[app hostname]" />
+    </applicationInitialization>
+</system.webServer>
+```
 
 有关自定义 `applicationInitialization` 元素的详细信息，请参阅[最常见的部署槽位交换故障以及如何修复它们](https://ruslany.net/2017/11/most-common-deployment-slot-swap-failures-and-how-to-fix-them/)。
 
@@ -256,7 +259,7 @@ ms.locfileid: "83801193"
 
 例如，若要让用户选择退出 beta 应用，可以在网页中插入以下链接：
 
-```HTML
+```html
 <a href="<webappname>.chinacloudsites.cn/?x-ms-routing-name=self">Go back to production app</a>
 ```
 
@@ -274,7 +277,7 @@ ms.locfileid: "83801193"
 
 ## <a name="delete-a-slot"></a>删除槽
 
-搜索并选择应用。 选择“部署槽” > “\<删除槽>” > “概述”。 应用类型将显示为“应用服务(槽)”，以提醒你正在查看部署槽。 在命令栏上选择“删除”。  
+搜索并选择应用。 选择“部署槽” > “\<slot to delete>” > “概述”。 应用类型将显示为“应用服务(槽)”，以提醒你正在查看部署槽。 在命令栏上选择“删除”。  
 
 ![删除部署槽](./media/web-sites-staged-publishing/DeleteStagingSiteButton.png)
 

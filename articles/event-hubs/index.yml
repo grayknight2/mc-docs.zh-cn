@@ -11,14 +11,14 @@ metadata:
   ms.collection: collection
   author: spelluru
   ms.author: v-tawe
-  origin.date: 03/13/2020
-  ms.date: 05/29/2020
-  ms.openlocfilehash: 773da251902960ec78ccfb05bc5f5526be886fd2
-  ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+  origin.date: 06/23/2020
+  ms.date: 08/21/2020
+  ms.openlocfilehash: ed76c9e4e2be626fb0744040d7ebdf7f889ff707
+  ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 05/29/2020
-  ms.locfileid: "84199761"
+  ms.lasthandoff: 08/21/2020
+  ms.locfileid: "88715196"
 landingContent:
 - title: 关于事件中心
   linkLists:
@@ -42,7 +42,7 @@ landingContent:
       url: event-hubs-quickstart-cli.md
     - text: Azure PowerShell
       url: event-hubs-quickstart-powershell.md
-    - text: Azure Resource Manager 模板
+    - text: Azure 资源管理器模板
       url: event-hubs-resource-manager-namespace-event-hub.md
 - title: 创建专用群集
   linkLists:
@@ -86,7 +86,7 @@ landingContent:
       url: event-hubs-java-get-started-send.md
     - text: Python
       url: get-started-python-send-v2.md
-    - text: Javascript
+    - text: JavaScript
       url: get-started-node-send-v2.md
     - text: Apache Kafka
       url: event-hubs-quickstart-kafka-enabled-event-hubs.md#send-and-receive-messages-with-kafka-in-event-hubs
@@ -94,6 +94,28 @@ landingContent:
       url: event-hubs-storm-getstarted-receive.md
     - text: Go
       url: event-hubs-go-get-started-send.md
+- title: “Azure Stack Hub 上的事件中心”预览版
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: 概述
+      url: /azure-stack/user/event-hubs-overview
+    - text: 常用功能集
+      url: /azure-stack/user/event-hubs-overview
+  - linkListType: how-to-guide
+    links:
+    - text: 容量计划
+      url: /azure-stack/operator/event-hubs-rp-capacity-planning
+    - text: 安装的先决条件（操作员）
+      url: /azure-stack/operator/event-hubs-rp-prerequisites
+    - text: 安装（操作员）
+      url: /azure-stack/operator/event-hubs-rp-install
+    - text: 使用 Blob 存储作为检查点存储
+      url: use-blob-storage-checkpoint-store-azure-stack-hub.md
+  - linkListType: quickstart
+    links:
+    - text: 创建事件中心群集
+      url: /azure-stack/user/event-hubs-quickstart-cluster-portal
 - title: 捕获事件
   linkLists:
   - linkListType: overview

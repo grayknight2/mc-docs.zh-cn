@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: quickstart
 ms.workload: identity
-ms.date: 07/09/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: jmprieur, saeeda
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:iOS
-ms.openlocfilehash: 604d52818c382a0cc70ac7ccdc98f4a66025493d
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.openlocfilehash: 2fc64b2ae1bea1ee02e34ef0d3299d65052d4b64
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164947"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647611"
 ---
 # <a name="quickstart-sign-in-users-and-call-the-microsoft-graph-api-from-an-ios-or-macos-app"></a>快速入门：从 iOS 或 macOS 应用将用户登录并调用 Microsoft Graph API
 
@@ -269,7 +269,7 @@ self.applicationContext!.getCurrentAccount(with: nil) { (currentAccount, previou
 ### <a name="learn-how-to-create-the-application-used-in-this-quickstart"></a>了解如何创建本快速入门中使用的应用程序
 
 > [!div class="nextstepaction"]
-> [适用于 iOS 和 macOS 的调用图 API 教程](/active-directory/develop/tutorial-v2-ios)
+> [适用于 iOS 和 macOS 的调用图 API 教程](./tutorial-v2-ios.md)
 
 [!INCLUDE [Help and support](../../../includes/active-directory-develop-help-support-include.md)]
 

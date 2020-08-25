@@ -5,14 +5,14 @@ author: sffamily
 ms.service: signalr
 ms.topic: quickstart
 origin.date: 11/13/2019
-ms.date: 04/20/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 29c034f2c8c296236e52d7755e1f9863a4e35f6a
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+ms.openlocfilehash: c26fb69e1cf8b6ba52bfb3fbe6bb376e6ce22d93
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82126669"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715133"
 ---
 # <a name="quickstart-broadcast-real-time-messages-from-console-app"></a>快速入门：从控制台应用广播实时消息
 
@@ -41,7 +41,7 @@ Azure SignalR 服务提供了 [REST API](https://github.com/Azure/azure-signalr/
 
 1. 打开 git 终端窗口。 切换到要克隆示例项目的文件夹。
 
-1. 运行下列命令，克隆示例存储库。 此命令在计算机上创建示例应用程序的副本。
+1. 运行下列命令以克隆示例存储库。 此命令在计算机上创建示例应用程序的副本。
 
     ```bash
     git clone https://github.com/aspnet/AzureSignalR-samples.git
@@ -123,11 +123,11 @@ Azure SignalR 服务允许第三方服务与系统集成。
 版本 | API 状态 | 门 | 特定
 --- | --- | --- | ---
 `1.0-preview` | 可用 | 5002 | [Swagger](https://github.com/Azure/azure-signalr/tree/dev/docs/swagger/v1-preview.json)
-`1.0` | 可用 | 标准 | [Swagger](https://github.com/Azure/azure-signalr/tree/dev/docs/swagger/v1.json)
+`1.0` | 可用 | Standard | [Swagger](https://github.com/Azure/azure-signalr/tree/dev/docs/swagger/v1.json)
 
 适用于每个特定版本的 API 的列表在下表中提供。
 
-API | `1.0-preview` | `1.0`
+API | 1.0-preview | 1.0
 --- | --- | ---
 [广播到所有对象](#broadcast) | **&#x2713;** | **&#x2713;**
 [广播到组](#broadcast-group) | **&#x2713;** | **&#x2713;**
@@ -243,7 +243,7 @@ API 版本 | API HTTP 方法 | 请求 URL
 响应状态代码 | 说明
 ---|---
 `200` | 服务良好
-`503` | 服务不可用
+`5xx` | 服务错误
 
 [!INCLUDE [Cleanup](includes/signalr-quickstart-cleanup.md)]
 

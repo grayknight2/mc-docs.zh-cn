@@ -3,16 +3,16 @@ title: 使用 ZIP 或 WAR 文件部署代码
 description: 了解如何使用 ZIP 文件（或者对于 Java 开发人员而言使用 WAR 文件）将应用部署到 Azure 应用服务。
 ms.topic: article
 origin.date: 08/12/2018
-ms.date: 02/17/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.reviewer: sisirap
 ms.custom: seodec18
-ms.openlocfilehash: fd13e742d97d7153e8bcb6ddf5c0350ad1101ca6
-ms.sourcegitcommit: 89ca2993f5978cd6dd67195db7c4bdd51a677371
+ms.openlocfilehash: 2f875a124539dace358f031653acd7ba724fc760
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82588673"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227939"
 ---
 # <a name="deploy-your-app-to-azure-app-service-with-a-zip-or-war-file"></a>使用 ZIP 或 WAR 文件将应用部署到 Azure 应用服务
 
@@ -30,6 +30,9 @@ ms.locfileid: "82588673"
 
 WAR 文件部署将 WAR 文件部署到应用服务，以运行 Java Web 应用。 请参阅[部署 WAR 文件](#deploy-war-file)。
 
+> [!NOTE]
+> 如果使用 `ZipDeploy`，则仅当文件时间戳与已部署的文件不匹配时，才会复制文件。 使用缓存输出的生成过程生成 zip 可以使部署速度更快。 有关详细信息，请参阅[从 zip 文件或 url 部署](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file-or-url)。
+
 ## <a name="prerequisites"></a>先决条件
 
 若要完成本文中的步骤，请[创建一个应用服务应用](/app-service/)，或者使用为其他教程创建的应用。
@@ -39,7 +42,7 @@ WAR 文件部署将 WAR 文件部署到应用服务，以运行 Java Web 应用�
 [!INCLUDE [Create a project ZIP file](../../includes/app-service-web-deploy-zip-prepare.md)]
 
 [!INCLUDE [Deploy ZIP file](../../includes/app-service-web-deploy-zip.md)]
-<!-- The above endpoint does not work for Linux App Services at this time. Consider using FTP or the [ZIP deploy API](https://docs.azure.cn/app-service/containers/app-service-linux-faq#continuous-integration-and-deployment) instead. -->
+上面的终结点目前不适用于 Linux 应用服务。 请考虑改用 FTP 或 [ZIP 部署 API](faq-app-service-linux.md#continuous-integration-and-deployment)。
 
 ## <a name="deploy-zip-file-with-azure-cli"></a>使用 Azure CLI 部署 ZIP 文件
 
@@ -65,7 +68,7 @@ az webapp config appsettings set --resource-group <group-name> --name <app-name>
 
 ## <a name="deploy-war-file"></a>部署 WAR 文件
 
-若要将 WAR 文件部署到应用服务，请将 POST 请求发送到 https://<app-name>.scm.chinacloudsites.cn/api/wardeploy。 POST 请求必须在消息正文中包含此 .war 文件。 应用的部署凭据是通过使用 HTTP BASIC 身份验证在请求中提供的。 
+若要将 WAR 文件部署到应用服务，请将 POST 请求发送到 `https://<app-name>.scm.chinacloudsites.cn/api/wardeploy`。 POST 请求必须在消息正文中包含此 .war 文件。 应用的部署凭据是通过使用 HTTP BASIC 身份验证在请求中提供的。 
 
 部署 WAR 文件时始终使用 `/api/wardeploy`。 此 API 将展开 WAR 文件并将其放在共享文件驱动器上。 使用其他部署 API 可能会导致行为不一致。 
 

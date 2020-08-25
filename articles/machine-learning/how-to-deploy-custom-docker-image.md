@@ -11,12 +11,12 @@ author: jpe316
 ms.reviewer: larryfr
 ms.date: 03/16/2020
 ms.custom: tracking-python
-ms.openlocfilehash: c335eb927eb6c1380c584b69767e5a7d1a77ab21
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: 193206da5e2cd536a4d9255831720c835b39c6ef
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441190"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228207"
 ---
 # <a name="deploy-a-model-using-a-custom-docker-base-image"></a>使用自定义 Docker 基础映像部署模型
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -76,7 +76,7 @@ Azure 机器学习提供了一个默认的 Docker 基础映像，因此你无需
 
     * Ubuntu 16.04 或更高版本。
     * Conda 4.5.# 或更高版本。
-    * Python 3.5.# 或 3.6.#。
+    * Python 3.5.#、3.6.# 或 3.7.#。
 
 <a id="getname"></a>
 

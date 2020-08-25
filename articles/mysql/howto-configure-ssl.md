@@ -8,12 +8,12 @@ ms.topic: how-to
 origin.date: 07/08/2020
 ms.date: 08/17/2020
 ms.custom: tracking-python
-ms.openlocfilehash: 63e2aaf04ee86b41f639bec7d83268f38064ba16
-ms.sourcegitcommit: 3cf647177c22b24f76236c57cae19482ead6a283
+ms.openlocfilehash: d2642679b45571d887f13df173cf6e155c1e2fb2
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88029592"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222496"
 ---
 # <a name="configure-ssl-connectivity-in-your-application-to-securely-connect-to-azure-database-for-mysql"></a>配置应用程序的 SSL 连接性以安全连接到 Azure Database for MySQL
 
@@ -25,20 +25,7 @@ Azure Database for MySQL 支持使用安全套接字层 (SSL) 将 Azure Database
 ## <a name="step-1-obtain-ssl-certificate"></a>步骤 1：获取 SSL 证书
 从 [https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem](https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem) 下载通过 SSL 与 Azure Database for MySQL 服务器通信所需的证书，再将证书文件保存到本地驱动器（例如，本教程使用 c:\ssl）。
 
-## <a name="step-2-download-and-install-openssl"></a>步骤 2：下载并安装 OpenSSL
-从[下载页](http://slproweb.com/products/Win32OpenSSL.html)查找并下载最新版本的 OpenSSL。
-
-## <a name="step-3-move-the-local-certificate-file-to-the-openssl-directory"></a>步骤 3：将本地证书文件移到 OpenSSL 目录
-将步骤 1 中下载的证书放入 **...\OpenSSL-Win32\bin** 目录。
-
-## <a name="step-4-convert-the-certificate-file-to-pem-format"></a>步骤 4：将证书文件转换为 PEM 格式
-下载的根证书文件采用 crt 格式。 需要使用 openssl.exe 命令行工具执行以下命令来转换文件格式：
-
-```
-OpenSSL>x509 -inform DEV -in DigiCertGlobalRootCA.crt -out DigiCertGlobalRootCA.pem
-```
-
-## <a name="step-5-bind-ssl"></a>步骤 5：绑定 SSL
+## <a name="step-2-bind-ssl"></a>步骤 2：绑定 SSL
 
 对于特定的编程语言连接字符串，请参考下面的[示例代码](howto-configure-ssl.md#sample-code)。
 
@@ -49,7 +36,7 @@ OpenSSL>x509 -inform DEV -in DigiCertGlobalRootCA.crt -out DigiCertGlobalRootCA.
 
 1. 将“使用 SSL”  字段更新为“必需”。
 
-1. 在“SSL CA 文件:”字段中输入 **DigiCertGlobalRootCA.pem** 的文件位置。**** 
+1. 在“SSL CA 文件:”字段中，输入 DigiCertGlobalRootCA.crt.pem 的文件位置。 
     
     ![保存 SSL 配置](./media/howto-configure-ssl/mysql-workbench-ssl.png)
 
@@ -59,13 +46,13 @@ OpenSSL>x509 -inform DEV -in DigiCertGlobalRootCA.crt -out DigiCertGlobalRootCA.
 绑定 SSL 证书的另一种方法是使用 MySQL 命令行接口执行以下命令。 
 
 ```bash
-mysql.exe -h mydemoserver.mysql.database.chinacloudapi.cn -u Username@mydemoserver -p --ssl-mode=REQUIRED --ssl-ca=C:\OpenSSL-Win32\bin\DigiCertGlobalRootCA.pem
+mysql.exe -h mydemoserver.mysql.database.chinacloudapi.cn -u Username@mydemoserver -p --ssl-mode=REQUIRED --ssl-ca=c:\ssl\DigiCertGlobalRootCA.crt.pem
 ```
 
 > [!NOTE]
 > 在 Windows 上使用 MySQL 命令行接口时，可能会收到错误 `SSL connection error: Certificate signature check failed`。 如果发生这种情况，请将 `--ssl-mode=REQUIRED --ssl-ca={filepath}` 参数替换为 `--ssl`。
 
-## <a name="step-6--enforcing-ssl-connections-in-azure"></a>步骤 6：在 Azure 中强制实施 SSL 连接 
+## <a name="step-3--enforcing-ssl-connections-in-azure"></a>步骤 3：在 Azure 中强制实施 SSL 连接 
 ### <a name="using-the-azure-portal"></a>使用 Azure 门户
 在 Azure 门户中，访问 Azure Database for MySQL 服务器，并单击“连接安全性”。 使用切换按钮来启用或禁用“强制实施 SSL 连接”设置，并单击“保存” 。 Azure 建议你始终启用“强制实施 SSL 连接”设置，以增强安全性。
 ![enable-ssl](./media/howto-configure-ssl/enable-ssl.png)
@@ -76,7 +63,7 @@ mysql.exe -h mydemoserver.mysql.database.chinacloudapi.cn -u Username@mydemoserv
 az mysql server update --resource-group myresource --name mydemoserver --ssl-enforcement Enabled
 ```
 
-## <a name="step-7-verify-the-ssl-connection"></a>步骤 7：验证 SSL 连接
+## <a name="step-4-verify-the-ssl-connection"></a>步骤 4：验证 SSL 连接
 执行 mysql status 命令，验证是否已使用 SSL 连接到 MySQL 服务器：
 ```dos
 mysql> status
@@ -91,7 +78,7 @@ mysql> status
 ### <a name="php"></a>PHP
 ```php
 $conn = mysqli_init();
-mysqli_ssl_set($conn,NULL,NULL, "C:\OpenSSL-Win32\bin\DigiCertGlobalRootCA.pem", NULL, NULL) ; 
+mysqli_ssl_set($conn,NULL,NULL, "/var/www/html/DigiCertGlobalRootCA.crt.pem", NULL, NULL) ; 
 mysqli_real_connect($conn, 'mydemoserver.mysql.database.chinacloudapi.cn', 'myadmin@mydemoserver', 'yourpassword', 'quickstartdb', 3306, MYSQLI_CLIENT_SSL);
 if (mysqli_connect_errno($conn)) {
 die('Failed to connect to MySQL: '.mysqli_connect_error());
@@ -100,7 +87,7 @@ die('Failed to connect to MySQL: '.mysqli_connect_error());
 ### <a name="php-using-pdo"></a>PHP（使用 PDO）
 ```phppdo
 $options = array(
-    PDO::MYSQL_ATTR_SSL_CA => 'C:\OpenSSL-Win32\bin\DigiCertGlobalRootCA.pem'
+    PDO::MYSQL_ATTR_SSL_CA => '/var/www/html/DigiCertGlobalRootCA.crt.pem'
 );
 $db = new PDO('mysql:host=mydemoserver.mysql.database.chinacloudapi.cn;port=3306;dbname=databasename', 'username@mydemoserver', 'yourpassword', $options);
 ```
@@ -111,7 +98,7 @@ try:
                                    password='yourpassword',
                                    database='quickstartdb',
                                    host='mydemoserver.mysql.database.chinacloudapi.cn', 
-                                   ssl_ca='C:\OpenSSL-Win32\bin\DigiCertGlobalRootCA.pem')
+                                   ssl_ca='/var/www/html/DigiCertGlobalRootCA.crt.pem')
 except mysql.connector.Error as err:
     print(err)
 ```
@@ -122,7 +109,7 @@ conn = pymysql.connect(user='myadmin@mydemoserver',
                        password='yourpassword',
                        database='quickstartdb',
                        host = 'mydemoserver.mysql.database.chinacloudapi.cn', 
-                       ssl = {'ssl': {'ssl-ca': 'C:\OpenSSL-Win32\bin\DigiCertGlobalRootCA.pem'}})
+                       ssl={'ca': '/var/www/html/DigiCertGlobalRootCA.crt.pem'})
 ```
 
 ### <a name="django-pymysql"></a>Django (PyMySQL)
@@ -136,7 +123,7 @@ DATABASES = {
         'HOST': 'mydemoserver.mysql.database.chinacloudapi.cn',
         'PORT': '3306',
         'OPTIONS': {
-            'ssl': {'ssl-ca': 'C:\OpenSSL-Win32\bin\DigiCertGlobalRootCA.pem'}
+            'ssl': {'ca': '/var/www/html/DigiCertGlobalRootCA.crt.pem'}
         }
     }
 }
@@ -149,14 +136,14 @@ client = Mysql2::Client.new(
         :username => 'myadmin@mydemoserver',
         :password => 'yourpassword',
         :database => 'quickstartdb',
-        :ssl_ca => 'C:\OpenSSL-Win32\bin\DigiCertGlobalRootCA.pem'
+        :ssl_ca => '/var/www/html/DigiCertGlobalRootCA.crt.pem'
     )
 ```
 
 ### <a name="golang"></a>Golang
 ```go
 rootCertPool := x509.NewCertPool()
-pem, _ := ioutil.ReadFile("C:\OpenSSL-Win32\bin\DigiCertGlobalRootCA.pem")
+pem, _ := ioutil.ReadFile("/var/www/html/DigiCertGlobalRootCA.crt.pem")
 if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
     log.Fatal("Failed to append PEM.")
 }
@@ -229,7 +216,7 @@ var builder = new MySqlConnectionStringBuilder
     Password = "yourpassword",
     Database = "quickstartdb",
     SslMode = MySqlSslMode.VerifyCA,
-    CACertificateFile = "C:\OpenSSL-Win32\bin\DigiCertGlobalRootCA.pem",
+    CACertificateFile = "DigiCertGlobalRootCA.crt.pem",
 };
 using (var connection = new MySqlConnection(builder.ConnectionString))
 {

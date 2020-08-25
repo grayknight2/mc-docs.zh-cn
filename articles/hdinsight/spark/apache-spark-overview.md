@@ -9,14 +9,14 @@ ms.custom: hdinsightactive,mvc
 ms.devlang: na
 ms.topic: overview
 origin.date: 04/17/2020
-ms.date: 03/23/2020
+ms.date: 08/31/2020
 ms.author: v-yiso
-ms.openlocfilehash: b7867073c205598e5b075308cc67321750498734
-ms.sourcegitcommit: 0130a709d934d89db5cccb3b4997b9237b357803
+ms.openlocfilehash: e9f12f15eeaf3fda2b624269b90309d2df876869
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84186434"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715179"
 ---
 # <a name="what-is-apache-spark-in-azure-hdinsight"></a>Azure HDInsight 中的 Apache Spark 是什么
 
@@ -43,7 +43,7 @@ HDInsight 中的 Spark 群集提供完全托管的 Spark 服务。 下面列出�
 | SSD 缓存 |可以选择将数据缓存在内存中，或缓存在已附加到群集节点的 SSD 中。 内存缓存提供最佳的查询性能，但可能费用不菲。 SSD 缓存是改善查询性能的绝佳选项，而且不需要根据内存中的整个数据集创建满足其需求的群集规模。 请参阅[使用 Azure HDInsight IO 缓存提高 Apache Spark 工作负载的性能](apache-spark-improve-performance-iocache.md)。 |
 | 与 BI 工具集成 |HDInsight 中的 Spark 群集提供 BI 工具（如 [Power BI](https://www.powerbi.com/)）的连接器，用于数据分析。 |
 | 预先加载的 Anaconda 库 |HDInsight 中的 Spark 群集随附预先安装的 Anaconda 库。 [Anaconda](https://docs.continuum.io/anaconda/) 提供将近 200 个用于机器学习、数据分析、可视化效果等的库。 |
-| 自适应性 | HDInsight 允许更改群集节点数量。 此外，由于所有数据都存储在 Azure 存储或 Data Lake Storage 中，因此可以在不丢失数据的情况下删除 Spark 群集。 |
+| 自适应性 | HDInsight 允许通过自动缩放功能动态更改群集节点的数量。 请参阅[自动缩放 Azure HDInsight 群集](../hdinsight-autoscale-clusters.md)。 此外，由于所有数据都存储在 Azure 存储或 Data Lake Storage 中，因此可以在不丢失数据的情况下删除 Spark 群集。 |
 | SLA |HDInsight 中的 Spark 群集附有全天候支持和保证正常运行时间达 99.9% 的 SLA。 |
 
 默认情况下，HDInsight 中的 Apache Spark 群集可通过群集提供以下组件。

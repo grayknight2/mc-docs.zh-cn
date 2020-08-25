@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 10/30/2019
-ms.date: 07/01/2020
-ms.openlocfilehash: b29db9493b36be2f77b149d80a0e9027d5a33d79
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.date: 08/18/2020
+ms.openlocfilehash: c82594ebcb8851eef908f744a70ff847b3f45baa
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226297"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515957"
 ---
 # <a name="kusto-as-a-linked-server-from-the-sql-server"></a>Kusto 作为 SQL Server 的链接服务器
 

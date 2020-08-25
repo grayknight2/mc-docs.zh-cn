@@ -10,12 +10,12 @@ ms.topic: conceptual
 origin.date: 06/05/2019
 ms.date: 10/08/2019
 ms.author: v-yiso
-ms.openlocfilehash: 4ec11659eed751da1d3d07805dbdd8cf161bd612
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: b0a14c5480eb9734f5ec9f2a4cdb02aa75e6a535
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "71341120"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715134"
 ---
 # <a name="security-controls-for-azure-expressroute"></a>Azure ExpressRoute 的安全控制
 
@@ -64,3 +64,6 @@ ms.locfileid: "71341120"
 |---|---|--|
 | 配置管理支持（配置的版本控制等）| 是 | 通过网络资源提供程序 (NRP)。 |
 
+## <a name="next-steps"></a>后续步骤
+
+- 详细了解[跨 Azure 服务的内置安全控制](../security/fundamentals/security-controls.md)。

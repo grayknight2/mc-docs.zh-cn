@@ -3,17 +3,19 @@ title: 作为键/值存储的 Azure Cosmos DB 的请求单位费用
 description: 了解 Azure Cosmos DB 在用作键/值存储时执行简单写入和读取操作的请求单位费用。
 author: rockboyfor
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 08/23/2019
-ms.date: 04/27/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.custom: seodec18
-ms.openlocfilehash: d9a4ec767601400ede47204a73becc0dc7fb9e70
-ms.sourcegitcommit: f9c242ce5df12e1cd85471adae52530c4de4c7d7
+ms.openlocfilehash: aac37eb0fc251047e5b890050c9410f00e33b399
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82134622"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223121"
 ---
 # <a name="azure-cosmos-db-as-a-key-value-store---cost-overview"></a>作为键值存储的 Azure Cosmos DB - 费用概述
 
@@ -36,16 +38,16 @@ Azure Cosmos DB 性能基于以[请求单位](request-units.md)（RU/秒）表�
 
 ## <a name="cost-of-reads-and-writes"></a>读取和写入成本
 
-<!--Notice: $0.08 against CNY 0.82 for Azure China-->
+<!--Notice: $0.08 against CNY 0.51 for Azure China-->
 
-如果预配 1,000 RU/秒，则相当于 360 万 RU/小时，因此，每小时成本为 0.82 元（Azure 中国）。 对于 1 KB 大小的数据项，这意味着可以使用预配的吞吐量消费 360 万次读取或 72 万次写入（360 万 RU / 5）。 规范化为百万次读取和写入后，成本将是 0.228 元/百万次读取（0.82 元 / 3.6）和 1.14 元/百万次写入（0.82 元 / 0.72）。 如下表中所示，百万次读写费用极低。
+如果预配 1,000 RU/秒，则相当于 360 万 RU/小时，因此，每小时成本为 0.51 元（Azure 中国）。 对于 1 KB 大小的数据项，这意味着可以使用预配的吞吐量消费 360 万次读取或 72 万次写入（360 万 RU / 5）。 规范化为百万次读取和写入后，成本将是 0.142 元/百万次读取（0.51 元/3.6）和 0.708 元/百万次写入（0.51 元/0.72）。 如下表中所示，百万次读写费用极低。
 
 |项大小|1 百万次读取的费用|1 百万次写入的费用|
 |-------------|-------|--------|
-|1 KB|0\.228 元|1\.14 元|
-|100 KB|2\.28 元|11.4 元|
+|1 KB|0\.142 元 |0\.708 元|
+|100 KB|1\.42 元|7\.08 元|
 
-<!--Notice: $0.08 against CNY0.82 for Azure China-->
+<!--Notice: $0.08 against CNY 0.51 for Azure China-->
 
 <!--Not Available on Most of the basic blob or object stores services charge $0.40 per million read transaction and $5 per million write transaction. If used optimally, Cosmos DB can be up to 98% cheaper than these other solutions (for 1-KB transactions).-->
 <!--Notice: $0.40 per million read transaction for Azure China-->
@@ -54,4 +56,4 @@ Azure Cosmos DB 性能基于以[请求单位](request-units.md)（RU/秒）表�
 
 * 使用 [RU 计算器](https://cosmos.azure.com/capacitycalculator/)估算工作负荷的吞吐量。
 
-<!--Update_Description: update meta properties, wording update-->
+<!-- Update_Description: update meta properties, wording update, update link -->

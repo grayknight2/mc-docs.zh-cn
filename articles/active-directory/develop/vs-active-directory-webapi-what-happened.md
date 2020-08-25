@@ -3,20 +3,19 @@ title: 连接到 Azure AD 时对 WebAPI 项目所做的更改
 description: 介绍使用 Visual Studio 连接到 Azure AD 时，WebAPI 项目会发生什么情况
 author: ghogen
 manager: jillfra
-ms.assetid: 57630aee-26a2-4326-9dbb-ea2a66daa8b0
 ms.workload: azure-vs
 ms.prod: visual-studio-windows
 ms.technology: vs-azure
-ms.topic: conceptual
-ms.date: 02/25/2020
+ms.topic: how-to
+ms.date: 08/20/2020
 ms.author: v-junlch
-ms.custom: aaddev, vs-azure
-ms.openlocfilehash: 3260e3bc1c47c83ce02c3571c8aed621adbff9e4
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.custom: devx-track-csharp, aaddev, vs-azure
+ms.openlocfilehash: b8d6333cf37faaf7792cec9b05eae26620a1c0d7
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77653098"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647521"
 ---
 # <a name="what-happened-to-my-webapi-project-visual-studio-azure-active-directory-connected-service"></a>我的 WebAPI 项目（Visual Studio Azure Active Directory 连接服务）发生了什么情况
 
@@ -128,7 +127,6 @@ ms.locfileid: "77653098"
 
 ## <a name="next-steps"></a>后续步骤
 
-- [Azure Active Directory 的身份验证方案](authentication-scenarios.md)
+- [Azure Active Directory 的身份验证方案](./authentication-vs-authorization.md)
 - [向 ASP.NET Web 应用添加 Microsoft 登录功能](quickstart-v2-aspnet-webapp.md)
 
-<!-- Update_Description: link update -->

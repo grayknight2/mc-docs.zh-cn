@@ -4,15 +4,17 @@ description: 了解 Azure Cosmos DB 的 SQL 关键字。
 author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 04/10/2020
-ms.date: 04/27/2020
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: 87880af86eb94d4184419e037a40b3eb9e1528a6
-ms.sourcegitcommit: f9c242ce5df12e1cd85471adae52530c4de4c7d7
+ms.openlocfilehash: f8f15916e8c0b44928202c11bbfe281d86844a38
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82134557"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222987"
 ---
 # <a name="keywords-in-azure-cosmos-db"></a>Azure Cosmos DB 中的关键字
 
@@ -36,9 +38,6 @@ ms.locfileid: "82134557"
 ```
 
 与 ANSI SQL 不同，在 SQL API 中，可以针对混合类型的属性表达范围查询。 例如，在某些项中，`grade` 可能是类似于 `5` 的数字；而在其他一些项中，它可能是类似于 `grade4` 的字符串。 在这些情况下（与在 JavaScript 中一样），两个不同类型之间的比较会生成 `Undefined`，因此会跳过该项。
-
-> [!TIP]
-> 为了更快地执行查询，请创建一个索引策略，该策略对 `BETWEEN` 子句筛选的任何数值属性或路径使用范围索引类型。
 
 ## <a name="distinct"></a>DISTINCT
 
@@ -77,7 +76,7 @@ FROM Families f
 ]
 ```
 
-还可以在子查询内的投影中使用 DISTINCT：
+还可以在子查询内的投影中使用 `DISTINCT`：
 
 ```sql
 SELECT f.id, ARRAY(SELECT DISTINCT VALUE c.givenName FROM c IN f.children) as ChildNames

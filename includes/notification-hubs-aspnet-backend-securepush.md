@@ -2,14 +2,15 @@
 author: sethmanheim
 ms.service: service-bus
 ms.topic: include
+origin.date: 11/09/2018
 ms.date: 12/09/2019
 ms.author: v-tawe
-ms.openlocfilehash: 3941b4c252bf4f90ecfe86ea0b24f0c05ab2d726
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 313488b6f73f4f1adf9751c3af72ef69adc26c7c
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "74885031"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88602430"
 ---
 ## <a name="webapi-project"></a>WebAPI 项目
 

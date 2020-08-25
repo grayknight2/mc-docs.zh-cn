@@ -3,7 +3,7 @@ title: 配置 Azure Active Directory 身份验证
 titleSuffix: Azure SQL Database & SQL Managed Instance & Azure Synapse Analytics
 description: 了解如何在配置 Azure AD 后使用 Azure Active Directory 身份验证连接到 SQL 数据库、SQL 托管实例和 Azure Synapse Analytics。
 services: sql-database
-ms.service: sql-database
+ms.service: sql-db-mi
 ms.subservice: security
 ms.custom: azure-synapse, has-adal-ref, sqldbrb=2
 ms.devlang: ''
@@ -11,14 +11,14 @@ ms.topic: conceptual
 author: WenJason
 ms.author: v-jay
 ms.reviewer: vanto, carlrab
-origin.date: 03/27/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: 15affe5c3acf1a3feb3bfb26094a96a9c7ad288a
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+origin.date: 07/27/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: fcc7721cc6851bea619444d7f1fc4d6e04b677a7
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227432"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222576"
 ---
 # <a name="configure-and-manage-azure-ad-authentication-with-azure-sql"></a>使用 Azure SQL 配置和管理 Azure AD 身份验证
 
@@ -40,7 +40,7 @@ Azure AD 身份验证支持以下身份验证方法：
 
 创建 Azure AD 实例并对其填充用户和组。 Azure AD 可以是初始 Azure AD 托管域。 Azure AD 也可以是本地 Active Directory 域服务，该服务可以与 Azure AD 联合。
 
-有关详细信息，请参阅[将本地标识与 Azure Active Directory 集成](../../active-directory/hybrid/whatis-hybrid-identity.md)、[将自己的域名添加到 Azure AD](../../active-directory/fundamentals/add-custom-domain.md)、[Azure 现在支持与 Windows Server Active Directory 联合](https://azure.microsoft.com/blog/20../../windows-azure-now-supports-federation-with-windows-server-active-directory/)、[管理 Azure AD 目录](../../active-directory/fundamentals/active-directory-whatis.md)、[使用 Windows PowerShell 管理 Azure AD](https://docs.microsoft.com/powershell/azure/overview) 和[混合标识所需端口和协议](../../active-directory/hybrid/reference-connect-ports.md)。
+有关详细信息，请参阅[将本地标识与 Azure Active Directory 集成](../../active-directory/hybrid/whatis-hybrid-identity.md)、[将自己的域名添加到 Azure AD](../../active-directory/fundamentals/add-custom-domain.md)、[Azure 现在支持与 Windows Server Active Directory 联合](https://azure.microsoft.com/blog/20../../windows-azure-now-supports-federation-with-windows-server-active-directory/)、[管理 Azure AD 目录](../../active-directory/fundamentals/active-directory-whatis.md)、[使用 Windows PowerShell 管理 Azure AD](https://docs.microsoft.com/powershell/azure/) 和[混合标识所需端口和协议](../../active-directory/hybrid/reference-connect-ports.md)。
 
 ## <a name="associate-or-add-an-azure-subscription-to-azure-active-directory"></a>将 Azure 订阅关联或添加到 Azure Active Directory
 
@@ -168,7 +168,7 @@ else {
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
-若要运行 PowerShell cmdlet，需要已安装并运行 Azure PowerShell。 有关详细信息，请参阅 [如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview)。
+若要运行 PowerShell cmdlet，需要已安装并运行 Azure PowerShell。 有关详细信息，请参阅 [如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azure/)。
 
 > [!IMPORTANT]
 > PowerShell Azure 资源管理器 (RM) 模块仍受 Azure SQL 托管实例的支持，但所有未来的开发都是针对 Az.Sql 模块的。 AzureRM 模块至少在 2020 年 12 月之前将继续接收 bug 修补程序。  Az 模块和 AzureRm 模块中的命令参数大体上是相同的。 若要详细了解其兼容性，请参阅[新 Azure PowerShell Az 模块简介](https://docs.microsoft.com/powershell/azure/new-azureps-module-az)。
@@ -215,7 +215,7 @@ Remove-AzSqlInstanceActiveDirectoryAdministrator -ResourceGroupName "ResourceGro
 |[az sql mi ad-admin list](https://docs.microsoft.com/cli/azure/sql/mi/ad-admin#az-sql-mi-ad-admin-list) | 返回当前为 SQL 托管实例配置的 Azure Active Directory 管理员的相关信息。 |
 |[az sql mi ad-admin update](https://docs.microsoft.com/cli/azure/sql/mi/ad-admin#az-sql-mi-ad-admin-update) | 更新 SQL 托管实例的 Active Directory 管理员。 |
 
-有关 CLI 命令的详细信息，请参阅 [az sql mi](/cli/sql/mi)。 
+有关 CLI 命令的详细信息，请参阅 [az sql mi](/cli/sql/mi)。
 
 * * *
 
@@ -229,8 +229,6 @@ Remove-AzSqlInstanceActiveDirectoryAdministrator -ResourceGroupName "ResourceGro
 ### <a name="azure-portal"></a>Azure 门户
 
 1. 在 [Azure 门户](https://portal.azure.cn/)右上角，选择你的连接，以下拉可能的 Active Directory 列表。 选择正确的 Active Directory 作为默认的 Azure AD。 此步骤将与订阅关联的 Active Directory 链接到服务器，确保为 Azure AD 和服务器使用相同的订阅。
-
-    ![choose-ad][8]
 
 2. 搜索并选择“SQL 服务器”。
 
@@ -264,7 +262,7 @@ Remove-AzSqlInstanceActiveDirectoryAdministrator -ResourceGroupName "ResourceGro
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
-若要运行 PowerShell cmdlet，需要已安装并运行 Azure PowerShell。 有关详细信息，请参阅 [如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview)。 若要预配 Azure AD 管理员，请执行以下 Azure PowerShell 命令：
+若要运行 PowerShell cmdlet，需要已安装并运行 Azure PowerShell。 有关详细信息，请参阅 [如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azure/)。 若要预配 Azure AD 管理员，请执行以下 Azure PowerShell 命令：
 
 - Connect-AzAccount -Environment AzureChinaCloud
 - Select-AzSubscription
@@ -354,7 +352,7 @@ Remove-AzSqlServerActiveDirectoryAdministrator -ResourceGroupName "Group-23" -Se
 但是，将 Azure Active Directory 身份验证与 SQL 数据库和 Azure Synapse 结合使用时，需要使用基于 Azure AD 标识的包含的数据库用户。 包含的数据库用户在 master 数据库中没有登录名，且映射到与数据库关联的 Azure AD 目录中的标识。 Azure AD 标识可以是单独的用户帐户，也可以是组。 有关包含的数据库用户的详细信息，请参阅[包含的数据库用户 - 使你的数据库可移植](https://msdn.microsoft.com/library/ff929188.aspx)。
 
 > [!NOTE]
-> 不能使用 Azure 门户创建数据库用户（管理员除外）。 RBAC 角色不会传播到 SQL 数据库、SQL 托管实例或 Azure Synapse 中的数据库。 Azure RBAC 角色用于管理 Azure 资源，不会应用于数据库权限。 例如，“SQL Server 参与者”角色不会授予连接到 SQL 数据库、SQL 托管实例或 Azure Synapse 中的数据库的访问权限。 必须使用 Transact-SQL 语句直接在数据库中授予访问权限。
+> 不能使用 Azure 门户创建数据库用户（管理员除外）。 Azure 角色不会传播到 SQL 数据库中的数据库、SQL 托管实例或 Azure Synapse。 Azure 角色用于管理 Azure 资源，不适用于数据库权限。 例如，“SQL Server 参与者”角色不会授予连接到 SQL 数据库、SQL 托管实例或 Azure Synapse 中的数据库的访问权限。 必须使用 Transact-SQL 语句直接在数据库中授予访问权限。
 
 > [!WARNING]
 > 不支持在 T-SQL 的 `CREATE LOGIN` 和 `CREATE USER` 语句中将特殊字符（例如冒号 `:` 或与号 `&`）用作用户名的一部分。
@@ -523,9 +521,11 @@ sqlcmd -S Target_DB_or_DW.testsrv.database.chinacloudapi.cn -U bob@contoso.com -
 - 有关数据库主体的详细信息，请参阅[主体](https://msdn.microsoft.com/library/ms181127.aspx)。
 - 有关数据库角色的详细信息，请参阅[数据库角色](https://msdn.microsoft.com/library/ms189121.aspx)。
 - 有关 SQL 数据库中的防火墙规则的详细信息，请参阅 [SQL 数据库防火墙规则](firewall-configure.md)。
+- 有关如何将 Azure AD 来宾用户设置为 Azure AD 管理员的信息，请参阅[创建 Azure AD 来宾用户并将其设置为 Azure AD 管理员](authentication-aad-guest-users.md)。
+- 有关如何使用 Azure SQL 服务主体的信息，请参阅[使用 Azure AD 应用程序创建 Azure AD 用户](authentication-aad-service-principal-tutorial.md)
 
 <!--Image references-->
+
 [11]: ./media/authentication-aad-configure/active-directory-integrated.png
 [12]: ./media/authentication-aad-configure/12connect-using-pw-auth2.png
 [13]: ./media/authentication-aad-configure/13connect-to-db2.png
-

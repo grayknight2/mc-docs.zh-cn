@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 03/12/2020
-ms.date: 07/01/2020
-ms.openlocfilehash: da889f57a7746502cf8160451eaee4b6261d332d
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.date: 08/18/2020
+ms.openlocfilehash: 6f00207b0b406d6821522a6ffd1cf43dd1e49a75
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226225"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515894"
 ---
 # <a name="export-data-to-storage"></a>将数据导出到存储
 
@@ -99,7 +99,7 @@ ms.locfileid: "86226225"
   <| myLogs | where id == "moshe" | limit 10000
 ```
 
-**已知问题**
+#### <a name="known-issues"></a>已知问题
 
 执行 export 命令期间的存储错误
 

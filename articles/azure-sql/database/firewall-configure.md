@@ -1,23 +1,24 @@
 ---
 title: IP 防火墙规则
-description: 为 Azure SQL 数据库中的数据库或 Azure Synapse Analytics 防火墙配置服务器级别 IP 防火墙规则。 管理访问权限，并配置单一数据库或共用数据库的数据库级 IP 防火墙规则。
+description: 为 Azure SQL 数据库中的数据库或 Azure Synapse Analytics 防火墙配置服务器级别 IP 防火墙规则。 为 SQL 数据库管理访问权限并配置数据库级 IP 防火墙规则。
 services: sql-database
 ms.service: sql-database
 ms.subservice: security
 titleSuffix: Azure SQL Database and Azure Synapse Analytics
+ms.custom: sqldbrb=1
 ms.devlang: ''
 ms.topic: conceptual
 author: WenJason
 ms.author: v-jay
 ms.reviewer: carlrab
-origin.date: 03/18/2019
-ms.date: 06/15/2020
-ms.openlocfilehash: 1e48b995e46e880e6547b9642f6d4631d168fe7a
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+origin.date: 06/17/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: 47da7ee8acc7a243fb0f142e16bbe028bc98dfec
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227552"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223397"
 ---
 # <a name="azure-sql-database-and-azure-synapse-ip-firewall-rules"></a>Azure SQL 数据库和 Azure Synapse IP 防火墙规则
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]

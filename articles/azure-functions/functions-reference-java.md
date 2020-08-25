@@ -2,21 +2,28 @@
 title: Azure Functions Java 开发人员参考
 description: 了解如何使用 Java 开发函数。
 ms.topic: conceptual
-ms.date: 07/02/2020
-ms.openlocfilehash: 744e74ad9cdea6b66e309d40e8c68959724a3228
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.date: 08/12/2020
+ms.custom: devx-track-java
+ms.openlocfilehash: 11e7c4995c67df18e656acaa613c8a616667f850
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945248"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223160"
 ---
 # <a name="azure-functions-java-developer-guide"></a>Azure Functions Java 开发人员指南
 
-Azure Functions 运行时支持 [Java SE 8 LTS (zulu8.31.0.2-jre8.0.181-win_x64)](https://repos.azul.com/azure-only/zulu/packages/zulu-8/8u181/)。 本指南介绍了用 Java 编写 Azure Functions 的复杂性。
+本指南包含有助于成功使用 Java 开发 Azure Functions 的详细信息。
 
-与其他语言一样，函数应用可能有一个或多个函数。 Java 函数是一个 `public` 方法，使用注释 `@FunctionName` 进行修饰。 此方法定义了 Java 函数的输入，在特定包中必须唯一。 使用 Java 编写的一个函数应用可能有多个类，这些类具有使用 `@FunctionName` 批注的多个公共方法。
+作为 Java 开发人员，如果不熟悉 Azure Functions，请考虑先阅读以下文章之一：
 
-本文假定你已阅读 [Azure Functions 开发人员参考](functions-reference.md)。 你还应学完下面其中一篇 Functions 快速入门：[使用 Visual Studio Code 创建第一个 Java 函数](/azure-functions/functions-create-first-function-vs-code?pivots=programming-language-java)或[使用 Maven 通过命令行创建第一个 Java 函数](/azure-functions/functions-create-first-azure-function-azure-cli?pivots=programming-language-java)。
+| 入门 | 概念| 
+| -- | -- |  
+| <ul><li>[使用 Visual Studio Code 的 Java 函数](/azure-functions/functions-create-first-function-vs-code?pivots=programming-language-java)</li><li>[使用终端/命令提示符的 Java/Maven 函数](/azure-functions/functions-create-first-azure-function-azure-cli?pivots=programming-language-java)</li><li>[使用 Eclipse 的 Java 函数](functions-create-maven-eclipse.md)</li><li>[使用 IntelliJ IDEA 的 Java 函数](functions-create-maven-intellij.md)</li></ul> | <ul><li>[开发人员指南](functions-reference.md)</li><li>[托管选项](functions-scale.md)</li><li>[性能注意事项](functions-best-practices.md)</li></ul> |
+
+## <a name="java-function-basics"></a>Java 函数基础知识
+
+Java 函数是一个 `public` 方法，使用注释 `@FunctionName` 进行修饰。 此方法定义了 Java 函数的输入，在特定包中必须唯一。 包可以有多个类，这些类具有使用 `@FunctionName` 进行批注的多个公共方法。 单个包在 Azure 中部署到函数应用。 在 Azure 中运行时，函数应用可为各个 Java 函数提供部署、执行和管理上下文。
 
 ## <a name="programming-model"></a>编程模型 
 
@@ -48,19 +55,7 @@ mvn archetype:generate \
     -DarchetypeArtifactId=azure-functions-archetype 
 ```
 
-若要开始使用此原型，请参阅 [Java 快速入门](/azure-functions/functions-create-first-azure-function-azure-cli?pivots=programming-language-java)。 
-
-## <a name="create-kotlin-functions-preview"></a>创建 Kotlin 函数（预览）
-
-还有一个 Maven 原型用来生成 Kotlin 函数。 此原型当前处于预览阶段，发布在以下 groupId:artifactId 之下：[com.microsoft.azure:azure-functions-kotlin-archetype](https://search.maven.org/artifact/com.microsoft.azure/azure-functions-kotlin-archetype/) 。 
-
-以下命令使用此原型生成新的 Java 函数项目：
-
-```
-mvn archetype:generate \
-    -DarchetypeGroupId=com.microsoft.azure \
-    -DarchetypeArtifactId=azure-functions-kotlin-archetype
-```
+若要开始使用此原型，请参阅 [Java 快速入门](./functions-create-first-azure-function-azure-cli.md?pivots=programming-language-java)。 
 
 ## <a name="folder-structure"></a>文件夹结构
 
@@ -88,8 +83,6 @@ FunctionsProject
  | - pom.xml
 ```
 
-_* Kotlin 项目看起来非常相似，因为它仍然是 Maven_
-
 可使用共享的 [host.json](functions-host-json.md) 文件来配置函数应用。 每个函数都有自己的代码文件 (.java) 和绑定配置文件 (function.json)。
 
 可在项目中放置多个函数。 不要将函数放入单独的 jar 中。 目标目录中的 `FunctionApp` 是部署到 Azure 中的函数应用的内容。
@@ -101,14 +94,14 @@ _* Kotlin 项目看起来非常相似，因为它仍然是 Maven_
 使用 [ com.microsoft.azure.functions.annotation.*](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation) 包中附带的 Java 注释将输入和输出绑定到方法。 有关详细信息，请参阅 [Java 参考文档](https://docs.microsoft.com/java/api/com.microsoft.azure.functions.annotation)。
 
 > [!IMPORTANT] 
-> 必须在 [local.settings.json](/azure-functions/functions-run-local#local-settings-file) 中配置一个 Azure 存储帐户，才能在本地运行 Azure Blob 存储、Azure 队列存储或 Azure 表存储触发器。
+> 必须在 [local.settings.json](./functions-run-local.md#local-settings-file) 中配置一个 Azure 存储帐户，才能在本地运行 Azure Blob 存储、Azure 队列存储或 Azure 表存储触发器。
 
 示例：
 
 ```java
 public class Function {
     public String echo(@HttpTrigger(name = "req", 
-      methods = {"post"},  authLevel = AuthorizationLevel.ANONYMOUS) 
+      methods = {HttpMethod.POST},  authLevel = AuthorizationLevel.ANONYMOUS) 
         String req, ExecutionContext context) {
         return String.format(req);
     }
@@ -139,9 +132,87 @@ public class Function {
 
 ```
 
+## <a name="java-versions"></a>Java 版本
+
+对 Java 11 的支持目前为预览版
+
+创建函数应用（用于在 Azure 中运行函数）时使用的 Java 版本在 pom.xml 文件中指定。 Maven 原型当前为 Java 8（可以在发布之前进行更改）生成 pom.xml。 pom.xml 中的 Java 版本应该与在本地对其开发和测试应用的版本相匹配。 
+
+### <a name="supported-versions"></a>支持的版本
+
+下表按操作系统显示了 Functions 运行时的每个主版本当前支持的 Java 版本：
+
+| Functions 版本 | Java 版本 (Windows) | Java 版本 (Linux) |
+| ----- | ----- | --- |
+| 3.x | 11（预览版）<br/>8<sup>\*</sup> | 11（预览版）<br/>8 |
+| 2.x | 8 | 不适用 |
+
+<sup>\*</sup> 这是 Maven 原型生成的 pom.xml 的当前默认值。
+
+### <a name="specify-the-deployment-version"></a>指定部署版本
+
+目前，Maven 原型生成面向 Java 8 的 pom.xml。 pom.xml 中的以下元素需要进行更新，才能创建运行 Java 11 的函数应用。
+
+| 元素 |  Java 8 值 | Java 11 值 | 描述 |
+| ---- | ---- | ---- | --- |
+| **`Java.version`** | 1.8 | 11 | maven-compiler-plugin 使用的 Java 版本。 |
+| **`JavaVersion`** | 8 | 11 | Azure 中的函数应用托管的 Java 版本。 |
+
+以下示例演示 pom.xml 文件的相关部分中用于 Java 8 的设置：
+
+#### `Java.version`
+```xml
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <azure.functions.maven.plugin.version>1.6.0</azure.functions.maven.plugin.version>
+        <azure.functions.java.library.version>1.3.1</azure.functions.java.library.version>
+        <functionAppName>fabrikam-functions-20200718015742191</functionAppName>
+        <stagingDirectory>${project.build.directory}/azure-functions/${functionAppName}</stagingDirectory>
+    </properties>
+```
+
+#### `JavaVersion`
+```xml
+                    <runtime>
+                        <!-- runtime os, could be windows, linux or docker-->
+                        <os>windows</os>
+                        <javaVersion>8</javaVersion>
+                        <!-- for docker function, please set the following parameters -->
+                        <!-- <image>[hub-user/]repo-name[:tag]</image> -->
+                        <!-- <serverId></serverId> -->
+                        <!-- <registryUrl></registryUrl>  -->
+                    </runtime>
+```
+
+> [!IMPORTANT]
+> 必须将 JAVA_HOME 环境变量正确设置为在使用 Maven 编译代码期间使用的 JDK 目录。 确保 JDK 的版本至少与 `Java.version` 设置一样高。 
+
+### <a name="specify-the-deployment-os"></a>指定部署操作系统
+
+Maven 还允许指定用于在 Azure 中运行函数应用的操作系统。 使用 `os` 元素选择操作系统。 
+
+| 元素 |  Windows | Linux | Docker |
+| ---- | ---- | ---- | --- |
+| **`os`** | windows | linux | docker |
+
+以下示例显示了 pom.xml 文件的 `runtime` 部分中的操作系统设置：
+
+```xml
+                    <runtime>
+                        <!-- runtime os, could be windows, linux or docker-->
+                        <os>windows</os>
+                        <javaVersion>8</javaVersion>
+                        <!-- for docker function, please set the following parameters -->
+                        <!-- <image>[hub-user/]repo-name[:tag]</image> -->
+                        <!-- <serverId></serverId> -->
+                        <!-- <registryUrl></registryUrl>  -->
+                    </runtime>
+```
+ 
 ## <a name="jdk-runtime-availability-and-support"></a>JDK 运行时可用性和支持 
 
-若要进行本地 Java 函数应用开发，请从 [Azul Systems](https://www.azul.com/downloads/azure-only/zulu/) 下载并使用[适用于 Azure 的 Azul Zulu Enterprise](https://assets.azul.com/files/Zulu-for-Azure-FAQ.pdf) Java 8 JDK。 将函数应用部署到云时，Azure Functions 使用 Azul Java 8 JDK 运行时。
+若要进行本地 Java 函数应用开发，请从 [Azul Systems](https://www.azul.com/downloads/azure-only/zulu/) 下载并使用相应的[适用于 Azure 的 Azul Zulu Enterprise](https://assets.azul.com/files/Zulu-for-Azure-FAQ.pdf) Java JDK。 将函数应用部署到云时，Azure Functions 使用 Azul Java JDK 运行时。
 
 对于 JDK 和函数应用的问题，[Azure 支持](https://www.azure.cn/support/)可通过[限定的支持计划](https://www.azure.cn/support/plans/)获得。
 
@@ -231,7 +302,7 @@ import com.microsoft.azure.functions.annotation.*;
 public class Function {
     @FunctionName("echo")
     public static String echo(
-        @HttpTrigger(name = "req", methods = { "put" }, authLevel = AuthorizationLevel.ANONYMOUS, route = "items/{id}") String inputReq,
+        @HttpTrigger(name = "req", methods = { HttpMethod.PUT }, authLevel = AuthorizationLevel.ANONYMOUS, route = "items/{id}") String inputReq,
         @TableInput(name = "item", tableName = "items", partitionKey = "Example", rowKey = "{id}", connection = "AzureWebJobsStorage") TestInputData inputData
         @TableOutput(name = "myOutputTable", tableName = "Person", connection = "AzureWebJobsStorage") OutputBinding<Person> testOutputData,
     ) {
@@ -348,7 +419,7 @@ public class Function {
 
 ## <a name="metadata"></a>Metadata
 
-少量的触发器会连同输入数据一起发送[触发器元数据](/azure-functions/functions-triggers-bindings)。 可使用注释 `@BindingName` 绑定到触发器元数据。
+少量的触发器会连同输入数据一起发送[触发器元数据](./functions-triggers-bindings.md)。 可使用注释 `@BindingName` 绑定到触发器元数据。
 
 
 ```Java
@@ -361,7 +432,7 @@ import com.microsoft.azure.functions.annotation.*;
 public class Function {
     @FunctionName("metadata")
     public static String metadata(
-        @HttpTrigger(name = "req", methods = { "get", "post" }, authLevel = AuthorizationLevel.ANONYMOUS) Optional<String> body,
+        @HttpTrigger(name = "req", methods = { HttpMethod.GET, HttpMethod.POST }, authLevel = AuthorizationLevel.ANONYMOUS) Optional<String> body,
         @BindingName("name") String queryValue
     ) {
         return body.orElse(queryValue);
@@ -403,7 +474,7 @@ import com.microsoft.azure.functions.*;
 import com.microsoft.azure.functions.annotation.*;
 
 public class Function {
-    public String echo(@HttpTrigger(name = "req", methods = {"post"}, authLevel = AuthorizationLevel.ANONYMOUS) String req, ExecutionContext context) {
+    public String echo(@HttpTrigger(name = "req", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) String req, ExecutionContext context) {
         if (req.isEmpty()) {
             context.getLogger().warning("Empty request body received by function " + context.getFunctionName() + " with invocation " + context.getInvocationId());
         }
@@ -446,7 +517,7 @@ az webapp log download --resource-group resourcegroupname --name functionappname
 ```java
 
 public class Function {
-    public String echo(@HttpTrigger(name = "req", methods = {"post"}, authLevel = AuthorizationLevel.ANONYMOUS) String req, ExecutionContext context) {
+    public String echo(@HttpTrigger(name = "req", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.ANONYMOUS) String req, ExecutionContext context) {
         context.getLogger().info("My app setting value: "+ System.getenv("myAppSetting"));
         return String.format(req);
     }
@@ -469,4 +540,3 @@ public class Function {
 * [适用于 Azure Functions 的 Maven 插件](https://github.com/Microsoft/azure-maven-plugins/blob/develop/azure-functions-maven-plugin/README.md) 
 * 通过 `azure-functions:add` 目标简化函数创建并准备临时目录以用于 [ZIP 文件部署](deployment-zip-push.md)。
 
-<!-- Update_Description: wording update -->

@@ -2,30 +2,32 @@
 title: 创建 Azure Cosmos DB 的 Cassandra 密钥空间和表
 description: 创建 Azure Cosmos DB 的 Cassandra 密钥空间和表
 author: rockboyfor
-ms.author: v-yeche
 ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
 ms.topic: sample
-origin.date: 09/25/2019
-ms.date: 10/28/2019
-ms.openlocfilehash: 590040131a8506fdab7ed12fd616b6f1a5fc5e35
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
+ms.author: v-yeche
+ms.openlocfilehash: 585f273284a782ce338594b62e083fd8ec73089a
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "72914849"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222643"
 ---
 <!--Verify successfully-->
 # <a name="create-an-azure-cosmos-cassandra-api-account-keyspace-and-table-using-azure-cli"></a>使用 Azure CLI 创建 Azure Cosmos Cassandra API 帐户、密钥空间和表
 
 [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../../../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
-如果选择在本地安装并使用 CLI，本主题需要运行 Azure CLI 2.0.73 版或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
+选择在本地安装并使用 CLI 时，本主题要求运行 Azure CLI 2.9.1 或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
 
 ## <a name="sample-script"></a>示例脚本
 
 ```azurecli
-!/bin/bash
+#!/bin/bash
 
 # Sign in the Azure China Cloud
 az cloud set -n AzureChinaCloud
@@ -65,15 +67,15 @@ az cosmosdb cassandra keyspace create \
 schema=$(cat << EOF 
 {
     "columns": [
-        {"name": "columnA","type": "uuid"},
-        {"name": "columnB","type": "int"},
-        {"name": "columnC","type": "text"}
+        {"name": "columna","type": "uuid"},
+        {"name": "columnb","type": "int"},
+        {"name": "columnc","type": "text"}
     ],
     "partitionKeys": [
-        {"name": "columnA"}
+        {"name": "columna"}
     ],
     "clusterKeys": [
-        { "name": "columnB", "orderBy": "asc" }
+        { "name": "columnb", "orderBy": "asc" }
     ]
 }
 EOF
@@ -121,5 +123,4 @@ az group delete --name $resourceGroupName
 
 可以在 [Azure Cosmos DB CLI GitHub 存储库](https://github.com/Azure-Samples/azure-cli-samples/tree/master/cosmosdb)中找到所有 Azure Cosmos DB CLI 脚本示例。
 
-<!--Update_Description: new articles on cassandra create with cli -->
-<!--New.date: 10/28/2019-->
+<!-- Update_Description: update meta properties, wording update, update link -->

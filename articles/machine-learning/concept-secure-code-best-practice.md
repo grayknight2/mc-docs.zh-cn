@@ -9,16 +9,16 @@ ms.topic: conceptual
 ms.author: larryfr
 author: larryfr
 ms.date: 11/12/2019
-ms.openlocfilehash: 6a7b07f4105343fc038a9b8e26c98447793f3614
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: a6dc34c97d2e3fd859b776add204fef9b869d76d
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441217"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227838"
 ---
 # <a name="secure-code-best-practices-with-azure-machine-learning"></a>使用 Azure 机器学习的安全代码最佳做法
 
-在 Azure 机器学习中，可以从任何源上传文件和内容。 Jupyter 笔记本或脚本中的内容可能会从会话中读取数据，在 Azure 中访问组织中的数据，或代表你运行恶意进程。
+在 Azure 机器学习中，可以从任何源将文件和内容上传到 Azure 中。 加载的 Jupyter 笔记本或脚本中的内容可能会从会话中读取数据，在 Azure 中访问组织中的数据，或代表你运行恶意进程。
 
 > [!IMPORTANT]
 > 仅从受信任的源运行笔记本或脚本。 例如，你或你的安全团队已查看其中的笔记本或脚本。

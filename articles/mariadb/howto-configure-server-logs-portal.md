@@ -4,17 +4,17 @@ description: 本文介绍如何从 Azure 门户配置和访问 Azure Database fo
 author: WenJason
 ms.author: v-jay
 ms.service: mariadb
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 4/13/2020
-ms.date: 04/27/2020
-ms.openlocfilehash: 2724f6d4923108c81b83a86ae37cb5be1db4678c
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+ms.date: 08/17/2020
+ms.openlocfilehash: cb109c7fa4ae137b5df3f7afb44be734aba51765
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82127082"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222860"
 ---
-# <a name="configure-and-access-slow-query-logs-from-the-azure-portal"></a>从 Azure 门户配置和访问慢查询日志
+# <a name="configure-and-access-azure-database-for-maria-db-slow-query-logs-from-the-azure-portal"></a>从 Azure 门户配置和访问 Azure Database for Maria DB 慢查询日志
 
 可以从 Azure 门户配置、列出并下载 [Azure Database for MariaDB 慢查询日志](concepts-server-logs.md)。
 

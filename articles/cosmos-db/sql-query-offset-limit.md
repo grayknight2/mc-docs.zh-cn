@@ -4,15 +4,17 @@ description: 了解在 Azure Cosmos DB 中进行查询时如何使用 OFFSET LIM
 author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 06/10/2019
-ms.date: 02/10/2020
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: cd5047cd276c5cfff2857c43df9c0eb67684276c
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 9be92b1e6906fb5b07cf2608103e8cdef52ac79c
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77067865"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222545"
 ---
 # <a name="offset-limit-clause-in-azure-cosmos-db"></a>Azure Cosmos DB 中的 OFFSET LIMIT 子句
 
@@ -38,11 +40,11 @@ OFFSET <offset_amount> LIMIT <limit_amount>
 
 ## <a name="remarks"></a>备注
 
-  必须在 `OFFSET LIMIT` 子句中同时指定 `OFFSET` 计数和 `LIMIT` 计数。 如果使用可选的 `ORDER BY` 子句，将会通过跳过排序值来生成结果集。 否则，查询将返回固定顺序的值。
+必须在 `OFFSET LIMIT` 子句中同时指定 `OFFSET` 计数和 `LIMIT` 计数。 如果使用可选的 `ORDER BY` 子句，将会通过跳过排序值来生成结果集。 否则，查询将返回固定顺序的值。
 
-  使用 `OFFSET LIMIT` 进行查询时的 RU 费用会随着要跳过的字词数量的增加而增加。 对于有多个结果页的查询，我们通常建议使用继续标记。 继续标记是一个“书签”，用于在以后恢复查询。 如果使用 `OFFSET LIMIT`，则没有“书签”。 如果希望返回查询的下一页，则必须从头开始。
+使用 `OFFSET LIMIT` 进行查询时的 RU 费用会随着要跳过的字词数量的增加而增加。 对于有[多个结果页](sql-query-pagination.md)的查询，我们通常建议使用[继续标记](sql-query-pagination.md#continuation-tokens)。 继续标记是一个“书签”，用于在以后恢复查询。 如果使用 `OFFSET LIMIT`，则没有“书签”。 如果希望返回查询的下一页，则必须从头开始。
 
-  如果希望完全跳过文档并保存客户端资源，则应使用 `OFFSET LIMIT`。 例如，如果要跳到第 1000 个查询结果，无需查看第 1 到第 999 个结果，则应使用 `OFFSET LIMIT`。 在后端，`OFFSET LIMIT` 仍会加载每个文档，包括那些跳过的文档。 性能优势是，通过避免处理不需要的文档，可以节省客户端资源。
+如果希望完全跳过项并保存客户端资源，则应使用 `OFFSET LIMIT`。 例如，如果要跳到第 1000 个查询结果，无需查看第 1 到第 999 个结果，则应使用 `OFFSET LIMIT`。 在后端，`OFFSET LIMIT` 仍会加载每个项，包括那些跳过的项。 性能优势是，通过避免处理不需要的项，可以节省客户端资源。
 
 ## <a name="examples"></a>示例
 
@@ -69,7 +71,7 @@ OFFSET <offset_amount> LIMIT <limit_amount>
 以下查询跳过第一个值并返回第二个值（不排序）：
 
 ```sql
-   SELECT f.id, f.address.city
+    SELECT f.id, f.address.city
     FROM Families f
     OFFSET 1 LIMIT 1
 ```
@@ -91,4 +93,4 @@ OFFSET <offset_amount> LIMIT <limit_amount>
 - [SELECT 子句](sql-query-select.md)
 - [ORDER BY 子句](sql-query-order-by.md)
 
-<!-- Update_Description: wording update, update link -->
+<!-- Update_Description: update meta properties, wording update, update link -->

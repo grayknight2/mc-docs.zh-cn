@@ -10,12 +10,12 @@ ms.topic: conceptual
 origin.date: 04/23/2020
 ms.date: 06/22/2020
 ms.author: v-yiso
-ms.openlocfilehash: 4a3db504451003a3974f8af6610ae3e803481a22
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+ms.openlocfilehash: 52507385f05b2bfcbb2a07422d6c6544368550df
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723295"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715387"
 ---
 # <a name="access-apache-hadoop-yarn-application-logs-on-linux-based-hdinsight"></a>在基于 Linux 的 HDInsight 上访问 Apache Hadoop YARN 应用程序日志
 
@@ -27,7 +27,7 @@ YARN 通过将资源管理与应用程序计划/监视相分离，来支持多�
 
 每个应用程序可能包含多个 *应用程序尝试*。 如果应用程序失败，可能会重试进行新的尝试。 每次尝试都在容器中运行。 在某种意义上，容器提供了由 YARN 应用程序完成的基本工作单位的上下文。 在容器的上下文中完成的所有工作均在给定容器的单个工作器节点上执行。 请参阅 [Hadoop：编写 YARN 应用程序](https://hadoop.apache.org/docs/r2.7.4/hadoop-yarn/hadoop-yarn-site/WritingYarnApplications.html)或 [Apache Hadoop YARN](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) 以获取更多参考信息。
 
-若要通过缩放群集来支持更高的处理吞吐量，可按照[使用几种不同的语言手动缩放群集](hdinsight-scaling-best-practices.md#utilities-to-scale-clusters)进行操作。
+若要通过缩放群集来支持更高的处理吞吐量，可参阅[自动缩放](hdinsight-autoscale-clusters.md)或[使用一些不同的语言手动缩放群集](hdinsight-scaling-best-practices.md#utilities-to-scale-clusters)。
 
 ## <a name="yarn-timeline-server"></a><a name="YARNTimelineServer"></a>YARN Timeline Server
 

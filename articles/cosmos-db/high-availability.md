@@ -4,34 +4,36 @@ description: 本文介绍 Azure Cosmos DB 如何提供高可用性
 author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 04/20/2020
-ms.date: 06/22/2020
+origin.date: 06/29/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: 9a2e1d9cf22b3e4d19734c0a5006c45444995ac0
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.openlocfilehash: 933f91a50d10ab3e6fda6120d371097f37d9ca11
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85098584"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223203"
 ---
 # <a name="high-availability-with-azure-cosmos-db"></a>使用 Azure Cosmos DB 实现高可用性
 
-Azure Cosmos DB 以透明方式在与 Cosmos 帐户关联的所有 Azure 区域之间复制数据。 Cosmos DB 对数据采用多层冗余，如下图所示：
+Azure Cosmos DB 以透明方式在与 Azure Cosmos 帐户关联的所有 Azure 区域之间复制数据。 Azure Cosmos DB 对数据采用多层冗余，如下图所示：
 
-![物理分区](./media/high-availability/cosmosdb-data-redundancy.png)
+:::image type="content" source="./media/high-availability/cosmosdb-data-redundancy.png" alt-text="物理分区" border="false":::
 
-- Cosmos 容器中的数据[已水平分区](partitioning-overview.md)。
+- Azure Cosmos 容器中的数据[已水平分区](partitioning-overview.md)。
 
-- 在每个区域中，每个分区受副本集的保护，该副本集中的大多数副本将复制并以持久方式提交所有写入内容。 副本分布在最多 10 到 20 个容错域中。
+- 分区集是多个副本集的集合。 在每个区域中，每个分区受副本集的保护，该副本集中的大多数副本将复制并以持久方式提交所有写入内容。 副本分布在最多 10 到 20 个容错域中。
 
-- 将复制所有区域中的每个分区。 每个区域包含某个 Cosmos 容器的所有数据分区，可接受写入并为读取提供服务。  
+- 将复制所有区域中的每个分区。 每个区域包含某个 Azure Cosmos 容器的所有数据分区，可接受写入并维护读取。  
 
-如果 Cosmos 帐户分布在 *N* 个 Azure 区域之间，则所有数据至少有 *N* x 4 个副本。 除了在与 Cosmos 帐户关联的区域之间提供低延迟数据访问和缩放写入/读取吞吐量以外，部署更多的区域（*N* 值较高）还可进一步提高可用性。  
+如果 Azure Cosmos 帐户分布在 N 个 Azure 区域之间，则所有数据至少有 N x 4 个副本。 通常情况下，在超过 2 个区域中拥有 Azure Cosmos 帐户可提高应用程序的可用性，并在相关区域之间提供较低的延迟。 
 
 ## <a name="slas-for-availability"></a>可用性 SLA
 
-作为多区域分布式数据库，Cosmos DB 提供综合性的 SLA，涵盖了吞吐量、99% 时间内的延迟、一致性和高可用性。 下表显示了 Cosmos DB 针对单区域和多区域帐户提供的高可用性保证。 为实现高可用性，请始终将 Cosmos 帐户配置为使用多个写入区域。
+作为多区域分布式数据库，Azure Cosmos DB 提供综合性 SLA，涵盖吞吐量、99% 时间内的延迟、一致性和高可用性。 下表显示 Azure Cosmos DB 针对单区域和多区域帐户提供的高可用性保证。 若要实现高可用性，请始终将 Azure Cosmos 帐户配置为使用多个写入区域（也称为多主数据库）。
 
 |操作类型  | 单区域 |多区域（单区域写入）|多区域（多区域写入） |
 |---------|---------|---------|-------|
@@ -41,19 +43,19 @@ Azure Cosmos DB 以透明方式在与 Cosmos 帐户关联的所有 Azure 区域�
 > [!NOTE]
 > 在实践中，有限过期、会话、一致前缀和最终一致性模型的实际写入可用性明显高于发布的 SLA。 所有一致性级别的实际读取可用性明显高于发布的 SLA。
 
-## <a name="high-availability-with-cosmos-db-in-the-event-of-regional-outages"></a>使用 Cosmos DB 在遇到区域性服务中断时提供高可用性
+## <a name="high-availability-with-azure-cosmos-db-in-the-event-of-regional-outages"></a>使用 Azure Cosmos DB 在发生区域性服务中断时提供高可用性
 
-区域性服务中断并不少见，而 Azure Cosmos DB 可确保你的数据库始终保持高可用性。 下面根据 Cosmos 帐户配置详细汇总了 Cosmos DB 在服务中断期间的行为：
+对于区域性服务中断的罕见情况，Azure Cosmos DB 可确保你的数据库始终保持高可用性。 下面根据 Azure Cosmos 帐户配置详细介绍 Azure Cosmos DB 在服务中断期间的行为：
 
-- 使用 Cosmos DB 时，在客户端确认写入操作之前，数据将由接受写入操作的区域中的副本仲裁持久提交。
+- 使用 Azure Cosmos DB 时，在客户端确认写入操作之前，数据将由接受写入操作的区域中的副本仲裁持续提交。
 
-- 配置有多个写入区域的多区域帐户对于写入和读取都将具有高可用性。 区域性故障转移可在瞬间完成，不需要在应用程序中进行任何更改。
+- 配置了多个写入区域/多主数据库的多区域帐户对于写入和读取都将保持高可用性。 区域性故障转移可在瞬间完成，不需要在应用程序中进行任何更改。
 
-- 发生区域性服务中断时，单区域帐户可能会失去可用性。 建议始终对 Cosmos 帐户**至少设置两个区域**（最好是至少设置两个写入区域），以确保始终保持高可用性。
+- 发生区域性服务中断时，单区域帐户可能会失去可用性。 始终建议对 Azure Cosmos 帐户至少设置两个区域（最好至少设置两个写入区域），以确保始终保持高可用性。
 
 ### <a name="multi-region-accounts-with-a-single-write-region-write-region-outage"></a>配置为使用单个写入区域的多区域帐户（写入区域服务中断）
 
-- 在写入区域中断期间，如果在 Azure Cosmos 帐户上配置了**启用自动故障转移**，则 Cosmos 帐户会将次要区域自动提升为新的主要写入区域。 当启用后，将按您指定的区域优先级顺序故障转移到其他区域。
+- 在写入区域服务中断期间，如果在 Azure Cosmos 帐户上配置了“启用自动故障转移”，则 Azure Cosmos 帐户会自动将次要区域提升为新的主要写入区域。 当启用后，将按您指定的区域优先级顺序故障转移到其他区域。
 - 当上一个受影响的区域重新联机时，可以通过[冲突源](how-to-manage-conflicts.md#read-from-conflict-feed)使用该区域发生故障时未复制的任何写入数据。 应用程序可以读取冲突源，根据应用程序特定的逻辑解决冲突，并相应地将更新后的数据写回 Azure Cosmos 容器。
 - 以前受影响的写入区域恢复后，它将自动用作读取区域。 可以切换回到用作写入区域的已恢复区域。 可以使用 [PowerShell、Azure CLI 或 Azure 门户](how-to-manage-database-account.md#manual-failover)来切换区域。 在切换写入区域之前、期间或之后，**不会丢失数据或可用性**，应用程序将继续保持高可用性。
 
@@ -62,26 +64,21 @@ Azure Cosmos DB 以透明方式在与 Cosmos 帐户关联的所有 Azure 区域�
 
 ### <a name="multi-region-accounts-with-a-single-write-region-read-region-outage"></a>配置为使用单个写入区域的多区域帐户（读取区域服务中断）
 
-- 在读取区域发生服务中断期间，使用与三个或更多读取区域的任何一致性级别或强一致性的 Cosmos 帐户将仍然可用于读取和写入。
+- 在读取区域服务中断期间，使用任何一致性级别或强一致性且具有三个或更多读取区域的 Azure Cosmos 帐户仍将对读取和写入保持高可用性。
+- 使用强一致性且读取区域不超过两个（包括读写区域）的 Azure Cosmos 帐户将在一个读取区域发生服务中断期间失去写入可用性，但会保持剩余区域的读取可用性。
 - 受影响的区域将自动断开连接，并标记为脱机。 [Azure Cosmos DB SDK](sql-api-sdk-dotnet.md) 会将读取调用重定向到首选区域列表中的下一个可用区域。
 - 如果首选区域列表中没有区域可用，则会自动让调用返回到当前的写入区域。
 - 处理读取区域服务中断不需要对应用程序代码进行更改。 当受影响的读取区域重新联机时，它会自动与当前写入区域同步，并再次可用于为读取请求提供服务。
-- 后续的读取会重定向到恢复的区域，不需更改应用程序代码。 在故障转移和重新加入以前发生故障的区域期间，Cosmos DB 会持续遵循读取一致性保证。
+- 后续的读取会重定向到恢复的区域，不需更改应用程序代码。 在故障转移和重新加入之前发生故障的区域期间，Azure Cosmos DB 会继续提供读取一致性保证。
+- 即使在发生了 Azure 区域永久无法恢复的罕见不幸事件中，如果为多区域 Azure Cosmos 帐户配置了强一致性，也不会丢失数据。 如果出现永久不可恢复的写入区域，对于配置了有限过期一致性的多区域 Azure Cosmos 帐户，潜在的数据丢失时段限制为过期时段（K 或 T），其中 K = 100,000 次更新，T = 5 分钟。 对于会话、一致前缀和最终一致性级别，潜在的数据丢失时段限制为最多 15 分钟。 有关 Azure Cosmos DB 的 RTO 和 RPO 目标的详细信息，请参阅[一致性级别和数据持续性](consistency-levels-tradeoffs.md#rto)
 
-> [!IMPORTANT]
-> 使用强一致性且读取区域不超出两个的 Azure Cosmos 帐户会在一个读取区域发生服务中断期间失去写入能力，但会保持剩余区域的读取能力。
-
-- 即使在罕见的不幸事件中，发生了 Azure 区域永久无法恢复的情况，如果为多区域 Cosmos 帐户配置了默认的非常一致性，也不会丢失数据。  如果出现永久不可恢复的写入区域，对于配置了有限过期一致性的多区域 Cosmos 帐户，潜在的数据丢失时段限制为过期时段（*K* 或 *T*），其中 K = 100,000 次更新，T = 5 分钟。 对于会话、一致前缀和最终一致性级别，潜在的数据丢失时段限制为最多 15 分钟。 有关 Azure Cosmos DB 的 RTO 和 RPO 目标的详细信息，请参阅[一致性级别和数据持续性](consistency-levels-tradeoffs.md#rto)
-
-<!--Not Avaialble on ## Availability Zone support-->
-
-
+<!--Not Available on ## Availability Zone support-->
 
 ## <a name="building-highly-available-applications"></a>生成高可用性应用程序
 
-- 为确保较高的写入和读取可用性，请将 Cosmos 帐户配置为跨越多个写入区域中的至少两个区域。 对于读取和写入，此配置都可提供由 SLA 作为保障的最高可用性、最低延迟和最佳可伸缩性。 详细了解如何[将 Cosmos 帐户配置为使用多个写入区域](tutorial-global-distribution-sql-api.md)。
+- 若要确保较高的写入和读取可用性，请将 Azure Cosmos 帐户配置为跨越至少两个区域并使用多个写入区域。 对于读取和写入，此配置都可提供由 SLA 作为保障的最高可用性、最低延迟和最佳可伸缩性。 若要了解详细信息，请参阅如何[将 Azure Cosmos 帐户配置为使用多个写入区域](tutorial-global-distribution-sql-api.md)。
 
-- 对于配置为使用单个写入区域的多区域 Cosmos 帐户，请[使用 Azure CLI 或 Azure 门户中启用自动故障转移](how-to-manage-database-account.md#automatic-failover)。 启用自动故障转移后，每当发生区域性灾难时，Cosmos DB 都会自动故障转移你的帐户。  
+- 对于配置为使用单个写入区域的多区域 Azure Cosmos 帐户，请[使用 Azure CLI 或 Azure 门户启用自动故障转移](how-to-manage-database-account.md#automatic-failover)。 启用自动故障转移后，每当发生区域性灾难时，Cosmos DB 都会自动故障转移你的帐户。  
 
 - 即使 Azure Cosmos 帐户具有高可用性，应用程序也不一定能够正常保持高可用性。 若要测试应用程序的端到端高可用性，请在应用程序测试或灾难恢复 (DR) 演练过程中，暂时禁用帐户的自动故障转移功能，[使用 PowerShell、Azure CLI 或 Azure 门户调用手动故障转移](how-to-manage-database-account.md#manual-failover)，然后监视应用程序的故障转移。 完成后，可以故障回复到主区域，然后还原该帐户的自动故障转移。
 

@@ -9,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: quickstart
 ms.workload: identity
-ms.date: 07/09/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
-ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:aspnet-core
-ms.openlocfilehash: 08be84e7c75feaffd646d916a42b8a013cf0db70
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.custom: devx-track-csharp, aaddev, identityplatformtop40, scenarios:getting-started, languages:aspnet-core
+ms.openlocfilehash: 596b2cf7eefbf6e17306de7b13f8a39c9a3e6db4
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164944"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647608"
 ---
 # <a name="quickstart-acquire-a-token-and-call-microsoft-graph-api-using-console-apps-identity"></a>快速入门：使用控制台应用的标识获取令牌并调用 Microsoft Graph API
 
@@ -204,7 +204,7 @@ app = ConfidentialClientApplicationBuilder.Create(config.ClientId)
 > | `config.ClientId` | 是在 Azure 门户中注册的应用程序的**应用程序(客户端) ID**。 可以在 Azure 门户的应用的“概览”页中找到此值。 |
 > | `config.Authority`    | （可选）用户要进行身份验证的 STS 终结点。 对于公有云，通常为 <https://login.partner.microsoftonline.cn/{tenant}>，其中 {tenant} 是租户名称或租户 ID。|
 
-有关详细信息，请参阅 [`ConfidentialClientApplication` 的参考文档](https://docs.azure.cn/zh-cn/dotnet/api/microsoft.identity.client.iconfidentialclientapplication?view=azure-dotnet)
+有关详细信息，请参阅 [`ConfidentialClientApplication` 的参考文档](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.iconfidentialclientapplication?view=azure-dotnet)
 
 ### <a name="requesting-tokens"></a>请求令牌
 

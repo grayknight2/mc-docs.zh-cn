@@ -5,14 +5,16 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 03/06/2020
-ms.date: 04/27/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: 3ab0ba82ec02836ea6358a9122614f14d7c22f9d
-ms.sourcegitcommit: f9c242ce5df12e1cd85471adae52530c4de4c7d7
+ms.openlocfilehash: 52f1eda603274b0b3a1d4bf778156202da1cd066
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82134796"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223447"
 ---
 # <a name="where-clause-in-azure-cosmos-db"></a>Azure Cosmos DB 中的 WHERE 子句
 
@@ -47,21 +49,21 @@ WHERE <filter_condition>
 以下查询请求包含值为 `AndersenFamily` 的 `id` 属性的项。 它会排除任何不带 `id` 属性或值与 `AndersenFamily` 不匹配的项。
 
 ```sql
-SELECT f.address
-FROM Families f
-WHERE f.id = "AndersenFamily"
+    SELECT f.address
+    FROM Families f
+    WHERE f.id = "AndersenFamily"
 ```
 
 结果有：
 
 ```json
-[{
-  "address": {
-    "state": "WA",
-    "county": "King",
-    "city": "Seattle"
-  }
-}]
+    [{
+      "address": {
+        "state": "WA",
+        "county": "King",
+        "city": "Seattle"
+      }
+    }]
 ```
 
 ### <a name="scalar-expressions-in-the-where-clause"></a>WHERE 子句中的标量表达式
@@ -70,7 +72,7 @@ WHERE f.id = "AndersenFamily"
 
 可以使用以下受支持的二元运算符：  
 
-|**运算符类型**  | **值** |
+|**运算符类型** | **值** |
 |---------|---------|
 |算术 | +,-,*,/,% |
 |位    | \|、&、^、<<、>>、>>>（补零右移） |
@@ -81,32 +83,32 @@ WHERE f.id = "AndersenFamily"
 以下查询使用二元运算符：
 
 ```sql
-SELECT *
-FROM Families.children[0] c
-WHERE c.grade % 2 = 1     -- matching grades == 5, 1
+    SELECT *
+    FROM Families.children[0] c
+    WHERE c.grade % 2 = 1     -- matching grades == 5, 1
 
-SELECT *
-FROM Families.children[0] c
-WHERE c.grade ^ 4 = 1    -- matching grades == 5
+    SELECT *
+    FROM Families.children[0] c
+    WHERE c.grade ^ 4 = 1    -- matching grades == 5
 
-SELECT *
-FROM Families.children[0] c
-WHERE c.grade >= 5    -- matching grades == 5
+    SELECT *
+    FROM Families.children[0] c
+    WHERE c.grade >= 5    -- matching grades == 5
 ```
 
 还可以在查询中使用一元运算符 +、-、~ 和 NOT，如以下示例所示：
 
 ```sql
-SELECT *
-FROM Families.children[0] c
-WHERE NOT(c.grade = 5)  -- matching grades == 1
+    SELECT *
+    FROM Families.children[0] c
+    WHERE NOT(c.grade = 5)  -- matching grades == 1
 
-SELECT *
-FROM Families.children[0] c
-WHERE (-c.grade = -5)  -- matching grades == 5
+    SELECT *
+    FROM Families.children[0] c
+    WHERE (-c.grade = -5)  -- matching grades == 5
 ```
 
-还可以在查询中使用属性引用。 例如，`SELECT * FROM Families f WHERE f.isRegistered` 返回包含值等于 `true` 的 `isRegistered` 属性的 JSON 项。 任何其他值（例如`false`、`null`、`Undefined`、`<number>`、`<string>`、`<object>` 或 `<array>`）会从结果中排除该项。 
+还可以在查询中使用属性引用。 例如，`SELECT * FROM Families f WHERE f.isRegistered` 返回包含值等于 `true` 的 `isRegistered` 属性的 JSON 项。 任何其他值（例如`false`、`null`、`Undefined`、`<number>`、`<string>`、`<object>` 或 `<array>`）会从结果中排除该项。 此外，还可以使用 `IS_DEFINED` 类型检查函数根据是否存在给定 JSON 属性进行查询。 例如，`SELECT * FROM Families f WHERE NOT IS_DEFINED(f.isRegistered)` 返回没有 `isRegistered` 值的所有 JSON 项。
 
 ## <a name="next-steps"></a>后续步骤
 

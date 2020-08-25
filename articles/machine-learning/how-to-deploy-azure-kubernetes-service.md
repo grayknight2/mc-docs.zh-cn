@@ -1,5 +1,5 @@
 ---
-title: 如何将模型部署到 Azure Kubernetes 服务
+title: 将 ML 模型部署到 Kubernetes 服务
 titleSuffix: Azure Machine Learning
 description: 了解如何使用 Azure Kubernetes 服务将 Azure 机器学习模型部署为 Web 服务。
 services: machine-learning
@@ -9,13 +9,13 @@ ms.topic: how-to
 ms.author: jordane
 author: jpe316
 ms.reviewer: larryfr
-ms.date: 06/12/2020
-ms.openlocfilehash: 209a545b70b45a413b0dbf24ca51ba480accbdcc
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.date: 06/23/2020
+ms.openlocfilehash: ade8703b08889effcbd7fa59b8baf9b2c23119df
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097541"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228209"
 ---
 # <a name="deploy-a-model-to-an-azure-kubernetes-service-cluster"></a>将模型部署到 Azure Kubernetes 服务群集
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -34,8 +34,15 @@ ms.locfileid: "85097541"
 * 使用 Azure 机器学习 SDK、机器学习 CLI 或 [Azure 机器学习工作室](https://ml.azure.com)创建 AKS 群集。 此过程会自动将群集连接到工作区。
 * 将现有的 AKS 群集附加到 Azure 机器学习工作区。 可使用 Azure 机器学习 SDK、机器学习 CLI 或 Azure 机器学习工作室来附加群集。
 
+AKS 群集和 AML 工作区可以位于不同的资源组中。
+
 > [!IMPORTANT]
 > 创建或附加过程是一次性任务。 将 AKS 群集连接到工作区后，便可将其用于部署。 如果不再需要 AKS 群集，可将其拆离或删除。 拆离或删除后，将无法再部署到该群集。
+
+> [!IMPORTANT]
+> 强烈建议在部署到 Web 服务之前先进行本地调试。有关详细信息，请参阅[本地调试](/machine-learning/how-to-troubleshoot-deployment#debug-locally)
+>
+> 还可参阅 Azure 机器学习 - [部署到本地笔记本](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/deployment/deploy-to-local)
 
 ## <a name="prerequisites"></a>先决条件
 
@@ -55,9 +62,27 @@ ms.locfileid: "85097541"
 
 - 本文中的 CLI 片段假设已创建 `inferenceconfig.json` 文档____。 有关如何创建此文档的详细信息，请参阅[部署模型的方式和位置](how-to-deploy-and-where.md)。
 
+- 如果需要的是在群集中部署的标准负载均衡器 (SLB)，而不是基本负载均衡器 (BLB)，请在 AKS 门户/CLI/SDK 中创建群集，然后将该群集附加到 AML 工作区。
+
+- 如果附加 AKS 群集（已[启用授权 IP 范围以访问 API 服务器](/aks/api-server-authorized-ip-ranges)），请为该 AKS 群集启用 AML 控制平面 IP 范围。 AML 控制平面是跨配对区域部署的，并且会在 AKS 群集上部署推理 Pod。 如果没有 API 服务器的访问权限，则无法部署推理 Pod。 在 AKS 群集中启用 IP 范围时，请对两个[配对区域]( https://docs.microsoft.com/azure/best-practices-availability-paired-regions)都使用 [IP 范围](https://www.microsoft.com/en-us/download/confirmation.aspx?id=56519)。
+
+__授权 IP 范围仅适用于标准负载均衡器。__
+ 
+ - 计算名称在工作区内必须唯一
+   - 名称是必须提供的，且长度必须介于 3 到 24 个字符之间。
+   - 有效字符为大小写字母、数字和 - 字符。
+   - 名称必须以字母开头
+   - 名称必须在 Azure 区域内的全部现有计算中都是唯一的。 如果选择的名称不是唯一的，则会显示警报
+   
+ - 如果要将模型部署到 GPU 节点或 FPGA 节点（或任何特定 SKU），则必须使用该特定 SKU 创建群集。 不支持在现有群集中创建辅助节点池以及在辅助节点池中部署模型。
+ 
+ 
+
+
+
 ## <a name="create-a-new-aks-cluster"></a>创建新的 AKS 群集
 
-**时间估计**：大约 20 分钟。
+**时间估计**：大约 10 分钟。
 
 对于工作区而言，创建或附加 AKS 群集是一次性过程。 可以将此群集重复用于多个部署。 如果删除该群集或包含该群集的资源组，则在下次需要进行部署时必须创建新群集。 可将多个 AKS 群集附加到工作区。
 
@@ -137,6 +162,7 @@ az ml computetarget create aks -n myaks
 
 * [创建 AKS 群集 (CLI)](https://docs.microsoft.com/cli/azure/aks?toc=%2Fazure%2Faks%2FTOC.json&bc=%2Fazure%2Fbread%2Ftoc.json&view=azure-cli-latest#az-aks-create)
 * [创建 AKS 群集（门户）](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough-portal?view=azure-cli-latest)
+* [创建 AKS 群集（Azure 快速入门模板上的 ARM 模板）](https://github.com/Azure/azure-quickstart-templates/tree/master/101-aks-azml-targetcompute)
 
 以下示例演示如何将现有 AKS 群集附加到工作区：
 
@@ -231,6 +257,30 @@ az ml model deploy -ct myaks -m mymodel:1 -n myservice -ic inferenceconfig.json 
 
 > [!IMPORTANT]
 > 通过 VS Code 进行部署要求提前创建 AKS 群集或将其附加到工作区。
+
+### <a name="understand-the-deployment-processes"></a>了解部署过程
+
+在 Kubernetes 和 Azure 机器学习中都会用到“部署”一词。 “部署”的含义在这两种上下文中有很大区别。 在 Kubernetes 中，`Deployment` 是使用声明性 YAML 文件指定的具体实体。 Kubernetes `Deployment` 具有明确的生命周期，并与其他 Kubernetes 实体（如 `Pods` 和 `ReplicaSets`）有具体的关系。 可以从[什么是 Kubernetes？](https://aka.ms/k8slearning)中的文档和视频了解 Kubernetes。
+
+在 Azure 机器学习中，“部署”在更普遍的意义上用于提供和清理项目资源。 Azure 机器学习认为属于部署的步骤包括：
+
+1. 将项目文件夹中的文件压缩，忽略那些在 .amlignore 或 .gitignore 中指定的文件
+1. 纵向扩展计算群集（与 Kubernetes 相关）
+1. 构建 dockerfile 或将其下载到计算节点（与 Kubernetes 相关）
+    1. 系统计算以下各项的哈希： 
+        - 基础映像 
+        - 自定义 Docker 步骤（请参阅[使用自定义 Docker 基础映像部署模型](/machine-learning/how-to-deploy-custom-docker-image)）
+        - Conda 定义 YAML（请参阅[在 Azure 机器学习中创建和使用软件环境](/machine-learning/how-to-use-environments)）
+    1. 在工作区 Azure 容器注册表 (ACR) 中进行查找时，系统使用此哈希作为键
+    1. 如果找不到该键，系统会在全局 ACR 中寻找匹配项
+    1. 如果找不到匹配项，系统会生成新映像（该映像将会被缓存并注册到工作区 ACR 中）
+1. 将压缩的项目文件下载到计算节点上的临时存储
+1. 将项目文件解压缩
+1. 计算节点执行 `python <entry script> <arguments>`
+1. 将写入 `./outputs` 的日志、模型文件和其他文件保存到与工作区关联的存储帐户
+1. 纵向缩减计算，包括删除临时存储（与 Kubernetes 相关）
+
+使用 AKS 时，Kubernetes 使用按上述方法生成或找到的 dockerfile 来控制计算的纵向扩展和缩减。 
 
 ## <a name="deploy-models-to-aks-using-controlled-rollout-preview"></a>使用受控推出（预览版）将模型部署到 AKS
 
@@ -366,6 +416,8 @@ print(token)
 > 需要在令牌的 `refresh_by` 时间后请求一个新令牌。
 >
 > Microsoft 强烈建议在 Azure Kubernetes 服务群集所在的相同区域中创建 Azure 机器学习工作区。 要使用令牌进行身份验证，Web 服务将调用创建 Azure 机器学习工作区的区域。 如果工作区区域不可用，即使群集和工作区不在同一区域，也将无法获取 Web 服务的令牌。 这实际上会导致在工作区的区域再次可用之前，基于令牌的身份验证不可用。 此外，群集区域和工作区区域的距离越远，获取令牌所需的时间就越长。
+>
+> 若要检索令牌，必须使用 Azure 机器学习 SDK 或 [az ml service get-access-token](https://docs.microsoft.com/cli/azure/ext/azure-cli-ml/ml/service?view=azure-cli-latest#ext-azure-cli-ml-az-ml-service-get-access-token) 命令。
 
 ## <a name="update-the-web-service"></a>更新 Web 服务
 

@@ -4,16 +4,17 @@ description: 了解如何使用 Azure 队列 JavaScript v12 库创建队列并�
 author: WenJason
 ms.author: v-jay
 origin.date: 12/13/2019
-ms.date: 07/20/2020
+ms.date: 08/24/2020
 ms.service: storage
 ms.subservice: queues
 ms.topic: quickstart
-ms.openlocfilehash: 878c2060b14cc7bd4e4d8b0f2b2d502ed188b830
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.custom: devx-track-javascript
+ms.openlocfilehash: c3ff240b69a3164857be265a5904b0309e0a1ed8
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414595"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753426"
 ---
 # <a name="quickstart-azure-queue-storage-client-library-v12-for-javascript"></a>快速入门：适用于 JavaScript 的 Azure 队列存储客户端库 v12
 
@@ -29,7 +30,12 @@ ms.locfileid: "86414595"
 * 从队列中删除消息
 * 删除队列
 
-[API 参考文档](https://docs.microsoft.com/javascript/api/@azure/storage-queue/) | [库源代码](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue) | [包（节点包管理器）](https://www.npmjs.com/package/@azure/storage-queue) | [示例](/storage/common/storage-samples-javascript?toc=%2fstorage%2fqueues%2ftoc.json#queue-samples)
+其他资源：
+
+* [API 参考文档](https://docs.microsoft.com/javascript/api/@azure/storage-queue/)
+* [库源代码](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue)
+* [包(节点包管理器)](https://www.npmjs.com/package/@azure/storage-queue)
+* [示例](/storage/common/storage-samples-javascript?toc=%2fstorage%2fqueues%2ftoc.json#queue-samples)
 
 ## <a name="prerequisites"></a>先决条件
 

@@ -1,25 +1,23 @@
 ---
 title: 使用 REST API 实现 Azure IoT Edge 流分析的 CI/CD
 description: 了解如何使用 REST API 实现 Azure 流分析的持续集成和部署管道。
-services: stream-analytics
-author: lingliw
-ms.author: v-lingwu
-manager: digimobile
-ms.reviewer: jasonh
+author: Johnnytechn
+ms.author: v-johya
+ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
+ms.date: 08/20/2020
 origin.date: 12/04/2018
-ms.date: 06/11/2019
-ms.openlocfilehash: 5816fbd69b154c4fc7f9924b4d191edbb38578c0
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: e520202ee75b0fd6f20860dccefd7bd698b10739
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75857035"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715700"
 ---
 # <a name="implement-cicd-for-stream-analytics-on-iot-edge-using-apis"></a>使用 API 实现 IoT Edge 流分析的 CI/CD
 
-可使用 REST API 启用 Azure 流分析作业的持续集成和部署管道。 本文举例说明该使用哪些 API 及其具体用法。 Azure Cloud Shell 不支持 REST API。
+可使用 REST API 启用 Azure 流分析作业的持续集成和部署管道。 本文举例说明该使用哪些 API 及其具体用法。
 
 ## <a name="call-apis-from-different-environments"></a>从不同环境调用 API
 
@@ -60,19 +58,19 @@ echo $response
 
 |方法|请求 URL|
 |------|-----------|
-|PUT|https://management.chinacloudapi.cn/subscriptions/{**subscription-id**}/resourcegroups/{**resource-group-name**}/providers/Microsoft.StreamAnalytics/streamingjobs/{**job-name**}?api-version=2017-04-01-preview|
+|PUT|`https://management.chinacloudapi.cn/subscriptions/{\**subscription-id**}/resourcegroups/{**resource-group-name**}/providers/Microsoft.StreamAnalytics/streamingjobs/{**job-name**}?api-version=2017-04-01-preview`|
  
-使用 curl 的命令示例  ：
+使用 curl 的命令示例****：
 
 ```curl
-curl -u { <username:password> }  -H "Content-Type: application/json" -X { <method> } -d "{ <request body>}” https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourcegroups/{resource-group-name}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobname}?api-version=2017-04-01-preview  
+curl -u { <username:password> } -H "Content-Type: application/json" -X { <method> } -d "{ <request body> }" https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourcegroups/{resource-group-name}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobname}?api-version=2017-04-01-preview  
 ``` 
  
 JSON 中的请求正文示例：
 
 ```json
 { 
-  "location": "China East 2", 
+  "location": "China North", 
   "tags": { "key": "value", "ms-suppressjobstatusmetrics": "true" }, 
   "sku": {  
       "name": "Standard" 
@@ -147,11 +145,11 @@ JSON 中的请求正文示例：
 
 |方法|请求 URL|
 |------|-----------|
-|POST|https://management.chinacloudapi.cn/subscriptions/{**subscriptionid**}/resourceGroups/{**resourcegroupname**}/providers/Microsoft.StreamAnalytics/streamingjobs/{**jobname**}/publishedgepackage?api-version=2017-04-01-preview|
+|POST|`https://management.chinacloudapi.cn/subscriptions/{\**subscriptionid**}/resourceGroups/{**resourcegroupname**}/providers/Microsoft.StreamAnalytics/streamingjobs/{**jobname**}/publishedgepackage?api-version=2017-04-01-preview`|
 
 在作业成功发布前，此异步操作会返回状态 202。 位置响应标头包含用于获取进程状态的 URI。 进程正在运行时，若调用位置标头中的 URI，则会返回状态 202。 进程结束时，位置标头中的 URI 会返回状态 200。 
 
-使用 curl 的 Edge 程序包发布调用示例  ： 
+使用 curl 的 Edge 程序包发布调用示例****： 
 
 ```bash
 curl -d -X POST https://management.chinacloudapi.cn/subscriptions/{subscriptionid}/resourceGroups/{resourcegroupname}/providers/Microsoft.StreamAnalytics/streamingjobs/{jobname}/publishedgepackage?api-version=2017-04-01-preview
@@ -166,10 +164,10 @@ https://management.chinacloudapi.cn/subscriptions/{**subscriptionid**}/resourceg
 ```
 在运行以下命令前等待一到两分钟，先通过在响应的 HEAD 中发现的 URL 调用 API。 如果未获得 200 响应，请重新运行该命令。
  
-使用 curl 通过返回的 URL 调用 API 的示例  ：
+使用 curl 通过返回的 URL 调用 API 的示例****：
 
 ```bash
-curl -d –X GET https://management.chinacloudapi.cn/subscriptions/{subscriptionid}/resourceGroups/{resourcegroupname}/providers/Microsoft.StreamAnalytics/streamingjobs/{resourcename}/publishedgepackage?api-version=2017-04-01-preview 
+curl -d -X GET https://management.chinacloudapi.cn/subscriptions/{subscriptionid}/resourceGroups/{resourcegroupname}/providers/Microsoft.StreamAnalytics/streamingjobs/{resourcename}/publishedgepackage?api-version=2017-04-01-preview 
 ```
 
 响应中包括需添加到 Edge 部署脚本的信息。 以下示例显示了需收集的信息，以及要在部署清单中添加信息的位置。
@@ -262,4 +260,3 @@ curl -d –X GET https://management.chinacloudapi.cn/subscriptions/{subscription
  
 * [Azure IoT Edge 流分析](stream-analytics-edge.md)
 * [IoT Edge 教程上的 ASA ](/iot-edge/tutorial-deploy-stream-analytics)
-* [使用 Visual Studio 工具开发流分析 Edge 作业](stream-analytics-tools-for-visual-studio-edge-jobs.md)

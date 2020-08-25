@@ -1,30 +1,21 @@
 ---
-title: 创建启用了捕获的事件中心 - Azure 事件中心 | Azure
+title: 创建启用了捕获的事件中心 - Azure 事件中心 | Microsoft Docs
 description: 使用 Azure 资源管理器模板创建包含一个事件中心的 Azure 事件中心命名空间并启用捕获
-services: event-hubs
-documentationcenter: .net
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: 8bdda6a2-5ff1-45e3-b696-c553768f1090
-ms.service: event-hubs
-ms.devlang: tbd
 ms.topic: conceptual
-ms.tgt_pltfrm: dotnet
-ms.workload: na
-origin.date: 02/12/2020
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 976c48c6ef407fc25605a2c2176c2b0fb6e83d32
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 5a02d6550d680186b1de525e5ea98e5b7543436d
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199775"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715216"
 ---
 # <a name="create-a-namespace-with-event-hub-and-enable-capture-using-a-template"></a>使用模板通过事件中心创建一个命名空间并启用捕获
 
-本文介绍如何使用 Azure 资源管理器模板创建包含一个事件中心实例的[事件中心](event-hubs-what-is-event-hubs.md)命名空间，并在事件中心启用[捕获功能](event-hubs-capture-overview.md)。 本文介绍如何定义要部署的资源以及如何定义执行部署时指定的参数。 可将此模板用于自己的部署，或自定义此模板以满足要求。
+本文介绍如何使用 Azure 资源管理器模板创建包含一个事件中心实例的[事件中心](./event-hubs-about.md)命名空间，并在事件中心启用[捕获功能](event-hubs-capture-overview.md)。 本文介绍如何定义要部署的资源以及如何定义执行部署时指定的参数。 可将此模板用于自己的部署，或自定义此模板以满足要求。
 
 本文还介绍如何根据所选目标，指定将事件捕获到 Azure 存储 Blob 或 Azure Data Lake Store 中。
 
@@ -324,9 +315,7 @@ New-AzResourceGroupDeployment -ResourceGroupName \<resource-group-name\> -Templa
 Azure Blob 存储（作为目标）：
 
 ```azurecli
-azure config mode arm
-
-azure group deployment create \<my-resource-group\> \<my-deployment-name\> --template-uri [https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-eventhubs-create-namespace-and-enable-capture/azuredeploy.json][]
+az group deployment create \<my-resource-group\> \<my-deployment-name\> --template-uri [https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-eventhubs-create-namespace-and-enable-capture/azuredeploy.json][]
 ```
 
 <!-- Not Availalble on Azure Data Lake Store and correspoding code -->
@@ -337,7 +326,7 @@ azure group deployment create \<my-resource-group\> \<my-deployment-name\> --tem
 
 访问以下链接可以了解有关事件中心的详细信息：
 
-* [事件中心概述](event-hubs-what-is-event-hubs.md)
+* [事件中心概述](./event-hubs-about.md)
 * [创建事件中心](event-hubs-create.md)
 * [事件中心常见问题解答](event-hubs-faq.md)
 

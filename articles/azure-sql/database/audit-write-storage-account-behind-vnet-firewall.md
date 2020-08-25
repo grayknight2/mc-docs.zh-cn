@@ -9,14 +9,14 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: vanto
 origin.date: 06/17/2020
-ms.date: 07/13/2020
+ms.date: 08/17/2020
 ms.custom: azure-synapse
-ms.openlocfilehash: 30348b7618808bbb445164fe433a4db3bab623d9
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.openlocfilehash: 0962d5fdddbf212c883427a970871b2c18705a57
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86228207"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222579"
 ---
 # <a name="write-audit-to-a-storage-account-behind-vnet-and-firewall"></a>将审核内容写入到 VNet 和防火墙后面的存储帐户
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
@@ -121,7 +121,7 @@ ms.locfileid: "86228207"
 2. 打开 [Azure 门户](https://portal.azure.cn)。 导航到存储帐户。 找到“访问控制(IAM)”，然后单击“添加角色分配”。  将“存储 Blob 数据参与者”RBAC 角色分配给托管数据库且已在上一步骤中注册到 Azure Active Directory (Azure AD) 的服务器。
 
    > [!NOTE]
-   > 只有具有“所有者”特权的成员能够执行此步骤。 若要了解 Azure 资源的各种内置角色，请参阅 [Azure 内置角色](../../role-based-access-control/built-in-roles.md)。
+   > 只有具有“所有者”特权的成员能够执行此步骤。 有关各种 Azure 内置角色，请参阅 [Azure 内置角色](../../role-based-access-control/built-in-roles.md)。
 
 3. 在不指定 storageAccountAccessKey 的情况下配置[服务器的 Blob 审核策略](https://docs.microsoft.com/rest/api/sql/server%20auditing%20settings/createorupdate)：
 

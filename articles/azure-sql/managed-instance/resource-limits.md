@@ -12,13 +12,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: carlrab, jovanpop, sachinp, sstein
 origin.date: 02/25/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: b2f4f88a3d104f2bf41605dbb6dd9ed85269246e
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 77be555c9ed7082cea65b357f5dee2c8f6dfbd1e
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227754"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223275"
 ---
 # <a name="overview-of-azure-sql-managed-instance-resource-limits"></a>Azure SQL 托管实例资源限制概述
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
@@ -34,11 +34,11 @@ SQL 托管实例的某些特征和资源限制取决于底层基础结构和体�
 
 |   | **Gen4** | **Gen5** |
 | --- | --- | --- |
-| 硬件 | Intel E5-2673 v3 (Haswell) 2.4-GHz 处理器、附加的 SSD vCore = 1 PP（物理核心） | Intel E5-2673 v4 (Broadwell) 2.3-GHz 处理器和 Intel SP-8160 (Skylake) 处理器、快速 NVMe SSD、vCore=1 LP（超线程） |
-| vCore 数目 | 8、16、24 个 vCore | 4、8、16、24、32、40、64、80 个 vCore |
-| 最大内存（内存/核心比） | 每个 vCore 7 GB<br/>添加更多 vCore 以获得更多内存。 | 每个 vCore 5.1 GB<br/>添加更多 vCore 以获得更多内存。 |
-| 最大内存中 OLTP 存储 | 实例限制：每个 vCore 1 - 1.5 GB| 实例限制：每个 vCore 0.8 - 1.65 GB |
-| 最大实例保留存储 |  常规用途：8 TB<br/>业务关键：1 TB | 常规用途：8 TB<br/> 业务关键型 1 TB 或 2 TB，具体取决于核心数 |
+| **硬件** | Intel E5-2673 v3 (Haswell) 2.4-GHz 处理器、附加的 SSD vCore = 1 PP（物理核心） | Intel E5-2673 v4 (Broadwell) 2.3-GHz 处理器和 Intel SP-8160 (Skylake) 处理器、快速 NVMe SSD、vCore=1 LP（超线程） |
+| **vCore 数目** | 8、16、24 个 vCore | 4、8、16、24、32、40、64、80 个 vCore |
+| **最大内存（内存/核心比）** | 每个 vCore 7 GB<br/>添加更多 vCore 以获得更多内存。 | 每个 vCore 5.1 GB<br/>添加更多 vCore 以获得更多内存。 |
+| **最大内存中 OLTP 存储** | 实例限制：每个 vCore 1 - 1.5 GB| 实例限制：每个 vCore 0.8 - 1.65 GB |
+| **最大实例保留存储** |  常规用途：8 TB<br/>业务关键：1 TB | 常规用途：8 TB<br/> 业务关键型 1 TB 或 2 TB，具体取决于核心数 |
 
 > [!IMPORTANT]
 > - Gen4 硬件正在逐步淘汰，不能再用于新部署。 SQL 托管实例的所有新实例都必须部署在 Gen5 硬件上。
@@ -117,7 +117,7 @@ SQL 托管实例只能在[支持的区域](https://azure.microsoft.com/global-in
 - **vCore 单元限制**：可跨单一区域的所有实例部署的 vCore 单元数上限。 一个 GP vCore 使用一个 vCore 单元，一个 BC vCore 采用 4 个 vCore 单位。 实例总数不受限制，只要在 vCore 单元限制内即可。
 
 > [!Note]
-> 这些限制是默认设置，不是技术限制。 如果在当前区域中需要更多托管实例，可以创建特殊[支持请求](https://support.azure.cn/zh-cn/support/support-azure/)，以根据需要提高限制。 或者，可以在另一个 Azure 区域中创建 SQL 托管实例的新实例，而无需发送支持请求。
+> 这些限制是默认设置，不是技术限制。 如果在当前区域中需要更多实例，可以创建特殊[支持请求](https://support.azure.cn/zh-cn/support/support-azure/)，以根据需要提高限制。 或者，可以在另一个 Azure 区域中创建 SQL 托管实例的新实例，而无需发送支持请求。
 
 ## <a name="next-steps"></a>后续步骤
 

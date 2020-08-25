@@ -8,17 +8,17 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 09/15/2019
-ms.date: 05/09/2020
-ms.openlocfilehash: 24cffb708d2dfe6a04d45b11eecc4d2282f5d483
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/13/2020
+ms.openlocfilehash: b236ac58c042eeee3e4cf6b20b3b7f09201cffa5
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417654"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515857"
 ---
 # <a name="use-azure-data-factory-command-activity-to-run-azure-data-explorer-control-commands"></a>使用 Azure 数据工厂命令活动运行 Azure 数据资源管理器控制命令
 
-[Azure 数据工厂](/data-factory/) (ADF) 是基于云的数据集成服务，可用于对数据执行一系列活动。 使用 ADF 可以创建数据驱动式工作流用于协调和自动化数据移动与数据转换。 使用 Azure 数据工厂中的“Azure 数据资源管理器命令”活动，可以在 ADF 工作流中运行 [Azure 数据资源管理器控制命令](https://docs.microsoft.com/azure/data-explorer/kusto/concepts/index#control-commands)。 本文介绍如何使用 Lookup 活动和 ForEach 活动创建包含 Azure 数据资源管理器命令活动的管道。
+[Azure 数据工厂](/data-factory/) (ADF) 是基于云的数据集成服务，可用于对数据执行一系列活动。 使用 ADF 可以创建数据驱动式工作流用于协调和自动化数据移动与数据转换。 使用 Azure 数据工厂中的“Azure 数据资源管理器命令”活动，可以在 ADF 工作流中运行 [Azure 数据资源管理器控制命令](/data-explorer/kusto/concepts/index#control-commands)。 本文介绍如何使用 Lookup 活动和 ForEach 活动创建包含 Azure 数据资源管理器命令活动的管道。
 
 ## <a name="prerequisites"></a>先决条件
 
@@ -44,7 +44,7 @@ ms.locfileid: "83417654"
 
 1. 画布现在包含创建的 Lookup 活动。 使用画布下面的选项卡更改任何相关参数。 在“常规”中，将活动重命名。 
 
-    ![编辑 Lookup 活动](media/data-factory-command-activity/edit-lookup-activity.PNG)
+    ![编辑 Lookup 活动](media/data-factory-command-activity/edit-lookup-activity.png)
 
     > [!TIP]
     > 单击画布中的空白区域可查看管道属性。 使用“常规”选项卡可将管道重命名。 示例中的管道命名为 *pipeline-4-docs*。
@@ -114,7 +114,7 @@ ms.locfileid: "83417654"
 
         ![ForEach 活动](media/data-factory-command-activity/for-each-activity.png)
 
-1.    在画布中选择 ForEach 活动。 在下面的“设置”选项卡中：
+1. 在画布中选择 ForEach 活动。 在下面的“设置”选项卡中：
     * 选中“顺序”复选框以按顺序处理 Lookup 结果，或将其保留为未选中状态以创建并行处理。
     * 设置“批计数”。
     * 在“项”中，提供对输出值的以下引用： *@activity('Lookup1').output.value*
@@ -128,7 +128,7 @@ ms.locfileid: "83417654"
 
     ![Azure 数据资源管理器命令活动](media/data-factory-command-activity/adx-command-activity.png)
 
-1.    在“连接”选项卡中，选择前面创建的同一链接服务。
+1. 在“连接”选项卡中，选择前面创建的同一链接服务。
 
     ![Azure 数据资源管理器命令活动连接选项卡](media/data-factory-command-activity/adx-command-activity-connection-tab.png)
 
@@ -155,7 +155,7 @@ ms.locfileid: "83417654"
     > * 时间限制：20 分钟（默认），1 小时（最大）。
     > * 如果需要，可以使用 [AdminThenQuery](https://docs.microsoft.com/azure/kusto/management/index#combining-queries-and-control-commands) 将查询追加到结果，以减少最终的大小/时间。
 
-1.    管道现已准备就绪。 可以单击管道名称返回到主管道视图。
+1. 管道现已准备就绪。 可以单击管道名称返回到主管道视图。
 
     ![Azure 数据资源管理器命令管道](media/data-factory-command-activity/adx-command-pipeline.png)
 

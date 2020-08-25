@@ -1,6 +1,6 @@
 ---
 title: 适用于 Azure SQL 数据库和数据仓库的连接设置
-description: 本文档介绍了 TLS 版本选择和代理，以及适用于 Azure SQL 数据库和 Azure Synapse Analytics 的重定向设置
+description: 本文档介绍传输层安全性 (TLS) 版本选择和代理，以及适用于 Azure SQL 数据库和 Azure Synapse Analytics 的重定向设置
 services: sql-database
 ms.service: sql-database
 titleSuffix: Azure SQL Database and SQL Data Warehouse
@@ -8,14 +8,14 @@ ms.topic: conceptual
 author: WenJason
 ms.author: v-jay
 ms.reviewer: carlrab, vanto
-origin.date: 03/09/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: 448c333552d261717af110315b3ff54ad9ba864d
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+origin.date: 07/06/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: a915c5d4fa82d9f54b2688393ce6435c2e7df265
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86228178"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222815"
 ---
 # <a name="azure-sql-connectivity-settings"></a>Azure SQL 连接设置
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
@@ -75,7 +75,10 @@ az sql server update -n sql-server-name -g sql-server-group --set publicNetworkA
 
 目前，我们支持 TLS 1.0、1.1 和 1.2。 设置最低 TLS 版本可确保支持后续更新的 TLS 版本。 例如，选择高于 1.1 的 TLS 版本。 这表示仅接受 TLS 1.1 和 1.2 的连接，并拒绝 TLS 1.0 的连接。 在测试并确认应用程序支持它后，我们建议将最低 TLS 版本设置为 1.2，因为它包括针对之前版本中发现的漏洞的修补程序，并且是 Azure SQL 数据库中受支持的最高 TLS 版本。
 
-对于使用依赖于较旧版本 TLS 的应用程序的客户，我们建议根据应用程序的要求设置最低 TLS 版本。 对于依赖于使用未加密连接进行连接的应用程序的客户，我们建议不要设置任何最低 TLS 版本。 
+> [!IMPORTANT]
+> 最低 TLS 版本的默认设置为允许使用所有版本。 但是，一旦强制执行某个 TLS 版本，就无法恢复为默认值。
+
+对于使用依赖于较旧版本 TLS 的应用程序的客户，我们建议根据应用程序的要求设置最低 TLS 版本。 对于依赖于使用未加密连接进行连接的应用程序的客户，我们建议不要设置任何最低 TLS 版本。
 
 有关详细信息，请参阅 [SQL 数据库连接的 TLS 注意事项](connect-query-content-reference-guide.md#tls-considerations-for-database-connectivity)。
 
@@ -89,7 +92,7 @@ Login failed with invalid TLS version
 ## <a name="set-minimal-tls-version-via-powershell"></a>通过 PowerShell 设置最低 TLS 版本
 
 > [!IMPORTANT]
-> Azure SQL 数据库仍然支持 PowerShell Azure 资源管理器模块，但所有后续开发都针对 Az.Sql 模块。 若要了解这些 cmdlet，请参阅 [AzureRM.Sql](https://docs.microsoft.com/powershell/module/AzureRM.Sql/)。 Az 模块和 AzureRm 模块中命令的参数大体相同。 以下脚本需要 [Azure PowerShell 模块](https://docs.microsoft.com/powershell/azure/install-az-ps)。
+> Azure SQL 数据库仍然支持 PowerShell Azure 资源管理器模块，但所有后续开发都针对 Az.Sql 模块。 若要了解这些 cmdlet，请参阅 [AzureRM.Sql](https://docs.microsoft.com/powershell/module/AzureRM.Sql/)。 Az 模块和 AzureRm 模块中的命令参数大体上是相同的。 以下脚本需要 [Azure PowerShell 模块](https://docs.microsoft.com/powershell/azure/install-az-ps)。
 
 以下 PowerShell 脚本演示如何在逻辑服务器级别 `Get` 和 `Set`“最低 TLS 版本”属性：
 
@@ -129,7 +132,7 @@ az sql server update -n sql-server-name -g sql-server-group --set minimalTlsVers
 ## <a name="change-connection-policy-via-powershell"></a>通过 PowerShell 更改连接策略
 
 > [!IMPORTANT]
-> Azure SQL 数据库仍然支持 PowerShell Azure 资源管理器模块，但所有后续开发都针对 Az.Sql 模块。 若要了解这些 cmdlet，请参阅 [AzureRM.Sql](https://docs.microsoft.com/powershell/module/AzureRM.Sql/)。 Az 模块和 AzureRm 模块中命令的参数大体相同。 以下脚本需要 [Azure PowerShell 模块](https://docs.microsoft.com/powershell/azure/install-az-ps)。
+> PowerShell Azure 资源管理器模块仍受 Azure SQL 数据库的支持，但所有未来的开发都是针对 Az.Sql 模块的。 若要了解这些 cmdlet，请参阅 [AzureRM.Sql](https://docs.microsoft.com/powershell/module/AzureRM.Sql/)。 Az 模块和 AzureRm 模块中的命令参数大体上是相同的。 以下脚本需要 [Azure PowerShell 模块](https://docs.microsoft.com/powershell/azure/install-az-ps)。
 
 以下 PowerShell 脚本展示了如何使用 PowerShell 更改连接策略：
 
@@ -141,7 +144,7 @@ $sqlserverid=(Get-AzSqlServer -ServerName sql-server-name -ResourceGroupName sql
 $id="$sqlserverid/connectionPolicies/Default"
 
 # Get current connection policy
-(Get-AzResource -ResourceId $id).Properties.connectionType
+(Get-AzResource -ResourceId $id -ApiVersion 2014-04-01 -Verbose).Properties.ConnectionType
 
 # Update connection policy
 Set-AzResource -ResourceId $id -Properties @{"connectionType" = "Proxy"} -f

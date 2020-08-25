@@ -1,19 +1,19 @@
 ---
 title: 通过 C# 以端到端方式将 blob 引入到 Azure 数据资源管理器中
 description: 本文介绍如何通过使用 C# 的端到端示例，将 blob 引入 Azure 数据资源管理器中。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 05/19/2020
-ms.date: 07/08/2020
-ms.openlocfilehash: 562132aa801f7f2c85b57c43b30a5c8459d4706d
-ms.sourcegitcommit: 5fb9ae9adc04e79d6d0e78c9e69dbe8aa3ceb00a
+ms.date: 08/13/2020
+ms.openlocfilehash: 8f2537308eb227baa10fd349c31a2a3ec8df7f2b
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86100233"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515825"
 ---
 # <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-c"></a>通过 C# 以端到端方式将 blob 引入到 Azure 数据资源管理器中
 

@@ -5,17 +5,19 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 03/23/2020
-ms.date: 04/27/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: 06ac80f63aa467b7e75cce786e0c178c62ac91f9
-ms.sourcegitcommit: f9c242ce5df12e1cd85471adae52530c4de4c7d7
+ms.openlocfilehash: 4c4f0a22ba35c99395d52f8b792aa2ad7f05023e
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82134986"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222790"
 ---
 # <a name="use-the-bulk-executor-net-library-to-perform-bulk-operations-in-azure-cosmos-db"></a>使用批量执行程序 .NET 库在 Azure Cosmos DB 中执行批量操作
 
@@ -44,13 +46,11 @@ ms.locfileid: "82134986"
 
 现在，我们从 GitHub 下载示例 .NET 应用程序来接着处理代码。 此应用程序针对 Azure Cosmos 帐户中存储的数据执行批量操作。 若要克隆该应用程序，请打开命令提示符，导航到要将该应用程序复制到的目录，然后运行以下命令：
 
-```
+```bash
 git clone https://github.com/Azure/azure-cosmosdb-bulkexecutor-dotnet-getting-started.git
 ```
 
 克隆的存储库包含两个示例：“BulkImportSample”和“BulkUpdateSample”。 可以打开任一示例应用程序，使用 Azure Cosmos DB 帐户的连接字符串更新 App.config 文件中的连接字符串，生成解决方案，然后运行它。
-
-<!--MOONCAKE: CORRECT ON "BulkUpdateSample".-->
 
 “BulkImportSample”应用程序生成随机文档并将其批量导入 Azure Cosmos 帐户。 “BulkUpdateSample”应用程序通过指定要对特定文档字段执行的修补操作，来批量更新导入的文档。 在后续部分，我们将查看其中每个示例应用中的代码。
 
@@ -209,6 +209,6 @@ git clone https://github.com/Azure/azure-cosmosdb-bulkexecutor-dotnet-getting-st
 
 ## <a name="next-steps"></a>后续步骤
 
-* 若要了解 Nuget 包的详细信息和发行说明，请参阅[批量执行程序 SDK 详细信息](sql-api-sdk-bulk-executor-dot-net.md)。
+* 若要了解 NuGet 包的详细信息和发行说明，请参阅[批量执行程序 SDK 详细信息](sql-api-sdk-bulk-executor-dot-net.md)。
 
 <!-- Update_Description: update meta properties, wording update, update link -->

@@ -7,13 +7,13 @@ ms.reviewer: hrasheed
 ms.service: hdinsight
 ms.topic: conceptual
 origin.date: 04/03/2020
-ms.date: 06/22/2020
-ms.openlocfilehash: f382e5b43e1178638d3ff3717c572c04717f6ad8
-ms.sourcegitcommit: 3a8a7d65d0791cdb6695fe6c2222a1971a19f745
+ms.date: 08/31/2020
+ms.openlocfilehash: 23b70f6c5c85138545b0bddf06bbaa013ab39477
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/28/2020
-ms.locfileid: "85516598"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715373"
 ---
 # <a name="interact-with-apache-kafka-clusters-in-azure-hdinsight-using-a-rest-proxy"></a>使用 REST 代理与 Azure HDInsight 中的 Apache Kafka 群集交互
 
@@ -83,7 +83,7 @@ ms.locfileid: "85516598"
 1. 通过执行 `pip3 install msal` 安装所需的 Python 依赖项。
 1. 修改 **Configure these properties** 代码部分，并更新你的环境的以下属性：
 
-    |属性 |说明 |
+    |properties |说明 |
     |---|---|
     |租户 ID|订阅所在的 Azure 租户。|
     |客户端 ID|在安全组中注册的应用程序的 ID。|
@@ -104,6 +104,7 @@ ms.locfileid: "85516598"
 #pip3 install msal
 
 import msal
+import requests
 
 #--------------------------Configure these properties-------------------------------#
 # Tenant ID for your Azure Subscription
@@ -140,7 +141,7 @@ getstatus = "/v1/metadata/topics"
 request_url = kafkarest_endpoint + getstatus
 
 # sending get request and saving the response as response object
-response = requests.get(request_url, headers={'Authorization': accessToken})
+response = requests.get(request_url, headers={'Authorization': 'Bearer ' + 'accessToken})
 print(response.content)
 ```
 

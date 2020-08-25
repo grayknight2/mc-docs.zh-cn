@@ -5,16 +5,18 @@ author: rockboyfor
 services: cosmos-db
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 05/20/2020
-ms.date: 07/06/2020
+origin.date: 07/22/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.custom: subject-monitoring
-ms.openlocfilehash: c7f4a82afb60fa05fc09c91c1d7ca6a0f266a142
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: 6d985d88f79a3731b9fd0d0b3fbbceae6ceaf367
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323386"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223458"
 ---
 # <a name="monitoring-azure-cosmos-db"></a>监视 Azure Cosmos DB
 
@@ -24,7 +26,7 @@ ms.locfileid: "85323386"
 
 * **通过 Azure Cosmos DB 门户监视：** 可以使用 Azure Cosmos 帐户的“指标”选项卡中提供的指标进行监视。 此选项卡上的指标包括吞吐量、存储、可用性、延迟、一致性和系统级指标。 默认情况下，这些指标的保留期为 7 天。 若要了解详细信息，请参阅本文的[从 Azure Cosmos DB 中收集的监视数据](#monitoring-from-azure-cosmos-db)部分。
 
-* **使用 Azure Monitor 中的指标进行监视：** 可以监视 Azure Cosmos 帐户的指标，并从 Azure Monitor 中创建仪表板。 默认情况下，Azure Monitor 收集 Azure Cosmos DB 指标，你无需显式配置任何内容。 这些指标以一分钟的粒度进行收集，粒度可能因所选指标而异。 默认情况下，这些指标的保留期为 30 天。 从前面选项中获得的大多数指标也可在这些指标中使用。 若要了解详细信息，请参阅本文的[分析指标数据](#analyze-metric-data)部分。
+* **使用 Azure Monitor 中的指标进行监视：** 可以监视 Azure Cosmos 帐户的指标，并从 Azure Monitor 中创建仪表板。 默认情况下，Azure Monitor 收集 Azure Cosmos DB 指标，你无需显式配置任何内容。 这些指标以一分钟的粒度进行收集，粒度可能因所选指标而异。 默认情况下，这些指标的保留期为 30 天。 从前面选项中获得的大多数指标也可在这些指标中使用。 指标的维度值（例如容器名称）不区分大小写。 因此，在对这些维度值进行字符串比较时，需要使用不区分大小写的比较。 若要了解详细信息，请参阅本文的[分析指标数据](#analyze-metric-data)部分。
 
 * **使用 Azure Monitor 中的诊断日志进行监视：** 可以监视 Azure Cosmos 帐户的日志，并从 Azure Monitor 中创建仪表板。 以秒粒度发生的遥测（例如，事件和跟踪）将作为日志进行存储。 例如，如果容器的吞吐量发生变化，则 Cosmos 帐户的属性也会发生变化，这些事件将在日志中捕获。 可以通过对收集的数据运行查询来分析这些日志。 若要了解详细信息，请参阅本文的[分析日志数据](#analyze-log-data)部分。
 
@@ -32,7 +34,7 @@ ms.locfileid: "85323386"
 
 下图显示了可用于通过 Azure 门户监视 Azure Cosmos DB 帐户的不同选项：
 
-![Azure 门户中提供的监视选项](media/monitor-cosmos-db/monitoring-options-portal.png)
+:::image type="content" source="media/monitor-cosmos-db/monitoring-options-portal.png" alt-text="Azure 门户中提供的监视选项" border="false":::
 
 使用 Azure Cosmos DB 时，可以在客户端上收集有关请求费用、活动 ID、异常/堆栈跟踪信息、HTTP 状态/子状态代码、诊断字符串的详细信息，以调试可能发生的任何问题。 如果需要与 Azure Cosmos DB 支持团队联系，也需要这些信息。  
 
@@ -64,7 +66,7 @@ Azure Cosmos DB 会收集与[来自 Azure 资源的监视数据](../azure-monito
 
 Azure 门户中每个 Azure Cosmos 数据库的“概述”页都提供数据库使用情况的简要视图，其中包括该数据库的请求和每小时计费。 这些信息非常有用，但只提供少量监视数据。 创建数据库后，系统会立即自动收集上述某些数据并使其可用于分析；同时，你可以使用某项配置启用其他数据收集。
 
-![概述页](media/monitor-cosmos-db/overview-page.png)
+:::image type="content" source="media/monitor-cosmos-db/overview-page.png" alt-text="概述页":::
 
 <a name="analyze-metric-data"></a>
 ## <a name="analyzing-metric-data"></a>分析指标数据
@@ -81,31 +83,31 @@ Azure Cosmos DB 提供了一个自定义体验来用于处理指标。 若要详
 
 ### <a name="view-operation-level-metrics-for-azure-cosmos-db"></a>查看 Azure Cosmos DB 的操作级别指标
 
-1. 登录到 [Azure 门户](https://portal.azure.cn/)。
+1. 登录 [Azure 门户](https://portal.azure.cn/)。
 
 1. 在左侧导航栏中选择“监视”，然后选择“指标”。 
 
-    ![Azure Monitor 中的“指标”窗格](./media/monitor-cosmos-db/monitor-metrics-blade.png)
+    :::image type="content" source="./media/monitor-cosmos-db/monitor-metrics-blade.png" alt-text="Azure Monitor 中的“指标”窗格":::
 
 1. 在“指标”窗格中选择一个资源，然后选择所需的订阅和资源组。    对于“资源类型”，请选择“Azure Cosmos DB 帐户”，选择一个现有的 Azure Cosmos 帐户，然后选择“应用”。  
 
-    ![选择 Cosmos DB 帐户以查看指标](./media/monitor-cosmos-db/select-cosmosdb-account.png)
+    :::image type="content" source="./media/monitor-cosmos-db/select-cosmosdb-account.png" alt-text="选择 Cosmos DB 帐户以查看指标":::
 
 1. 接下来，可以从可用指标列表中选择一个指标。 可以选择特定于请求单位、存储、延迟、可用性、Cassandra 和其他方面的指标。 若要详细了解此列表中的所有可用指标，请参阅[按类别划分的指标](monitor-cosmos-db-reference.md)一文。 在此示例中，让我们选择“请求单位”和“平均”作为聚合值。
 
     除这些详细信息外，还可以选择指标的“时间范围”和“时间粒度”。  可以查看过去最长 30 天的指标。  应用筛选器后，系统会根据该筛选器显示图表。 可以查看所选时间段内每分钟消耗的平均请求单位数。  
 
-    ![从 Azure 门户中选择指标](./media/monitor-cosmos-db/metric-types.png)
+    :::image type="content" source="./media/monitor-cosmos-db/metric-types.png" alt-text="从 Azure 门户中选择指标":::
 
 ### <a name="add-filters-to-metrics"></a>向指标添加筛选器
 
 还可以按 **CollectionName**、**DatabaseName**、**OperationType**、**Region** 和 **StatusCode** 筛选指标及显示的图表。 若要筛选指标，请选择“添加筛选器”，选择所需的属性（例如 **OperationType**），然后选择一个值（例如 **Query**）。 然后，图表中会显示查询操作在所选时间段内消耗的请求单位数。 不会记录通过存储过程执行的操作，因此 OperationType 指标下不会显示这些操作。
 
-![添加筛选器以选择指标粒度](./media/monitor-cosmos-db/add-metrics-filter.png)
+:::image type="content" source="./media/monitor-cosmos-db/add-metrics-filter.png" alt-text="添加筛选器以选择指标粒度":::
 
 可以使用“应用拆分”选项将指标分组。 例如，可按操作类型将请求单位分组，并一次性查看所有操作的图表，如下图所示：
 
-![添加“应用拆分”筛选器](./media/monitor-cosmos-db/apply-metrics-splitting.png)
+:::image type="content" source="./media/monitor-cosmos-db/apply-metrics-splitting.png" alt-text="添加“应用拆分”筛选器":::
 
 <a name="analyze-log-data"></a>
 ## <a name="analyzing-log-data"></a>分析日志数据
@@ -164,11 +166,15 @@ Azure Monitor 日志中的数据以表形式存储，每个表包含自己独有
 
 若要访问其他指标，请使用 [Azure Monitor SDK](https://www.nuget.org/packages/Microsoft.Azure.Insights)。 可以通过调用以下命令检索可用的指标定义：
 
-    https://management.chinacloudapi.cn/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroup}/providers/Microsoft.DocumentDb/databaseAccounts/{DocumentDBAccountName}/metricDefinitions?api-version=2015-04-08
+```http
+https://management.chinacloudapi.cn/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroup}/providers/Microsoft.DocumentDb/databaseAccounts/{DocumentDBAccountName}/metricDefinitions?api-version=2015-04-08
+```
 
 用于检索各个指标的查询使用以下格式：
 
-    https://management.chinacloudapi.cn/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroup}/providers/Microsoft.DocumentDb/databaseAccounts/{DocumentDBAccountName}/metrics?api-version=2015-04-08&$filter=%28name.value%20eq%20%27Total%20Requests%27%29%20and%20timeGrain%20eq%20duration%27PT5M%27%20and%20startTime%20eq%202016-06-03T03%3A26%3A00.0000000Z%20and%20endTime%20eq%202016-06-10T03%3A26%3A00.0000000Z
+```http
+https://management.chinacloudapi.cn/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroup}/providers/Microsoft.DocumentDb/databaseAccounts/{DocumentDBAccountName}/metrics?api-version=2015-04-08&$filter=%28name.value%20eq%20%27Total%20Requests%27%29%20and%20timeGrain%20eq%20duration%27PT5M%27%20and%20startTime%20eq%202016-06-03T03%3A26%3A00.0000000Z%20and%20endTime%20eq%202016-06-10T03%3A26%3A00.0000000Z
+```
 
 ## <a name="next-steps"></a>后续步骤
 

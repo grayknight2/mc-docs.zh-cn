@@ -7,14 +7,14 @@ ms.author: v-junlch
 manager: diviso
 ms.service: time-series-insights
 ms.topic: article
-ms.date: 08/05/2020
+ms.date: 08/20/2020
 ms.custom: seodec18
-ms.openlocfilehash: 3d4678dde83b74c3ad73b2320ac48777fbb10bfc
-ms.sourcegitcommit: 36e7f37481969f92138bfe70192b1f4a2414caf7
+ms.openlocfilehash: 551e0eea5bca255f06c9758baf8130418e14f038
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87796303"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715240"
 ---
 # <a name="shape-json-to-maximize-query-performance-in-your-gen1-environment"></a>在 Gen1 环境中塑造 JSON 以最大化查询性能
 
@@ -55,7 +55,6 @@ ms.locfileid: "87796303"
 
 请考虑使用 [IoT 设备消息对象](https://docs.microsoft.com/dotnet/api/microsoft.azure.devices.message?view=azure-dotnet)发送到 Azure 时序见解 GA 环境的以下 JSON 有效负载，该有效负载在发送到 Azure 云时会序列化为 JSON：
 
-
 ```JSON
 [
     {
@@ -85,14 +84,14 @@ ms.locfileid: "87796303"
 ]
 ```
 
-* 包含键属性 **deviceId** 的参考数据表：
+- 包含键属性 **deviceId** 的参考数据表：
 
    | deviceId | messageId | deviceLocation |
    | --- | --- | --- |
    | FXXX | LINE\_DATA | EU |
    | FYYY | LINE\_DATA | US |
 
-* 平展后的 Azure 时序见解事件表：
+- 平展后的 Azure 时序见解事件表：
 
    | deviceId | messageId | deviceLocation | timestamp | series.Flow Rate ft3/s | series.Engine Oil Pressure psi |
    | --- | --- | --- | --- | --- | --- |
@@ -101,6 +100,7 @@ ms.locfileid: "87796303"
    | FYYY | LINE\_DATA | US | 2018-01-17T01:18:00Z | 0.58015072345733643 | 22.2 |
 
 > [!NOTE]
+
 > - **deviceId** 列充当机群中各种设备的列标题。 对于其他五个列，使 **deviceId** 值成为其自身的属性名称会将设备总数限制为 595（对于 S1 环境）或 795（对于 S2 环境）。
 > - 避免不必要的属性（例如制造商和型号信息）。 由于将来不会查询这些属性，消除它们对网络和存储效率有利。
 > - 参考数据用于减少通过网络传输的字节数。 已使用键属性 **deviceId** 联接 **messageId** 和 **deviceLocation** 这两个特性。 此数据在流入时联接到遥测数据，然后存储在 Azure 时序见解中以供查询。
@@ -155,7 +155,7 @@ ms.locfileid: "87796303"
 ]
 ```
 
-* 包含键属性 **deviceId** 和 **series.tagId** 的参考数据表：
+- 包含键属性 **deviceId** 和 **series.tagId** 的参考数据表：
 
    | deviceId | series.tagId | messageId | deviceLocation | type | unit |
    | --- | --- | --- | --- | --- | --- |
@@ -164,18 +164,19 @@ ms.locfileid: "87796303"
    | FYYY | pumpRate | LINE\_DATA | US | 流速 | ft3/s |
    | FYYY | oilPressure | LINE\_DATA | US | 引擎油压 | psi |
 
-* 平展后的 Azure 时序见解事件表：
+- 平展后的 Azure 时序见解事件表：
 
    | deviceId | series.tagId | messageId | deviceLocation | type | unit | timestamp | series.value |
    | --- | --- | --- | --- | --- | --- | --- | --- |
-   | FXXX | pumpRate | LINE\_DATA | EU | 流速 | ft3/s | 2018-01-17T01:17:00Z | 1.0172575712203979 | 
+   | FXXX | pumpRate | LINE\_DATA | EU | 流速 | ft3/s | 2018-01-17T01:17:00Z | 1.0172575712203979 |
    | FXXX | oilPressure | LINE\_DATA | EU | 引擎油压 | psi | 2018-01-17T01:17:00Z | 34.7 |
-   | FXXX | pumpRate | LINE\_DATA | EU | 流速 | ft3/s | 2018-01-17T01:17:00Z | 2.445906400680542 | 
+   | FXXX | pumpRate | LINE\_DATA | EU | 流速 | ft3/s | 2018-01-17T01:17:00Z | 2.445906400680542 |
    | FXXX | oilPressure | LINE\_DATA | EU | 引擎油压 | psi | 2018-01-17T01:17:00Z | 49.2 |
    | FYYY | pumpRate | LINE\_DATA | US | 流速 | ft3/s | 2018-01-17T01:18:00Z | 0.58015072345733643 |
    | FYYY | oilPressure | LINE\_DATA | US | 引擎油压 | psi | 2018-01-17T01:18:00Z | 22.2 |
 
 > [!NOTE]
+
 > - 列 **deviceId** 和 **series.tagId** 充当机群中各个设备和标记的列标题。 对于其他六个列，将每个值用作其自身的特性会将设备总数查询限制为 594（对于 S1 环境）或 794（对于 S2 环境）。
 > - 出于第一个示例中提到的原因，请避免不必要的属性。
 > - 参考数据用于减少通过网络传输的字节数，因为针对 **messageId** 和 **deviceLocation** 的唯一对引入了 **deviceId**。 针对 **type** 和 **unit** 的唯一对使用了组合键 **series.tagId**。 该组合键允许使用 **deviceId** 和 **series.tagId** 对来引用四个值：**messageId、deviceLocation、type** 和 **unit**。 在流入时，此数据将联接到遥测数据。 然后，它将存储在 Azure 时序见解中供查询。
@@ -185,14 +186,14 @@ ms.locfileid: "87796303"
 
 对于包含大量可能值的属性，最好是在单个列中将这些值作为非重复值发送，而不要为每个值创建一个新列。 对于前面的两个示例：
 
-  - 在第一个示例中，少量的属性包含多个值，因此，适合将每个属性设为单独的属性。
-  - 在第二个示例中，度量未指定为单独的属性， 而是通用系列属性下的值或度量数组。 发送了新键 **tagId**，该键在平展表中创建新列 **series.tagId**。 新属性 **type** 和 **unit** 是使用参考数据创建的，因此不会达到属性限制。
+- 在第一个示例中，少量的属性包含多个值，因此，适合将每个属性设为单独的属性。
+- 在第二个示例中，度量未指定为单独的属性， 而是通用系列属性下的值或度量数组。 发送了新键 **tagId**，该键在平展表中创建新列 **series.tagId**。 新属性 **type** 和 **unit** 是使用参考数据创建的，因此不会达到属性限制。
 
 ## <a name="next-steps"></a>后续步骤
 
 - 阅读有关[将 IoT 中心设备消息发送到云](../iot-hub/iot-hub-devguide-messages-construct.md)的详细信息。
 
-- 请参阅 [Azure 时序见解查询语法](https://docs.microsoft.com/rest/api/time-series-insights/ga-query-syntax)，以详细了 Azure 解时序见解数据访问 REST API 的查询语法。
+- 请参阅 [Azure 时序见解查询语法](https://docs.microsoft.com/rest/api/time-series-insights/gen1-query-syntax)，以详细了 Azure 解时序见解数据访问 REST API 的查询语法。
 
 - 了解[如何调整事件](./time-series-insights-send-events.md)。
 

@@ -6,22 +6,22 @@ author: WenJason
 ms.service: storage
 ms.topic: how-to
 origin.date: 01/23/2020
-ms.date: 07/20/2020
+ms.date: 08/24/2020
 ms.author: v-jay
 ms.reviewer: dineshm
 ms.subservice: blobs
-ms.openlocfilehash: a527494bca6281d4b3675af8f892de0a420f98e8
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.openlocfilehash: e05951fe637db4b6da88a346c41acbe45f4b43d9
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414703"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753524"
 ---
 # <a name="map-a-custom-domain-to-an-azure-blob-storage-endpoint"></a>将自定义域映射到 Azure Blob 存储终结点
 
 可以将自定义域映射到 blob 服务终结点或[静态网站](storage-blob-static-website.md)终结点。 
 
-[!INCLUDE [updated-for-az](../../../includes/storage-data-lake-gen2-support.md)]
+[!INCLUDE [storage-data-lake-gen2-support](../../../includes/storage-data-lake-gen2-support.md)]
 
 > [!NOTE] 
 > 这种映射仅适用于子域（例如：`www.contoso.com`）。 

@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/01/2020
-ms.openlocfilehash: 5698a27f69bbef78cef1bcb271f712a1c247072a
-ms.sourcegitcommit: c17e965d4ffd82fd7cd86b2648fcb0053a65df00
+ms.date: 08/18/2020
+ms.openlocfilehash: 7cbd371d39dc62a88b48f6f79ad145597e1f45db
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470505"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515697"
 ---
-# <a name="alter-merge-table-column-docstrings"></a>alter-merge table column-docstrings
+# <a name="alter-merge-table-column-docstrings"></a>.alter-merge table column-docstrings
 
 设置指定表的一个或多个列的 `docstring` 属性。 未显式设置的列保留此属性的现有值（如果有）。
 

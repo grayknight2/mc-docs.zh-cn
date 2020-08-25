@@ -8,14 +8,14 @@ ms.author: v-junlch
 manager: dpalled
 ms.workload: big-data
 ms.topic: conceptual
-ms.date: 08/04/2020
+ms.date: 08/20/2020
 ms.custom: shresha
-ms.openlocfilehash: 4a0aa151f4ba8b30209176ae536dee6e1fc86b8b
-ms.sourcegitcommit: 36e7f37481969f92138bfe70192b1f4a2414caf7
+ms.openlocfilehash: 33398f6cd788d0d62913bbcbf8756ff829861375
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87801840"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715298"
 ---
 # <a name="migrating-to-new-azure-time-series-insights-gen2-api-versions"></a>迁移到新的 Azure 时序见解第 2 代 API 版本
 
@@ -23,7 +23,7 @@ ms.locfileid: "87801840"
 
 如果你创建了 Azure 时序见解第 2 代公共预览版环境（在 2020 年 7 月 16 日之前），请按照本文中所述的步骤将你的 TSI 环境更新为使用新的已正式发布的 API 版本。
 
-新的 API 版本是 `2020-07-31`，它使用了更新的[时序表达式语法](https://docs.microsoft.com/rest/api/time-series-insights/preview#time-series-expression-and-syntax)。
+新的 API 版本是 `2020-07-31`，它使用了更新的[时序表达式语法](https://docs.microsoft.com/rest/api/time-series-insights/reference-time-series-expression-syntax)。
 
 用户必须迁移其环境的[时序模型变量](./concepts-variables.md)，已保存的查询、Power BI 查询，以及调用 API 终结点的任何自定义工具。 如果你对迁移流程有任何疑问或问题，请通过 Azure 门户提交支持票证并提及此文档。
 
@@ -32,7 +32,7 @@ ms.locfileid: "87801840"
 
 ## <a name="migrate-time-series-model-and-saved-queries"></a>迁移时序模型和已保存的查询
 
-若要帮助用户迁移[时序模型变量](./concepts-variables.md)和已保存的查询，可通过 [Azure 时序见解资源管理器](https://insights.timeseries.azure.com)使用内置工具。 导航到要迁移的环境，然后执行以下步骤。 **你可以部分完成迁移，并在以后的某个时间回来完成迁移，但不能还原任何更新。**
+若要帮助用户迁移[时序模型变量](./concepts-variables.md)和已保存的查询，可通过 [Azure 时序见解资源管理器](https://insights.timeseries.azure.cn)使用内置工具。 导航到要迁移的环境，然后执行以下步骤。 **你可以部分完成迁移，并在以后的某个时间回来完成迁移，但不能还原任何更新。**
 
 > [!NOTE]
 > 你必须是环境的参与者，才能更新时序模型和已保存的查询。 如果你不是参与者，则只能迁移保存的个人查询。 继续操作之前，请查看[环境访问策略](./concepts-access-policies.md)和你的访问级别。
@@ -95,7 +95,7 @@ ms.locfileid: "87801840"
     - [Delete 操作和 Get 操作](https://docs.microsoft.com/rest/api/time-series-insights/dataaccessgen2/timeseriestypes/executebatch)
     - [列表](https://docs.microsoft.com/rest/api/time-series-insights/dataaccessgen2/timeseriestypes/list)
 
-对于以下 REST 终结点，你必须在 URI 中将 API 版本更新为 `2020-07-31`，并确保 `tsx` 属性的所有实例都使用更新的[时序表达式语法](https://docs.microsoft.com/rest/api/time-series-insights/preview#time-series-expression-and-syntax)。
+对于以下 REST 终结点，你必须在 URI 中将 API 版本更新为 `2020-07-31`，并确保 `tsx` 属性的所有实例都使用更新的[时序表达式语法](https://docs.microsoft.com/rest/api/time-series-insights/reference-time-series-expression-syntax)。
 
 - 类型 API
   - [Put 操作](https://docs.microsoft.com/rest/api/time-series-insights/dataaccessgen2/timeseriestypes/executebatch#typesbatchput)
@@ -355,7 +355,7 @@ ms.locfileid: "87801840"
 
 #### <a name="invalidinput"></a>InvalidInput
 
-如果看到以下错误，则表明你使用的是新的 API 版本 (`2020-07-31`)，但 TSX 语法尚未更新。 请查看[时序表达式语法](https://docs.microsoft.com/rest/api/time-series-insights/preview#time-series-expression-and-syntax)和上面的迁移示例。 重新提交 API 请求之前，请确保所有 `tsx` 属性都已正确更新。
+如果看到以下错误，则表明你使用的是新的 API 版本 (`2020-07-31`)，但 TSX 语法尚未更新。 请查看[时序表达式语法](https://docs.microsoft.com/rest/api/time-series-insights/reference-time-series-expression-syntax)和上面的迁移示例。 重新提交 API 请求之前，请确保所有 `tsx` 属性都已正确更新。
 
 ```JSON
 {

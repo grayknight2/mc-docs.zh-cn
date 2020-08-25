@@ -1,22 +1,16 @@
 ---
 title: 常见问题 - Azure 事件中心 | Microsoft Docs
 description: 本文提供了有关 Azure 事件中心的常见问题 (FAQ) 和解答的列表。
-services: event-hubs
-documentationcenter: na
-author: ShubhaVijayasarathy
-manager: timlt
-ms.service: event-hubs
 ms.topic: article
-ms.custom: seodec18
-origin.date: 12/02/2019
-ms.date: 07/01/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 2922dd28f8b564c5d26db91017f7fb193bcaf2e6
-ms.sourcegitcommit: 4f84bba7e509a321b6f68a2da475027c539b8fd3
+ms.openlocfilehash: 28e30835dd210f1a8cfe22e572f164badab0eda3
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85796136"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715237"
 ---
 # <a name="event-hubs-frequently-asked-questions"></a>事件中心常见问题
 
@@ -275,6 +269,6 @@ bootstrap.servers=dummynamespace.servicebus.chinacloudapi.cn:9093 request.timeou
 
 访问以下链接可以了解有关事件中心的详细信息：
 
-* [事件中心概述](event-hubs-what-is-event-hubs.md)
+* [事件中心概述](./event-hubs-about.md)
 * [创建事件中心](event-hubs-create.md)
 * [事件中心自动膨胀](event-hubs-auto-inflate.md)

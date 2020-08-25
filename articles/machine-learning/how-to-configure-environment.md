@@ -11,12 +11,12 @@ ms.reviewer: larryfr
 ms.topic: how-to
 ms.date: 12/27/2019
 ms.custom: seodec18, tracking-python
-ms.openlocfilehash: ddb0258c57c35faa8aac66a4c7f684ab29c5cdb7
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: 4aa64a000af04e48706e61947090bfc0fe48222d
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441188"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228228"
 ---
 # <a name="configure-a-development-environment-for-azure-machine-learning"></a>配置 Azure 机器学习的开发环境
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -59,7 +59,7 @@ Azure 机器学习[计算实例（预览版）](concept-compute-instance.md)是�
 
 无需为计算实例安装或配置任何组件。  随时可从 Azure 机器学习工作区内部创建组件。 只需提供名称并指定 Azure VM 类型即可。 请参考以下文章尝试操作计算实例：[教程：设置环境和工作区](tutorial-1st-experiment-sdk-setup.md)。
 
-详细了解[计算实例](concept-compute-instance.md)。
+若要了解计算实例的详细信息（包括如何安装包），请参阅[计算实例](concept-compute-instance.md)。
 
 若要避免产生计算费用，请[停止计算实例](tutorial-1st-experiment-sdk-train.md#clean-up-resources)。
 

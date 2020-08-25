@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 03/09/2020
-ms.date: 07/31/2020
+ms.date: 08/18/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 836e6a5136435e4dcf026f1d5d7b11cb38e7b77a
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.openlocfilehash: 5ef0b6f4fb8ae76b63c1916bc60ee05fc8430fe4
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509245"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515722"
 ---
 # <a name="current_principal_is_member_of"></a>current_principal_is_member_of()
 

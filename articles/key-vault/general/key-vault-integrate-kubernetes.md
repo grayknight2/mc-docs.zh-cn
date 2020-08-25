@@ -7,12 +7,12 @@ ms.service: key-vault
 ms.topic: tutorial
 origin.date: 06/04/2020
 ms.date: 07/28/2020
-ms.openlocfilehash: 43fa9dc41b5e156217f4db8047e8ad0db3dbe7a9
-ms.sourcegitcommit: 0e778acf5aa5eb63ab233e07e7aecce3a9a5e6d4
+ms.openlocfilehash: 7c56d52d7a2522fa19fe7b12c9c6a8b7e8855ecb
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87296515"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228242"
 ---
 # <a name="tutorial-configure-and-run-the-azure-key-vault-provider-for-the-secrets-store-csi-driver-on-kubernetes"></a>教程：为 Kubernetes 上的机密存储 CSI 驱动程序配置并运行 Azure Key Vault 提供程序
 
@@ -52,7 +52,7 @@ az ad sp create-for-rbac --name contosoServicePrincipal --skip-assignment
 
 ## <a name="deploy-an-azure-kubernetes-service-aks-cluster-by-using-the-azure-cli"></a>使用 Azure CLI 部署 Azure Kubernetes 服务 (AKS) 群集
 
-无需使用 Azure Cloud Shell。 安装了 Azure CLI 的命令提示符（终端）足以满足要求。 
+安装了 Azure CLI 的命令提示符（终端）足以满足要求。 
 
 完成[使用 Azure CLI 部署 Azure Kubernetes 服务群集](https://docs.azure.cn/aks/kubernetes-walkthrough)中的“创建资源组”、“创建 AKS 群集”和“连接到群集”部分。 
 
@@ -103,8 +103,8 @@ az ad sp create-for-rbac --name contosoServicePrincipal --skip-assignment
 
 若要创建你自己的密钥保管库并设置机密，请按照[使用 Azure CLI 在 Azure Key Vault 中设置和检索机密](https://docs.azure.cn/key-vault/secrets/quick-create-cli)中的说明执行操作。
 
-> [!NOTE] 
-> 无需使用 Azure Cloud Shell，也无需创建新的资源组。 可使用之前为 Kubernetes 群集创建的资源组。
+> [!NOTE]
+> 不需要创建新的资源组。 可使用之前为 Kubernetes 群集创建的资源组。
 
 ## <a name="create-your-own-secretproviderclass-object"></a>创建自己的 SecretProviderClass 对象
 

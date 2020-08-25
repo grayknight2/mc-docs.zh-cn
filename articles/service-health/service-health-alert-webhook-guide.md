@@ -1,26 +1,15 @@
 ---
-title: 使用 Webhook 为现有的问题管理系统配置 Azure 服务运行状况通知
+title: 通过 Webhook 发送 Azure 服务运行状况通知
 description: 将有关服务运行状况事件的个性化通知发送到现有的问题管理系统。
-author: stephbaron
-manager: scotthit
-editor: ''
-services: service-health
-documentationcenter: service-health
-ms.assetid: ''
+ms.topic: conceptual
 ms.service: service-health
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-origin.date: 03/27/2018
-ms.date: 08/05/2019
-ms.author: v-yiso
-ms.openlocfilehash: 61097c9eabee21629f424cf59b8e3382e2204459
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.date: 08/10/2020
+ms.openlocfilehash: 83be17feb7aa6c36dd210db631bfb51e19129451
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "68514150"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222902"
 ---
 # <a name="use-a-webhook-to-configure-health-notifications-for-problem-management-systems"></a>使用 Webhook 为问题管理系统配置运行状况通知
 
@@ -34,6 +23,10 @@ ms.locfileid: "68514150"
 * [使用 ServiceNow 配置警报](service-health-alert-webhook-servicenow.md)
 * [使用 PagerDuty 配置警报](service-health-alert-webhook-pagerduty.md)
 * [使用 OpsGenie 配置警报](service-health-alert-webhook-opsgenie.md)
+
+**观看介绍视频：**
+
+>[!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2OtUV]
 
 ## <a name="configure-a-custom-notification-by-using-the-service-health-webhook-payload"></a>使用服务运行状况 Webhook 有效负载配置自定义通知
 若要设置自己的自定义 Webhook 集成，需分析通过服务运行状况通知发送的 JSON 有效负载。
@@ -68,20 +61,20 @@ https<i></i>://app.azure.com/h/0DET-URB/bbadb3
 其中的内容为转义的 [JSON](https://json.org/) 字符串，取消转义时，包含另一个可以定期分析的 JSON 对象。 例如：
 
 ```json
-{"data.context.activityLog.properties.impactedServices": "[{\"ImpactedRegions\":[{\"RegionName\":\"Australia East\"},{\"RegionName\":\"Australia Southeast\"}],\"ServiceName\":\"Alerts & Metrics\"},{\"ImpactedRegions\":[{\"RegionName\":\"Australia Southeast\"}],\"ServiceName\":\"App Service\"}]"}
+{"data.context.activityLog.properties.impactedServices": "[{\"ImpactedRegions\":[{\"RegionName\":\"China East\"},{\"RegionName\":\"China North\"}],\"ServiceName\":\"Alerts & Metrics\"},{\"ImpactedRegions\":[{\"RegionName\":\"China North\"}],\"ServiceName\":\"App Service\"}]"}
 ```
 
-变为：
+ 变为：
 
 ```json
 [
    {
       "ImpactedRegions":[
          {
-            "RegionName":"Australia East"
+            "RegionName":"China East"
          },
          {
-            "RegionName":"Australia Southeast"
+            "RegionName":"China North"
          }
       ],
       "ServiceName":"Alerts & Metrics"
@@ -89,7 +82,7 @@ https<i></i>://app.azure.com/h/0DET-URB/bbadb3
    {
       "ImpactedRegions":[
          {
-            "RegionName":"Australia Southeast"
+            "RegionName":"China North"
          }
       ],
       "ServiceName":"App Service"
@@ -98,8 +91,8 @@ https<i></i>://app.azure.com/h/0DET-URB/bbadb3
 ```
 
 此示例显示：
-- 澳大利亚东部和澳大利亚东南部的“警报和指标”问题。
-- 澳大利亚东南部的“应用服务”问题。
+- 中国东部和中国北部的“警报和指标”
+- 中国北部的“应用服务”。
 
 ## <a name="test-your-webhook-integration-via-an-http-post-request"></a>通过 HTTP POST 请求测试 Webhook 集成
 
@@ -114,7 +107,7 @@ https<i></i>://app.azure.com/h/0DET-URB/bbadb3
 
     HEADERS     Content-Type: application/json
 
-    BODY        <Service Health payload>
+    BODY        <service health payload>
     ```
    应会收到“2XX - 成功”响应。
 
@@ -122,5 +115,6 @@ https<i></i>://app.azure.com/h/0DET-URB/bbadb3
 
 ## <a name="next-steps"></a>后续步骤
 - 查看[活动日志警报 webhook 架构](../azure-monitor/platform/activity-log-alerts-webhook.md)。 
-- 了解[服务运行状况通知](../azure-monitor/platform/service-notifications.md)。
+- 了解[服务运行状况通知](./service-notifications.md)。
 - 详细了解[操作组](../azure-monitor/platform/action-groups.md)。
+

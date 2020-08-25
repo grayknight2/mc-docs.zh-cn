@@ -1,27 +1,16 @@
 ---
-title: 专用事件中心概述 - Azure 事件中心 | Azure
+title: 专用事件中心概述 - Azure 事件中心 | Microsoft Docs
 description: 本文概述专用 Azure 事件中心，它提供事件中心的单租户部署。
-services: event-hubs
-documentationcenter: na
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.custom: seodec18
-origin.date: 12/06/2018
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 7be0027b8c6a38ba0d842beb94aee7d8c514a01f
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: d95dad40cf112052ead7380d4ee2177efbe934f0
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199404"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715353"
 ---
 <!-- event hubs dedicate is supported in mooncake, but event hubs cluster not availible -->
 <!-- need to contact 21vainet to create dedicate cluster -->

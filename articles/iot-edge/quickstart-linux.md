@@ -10,12 +10,12 @@ ms.topic: quickstart
 ms.service: iot-edge
 services: iot-edge
 ms.custom: mvc
-ms.openlocfilehash: 13bbd4805060b2e0183552c01bfc50710a33e853
-ms.sourcegitcommit: 5fb9ae9adc04e79d6d0e78c9e69dbe8aa3ceb00a
+ms.openlocfilehash: 21d4f7e117d5f61d382383726e3558fca1047ef7
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86100220"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228431"
 ---
 # <a name="quickstart-deploy-your-first-iot-edge-module-to-a-virtual-linux-device"></a>快速入门：将第一个 IoT Edge 模块部署到虚拟 Linux 设备
 
@@ -38,7 +38,7 @@ ms.locfileid: "86100220"
 
 请使用 Azure CLI 完成本快速入门中的多个步骤。Azure IoT 有一个可以启用其他功能的扩展。
 
-将 Azure IoT 扩展添加到 Cloud Shell 实例。
+将 Azure IoT 扩展添加到 Azure CLI 实例。
 
    ```azurecli
    az extension add --name azure-iot
@@ -97,13 +97,13 @@ IoT Edge 设备：
 
 由于 IoT Edge 设备的行为和托管方式与典型 IoT 设备不同，请使用 `--edge-enabled` 标志声明此标识，使之用于 IoT Edge 设备。
 
-1. 在 Azure Cloud Shell 中输入以下命令，以便在中心创建名为 **myEdgeDevice** 的设备。
+1. 在 Azure CLI 中输入以下命令，以便在中心创建名为“myEdgeDevice”的设备。
 
    ```azurecli
    az iot hub device-identity create --hub-name {hub_name} --device-id myEdgeDevice --edge-enabled
    ```
 
-   如果出现有关 iothubowner 策略密钥的错误，请确保 Cloud Shell 运行最新版的 azure-cli-iot-ext 扩展。
+   如果出现有关 iothubowner 策略密钥的错误，请确保 Azure CLI 运行最新版的 azure-cli-iot-ext 扩展。
 
 2. 检索设备的连接字符串，该字符串将物理设备与其在 IoT 中心的标识链接在一起。
 
@@ -121,7 +121,7 @@ IoT Edge 设备：
 
 ![关系图 - 在设备上启动运行时](./media/quickstart-linux/start-runtime.png)
 
-IoT Edge 运行时部署在所有 IoT Edge 设备上。 它有三个组件。 **IoT Edge 安全守护程序在** IoT Edge 设备每次启动时启动，并通过启动 IoT Edge 代理引导设备。 **IoT Edge 代理**协助部署和监视 IoT Edge 设备（包括 IoT Edge 中心）的模块。 IoT Edge 中心管理 IoT Edge 设备模块之间以及设备和 Azure IoT 中心之间的通信。
+IoT Edge 运行时部署在所有 IoT Edge 设备上。 它有三个组件。 每次 IoT Edge 设备启动并通过启动 IoT Edge 代理启动设备时，**IoT Edge 安全守护程序**就会启动。 **IoT Edge 代理**协助部署和监视 IoT Edge 设备（包括 IoT Edge 中心）的模块。 IoT Edge 中心管理 IoT Edge 设备模块之间以及设备和 Azure IoT 中心之间的通信。
 
 在运行时配置期间，你提供设备连接字符串。 请使用从 Azure CLI 检索的字符串。 此字符串将物理设备与 Azure 中的 IoT Edge 设备标识关联在一起。
 
@@ -154,7 +154,7 @@ IoT Edge 运行时部署在所有 IoT Edge 设备上。 它有三个组件。 **
    sudo systemctl status iotedge
    ```
 
-   ![查看作为系统服务运行的 Edge 守护程序](./media/quickstart-linux/iotedged-running.png)
+   ![查看作为系统服务运行的 IoT Edge 守护程序](./media/quickstart-linux/iotedged-running.png)
 
 2. 若需排查服务问题，请检索服务日志。
 

@@ -1,29 +1,30 @@
 ---
 title: 了解 Azure Active Directory 应用清单
+titleSuffix: Microsoft identity platform
 description: 详细介绍 Azure Active Directory 应用清单，该清单表示 Azure AD 租户中的应用程序标识配置，并方便实现 OAuth 授权、许可体验和其他功能。
 services: active-directory
 author: rwike77
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: conceptual
+ms.topic: reference
 ms.workload: identity
-ms.date: 06/30/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.custom: aaddev
 ms.reviewer: sureshja
-ms.openlocfilehash: 4c2bb856c70c0733ed73093d745cbb03c90e556e
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.openlocfilehash: 944017168ae987f6a1fcb73018b203a0465c9b76
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945229"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647596"
 ---
 # <a name="azure-active-directory-app-manifest"></a>Azure Active Directory 应用清单
 
-应用程序清单包含 Microsoft 标识平台中的某个应用程序对象的所有属性的定义。 它还充当用于更新应用程序对象的机制。 有关应用程序实体及其架构的详细信息，请参阅[图形 API 应用程序实体文档](https://docs.microsoft.com/previous-versions/azure/ad/graph/api/entity-and-complex-type-reference#application-entity)。
+应用程序清单包含 Microsoft 标识平台中的某个应用程序对象的所有属性的定义。 它还充当用于更新应用程序对象的机制。 有关应用程序实体及其架构的详细信息，请参阅[图形 API 应用程序实体文档](https://docs.microsoft.com/graph/api/resources/application)。
 
-可以通过 Azure 门户或者使用 [REST API](https://docs.microsoft.com/previous-versions/azure/ad/graph/api/entity-and-complex-type-reference#application-entity) 或 [PowerShell](https://docs.microsoft.com/powershell/module/azuread/?view=azureadps-2.0#applications) 以编程方式配置应用的属性。 但是，在某些情况下，需要编辑应用清单来配置应用的属性。 这些方案包括：
+可以通过 Azure 门户或者使用 [REST API](https://docs.microsoft.com/graph/api/resources/application) 或 [PowerShell](https://docs.microsoft.com/powershell/module/azuread/?view=azureadps-2.0#applications) 以编程方式配置应用的属性。 但是，在某些情况下，需要编辑应用清单来配置应用的属性。 这些方案包括：
 
 * 如果已将应用注册为 Azure AD 多租户，则无法在 UI 中更改支持的帐户。 而是必须使用应用程序清单编辑器来更改支持的帐户类型。
 * 如果需要定义你的应用支持的权限和角色，则必须修改应用程序清单。
@@ -425,7 +426,7 @@ ms.locfileid: "85945229"
 | parentalControlSettings | String |
 
 - `countriesBlockedForMinors` 指定禁止未成年人使用该应用的国家/地区。
-- `legalAgeGroupRule` 指定适用于应用用户的法定年龄组规则。 可设置为 `Allow`、`RequireConsentForPrivacyServices`、`RequireConsentForMinors`、`RequireConsentForKids` 或 `BlockMinors`。  
+- `legalAgeGroupRule` 指定适用于应用用户的法定年龄组规则。 可设置为 `Allow`、`RequireConsentForPrivacyServices`、`RequireConsentForMinors`、`RequireConsentForKids` 或 `BlockMinors`。
 
 示例：
 
@@ -485,7 +486,7 @@ ms.locfileid: "85945229"
 | :--- | :--- |
 | publicClient | 布尔|
 
-指定此应用程序是否是公共客户端（例如在移动设备上运行的已安装应用程序）。 
+指定此应用程序是否是公共客户端（例如在移动设备上运行的已安装应用程序）。
 
 此属性仅在应用注册（旧版）体验中可用。 在[应用注册](https://portal.azure.cn/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredAppsPreview)体验中替换为了 `allowPublicClient`。
 
@@ -523,8 +524,9 @@ ms.locfileid: "85945229"
 
 - `Web`
 - `InstalledClient`
+- `Spa`
 
-若要了解详细信息，请参阅 [replyUrl 限制和局限性](/active-directory/develop/reply-url)。
+若要了解详细信息，请参阅 [replyUrl 限制和局限性](./reply-url.md)。
 
 示例：
 
@@ -653,7 +655,7 @@ ms.locfileid: "85945229"
 
 显示这些错误之一时，建议执行以下操作：
 
-1. 在清单编辑器中逐个编辑属性，而不是上传之前下载的清单。 使用[清单参考](#manifest-reference)表来了解旧属性和新属性的语法与语义，以便能够成功编辑所需的属性。 
+1. 在清单编辑器中逐个编辑属性，而不是上传之前下载的清单。 使用[清单参考](#manifest-reference)表来了解旧属性和新属性的语法与语义，以便能够成功编辑所需的属性。
 1. 如果工作流要求在源存储库中保存清单供以后使用，我们建议使用**应用注册**体验中显示的清单来变基存储库中保存的清单。
 
 ## <a name="next-steps"></a>后续步骤
@@ -667,13 +669,13 @@ ms.locfileid: "85945229"
 [AAD-APP-OBJECTS]:app-objects-and-service-principals.md
 [AAD-DEVELOPER-GLOSSARY]:developer-glossary.md
 [ADD-UPD-RMV-APP]:quickstart-v1-integrate-apps-with-azure-ad.md
-[APPLICATION-ENTITY]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#application-entity
-[APPLICATION-ENTITY-APP-ROLE]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#approle-type
-[APPLICATION-ENTITY-OAUTH2-PERMISSION]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#oauth2permission-type
+[APPLICATION-ENTITY]: https://docs.microsoft.com/previous-versions/azure/ad/graph/api/entity-and-complex-type-reference#application-entity
+[APPLICATION-ENTITY-APP-ROLE]: https://docs.microsoft.com/previous-versions/azure/ad/graph/api/entity-and-complex-type-reference#approle-type
+[APPLICATION-ENTITY-OAUTH2-PERMISSION]: https://docs.microsoft.com/previous-versions/azure/ad/graph/api/entity-and-complex-type-reference#oauth2permission-type
 [AZURE-PORTAL]: https://portal.azure.cn
 [GRAPH-API]: active-directory-graph-api.md
 [IMPLICIT-GRANT]:v1-oauth2-implicit-grant-flow.md
-[O365-PERM-DETAILS]: https://msdn.microsoft.com/office/office365/HowTo/application-manifest
-[O365-SERVICE-DAEMON-APPS]: https://msdn.microsoft.com/office/office365/howto/building-service-apps-in-office-365
+[INTEGRATING-APPLICATIONS-AAD]: ./quickstart-register-app.md
+[O365-PERM-DETAILS]: https://docs.microsoft.com/graph/permissions-reference
+[O365-SERVICE-DAEMON-APPS]: https://docs.microsoft.com/previous-versions/office/office-365-api/
 
-<!-- Update_Description: wording update -->

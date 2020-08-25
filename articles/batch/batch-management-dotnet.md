@@ -1,17 +1,19 @@
 ---
 title: 使用 Batch Management .NET 库管理帐户资源
 description: 使用 Batch Management .NET 库创建、删除和修改 Azure Batch 帐户资源。
-ms.topic: article
+ms.topic: how-to
 origin.date: 04/24/2017
-ms.date: 09/07/2018
-ms.author: v-lingwu
+ms.date: 08/24/2020
+ms.testscope: yes|no
+ms.testdate: 09/07/2018
+ms.author: v-yeche
 ms.custom: seodec18, has-adal-ref
-ms.openlocfilehash: 089ae5817a124d070c8e2aeff34490b61705f844
-ms.sourcegitcommit: cbaa1aef101f67bd094f6ad0b4be274bbc2d2537
+ms.openlocfilehash: 2010fc25527aca661111745bcda9a9dce306d5b4
+ms.sourcegitcommit: e633c458126612223fbf7a8853dbf19acc7f0fa5
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/28/2020
-ms.locfileid: "84126579"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88654917"
 ---
 # <a name="manage-batch-accounts-and-quotas-with-the-batch-management-client-library-for-net"></a>通过用于 .NET 的 Batch Management 客户端库管理 Batch 帐户和配额
 
@@ -151,47 +153,47 @@ Batch Management .NET 库是 Azure 资源提供程序客户端，可与 [Azure �
 4. 使用凭据创建 [ResourceManagementClient][resman_client] 对象。
 5. 使用 [ResourceManagementClient][resman_client] 对象创建资源组。
 6. 使用 [BatchManagementClient][net_mgmt_client] 对象执行多个 Batch 帐户操作：
-   * 在新资源组中创建 Batch 帐户。
-   * 从 Batch 服务获取新建的帐户。
-   * 输出新帐户的帐户密钥。
-   * 重新生成帐户的新主密钥。
-   * 输出帐户的配额信息。
-   * 输出订阅的配额信息。
-   * 输出订阅中的所有帐户。
-   * 删除新建的帐户。
+    * 在新资源组中创建 Batch 帐户。
+    * 从 Batch 服务获取新建的帐户。
+    * 输出新帐户的帐户密钥。
+    * 重新生成帐户的新主密钥。
+    * 输出帐户的配额信息。
+    * 输出订阅的配额信息。
+    * 输出订阅中的所有帐户。
+    * 删除新建的帐户。
 7. 删除该资源组。
 
 删除新建的 Batch 帐户和资源组之前，可以在 [Azure 门户][azure_portal]中查看它们：
 
 要成功运行示例应用程序，必须首先在 Azure 门户中将其注册到 Azure AD 租户，并向 Azure 资源管理器 API 授予权限。 按照[使用 Azure AD 对 Batch 管理应用程序进行验证](batch-aad-auth-management.md)中提供的步骤操作。
 
-
 [aad_about]:../active-directory/fundamentals/active-directory-whatis.md "什么是 Azure Active Directory？"
-[aad_adal]:../active-directory/develop/active-directory-authentication-libraries.md
+[aad_adal]: ../active-directory/azuread-dev/active-directory-authentication-libraries.md
 [aad_auth_scenarios]:../active-directory/develop/authentication-scenarios.md "Azure AD 的身份验证方案"
 [aad_integrate]:../active-directory/develop/quickstart-v1-integrate-apps-with-azure-ad.md "将应用程序与 Azure Active Directory 集成"
 [acct_mgmt_sample]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/AccountManagement
-[api_net]: https://msdn.microsoft.com/library/azure/mt348682.aspx
-[api_mgmt_net]: https://msdn.microsoft.com/library/azure/mt463120.aspx
-[azure_portal]: http://portal.azure.cn
+[api_net]: https://docs.azure.cn/dotnet/api/microsoft.azure.batch
+[api_mgmt_net]: https://docs.microsoft.com/dotnet/api/overview/azure/batch
+[azure_portal]: https://portal.azure.cn
 [azure_storage]: https://www.azure.cn/home/features/storage/
-[azure_tokencreds]: https://msdn.microsoft.com/library/azure/microsoft.windowsazure.tokencloudcredentials.aspx
+[azure_tokencreds]: https://docs.microsoft.com/previous-versions/azure/reference/mt167728(v=azure.100?view=azure-dotnet)
 [batch_explorer_project]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/BatchExplorer
-[net_batch_client]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.batchclient.aspx
-[net_list_keys]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.accountoperationsextensions.listkeysasync.aspx
-[net_create]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.accountoperationsextensions.createasync.aspx
-[net_delete]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.accountoperationsextensions.deleteasync.aspx
-[net_regenerate_keys]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.accountoperationsextensions.regeneratekeyasync.aspx
-[net_sharedkeycred]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.auth.batchsharedkeycredentials.aspx
-[net_mgmt_client]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.batchmanagementclient.aspx
-[net_mgmt_subscriptions]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.batchmanagementclient.subscriptions.aspx
-[net_mgmt_listaccounts]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.batch.iaccountoperations.listasync.aspx
-[resman_client]: https://msdn.microsoft.com/library/azure/microsoft.azure.management.resources.resourcemanagementclient.aspx
-[resman_subclient]: https://msdn.microsoft.com/library/azure/microsoft.azure.subscriptions.subscriptionclient.aspx
+[net_batch_client]: https://docs.azure.cn/dotnet/api/microsoft.azure.batch.batchclient
+[net_list_keys]: https://docs.microsoft.com/previous-versions/azure/mt463199(v=azure.100?view=azure-dotnet)
+[net_create]: https://docs.microsoft.com/previous-versions/azure/mt463210(v=azure.100)
+[net_delete]: https://docs.microsoft.com/previous-versions/azure/mt463128(v=azure.100)
+[net_regenerate_keys]: https://docs.microsoft.com/previous-versions/azure/mt463210(v=azure.100)previous-versions/azure/mt463213(v=azure.100)
+[net_sharedkeycred]: https://docs.azure.cn/dotnet/api/microsoft.azure.batch.auth.batchsharedkeycredentials
+[net_mgmt_client]: https://docs.microsoft.com/dotnet/api/microsoft.azure.management.batch.batchmanagementclient
+[net_mgmt_subscriptions]: https://docs.microsoft.com/previous-versions/azure/mt463210(v=azure.100)previous-versions/azure/mt592937(v=azure.100?view=azure-dotnet)
+[net_mgmt_listaccounts]: https://docs.microsoft.com/previous-versions/azure/mt463210(v=azure.100)previous-versions/azure/mt463134(v=azure.100)
+[resman_api]: https://docs.microsoft.com/previous-versions/azure/mt463210(v=azure.100)previous-versions/azure/mt463134(v=azure.100)
+[resman_client]: https://docs.azure.cn/dotnet/api/microsoft.azure.management.resourcemanager
+[resman_subclient]: https://docs.microsoft.com/dotnet/api/microsoft.azure.management.resourcemanager
 [resman_overview]: ../azure-resource-manager/management/overview.md
 
 [1]: ./media/batch-management-dotnet/portal-01.png
 [2]: ./media/batch-management-dotnet/portal-02.png
 [3]: ./media/batch-management-dotnet/portal-03.png
 
-<!-- Update_Description: link update -->
+<!-- Update_Description: update meta properties, wording update, update link -->

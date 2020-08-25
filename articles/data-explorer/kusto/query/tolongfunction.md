@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: 4fbc0165d561376843f946df3cc0a318b9599bd4
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: 4cfe9f6fd8fd6534c25b9bc938e4256816a0387f
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841211"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516107"
 ---
 # <a name="tolong"></a>tolong()
 
@@ -24,17 +24,19 @@ ms.locfileid: "87841211"
 tolong("123") == 123
 ```
 
-**语法**
+> [!NOTE]
+> 尽可能首选使用 [long()](./scalar-data-types/long.md)。
 
-`tolong(`*Expr*`)`
+## <a name="syntax"></a>语法
 
-**参数**
+`tolong(`Expr`)`
+
+## <a name="arguments"></a>参数
 
 * Expr：将转换为 long 的表达式。 
 
-**返回**
+## <a name="returns"></a>返回
 
 如果转换成功，则结果将是一个 long 类型的数字。
 如果转换未成功，结果将是 `null`。
  
-*注意*：尽可能首选使用 [long()](./scalar-data-types/long.md)。

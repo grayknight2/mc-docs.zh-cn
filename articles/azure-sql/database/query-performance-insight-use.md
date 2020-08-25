@@ -11,13 +11,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: jrasnik, carlrab
 origin.date: 03/10/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: e6be60159df57a70bc6e11f8bcaf6ea47e1e375d
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 4fcbbeb8e2c12dead14a35fad19e69d50582d318
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227938"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222880"
 ---
 # <a name="query-performance-insight-for-azure-sql-database"></a>适用于 Azure SQL 数据库的 Query Performance Insight
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]

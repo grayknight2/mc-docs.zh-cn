@@ -9,12 +9,12 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 05/26/2020
-ms.openlocfilehash: f495eb2c588d1415369edfc24bbd1f8ff56af27d
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: b25db436113e1d4b5a933a047fabd63094826e0a
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440914"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228465"
 ---
 # <a name="train-pytorch-model"></a>训练 PyTorch 模型
 
@@ -27,7 +27,7 @@ ms.locfileid: "86440914"
 2. 将“训练 Pytorch 模型”模块添加到管道。 可以在“模型训练”类别下找到此模块。 展开“训练”，然后将“训练 Pytorch 模型”模块拖到你的管道中 。
 
    > [!NOTE]
-   > “训练 Pytorch 模型”模块只能在“GPU”类型的计算上运行，否则管道将会失败 。 通过设置“使用其他计算目标”，可以在特定模块的右窗格中为该模块选择计算。
+   > 对于大型数据集，“训练 Pytorch 模型”模块最好在“GPU”类型的计算上运行，否则管道会失败。 通过设置“使用其他计算目标”，可以在特定模块的右窗格中为该模块选择计算。
 
 3.  在左侧输入中，附加未训练的模型。 将训练数据集和验证数据集附加到“训练 Pytorch 模型”的中间和右侧输入。
 

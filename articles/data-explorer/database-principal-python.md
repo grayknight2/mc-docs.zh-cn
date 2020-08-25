@@ -1,19 +1,19 @@
 ---
 title: 使用 Python 向 Azure 数据资源管理器添加数据库主体
 description: 本文介绍如何使用 Python 向 Azure 数据资源管理器添加数据库主体。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 02/03/2020
-ms.date: 05/09/2020
-ms.openlocfilehash: d0aa6f4f608ae6efaf87fafd3aff04b0f94b77ad
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: e9a667f0c2d200e6ad1c93bf52fce4295fdd5457
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417767"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515840"
 ---
 # <a name="add-database-principals-for-azure-data-explorer-by-using-python"></a>使用 Python 向 Azure 数据资源管理器添加数据库主体
 

@@ -1,19 +1,19 @@
 ---
 title: 在 Azure 数据资源管理器中管理垂直缩放（纵向扩展）群集以满足需求
 description: 本文介绍根据不断变化的需求对 Azure 数据资源管理器群集进行纵向扩展和纵向缩减的步骤。
-author: radennis
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: radennis
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 07/14/2019
-ms.date: 05/09/2020
-ms.openlocfilehash: caed3441f913206b634095dd3da11becb528baf0
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: 9381134e1d9d08a72eae7af90734279dd50a071a
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417721"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515663"
 ---
 # <a name="manage-cluster-vertical-scaling-scale-up-in-azure-data-explorer-to-accommodate-changing-demand"></a>在 Azure 数据资源管理器中管理纵向扩展（缩减）群集以适应不断变化的需求
 

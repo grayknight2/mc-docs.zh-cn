@@ -12,13 +12,13 @@ metadata:
   author: iainfoulds
   ms.author: v-junlch
   manager: daveba
-  ms.date: 08/07/2020
-  ms.openlocfilehash: c6e6f199a93ca49951f8e5a5b091ca5e105ec876
-  ms.sourcegitcommit: a5eb9a47feefb053ddbaab4b15c395972c372339
+  ms.date: 08/21/2020
+  ms.openlocfilehash: a4271559b6c8d711f5da6f8c8220dc3dd04ef6b6
+  ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 08/10/2020
-  ms.locfileid: "88028566"
+  ms.lasthandoff: 08/21/2020
+  ms.locfileid: "88715166"
 landingContent:
 - title: 关于 Azure AD 域服务
   linkLists:
@@ -88,6 +88,8 @@ landingContent:
       url: join-ubuntu-linux-vm.md
     - text: Red Hat Enterprise Linux
       url: join-rhel-linux-vm.md
+    - text: SUSE Linux Enterprise
+      url: join-suse-linux-vm.md
 - title: 疑难解答
   linkLists:
   - linkListType: how-to-guide

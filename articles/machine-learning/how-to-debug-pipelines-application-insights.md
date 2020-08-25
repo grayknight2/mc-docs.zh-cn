@@ -11,14 +11,14 @@ ms.workload: data-services
 ms.topic: how-to
 ms.date: 01/16/2020
 ms.custom: seodec18, tracking-python
-ms.openlocfilehash: f3724767eb7bbae3e46a409af6dcdcb25f84ae1f
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.openlocfilehash: 5c7ee2b4c2fa12e93fa92c600e784c902cabd18d
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097138"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228220"
 ---
-# <a name="debug-and-troubleshoot-machine-learning-pipelines-in-application-insights"></a>对 Application Insights 中的机器学习管道进行调试和故障排除
+# <a name="collect-machine-learning-pipeline-log-files-in-application-insights-for-alerts-and-debugging"></a>在 Application Insights 中收集用于警报和调试的机器学习管道日志文件
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
 可以通过脚本使用 [OpenCensus](https://opencensus.io/quickstart/python/) Python 库将日志路由到 Application Insights。 在一个位置聚合管道运行发出的日志可以生成查询和诊断问题。 使用 Application Insights 可以跟踪一段时间内的日志，并比较各个运行的管道日志。

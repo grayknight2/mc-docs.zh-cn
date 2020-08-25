@@ -8,13 +8,13 @@ ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 origin.date: 12/02/2019
-ms.date: 03/02/2020
-ms.openlocfilehash: f9d77626ac05f4bad4d8d6cc424c6fde9f002b00
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+ms.date: 08/31/2020
+ms.openlocfilehash: db930f0fba06be848c1387f9f8bc45e6d385cbbb
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723067"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715388"
 ---
 # <a name="hdinsight-cluster-management-best-practices"></a>HDInsight 群集管理最佳做法
 
@@ -59,6 +59,7 @@ ms.locfileid: "84723067"
 
 | 选项 | 文档 |
 |---|---|
+| 自动缩放 | [自动缩放 Azure HDInsight 群集](./hdinsight-autoscale-clusters.md) |
 | 手动缩放 | [缩放 Azure HDInsight 群集](./hdinsight-scaling-best-practices.md) |
 | 使用 Ambari 进行监视| [在 Azure HDInsight 中监视群集性能](./hdinsight-key-scenarios-to-monitor.md) |
 
@@ -76,4 +77,4 @@ AzureActivity
 ## <a name="next-steps"></a>后续步骤
 
 * [HDInsight 群集的容量规划](./hdinsight-capacity-planning.md)
-* [Azure HDInsight 的默认的和建议的节点配置是什么？](./hdinsight-supported-node-configuration.md)
+* [Azure HDInsight 的默认和推荐节点配置是什么？](./hdinsight-supported-node-configuration.md)

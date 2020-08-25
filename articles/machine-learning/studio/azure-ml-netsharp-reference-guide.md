@@ -10,16 +10,16 @@ author: xiaoharper
 ms.author: amlstudiodocs
 ms.custom: previous-author=heatherbshapiro, previous-ms.author=hshapiro
 ms.date: 03/01/2018
-ms.openlocfilehash: 3ff3907c3d56ea2f72dd6d0ae60c5d7cc0f9354e
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 584280846ee4dca009a88d5056b189a7d5e20e2e
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "80343217"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227904"
 ---
-# <a name="guide-to-net-neural-network-specification-language-for-azure-machine-learning-studio-classic"></a>有关 Azure 机器学习工作室（经典）的 Net# 神经网络规范语言的指南
+# <a name="guide-to-net-neural-network-specification-language-for-machine-learning-studio-classic"></a>有关机器学习工作室（经典）的 Net# 神经网络规范语言的指南
 
-[!INCLUDE [Notebook deprecation notice](../../../includes/aml-studio-notebook-notice.md)]
+**适用于：**  ![yes](../../../includes/media/aml-applies-to-skus/yes.png)机器学习工作室（经典）   ![no](../../../includes/media/aml-applies-to-skus/no.png)[Azure 机器学习](../compare-azure-ml-to-studio-classic.md)
 
 Net# 是由 Microsoft 开发的用于定义复杂神经网络体系结构（例如深度神经网络或任意维度的卷积）的语言。 可使用复杂的结构改进图像、视频或音频等数据的学习。
 
@@ -58,7 +58,7 @@ Net# 支持各种类型的连接捆绑，可自定义映射到隐藏层和映射
 
 ## <a name="supported-customizations"></a>支持的自定义项
 
-在 Azure 机器学习工作室（经典）中创建的神经网络模型的体系结构可通过使用 Net# 广泛自定义。 方法：
+在 Azure 机器学习工作室（经典）中创建的神经网络模型的体系结构可通过使用 Net# 广泛自定义。 可以：
 
 + 创建隐藏层并控制每层的节点数。
 + 指定如何相互连接层。
@@ -201,7 +201,7 @@ hidden ByCol[5, 20] from Pixels where (s,d) => abs(s[1] - d[1]) <= 1;
 
 + **Sharing**：（可选）定义卷积的每个维度的权重共享。 值可以是单个布尔值或布尔值的元组（其长度为捆绑的实参数量）。 单个布尔值扩展为正确长度的元组，所有组件都等于指定值。 默认值为包含所有 True 值的元组。
 
-+ **MapCount**：（可选）为卷积捆绑定义功能映射数。 值可以是单个正整数或正整数的元组（其长度为捆绑的实参数量）。 单个整数值扩展为正确长度的元组，第一个组件等于指定值，其他所有组件等于 1. 默认值为 1。 功能映射的总数是元组组件的乘积。 组件之间的总数的因数分解可确定目标节点中功能映射值的分组方式。
++ **MapCount**：（可选）为卷积捆绑定义功能映射数。 值可以是单个正整数或正整数的元组（其长度为捆绑的实参数量）。 单个整数值扩展为正确长度的元组，第一个组件等于指定值，其他所有组件等于 1. 默认值为一。 功能映射的总数是元组组件的乘积。 组件之间的总数的因数分解可确定目标节点中功能映射值的分组方式。
 
 + **Weights**：（可选）定义捆绑的初始权重。 值必须是浮点值的元组，其长度为内核数乘以每个内核的权重数，会在本文后面部分中定义。 默认权重是随机生成的。
 
@@ -215,7 +215,7 @@ hidden ByCol[5, 20] from Pixels where (s,d) => abs(s[1] - d[1]) <= 1;
 
     如果维度值为 False，则将定义内核，使留出的每个端上的节点数都相同（最大差值为 1）。 此属性的默认值为一个元组，其所有组件都等于 False。
 
-+ **UpperPad** 和 **LowerPad**：（可选）对大量要使用的填充提供更好的控制。 **重要提示：** 当且仅当“没有”定义上述的“Padding”属性时，才能定义这些属性  。 值必须是正整数值的元组，其长度为绑定的实参数量。 指定这些属性后，“虚拟”节点将添加到输入层的每个维度的上下两端。 每个维度的上下两端添加的节点数分别由 **LowerPad**[i] 和 **UpperPad**[i] 确定。
++ **UpperPad** 和 **LowerPad**：（可选）对大量要使用的填充提供更好的控制。 **重要提示：** 当且仅当***没有***定义上述的 **Padding** 属性时，才能定义这些属性。 值必须是正整数值的元组，其长度为绑定的实参数量。 指定这些属性后，“虚拟”节点将添加到输入层的每个维度的上下两端。 每个维度的上下两端添加的节点数分别由 **LowerPad**[i] 和 **UpperPad**[i] 确定。
 
     若要确保内核只对应“真实”节点而不是“虚拟”节点，则必须符合以下条件：
   - **LowerPad** 的每个组件必须严格小于 `KernelShape[d]/2`。

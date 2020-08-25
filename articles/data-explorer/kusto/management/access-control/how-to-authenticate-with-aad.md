@@ -9,13 +9,13 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 origin.date: 09/13/2019
-ms.date: 07/01/2020
-ms.openlocfilehash: 5805b3620c22d370099d3cd717f8db43712258a9
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.date: 08/18/2020
+ms.openlocfilehash: bf15e470176bc2511fa8095cb8a81bbeea4ab670
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226271"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515699"
 ---
 # <a name="how-to-authenticate-with-aad-for-azure-data-explorer-access"></a>如何使用 AAD 进行身份验证以便访问 Azure 数据资源管理器
 
@@ -160,7 +160,7 @@ request.Headers.Set(HttpRequestHeader.Authorization, string.Format(CultureInfo.I
 // Create Auth Context for AAD (common or tenant-specific endpoint):
 AuthenticationContext authContext = new AuthenticationContext("AAD Authority URL");
 
-// Exchange your token for for Kusto token.
+// Exchange your token for a Kusto token.
 // You will need to provide your application's client ID and secret to authenticate your application
 var tokenForKusto = authContext.AcquireTokenAsync(
     "https://{serviceNameAndRegion}.kusto.chinacloudapi.cn",

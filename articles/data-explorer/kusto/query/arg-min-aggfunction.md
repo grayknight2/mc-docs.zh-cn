@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 04/12/2019
-ms.date: 07/31/2020
-ms.openlocfilehash: ad836dd2bd11faf818298d5d8872bc2ad382eec1
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 6265bf068078dec091d71e70dd642e059af88826
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509547"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515683"
 ---
 # <a name="arg_min-aggregation-function"></a>arg_min()（聚合函数）
 

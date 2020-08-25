@@ -8,13 +8,13 @@ ms.workload: big-data
 ms.service: time-series-insights
 services: time-series-insights
 ms.topic: conceptual
-ms.date: 08/04/2020
-ms.openlocfilehash: 59afcb7e67921e187c06c83cd4b2406226778fe9
-ms.sourcegitcommit: 36e7f37481969f92138bfe70192b1f4a2414caf7
+ms.date: 08/20/2020
+ms.openlocfilehash: ec9fefe538b7bd36bfbc3e05d5488331f988f31a
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87801858"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715175"
 ---
 # <a name="supported-data-types"></a>支持的数据类型
 
@@ -31,7 +31,7 @@ ms.locfileid: "87801858"
 
 ## <a name="sending-mixed-data-types"></a>发送混合数据类型
 
-Azure 时序见解第 2 代环境为强类型环境。 如果设备或标记为某个设备属性发送不同类型的数据，则值会存储在两个不同的列中，而你在 API 调用中定义时序模型变量表达式时应使用 [coalesce() 函数](https://docs.microsoft.com/rest/api/time-series-insights/preview#other-functions)。
+Azure 时序见解第 2 代环境为强类型环境。 如果设备或标记为某个设备属性发送不同类型的数据，则值会存储在两个不同的列中，而你在 API 调用中定义时序模型变量表达式时应使用 [coalesce() 函数](https://docs.microsoft.com/rest/api/time-series-insights/reference-time-series-expression-syntax#other-functions)。
 
 Azure 时序见解资源管理器提供了一种方法来自动联合同一设备属性的不同列。 在下面的示例中，传感器会发送一个 `PresentValue` 属性，该属性可以是 Long 或 Double。 若要查询 `PresentValue` 属性的所有已存储值（不管数据类型如何），请选择 `PresentValue (Double | Long)`，系统会替你联合这些列。
 

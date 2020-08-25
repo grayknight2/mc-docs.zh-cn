@@ -3,33 +3,35 @@ title: 快速入门：Azure Blob 存储库 v12 - Python
 description: 本快速入门介绍如何使用适用于 Python 的 Azure Blob 存储客户端库版本 12 在 Blob（对象）存储中创建容器和 blob。 接下来，将介绍如何将 blob 下载到本地计算机，以及如何在容器中列出所有 blob。
 author: WenJason
 ms.author: v-jay
-origin.date: 01/24/2020
-ms.date: 07/20/2020
+origin.date: 07/24/2020
+ms.date: 08/24/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.custom: tracking-python
-ms.openlocfilehash: 7c2eb6c55544cf5406a8314c446b616bfa9e887e
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.custom: devx-track-python
+ms.openlocfilehash: 4113fe626714060bc86e617b55965076ce24e34c
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414729"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753629"
 ---
 # <a name="quickstart-manage-blobs-with-python-v12-sdk"></a>快速入门：使用 Python v12 SDK 管理 blob
 
 本快速入门介绍如何使用 Python 管理 blob。 Blob 是可以保存大量文本或二进制数据（包括图像、文档、流媒体和存档数据）的对象。 你将上传、下载和列出 Blob，并创建和删除容器。
 
-[API 参考文档](https://docs.microsoft.com/python/api/azure-storage-blob) | [库源代码](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/storage/azure-storage-blob) | [包 （Python 包索引）](https://pypi.org/project/azure-storage-blob/) | [示例](/storage/common/storage-samples-python?toc=%2fstorage%2fblobs%2ftoc.json#blob-samples)
+其他资源：
+
+* [API 参考文档](https://docs.microsoft.com/python/api/azure-storage-blob)
+* [库源代码](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/storage/azure-storage-blob)
+* [包（Python 包索引）](https://pypi.org/project/azure-storage-blob/)
+* [示例](/storage/common/storage-samples-python?toc=%2fstorage%2fblobs%2ftoc.json#blob-samples)
 
 ## <a name="prerequisites"></a>先决条件
 
 - 具有活动订阅的 Azure 帐户。 [创建 1 元试用帐户](https://wd.azure.cn/zh-cn/pricing/1rmb-trial-full)。
 - 一个 Azure 存储帐户。 [创建存储帐户](../common/storage-account-create.md)。
 - [Python](https://www.python.org/downloads/) 2.7、3.5 或更高版本。
-
-> [!NOTE]
-> 若要使用之前的 SDK 版本入门，请参阅[快速入门：使用 Python v2.1 SDK 管理 blob](storage-quickstart-blobs-python-legacy.md)。
 
 [!INCLUDE [storage-multi-protocol-access-preview](../../../includes/storage-multi-protocol-access-preview.md)]
 

@@ -4,16 +4,16 @@ description: 了解如何与 Azure 防火墙集成，以保护应用服务环境
 author: ccompy
 ms.assetid: 955a4d84-94ca-418d-aa79-b57a5eb8cb85
 ms.topic: article
-origin.date: 03/31/2020
-ms.date: 06/22/2020
+origin.date: 07/13/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18, references_regions
-ms.openlocfilehash: 398885ff0adcc6ad4ab9a13d27e21202f73ced22
-ms.sourcegitcommit: d24e12d49708bbe78db450466eb4fccbc2eb5f99
+ms.openlocfilehash: 533369a4de03aa8c965be3869f6f1547aba8db68
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85613331"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227931"
 ---
 # <a name="locking-down-an-app-service-environment"></a>锁定应用服务环境
 
@@ -62,7 +62,7 @@ ASE 还必须允许端口 16001 上来自负载均衡器标记的入站请求。
    
    ![添加应用程序规则][1]
    
-1. 在 Azure 防火墙 UI >“规则”>“网络规则集合”中，选择“添加网络规则集合”。 提供名称、优先级，并设置“允许”。 在“规则”部分中，在 IP 地址下，提供一个名称，选择“任何”作为协议，将源和目标地址设置为 *，将端口设置为 123。 此规则允许系统使用 NTP 执行时钟同步。 以相同的方式针对端口 12000 创建另一个规则，以帮助诊断任何系统问题。 
+1. 在 Azure 防火墙 UI >“规则”>“网络规则集合”中，选择“添加网络规则集合”。 提供名称、优先级，并设置“允许”。 在“规则”部分的“IP 地址”下，提供一个名称，选择“任何”作为协议，将源和目标地址设置为 *，并将端口设置为 123。 此规则允许系统使用 NTP 执行时钟同步。 以相同的方式针对端口 12000 创建另一个规则，以帮助诊断任何系统问题。 
 
    ![添加 NTP 网络规则][3]
    
@@ -97,8 +97,10 @@ ASE 还必须允许端口 16001 上来自负载均衡器标记的入站请求。
 
 Azure 防火墙可将日志发送到 Azure 存储、事件中心或 Azure Monitor 日志。 若要将应用与支持的任何目标相集成，请转到 Azure 防火墙门户 >“诊断日志”，并为所需目标启用日志。 与 Azure Monitor 日志集成后，可以查看已发送到 Azure 防火墙的任何流量的日志记录。 若要查看被拒绝的流量，请打开 Log Analytics 工作区门户 >“日志”，并输入如下所示的查询 
 
-    AzureDiagnostics | where msg_s contains "Deny" | where TimeGenerated >= ago(1h)
- 
+```kusto
+AzureDiagnostics | where msg_s contains "Deny" | where TimeGenerated >= ago(1h)
+```
+
 首次运行应用程序时，如果不知道所有的应用程序依赖项，则将 Azure 防火墙与 Azure Monitor 日志集成会很有用。 可以通过[在 Azure Monitor 中分析日志数据](https://docs.azure.cn/azure-monitor/log-query/log-query-overview)详细了解 Azure Monitor 日志。
  
 ## <a name="dependencies"></a>依赖项
@@ -109,8 +111,7 @@ Azure 防火墙可将日志发送到 Azure 存储、事件中心或 Azure Monito
 - IP 地址依赖项适用于非 HTTP/S 流量（TCP 和 UDP 流量）
 - 可将 FQDN HTTP/HTTPS 终结点放在防火墙设备中。
 - 通配符 HTTP/HTTPS 终结点是可以根据许多限定符随 ASE 一起变化的依赖项。 
-
-<!-- - Linux dependencies are only a concern if you are deploying Linux apps into your ASE. If you are not deploying Linux apps into your ASE, then these addresses do not need to be added to your firewall. -->
+- 仅当要在 ASE 中部署 Linux 应用时，才需要考虑 Linux 依赖项。 如果不将 Linux 应用部署到 ASE，则不需要将这些地址添加到防火墙。 
 
 #### <a name="service-endpoint-capable-dependencies"></a>支持服务终结点的依赖项 
 
@@ -176,6 +177,7 @@ Azure 防火墙可将日志发送到 Azure 存储、事件中心或 Azure Monito
 |azglobal-red.azglobal.metrics.nsatc.net:443 |
 |antares-black.antares.metrics.nsatc.net:443 |
 |antares-red.antares.metrics.nsatc.net:443 |
+|prod.microsoftmetrics.com:443 |
 |maupdateaccount.blob.core.chinacloudapi.cn:443 |
 |clientconfig.passport.net:443 |
 |packages.microsoft.com:443 |
@@ -192,6 +194,8 @@ Azure 防火墙可将日志发送到 Azure 存储、事件中心或 Azure Monito
 |admin.core.chinacloudapi.cn:443 |
 |prod.warmpath.msftcloudes.com:443 |
 |prod.warmpath.msftcloudes.com:80 |
+|gcs.prod.monitoring.core.chinacloudapi.cn:80|
+|gcs.prod.monitoring.core.chinacloudapi.cn:443|
 |azureprofileruploads.blob.core.chinacloudapi.cn:443 |
 |azureprofileruploads2.blob.core.chinacloudapi.cn:443 |
 |azureprofileruploads3.blob.core.chinacloudapi.cn:443 |
@@ -217,6 +221,8 @@ Azure 防火墙可将日志发送到 Azure 存储、事件中心或 Azure Monito
 |gmstorageprodsn1.queue.core.chinacloudapi.cn:443 |
 |gmstorageprodsn1.table.core.chinacloudapi.cn:443 |
 |rteventservice.trafficmanager.cn:443 |
+|ctldl.windowsupdate.com:80 |
+|ctldl.windowsupdate.com:443 |
 
 #### <a name="wildcard-httphttps-dependencies"></a>通配符 HTTP/HTTPS 依赖项 
 
@@ -227,8 +233,42 @@ Azure 防火墙可将日志发送到 Azure 存储、事件中心或 Azure Monito
 | \*.update.microsoft.com:443 |
 | \*.windowsupdate.microsoft.com:443 |
 | \*.identity.azure.cn:443 |
+| \*.ctldl.windowsupdate.com:80 |
+| \*.ctldl.windowsupdate.com:443 |
 
-<!-- Linux is not available in mooncake -->
+#### <a name="linux-dependencies"></a>Linux 依赖项 
+
+| 端点 |
+|----------|
+|wawsinfraprodbay063.blob.core.chinacloudapi.cn:443 |
+|registry-1.docker.io:443 |
+|auth.docker.io:443 |
+|production.cloudflare.docker.com:443 |
+|download.docker.com:443 |
+|us.archive.ubuntu.com:80 |
+|download.mono-project.com:80 |
+|packages.treasuredata.com:80|
+|security.ubuntu.com:80 |
+|oryx-cdn.microsoft.io:443 |
+| \*.cdn.mscr.io:443 |
+|mcr.microsoft.com:443 |
+|\*.data.mcr.microsoft.com:443 |
+|packages.fluentbit.io:80 |
+|packages.fluentbit.io:443 |
+|apt-mo.trafficmanager.net:80 |
+|apt-mo.trafficmanager.net:443 |
+|azure.archive.ubuntu.com:80 |
+|azure.archive.ubuntu.com:443 |
+|changelogs.ubuntu.com:80 |
+|13.74.252.37:11371 |
+|13.75.127.55:11371 |
+|13.76.190.189:11371 |
+|13.80.10.205:11371 |
+|13.91.48.226:11371 |
+|40.76.35.62:11371 |
+|104.215.95.108:11371 |
+
+<!-- ## US Gov dependencies -->
 
 <!--Image references-->
 [1]: ./media/firewall-integration/firewall-apprule.png

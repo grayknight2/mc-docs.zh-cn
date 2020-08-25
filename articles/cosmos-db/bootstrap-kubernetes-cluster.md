@@ -3,18 +3,19 @@ title: 如何将 Azure Kubernetes 与 Azure Cosmos DB 配合使用
 description: 了解如何在 Azure 上启动使用 Azure Cosmos DB（预览版）的 Kubernetes 群集
 author: rockboyfor
 ms.service: cosmos-db
-ms.topic: conceptual
-origin.date: 05/06/2019
-ms.date: 09/30/2019
+ms.topic: how-to
+ms.date: 08/03/2020
+ms.testscope: yes
+ms.testdate: 08/03/2020
 ms.author: v-yeche
-ms.openlocfilehash: fcea79175985b635e94fc260160eed52eac3186d
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 4cc34700430406eb6cdae8503e473096324b877a
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "71306803"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222792"
 ---
-<!--Previewed only, must submit with request-->
+<!--PRIVATE PREVIEWED ONLY, NOT AVAILABLE ON MOONCAKE-->
 <!--Azure Cosmos etcd API is currently available to deploy in "CentralUS" region only. -->
 # <a name="how-to-use-azure-kubernetes-with-azure-cosmos-db-preview"></a>如何将 Azure Kubernetes 与 Azure Cosmos DB（预览版）配合使用
 
@@ -26,17 +27,19 @@ ms.locfileid: "71306803"
 * 默认保护且面向企业。
 * 业界领先的复合型 SLA。
 
+若要详细了解 Azure Cosmos DB 中的 etcd API，请参阅概述文章。 本文介绍如何使用 [Azure Kubernetes 引擎](https://github.com/Azure/aks-engine/blob/master/docs/tutorials/quickstart.md) (aks-engine) 在 Azure 上启动使用 [Azure Cosmos DB](https://docs.azure.cn/cosmos-db/) 而不是本地安装和本地配置的 etcd 的 Kubernetes 群集。 
 
 <!--Not Available on  [overview](etcd-api-introduction.md)-->
+
 ## <a name="prerequisites"></a>先决条件
 
 1. 安装最新版本的 [Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。 可以下载特定于自己的操作系统的 Azure CLI 并进行安装。
 
-1. 安装[最新版本](https://github.com/Azure/aks-engine/releases)的 Azure Kubernetes 引擎。 [Azure Kubernetes 引擎](https://github.com/Azure/aks-engine/blob/master/docs/tutorials/quickstart.md#install-aks-engine)页面中提供了不同操作系统的安装说明。 只需查看链接的文档中“安装 AKS 引擎”部分中的步骤  。下载后，解压缩 zip 文件。
+1. 安装[最新版本](https://github.com/Azure/aks-engine/releases)的 Azure Kubernetes 引擎。 [Azure Kubernetes 引擎](https://github.com/Azure/aks-engine/blob/master/docs/tutorials/quickstart.md#install-aks-engine)页面中提供了不同操作系统的安装说明。 只需查看链接的文档中“安装 AKS 引擎”部分中的步骤。下载后，解压缩 zip 文件。
 
-    Azure Kubernetes 引擎 (aks-engine) 可以生成 Azure 资源管理器模板，用于 Azure 上的 Kubernetes 群集  。 aks-engine 的输入内容是群集定义文件，该文件描述所需的群集，包括业务流程协调程序、功能和代理。 输入文件的结构类似于 Azure Kubernetes 服务的公共 API。
+    Azure Kubernetes 引擎 (aks-engine) 可以生成 Azure 资源管理器模板，用于 Azure 上的 Kubernetes 群集****。 aks-engine 的输入内容是群集定义文件，该文件描述所需的群集，包括业务流程协调程序、功能和代理。 输入文件的结构类似于 Azure Kubernetes 服务的公共 API。
 
-1. Azure Cosmos DB 中的 etcd API 目前处于预览状态。 登录并使用此处的预览版： https://aka.ms/cosmosetcdapi-signup 。 提交表单后，订阅将被列入允许列表，以使用 Azure Cosmos etcd API。 
+1. Azure Cosmos DB 中的 etcd API 目前处于预览状态。 登录并使用此处的预览版：https://aka.ms/cosmosetcdapi-signup。 提交表单后，订阅将被允许使用 Azure Cosmos etcd API。 
 
 ## <a name="deploy-the-cluster-with-azure-cosmos-db"></a>使用 Azure Cosmos DB 部署群集
 
@@ -46,7 +49,7 @@ ms.locfileid: "71306803"
     az login
     ```
 
-1. 如果有多个订阅，请切换到已列入 Azure Cosmos DB etcd API 允许列表的订阅。 可以使用以下命令切换至所需订阅：
+1. 如果有多个订阅，请切换到已被允许使用 Azure Cosmos DB etcd API 的订阅。 可以使用以下命令切换至所需订阅：
 
     ```azurecli
     az account set --subscription "<Name of your subscription>"
@@ -75,7 +78,7 @@ ms.locfileid: "71306803"
     }
     ```
 
-    请记下“appId”和“password”字段，因为将在后续步骤中使用到这些参数   。 
+    请记下“appId”和“password”字段，因为将在后续步骤中使用到这些参数********。 
 
 1. 从命令提示符处导航至 Azure Kubernetes 引擎可执行文件所在的文件夹。 例如，可以在命令提示符上导航至该文件夹：
 
@@ -124,7 +127,7 @@ ms.locfileid: "71306803"
     }
     ```
 
-   在 JSON/群集定义文件中，要记录的关键参数为 "cosmosEtcd": true  。 该参数在“masterProfile”属性中，并指示部署过程使用 Azure Cosmos etcd API 而不是常规 etcd。 
+   在 JSON/群集定义文件中，要记录的关键参数为 "cosmosEtcd": true****。 该参数在“masterProfile”属性中，并指示部署过程使用 Azure Cosmos etcd API 而不是常规 etcd。 
 
 1. 使用以下命令部署使用 Azure Cosmos DB 的 Azure Kubernetes 群集：
 
@@ -150,8 +153,6 @@ ms.locfileid: "71306803"
     
     <!--Azure Cosmos etcd API is currently available to deploy in "CentralUS" region only. -->
     
-    > [!Note]
-    > 目前仅能在“centralus”区域中部署 Azure Cosmos etcd API。 
 
     * **api-model：** 指向模板文件的完全限定的路径。
     * **force-overwrite：** 此选项用于自动覆盖输出目录中的现有文件。
@@ -182,12 +183,11 @@ INFO[0587] Finished ARM Deployment (aks-sg-test-546247491). Succeeded
 
 资源组现在包含的资源有虚拟机、Azure Cosmos 帐户 (etcd API)、虚拟网络、可用性集以及 Kubernetes 群集所需的其他资源。 
 
-Azure Cosmos 帐户的名称将与指定的 DNS 前缀（追加了 k8s）相匹配。 将自动使用名为 EtcdDB 的数据库以及名为 EtcdData 的容器预配 Azure Cosmos 帐户   。 该容器存储所有与 etcd 相关的数据。 容器预配有一定数量的请求单位，你可以基于自己的工作负荷[缩放（增加/减少）吞吐量](scaling-throughput.md)。 
+Azure Cosmos 帐户的名称将与指定的 DNS 前缀（追加了 k8s）相匹配。 将自动使用名为 EtcdDB 的数据库以及名为 EtcdData 的容器预配 Azure Cosmos 帐户********。 该容器存储所有与 etcd 相关的数据。 容器预配有一定数量的请求单位，你可以基于自己的工作负荷[缩放（增加/减少）吞吐量](scaling-throughput.md)。 
 
 ## <a name="next-steps"></a>后续步骤
 
 * 了解如何[使用 Azure Cosmos 数据库、容器和项](databases-containers-items.md)
 * 了解如何[优化预配吞吐量成本](optimize-cost-throughput.md)
 
-<!--Update_Description: new articles on bootstrap kubernets cluster -->
-<!--ms.date: 06/03/2019-->
+<!-- Update_Description: update meta properties, wording update, update link -->

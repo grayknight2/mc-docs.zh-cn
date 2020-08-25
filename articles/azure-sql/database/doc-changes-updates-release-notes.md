@@ -4,20 +4,20 @@ titleSuffix: Azure SQL Database & SQL Managed Instance
 description: 了解 Azure SQL 数据库和 SQL 托管实例的新增功能和文档改进。
 services: sql-database
 author: WenJason
-ms.service: sql-database
+ms.service: sql-db-mi
 ms.subservice: service
 ms.custom: sqldbrb=2
 ms.devlang: ''
 ms.topic: conceptual
-origin.date: 05/13/2020
-ms.date: 07/13/2020
+origin.date: 06/17/2020
+ms.date: 08/17/2020
 ms.author: v-jay
-ms.openlocfilehash: a411e27a4da937448dcdd27d6169863b290c2e5d
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.openlocfilehash: 50cff4371790dc66a2517e22518bda4a02abc9fa
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227833"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222662"
 ---
 # <a name="whats-new-in-azure-sql-database--sql-managed-instance"></a>Azure SQL 数据库和 SQL 托管实例中的新增功能有哪些？
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -94,8 +94,8 @@ Azure SQL 数据库和 Azure SQL 托管实例的相关文档已拆分为单独�
 
 |问题  |发现日期  |状态  |解决日期  |
 |---------|---------|---------|---------|
-|[没有使用 CHECKSUM 的手动备份可能无法还原](#restoring-manual-backup-without-checksum-might-fail)|2020 年 5 月|具有解决方法| |
-|[在修改、禁用或启用现有作业后代理无响应](#agent-becomes-unresponsive-upon-modifying-disabling-or-enabling-existing-jobs)|2020 年 5 月|已自动缓解| |
+|[没有使用 CHECKSUM 的手动备份可能无法还原](#restoring-manual-backup-without-checksum-might-fail)|2020 年 5 月|已解决|2020 年 6 月|
+|[在修改、禁用或启用现有作业后代理无响应](#agent-becomes-unresponsive-upon-modifying-disabling-or-enabling-existing-jobs)|2020 年 5 月|已解决|2020 年 6 月|
 |[资源组上的权限不应用于 SQL 托管实例](#permissions-on-resource-group-not-applied-to-sql-managed-instance)|2020 年 2 月|具有解决方法||
 |[通过门户对故障转移组进行手动故障转移的限制](#limitation-of-manual-failover-via-portal-for-failover-groups)|2020 年 1 月|具有解决方法||
 |[SQL 代理角色需要拥有对非 sysadmin 登录名的显式 EXECUTE 权限](#in-memory-oltp-memory-limits-are-not-applied)|2019 年 12 月|具有解决方法||
@@ -281,7 +281,7 @@ using (var scope = new TransactionScope())
 
 ```
 
-解决方法（自 2020 年 3 月起不再需要）：使用 [SqlConnection.ChangeDatabase(String)](https://docs.microsoft.com/dotnet/api/system.data.sqlclient.sqlconnection.changedatabase) 在连接上下文中使用另一个数据库，而不是使用两个连接。
+**解决方法（自 2020 年 3 月起不再需要）** ：使用 [SqlConnection.ChangeDatabase(String)](https://docs.microsoft.com/dotnet/api/system.data.sqlclient.sqlconnection.changedatabase) 在连接上下文中使用其他数据库，而非使用两个连接。
 
 ### <a name="clr-modules-and-linked-servers-sometimes-cant-reference-a-local-ip-address"></a>CLR 模块和链接的服务器有时无法引用本地 IP 地址
 

@@ -5,14 +5,16 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 04/27/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: d4706796ae8311f5bcdf0224a09b4acc5231a65d
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: 73f9a5348520d3d3c6a3b3ce4526a8bfe0c74652
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323265"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223451"
 ---
 # <a name="optimize-development-and-testing-cost-in-azure-cosmos-db"></a>在 Azure Cosmos DB 中优化开发和测试成本
 
@@ -24,7 +26,9 @@ ms.locfileid: "85323265"
 
 ## <a name="azure-cosmos-db-free-tier"></a>Azure Cosmos DB 免费层
 
-使用 Azure Cosmos DB 免费层，可以轻松上手、开发和测试应用程序，甚至免费运行小型生产工作负载。 在帐户上启用免费层后，一开始你将在该帐户中免费获得 400 RU/秒的吞吐量和 5 GB 的存储空间。 还可以创建包含 25 个容器的共享吞吐量数据库，这些容器在数据库级别的吞吐量均为 400 RU/秒，所有这些操作都可以通过免费层实现（免费层帐户的限制为 5 个共享吞吐量数据库）。 免费层在帐户的生命周期内无限期地持续有效，并且附带常规 Azure Cosmos DB 帐户的所有[优点和功能](introduction.md#key-benefits)，包括无限制的存储和吞吐量（RU/秒）、SLA、高可用性以及在所有 Azure 中国区域进行统包式多区域分布等。 每个 Azure 订阅最多可以有一个免费层帐户，并且必须在创建帐户时选择加入使用。 首先，[在 Azure 门户中创建一个启用了免费层的新帐户](create-cosmosdb-resources-portal.md) 或使用 [ARM 模板](manage-sql-with-resource-manager.md#free-tier)。 如需更多详细信息，请参阅[定价页](https://www.azure.cn/pricing/details/cosmos-db/)。
+使用 Azure Cosmos DB 免费层，可以轻松上手、开发和测试应用程序，甚至免费运行小型生产工作负载。 在帐户上启用免费层后，一开始你将在该帐户中免费获得 400 RU/秒的吞吐量和 5 GB 的存储空间。 还可以创建包含 25 个容器的共享吞吐量数据库，这些容器在数据库级别的吞吐量均为 400 RU/秒，所有这些操作都可以通过免费层实现（免费层帐户的限制为 5 个共享吞吐量数据库）。 使用免费层时，如果预配的共享数据库的最小吞吐量为 400 RU/秒，则该数据库中的所有容器都可以共享吞吐量。 任何具有共享吞吐量的新数据库或具有专用吞吐量的容器都将按常规定价计费。
+
+免费层在帐户的生命周期内无限期地持续有效，并且附带常规 Azure Cosmos DB 帐户的所有[优点和功能](introduction.md#key-benefits)，包括无限制的存储和吞吐量（RU/秒）、SLA、高可用性以及在所有 Azure 中国区域进行统包式多区域分布等。 每个 Azure 订阅最多可以有一个免费层帐户，并且必须在创建帐户时选择加入使用。 首先，[在 Azure 门户中创建一个启用了免费层的新帐户](create-cosmosdb-resources-portal.md) 或使用 [ARM 模板](manage-sql-with-resource-manager.md#free-tier)。 如需更多详细信息，请参阅[定价页](https://www.azure.cn/pricing/details/cosmos-db/)。
 
 <!--Not Available on ## Try Azure Cosmos DB for free-->
 <!--Not Available on [Try Azure Cosmos DB for free](https://www.azure.cn/try/cosmosdb/)-->

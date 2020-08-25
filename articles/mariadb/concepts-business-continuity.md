@@ -5,14 +5,14 @@ author: WenJason
 ms.author: v-jay
 ms.service: mariadb
 ms.topic: conceptual
-origin.date: 09/24/2018
-ms.date: 11/04/2019
-ms.openlocfilehash: 578c8f5c4fd82dafdedd9c37fcf44fce69ad8889
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+origin.date: 7/7/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: 3d17c5a59d4aee75ee08e9dc059da4519d7d4ac4
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82127061"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223223"
 ---
 # <a name="understand-business-continuity-in-azure-database-for-mariadb"></a>了解 Azure Database for MariaDB 中的业务连续性
 
@@ -49,11 +49,16 @@ Azure 数据中心会罕见地发生中断。 发生中断时，可能仅导致�
 > [!IMPORTANT]
 > 只有当为服务器预配了异地冗余备份存储时，异地还原才是可行的。
 
+## <a name="cross-region-read-replicas"></a>跨区域只读副本
+
+可以使用跨区域只读副本来增强业务连续性和灾难恢复规划。 只读副本使用 MariaDB 的二进制日志复制技术进行异步更新。 从[只读副本概念文章](concepts-read-replicas.md)详细了解有关只读副本、可用区域以及如何进行故障转移的信息。 
+
+## <a name="faq"></a>常见问题解答
+### <a name="where-does-azure-database-for-mariadb-store-customer-data"></a>Azure Database for MariaDB 将客户数据存储在何处？
+默认情况下，Azure Database for MariaDB 不会将客户数据移出部署的区域或存储到部署区域以外的区域。 但是，客户可以选择启用[地域冗余备份](concepts-backup.md#backup-redundancy-options)或创建[跨区域读取副本](concepts-read-replicas.md#cross-region-replication)，以便在另一个区域存储数据。
+
 ## <a name="next-steps"></a>后续步骤
 
-- 若要详细了解自动备份，请参阅 [Azure Database for MariaDB 中的备份](concepts-backup.md)。
-- 若要使用 Azure 门户还原到某个时间点，请参阅 [使用 Azure 门户将数据库还原到某个时间点](howto-restore-server-portal.md)。
-
-<!--
-- To restore to a point in time using Azure CLI, see [restore database to a point in time using CLI](howto-restore-server-cli.md). 
--->
+- 详细了解 [Azure Database for MariaDB 中的自动备份](concepts-backup.md)。
+- 了解如何使用 [Azure 门户](howto-restore-server-portal.md)或 [Azure CLI](howto-restore-server-cli.md) 进行还原。
+- 了解 [Azure Database for MariaDB 中的只读副本](concepts-read-replicas.md)。

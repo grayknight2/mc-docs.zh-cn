@@ -1,34 +1,37 @@
 ---
 title: 监视 Azure Batch
 description: 了解 Azure 监视服务、指标、诊断日志以及 Azure Batch 的其他监视功能。
-ms.topic: article
-ms.date: 04/05/2018
-ms.author: v-lingwu
-ms.openlocfilehash: 1b89ccfc5e27496ee687e46e58e653adc21bec20
-ms.sourcegitcommit: cbaa1aef101f67bd094f6ad0b4be274bbc2d2537
+ms.topic: how-to
+origin.date: 04/05/2018
+ms.date: 08/24/2020
+ms.testscope: no
+ms.testdate: 04/05/2018
+ms.author: v-yeche
+ms.openlocfilehash: 80aa8ed687b47a4e9d39f04b359d2e04013c6716
+ms.sourcegitcommit: e633c458126612223fbf7a8853dbf19acc7f0fa5
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/28/2020
-ms.locfileid: "84126727"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88655011"
 ---
 # <a name="monitor-batch-solutions"></a>监视 Batch 解决方案
 
 Azure 和 Batch 服务提供了一系列服务、工具和 API 来监视 Batch 解决方案。 本概述文章可帮助你选择适合需求的监视方法。
 
-有关可用来监视 Azure 资源的 Azure 组件和服务的概述，请参阅[监视 Azure 应用程序和资源](../monitoring-and-diagnostics/monitoring-overview.md)。
+有关可用来监视 Azure 资源的 Azure 组件和服务的概述，请参阅[监视 Azure 应用程序和资源](../azure-monitor/overview.md)。
 
 ## <a name="subscription-level-monitoring"></a>订阅级监视
 
-在订阅级别（包括 Batch 帐户），[Azure 活动日志](../azure-monitor/platform/platform-logs-overview.md)将操作事件数据收集到[几个类别](../azure-monitor/platform/activity-log-view.md#categories-in-the-activity-log)中。
+在订阅级别（包括 Batch 帐户），[Azure 活动日志](../azure-monitor/platform/platform-logs-overview.md)将操作事件数据收集到[几个类别](../azure-monitor/platform/activity-log.md#view-the-activity-log)中。
 
 对于 Batch 帐户，具体而言，活动日志收集与帐户创建和删除以及密钥管理相关的事件。
 
-从活动日志中检索事件的一种方法是使用 Azure 门户。 单击“所有服务” > “活动日志”。  或者，使用 Azure CLI、PowerShell cmdlet 或 Azure Monitor REST API 来查询事件。 还可以导出活动日志，或者配置[活动日志警报](../monitoring-and-diagnostics/monitoring-activity-log-alerts-new-experience.md)。
+从活动日志中检索事件的一种方法是使用 Azure 门户。 单击“所有服务” > “活动日志”。  或者，使用 Azure CLI、PowerShell cmdlet 或 Azure Monitor REST API 来查询事件。 还可以导出活动日志，或者配置[活动日志警报](../azure-monitor/platform/alerts-activity-log.md)。
 
 ## <a name="batch-account-level-monitoring"></a>Batch 帐户级监视
 
 使用 [Azure Monitor](../azure-monitor/overview.md) 的各项功能监视每个 Batch 帐户。 Azure Monitor 针对 Batch 帐户级别范围内的资源（例如池、作业和任务）收集[指标](../azure-monitor/platform/data-platform-metrics.md)以及可选的[诊断日志](../azure-monitor/platform/platform-logs-overview.md)。 可以手动或以编程方式收集并使用此数据来监视 Batch 帐户中的活动以及对问题进行诊断。 有关详细信息，请参阅[用于诊断评估和监视的 Batch 指标、警报和日志](batch-diagnostics.md)。
- 
+
 > [!NOTE]
 > 指标默认情况下在 Batch 帐户中可用，不需要进行额外配置，它们具有为期 30 天的滚动历史记录。 必须为 Batch 帐户启用诊断日志记录，并且，若要存储或处理诊断日志数据，可能会产生其他成本。 
 
@@ -58,9 +61,9 @@ Azure 和 Batch 服务提供了一系列服务、工具和 API 来监视 Batch �
 
 * [Batch Explorer](https://github.com/Azure/BatchExplorer) 是一个功能丰富的免费独立客户端工具，可帮助创建、调试和监视 Azure Batch 应用程序。 下载适用于 Mac、Linux 或 Windows 的[安装包](https://azure.github.io/BatchExplorer/)。 （可选）对 Batch 解决方案进行配置以[显示 Application Insights 数据](https://github.com/Azure/batch-insights)，例如 Batch Explorer 中的 VM 性能计数器。
 
-
 ## <a name="next-steps"></a>后续步骤
 
 * 了解适用于生成批处理解决方案的[批处理 API 和工具](batch-apis-tools.md)。
 * 详细了解使用 Batch [实现诊断日志记录](batch-diagnostics.md)。
-<!-- Update_Description: wording update -->
+
+<!-- Update_Description: update meta properties, wording update, update link -->

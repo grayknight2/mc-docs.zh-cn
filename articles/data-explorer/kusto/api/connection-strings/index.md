@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 10/30/2019
-ms.date: 07/01/2020
-ms.openlocfilehash: 8a2b50891dbb43817f151ba441361ee53317ab24
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.date: 08/18/2020
+ms.openlocfilehash: dfdd1ea07658160019f63c875a14dc418e82740d
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226265"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515673"
 ---
 # <a name="connection-strings"></a>连接字符串
 
@@ -28,3 +28,6 @@ ms.locfileid: "86226265"
 * [存储连接字符串](./storage.md)说明如何将 Kusto 指向外部存储服务，例如 Azure Blob 存储和 Azure Data Lake Storage。
 * SQL 连接字符串 - 供 Kusto [sql_request 插件](../../query/sqlrequestplugin.md)用来向 Azure DB 服务发出请求，并可供 [export to SQL 命令](../../management/data-export/export-data-to-sql.md)使用。  
   这些连接字符串遵循 [SqlClient 连接字符串](https://docs.microsoft.com/dotnet/framework/data/adonet/connection-string-syntax#sqlclient-connection-strings)规范。
+
+> [!NOTE]
+> 某些连接字符串可能引用安全主体。 请参阅[主体和标识提供者](../../management/access-control/principals-and-identity-providers.md)，了解如何在连接字符串中指定安全主体。

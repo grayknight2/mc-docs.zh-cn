@@ -3,16 +3,19 @@ title: 在 Azure Cosmos DB 中编写存储过程、触发器和 UDF
 description: 了解如何在 Azure Cosmos DB 中定义存储过程、触发器和用户定义的函数
 author: rockboyfor
 ms.service: cosmos-db
-ms.topic: conceptual
-origin.date: 05/07/2020
-ms.date: 06/22/2020
+ms.topic: how-to
+origin.date: 06/16/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: 60ee6eb06c385eac21d5d5bf653620608f908014
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.custom: devx-track-javascript
+ms.openlocfilehash: 9f4e5c18c052ed47cd318fe310cfdbbbdf2241e5
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85098577"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222910"
 ---
 # <a name="how-to-write-stored-procedures-triggers-and-user-defined-functions-in-azure-cosmos-db"></a>如何在 Azure Cosmos DB 中编写存储过程、触发器和用户定义的函数
 
@@ -22,7 +25,6 @@ Azure Cosmos DB 提供 JavaScript 的语言集成式事务执行用于编写**�
 
 > [!NOTE]
 > 对于已分区的容器，在执行存储过程时，必须在请求选项中提供分区键值。 存储过程的范围始终限定为分区键。 存储过程看不到具有不同分区键值的项。 这一点也适用于触发器。
-
 > [!Tip]
 > Cosmos 支持使用存储过程、触发器和用户定义的函数部署容器。 有关详细信息，请参阅[使用服务器端功能创建 Azure Cosmos DB 容器](manage-sql-with-resource-manager.md#create-sproc)。
 
@@ -56,21 +58,42 @@ var helloWorldStoredProc = {
 
 存储过程还包含一个用于设置说明的参数（一个布尔值）。 如果该参数设置为 true，同时缺少说明，则存储过程将引发异常。 否则，存储过程的剩余部分将继续运行。
 
-以下示例存储过程采用新的 Azure Cosmos 项作为输入，将此项插入到 Azure Cosmos 容器，然后返回新建项的 ID。 此示例利用[快速入门 .NET SQL API](create-sql-api-dotnet.md) 中的 ToDoList 示例
+以下示例存储过程采用新 Azure Cosmos 项的数组作为输入，将其插入 Azure Cosmos 容器，然后返回插入项的计数。 此示例利用[快速入门 .NET SQL API](create-sql-api-dotnet.md) 中的 ToDoList 示例
 
 ```javascript
-function createToDoItem(itemToCreate) {
+function createToDoItems(items) {
+    var collection = getContext().getCollection();
+    var collectionLink = collection.getSelfLink();
+    var count = 0;
 
-    var context = getContext();
-    var container = context.getCollection();
+    if (!items) throw new Error("The array is undefined or null.");
 
-    var accepted = container.createDocument(container.getSelfLink(),
-        itemToCreate,
-        function (err, itemCreated) {
-            if (err) throw new Error('Error' + err.message);
-            context.getResponse().setBody(itemCreated.id)
-        });
-    if (!accepted) return;
+    var numItems = items.length;
+
+    if (numItems == 0) {
+        getContext().getResponse().setBody(0);
+        return;
+    }
+
+    tryCreate(items[count], callback);
+
+    function tryCreate(item, callback) {
+        var options = { disableAutomaticIdGeneration: false };
+
+        var isAccepted = collection.createDocument(collectionLink, item, options, callback);
+
+        if (!isAccepted) getContext().getResponse().setBody(count);
+    }
+
+    function callback(err, item, options) {
+        if (err) throw err;
+        count++;
+        if (count >= numItems) {
+            getContext().getResponse().setBody(count);
+        } else {
+            tryCreate(items[count], callback);
+        }
+    }
 }
 ```
 

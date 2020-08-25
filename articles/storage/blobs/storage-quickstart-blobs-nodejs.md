@@ -3,32 +3,35 @@ title: 快速入门：Azure Blob 存储库 v12 - JavaScript
 description: 本快速入门介绍如何使用适用于 JavaScript 的 Azure Blob 存储客户端库版本 12 在 Blob（对象）存储中创建容器和 blob。 接下来，将介绍如何将 blob 下载到本地计算机，以及如何在容器中列出所有 blob。
 author: WenJason
 ms.author: v-jay
-origin.date: 01/24/2020
-ms.date: 07/20/2020
+origin.date: 07/24/2020
+ms.date: 08/24/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.openlocfilehash: 7ba5143407e6923bc1fb5d1aab67d40b9d490b26
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.custom: devx-track-javascript
+ms.openlocfilehash: a5ea5760d777985c602a25a351ffbcd91147e252
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414652"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753351"
 ---
 # <a name="quickstart-manage-blobs-with-javascript-v12-sdk-in-nodejs"></a>快速入门：在 Node.js 中使用 JavaScript v12 SDK 管理 blob
 
 本快速入门介绍如何使用 Node.js 管理 blob。 Blob 是可以保存大量文本或二进制数据（包括图像、文档、流媒体和存档数据）的对象。 你将上传、下载和列出 Blob，并创建和删除容器。
 
-[API 参考文档](https://docs.microsoft.com/javascript/api/@azure/storage-blob) | [库源代码](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob) | [包（节点包管理器）](https://www.npmjs.com/package/@azure/storage-blob) | [示例](/storage/common/storage-samples-javascript?toc=%2fstorage%2fblobs%2ftoc.json#blob-samples)
+其他资源：
+
+* [API 参考文档](https://docs.microsoft.com/javascript/api/@azure/storage-blob)
+* [库源代码](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob)
+* [包(节点包管理器)](https://www.npmjs.com/package/@azure/storage-blob)
+* [示例](/storage/common/storage-samples-javascript?toc=%2fstorage%2fblobs%2ftoc.json#blob-samples)
 
 ## <a name="prerequisites"></a>先决条件
 
 - 具有活动订阅的 Azure 帐户。 [创建 1 元试用帐户](https://wd.azure.cn/zh-cn/pricing/1rmb-trial-full)。
 - 一个 Azure 存储帐户。 [创建存储帐户](../common/storage-account-create.md)。
 - [Node.js](https://nodejs.org/en/download/)。
-
-> [!NOTE]
-> 若要使用之前的 SDK 版本入门，请参阅[快速入门：在 Node.js 中使用 JavaScript v10 SDK 管理 blob](storage-quickstart-blobs-nodejs-legacy.md)。
 
 [!INCLUDE [storage-multi-protocol-access-preview](../../../includes/storage-multi-protocol-access-preview.md)]
 
@@ -38,7 +41,7 @@ ms.locfileid: "86414652"
 
 ### <a name="create-the-project"></a>创建项目
 
-创建名为 blob-quickstart-v12 的 JavaScript 应用程序  。
+创建名为 blob-quickstart-v12 的 JavaScript 应用程序。
 
 1. 在控制台窗口（例如 cmd、PowerShell 或 Bash）中，为项目创建新目录。
 
@@ -46,13 +49,13 @@ ms.locfileid: "86414652"
     mkdir blob-quickstart-v12
     ```
 
-1. 切换到新创建的 blob-quickstart-v12 目录  。
+1. 切换到新创建的 blob-quickstart-v12 目录。
 
     ```console
     cd blob-quickstart-v12
     ```
 
-1. 创建名为 package.json 的新文本文件  。 此文件定义 Node.js 项目。 将此文件保存到 blob-quickstart-v12 目录中  。 下面是文件的内容：
+1. 创建名为 package.json 的新文本文件。 此文件定义 Node.js 项目。 将此文件保存到 blob-quickstart-v12 目录中。 下面是文件的内容：
 
     ```json
     {
@@ -77,7 +80,7 @@ ms.locfileid: "86414652"
 
 ### <a name="install-the-package"></a>安装包
 
-当仍在 blob-quickstart-v12 目录中时，使用 `npm install` 命令安装适用于 JavaScript 包的 Azure Blob 存储客户端库  。 此命令读取 package.json 文件，并安装适用于 JavaScript 包的 Azure Blob 存储客户端库 v12 及其依赖的所有库  。
+当仍在 blob-quickstart-v12 目录中时，使用 `npm install` 命令安装适用于 JavaScript 包的 Azure Blob 存储客户端库。 此命令读取 package.json 文件，并安装适用于 JavaScript 包的 Azure Blob 存储客户端库 v12 及其依赖的所有库。
 
 ```console
 npm install
@@ -105,7 +108,7 @@ npm install
     main().then(() => console.log('Done')).catch((ex) => console.log(ex.message));
     ```
 
-1. 将新文件在 blob-quickstart-v12 目录中另存为 blob-quickstart-v12.js   。
+1. 将新文件在 blob-quickstart-v12 目录中另存为 blob-quickstart-v12.js 。
 
 [!INCLUDE [storage-quickstart-credentials-include](../../../includes/storage-quickstart-credentials-include.md)]
 
@@ -238,7 +241,7 @@ console.log('\nDownloaded blob content...');
 console.log('\t', await streamToString(downloadBlockBlobResponse.readableStreamBody));
 ```
 
-在 `main` 函数后添加此帮助器函数  ：
+在 `main` 函数后添加此帮助器函数：
 
 ```javascript
 // A helper function used to read a Node.js readable stream into a string
@@ -274,7 +277,7 @@ console.log("Container was deleted successfully. requestId: ", deleteContainerRe
 
 此应用创建文本字符串，并将其上传到 Blob 存储。 示例随后列出容器中的 Blob，下载 Blob 并显示下载的数据。
 
-在控制台提示符下，导航到包含blob-quickstart-v12.py 文件的目录，然后执行以下 `node` 命令来运行应用  。
+在控制台提示符下，导航到包含blob-quickstart-v12.py 文件的目录，然后执行以下 `node` 命令来运行应用。
 
 ```console
 node blob-quickstart-v12.js
@@ -301,7 +304,7 @@ Deleting container...
 Done
 ```
 
-逐步执行调试器中的代码，并在整个过程中检查 [Azure 门户](https://portal.azure.cn)。 检查是否正在创建容器。 可以在容器中打开 blob 并查看内容。
+在调试器中逐步执行代码，并在执行过程中反复检查 [Azure 门户](https://portal.azure.cn)。 检查是否正在创建容器。 可以在容器中打开 blob 并查看内容。
 
 ## <a name="next-steps"></a>后续步骤
 

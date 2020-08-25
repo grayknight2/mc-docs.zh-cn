@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: ae579f79dc2bdf7b5e3c28f57e55f75b6445bd76
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 5b877d5fce9553ac930ae80ed7b44561dc06ed78
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509230"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515634"
 ---
 # <a name="binary_or"></a>binary_or()
 

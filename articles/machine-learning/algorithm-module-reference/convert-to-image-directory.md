@@ -9,12 +9,12 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 05/26/2020
-ms.openlocfilehash: 2428638f5e5a6fc39f805b723bce0069feb70000
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: fa788629dd297c2de3a54868141a8ecead921477
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441095"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228466"
 ---
 # <a name="convert-to-image-directory"></a>转换为图像目录
 
@@ -24,11 +24,15 @@ ms.locfileid: "86441095"
 
 1.  将“转换为图像目录”模块添加到试验中。 可以在模块列表的“计算机视觉/图像数据转换”类别中找到此模块。 
 
-2.  将图像数据集作为输入进行连接。 请确保输入数据集中有图像。
+2.  [注册一个图像数据集](/machine-learning/how-to-create-register-datasets)，并将其连接到模块输入端口。 请确保输入数据集中有图像。 
     支持以下数据集格式：
 
     - 具有以下扩展名的压缩文件：“.zip”、“.tar”、“.gz”、“.bz2”。
     - 包含图像的文件夹。 强烈建议先压缩此类文件夹，然后再使用压缩文件作为数据集。
+
+    > [!WARNING]
+    > 不能使用“导入数据”模块导入图像数据集，因为“导入数据”模块的输出类型是“DataFrame 目录”，它只包含文件路径字符串。
+    
 
     > [!NOTE]
     > 如果在监督式学习中使用图像数据集，则需要标签。

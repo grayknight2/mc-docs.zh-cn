@@ -8,13 +8,13 @@ ms.reviewer: elgevork
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 06/18/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: 9535f6b2ff39ea817e25ef2ad0db7e4eb0b14625
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 7e28aea54da55adeaf1e1295f05c2647ea10c742
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509527"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515765"
 ---
 # <a name="bag_merge"></a>bag_merge()
 

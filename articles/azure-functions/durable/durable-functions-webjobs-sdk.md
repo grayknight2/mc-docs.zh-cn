@@ -2,14 +2,14 @@
 title: 如何以 WebJobs 的形式运行 Durable Functions - Azure
 description: 了解如何使用 WebJobs SDK 编写 Durable Functions 的代码，并将其配置为在 WebJobs 中运行。
 ms.topic: conceptual
-ms.date: 06/09/2020
+ms.date: 08/12/2020
 ms.author: v-junlch
-ms.openlocfilehash: f00c6e00eaa5421ea3a60ad08f99d1b8e4999351
-ms.sourcegitcommit: f1a76ee3242698123a3d77f44c860db040b48f70
+ms.openlocfilehash: 130207c787692c9342ba4a6d617081fdec32fdbf
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84563700"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222598"
 ---
 # <a name="how-to-run-durable-functions-as-webjobs"></a>如何以 WebJobs 的形式运行 Durable Functions
 
@@ -61,6 +61,13 @@ Install-Package Microsoft.Extensions.Logging -version 2.0.1
 Install-Package Microsoft.Azure.WebJobs.Extensions.DurableTask -version 1.8.3
 ```
 
+还需要日志记录提供程序。 以下命令安装 Azure Application Insights 提供程序和 `ConfigurationManager`。 使用 `ConfigurationManager` 可从应用设置中获取 Application Insights 检测密钥。
+
+```powershell
+Install-Package Microsoft.Azure.WebJobs.Logging.ApplicationInsights -version 2.2.0
+Install-Package System.Configuration.ConfigurationManager -version 4.4.1
+```
+
 以下命令安装控制台提供程序：
 
 ```powershell
@@ -82,6 +89,35 @@ config.UseDurableTask(new DurableTaskExtension
 ```
 
 有关可在 `DurableTaskExtension` 对象中设置的属性列表，请参阅 [host.json](../functions-host-json.md#durabletask)。
+
+`Main` 方法也是设置日志记录提供程序的位置。 以下示例配置控制台和 Application Insights 提供程序。
+
+```cs
+static void Main(string[] args)
+{
+    using (var loggerFactory = new LoggerFactory())
+    {
+        var config = new JobHostConfiguration();
+
+        config.DashboardConnectionString = "";
+
+        var instrumentationKey =
+            ConfigurationManager.AppSettings["APPINSIGHTS_INSTRUMENTATIONKEY"];
+
+        config.LoggerFactory = loggerFactory
+            .AddApplicationInsights(instrumentationKey, null)
+            .AddConsole();
+
+        config.UseTimers();
+        config.UseDurableTask(new DurableTaskExtension
+        {
+            HubName = "MyTaskHub",
+        });
+        var host = new JobHost(config);
+        host.RunAndBlock();
+    }
+}
+```
 
 ## <a name="functions"></a>函数
 
@@ -154,7 +190,84 @@ while (true)
 
 1. 确保存储模拟器正在运行（参阅[先决条件](#prerequisites)）。
 
+1. 若要在本地运行项目时查看 Application Insights 中的日志：
+
+    a. 创建 Application Insights 资源并为其使用“常规”应用类型。
+
+    b. 在 *App.config* 文件中保存检测密钥。
+
 1. 运行该项目。
+
+### <a name="run-in-azure"></a>在 Azure 中运行
+
+1. 创建 Web 应用和存储帐户。
+
+1. 在 Web 应用中，将存储连接字符串保存到名为 `AzureWebJobsStorage` 的应用设置中。
+
+1. 创建 Application Insights 资源并为其使用“常规”应用类型。
+
+1. 将检测密钥保存到名为 `APPINSIGHTS_INSTRUMENTATIONKEY` 的应用设置中。
+
+1. 部署为 WebJob
+
+## <a name="webjobs-sdk-3x"></a>WebJobs SDK 3.x
+
+本文介绍如何开发 WebJobs SDK 2.x 项目。 如果开发 [WebJobs SDK 3.x](../../app-service/webjobs-sdk-get-started.md) 项目，本部分有助于了解其中的差异。
+
+引入的主要更改是使用 .NET Core 而不是 .NET Framework。 若要创建 WebJobs SDK 3.x 项目，请遵照上述说明，但操作上有以下几处差别：
+
+1. 创建 .NET Core 控制台应用。 在 Visual Studio 的“新建项目”对话框中，选择“.NET Core” > “控制台应用(.NET Core)”  。 项目文件指定 `TargetFramework` 为 `netcoreapp2.x`。
+
+1. 选择以下包的 WebJobs SDK 3.x 发行版本：
+
+    * `Microsoft.Azure.WebJobs.Extensions`
+    * `Microsoft.Azure.WebJobs.Extensions.Storage`
+    * `Microsoft.Azure.WebJobs.Logging.ApplicationInsights`
+
+1. 使用 .NET Core 配置框架在 appsettings.json 文件中设置存储连接字符串和 Application Insights 检测密钥。 下面是一个示例：
+
+    ```json
+        {
+            "AzureWebJobsStorage": "<replace with storage connection string>",
+            "APPINSIGHTS_INSTRUMENTATIONKEY": "<replace with Application Insights instrumentation key>"
+        }
+    ```
+
+1. 更改 `Main` 方法代码以执行此操作。 下面是一个示例：
+
+   ```cs
+   static void Main(string[] args)
+   {
+        var hostBuilder = new HostBuilder()
+            .ConfigureWebJobs(config =>
+            {
+                config.AddAzureStorageCoreServices();
+                config.AddAzureStorage();
+                config.AddTimers();
+                config.AddDurableTask(options =>
+                {
+                    options.HubName = "MyTaskHub";
+                    options.AzureStorageConnectionStringName = "AzureWebJobsStorage";
+                });
+            })
+            .ConfigureLogging((context, logging) =>
+            {
+                logging.AddConsole();
+                logging.AddApplicationInsights(config =>
+                {
+                    config.InstrumentationKey = context.Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"];
+                });
+            })
+            .UseConsoleLifetime();
+
+        var host = hostBuilder.Build();
+
+        using (host)
+        {
+            host.Run();
+        }
+   }
+   ```
 
 ## <a name="next-steps"></a>后续步骤
 

@@ -3,16 +3,16 @@ title: 配置部署凭据
 description: 了解 Azure 应用服务中有哪些类型的部署凭据，以及如何配置和使用这些凭据。
 ms.topic: article
 origin.date: 08/14/2019
-ms.date: 06/22/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.reviewer: byvinyal
 ms.custom: seodec18
-ms.openlocfilehash: 8aa8244a97e5e857626384cda009554ec8202fb4
-ms.sourcegitcommit: d24e12d49708bbe78db450466eb4fccbc2eb5f99
+ms.openlocfilehash: 488e0930a894316f806e8c3aa9dadcedc24c1710
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85613296"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227940"
 ---
 # <a name="configure-deployment-credentials-for-azure-app-service"></a>为 Azure 应用服务配置部署凭据
 [Azure 应用服务](app-service-web-overview.md)支持两种类型的凭据，这些凭据适用于[本地 GIT 部署](deploy-local-git.md)和 [FTP/S 部署](deploy-ftp.md)。 这些凭据与 Azure 订阅凭据不同。
@@ -42,17 +42,17 @@ JSON 输出会将该密码显示为 `null`。 如果收到 `'Conflict'. Details:
 
 1. 在 [Azure 门户](https://portal.azure.cn)中，从左侧菜单中选择“应用服务” > “\<any_app>” > “部署中心” > “FTP” > “仪表板”。
 
-    ![](./media/app-service-deployment-credentials/access-no-git.png)
+    ![演示如何从 Azure 应用服务的部署中心选择 FTP 仪表板。](./media/app-service-deployment-credentials/access-no-git.png)
 
     或者，如果已配置了 Git 部署，请选择“应用程序服务” > “&lt;any_app>” > “部署中心” > “FTP/凭据”。
 
-    ![](./media/app-service-deployment-credentials/access-with-git.png)
+    ![演示如何从 Azure 应用服务的部署中心为配置的 Git 部署选择 FTP 仪表板。](./media/app-service-deployment-credentials/access-with-git.png)
 
 2. 选择“用户凭据”，配置用户名和密码，然后选择“保存凭据” 。
 
 设置部署凭据后，可以在应用的“概述”页中找到 Git 部署用户名，
 
-![](./media/app-service-deployment-credentials/deployment_credentials_overview.png)
+![演示如何在应用“概述”页上查找 Git 部署用户名。](./media/app-service-deployment-credentials/deployment_credentials_overview.png)
 
 如果配置了 Git 部署，则该页显示 **Git/部署用户名**；否则，显示 **FTP/部署用户名**。
 

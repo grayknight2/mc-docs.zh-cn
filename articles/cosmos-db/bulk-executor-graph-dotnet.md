@@ -1,20 +1,22 @@
 ---
-title: 通过 Azure Cosmos DB Gremlin API 使用图批量执行程序 .NET 库
+title: 将图批量执行程序 .NET 库与 Azure Cosmos DB Gremlin API 配合使用
 description: 了解如何使用批量执行程序库将图数据大规模导入 Azure Cosmos DB Gremlin API 容器中。
 author: rockboyfor
 ms.service: cosmos-db
 ms.subservice: cosmosdb-graph
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 05/28/2019
-ms.date: 04/27/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: 6dfc01a5afb128f80203958e029657b740562b2b
-ms.sourcegitcommit: f9c242ce5df12e1cd85471adae52530c4de4c7d7
+ms.openlocfilehash: 43fc2e380258cb1588f29801a6107a57ddce7764
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82134985"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222788"
 ---
 <!--Verify sucessfully-->
 # <a name="using-the-graph-bulk-executor-net-library-to-perform-bulk-operations-in-azure-cosmos-db-gremlin-api"></a>使用图批量执行程序 .NET 库在 Azure Cosmos DB Gremlin API 中执行批量操作
@@ -32,7 +34,7 @@ ms.locfileid: "82134985"
 2. 根据获得的记录构造 `GremlinVertex` 和 `GremlinEdge` 对象，然后将其添加到 `IEnumerable` 数据结构中。 应该在应用程序的此部分实施检测和添加关系的逻辑，以免出现数据源不是图形数据库的情况。
 3. 使用[图形 BulkImportAsync 方法](https://docs.microsoft.com/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.graph.graphbulkexecutor.bulkimportasync?view=azure-dotnet)将图形对象插入集合中。
 
-    与使用 Gremlin 客户端相比，此机制会提高数据迁移效率。 之所以会体验到这种效率提高，是因为使用 Gremlin 插入数据时，需要应用程序一次发送一个查询，该查询在创建数据之前需经历验证、评估和执行这几个阶段。 批量执行程序库会在应用程序中处理验证，并且会针对每个网络请求一次发送多个图对象。
+与使用 Gremlin 客户端相比，此机制会提高数据迁移效率。 之所以会体验到这种效率提高，是因为使用 Gremlin 插入数据时，需要应用程序一次发送一个查询，该查询在创建数据之前需经历验证、评估和执行这几个阶段。 批量执行程序库会在应用程序中处理验证，并且会针对每个网络请求一次发送多个图对象。
 
 ### <a name="creating-vertices-and-edges"></a>创建顶点和边缘
 
@@ -160,7 +162,8 @@ git clone https://github.com/Azure-Samples/azure-cosmosdb-graph-bulkexecutor-dot
 3. 通过查询图形数据库来评估结果。 如果 `ShouldCleanupOnFinish` 选项设置为 true，则会自动删除此数据库。
 
 ## <a name="next-steps"></a>后续步骤
-* 若要了解 Nuget 包的详细信息以及 Bulk Executor .Net 库的发行说明，请参阅 [Bulk Executor SDK 详细信息](sql-api-sdk-bulk-executor-dot-net.md)。 
+
+* 若要了解 NuGet 包的详细信息以及 Bulk Executor .Net 库的发行说明，请参阅 [Bulk Executor SDK 详细信息](sql-api-sdk-bulk-executor-dot-net.md)。 
 * 请查看[性能提示](/cosmos-db/bulk-executor-dot-net#performance-tips)，以便进一步优化批量执行程序的使用。
 * 请查看 [BulkExecutor.Graph 参考文章](https://docs.microsoft.com/dotnet/api/microsoft.azure.cosmosdb.bulkexecutor.graph?view=azure-dotnet)，以便更详细地了解在此命名空间中定义的类和方法。
 

@@ -3,18 +3,21 @@ author: WenJason
 ms.service: storage
 ms.topic: include
 origin.date: 10/26/2018
-ms.date: 01/14/2019
+ms.date: 08/24/2020
 ms.author: v-jay
-ms.openlocfilehash: 809fec4f44ccf34ffa90fb562cc2fb687fab1c02
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 7b1fe47d9005da4c4a23c94be56f4635390db7bb
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "63844395"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753396"
 ---
 Azure 存储中的每个 Blob 必须驻留在一个容器中。 该容器构成 Blob 名称的一部分。 例如，在这些示例 Blob URI 中， `mycontainer` 是容器的名称：
 
-https://storagesample.blob.core.chinacloudapi.cn/mycontainer/blob1.txt https://storagesample.blob.core.chinacloudapi.cn/mycontainer/photos/myphoto.jpg
+```http
+https://storagesample.blob.core.chinacloudapi.cn/mycontainer/blob1.txt
+https://storagesample.blob.core.chinacloudapi.cn/mycontainer/photos/myphoto.jpg
+```
 
 容器名称必须是有效的 DNS 名称，并符合以下命名规则：
 

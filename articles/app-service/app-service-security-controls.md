@@ -1,17 +1,17 @@
 ---
-title: 安全控件
+title: Azure 应用服务的安全控制
 description: 查找用于评估组织 Azure 应用服务的安全控制的清单。
 author: msmbaldwin
 ms.topic: conceptual
 origin.date: 09/04/2019
-ms.date: 01/13/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
-ms.openlocfilehash: 00e5c914739a4a0015d91ab2669e8c585c3a13c9
-ms.sourcegitcommit: 9b0a89269a7e422570b7bc0ca983f60d2f317d48
+ms.openlocfilehash: 4f1293bebf89e35476d61686c7ae819524a45b5c
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81675785"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227976"
 ---
 # <a name="security-controls-for-azure-app-service"></a>Azure 应用服务的安全控制
 
@@ -41,8 +41,8 @@ ms.locfileid: "81675785"
 
 | 安全控制 | Yes/No | 注释 |  文档
 |---|---|--|
-| 身份验证| 是 | 客户可以构建基于应用服务的应用程序，这些应用程序自动集成 [Azure Active Directory (Azure AD)](../active-directory/index.yml) 以及其他与 OAuth 兼容的标识提供者 对应用服务资产进行管理访问时，所有访问都是通过组合使用 Azure AD 身份验证主体和 Azure 资源管理器 RBAC 角色来控制的。 | [Azure 应用服务中的身份验证和授权](overview-authentication-authorization.md)
-| 授权| 是 | 对应用服务资产进行管理访问时，所有访问都可以通过组合使用经 Azure AD 验证的主体和 Azure 资源管理器 RBAC 角色进行控制。  | [Azure 应用服务中的身份验证和授权](overview-authentication-authorization.md)
+| 身份验证| 是 | 客户可以构建基于应用服务的应用程序，这些应用程序自动集成 [Azure Active Directory (Azure AD)](../active-directory/index.yml) 以及其他与 OAuth 兼容的标识提供者。对应用服务资产进行管理访问时，所有访问都是通过组合使用 Azure AD 身份验证主体和 Azure RBAC 来控制的。 | [Azure 应用服务中的身份验证和授权](overview-authentication-authorization.md)
+| 授权| 是 | 对应用服务资产进行管理访问时，所有访问都可以通过组合使用 Azure AD 身份验证主体和 Azure RBAC 进行控制。  | [Azure 应用服务中的身份验证和授权](overview-authentication-authorization.md)
 
 ## <a name="data-protection"></a>数据保护
 
@@ -60,6 +60,6 @@ ms.locfileid: "81675785"
 |---|---|--|
 | 配置管理支持（配置的版本控制等）| 是 | 进行管理操作时，可以将应用服务配置的状态导出为 Azure 资源管理器模板，并在一段时间内进行版本控制。 进行运行时操作时，客户可以使用应用服务的部署槽功能保留某个应用程序的多个不同的实时版本。 | 
 
-<!-- ## Next steps -->
+## <a name="next-steps"></a>后续步骤
 
-<!-- - Learn more about the [built-in security controls across Azure services](../security/fundamentals/security-controls.md). -->
+- 详细了解[跨 Azure 服务的内置安全控制](../security/fundamentals/security-controls.md)。

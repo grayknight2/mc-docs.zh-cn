@@ -8,14 +8,14 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: v-yiso
-origin.date: 02/22/2020
-ms.date: 06/29/2020
-ms.openlocfilehash: ec30cf383a2db9c50e7d5a456f53cb3d58ee0cb3
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+origin.date: 07/28/2020
+ms.date: 08/24/2020
+ms.openlocfilehash: 83c1c758b8c3990a0a3dd74068fb7a88cfc3c215
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097488"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227867"
 ---
 # <a name="export-data-module"></a>导出数据模块
 
@@ -27,8 +27,8 @@ ms.locfileid: "85097488"
 
 - Azure Blob 容器
 - Azure 文件共享
-- Azure Data Lake
-- Azure Data Lake Gen2
+- Azure Data Lake Storage Gen2
+- Azure SQL 数据库
 
 导出数据之前，首先需要在 Azure 机器学习工作区中注册数据存储。 有关详细信息，请参阅[访问 Azure 存储服务中的数据](../how-to-access-data.md)。
 
@@ -42,7 +42,10 @@ ms.locfileid: "85097488"
 
 1. 对于“数据存储”，请从下拉列表中选择现有数据存储。 还可以创建新的数据存储。 通过访问[访问 Azure 存储服务中的数据](../how-to-access-data.md)来查看方法。
 
-1. 复选框“再生成输出”决定是否在运行时执行模块以再生成输出。 
+    > [!NOTE]
+    > 不支持将某种数据类型的数据导出到指定为另一种数据类型的 SQL 数据库列。 目标表不需要先存在。
+
+1. 复选框“重新生成输出”决定是否在运行时执行模块以重新生成输出。 
 
     默认情况下，它处于未选中状态，这意味着如果以前已经以相同的参数执行了模块，系统将重用上次运行的输出以减少运行时间。 
 

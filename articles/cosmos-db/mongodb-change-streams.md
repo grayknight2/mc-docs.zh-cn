@@ -1,19 +1,22 @@
 ---
-title: Azure Cosmos DB API for MongoDB 中的更改流
-description: 了解如何使用 Azure Cosmos DB API for MongoDB 中的更改流来获取对数据所做的更改。
+title: Azure Cosmos DB's API for MongoDB 中的更改流
+description: 了解如何使用 Azure Cosmos DB's API for MongoDB 中的更改流来获取对数据所做的更改。
 author: rockboyfor
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 06/04/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: 674ace769eab6c112c88894163efad196e31c00c
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.custom: devx-track-javascript
+ms.openlocfilehash: 564b41e6d84aead4832768d223c6ba1ea9ed8617
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85321026"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222486"
 ---
 # <a name="change-streams-in-azure-cosmos-dbs-api-for-mongodb"></a>Azure Cosmos DB's API for MongoDB 中的更改流
 
@@ -62,6 +65,7 @@ while (!cursor.isExhausted()) {
     }
 }
 ```
+
 # <a name="c"></a>[C#](#tab/csharp)
 
 ```csharp
@@ -82,6 +86,52 @@ while (enumerator.MoveNext()){
 
 enumerator.Dispose();
 ```
+
+# <a name="java"></a>[Java](#tab/java)
+
+以下示例演示如何在 Java 中使用更改流功能，有关完整示例，请参阅此 [GitHub 存储库](https://github.com/Azure-Samples/azure-cosmos-db-mongodb-java-changestream/blob/master/mongostream/src/main/java/com/azure/cosmos/mongostream/App.java)。 此示例还演示如何使用 `resumeAfter` 方法来查找上次读取中的所有更改。 
+
+```java
+Bson match = Aggregates.match(Filters.in("operationType", asList("update", "replace", "insert")));
+
+// Pick the field you are most interested in
+Bson project = Aggregates.project(fields(include("_id", "ns", "documentKey", "fullDocument")));
+
+// This variable is for second example
+BsonDocument resumeToken = null;
+
+// Now time to build the pipeline
+List<Bson> pipeline = Arrays.asList(match, project);
+
+//#1 Simple example to seek changes
+
+// Create cursor with update_lookup
+MongoChangeStreamCursor<ChangeStreamDocument<org.bson.Document>> cursor = collection.watch(pipeline)
+        .fullDocument(FullDocument.UPDATE_LOOKUP).cursor();
+
+Document document = new Document("name", "doc-in-step-1-" + Math.random());
+collection.insertOne(document);
+
+while (cursor.hasNext()) {
+    // There you go, we got the change document.
+    ChangeStreamDocument<Document> csDoc = cursor.next();
+
+    // Let is pick the token which will help us resuming
+    // You can save this token in any persistent storage and retrieve it later
+    resumeToken = csDoc.getResumeToken();
+    //Printing the token
+    System.out.println(resumeToken);
+
+    //Printing the document.
+    System.out.println(csDoc.getFullDocument());
+    //This break is intentional but in real project feel free to remove it.
+    break;
+}
+
+cursor.close();
+
+```
+---
 
 ## <a name="changes-within-a-single-shard"></a>单个分片中的更改
 

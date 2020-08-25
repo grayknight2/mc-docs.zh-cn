@@ -1,19 +1,19 @@
 ---
 title: 使用 C# 为 Azure 数据资源管理器创建事件中心数据连接
 description: 本文介绍如何使用 C# 为 Azure 数据资源管理器创建事件中心数据连接。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 10/07/2019
-ms.date: 05/09/2020
-ms.openlocfilehash: 9e2a718552879a8e4b418f66f7f5fa84595fefed
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: bde796c0019e40c2892b507c7e737ec872d2e946
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417774"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515864"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-c"></a>使用 C# 为 Azure 数据资源管理器创建事件中心数据连接
 
@@ -23,11 +23,12 @@ ms.locfileid: "83417774"
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager 模板](data-connection-event-hub-resource-manager.md)
 
-Azure 数据资源管理器是一项快速且高度可缩放的数据探索服务，适用于日志和遥测数据。 Azure 数据资源管理器提供了从事件中心、IoT 中心和写入 blob 容器的 blob 引入数据（数据加载）的功能。 在本文中，你将使用 C# 为 Azure 数据资源管理器创建事件中心数据连接。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+在本文中，你将使用 C# 为 Azure 数据资源管理器创建事件中心数据连接。
 
-## <a name="prerequisites"></a>必备条件
+## <a name="prerequisites"></a>先决条件
 
-* 如果尚未安装 Visual Studio 2019，可以下载并使用**免费的** [Visual Studio 2019 Community Edition](https://www.visualstudio.com/downloads/)。 在安装 Visual Studio 的过程中，请确保启用“Azure 开发”。 
+* 如果尚未安装 Visual Studio 2019，可以下载并使用**免费的** [Visual Studio 2019 Community Edition](https://www.visualstudio.com/downloads/)。 在安装 Visual Studio 的过程中，请确保启用“Azure 开发”。
 * 如果没有 Azure 订阅，请在开始前创建一个[试用 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 * 创建[群集和数据库](create-cluster-database-csharp.md)
 * 创建[表和列映射](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
@@ -82,13 +83,13 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 | clientId | *xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx* | 可以访问租户中资源的应用程序的客户端 ID。|
 | clientSecret | *xxxxxxxxxxxxxx* | 可以访问租户中资源的应用程序的客户端密码。|
 | resourceGroupName | *testrg* | 包含群集的资源组的名称。|
-| clusterName | mykustocluster  | 群集的名称。|
-| databaseName | mykustodatabase  | 群集中目标数据库的名称。|
+| clusterName | mykustocluster** | 群集的名称。|
+| databaseName | mykustodatabase** | 群集中目标数据库的名称。|
 | dataConnectionName | *myeventhubconnect* | 所需的数据连接名称。|
 | tableName | *StormEvents* | 目标数据库中目标表的名称。|
 | mappingRuleName | *StormEvents_CSV_Mapping* | 与目标表相关的列映射的名称。|
 | dataFormat | *csv* | 消息的数据格式。|
-| eventHubResourceId | 资源 ID  | 包含要引入的数据的事件中心的资源 ID。 |
+| eventHubResourceId | 资源 ID | 包含要引入的数据的事件中心的资源 ID。 |
 | consumerGroup | *$Default* | 事件中心的使用者组。|
 | location | *中国东部 2* | 数据连接资源的位置。|
 

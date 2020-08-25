@@ -23,13 +23,17 @@
       href: tutorial-restrict-network-access-to-resources.md
     - name: 连接虚拟网络
       href: tutorial-connect-virtual-networks-portal.md
+    - name: 创建 NAT 网关
+      href: quickstart-create-nat-gateway-portal.md
+    - name: 创建并验证 NAT 网关
+      href: tutorial-create-validate-nat-gateway-portal.md
 - name: 示例
   items:
     - name: Azure CLI
       href: cli-samples.md
     - name: Azure PowerShell
       href: powershell-samples.md
-    - name: Resource Manager 模板
+    - name: 资源管理器模板
       href: template-samples.md
     - name: Azure Policy 内置策略定义
       displayName: 'samples, policies, definitions'
@@ -40,6 +44,16 @@
       href: virtual-network-disaster-recovery-guidance.md
     - name: 连接
       items:
+        - name: NAT
+          items:
+            - name: 概述
+              href: nat-overview.md
+            - name: 资源
+              href: nat-gateway-resource.md
+            - name: 指标和警报
+              href: nat-metrics.md
+            - name: 疑难解答
+              href: troubleshoot-nat.md
         - name: 路由
           href: virtual-networks-udr-overview.md
         - name: 后端连接互操作性
@@ -172,7 +186,7 @@
                   href: virtual-network-ipv4-ipv6-dual-stack-powershell.md
                 - name: Azure CLI
                   href: virtual-network-ipv4-ipv6-dual-stack-cli.md
-                - name: Resource Manager 模板
+                - name: 资源管理器模板
                   href: ipv6-configure-template-json.md
             - name: 标准公共负载均衡器
               items:
@@ -180,7 +194,7 @@
                   href: virtual-network-ipv4-ipv6-dual-stack-standard-load-balancer-powershell.md
                 - name: Azure CLI
                   href: virtual-network-ipv4-ipv6-dual-stack-standard-load-balancer-cli.md
-                - name: Resource Manager 模板
+                - name: 资源管理器模板
                   href: ipv6-configure-standard-load-balancer-template-json.md
             - name: 标准内部负载均衡器
               href: ipv6-dual-stack-standard-internal-load-balancer-powershell.md
@@ -293,7 +307,20 @@
           href: move-across-regions-publicip-portal.md
         - name: 公共 IP - PowerShell
           href: move-across-regions-publicip-powershell.md
-    - name: 故障排除
+    - name: NAT
+      items:
+        - name: 创建 NAT 网关 - PowerShell
+          href: quickstart-create-nat-gateway-powershell.md
+        - name: 创建 NAT 网关 - CLI
+          href: quickstart-create-nat-gateway-cli.md
+        - name: 创建 NAT 网关 - ARM 模板
+          displayname: Resource Manager
+          href: quickstart-create-nat-gateway-template.md
+        - name: 创建并验证 NAT 网关 - PowerShell
+          href: tutorial-create-validate-nat-gateway-powershell.md
+        - name: 创建并验证 NAT 网关 - CLI
+          href: tutorial-create-validate-nat-gateway-cli.md
+    - name: 疑难解答
       items:
         - name: 排查虚拟网络对等互连问题
           href: virtual-network-troubleshoot-peering-issues.md
@@ -355,5 +382,5 @@
       href: 'https://www.azure.cn/pricing/calculator/'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-virtual-network'
-    - name: 常见问题
+    - name: 常见问题解答
       href: virtual-networks-faq.md

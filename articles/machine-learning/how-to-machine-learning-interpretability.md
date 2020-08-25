@@ -10,12 +10,12 @@ ms.author: mesameki
 author: mesameki
 ms.reviewer: Luis.Quintanilla
 ms.date: 06/30/2020
-ms.openlocfilehash: 86723efb648eaebb49287886f5d25be67c58fadd
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: 68e66e729bf84cb051dda8a93e4898d8e90128b2
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440887"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228280"
 ---
 # <a name="model-interpretability-in-azure-machine-learning"></a>Azure 机器学习中的模型可解释性
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -44,7 +44,7 @@ ms.locfileid: "86440887"
 
 * `azureml.contrib.interpret`，可以尝试的预览版和试验性功能。
 
-将 `pip install azureml-interpret` 和 `pip install azureml-interpret-contrib` 用于常规用途，将 `pip install azureml-contrib-interpret` 用于自动化机器学习用途来获取可解释性包。
+一般使用 `pip install azureml-interpret` 和 `pip install azureml-contrib-interpret`。
 
 
 > [!IMPORTANT]

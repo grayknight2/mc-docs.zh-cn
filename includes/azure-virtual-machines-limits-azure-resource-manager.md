@@ -3,16 +3,18 @@ author: rockboyfor
 ms.service: virtual-machines
 ms.topic: include
 origin.date: 02/10/2020
-ms.date: 07/06/2020
+ms.date: 08/03/2020
+ms.testscope: no
+ms.testdate: 07/06/2020
 ms.author: v-yeche
-ms.openlocfilehash: 8806736ce2336e1950342c3bff8d8fa29617f82c
-ms.sourcegitcommit: 89118b7c897e2d731b87e25641dc0c1bf32acbde
+ms.openlocfilehash: 1fcc2e0d452a5e0c46aac083eb41e2255ce17fd7
+ms.sourcegitcommit: 692b9bad6d8e4d3a8e81c73c49c8cf921e1955e7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945767"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "88753619"
 ---
-<!--MOONCAKE: CORRECT ON https://www.azure.cn/pricing/details/virtual-machines/index.html-->
+<!--MOONCAKE: CORRECT ON https://www.azure.cn/pricing/details/virtual-machines-->
 <!--MOONCAKE: CORRECT ON /billing/billing-add-change-azure-subscription-administrator/-->
 
 | 资源 | 限制 |

@@ -7,14 +7,17 @@ ms.subservice: cosmosdb-sql
 ms.devlang: java
 ms.topic: reference
 origin.date: 05/20/2020
-ms.date: 06/22/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: f8d2a60b4178bf8647438cca46c578b2c0c5144f
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.custom: devx-track-java
+ms.openlocfilehash: 5a3add914148d8acc240f3ab784f959f7d61a732
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102033"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222411"
 ---
 <!--Verified successfully-->
 # <a name="azure-cosmos-db-java-sdk-v4-for-core-sql-api-release-notes-and-resources"></a>用于 Core (SQL) API 的 Azure Cosmos DB Java SDK v4：发行说明和资源
@@ -50,7 +53,7 @@ ms.locfileid: "85102033"
 | |  |
 |---|---|
 | **SDK 下载** | [Maven](https://mvnrepository.com/artifact/com.azure/azure-cosmos) |
-|**API 文档** | [Java API 参考文档](https://azuresdkdocs.blob.core.windows.net/$web/java/azure-cosmos/4.0.1/index.html) |
+|**API 文档** | [Java API 参考文档](https://docs.microsoft.com/java/api/overview/azure/cosmosdb/client?view=azure-java-stable) |
 |**参与 SDK** | [GitHub 上用于 Java 的 Azure SDK 中央存储库](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/cosmos) | 
 |**入门** | [快速入门：生成 Java 应用以管理 Azure Cosmos DB SQL API 数据](/cosmos-db/create-sql-api-java)   [具有快速入门代码的 GitHub 存储库](https://github.com/Azure-Samples/azure-cosmos-java-getting-started) | 
 |**基本代码示例** | [Azure Cosmos DB：SQL API 的 Java 示例](sql-api-java-sdk-samples.md)   [具有示例代码的 GitHub 存储库](https://github.com/Azure-Samples/azure-cosmos-java-sql-api-samples)|
@@ -62,7 +65,53 @@ ms.locfileid: "85102033"
 | 受支持的最小运行时|[JDK 8](https://docs.microsoft.com/java/azure/jdk/?view=azure-java-stable) | 
 | **Azure Cosmos DB 研讨会和实验室** |[Cosmos DB 研讨会主页](https://aka.ms/cosmosworkshop)
 
+<!--Correct om the **API documentation** https://docs.microsoft.com/java/api/overview/azure/cosmosdb/client?view=azure-java-stable-->
+
 ## <a name="release-history"></a>版本历史记录
+
+### <a name="440-beta1-unreleased"></a>4.4.0-beta.1（未发布）
+
+### <a name="430-2020-07-29"></a>4.3.0 (2020-07-29)
+#### <a name="new-features"></a>新功能
+* 已将 reactor-core 库版本更新为 `3.3.8.RELEASE`。 
+* 已将 reactor-netty 库版本更新为 `0.9.10.RELEASE`。 
+* 已将 netty 库版本更新为 `4.1.51.Final`。 
+* 为具有 `partitionKey` 的 `upsertItem` 添加了新的重载 API。 
+* 添加了开放式遥测跟踪支持。 
+#### <a name="key-bug-fixes"></a>关键 Bug 修复
+* 修复了在网关模式下取消请求时引发 SSLException 的问题。
+* 修复了存储过程执行中的资源限制重试策略问题。
+* 修复了 SDK 在日志级别调试模式下挂起的问题。 
+* 修复了直接模式下延迟定期出现峰值的问题。 
+* 修复了客户端初始化时间过长的问题。 
+* 修复了使用直接模式和网关模式自定义客户端时的 http 代理 bug。 
+* 修复了用户中的潜在 NPE 传递 null 选项的问题。 
+* 将 timeUnit 添加到诊断字符串中的 `requestLatency`。
+* 从诊断字符串中删除了重复的 uri 字符串。 
+* 将诊断字符串修复为正确的 JSON 格式以用于点操作。
+* 修复了导致 reactor 链在出现“未找到”异常时爆发的 `.single()` 运算符问题。 
+
+### <a name="420-2020-07-14"></a>4.2.0 (2020-07-14)
+#### <a name="new-features"></a>新功能
+* 向 `CosmosStoredProcedureRequestOptions` 添加了启用脚本日志记录的 API。
+* 将 `DirectConnectionConfig` 的默认 `idleEndpointTimeout` 更新为 1 小时，并将默认 `connectTimeout` 更新为 5 秒。
+#### <a name="key-bug-fixes"></a>关键 Bug 修复
+* 修复了 `GatewayConnectionConfig` `idleConnectionTimeout` 替代 `DirectConnectionConfig` `idleConnectionTimeout` 的问题。
+* 修复了 `CosmosQueryRequestOptions` 中的 `responseContinuationTokenLimitInKb` get 和 set API。
+* 修复了使用相同名称重新创建集合时查询和更改源中的问题。
+* 修复了引发 ClassCastException 的顶层查询的问题。
+* 修复了 order by 查询引发 NullPointerException 的问题。
+* 修复了在直接模式下处理已取消的请求导致调用 reactor `onErrorDropped` 的问题。 
+
+### <a name="410-2020-06-25"></a>4.1.0 (2020-06-25)
+#### <a name="new-features"></a>新功能
+* 添加了对 `GROUP BY` 查询的支持。
+* 在 DirectConnectionConfig 中将 maxConnectionsPerEndpoint 的默认值增加到 130。
+* 在 DirectConnectionConfig 中将 maxRequestsPerConnection 的默认值增加到 30。
+#### <a name="key-bug-fixes"></a>关键 Bug 修复
+* 修复了使用继续标记恢复时 order by 查询返回重复结果的问题。 
+* 修复了 value 查询为嵌套对象返回 null 值的问题。
+* 修复了 RntbdClientChannelPool 中请求管理器上的空指针异常问题。
 
 ### <a name="401-2020-06-10"></a>4.0.1 (2020-06-10)
 #### <a name="new-features"></a>新功能
@@ -118,6 +167,7 @@ ms.locfileid: "85102033"
 * 通过删除双序列化/反序列化来进行查询优化。 
 * 通过删除不必要的来回复制来优化响应标头。 
 * 通过删除中间字符串实例化优化了 `ByteBuffer` 序列化/反序列化。
+
 #### <a name="key-bug-fixes"></a>关键 Bug 修复
 * 修复了 ConnectionPolicy `toString()` 空指针异常。
 * 修复了在按查询的值顺序分析查询结果时的问题。 
@@ -133,5 +183,4 @@ ms.locfileid: "85102033"
 ## <a name="see-also"></a>另请参阅
 若要了解有关 Cosmos DB 的详细信息，请参阅 [Azure Cosmos DB](https://www.azure.cn/home/features/cosmos-db/) 服务页。
 
-<!-- Update_Description: new article about sql api sdk java v4 -->
-<!--NEW.date: 06/22/2020-->
+<!-- Update_Description: update meta properties, wording update, update link -->

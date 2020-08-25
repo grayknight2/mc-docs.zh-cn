@@ -3,23 +3,23 @@ title: 将应用移动到其他区域
 description: 了解如何将应用服务资源从一个区域移动到另一个区域。
 ms.topic: how-to
 origin.date: 02/27/2020
-ms.date: 03/16/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: subject-moving-resources
-ms.openlocfilehash: 47cacf8cfd0509def39bfb25af6e96d7a26d65c9
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: bf2a4c6c14a6f20aae320aad00d8bc2f208f45f1
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "80151721"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228507"
 ---
-# <a name="move-an-app-service-app-to-another-region"></a>将应用服务应用移动到其他区域
+# <a name="move-an-app-service-resource-to-another-region"></a>将应用服务资源移动到其他区域
 
 本文介绍了如何将应用服务资源移动到其他 Azure 区域。 由于各种原因，你可能需要将资源移动到其他区域。 例如，利用新的 Azure 区域，部署仅在特定区域中可用的功能或服务，满足内部策略和监管要求，或者满足容量规划要求。
 
-应用服务资源是特定于区域的，不能跨区域移动。 你必须在目标区域中创建现有应用服务资源的副本，并将你的内容移动到新应用。 如果你的源应用使用自定义域，你可以在完成后[将其迁移到目标区域中的新应用](manage-custom-dns-migrate-domain.md)。
+应用服务资源是特定于区域的，不能跨区域移动。 必须在目标区域中创建现有应用服务资源的副本，然后将内容移动到新应用。 如果你的源应用使用自定义域，你可以在完成后[将其迁移到目标区域中的新应用](manage-custom-dns-migrate-domain.md)。
 
-为了更轻松地复制应用，你可以[将个体应用服务应用克隆到](app-service-web-app-cloning.md)另一个区域中的应用服务计划，但它具有[限制](app-service-web-app-cloning.md#current-restrictions)。
+为了更轻松地复制应用，可以[将个体应用服务应用克隆](app-service-web-app-cloning.md)到另一个区域中的应用服务计划，但它具有[限制](app-service-web-app-cloning.md#current-restrictions)，特别是它不支持 Linux 应用。
 
 ## <a name="prerequisites"></a>先决条件
 
@@ -76,7 +76,7 @@ ms.locfileid: "80151721"
         "type": "Microsoft.Web/sites/hostNameBindings",
         "apiVersion": "2018-11-01",
         "name": "[concat(parameters('sites_webapp_name'), '/', parameters('sites_webapp_name'), '.chinacloudsites.cn')]",
-        "location": "West Europe",
+        "location": "China East 2",
         "dependsOn": [
             "[resourceId('Microsoft.Web/sites', parameters('sites_webapp_name'))]"
         ],
@@ -92,7 +92,7 @@ ms.locfileid: "80151721"
         "type": "Microsoft.Web/certificates",
         "apiVersion": "2018-11-01",
         "name": "[parameters('certificates_test2_cephaslin_com_name')]",
-        "location": "West Europe",
+        "location": "China East 2",
         "properties": {
             "hostNames": [
                 "[parameters('certificates_test2_cephaslin_com_name')]"

@@ -9,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 05/27/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started
-ms.openlocfilehash: 1f7c80c10607194531581aa60f6251bd547fef66
-ms.sourcegitcommit: 0130a709d934d89db5cccb3b4997b9237b357803
+ms.openlocfilehash: 29f1212ea5ff4d449cde3c4a359590a59b04e4c0
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84186755"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647642"
 ---
 # <a name="authentication-flows-and-application-scenarios"></a>身份验证流和应用程序方案
 
@@ -305,5 +305,4 @@ Microsoft 身份验证库支持多种平台：
 
 ## <a name="next-steps"></a>后续步骤
 
-* 详细了解[身份验证基础知识](authentication-scenarios.md)和 [Microsoft 标识平台中的访问令牌](access-tokens.md)。
-
+* 详细了解[身份验证基础知识](./authentication-vs-authorization.md)和 [Microsoft 标识平台中的访问令牌](access-tokens.md)。

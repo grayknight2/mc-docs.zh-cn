@@ -1,9 +1,9 @@
 ---
 title: Azure SQL 数据库：管理长期备份保留
-description: 了解如何使用 Azure 门户和 PowerShell 在 Azure 存储中存储和还原 Azure SQL 数据库的单个数据库或池化数据库的自动备份（最长可达 10 年）
+description: 了解如何使用 Azure 门户和 PowerShell 在 Azure 存储中存储和还原 Azure SQL 数据库的自动备份（最长可达 10 年）
 services: sql-database
-ms.service: sql-database
-ms.subservice: operations
+ms.service: sql-db-mi
+ms.subservice: backup-restore
 ms.custom: ''
 ms.devlang: ''
 ms.topic: conceptual
@@ -11,13 +11,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: mathoma, carlrab
 origin.date: 04/14/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: 0e9958213c0e863e312bf5d2c8a98c006fb0201b
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 26e7ff39514374816f8298f3ffa621d95f7ed226
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86228130"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223156"
 ---
 # <a name="manage-azure-sql-database-long-term-backup-retention"></a>管理 Azure SQL 数据库长期备份保留
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -77,7 +77,7 @@ ms.locfileid: "86228130"
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
 > [!IMPORTANT]
-> Azure SQL 数据库仍然支持 PowerShell Azure 资源管理器模块，但所有后续开发都针对 Az.Sql 模块。 若要了解这些 cmdlet，请参阅 [AzureRM.Sql](https://docs.microsoft.com/powershell/module/AzureRM.Sql/)。 Az 模块和 AzureRm 模块中的命令参数大体上是相同的。
+> PowerShell Azure 资源管理器模块仍受 Azure SQL 数据库的支持，但所有未来的开发都是针对 Az.Sql 模块的。 若要了解这些 cmdlet，请参阅 [AzureRM.Sql](https://docs.microsoft.com/powershell/module/AzureRM.Sql/)。 Az 模块和 AzureRm 模块中的命令参数大体上是相同的。
 
 以下各部分展示了如何使用 PowerShell 配置长期备份保留、查看 Azure 存储中的备份，以及从 Azure 存储中的备份进行还原。
 
@@ -134,12 +134,12 @@ Set-AzSqlDatabaseBackupLongTermRetentionPolicy -ServerName $serverName -Database
 
 ```powershell
 # get all LTR policies within a server
-$ltrPolicies = Get-AzSqlDatabase -ResourceGroupName Default-SQL-ChinaEast -ServerName trgrie-ltr-server | `
-    Get-AzSqlDatabaseLongTermRetentionPolicy -Current
+$ltrPolicies = Get-AzSqlDatabase -ResourceGroupName $resourceGroup -ServerName $serverName | `
+    Get-AzSqlDatabaseLongTermRetentionPolicy
 
 # get the LTR policy of a specific database
 $ltrPolicies = Get-AzSqlDatabaseBackupLongTermRetentionPolicy -ServerName $serverName -DatabaseName $dbName `
-    -ResourceGroupName $resourceGroup -Current
+    -ResourceGroupName $resourceGroup
 ```
 
 ### <a name="clear-an-ltr-policy"></a>清除 LTR 策略

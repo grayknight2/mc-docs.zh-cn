@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 11/06/2018
 ms.author: tomfitz
 ms.custom: include file
-ms.openlocfilehash: 410e658913a08c433cd22fd94bf1da6a5f3d1545
-ms.sourcegitcommit: ac70b12de243a9949bf86b81b2576e595e55b2a6
+ms.openlocfilehash: 79e2c006d650d9126b63759472ccca043ae97f6b
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87919302"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88602313"
 ---
 此功能为预览版。 若要使用它，必须安装预览扩展或模块。
 
@@ -21,7 +21,7 @@ ms.locfileid: "87919302"
 
 对于 Azure CLI，需要[事件网格扩展](/cli/azure-cli-extensions-list)。
 
-在 [CloudShell](/azure/cloud-shell/quickstart) 中：
+<!-- In [CloudShell](/azure/cloud-shell/quickstart): -->
 
 * 如果之前已安装此扩展，请使用 `az extension update -n eventgrid` 进行更新
 * 如果之前尚未安装此扩展，请使用 `az extension add -n eventgrid` 安装

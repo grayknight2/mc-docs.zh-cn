@@ -8,14 +8,14 @@ ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
 origin.date: 04/16/2020
-ms.date: 06/01/2020
+ms.date: 08/24/2020
 ms.author: v-jay
-ms.openlocfilehash: 5ceaa26b2fed1d11515eefefcea872f7fcc945a5
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: f263d14d00def72cf3ab0750d15b6cab30a25378
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199657"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753439"
 ---
 # <a name="quickstart-upload-download-and-list-blobs-with-the-azure-portal"></a>快速入门：使用 Azure 门户上传、下载和列出 Blob
 
@@ -60,9 +60,18 @@ ms.locfileid: "84199657"
 1. 导航到在前一部分上传的 Blob 的列表。
 1. 右键单击要下载的 Blob，然后选择“下载”。 
 
+    ![显示如何下载 Blob 的屏幕截图](media/storage-quickstart-blobs-portal/download-blob.png)
+
+## <a name="delete-a-block-blob"></a>删除块 Blob
+
+可以下载一个块 Blob，让其在浏览器中显示，或者将其保存到本地文件系统。 若要下载块 Blob，请执行以下步骤：
+
+1. 导航到在前一部分上传的 Blob 的列表。
+1. 选择要删除的 blob，然后选择顶部操作栏中的“删除”。
+
 ## <a name="clean-up-resources"></a>清理资源
 
-若要删除在本快速入门中创建的资源，可以删除容器。 容器中的所有 Blob 也会被删除。
+若要删除在本快速入门中创建的所有资源，你可以直接删除容器。 容器中的所有 Blob 也会被删除。
 
 若要删除容器，请执行以下操作：
 

@@ -1,20 +1,17 @@
 ---
 title: 使用共享访问签名对 Azure 事件中心访问进行身份验证
 description: 本文介绍如何使用共享访问签名对事件中心资源访问进行身份验证。
-services: event-hubs
-ms.service: event-hubs
-documentationcenter: ''
-author: spelluru
 ms.topic: conceptual
-origin.date: 11/26/2019
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 5dbd0d4333c25fbd885d09668dc11e7931ad6d05
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.custom: devx-track-javascript
+ms.openlocfilehash: c9815e6cdc7477a2f74446b39c724adb81ee192a
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199452"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715185"
 ---
 # <a name="authenticate-access-to-event-hubs-resources-using-shared-access-signatures-sas"></a>使用共享访问签名 (SAS) 对事件中心资源访问进行身份验证
 使用共享访问签名 (SAS) 可以精细控制向具有共享访问签名的客户端授予的访问权限类型。 下面是可以在 SAS 中设置的一些控制措施： 

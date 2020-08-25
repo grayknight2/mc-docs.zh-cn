@@ -1,23 +1,19 @@
 ---
 title: 针对事件中心的 Apache Kafka 开发人员指南
 description: 本文提供相关文章的链接，这些文章介绍了如何将 Kafka 应用程序与 Azure 事件中心集成。
-services: event-hubs
-author: spelluru
-manager: ''
 ms.author: v-tawe
-origin.date: 03/31/2020
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.topic: article
-ms.service: event-hubs
-ms.openlocfilehash: 5657f233846cf378251d77d7e6db8e245de5bedb
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 86f4e2e9d2eedd88daa0b65fddfab9bfa92943e7
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199911"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715199"
 ---
 # <a name="apache-kafka-developer-guide-for-azure-event-hubs"></a>针对 Azure 事件中心的 Apache Kafka 开发人员指南
-本文提供相关文章的链接，这些文章介绍了如何将 Apache Kafka 应用程序与 Azure 事件中心集成。
+本文提供相关文章的链接，这些文章介绍了如何将 Apache Kafka 应用程序与 Azure 事件中心集成。 
 
 ## <a name="overview"></a>概述
 事件中心提供 Kafka 终结点，现有的基于 Kafka 的应用程序可将该终结点用作运行你自己的 Kafka 群集的替代方案。 事件中心支持 Apache Kafka 协议 1.0 及更高版本，并且可与现有 Kafka 应用程序（包括 MirrorMaker）配合使用。 有关详细信息，请参阅[适用于 Apache Kafka 的事件中心](event-hubs-for-kafka-ecosystem-overview.md)
@@ -26,10 +22,10 @@ ms.locfileid: "84199911"
 你可以在 GitHub 和此内容集中找到各种快速入门文章，快速熟悉用于 Kafka 的事件中心。
 
 ### <a name="quickstarts-in-github"></a>GitHub 中的快速入门
-请参阅 **azure-event-hubs-for-kafka** 存储库中的以下快速入门教程：
+请参阅 **azure-event-hubs-for-kafka** 存储库中的以下快速入门教程： 
 
-| 客户端语言/框架 | 说明 |
-| ------------------------- | ----------- |
+| 客户端语言/框架 | 说明 | 
+| ------------------------- | ----------- | 
 | [.NET](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/dotnet) | <p>本快速入门介绍如何使用通过 .Net Core 2.0 以 C# 编写的示例创建者和使用者来创建和连接事件中心 Kafka 终结点。</p><p>此示例基于 [Confluent 的 Apache Kafka .NET 客户端](https://github.com/confluentinc/confluent-kafka-dotnet)，经过修改后可与用于 Kafka 的事件中心配合使用。</p> | 
 | [Java](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/java) | 本快速入门介绍如何使用以 Java 编写的示例创建者和使用者来创建和连接事件中心 Kafka 终结点。 |
 | [Node.js](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/node) | <p>本快速入门介绍如何使用以 Node 编写的示例创建者和使用者来创建和连接事件中心 Kafka 终结点。</p><p>此示例使用 [node-rdkafka](https://github.com/Blizzard/node-rdkafka) 库。 </p>| 
@@ -37,22 +33,23 @@ ms.locfileid: "84199911"
 | [Go](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/go) | <p>本快速入门介绍如何使用以 Go 编写的示例创建者和使用者来创建和连接事件中心 Kafka 终结点。</p><p>此示例基于 [Confluent 的 Apache Kafka Golang 客户端](https://github.com/confluentinc/confluent-kafka-go)，经过修改后可与用于 Kafka 的事件中心配合使用。</p>| 
 | [Sarama kafka Go](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/go-sarama-client) | 本快速入门介绍如何使用通过 [Sarama Kafka 客户端](https://github.com/Shopify/sarama)库以 Go 编写的示例创建者和使用者来创建和连接事件中心 Kafka 终结点。 |
 | [Kafka](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/kafka-cli) | 本快速入门介绍如何使用 Apache Kafka 发行版附带的 CLI 来创建和连接事件中心 Kafka 终结点。| 
-| [Kafkacat](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/kafkacat) | kafkacat 是一个非 JVM 的命令行使用者和创建者。它基于 librdkafka，因其速度快且资源占用量小而广受欢迎。 本快速入门包含一个示例配置和几个简单的示例 kafkacat 命令。 |
-
+| [Kafkacat](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/quickstart/kafkacat) | kafkacat 是一个非 JVM 的命令行使用者和创建者。它基于 librdkafka，因其速度快且资源占用量小而广受欢迎。 本快速入门包含一个示例配置和几个简单的示例 kafkacat 命令。 | 
+ 
 ### <a name="quickstarts-in-docs"></a>DOCS 中的快速入门
-请参阅此内容集中的这个快速入门：[使用 Kafka 协议通过事件中心进行数据流式传输](event-hubs-quickstart-kafka-enabled-event-hubs.md)，其中提供的分步说明介绍了如何将数据流式传输到事件中心。 你将了解如何只需更改应用程序配置，即可使用生产者和使用者与事件中心通信。
+请参阅此内容集中的这个快速入门：[使用 Kafka 协议通过事件中心进行数据流式传输](event-hubs-quickstart-kafka-enabled-event-hubs.md)，其中提供的分步说明介绍了如何将数据流式传输到事件中心。 你将了解如何只需更改应用程序配置，即可使用生产者和使用者与事件中心通信。 
 
-## <a name="tutorials"></a>教程
+
+## <a name="tutorials"></a>教程 
 
 ### <a name="tutorials-in-github"></a>GitHub 中的教程
 请参阅 GitHub 中的以下教程：
 
-| 教程 | 说明 |
-| ------------------------- | ----------- |
-| [Akka](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/akka/java) | 本教程演示如何在不更改协议客户端或运行自己的群集的情况下，将 Akka Streams 连接到已启用 Kafka 的事件中心。 有两个单独的使用 **Java** 和 **Scala** 编程语言的教程。 |
-| [“连接”](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/connect) | 本文档将详细介绍如何将 Kafka Connect 与 Azure 事件中心集成，以及如何部署基本的 FileStreamSource 和 FileStreamSink 连接器。 虽然这些连接器不是用于生产的，但它们可以用于演示端到端 Kafka Connect 方案，让 Azure 事件中心冒充 Kafka 中转站。|
-| [Filebeat](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/filebeat) | 本文档详述如何通过 Filebeat 的 Kafka 输出来集成 Filebeat 和事件中心。 |
-| [Flink](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/flink) | 本教程将演示如何在不更改协议客户端或运行自己的群集的情况下，将 Apache Flink 连接到已启用 Kafka 的事件中心。 |
+| 教程 | 说明 | 
+| ------------------------- | ----------- | 
+| [Akka](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/akka/java) | 本教程演示如何在不更改协议客户端或运行自己的群集的情况下，将 Akka Streams 连接到已启用 Kafka 的事件中心。 有两个单独的使用 **Java** 和 **Scala** 编程语言的教程。 | 
+| [“连接”](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/connect) | 本文档将详细介绍如何将 Kafka Connect 与 Azure 事件中心集成，以及如何部署基本的 FileStreamSource 和 FileStreamSink 连接器。 虽然这些连接器不是用于生产的，但它们可以用于演示端到端 Kafka Connect 方案，让 Azure 事件中心冒充 Kafka 中转站。| 
+| [Filebeat](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/filebeat) | 本文档详述如何通过 Filebeat 的 Kafka 输出来集成 Filebeat 和事件中心。 | 
+| [Flink](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/flink) | 本教程将演示如何在不更改协议客户端或运行自己的群集的情况下，将 Apache Flink 连接到已启用 Kafka 的事件中心。 | 
 | [FluentD](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/fluentd) | 本文档详述如何使用 Fluentd 的 `out_kafka` 输出插件来集成 Fluentd 和事件中心。 |
 | [互操作](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/interop) | 本教程介绍如何在使用不同协议的使用者与创建者之间交换事件。 |
 | [Logstash](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/logstash) | 本教程详述如何将 Logstash 与使用 Logstash Kafka 输入/输出插件且支持 Kafka 的事件中心集成。 | 
@@ -85,3 +82,6 @@ ms.locfileid: "84199911"
 - [针对事件中心的 Apache Kafka 故障排除指南](apache-kafka-troubleshooting-guide.md)
 - [常见问题解答 - 用于 Apache Kafka 的事件中心](apache-kafka-frequently-asked-questions.md)
 - [针对事件中心的 Apache Kafka 迁移指南](apache-kafka-migration-guide.md)
+
+
+

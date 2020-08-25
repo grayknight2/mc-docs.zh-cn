@@ -1,19 +1,19 @@
 ---
 title: 通过 Python 以端到端方式将 blob 引入到 Azure 数据资源管理器中
 description: 本文介绍如何通过使用 Python 的端到端示例，将 blob 引入 Azure 数据资源管理器中。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 02/03/2020
-ms.date: 05/09/2020
-ms.openlocfilehash: 078a04fca215ea4a165cfd727522cf5d3f3ab285
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/13/2020
+ms.openlocfilehash: 6b14dec9ab428fcc17b85ae6528b419b0da39b68
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417636"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515824"
 ---
 # <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-python"></a>通过 Python 以端到端方式将 blob 引入到 Azure 数据资源管理器中
 
@@ -42,12 +42,6 @@ pip install azure-mgmt-eventgrid
 pip install azure-kusto-data
 pip install azure-storage-blob
 ```
-
-> [!NOTE]
-> 请将终结点从  
-> `CLOUD_LOGIN_URL = "https://login.microsoftonline.com/"` 到 `CLOUD_LOGIN_URL = "https://login.partner.microsoftonline.cn"`  
-> （在下载的库文件 `<YourPythonInstallPath>\Lib\site-packages\azure\kusto\data\security.py` 中），使其可在 Azure 中国内运行。
-
 [!INCLUDE [data-explorer-authentication](includes/data-explorer-authentication.md)]
 
 [!INCLUDE [data-explorer-e2e-event-grid-resource-template](includes/data-explorer-e2e-event-grid-resource-template.md)]

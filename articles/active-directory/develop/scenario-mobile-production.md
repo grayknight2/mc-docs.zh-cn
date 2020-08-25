@@ -3,25 +3,22 @@ title: 准备移动应用 - 为生产调用 Web API | Azure
 titleSuffix: Microsoft identity platform
 description: 了解如何构建用于调用 Web API 的移动应用。 （准备用于生产的应用。）
 services: active-directory
-documentationcenter: dev-center-name
 author: jmprieur
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.devlang: na
 ms.topic: conceptual
-ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 02/25/2020
+ms.date: 08/19/2020
 ms.author: v-junlch
-ms.reviwer: jmprieur
+ms.reviewer: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 6283cb14a84f9e35fc6da83547ae361e8774b181
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 17b2ae222acb81c12b48aea54aa8a6d9b11e205c
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77653158"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647724"
 ---
 # <a name="prepare-mobile-apps-for-production"></a>准备用于生产的移动应用
 
@@ -39,7 +36,7 @@ ms.locfileid: "77653158"
 
 ## <a name="mitigate-and-investigate-issues"></a>缓解和调查问题
 
-若要更好地诊断应用中的问题，请收集数据。 有关可以收集的数据类型的信息，请参阅 [MSAL 应用程序中的日志记录](/active-directory/develop/msal-logging)。
+若要更好地诊断应用中的问题，请收集数据。 有关可以收集的数据类型的信息，请参阅 [MSAL 应用程序中的日志记录](./msal-logging.md)。
 
 一些数据收集建议如下：
 
@@ -53,4 +50,3 @@ ms.locfileid: "77653158"
 
 若要尝试其他示例，请参阅[桌面和移动公共客户端应用](sample-v2-code.md#desktop-and-mobile-public-client-apps)。
 
-<!-- Update_Description: wording update -->

@@ -2,23 +2,25 @@
 title: Azure Cosmos DB 的定价模型
 description: 本文介绍 Azure Cosmos DB 的定价模型，以及该模型如何简化成本管理和成本计划。
 author: rockboyfor
-ms.author: v-yeche
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 08/01/2019
-ms.date: 02/10/2020
-ms.openlocfilehash: ffa6e201c9b00c82af633f5e70f74d9dd4d120e6
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+origin.date: 07/14/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
+ms.author: v-yeche
+ms.openlocfilehash: ed51fcbeb646a571dd362cf9a3043c75915dfbda
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "76980525"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223092"
 ---
-# <a name="pricing-model-in-azure-cosmos-db"></a>Azure Cosmos DB 中的定价模型 
+# <a name="pricing-model-in-azure-cosmos-db"></a>Azure Cosmos DB 中的定价模型
 
 Azure Cosmos DB 的定价模型可简化成本管理和计划。 使用 Azure Cosmos DB 时，需要为预配的吞吐量和消耗的存储支付费用。
 
-* **预配的吞吐量**：预配的吞吐量（也称为预留吞吐量）可保证提供任何规模的高性能。 指定所需的吞吐量 (RU/s)，Azure Cosmos DB 提供所需资源来保证配置的吞吐量。 按指定时间内最大的预配吞吐量以小时来收费。
+* **预配的吞吐量**：[预配的吞吐量](how-to-choose-offer.md)（也称为预留吞吐量）保证在任何规模都具有高性能。 指定所需的吞吐量 (RU/s)，Azure Cosmos DB 提供所需资源来保证配置的吞吐量。 按指定时间内最大的预配吞吐量以小时来收费。 可以手动预配吞吐量或使用[自动缩放](provision-throughput-autoscale.md)进行。
 
    > [!NOTE]
    > 由于预配的吞吐量模型会将资源提供给容器或数据库，因此即使不运行任何工作负载，也要为预配的吞吐量付费。
@@ -29,24 +31,24 @@ Azure Cosmos DB 的定价模型可简化成本管理和计划。 使用 Azure Co
 
 有关详细信息，请参阅 [Azure Cosmos DB 定价页](https://www.azure.cn/pricing/details/cosmos-db/)和[了解 Azure Cosmos DB 帐单](understand-your-bill.md)。
 
-<!--MOONCAKE CUSTOMIZE: 6 美元 to 61.01 人民币 on 100RU/s-->
+<!--MOONCAKE CUSTOMIZE: 6 美元 to 37.95 人民币 on 100RU/s-->
 
-Azure Cosmos DB 中的定价模型在所有 API 中都是一致的。 有关详细信息，请参阅 [Azure Cosmos DB 定价模型如何对客户而言更具经济效益](total-cost-ownership.md)。 数据库或容器需要最小吞吐量来确保 SLA，可以按每 100 RU/秒 37.94 元的价格增加或减少预配的吞吐量。
+Azure Cosmos DB 中的定价模型在所有 API 中都是一致的。 有关详细信息，请参阅 [Azure Cosmos DB 定价模型如何对客户而言更具经济效益](total-cost-ownership.md)。 数据库或容器具有最小吞吐量要求来确保 SLA，对于每个 100 RU/s 可以增加或减少预配的吞吐量。
 
-目前，基于数据库和容器的吞吐量的最低价格是 151.76 元/月（请参阅 [Azure Cosmos DB 定价页](https://www.azure.cn/pricing/details/cosmos-db/)，了解最新信息）。 如果工作负荷使用多个容器，那么可以通过使用数据库级别的吞吐量来优化成本，因为数据库级别的吞吐量使得数据库中的任意数量的容器可以在容器之间共享吞吐量。 下表总结了预配的吞吐量和不同实体的成本：
+当前，基于数据库和容器的吞吐量的最低价格均为 151.78 元/月左右。 定价取决于所使用的区域，有关最新定价信息，请参阅 [Azure Cosmos DB 定价页](https://www.azure.cn/pricing/details/cosmos-db/)。 如果工作负荷使用多个容器，那么可以通过使用数据库级别的吞吐量来优化成本，因为数据库级别的吞吐量使得数据库中的任意数量的容器可以在容器之间共享吞吐量。 下表总结了预配的吞吐量和不同实体的成本：
 
-|**实体** | **最小吞吐量和成本** |**规模增量和成本** |**预配范围** |
+|**实体** | **最小吞吐量** |**缩放增量** |**预配范围** |
 |---------|---------|---------|-------|
-|数据库    | 400 RU/秒（151.76 元/月）    | 100 RU/秒（37.94 元/月）   |吞吐量预留给数据库，并由数据库中的容器共享 |
-|容器     | 400 RU/秒（151.76 元/月）    | 100 RU/秒（37.94 元/月）  |吞吐量预留给特定容器 |
+|数据库    | 400 RU/s    | 100 RU/s   |吞吐量预留给数据库，并由数据库中的容器共享 |
+|容器     | 400 RU/s   | 100 RU/s  |吞吐量预留给特定容器 |
 
-如上表所示，Azure Cosmos DB 的最低吞吐量起步价为 151.76 元/月。 如果你从最低吞吐量开始，并随着时间的推移逐步增加吞吐量以支持生产工作负荷，则成本将以每月 37.94 元的增量平稳增长。 Azure Cosmos DB 的定价模型是弹性的，按比例增加或减少时，价格会平稳地上升或下降。
+如上表所示，Azure Cosmos DB 的最低吞吐量起步价约为 151.78 元/月。 如果你从最低吞吐量开始，并随着时间的推移逐步增加吞吐量以支持生产工作负荷，则成本将以每月约 37.94 元的增量平稳增长。 定价取决于所使用的区域，有关最新定价信息，请参阅 [Azure Cosmos DB 定价页](https://www.azure.cn/pricing/details/cosmos-db/)。 Azure Cosmos DB 的定价模型是弹性的，按比例增加或减少时，价格会平稳地上升或下降。
 
-<!--MOONCAKE CUSTOMIZE: 24 美元/月 to 151.76 人民币/月 on 400RU/s-->
+<!--MOONCAKE CUSTOMIZE: 24 美元/月 to 151.78 人民币/月 on 400RU/s-->
 
 ## <a name="try-azure-cosmos-db-for-free"></a>免费试用 Azure Cosmos DB 
 
-Azure Cosmos DB 免费为开发人员提供多个选项。 这些选项包括：
+Azure Cosmos DB 免费为开发人员提供众多选项。 这些选项包括：
 
 <!--MOONCAKE CUSTOMIZE: Azure trial account-->
 

@@ -5,18 +5,18 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.topic: how-to
 origin.date: 06/19/2020
-ms.date: 08/03/2020
+ms.date: 08/17/2020
 ms.testscope: no
 ms.testdate: ''
 author: rockboyfor
 ms.author: v-yeche
 ms.custom: seodec18
-ms.openlocfilehash: aba0490534887dfb96b1c1121e3933cb3efcbf4b
-ms.sourcegitcommit: 692b9bad6d8e4d3a8e81c73c49c8cf921e1955e7
+ms.openlocfilehash: e8a89f447230fe4cadec4f67e074c8fe5852d02b
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87426524"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223443"
 ---
 # <a name="azure-table-storage-table-design-guide-scalable-and-performant-tables"></a>Azure 表存储表设计指南：可缩放的高性能表
 
@@ -315,7 +315,7 @@ EGT 还引入了一个在设计时需要评估的潜在权衡。 使用更多分
 
 请考虑这样一个示例：一家具有数万个部门和员工实体的大型跨国公司。 每个部门有许多员工，而每个员工都与一个特定的部门相关联。 一种方法是存储不同的部门和员工实体，如下所示：  
 
-![显示部门实体和员工实体的插图][1]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE01.png" alt-text="显示部门实体和员工实体的插图":::
 
 此示例展示了类型之间基于 `PartitionKey` 值的隐式一对多关系。 每个部门可以有许多员工。  
 
@@ -323,7 +323,7 @@ EGT 还引入了一个在设计时需要评估的潜在权衡。 使用更多分
 
 另一种方法是使数据反规范化，并只存储具有反规范化部门数据的员工实体，如以下示例所示。 在此特定方案中，如果要求能够更改部门经理的详细信息，则此反规范化方法可能不是最佳方法。 为此，需要更新部门中的每个员工。  
 
-![员工实体的插图][2]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE02.png" alt-text="员工实体的插图":::
 
 有关详细信息，请参阅本指南后面的 [反规范化模式](#denormalization-pattern) 。  
 
@@ -400,18 +400,18 @@ EGT 还引入了一个在设计时需要评估的潜在权衡。 使用更多分
 ### <a name="inheritance-relationships"></a>继承关系
 如果客户端应用程序使用一组构成继承关系的的类来表示业务实体，则可以轻松地在表存储中持久保存这些实体。 例如，可能在客户端应用程序中定义了以下一组类，其中 `Person` 是一个抽象类。
 
-![继承关系示意图][3]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE03.png" alt-text="继承关系示意图":::
 
 可以使用单个 `Person` 表在表存储中持久保存两个具体类的实例。 使用如下所示的实体：  
 
-![显示客户实体和员工实体的插图][4]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE04.png" alt-text="显示客户实体和员工实体的插图":::
 
 有关在客户端代码中处理同一个表中的多个实体类型的详细信息，请参阅本指南稍后的[处理异类实体类型](#work-with-heterogeneous-entity-types)。 此部分提供了如何在客户端代码中识别实体类型的示例。  
 
 ## <a name="table-design-patterns"></a>表设计模式
 在前面部分，你已了解如何优化表设计，包括如何使用查询检索实体数据，以及如何插入、更新和删除实体数据。 本部分介绍适用于表存储的一些模式。 此外，还将了解如何实际解决先前在本指南中提出的一些问题和权衡。 下图汇总了不同模式之间的关系：  
 
-![表设计模式示意图][5]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE05.png" alt-text="表设计模式示意图":::
 
 该模式图突出显示了本指南中介绍的模式（蓝色）和反模式（橙色）之间的某些关系。 当然，还有许多其他值得考虑的模式。 例如，一种重要的表存储方案是使用[命令查询职责分离](https://msdn.microsoft.com/library/azure/jj554200.aspx)模式中的[具体化视图模式](https://msdn.microsoft.com/library/azure/dn589782.aspx)。  
 
@@ -421,14 +421,14 @@ EGT 还引入了一个在设计时需要评估的潜在权衡。 使用更多分
 #### <a name="context-and-problem"></a>上下文和问题
 表存储使用 `PartitionKey` 和 `RowKey` 值自动编制实体的索引。 这使客户端应用程序可以使用这些值高效地检索实体。 例如，使用下面的表结构时，客户端应用程序可使用点查询，通过部门名称和员工 ID（`PartitionKey` 和 `RowKey` 值）检索单个员工实体。 客户端还可以在每个部门内检索按员工 ID 排序的实体。
 
-![员工实体的插图][6]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE06.png" alt-text="员工实体的插图":::
 
 如果还要基于另一个属性（例如，电子邮件地址）的值查找员工实体，则必须使用效率较低的分区扫描来查找匹配项。 这是因为表存储不提供辅助索引。 此外，还无法选择请求按 `RowKey` 顺序以外顺序排序的员工列表。  
 
 #### <a name="solution"></a>解决方案
 若要解决缺少辅助索引的问题，可以存储每个实体的多个副本，其中每个副本使用不同 `RowKey` 值。 如果存储采用以下结构的实体，则可以有效地基于邮件地址或员工 ID 检索员工实体。 通过 `RowKey` 的前缀值 `empid_` 和 `email_`，可以使用一定范围的邮件地址或员工 ID 查询单个员工或某范围内的员工。  
 
-![显示具有不同 RowKey 值的员工实体的插图][7]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE07.png" alt-text="显示具有不同 RowKey 值的员工实体的插图":::
 
 以下两个筛选条件（一个按员工 ID 查找，一个按电子邮件地址查找）都指定点查询：  
 
@@ -452,7 +452,7 @@ EGT 还引入了一个在设计时需要评估的潜在权衡。 使用更多分
 * 在 `RowKey` 中填充数字值（例如员工 ID 000223），实现正确排序并根据上下限进行筛选。  
 * 不一定需要重复实体的所有属性。 例如，如果使用 `RowKey` 中的电子邮件地址查找实体的查询始终不需要员工的年龄，则这些实体可具有以下结构：
 
-    ![员工实体的插图][8]
+    :::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE08.png" alt-text="员工实体的插图":::
 
 * 通常，最好存储重复数据并确保可以使用单个查询检索所有所需数据，而不是使用一个查询来找到实体，使用另一个查询来查找所需数据。  
 
@@ -479,7 +479,7 @@ EGT 还引入了一个在设计时需要评估的潜在权衡。 使用更多分
 #### <a name="context-and-problem"></a>上下文和问题
 表存储使用 `PartitionKey` 和 `RowKey` 值自动编制实体的索引。 这使客户端应用程序可以使用这些值高效地检索实体。 例如，使用下面的表结构时，客户端应用程序可使用点查询，通过部门名称和员工 ID（`PartitionKey` 和 `RowKey` 值）检索单个员工实体。 客户端还可以在每个部门内检索按员工 ID 排序的实体。  
 
-![员工实体的插图][9]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE09.png" alt-text="员工实体图":::[9]
 
 如果还要能够基于另一个属性（例如，电子邮件地址）的值查找员工实体，则必须使用效率较低的分区扫描来查找匹配项。 这是因为表存储不提供辅助索引。 此外，还无法选择请求按 `RowKey` 顺序以外顺序排序的员工列表。  
 
@@ -488,7 +488,7 @@ EGT 还引入了一个在设计时需要评估的潜在权衡。 使用更多分
 #### <a name="solution"></a>解决方案
 若要解决缺少辅助索引的问题，可以存储每个实体的多个副本，其中每个副本使用不同的 `PartitionKey` 和 `RowKey` 值。 如果存储采用以下结构的实体，则可以有效地基于邮件地址或员工 ID 检索员工实体。 通过 `PartitionKey` 的前缀值 `empid_` 和 `email_`，可以识别要用于查询的索引。  
 
-![显示具有主索引的员工实体和具有辅助索引的员工实体的插图][10]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE10.png" alt-text="显示具有主索引的员工实体和具有辅助索引的员工实体的插图":::
 
 以下两个筛选条件（一个按员工 ID 查找，一个按电子邮件地址查找）都指定点查询：  
 
@@ -511,7 +511,8 @@ EGT 还引入了一个在设计时需要评估的潜在权衡。 使用更多分
 * 在 `RowKey` 中填充数字值（例如员工 ID 000223），实现正确排序并根据上下限进行筛选。  
 * 不一定需要重复实体的所有属性。 例如，如果使用 `RowKey` 中的电子邮件地址查找实体的查询始终不需要员工的年龄，则这些实体可具有以下结构：
 
-  ![显示具有辅助索引的员工实体的插图][11]
+    :::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE11.png" alt-text="显示具有辅助索引的员工实体的插图":::
+
 * 通常，最好存储重复数据并确保可以使用单个查询检索所有所需数据，而不是使用一个查询通过辅助索引找到实体，使用另一个查询通过主索引查找所需数据。  
 
 #### <a name="when-to-use-this-pattern"></a>何时使用此模式
@@ -550,7 +551,7 @@ EGT 在多个共享同一分区键的实体之间启用原子事务。 由于性
 
 但不能使用 EGT 执行这两项操作。 若要避免故障导致实体同时出现在这两个表中或未出现在任一表中的风险，存档操作必须确保最终一致性。 下面的序列图概述了此操作中的步骤。  
 
-![最终一致性的解决方案图示][12]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE12.png" alt-text="最终一致性的解决方案图示":::
 
 客户端通过在 Azure 队列中放置一条消息来启动存档操作（在此示例中要将员工 #456 存档）。 辅助角色在队列中轮询新消息；当它找到一个新消息时，会读取该消息，并在队列上保留一个隐藏的副本。 接下来，辅助角色从 **Current** 表中获取实体的副本，将该副本插入 **Archive** 表中，并删除 **Current** 表中的原始实体。 最后，如果在前面的步骤中没有出现错误，辅助角色将从队列中删除隐藏的消息。  
 
@@ -590,7 +591,7 @@ EGT 在多个共享同一分区键的实体之间启用原子事务。 由于性
 #### <a name="context-and-problem"></a>上下文和问题
 表存储使用 `PartitionKey` 和 `RowKey` 值自动编制实体的索引。 这使客户端应用程序可以使用点查询高效地检索实体。 例如，使用下面的表结构时，客户端应用程序可以高效地使用部门名称和员工 ID（`PartitionKey` 和 `RowKey`）检索单个员工实体。  
 
-![员工实体的插图][13]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE13.png" alt-text="员工实体的插图":::
 
 如果还要能够根据另一个非唯一的属性（如姓氏）的值检索员工实体的列表，则必须使用效率较低的分区扫描。 这种扫描将查找匹配项，而不是使用索引来直接查找。 这是因为表存储不提供辅助索引。  
 
@@ -609,7 +610,7 @@ EGT 在多个共享同一分区键的实体之间启用原子事务。 由于性
 
 使用存储以下数据的索引实体：  
 
-![显示带有包含相同姓氏的员工 ID 列表的字符串的员工实体的插图][14]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE14.png" alt-text="显示带有包含相同姓氏的员工 ID 列表的字符串的员工实体的插图":::
 
 `EmployeeIDs` 属性包含一个员工 ID 列表，其中员工的姓氏存储在 `RowKey` 中。  
 
@@ -631,7 +632,7 @@ EGT 在多个共享同一分区键的实体之间启用原子事务。 由于性
 
 对于此选项，请使用存储以下数据的索引实体：  
 
-![显示带有包含相同姓氏的员工 ID 列表的字符串的员工实体的插图][15]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE15.png" alt-text="显示带有包含相同姓氏的员工 ID 列表的字符串的员工实体的插图":::
 
 `EmployeeIDs` 属性包含一个员工 ID 列表，其中员工的姓氏存储在 `RowKey` 和 `PartitionKey` 中。  
 
@@ -663,12 +664,12 @@ EGT 在多个共享同一分区键的实体之间启用原子事务。 由于性
 #### <a name="context-and-problem"></a>上下文和问题
 在关系数据库中，通常会规范化数据以消除从多个表中检索数据的查询产生的重复项。 如果规范化 Azure 表中的数据，则必须从客户端到服务器进行多次往返才能检索相关数据。 例如，使用下面的表结构需要两次往返，才能检索某个部门的详细信息。 一次往返用于提取包括经理 ID 的部门实体，另一次往返提取员工实体中的经理详细信息。  
 
-![部门实体和员工实体的插图][16]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE16.png" alt-text="部门实体和员工实体的插图":::
 
 #### <a name="solution"></a>解决方案
 不是将数据存储在两个不同的实体中，而是对数据进行反规范化，并在部门实体中保留经理详细信息的副本。 例如：  
 
-![已反规范化且已合并的部门实体的插图][17]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE17.png" alt-text="已反规范化且已合并的部门实体的插图":::
 
 通过使用这些属性存储部门实体，现在可以使用点查询检索有关某个部门的所有所需详细信息。  
 
@@ -696,18 +697,18 @@ EGT 在多个共享同一分区键的实体之间启用原子事务。 由于性
 
 假设你要使用以下结构在表存储中存储员工实体：  
 
-![员工实体的插图][18]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE18.png" alt-text="员工实体的插图":::
 
 还需要存储有关员工组织工作的每年的评价和绩效的历史数据，并且需要能够按年份访问此信息。 一种选择是创建另一个表，该表存储具有以下结构的实体：  
 
-![员工评价实体的插图][19]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE19.png" alt-text="员工评价实体的插图":::
 
 使用此方法时，你可能会决定在新实体中重复一些信息（如名字和姓氏），以便可以使用单个请求检索数据。 但是，无法保持强一致性，因为无法使用 EGT 以原子方式更新这两个实体。  
 
 #### <a name="solution"></a>解决方案
 在原始表中使用具有以下结构的实体存储新的实体类型：  
 
-![具有复合键的员工实体的插图][20]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE20.png" alt-text="具有复合键的员工实体的插图":::
 
 请注意，`RowKey` 现在是复合键，由员工 ID 和评价数据的年份组成。 使用它只需针对单个实体发出单个请求，即可检索员工的绩效和评价数据。  
 
@@ -779,7 +780,7 @@ $filter=(PartitionKey eq 'Sales') and (RowKey ge 'empid_000123') and (RowKey lt 
 
 可以使用 `RowKey` 中登录请求的日期和时间：  
 
-![登录尝试实体的插图][21]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE21.png" alt-text="登录尝试实体的插图":::
 
 此方法可避免产生分区热点，因为应用程序可以在一个单独的分区中插入和删除每个用户的登录实体。 但是，如果有大量实体，此方法可能成本高昂且非常耗时。 首先需要执行表扫描以确定所有要删除的实体，然后必须删除每个旧实体。 可以通过在 EGT 中成批处理多个删除请求来减少到服务器的往返次数。  
 
@@ -809,14 +810,14 @@ $filter=(PartitionKey eq 'Sales') and (RowKey ge 'empid_000123') and (RowKey lt 
 #### <a name="context-and-problem"></a>上下文和问题
 一个常见方案用于要存储一系列数据的应用程序，该应用程序通常需要一次检索所有这些数据。 例如，用户的应用程序可能会记录每个员工每小时发送的 IM 消息数，并使用此信息来绘制每个用户在过去 24 小时内发送的消息数。 一个设计可以是为每个员工存储 24 个实体：  
 
-![消息统计实体的插图][22]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE22.png" alt-text="消息统计实体的插图":::
 
 利用此设计，在应用程序需要更新消息计数值时，可以方便地找到并更新要为每个员工更新的实体。 但是，为了检索信息以绘制过去 24 小时的活动图，必须检索 24 个实体。  
 
 #### <a name="solution"></a>解决方案
 使用以下设计，其中使用单独的属性来存储每小时的消息计数：  
 
-![显示具有单独属性的消息统计实体的插图][23]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE23.png" alt-text="显示具有单独属性的消息统计实体的插图":::
 
 利用此设计，可以使用合并操作来更新某个员工在特定小时内的消息计数。 现在，可以使用对单个实体的请求检索绘制图表所需的所有信息。  
 
@@ -845,7 +846,7 @@ $filter=(PartitionKey eq 'Sales') and (RowKey ge 'empid_000123') and (RowKey lt 
 #### <a name="solution"></a>解决方案
 使用表存储，可以存储多个实体来表示具有多于 252 个属性的单个大型业务对象。 例如，如果要存储每个员工在过去 365 天内发送的的 IM 消息计数，可以使用以下设计（该设计使用两个具有不同架构的实体）：  
 
-![显示具有 Rowkey 01 的消息统计实体和具有 Rowkey 02 的消息统计实体的插图][24]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE24.png" alt-text="显示具有 Rowkey 01 的消息统计实体和具有 Rowkey 02 的消息统计实体的插图":::
 
 如果需要进行的更改需要更新这两个实体以使它们保持彼此同步，则可以使用 EGT。 否则，可以使用单个合并操作来更新特定天的消息计数。 若要检索单个员工的所有数据，必须检索这两个实体。 这可以通过同时使用 `PartitionKey` 和 `RowKey` 值的两个有效请求来实现。  
 
@@ -872,7 +873,7 @@ $filter=(PartitionKey eq 'Sales') and (RowKey ge 'empid_000123') and (RowKey lt 
 #### <a name="solution"></a>解决方案
 如果由于一个或多个属性包含大量数据而导致实体的大小超过 1 MB，可以将数据存储在 Blob 存储中，并在实体的属性中存储 Blob 的地址。 例如，用户可以在 Blob 存储中存储员工的照片，并在员工实体的 `Photo` 属性中存储指向照片的链接：  
 
-![显示具有用于指向 Blob 存储的照片的字符串的员工实体的插图][25]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE25.png" alt-text="显示具有用于指向 Blob 存储的照片的字符串的员工实体的插图":::
 
 #### <a name="issues-and-considerations"></a>问题和注意事项
 在决定如何实现此模式时，请考虑以下几点：  
@@ -897,12 +898,12 @@ $filter=(PartitionKey eq 'Sales') and (RowKey ge 'empid_000123') and (RowKey lt 
 #### <a name="context-and-problem"></a>上下文和问题
 将实体前置或后置于存储实体通常会导致应用程序将新实体添加到分区序列中的第一个分区或最后一个分区。 在这种情况下，对于任何指定时间，所有插入都发生在同一个分区中，从而产生热点。 这会导致表存储无法对多个节点中的插入操作进行负载均衡，从而可能导致应用程序达到分区的可伸缩性目标。 例如，假设某个应用程序记录员工对网络和资源的访问。 如果事务量达到单个分区的可伸缩性目标，则如下所示的实体结构可能会导致当前小时的分区成为热点。  
 
-![员工实体的插图][26]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE26.png" alt-text="员工实体的插图":::
 
 #### <a name="solution"></a>解决方案
 以下替代实体结构在应用程序记录事件时可避免在任何特定分区上产生热点：  
 
-![显示带有复合了年、月、日、小时和事件 ID 的 RowKey 的员工实体的插图][27]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE27.png" alt-text="显示带有复合了年、月、日、小时和事件 ID 的 RowKey 的员工实体的插图":::
 
 请注意，在此示例中，`PartitionKey` 和 `RowKey` 都是复合键。 `PartitionKey` 使用部门和员工 ID 将日志记录分布到多个分区。  
 
@@ -928,13 +929,13 @@ $filter=(PartitionKey eq 'Sales') and (RowKey ge 'empid_000123') and (RowKey lt 
 #### <a name="context-and-problem"></a>上下文和问题
 日志数据的一个常见用例是检索针对特定日期/时间范围选择的日志条目。 例如，你想要查找应用程序在特定日期的 15:04 和 15:06 之间记录的所有错误和关键消息。 你不希望使用日志消息的日期和时间来确定日志实体要保存到的分区。 该操作会导致热分区，因为所有日志实体在任意给定时间内均共享同一 `PartitionKey` 值（请参阅[前置/后置反模式](#prepend-append-anti-pattern)）。 例如，日志消息的以下实体架构会导致热分区，因为应用程序会将当前日期小时的所有日志消息都写入到该分区：  
 
-![日志消息实体的插图][28]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE28.png" alt-text="日志消息实体的插图":::
 
 在此示例中，`RowKey` 包括日志消息的日期和时间，以确保日志消息存储按日期/时间顺序排序。 `RowKey` 还包括消息 ID，以防止多条日志消息共享同一日期和时间。  
 
 另一种方法是使用 `PartitionKey`，它可确保应用程序在一组分区中写入消息。 例如，如果日志消息的源提供了一种方法可将消息分布到多个分区，则可以使用以下实体架构：  
 
-![日志消息实体的插图][29]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE29.png" alt-text="日志消息实体的插图":::
 
 但是，此架构的问题是若要检索特定时间跨度的所有日志消息，必须搜索表中的每个分区。
 
@@ -1530,36 +1531,6 @@ private static async Task SimpleEmployeeUpsertAsync(CloudTable employeeTable,
 * 方法签名现在包括 `async` 修饰符，并返回 `Task` 实例。  
 * 该方法现在调用 `ExecuteAsync` 方法，而不是调用 `Execute` 方法来更新实体。 该方法使用 `await` 修饰符来以异步方式检索结果。  
 
-客户端应用程序可以调用多个类似这样的异步方法，每个方法调用在单独的线程中运行。  
-
-[1]: ./media/storage-table-design-guide/storage-table-design-IMAGE01.png
-[2]: ./media/storage-table-design-guide/storage-table-design-IMAGE02.png
-[3]: ./media/storage-table-design-guide/storage-table-design-IMAGE03.png
-[4]: ./media/storage-table-design-guide/storage-table-design-IMAGE04.png
-[5]: ./media/storage-table-design-guide/storage-table-design-IMAGE05.png
-[6]: ./media/storage-table-design-guide/storage-table-design-IMAGE06.png
-[7]: ./media/storage-table-design-guide/storage-table-design-IMAGE07.png
-[8]: ./media/storage-table-design-guide/storage-table-design-IMAGE08.png
-[9]: ./media/storage-table-design-guide/storage-table-design-IMAGE09.png
-[10]: ./media/storage-table-design-guide/storage-table-design-IMAGE10.png
-[11]: ./media/storage-table-design-guide/storage-table-design-IMAGE11.png
-[12]: ./media/storage-table-design-guide/storage-table-design-IMAGE12.png
-[13]: ./media/storage-table-design-guide/storage-table-design-IMAGE13.png
-[14]: ./media/storage-table-design-guide/storage-table-design-IMAGE14.png
-[15]: ./media/storage-table-design-guide/storage-table-design-IMAGE15.png
-[16]: ./media/storage-table-design-guide/storage-table-design-IMAGE16.png
-[17]: ./media/storage-table-design-guide/storage-table-design-IMAGE17.png
-[18]: ./media/storage-table-design-guide/storage-table-design-IMAGE18.png
-[19]: ./media/storage-table-design-guide/storage-table-design-IMAGE19.png
-[20]: ./media/storage-table-design-guide/storage-table-design-IMAGE20.png
-[21]: ./media/storage-table-design-guide/storage-table-design-IMAGE21.png
-[22]: ./media/storage-table-design-guide/storage-table-design-IMAGE22.png
-[23]: ./media/storage-table-design-guide/storage-table-design-IMAGE23.png
-[24]: ./media/storage-table-design-guide/storage-table-design-IMAGE24.png
-[25]: ./media/storage-table-design-guide/storage-table-design-IMAGE25.png
-[26]: ./media/storage-table-design-guide/storage-table-design-IMAGE26.png
-[27]: ./media/storage-table-design-guide/storage-table-design-IMAGE27.png
-[28]: ./media/storage-table-design-guide/storage-table-design-IMAGE28.png
-[29]: ./media/storage-table-design-guide/storage-table-design-IMAGE29.png
+客户端应用程序可以调用多个类似这样的异步方法，每个方法调用在单独的线程中运行。
 
 <!-- Update_Description: update meta properties, wording update, update link -->

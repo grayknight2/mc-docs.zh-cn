@@ -8,12 +8,12 @@ origin.date: 03/25/2020
 ms.date: 06/09/2020
 ms.author: v-tawe
 ms.custom: security-benchmark
-ms.openlocfilehash: 503623ae420aa5da2f509772bc937ec4fc5c2725
-ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
+ms.openlocfilehash: 4c9473498fd6964159535aac6a8f8be9eb7a9732
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/14/2020
-ms.locfileid: "88228415"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516023"
 ---
 # <a name="azure-security-baseline-for-data-explorer"></a>数据资源管理器的 Azure 安全基线
 
@@ -266,7 +266,7 @@ Azure 平台日志概述： https://docs.azure.cn/azure-monitor/platform/platfor
 ### <a name="31-maintain-inventory-of-administrative-accounts"></a>3.1：维护管理帐户的清单
 
 **指导**：在 Azure 数据资源管理器中，安全角色定义哪些安全主体（用户和应用程序）有权对受保护的资源（例如数据库或表）进行操作，以及允许进行哪些操作。 可以利用 Kusto 查询列出 Azure 数据资源管理器群集和数据库的具有管理员角色的主体。
-[使用 Kusto 查询在 Azure 数据资源管理器中进行安全角色管理](https://docs.microsoft.com/azure/data-explorer/kusto/management/security-roles)
+[使用 Kusto 查询在 Azure 数据资源管理器中进行安全角色管理](/data-explorer/kusto/management/security-roles)
 
 **Azure 安全中心监视**：是
 
@@ -363,9 +363,9 @@ https://docs.azure.cn/active-directory/reports-monitoring/quickstart-configure-n
 
 应用程序身份验证（非交互式登录）：用于对必须在没有人类用户参与的情况下运行或进行身份验证的服务和应用程序进行身份验证。
 
-[Azure 数据资源管理器访问控制概述](https://docs.microsoft.com/azure/data-explorer/kusto/management/access-control/index)
+[Azure 数据资源管理器访问控制概述](/data-explorer/kusto/management/access-control/index)
 
-[使用 Azure Active Directory 进行身份验证](https://docs.microsoft.com/azure/data-explorer/kusto/management/access-control/aad)
+[使用 Azure Active Directory 进行身份验证](/data-explorer/kusto/management/access-control/aad)
 
 **Azure 安全中心监视**：是
 
@@ -375,7 +375,7 @@ https://docs.azure.cn/active-directory/reports-monitoring/quickstart-configure-n
 
 **指导**：Azure Active Directory (Azure AD) 提供日志来帮助发现过时的帐户。 此外，请使用 Azure 标识访问评审来有效管理组成员身份、对企业应用程序的访问和角色分配。 可以定期评审用户的访问权限，确保只有适当的用户才持续拥有访问权限。
 
-[如何使用 Azure AD 进行 Azure 数据资源管理器访问身份验证](https://docs.microsoft.com/azure/data-explorer/kusto/management/access-control/how-to-authenticate-with-aad)
+[如何使用 Azure AD 进行 Azure 数据资源管理器访问身份验证](/data-explorer/kusto/management/access-control/how-to-authenticate-with-aad)
 
 [Azure AD 报告](https://docs.azure.cn/active-directory/reports-monitoring/)
 
@@ -485,7 +485,7 @@ How to create an NSG with a Security Config:  https://docs.azure.cn/virtual-netw
 
 **指导**：数据标识、分类和丢失防护功能尚不适用于 Azure 数据资源管理器。 如果需要出于合规性目的使用这些功能，请实施第三方解决方案。
 
-对于由 Microsoft 管理的底层平台，Microsoft 将所有客户内容都视为敏感内容，竭尽全力防范客户数据丢失和泄露。 为了确保 Azure 中的客户数据保持安全，Microsoft 已实施并维护一套可靠的数据保护控制机制和功能。
+对于 Microsoft 管理的底层平台，Microsoft 会将所有客户内容视为敏感数据，并会全方位地防范客户数据丢失和遭到透露。 为了确保 Azure 中的客户数据保持安全，Microsoft 已实施并维护一套可靠的数据保护控制机制和功能。
 
 了解 Azure 中的客户数据保护： https://docs.azure.cn/security/fundamentals/protection-customer-data
 
@@ -926,7 +926,7 @@ https://secdevtools.azurewebsites.net/helpcredscan.html
 
 了解 Azure 存储冗余和服务级别协议： https://docs.azure.cn/storage/common/storage-redundancy
 
-[将数据导出到存储](https://docs.microsoft.com/azure/data-explorer/kusto/management/data-export/export-data-to-storage)
+[将数据导出到存储](/data-explorer/kusto/management/data-export/export-data-to-storage)
 
 **Azure 安全中心监视**：目前不可用
 

@@ -8,14 +8,14 @@ ms.subservice: core
 ms.topic: conceptual
 ms.author: v-yiso
 author: sdgilley
-origin.date: 12/27/2019
-ms.date: 03/09/2020
-ms.openlocfilehash: cf87259cb59fe3e2e9a2c6959e2b3f7eab328226
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+origin.date: 07/08/2020
+ms.date: 08/27/2020
+ms.openlocfilehash: 6e2f35aea7c2b872665b2c19dc6a581e83a70f79
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441081"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228449"
 ---
 # <a name="what-is-an-azure-machine-learning-workspace"></a>什么是 Azure 机器学习工作区？
 
@@ -48,12 +48,17 @@ ms.locfileid: "86441081"
 
 可以通过以下方式与工作区交互：
 
+> [!IMPORTANT]
+> 下面标记了“（预览版）”的工具目前为公共预览版。
+> 该预览版在提供时没有附带服务级别协议，建议不要将其用于生产工作负载。 某些功能可能不受支持或者受限。 
+
 + 在 Web 上：
     + [Azure 机器学习工作室](https://ml.azure.com) 
     + [Azure 机器学习设计器（预览版）](concept-designer.md)- 仅在[企业版](overview-what-is-azure-ml.md#sku)工作区中可用。
 + 在任何 Python 环境中使用[适用于 Python 的 Azure 机器学习 SDK](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py)。
 + 在任何 R 环境中使用[适用于 R 的 Azure 机器学习 SDK](https://azure.github.io/azureml-sdk-for-r/reference/index.html)。
 + 在命令行上使用 Azure 机器学习 [CLI 扩展](/machine-learning/reference-azure-machine-learning-cli)
++ [Azure 机器学习 VS Code 扩展](how-to-manage-resources-vscode.md#workspaces)
 
 ## <a name="machine-learning-with-a-workspace"></a>使用工作区进行机器学习
 
@@ -71,13 +76,13 @@ ms.locfileid: "86441081"
 
 还可以执行以下工作区管理任务：
 
-| 工作区管理任务   | 门户              | 工作室 | Python SDK / R SDK       | CLI        |
-|---------------------------|---------|---------|------------|------------|
-| 创建工作区        | **&check;**     | | **&check;** | **&check;** |
-| 管理工作区访问权限    | **&check;**   || |  **&check;**    |
-| 升级到企业版    | **&check;** | **&check;**  | |     |
-| 创建和管理计算资源    | **&check;**   | **&check;** | **&check;** |  **&check;**   |
-| 创建笔记本 VM |   | **&check;** | |     |
+| 工作区管理任务   | 门户              | 工作室 | Python SDK / R SDK       | CLI        | VS Code
+|---------------------------|---------|---------|------------|------------|------------|
+| 创建工作区        | **&check;**     | | **&check;** | **&check;** | **&check;** |
+| 管理工作区访问权限    | **&check;**   || |  **&check;**    ||
+| 升级到企业版    | **&check;** | **&check;**  | |     ||
+| 创建和管理计算资源    | **&check;**   | **&check;** | **&check;** |  **&check;**   ||
+| 创建笔记本 VM |   | **&check;** | |     ||
 
 > [!WARNING]
 > 不支持将 Azure 机器学习工作区移动到另一个订阅，或将拥有的订阅移到新租户。 这样做可能会导致错误。
@@ -91,7 +96,7 @@ ms.locfileid: "86441081"
 * 使用 [Azure 门户](how-to-manage-workspace.md)作为点击界面来逐步完成每个步骤。
 * 使用[适用于 Python 的 Azure 机器学习 SDK](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py#workspace) 从 Python 脚本或 Jupiter 笔记本动态创建工作区
 * 需要按企业安全标准自动创建或自定义创建时，请使用 [Azure 资源管理器模板](how-to-create-workspace-template.md)或 [Azure 机器学习 CLI](reference-azure-machine-learning-cli.md)。
-* 如果使用 Visual Studio Code，请使用 [VS Code 扩展](tutorial-setup-vscode-extension.md)。
+* 如果使用 Visual Studio Code，请使用 [VS Code 扩展](how-to-manage-resources-vscode.md#create-a-workspace)。
 
 > [!NOTE]
 > 工作区名称不区分大小写。
@@ -111,6 +116,9 @@ ms.locfileid: "86441081"
 
 > [!NOTE]
 > 除创建新版本以外，还可以使用现有的 Azure 服务。
+
+> [!IMPORTANT]
+> 若要使用现有 Azure 存储帐户，则该帐户不能是高级帐户（Premium_LRS 和 Premium_GRS）。 它也不能具有分层命名空间（与 Azure Data Lake Storage Gen2 一起使用）。 工作区的默认存储帐户不支持高级存储和分层命名空间。 可以将高级存储或分层命名空间用于非默认存储帐户。
 
 ## <a name="next-steps"></a>后续步骤
 

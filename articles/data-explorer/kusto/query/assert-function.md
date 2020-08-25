@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 09/26/2019
-ms.date: 07/31/2020
-ms.openlocfilehash: 37c4850663fe95015a37194a044eb3c638397fff
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 31fb5a6b95930cf92f2e36677354c8db9ddb718b
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509233"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515781"
 ---
 # <a name="assert"></a>assert()
 
@@ -29,15 +29,13 @@ ms.locfileid: "87509233"
 * *condition*：要计算的条件表达式。 如果条件为 `false`，则使用指定的消息报告错误。 如果条件为 `true`，它将返回 `true` 作为计算结果。 在查询分析阶段，条件的计算结果必须为常量。
 * *message*：断言计算结果为 `false` 时使用的消息。 message 必须是字符串字文本。
 
+> [!NOTE]
+> 在查询分析阶段，`condition` 的计算结果必须为常量。 换句话说，可以从引用常量的其他表达式进行构造它，而不能将其绑定到行上下文。
 
 ## <a name="returns"></a>返回
 
 * `true` - 如果条件为 `true`
 * 如果条件计算结果为 `false`，则引发语义错误。
-
-**说明**
-
-* 在查询分析阶段，`condition` 的计算结果必须为常量。 换句话说，可以从引用常量的其他表达式进行构造它，而不能将其绑定到行上下文。
 
 ## <a name="examples"></a>示例
 

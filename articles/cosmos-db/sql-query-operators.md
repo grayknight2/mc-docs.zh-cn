@@ -4,15 +4,17 @@ description: 了解 Azure Cosmos DB 支持的 SQL 运算符，例如相等、比
 author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 12/02/2019
-ms.date: 02/10/2020
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
 ms.author: v-yeche
-ms.openlocfilehash: aed6a30d407a847c4c3713408f085fdf0f601a94
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: d952fff19d040a5b535423edd10ab6d6a1ab8355
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77067863"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222544"
 ---
 # <a name="operators-in-azure-cosmos-db"></a>Azure Cosmos DB 中的运算符
 
@@ -36,33 +38,57 @@ ms.locfileid: "77067863"
 
 如果标量表达式的结果为 `Undefined`，则不会将该项包含在结果中，因为 `Undefined` 不等于 `true`。
 
+例如，以下查询在数字和字符串值之间进行的比较生成 `Undefined`。 因此，筛选器不包含任何结果。
+
+```sql
+SELECT *
+FROM c
+WHERE 7 = 'a'
+```
+
 ## <a name="logical-and-or-and-not-operators"></a>逻辑（AND、OR 和 NOT）运算符
 
 逻辑运算符对布尔值进行运算。 下表显示了这些运算符的逻辑真值表：
 
 **OR 运算符**
 
-| 或 | True | False | Undefined |
+在任一条件为 `true` 时返回 `true`。
+
+|  | **True** | **False** | **Undefined** |
 | --- | --- | --- | --- |
-| True |True |True |True |
-| False |True |False |Undefined |
-| Undefined |True |Undefined |Undefined |
+| **True** |True |True |True |
+| **False** |True |错误 |Undefined |
+| **未定义** |True |未定义 |未定义 |
 
 **AND 运算符**
 
-| 和 | True | False | Undefined |
+在两个表达式均为 `true` 时返回 `true`。
+
+|  | **True** | **False** | **Undefined** |
 | --- | --- | --- | --- |
-| True |True |False |Undefined |
-| False |False |False |False |
-| Undefined |Undefined |False |Undefined |
+| **True** |True |False |Undefined |
+| **False** |False |False |False |
+| **未定义** |Undefined |错误 |Undefined |
 
 **NOT 运算符**
 
-| NOT |  |
+反转任何布尔表达式的值。
+
+|  | **NOT** |
 | --- | --- |
-| True |False |
-| False |True |
-| Undefined |Undefined |
+| **True** |错误 |
+| **False** |True |
+| **未定义** |Undefined |
+
+**运算符优先级**
+
+逻辑运算符 `OR`、`AND` 和 `NOT` 的优先级如下所示：
+
+| **“运算符”** | **Priority** |
+| --- | --- |
+| **NOT** |1 |
+| **AND** |2 |
+| **OR** |3 |
 
 ## <a name="-operator"></a>* 运算符
 
@@ -70,7 +96,7 @@ ms.locfileid: "77067863"
 
 ## <a name="-and--operators"></a>? 和 ?? 运算符
 
-如同在 C# 和 JavaScript 等编程语言中那样，可以使用三元 (?) 和联合 (??) 运算符来生成条件表达式。 
+如同在 C# 和 JavaScript 等编程语言中那样，可以使用三元 (?) 和联合 (??) 运算符来生成条件表达式。
 
 可以使用 ? 运算符即时构造新的 JSON 属性。 例如，以下查询将年级分类为 `elementary` 或 `other`：
 
@@ -97,8 +123,8 @@ ms.locfileid: "77067863"
 
 ## <a name="next-steps"></a>后续步骤
 
-- [Azure Cosmos DB.NET 示例](https://github.com/Azure/azure-cosmos-dotnet-v3)
+- [Azure Cosmos DB .NET 示例](https://github.com/Azure/azure-cosmos-dotnet-v3)
 - [关键字](sql-query-keywords.md)
 - [SELECT 子句](sql-query-select.md)
 
-<!-- Update_Description: wording update, update link -->
+<!-- Update_Description: update meta properties, wording update, update link -->

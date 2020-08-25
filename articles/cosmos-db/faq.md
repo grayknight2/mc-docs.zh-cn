@@ -5,15 +5,17 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 09/01/2019
-ms.date: 06/22/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.custom: seodec18
-ms.openlocfilehash: bfe0a7a949ba5ba4faa7eac0264ab6823ba2ded3
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.openlocfilehash: 235ca4c57106c2e93036e4ad42e859df5c2af126
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85098400"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222927"
 ---
 # <a name="frequently-asked-questions-about-different-apis-in-azure-cosmos-db"></a>有关 Azure Cosmos DB 中不同 API 的常见问题
 
@@ -63,11 +65,13 @@ Azure Cosmos DB 是世纪互联提供的多区域分布式多模型数据库服�
 
 <!-- Not Available [Try Azure Cosmos DB for free](https://www.azure.cn/try/cosmosdb/) -->
 
-如果不熟悉 Azure，可以注册 [Azure 试用帐户](https://www.azure.cn/pricing/1rmb-trial/)，这样可以得到 30 天试用期和信用额度，以便试用所有 Azure 服务。 如果你有 Visual Studio 订阅，则还有资格[免费获取 Azure 信用额度](https://www.azure.cn/offers/ms-mc-arz-msdn/index.html)，可用于任何 Azure 服务。
+如果不熟悉 Azure，可以注册 [Azure 试用帐户](https://www.azure.cn/pricing/1rmb-trial/)，这样可以得到 30 天试用期和信用额度，以便试用所有 Azure 服务。 如果你有 Visual Studio 订阅，则还有资格[免费获取 Azure 信用额度](https://www.azure.cn/offers/ms-mc-arz-msdn/)，可用于任何 Azure 服务。
 
 也可以使用 [Azure Cosmos DB 模拟器](local-emulator.md)在本地免费开发和测试应用程序，无需创建 Azure 订阅。 如果对应用程序在 Azure Cosmos DB 模拟器中的工作情况感到满意，则可以切换到在云中使用 Azure Cosmos DB 帐户。
 
 ### <a name="how-can-i-get-additional-help-with-azure-cosmos-db"></a>如何获取 Azure Cosmos DB 的更多帮助？
+
+<!---Mooncake Customization on question and answer forums-->
 
 若要咨询技术问题，可在问答论坛中发帖：
 
@@ -77,7 +81,9 @@ Azure Cosmos DB 是世纪互联提供的多区域分布式多模型数据库服�
 <!--Not Available on [on-topic](https://stackoverflow.com/help/on-topic)-->
 <!--Not Available on [provide as many details as possible, making the question clear and answerable](https://stackoverflow.com/help/how-to-ask)-->
 
-若要请求新功能，请在 [Azure 支持站点](https://support.azure.cn/support/support-azure/)上提交新的请求。
+<!---Mooncake Customization on question and answer forums-->
+
+若要请求新功能，请在 [Azure 支持](https://support.azure.cn/support/contact/)上创建新的请求。
 
 若要修复帐户问题，请在 Azure 门户中提交[支持请求](https://support.azure.cn/support/support-azure/)。
 
@@ -97,7 +103,7 @@ Azure Cosmos DB 是世纪互联提供的多区域分布式多模型数据库服�
 
 ### <a name="what-are-the-regions-that-preferredlocations-can-be-set-to"></a>可以将 PreferredLocations 设置为哪些区域？
 
-可以将 PreferredLocations 值设置为提供 Cosmos DB 的任何 Azure 区域。 有关可用区域的列表，请参阅 [Azure 区域](https://status.azure.com/status/)。
+可以将 PreferredLocations 值设置为提供 Cosmos DB 的任何 Azure 区域。 有关可用区域的列表，请参阅 [Azure 区域](https://azure.microsoft.com/regions/)。
 
 ### <a name="is-there-anything-i-should-be-aware-of-when-distributing-data-across-china-via-the-azure-datacenters"></a>通过 Azure 数据中心在中国分配数据时需要注意什么？
 
@@ -146,7 +152,7 @@ GitHub 上提供了 SQL API [.NET](sql-api-dotnet-samples.md)、[Java](https://g
 
 容器是文档及其关联的 JavaScript 应用程序逻辑的组。 容器是一个计费实体，其[成本](performance-levels.md)由吞吐量和已用存储确定。 容器可以跨一个或多个分区或服务器，并且能缩放以处理几乎无限制增长的存储或吞吐量。
 
-* 对于 SQL API，容器映射到容器。
+* 对于 SQL API，资源称为容器。
 * 对于 Cosmos DB 的 API for MongoDB 帐户，容器映射到集合。
 * 对于 Cassandra 和表 API 帐户，容器映射到表。
 * 对于 Gremlin API 帐户，容器映射到图表。

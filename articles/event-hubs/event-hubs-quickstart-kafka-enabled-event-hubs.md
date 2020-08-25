@@ -1,19 +1,16 @@
 ---
 title: 快速入门：通过 Kafka 协议使用 Azure 事件中心进行数据流式传输
 description: 快速入门：本文介绍了如何使用 Kafka 协议和 API 流式传输到 Azure 事件中心。
-services: event-hubs
-author: ShubhaVijayasarathy
-ms.service: event-hubs
 ms.topic: quickstart
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-origin.date: 02/12/2020
-ms.date: 05/29/2020
-ms.openlocfilehash: 8c8a3009864a601516030fbbec488ceae6a28491
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 706fe037f42d5975a1767ba19f32b6675843630f
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84200246"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715236"
 ---
 # <a name="quickstart-data-streaming-with-event-hubs-using-the-kafka-protocol"></a>快速入门：使用 Kafka 协议通过事件中心进行数据流式传输
 此快速入门介绍如何在不更改协议客户端或运行自己的群集的情况下将数据流式传输到事件中心。 你将了解如何只需更改应用程序配置，即可使用生产者和使用者与事件中心通信。 Azure 事件中心支持 [Apache Kafka 版本 1.0](https://kafka.apache.org/10/documentation.html)。
@@ -54,7 +51,6 @@ ms.locfileid: "84200246"
     sasl.mechanism=PLAIN
     sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="{YOUR.EVENTHUBS.CONNECTION.STRING}";
     ```
-
     **OAuth：**
 
     ```xml
@@ -63,20 +59,20 @@ ms.locfileid: "84200246"
     sasl.mechanism=OAUTHBEARER
     sasl.jaas.config=org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;
     sasl.login.callback.handler.class=CustomAuthenticateCallbackHandler;
-    ```
+    ```    
 
     可以在[此处](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/oauth/java/appsecret/producer/src/main/java)的 GitHub 上找到示例处理程序类 CustomAuthenticateCallbackHandler 的源代码。
 4. 运行生产者代码并将事件流式传输到事件中心：
-
+   
     ```shell
     mvn clean package
-    mvn exec:java -Dexec.mainClass="TestProducer"
+    mvn exec:java -Dexec.mainClass="TestProducer"                                    
     ```
-
+    
 5. 导航到 `azure-event-hubs-for-kafka/quickstart/java/consumer`。
 
 6. 在 `src/main/resources/consumer.config` 中更新使用者的配置详细信息，如下所示：
-
+   
     **TLS/SSL：**
 
     ```xml
@@ -103,10 +99,10 @@ ms.locfileid: "84200246"
 
     ```java
     mvn clean package
-    mvn exec:java -Dexec.mainClass="TestConsumer"
+    mvn exec:java -Dexec.mainClass="TestConsumer"                                    
     ```
 
 如果事件中心 Kafka 群集有事件，则现在开始从使用者接收这些事件。
 
 ## <a name="next-steps"></a>后续步骤
-本文介绍了如何在不更改协议客户端或运行自己的群集的情况下，将事件流式传输到事件中心。 若要了解详细信息，请参阅[针对 Azure 事件中心的 Apache Kafka 开发人员指南](apache-kafka-developer-guide.md)。
+本文介绍了如何在不更改协议客户端或运行自己的群集的情况下，将事件流式传输到事件中心。 若要了解详细信息，请参阅[针对 Azure 事件中心的 Apache Kafka 开发人员指南](apache-kafka-developer-guide.md)。 

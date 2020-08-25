@@ -3,16 +3,18 @@ title: 使用 Azure CLI 管理 Azure Cosmos DB 资源
 description: 使用 Azure CLI 管理 Azure Cosmos DB 帐户、数据库和容器。
 author: rockboyfor
 ms.service: cosmos-db
-ms.topic: conceptual
-origin.date: 06/03/2020
-ms.date: 06/22/2020
+ms.topic: how-to
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: b4e2b2108ff62c3bab4785671875b0f745ea2de6
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.openlocfilehash: 143030966c38991ef7998f52553fe08bfe8f8cd1
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85098298"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223196"
 ---
 # <a name="manage-azure-cosmos-resources-using-azure-cli"></a>使用 Azure CLI 管理 Azure Cosmos 资源
 
@@ -20,9 +22,9 @@ ms.locfileid: "85098298"
 
 [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
-选择在本地安装并使用 CLI 时，本主题要求运行 Azure CLI 2.6.0 或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
+选择在本地安装并使用 CLI 时，本主题要求运行 Azure CLI 2.9.1 或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
 
-<!--Correct to use When-->
+<!--Mooncake Customization: Correct to use When-->
 
 ## <a name="azure-cosmos-accounts"></a>Azure Cosmos 帐户
 
@@ -117,7 +119,7 @@ accountId=$(az cosmosdb show -g $resourceGroupName -n $accountName --query id -o
 
 # Make China East the next region to fail over to instead of China East 2
 az cosmosdb failover-priority-change --ids $accountId \
-    --failover-policies ChinaNorth2=0 ChinaEast=1 ChinaEast2=2
+    --failover-policies 'China North 2=0' 'China East=1' 'China East 2=2'
 ```
 
 <!--CORRECT ON E.g eastus=0 westus=1-->
@@ -141,7 +143,7 @@ az cosmosdb update --ids $accountId --enable-automatic-failover true
 > 在 priority = 0 的情况下更改区域会为 Azure Cosmos 帐户触发手动故障转移。 任何其他优先级更改都不会触发故障转移。
 
 ```azurecli
-# Assume region order is initially 'ChinaNorth2=0' 'ChinaEast2=1' 'ChinaEast=2' for account
+# Assume region order is initially 'China North 2=0' 'China East 2=1' 'China East=2' for account
 resourceGroupName='myResourceGroup'
 accountName='mycosmosaccount'
 
@@ -150,7 +152,7 @@ accountId=$(az cosmosdb show -g $resourceGroupName -n $accountName --query id -o
 
 # Trigger a manual failover to promote China East 2 as new write region
 az cosmosdb failover-priority-change --ids $accountId \
-    --failover-policies ChinaEast2=0 ChinaEast=1 ChinaNorth2=2
+    --failover-policies 'China East 2=0' 'China East=1' 'China North 2=2'
 ```
 
 <a name="list-account-keys"></a>
@@ -280,7 +282,7 @@ az cosmosdb sql database throughput update \
 
 ### <a name="manage-lock-on-a-database"></a>管理数据库上的锁
 
-将删除锁置于数据库上。 要详细了解如何执行此操作，请参阅[防止 SDK 更改](role-based-access-control.md#preventing-changes-from-cosmos-sdk)。
+将删除锁置于数据库上。 要详细了解如何执行此操作，请参阅[防止 SDK 更改](role-based-access-control.md#prevent-sdk-changes)。
 
 ```azurecli
 resourceGroupName='myResourceGroup'
@@ -314,6 +316,7 @@ az lock delete --ids $lockid
 以下部分演示了如何管理 Azure Cosmos DB 容器，具体包括：
 
 * [创建容器](#create-a-container)
+* [使用自动缩放创建容器](#create-a-container-with-autoscale)
 * [创建启用了 TTL 的容器](#create-a-container-with-ttl)
 * [使用自定义索引策略创建容器](#create-a-container-with-a-custom-index-policy)
 * [更改容器吞吐量](#change-container-throughput)
@@ -336,6 +339,25 @@ az cosmosdb sql container create \
     -a $accountName -g $resourceGroupName \
     -d $databaseName -n $containerName \
     -p $partitionKey --throughput $throughput
+```
+
+### <a name="create-a-container-with-autoscale"></a>使用自动缩放创建容器
+
+使用默认索引策略、分区键且自动缩放 RU/s 为 4000 的 Cosmos 容器。
+
+```azurecli
+# Create a SQL API container
+resourceGroupName='MyResourceGroup'
+accountName='mycosmosaccount'
+databaseName='database1'
+containerName='container1'
+partitionKey='/myPartitionKey'
+maxThroughput=4000
+
+az cosmosdb sql container create \
+    -a $accountName -g $resourceGroupName \
+    -d $databaseName -n $containerName \
+    -p $partitionKey --max-throughput $maxThroughput
 ```
 
 ### <a name="create-a-container-with-ttl"></a>创建带有 TTL 的容器
@@ -438,7 +460,7 @@ az cosmosdb sql container throughput update \
 
 ### <a name="manage-lock-on-a-container"></a>管理容器上的锁定
 
-在某个容器上放置删除锁定。 要详细了解如何执行此操作，请参阅[防止 SDK 更改](role-based-access-control.md#preventing-changes-from-cosmos-sdk)。
+在某个容器上放置删除锁定。 要详细了解如何执行此操作，请参阅[防止 SDK 更改](role-based-access-control.md#prevent-sdk-changes)。
 
 ```azurecli
 resourceGroupName='myResourceGroup'

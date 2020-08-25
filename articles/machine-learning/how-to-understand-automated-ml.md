@@ -10,12 +10,12 @@ ms.service: machine-learning
 ms.subservice: core
 ms.topic: how-to
 ms.date: 12/05/2019
-ms.openlocfilehash: ff9ad9cbf7516e4404af482dfcb56ad49b4e6233
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: fe544ec4ed25bf26b373cf66190e75c4fa4291cb
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441204"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228403"
 ---
 # <a name="understand-automated-machine-learning-results"></a>了解自动化机器学习的结果
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -23,8 +23,8 @@ ms.locfileid: "86441204"
 本文介绍如何查看和理解每个自动机器学习运行的图表与指标。 
 
 了解有关以下方面的详细信息：
-+ [分类模型的指标、图表和曲线](#classification)
-+ [回归模型的指标、图表和图形](#regression)
++ [分类模型的指标和图表](#classification)
++ [回归模型的指标和图表](#regression)
 + [模型可解释性和特征重要性](#explain-model)
 
 ## <a name="prerequisites"></a>先决条件
@@ -99,6 +99,12 @@ recall_score_micro|Recall 是特定类的正确标记元素的百分比。 通�
 recall_score_weighted|Recall 是特定类的正确标记元素的百分比。 Weighted 是每个类的召回率算术平均值，按每个类中的真实实例数加权。|[计算](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html)|average="weighted"|
 weighted_accuracy|加权准确度是当分配给每个示例的权重等于该示例的真实类中的真实实例比例时的准确度。|[计算](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html)|sample_weight 是等于目标中每个元素的该类比例的向量|
 
+### <a name="binary-vs-multiclass-metrics"></a>二元分类指标与多类指标
+
+AutoML 不区分二元分类指标与多类指标。 不管数据集有两个类还是两个以上的类，都会报告相同的验证指标。 但是，某些指标旨在用于多类分类。 正如你所期望的那样，这些指标在应用于二元分类数据集时不会将任何类视为 `true` 类。 明确用于多类的指标以 `micro`、`macro` 或 `weighted` 为后缀。 示例包括 `average_precision_score`、`f1_score`、`precision_score`、`recall_score`、`AUC`。
+
+可以通过具体的示例更清楚地了解此区别：多类平均查全率（`micro`、`macro` 或 `weighted`）不按 `tp / (tp + fn)` 计算查全率，而是对二元分类数据集的两个类进行平均。 这相当于分别计算 `true` 类和 `false` 类的查全率，然后取二者的平均值。
+
 <a name="confusion-matrix"></a>
 
 ### <a name="confusion-matrix"></a>混淆矩阵
@@ -144,15 +150,13 @@ weighted_accuracy|加权准确度是当分配给每个示例的权重等于该�
 ### <a name="roc-chart"></a>ROC 图
 
 #### <a name="what-is-a-roc-chart"></a>什么是 ROC 图？
-接收方操作特征 (ROC) 是特定模型的正确分类标签与错误分类标签的对比图。 以较高的偏差基于数据集训练模型时，ROC 曲线提供的信息可能较少，因为它不会显示误报标签。
+接收方操作特征 (ROC) 是特定模型的正确分类标签与错误分类标签的对比图。 在类失衡严重的情况下基于数据集训练模型时，ROC 曲线提供的信息可能较少，因为多数类可能会掩盖少数类的贡献。
 
 #### <a name="what-does-automated-ml-do-with-the-roc-chart"></a>自动化 ML 如何处理 ROC 图？
-自动化 ML 生成宏观平均精准率-召回率、微观平均精准率-召回率，以及与模型的所有类关联的精准率-召回率。 
-
-宏观平均将单独计算每个类的指标，然后取平均值，并同等处理所有类。 但，微观平均将聚合所有类的贡献来计算平均值。 如果数据集中存在类不平衡的情况，则最好是使用微观平均。
+可以按照正确分类的样本的比例将该 ROC 图下的区域可视化。 ROC 图的高级用户可能会查看曲线下区域之外的区域，直观了解以分类阈值或决策边界函数形式表示的真正率和假正率。
 
 #### <a name="what-does-a-good-model-look-like"></a>良好的模型是怎样的？
-理想情况下，该模型具有较接近 100% 的真报率和较接近 0% 的误报率。 
+最佳模型是 ROC 曲线接近左上角，即真正率为 100%，假正率为 0%。 随机模型将显示为一条从左下角到右上角的平直线。 比随机模型更差的模型会显示在 y=x 这条线的下方。
 
 ##### <a name="example-1-a-classification-model-with-low-true-labels-and-high-false-labels"></a>示例 1：真报标签较少且误报标签较多的分类模型
 ![真报标签较少且误报标签较多的分类模型](./media/how-to-understand-automated-ml/azure-machine-learning-auto-ml-roc-1.png)
@@ -162,7 +166,8 @@ weighted_accuracy|加权准确度是当分配给每个示例的权重等于该�
 <a name="lift-curve"></a>
 ### <a name="lift-chart"></a>提升图
 #### <a name="what-is-a-lift-chart"></a>什么是提升图？
-提升图用于评估分类模型的性能。 它显示使用生成的模型比不使用模型预期能够将准确度改善多少。
+提升图用于评估分类模型的性能。 提升图显示某个模型的表现优于随机模型的次数。 这里提供的是一个相对表现（考虑到类的数量越多，分类越困难）。 如果一个数据集有十个类，则根据该数据集的样本进行的预测其错误率会高于根据两个类的数据集的样本进行的预测。
+
 #### <a name="what-does-automated-ml-do-with-the-lift-chart"></a>自动化 ML 如何处理提升图？
 可以根据基线比较 Azure 机器学习自动生成的模型的性能提升，以查看该特定模型的值增益。
 #### <a name="what-does-a-good-model-look-like"></a>良好的模型是怎样的？
@@ -172,10 +177,10 @@ weighted_accuracy|加权准确度是当分配给每个示例的权重等于该�
 ##### <a name="example-2-a-classification-model-that-performs-better-than-a-random-selection-model"></a>示例 2：表现比随机选择模型更好的分类模型
 ![表现更好的分类模型](./media/how-to-understand-automated-ml/azure-machine-learning-auto-ml-lift-curve2.png)
 <a name="gains-curve"></a>
-### <a name="gains-chart"></a>增益图
-#### <a name="what-is-a-gains-chart"></a>什么是增益图？
+### <a name="cumulative-gains-chart"></a>累积增益图
+#### <a name="what-is-a-cumulative-gains-chart"></a>什么是累积增益图？
 
-增益图按每个数据部分评估分类模型的性能。 它针对数据集的每个百分位，显示性能预期要比随机选择模型改善多少。
+累积增益图按数据的每个部分评估分类模型的表现。 该图按数据集的每个百分位显示已进行准确分类的额外样本数。
 
 #### <a name="what-does-automated-ml-do-with-the-gains-chart"></a>自动化 ML 如何处理增益图？
 借助累积增益图，可以使用一个对应于模型所需增益的百分比来选择分类截止值。 此信息提供了查看随附提升图中的结果的另一种方式。
@@ -196,7 +201,7 @@ weighted_accuracy|加权准确度是当分配给每个示例的权重等于该�
 
 宏观平均将单独计算每个类的指标，然后取平均值，并同等处理所有类。 但，微观平均将聚合所有类的贡献来计算平均值。 
 #### <a name="what-does-a-good-model-look-like"></a>良好的模型是怎样的？
- 适当校准的模型与 y=x 行对齐，表示它在预测中具有合理的置信度。 置信度过高的模型与 y=0 行对齐，其中会显示预测概率，但不显示实际概率。 
+进行了适当校准的模型会与 y=x 这条线吻合，会正确预测样本属于每个类的概率。 置信度过高的模型在预测接近零和一的概率时会出现高估的情况，但很少出现无法确定每个样本的类的情况。
 
 
 ##### <a name="example-1-a-well-calibrated-model"></a>示例 1：适当校准的模型
@@ -250,11 +255,11 @@ normalized_root_mean_squared_log_error|规范化均方根对数误差指均方�
 
 ### <a name="histogram-of-residuals-chart"></a><a name="histo"></a> 残差直方图
 #### <a name="what-is-a-residuals-chart"></a>什么是残差图？
-残差表示观测到的 y - 预测的 y。 若要显示偏差较小的误差边际，应该以 0 为中心，将残差直方图绘制成钟形曲线。 
+残差是指预测与实际值之间的差 (`y_pred - y_true`)。 若要显示偏差较小的误差边际，应该以 0 为中心，将残差直方图绘制成钟形曲线。 
 #### <a name="what-does-automated-ml-do-with-the-residuals-chart"></a>自动化 ML 如何处理残差图？
 自动化 ML 自动提供残差图来显示预测中的误差分布。
 #### <a name="what-does-a-good-model-look-like"></a>良好的模型是怎样的？
-良好的模型通常会产生钟形曲线或接近为零的误差数。
+良好模型的残差通常会接近零。
 
 ##### <a name="example-1-a-regression-model-with-bias-in-its-errors"></a>示例 1：误差中带有偏差的回归模型
 ![误差中带有偏差的 SA 回归模型](./media/how-to-understand-automated-ml/azure-machine-learning-auto-ml-regression3.png)

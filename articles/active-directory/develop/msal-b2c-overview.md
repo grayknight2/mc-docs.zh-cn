@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 06/30/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: nacanuma
 ms.custom: aaddev
-ms.openlocfilehash: 0e9efd33c7b4e72dabdc03483a6ae6e521d728f7
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.openlocfilehash: 109c1dcac8577c220bd1c38bf4c5d3200fe8fa2f
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945023"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647510"
 ---
 # <a name="use-microsoft-authentication-library-for-javascript-to-work-with-azure-ad-b2c"></a>通过适用于 JavaScript 的 Microsoft 身份验证库来使用 Azure AD B2C
 
@@ -44,7 +44,7 @@ ms.locfileid: "85945023"
 
 ### <a name="step-1-register-your-application"></a>步骤 1：注册应用程序
 
-若要使用 Azure AD B2C 保护 Web API，首先需要注册该 Web API。 请遵循[注册应用程序](../../active-directory-b2c/add-web-application.md)来执行详细步骤。
+若要使用 Azure AD B2C 保护 Web API，首先需要注册该 Web API。 请遵循[注册应用程序](../../active-directory-b2c/add-web-api-application.md)来执行详细步骤。
 
 ### <a name="step-2-download-the-sample-application"></a>步骤 2：下载示例应用程序
 

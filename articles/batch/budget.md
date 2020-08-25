@@ -5,13 +5,13 @@ author: rockboyfor
 ms.topic: article
 ms.date: 04/26/2020
 ms.author: v-yeche
-origin.date: 08/17/2020
-ms.openlocfilehash: eb5071b7e457dbe542cce341c3d381f8d73a03b0
-ms.sourcegitcommit: 3cf647177c22b24f76236c57cae19482ead6a283
+origin.date: 08/24/2020
+ms.openlocfilehash: c54948dbf8577b1d61d88e6011649247d4075faa
+ms.sourcegitcommit: e633c458126612223fbf7a8853dbf19acc7f0fa5
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88029643"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88654986"
 ---
 # <a name="cost-analysis-and-budgets-for-azure-batch"></a>Azure Batch 成本分析和预算
 

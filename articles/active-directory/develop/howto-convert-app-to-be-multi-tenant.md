@@ -7,18 +7,18 @@ author: rwike77
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
-ms.date: 04/22/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: jmprieur, lenalepa, sureshja, kkrishna
 ms.custom: aaddev
-ms.openlocfilehash: 1f9e03b8ea132bf8248d47f74eaf6dc5ea20c5e9
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+ms.openlocfilehash: f105d81f9db9b0b28ddcb21950f109164c012dfe
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82126242"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647480"
 ---
 # <a name="how-to-sign-in-any-azure-active-directory-user-using-the-multi-tenant-application-pattern"></a>如何：使用多租户应用程序模式让任何 Azure Active Directory 用户登录
 
@@ -46,7 +46,7 @@ Azure AD 中的 Web 应用/API 注册默认为单租户。 通过在 [Azure 门�
 默认情况下，通过 Azure 门户创建的应用在创建应用时设置了一个全局唯一的应用 ID URI，但你可以更改此值。 例如，如果租户的名称为 contoso.onmicrosoft.com，则有效的应用 ID URI 为 `https://contoso.partner.onmschina.cn/myapp`。 如果租户具有已验证的域 `contoso.com`，则有效的应用 ID URI 也是 `https://contoso.com/myapp`。 如果应用程序 ID URI 不遵循此模式，则将应用程序设置为多租户就会失败。
 
 > [!NOTE]
-> 默认情况下，本机客户端注册以及 [Microsoft 标识平台应用程序](v2-overview.md)是多租户的。 不需要采取任何措施将这些应用程序注册转换为多租户。
+> 默认情况下，本机客户端注册以及 [Microsoft 标识平台应用程序](./v2-overview.md)是多租户的。 不需要采取任何措施将这些应用程序注册转换为多租户。
 
 ## <a name="update-your-code-to-send-requests-to-common"></a>将代码更新为向 /common 发送请求
 
@@ -70,15 +70,21 @@ Web 应用程序和 Web API 接收并验证 Microsoft 标识平台发送的令�
 
 让我们看看应用程序如何验证它从 Microsoft 标识平台接收的令牌。 单租户应用程序通常采用类似于下面的终结点值：
 
+```http
     https://login.partner.microsoftonline.cn/contoso.partner.onmschina.cn
+```
 
 并使用该值构造元数据 URL（在本例中为 OpenID Connect），例如：
 
+```http
     https://login.partner.microsoftonline.cn/contoso.partner.onmschina.cn/.well-known/openid-configuration
+```
 
 以下载用于验证令牌的两项关键信息：租户的签名密钥和颁发者值。 每个 Azure AD 租户使用以下格式的唯一颁发者值：
 
+```http
     https://sts.chinacloudapi.cn/31537af4-6d77-4bb9-a681-d2394888ea26/
+```
 
 其中，GUID 值是租户的租户 ID 重命名安全版本。 如果选择上面的 `contoso.partner.onmschina.cn` 元数据链接，就可以在文档中看到此颁发者值。
 
@@ -86,7 +92,9 @@ Web 应用程序和 Web API 接收并验证 Microsoft 标识平台发送的令�
 
 由于 /common 终结点既不对应于租户也不是颁发者，因此在检查 /common 的元数据中的颁发者值时，它具有的是一个模板化的 URL 而不是实际值：
 
+```http
     https://sts.chinacloudapi.cn/{tenantid}/
+```
 
 因此，多租户应用程序无法仅通过将元数据中的颁发者值与令牌中的 `issuer` 值进行匹配来验证令牌。 多租户应用程序需要一个逻辑来根据颁发者值的租户 ID 部分来确定哪些颁发者值有效、哪些颁发者值无效。 
 
@@ -134,7 +142,9 @@ Web 应用程序和 Web API 接收并验证 Microsoft 标识平台发送的令�
 
 如果逻辑应用程序包含两个或更多个应用程序注册（例如独立的客户端和资源），这可能造成问题。 如何先将资源添加到客户租户中？ Azure AD 通过实现在单个步骤中连接客户端和资源来涵盖了此情况。 用户在同意页面上会看到由客户端和资源请求的权限的总和。 若要启用此行为，资源的应用程序注册必须在其[应用程序清单][AAD-App-Manifest]中以 `knownClientApplications` 形式包含客户端的应用 ID。 例如：
 
+```aad-app-manifest
     knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]
+```
 
 在本文末尾的[相关内容](#related-content)部分的多层本机客户端调用 Web API 示例中对此进行了演示。 下图针对在单个租户中注册的多层应用提供了同意概览。
 
@@ -193,8 +203,8 @@ Web 应用程序和 Web API 接收并验证 Microsoft 标识平台发送的令�
 [AAD-Samples-MT]: https://docs.microsoft.com/samples/browse/?products=azure-active-directory
 [AAD-Why-To-Integrate]: ./active-directory-how-to-integrate.md
 [AZURE-portal]: https://portal.azure.cn
-[MSFT-Graph-overview]: https://developer.microsoft.com/graph/docs/overview/overview
-[MSFT-Graph-permission-scopes]: https://developer.microsoft.com/graph/docs/concepts/permissions_reference
+[MSFT-Graph-overview]: https://docs.microsoft.com/graph/
+[MSFT-Graph-permission-scopes]: https://docs.microsoft.com/graph/permissions-reference
 
 <!--Image references-->
 [AAD-Sign-In]: ./media/active-directory-devhowto-multi-tenant-overview/sign-in-with-microsoft-light.png
@@ -214,9 +224,9 @@ Web 应用程序和 Web API 接收并验证 Microsoft 标识平台发送的令�
 [AAD-V2-Dev-Guide]: v2-overview.md
 [AZURE-portal]: https://portal.azure.cn
 [JWT]: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32
-[O365-Perm-Ref]: https://msdn.microsoft.com/office/office365/howto/application-manifest
+[O365-Perm-Ref]: https://docs.microsoft.com/graph/permissions-reference
 [OAuth2-Access-Token-Scopes]: https://tools.ietf.org/html/rfc6749#section-3.3
-[OAuth2-AuthZ-Code-Grant-Flow]: https://msdn.microsoft.com/library/azure/dn645542.aspx
+[OAuth2-AuthZ-Code-Grant-Flow]: https://docs.microsoft.com/previous-versions/azure/dn645542(v=azure.100)
 [OAuth2-AuthZ-Grant-Types]: https://tools.ietf.org/html/rfc6749#section-1.3 
 [OAuth2-Client-Types]: https://tools.ietf.org/html/rfc6749#section-2.1
 [OAuth2-Role-Def]: https://tools.ietf.org/html/rfc6749#page-6

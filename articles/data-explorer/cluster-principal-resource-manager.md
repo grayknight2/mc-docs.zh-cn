@@ -1,19 +1,19 @@
 ---
 title: 使用 Azure 资源管理器模板向 Azure 数据资源管理器添加群集主体
 description: 本文介绍如何使用 Azure 资源管理器模板向 Azure 数据资源管理器添加群集主体。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 02/03/2020
-ms.date: 05/09/2020
-ms.openlocfilehash: 63445e9016c54e64dc064334e26808880414f70d
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: f45957e54defe778f088769fcd2b13a775625148
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417775"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515804"
 ---
 # <a name="add-cluster-principals-for-azure-data-explorer-by-using-an-azure-resource-manager-template"></a>使用 Azure 资源管理器模板向 Azure 数据资源管理器添加群集主体
 

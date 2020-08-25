@@ -1,20 +1,16 @@
 ---
 title: 使用 Azure 流分析处理事件中心的数据 | Microsoft Docs
 description: 本文介绍如何使用 Azure 流分析作业处理 Azure 事件中心的数据。
-services: event-hubs
-author: spelluru
-manager: ''
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-origin.date: 07/09/2019
-ms.date: 05/29/2020
 ms.topic: article
-ms.service: event-hubs
-ms.openlocfilehash: 6f06ed087701630487d9546d186fdaf986b502dc
-ms.sourcegitcommit: 5afd7c4c3be9b80c4c67ec55f66fcf347aad74c6
+ms.openlocfilehash: a518fa12adb3991a624856b39ea22bb2d4dba681
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85942565"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715151"
 ---
 # <a name="process-data-from-your-event-hub-using-azure-stream-analytics"></a>使用 Azure 流分析处理事件中心的数据 
 利用 Azure 流分析服务，可以轻松地通过 Azure 事件中心引入、处理和分析流数据，获得进行实时操作所需的强大洞察力。 此集成使你可以快速创建热路径分析管道。 可以通过 Azure 门户直观显示传入数据以及编写流分析查询。 查询准备就绪后，单击几下鼠标即可将其移到生产环境中。 

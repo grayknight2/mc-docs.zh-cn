@@ -5,16 +5,20 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 08/01/2019
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: 09d5f250181f483f19facdc76fe2a1f18f9c62ce
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: 9bd7734fe685ff4ee6a5aeace518e4a71b5c85d8
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85320468"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222527"
 ---
+<!--VERIFIED SUCCESSFULLY-->
+<!--UPDATE CAREFULLY-->
 # <a name="understand-your-azure-cosmos-db-bill"></a>了解 Azure Cosmos DB 帐单
 
 Azure Cosmos DB 是完全托管的云原生数据库服务，仅针对预配的吞吐量和消耗的存储收费，从而简化计费。 与本地或 IaaS 托管的替代方案相比，无需额外的许可费、硬件、使用成本或设施成本。 若想使用 Azure Cosmos DB 的多区域功能，与现有本地或 IaaS 解决方案相比，数据库服务可显着降低成本。
@@ -36,7 +40,7 @@ Azure Cosmos DB 是完全托管的云原生数据库服务，仅针对预配的�
 
 * 以每小时 10 个单位乘以成本 0.051 元（每小时每 100 RU/秒）= 每小时 0.51 元。 
 
-* 以每小时 0.82 元乘以当月的小时数，即 0.82 * 24 小时 * 31 天 = 当月 610.1 元。  
+* 以每小时 0.51 元乘以当月的小时数，即 0.51 * 24 小时 * 31 天 = 当月 610.1 元。  
 
 * 月度总帐单将显示 7,440 个单位（100 个 RU），费用为 610.1 元。
 
@@ -46,7 +50,7 @@ Azure Cosmos DB 是完全托管的云原生数据库服务，仅针对预配的�
 
 * 则帐单上会显示 600 个单位（2,500 RU/秒/100 RU/秒/单位* 24小时）。 费用为 30.6 元（600 个单位 * 0.051 元/单位）。
 
-* 当月总帐单将为 49.2 元。
+* 当月总帐单将为 30.6 元。
 
 ### <a name="billing-rate-if-storage-size-changes"></a>存储大小变化时的计费率
 
@@ -74,7 +78,7 @@ Azure Cosmos DB 是完全托管的云原生数据库服务，仅针对预配的�
 
 * 假设一个月为 744 小时（24 小时 * 31 天），如果 500 小时的预配吞吐量为 1,200 RU/秒，其余 244 小时的预配吞吐量为 22,200 RU/秒，则月度帐单将显示：500 x 0.984 元/小时 + 244 x 18.21元/小时 = 13402.56 元/月。
 
-    <!--Not Available on ![Dedicated throughput bill example](./media/understand-your-bill/bill-example1.png)-->
+    <!--Not Available on :::image type="content" source="./media/understand-your-bill/bill-example1.png" alt-text="Dedicated throughput bill example":::-->
 
 ### <a name="billing-example-containers-with-shared-throughput-mode"></a>计费示例：具有共享吞吐量模式的容器
 
@@ -86,11 +90,11 @@ Azure Cosmos DB 是完全托管的云原生数据库服务，仅针对预配的�
 
 * 此时需支付：1,550 * 0.051 元 = 79.05元/小时。  
 
-    <!--CURRECTLY $2,880 MAP TO CNY18,360-->
+<!--CURRECTLY $2,880 MAP TO CNY18,360-->
     
 * 假设一个月为 744 小时，如果 300 小时的预配吞吐量为 120K RU/秒，其余 444 小时的预配吞吐量为 155K RU/秒，则月度帐单将显示：300 x 61.2元/小时 + 444 x 79.05元/小时 = 18,360 元+ 35,098.2 元 = 53,458.2 元/月。 
 
-    <!--Not Available on ![Shared throughput bill example](./media/understand-your-bill/bill-example2.png)-->
+    <!--Not Available on :::image type="content" source="./media/understand-your-bill/bill-example2.png" alt-text="Shared throughput bill example":::-->
 
 ## <a name="billing-examples-with-geo-replication-and-multi-master"></a>采用异地复制和多主数据库的计费示例  
 
@@ -132,7 +136,9 @@ Azure Cosmos DB 是完全托管的云原生数据库服务，仅针对预配的�
 
 我们来看看以下示例，示例中包含一个多区域 Azure Cosmos 帐户，其中所有区域都可写入（多主数据库配置）。 为简单起见，假定存储大小保持不变，且不会更改，此处不考虑存储大小，从而简化示例。 本月的预配吞吐量变化如下（假定一月为 31 天或 744 小时）： 
 
-<!--Region Mapping: West US--China North; East US--China East; North Europe-->中国北部 2-->
+<!--Region Mapping: West US       China North-->
+<!--Region Mapping: East US       China East-->
+<!--Region Mapping: North Europe  China North 2-->
 
 [0-100 小时]：  
 
@@ -186,7 +192,7 @@ Azure Cosmos DB 是完全托管的云原生数据库服务，仅针对预配的�
 
 下图直观地呈现了本月 744 小时内总预配吞吐量的变化情况： 
 
-![真实示例](./media/understand-your-bill/bill-example3.png)
+:::image type="content" source="./media/understand-your-bill/bill-example3.png" alt-text="真实示例":::
 
 将按以下方式计算月度总帐单（假定一个月为 31 天/744 小时）：
 
@@ -246,19 +252,18 @@ Azure Cosmos DB 是完全托管的云原生数据库服务，仅针对预配的�
 
 我们来看看另一个示例，介绍希望在月末之前主动估算帐单的情况。 可按如下方式估算帐单：
 
-|**存储成本** | |
-|----|----|
-|平均记录大小 (KB) |1 |
-|记录数  |100,000,000  |
-|总存储 (GB)  |100 |
-|每 GB 的月度成本  |2\.576 元  |
-|预期的月度存储成本   |257.6 元  |
+**存储成本**
 
-<br />
+* 平均记录大小 (KB) = 1 
+* 记录数 = 100,000,000 
+* 总存储 (GB) = 100 
+* 每 GB 的月度成本 = 2.576 元 
+* 预期的月度存储成本 = 257.6 元 
 
-|**吞吐量成本** | | | |
-|----|----|----|----|
+**吞吐量成本**
+
 |操作类型| 请求数/秒| 平均值RU/请求| 所需 RU|
+|----|----|----|----|
 |写入| 100 | 5 | 500|
 |读取| 400| 1| 400|
 

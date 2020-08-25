@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 08/28/2019
-ms.date: 08/06/2020
-ms.openlocfilehash: 26e7c1a55fef986457f11c92b705aeb1cccab036
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: 50bc3a8cb06107dfd3b323c1b753f933d39e164d
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841165"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515738"
 ---
 # <a name="series_decompose_anomalies"></a>series_decompose_anomalies()
 
@@ -23,11 +23,11 @@ ms.locfileid: "87841165"
 
 此函数采用包含某个序列（动态数值数组）的表达式作为输入，并提取有分数的异常点。
 
-**语法**
+## <a name="syntax"></a>语法
 
 `series_decompose_anomalies (`*Series* `[, ` *Threshold*`,` *Seasonality*`,` *Trend*`, ` *Test_points*`, ` *AD_method*`,` *Seasonality_threshold* `])`
 
-**参数**
+## <a name="arguments"></a>参数
 
 * Series：动态数组单元格（数值数组），通常是 [make-series](make-seriesoperator.md) 或 [make_list](makelist-aggfunction.md) 运算符生成的输出
 * *阈值*：异常阈值，默认值为 1.5（k 值），用于检测轻度异常或更严重的异常
@@ -45,7 +45,7 @@ ms.locfileid: "87841165"
     * “tukey”：Tukey 的围栏测试，采用标准的第 25 - 75 百分位范围 。有关残差时序的详细信息，请参阅 [series_outliers](series-outliersfunction.md)
 * Seasonality_threshold：当 Seasonality 设置为 autodetect 时周期性分数的阈值。 默认分数阈值为 `0.6`。 有关详细信息，请参阅 [series_periods_detect](series-periods-detectfunction.md)
 
-**返回值**
+## <a name="returns"></a>返回
 
  该函数返回以下各个序列：
 

@@ -1,19 +1,19 @@
 ---
 title: 使用 C# 向 Azure 数据资源管理器添加群集主体
 description: 本文介绍如何使用 C# 向 Azure 数据资源管理器添加群集主体。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 02/03/2020
-ms.date: 05/09/2020
-ms.openlocfilehash: 9fb81b5d70e7a54f12b67342a2b7e893682a76d7
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: ad7f2821b37faf9855f3ddb117010240d5b15abd
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417777"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515946"
 ---
 # <a name="add-cluster-principals-for-azure-data-explorer-by-using-c"></a>使用 C# 向 Azure 数据资源管理器添加群集主体
 

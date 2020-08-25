@@ -8,14 +8,14 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-origin.date: 04/24/2020
-ms.date: 06/29/2020
-ms.openlocfilehash: 535dcb36b31488dc987b611b5e804f1c413c0a67
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+origin.date: 07/27/2020
+ms.date: 08/24/2020
+ms.openlocfilehash: 946e2fee2b494efa9d71784cd7b85ef66cd0fc12
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441179"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228486"
 ---
 # <a name="evaluate-model-module"></a>“评估模型”模块
 
@@ -52,6 +52,11 @@ ms.locfileid: "86441179"
 
 运行“评估模型”后，选择模块以打开右侧的“评估模型”导航面板 。  然后，选择“输出 + 日志”选项卡，然后在该选项卡上，“数据输出”部分包含多个图标。   “可视化”图标有一个条形图图标，这是查看结果的第一种方法。
 
+对于二元分类，单击“可视化”图标后，可以直观显示二元混淆矩阵。
+对于多元分类，可以在“输出 + 日志”选项卡下找到混淆矩阵绘图文件，如下所示：
+> [!div class="mx-imgBorder"]
+> ![预览已上传的图像](media/module/multi-class-confusion-matrix.png)
+
 如果将数据集连接到“评估模型”的两种输入，结果将包含这两个数据集或这两个模型的指标。
 附加到左侧端口的模型或数据先显示在报告中，其后是附加到右侧端口的数据集或模型的指标。  
 
@@ -71,21 +76,19 @@ ms.locfileid: "86441179"
 
 ### <a name="metrics-for-classification-models"></a>分类模型的指标
 
-评估分类模型时，将报告以下指标。
+
+评估二元分类模型时，会报告以下指标。
   
 -   “准确度”衡量分类模型的优劣，即真实结果占总体的比例。  
   
--   “精准率”是真实结果与所有正面结果之比。  
+-   “精准率”是真实结果与所有正面结果之比。 查准率 = TP/(TP+FP)  
   
--   “召回率”是模型返回的所有正确结果的小数。  
+-   “查全率”是实际检索到的相关实例总数的分数。 查全率 = TP/(TP+FN)  
   
--   “F 评分”计算为精准率与召回率的加权平均值，介于 0 和 1 之间，理想的 F 评分值为 1。  
+-   “F1 分数”计算为查准率与查全率的加权平均值，介于 0 到 1 之间，理想的 F1 分数值为 1。  
   
 -   “AUC”度量绘制的曲线下面的面积（在 y 轴上绘制真报率，在 x 轴上绘制误报率）。 此指标非常有用，因为它提供单个数字让你比较不同类型的模型。  
-  
-- “平均对数损失”是用于表示错误结果的惩罚的单个评分。 它计算为以下两个概率分布之差 – 真实分布，以及模型中的分布。  
-  
-- “训练对数损失”是表示分类器相比随机预测的优势的单个评分。 对数损失通过将模型输出的概率与标签中的已知值（真实值）进行比较，来度量模型的不确定性。 你希望将整个模型的对数损失降至最低。
+
 
 ### <a name="metrics-for-regression-models"></a>回归模型的指标
  

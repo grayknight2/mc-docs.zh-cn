@@ -5,15 +5,18 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.devlang: java
 ms.topic: conceptual
-origin.date: 06/11/2020
-ms.date: 07/06/2020
+origin.date: 07/08/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: bcd4b3d68858441d899db399cfa3297c5815d5b5
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.custom: devx-track-java
+ms.openlocfilehash: aea5db6bd142d50b8bf10a9e2e17792b97baa0f7
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323340"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222468"
 ---
 <!--Verified successfully, ONLY CHARACTERS CONTENT-->
 # <a name="performance-tips-for-azure-cosmos-db-java-sdk-v4"></a>Azure Cosmos DB Java SDK v4 性能提示
@@ -36,55 +39,200 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
 ## <a name="networking"></a>网络
 
-* **连接模式：使用直接模式** <a name="direct-connection"></a>
+* **连接模式：使用直接模式**
+<a name="direct-connection"></a>
 
-    客户端连接到 Azure Cosmos DB 的方式对性能有重大影响（尤其在客户端延迟方面）。 ConnectionMode 是可用于配置客户端 ConnectionPolicy 的关键配置设置 。 对于 Azure Cosmos DB Java SDK v4，有两种可用的 ConnectionMode：  
+    客户端连接到 Azure Cosmos DB 的方式对性能有重大影响（尤其在客户端延迟方面）。 连接模式是可用于配置客户端的关键配置设置。 对于 Azure Cosmos DB Java SDK v4，有两种可用的连接模式：  
 
-    * [网关（默认值）](https://docs.microsoft.com/java/api/com.microsoft.azure.cosmosdb.connectionmode)  
-    * [直接](https://docs.microsoft.com/java/api/com.microsoft.azure.cosmosdb.connectionmode)
+    * 直接模式（默认）      
+    * 网关模式
 
-    这两个 ConnectionMode 实质上设置了请求从客户端计算机发往 Azure Cosmos DB 后端的分区时所采用的路由的条件。 通常，“直接”模式是获得最佳性能的首选选项 - 它允许客户端打开直接连接到 Azure Cosmos DB 后端分区的 TCP 连接，在不通过中介的情况下直接发送请求。 与之相反，在“网关”模式下，客户端发出的请求会路由到 Azure Cosmos DB 前端中所谓的“网关”服务器，该服务器接下来会将你的请求扇出到 Azure Cosmos DB 后端的相应分区。 如果应用程序在有严格防火墙限制的企业网络中运行，则“网关”模式是最佳选择，因为它使用标准 HTTPS 端口与单个终结点。 但是，对于性能的影响是每次从/向 Azure Cosmos DB 读取/写入数据时，“网关”模式都涉及到额外的网络跃点（从客户端到网关，以及从网关到分区）。 因此，直接模式因为网络跃点较少，可以提供更好的性能。
+    这些连接模式实质上限制了数据平面请求（文档读取和写入）从客户端计算机到 Azure Cosmos DB 后端中分区的路由方式。 通常，直接模式是最佳性能的首选选项，它允许客户端直接与 Azure Cosmos DB 后端分区建立 TCP 连接，并直接发送请求，而不通过中介。 与之相反，在“网关”模式下，客户端发出的请求会路由到 Azure Cosmos DB 前端中所谓的“网关”服务器，该服务器接下来会将你的请求扇出到 Azure Cosmos DB 后端的相应分区。 如果应用程序在有严格防火墙限制的企业网络中运行，则“网关”模式是最佳选择，因为它使用标准 HTTPS 端口与单个终结点。 但是，对于性能的影响是每次从/向 Azure Cosmos DB 读取/写入数据时，“网关”模式都涉及到额外的网络跃点（从客户端到网关，以及从网关到分区）。 因此，直接模式因为网络跃点较少，可以提供更好的性能。
 
-    ConnectionMode 是在构造 Azure Cosmos DB 客户端实例期间使用 ConnectionPolicy 参数配置的： 
+     如下所示，使用 directMode() 或 gatewayMode() 方法在 Azure Cosmos DB 客户端生成器中配置数据平面请求的连接模式。 若要使用默认设置配置任一模式，请调用任一方法而不使用参数。    否则，以参数（directMode() 的是 DirectConnectionConfig，gatewayMode() 的是 GatewayConnectionConfig）的形式传递配置设置类实例。
 
-    #### <a name="async"></a>[异步](#tab/api-async)
+    <a name="override-default-consistency-javav4"></a>
+    ### <a name="java-v4-sdk"></a>Java V4 SDK
 
-    <a name="java4-connection-policy-async"></a>
-    ### <a name="java-sdk-v4-maven-comazureazure-cosmos-async-api"></a>Java SDK V4 (Maven com.azure::azure-cosmos) 异步 API
+    # <a name="async"></a>[异步](#tab/api-async)
+
+    Java SDK V4 (Maven com.azure::azure-cosmos) 异步 API
 
     ```java
-    public ConnectionPolicy getConnectionPolicy() {
-        ConnectionPolicy policy = new ConnectionPolicy();
-        policy.setMaxPoolSize(1000);
-        return policy;
-    }
 
-    ConnectionPolicy connectionPolicy = new ConnectionPolicy();
-    CosmosAsyncClient client = new CosmosClientBuilder()
-        .setEndpoint(HOST)
-        .setKey(MASTER)
-        .setConnectionPolicy(connectionPolicy)
-        .buildAsyncClient();
+    /* Direct mode, default settings */
+    CosmosAsyncClient clientDirectDefault = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .directMode()
+            .buildAsyncClient();
+
+    /* Direct mode, custom settings */
+    DirectConnectionConfig directConnectionConfig = DirectConnectionConfig.getDefaultConfig();
+
+    // Example config, do not use these settings as defaults
+    directConnectionConfig.setMaxConnectionsPerEndpoint(120);
+    directConnectionConfig.setIdleConnectionTimeout(Duration.ofMillis(100));
+
+    CosmosAsyncClient clientDirectCustom = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .directMode(directConnectionConfig)
+            .buildAsyncClient();
+
+    /* Gateway mode, default settings */
+    CosmosAsyncClient clientGatewayDefault = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .gatewayMode()
+            .buildAsyncClient();
+
+    /* Gateway mode, custom settings */
+    GatewayConnectionConfig gatewayConnectionConfig = GatewayConnectionConfig.getDefaultConfig();
+
+    // Example config, do not use these settings as defaults
+    gatewayConnectionConfig.setProxy(new ProxyOptions(ProxyOptions.Type.HTTP, InetSocketAddress.createUnresolved("your.proxy.addr",80)));
+    gatewayConnectionConfig.setMaxConnectionPoolSize(150);
+
+    CosmosAsyncClient clientGatewayCustom = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .gatewayMode(gatewayConnectionConfig)
+            .buildAsyncClient();
+
+    /* No connection mode, defaults to Direct mode with default settings */
+    CosmosAsyncClient clientDefault = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .buildAsyncClient();
+
     ```
 
-    #### <a name="sync"></a>[Sync](#tab/api-sync)
+    # <a name="sync"></a>[Sync](#tab/api-sync)
 
-    <a name="java4-connection-policy-sync"></a>
-    ### <a name="java-sdk-v4-maven-comazureazure-cosmos-sync-api"></a>Java SDK V4 (Maven com.azure::azure-cosmos) 同步 API
+    Java SDK V4 (Maven com.azure::azure-cosmos) 同步 API
 
     ```java
-    public ConnectionPolicy getConnectionPolicy() {
-        ConnectionPolicy policy = new ConnectionPolicy();
-        policy.setMaxPoolSize(1000);
-        return policy;
-    }
 
-    ConnectionPolicy connectionPolicy = new ConnectionPolicy();
-    CosmosClient client = new CosmosClientBuilder()
-        .setEndpoint(HOST)
-        .setKey(MASTER)
-        .setConnectionPolicy(connectionPolicy)
-        .buildClient();
+    /* Direct mode, default settings */
+    CosmosClient clientDirectDefault = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .directMode()
+            .buildClient();
+
+    /* Direct mode, custom settings */
+    DirectConnectionConfig directConnectionConfig = DirectConnectionConfig.getDefaultConfig();
+
+    // Example config, do not use these settings as defaults
+    directConnectionConfig.setMaxConnectionsPerEndpoint(120);
+    directConnectionConfig.setIdleConnectionTimeout(Duration.ofMillis(100));
+
+    CosmosClient clientDirectCustom = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .directMode(directConnectionConfig)
+            .buildClient();
+
+    /* Gateway mode, default settings */
+    CosmosClient clientGatewayDefault = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .gatewayMode()
+            .buildClient();
+
+    /* Gateway mode, custom settings */
+    GatewayConnectionConfig gatewayConnectionConfig = GatewayConnectionConfig.getDefaultConfig();
+
+    // Example config, do not use these settings as defaults
+    gatewayConnectionConfig.setProxy(new ProxyOptions(ProxyOptions.Type.HTTP, InetSocketAddress.createUnresolved("your.proxy.addr",80)));
+    gatewayConnectionConfig.setMaxConnectionPoolSize(150);
+
+    CosmosClient clientGatewayCustom = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .gatewayMode(gatewayConnectionConfig)
+            .buildClient();
+
+    /* No connection mode, defaults to Direct mode with default settings */
+    CosmosClient clientDefault = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .buildClient();
+
+    ```
+
+    --- 
+
+    由于以下原因，directMode() 方法额外被替代。 控制平面操作（如数据库和容器 CRUD）始终使用网关模式；如果用户已为数据平面操作配置了直接模式，控制平面操作将使用默认的网关模式设置。 大多数用户是这种情况。 但是，如果用户想将直接模式用于数据平面操作，同时获得控制平面网关模式参数的可调性，则可以使用以下 directMode() 的重写：
+
+    <a name="override-default-consistency-javav4"></a>
+    ### <a name="java-v4-sdk"></a>Java V4 SDK
+
+    # <a name="async"></a>[异步](#tab/api-async)
+
+    Java SDK V4 (Maven com.azure::azure-cosmos) 异步 API
+
+    ```java
+
+    /* Independent customization of Direct mode data plane and Gateway mode control plane */
+    DirectConnectionConfig directConnectionConfig = DirectConnectionConfig.getDefaultConfig();
+
+    // Example config, do not use these settings as defaults
+    directConnectionConfig.setMaxConnectionsPerEndpoint(120);
+    directConnectionConfig.setIdleConnectionTimeout(Duration.ofMillis(100));
+
+    GatewayConnectionConfig gatewayConnectionConfig = GatewayConnectionConfig.getDefaultConfig();
+
+    // Example config, do not use these settings as defaults
+    gatewayConnectionConfig.setProxy(new ProxyOptions(ProxyOptions.Type.HTTP, InetSocketAddress.createUnresolved("your.proxy.addr",80)));
+    gatewayConnectionConfig.setMaxConnectionPoolSize(150);
+
+    CosmosAsyncClient clientDirectCustom = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .directMode(directConnectionConfig,gatewayConnectionConfig)
+            .buildAsyncClient();
+
+    ```
+
+    # <a name="sync"></a>[Sync](#tab/api-sync)
+
+    Java SDK V4 (Maven com.azure::azure-cosmos) 同步 API
+
+    ```java
+
+    /* Independent customization of Direct mode data plane and Gateway mode control plane */
+    DirectConnectionConfig directConnectionConfig = DirectConnectionConfig.getDefaultConfig();
+
+    // Example config, do not use these settings as defaults
+    directConnectionConfig.setMaxConnectionsPerEndpoint(120);
+    directConnectionConfig.setIdleConnectionTimeout(Duration.ofMillis(100));
+
+    GatewayConnectionConfig gatewayConnectionConfig = GatewayConnectionConfig.getDefaultConfig();
+
+    // Example config, do not use these settings as defaults
+    gatewayConnectionConfig.setProxy(new ProxyOptions(ProxyOptions.Type.HTTP, InetSocketAddress.createUnresolved("your.proxy.addr",80)));
+    gatewayConnectionConfig.setMaxConnectionPoolSize(150);
+
+    CosmosClient clientDirectCustom = new CosmosClientBuilder()
+            .endpoint(HOSTNAME)
+            .key(MASTERKEY)
+            .consistencyLevel(CONSISTENCY)
+            .directMode(directConnectionConfig,gatewayConnectionConfig)
+            .buildClient();
+
     ```
 
     --- 
@@ -92,11 +240,9 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 <a name="collocate-clients"></a>
 * **将客户端并置在同一 Azure 区域内以提高性能** <a name="same-region"></a>
 
-    如果可能，请将任何调用 Azure Cosmos DB 的应用程序放在与 Azure Cosmos 数据库所在的相同区域中。  根据请求采用的路由，各项请求从客户端传递到 Azure 数据中心边界时的此类延迟可能有所不同。 通过确保在与预配 Azure Cosmos DB 终结点所在的同一 Azure 区域中调用应用程序，可能会实现最低的延迟。 有关可用区域的列表，请参阅 [Azure Regions](https://status.azure.com/status/)（Azure 区域）。
-    
-    <!--Not Available on For an approximate comparison, calls to Azure Cosmos DB within the same region complete within 1-2 ms, but the latency between the West and East coast of the US is >50 ms.-->
-    
-    ![Azure Cosmos DB 连接策略演示](./media/performance-tips/same-region.png)
+    如果可能，请将任何调用 Azure Cosmos DB 的应用程序放在与 Azure Cosmos 数据库所在的相同区域中。  根据请求采用的路由，各项请求从客户端传递到 Azure 数据中心边界时的此类延迟可能有所不同。 通过确保在与预配 Azure Cosmos DB 终结点所在的同一 Azure 区域中调用应用程序，可能会实现最低的延迟。 有关可用区域的列表，请参阅 [Azure Regions](https://azure.microsoft.com/regions/#services)（Azure 区域）。
+
+    :::image type="content" source="./media/performance-tips/same-region.png" alt-text="Azure Cosmos DB 连接策略演示" border="false":::
 
     与多区域 Azure Cosmos DB 帐户交互的应用需要配置[首选位置](tutorial-global-distribution-sql-api.md#preferred-locations)，以确保请求进入并置区域。
 
@@ -178,39 +324,31 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
 * **优化 ConnectionPolicy**
 
-    默认情况下，在使用 Azure Cosmos DB Java SDK v4 时，直接模式 Cosmos DB 请求是通过 TCP 发出的。 在内部，SDK 使用特殊的直接模式体系结构来动态管理网络资源并获得最佳性能。
+    默认情况下，在使用 Azure Cosmos DB Java SDK v4 时，直接模式 Cosmos DB 请求是通过 TCP 发出的。 在内部，直接模式使用特殊的体系结构来动态管理网络资源并获得最佳性能。
 
     在 Azure Cosmos DB Java SDK v4 中，直接模式是为大多数工作负荷改善数据库性能的最佳选择。 
 
     * ***直接模式概述***
 
-        ![直接模式体系结构插图](./media/performance-tips-async-java/rntbdtransportclient.png)
+        :::image type="content" source="./media/performance-tips-async-java/rntbdtransportclient.png" alt-text="直接模式体系结构插图" border="false":::
 
         在直接模式下采用的客户端体系结构使得网络利用率可预测，并实现对 Azure Cosmos DB 副本的多路访问。 上图显示了直接模式如何将客户端请求路由到 Cosmos DB 后端中的副本。 直接模式体系结构在客户端上为每个数据库副本最多分配 10 个通道。 一个通道是前面带有请求缓冲区（深度为 30 个请求）的 TCP 连接。 属于某个副本的通道由该副本的服务终结点按需动态分配。 当用户在直接模式下发出请求时，TransportClient 会根据分区键将请求路由到适当的服务终结点。 请求队列在服务终结点之前缓冲请求。
 
-    * ***直接模式的 ConnectionPolicy 配置选项***
+    * ***直接模式的配置选项***
 
-        以下配置设置控制 RNTBD 体系结构的行为，而该体系结构则控制直接模式 SDK 的行为。
-        
-        第一步，请使用下面推荐的配置设置。 这些 ConnectionPolicy 选项是高级配置设置，可能会以意想不到的方式影响 SDK 性能；我们建议用户不要对其进行修改，除非他们深刻了解其中的得失，并且进行修改是绝对必要的。 如果你遇到有关此特定主题的问题，请联系 [ Azure Cosmos DB 团队](mailto:CosmosDBPerformanceSupport@service.microsoft.com)。
+         如果需要非默认的直接模式行为，则在 Azure Cosmos DB 客户端生成器中创建 DirectConnectionConfig 实例并自定义其属性，然后将自定义的属性实例传递到 directMode() 方法。
 
-        如果使用 Azure Cosmos DB 作为参考数据库（即，该数据库用于多个点读取操作和少量的写入操作），可以接受将 idleEndpointTimeout 设置为 0（即无超时）。
+        这些配置设置控制以上讨论的基础直接模式体系结构的行为。
+
+        第一步是使用下面推荐的配置设置。 这些 DirectConnectionConfig 选项是高级配置设置，可能会以意想不到的方式影响 SDK 性能；我们建议用户不要对其进行修改，除非他们深刻了解其中的得失，并且进行修改是绝对必要的。 如果遇到有关此特定主题方面的问题，请与 [Azure Cosmos DB 团队](mailto:CosmosDBPerformanceSupport@service.microsoft.com)联系。
 
         | 配置选项       | 默认    |
         | :------------------:       | :-----:    |
-        | bufferPageSize             | 8192       |
-        | connectionTimeout          | “PT1M”     |
-        | idleChannelTimeout         | "PT0S"     |
-        | idleEndpointTimeout        | "PT1M10S"  |
-        | maxBufferCapacity          | 8388608    |
-        | maxChannelsPerEndpoint     | 10 个         |
-        | maxRequestsPerChannel      | 30         |
-        | receiveHangDetectionTime   | "PT1M5S"   |
-        | requestExpiryInterval      | "PT5S"     |
-        | requestTimeout             | “PT1M”     |
-        | requestTimerResolution     | "PT0.5S"   |
-        | sendHangDetectionTime      | "PT10S"    |
-        | shutdownTimeout            | "PT15S"    |
+        | idleConnectionTimeout      | “PT1M”     |
+        | maxConnectionsPerEndpoint  | "PT0S"     |
+        | connectTimeout             | "PT1M10S"  |
+        | idleEndpointTimeout        | 8388608    |
+        | maxRequestsPerConnection   | 10         |
 
 * **优化分区集合的并行查询。**
 
@@ -289,6 +427,7 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
             // DON'T do this on eventloop IO netty thread.
             veryCpuIntensiveWork();                
         });
+
     ```
 
     应该根据工作的类型使用相应的现有 Reactor 计划程序来执行工作。 请阅读 [``Schedulers``](https://projectreactor.io/docs/core/release/api/reactor/core/scheduler/Schedulers.html)。
@@ -303,7 +442,7 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
         生成请求的线程的总体延迟计算必然会考虑到同步记录器延迟的因素。 建议使用异步记录器（例如 [log4j2](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Flogging.apache.org%2Flog4j%2Flog4j-2.3%2Fmanual%2Fasync.html&data=02%7C01%7CCosmosDBPerformanceInternal%40service.microsoft.com%7C36fd15dea8384bfe9b6b08d7c0cf2113%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637189868158267433&sdata=%2B9xfJ%2BWE%2F0CyKRPu9AmXkUrT3d3uNA9GdmwvalV3EOg%3D&reserved=0)），以便将日志记录开销与高性能应用程序线程分开。
 
-    * 禁用 netty 的日志记录
+    * ***禁用 netty 的日志记录***
 
         Netty 库日志记录非常琐碎，因此需要将其关闭（在配置中禁止登录可能并不足够），以避免产生额外的 CPU 开销。 如果不处于调试模式，请一起禁用 netty 日志记录。 因此，如果要使用 log4j 来消除 netty 中 ``org.apache.log4j.Category.callAppenders()`` 产生的额外 CPU 开销，请将以下行添加到基代码：
 
@@ -343,6 +482,7 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     ```java
     asyncContainer.createItem(item,new PartitionKey(pk),new CosmosItemRequestOptions()).block();
+
     ```
 
     # <a name="sync"></a>[Sync](#tab/api-sync)
@@ -351,9 +491,10 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     ```java
     syncContainer.createItem(item,new PartitionKey(pk),new CosmosItemRequestOptions());
+
     ```
 
-    ---
+    --- 
 
     而不是仅提供项实例，如下所示：
 
@@ -363,6 +504,7 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     ```java
     asyncContainer.createItem(item).block();
+
     ```
 
     # <a name="sync"></a>[Sync](#tab/api-sync)
@@ -371,30 +513,24 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     ```java
     syncContainer.createItem(item);
+
     ```
 
-    ---
+    --- 
 
     后者是受支持的，但会增加应用程序的延迟；SDK 必须分析项并提取分区键。
 
-## <a name="indexing-policy"></a>索引策略
+## <a name="indexing-policy"></a>索引编制策略
 
 * **从索引中排除未使用的路径以加快写入速度**
 
-    Azure Cosmos DB 的索引策略允许使用索引路径（setIncludedPaths 和 setExcludedPaths）指定要在索引中包括或排除的文档路径。 在事先知道查询模式的方案中，使用索引路径可改善写入性能并降低索引存储空间，因为索引成本与索引的唯一路径数目直接相关。 例如，以下代码演示如何使用“*”通配符从索引编制中排除文档的整个部分（也称为子树）。
+    Azure Cosmos DB 的索引策略允许使用索引路径（setIncludedPaths 和 setExcludedPaths）指定要在索引中包括或排除的文档路径。 在事先知道查询模式的方案中，使用索引路径可改善写入性能并降低索引存储空间，因为索引成本与索引的唯一路径数目直接相关。 例如，以下代码演示如何使用“*”通配符从索引编制中纳入和排除文档的整个部分（也称为子树）。
 
     <a name="java4-indexing"></a>
-### <a name="java-sdk-v4-maven-comazureazure-cosmos"></a>Java SDK V4 (Maven com.azure::azure-cosmos)
-    ```java
-    Index numberIndex = Index.Range(DataType.Number);
-    indexes.add(numberIndex);
-    includedPath.setIndexes(indexes);
-    includedPaths.add(includedPath);
-    indexingPolicy.setIncludedPaths(includedPaths);        
-    containerProperties.setIndexingPolicy(indexingPolicy);
-    ``` 
-
-    For more information, see [Azure Cosmos DB indexing policies](indexing-policies.md).
+    
+    <!--Pending for global document refreshment-->
+    
+    有关索引的详细信息，请参阅 [Azure Cosmos DB 索引策略](indexing-policies.md)。
 
 ## <a name="throughput"></a>吞吐量
 <a name="measure-rus"></a>
@@ -417,7 +553,8 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
     CosmosItemResponse<CustomPOJO> response = asyncContainer.createItem(item).block();
 
     response.getRequestCharge();
-    ```     
+
+    ```
 
     # <a name="sync"></a>[Sync](#tab/api-sync)
 
@@ -427,9 +564,10 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
     CosmosItemResponse<CustomPOJO> response = syncContainer.createItem(item);
 
     response.getRequestCharge();
-    ```     
 
-    ---
+    ```
+
+    --- 
 
     在此标头中返回的请求费用是预配吞吐量的一小部分。 例如，如果预配了 2000 RU/s，上述查询返回 1000 个 1KB 文档，则操作成本为 1000。 因此在一秒内，服务器在对后续请求进行速率限制之前，只接受两个此类请求。 有关详细信息，请参阅[请求单位](request-units.md)和[请求单位计算器](https://www.documentdb.com/capacityplanner)。
 
@@ -438,9 +576,11 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     客户端尝试超过帐户保留的吞吐量时，服务器的性能不会降低，并且不会使用超过保留级别的吞吐量容量。 服务器将抢先结束 RequestRateTooLarge（HTTP 状态代码 429）的请求并返回 [x-ms-retry-after-ms](https://docs.microsoft.com/rest/api/cosmos-db/common-cosmosdb-rest-request-headers) 标头，该标头指示重新尝试请求前用户必须等待的时间量（以毫秒为单位）。
 
+    ```xml
         HTTP Status 429,
         Status Line: RequestRateTooLarge
         x-ms-retry-after-ms :100
+    ```
 
     SDK 全部都会隐式捕获此响应，并遵循服务器指定的 retry-after 标头，并重试请求。 除非多个客户端同时访问帐户，否则下次重试就会成功。
 

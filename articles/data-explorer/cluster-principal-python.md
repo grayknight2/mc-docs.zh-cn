@@ -1,19 +1,19 @@
 ---
 title: 使用 Python 向 Azure 数据资源管理器添加群集主体
 description: 本文介绍如何使用 Python 向 Azure 数据资源管理器添加群集主体。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 02/03/2020
-ms.date: 05/09/2020
-ms.openlocfilehash: efd98051fe23b5b761cff7aefef5d93079386c44
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: 824fb278b17ce4a700b6c78a0ea76d7048d4ce01
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417683"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515934"
 ---
 # <a name="add-cluster-principals-for-azure-data-explorer-by-using-python"></a>使用 Python 向 Azure 数据资源管理器添加群集主体
 

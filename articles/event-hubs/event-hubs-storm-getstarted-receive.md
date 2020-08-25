@@ -1,27 +1,16 @@
 ---
 title: 快速入门：使用 Apache Storm 接收事件 - Azure 事件中心
 description: 快速入门：本文提供有关如何使用 Apache Storm 从 Azure 事件中心接收事件的信息。
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.workload: na
-ms.tgt_pltfrm: java
-ms.devlang: multiple
 ms.topic: quickstart
-ms.custom: seodec18
-origin.date: 11/05/2019
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 0b89d2c328891ce130143d1c1955fdaf9c4fa5ba
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: db4e7938967de33bc6c743dd956304c2e433d738
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199768"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715385"
 ---
 # <a name="quickstart-receive-events-from-event-hubs-using-apache-storm"></a>快速入门：使用 Apache Storm 从事件中心接收事件
 
@@ -89,16 +78,16 @@ ms.locfileid: "84199768"
     eventhubspout.namespace = ioteventhub-ns
     eventhubspout.entitypath = {event hub name}
     eventhubspout.partitions.count = 16
-
+       
     # if not provided, will use storm's zookeeper settings
     # zookeeper.connectionstring=localhost:2181
-
+       
     eventhubspout.checkpoint.interval = 10
     eventhub.receiver.credits = 10
     ```
     **eventhub.receiver.credits** 的值决定在将事件发布到 Storm 管道之前先进行批处理的事件的数量。 为了简单起见，本示例将此值设置为 10。 在生产中，通常应将它设置为较高的值，例如 1024。
 10. 使用以下代码创建名为 **LoggerBolt** 的新类：
-
+    
     ```java
     import java.util.Map;
     import org.slf4j.Logger;
@@ -108,37 +97,37 @@ ms.locfileid: "84199768"
     import backtype.storm.topology.OutputFieldsDeclarer;
     import backtype.storm.topology.base.BaseRichBolt;
     import backtype.storm.tuple.Tuple;
-
+    
     public class LoggerBolt extends BaseRichBolt {
         private OutputCollector collector;
         private static final Logger logger = LoggerFactory
                   .getLogger(LoggerBolt.class);
-
+    
         @Override
         public void execute(Tuple tuple) {
             String value = tuple.getString(0);
             logger.info("Tuple value: " + value);
-
+   
             collector.ack(tuple);
         }
-
+   
         @Override
         public void prepare(Map map, TopologyContext context, OutputCollector collector) {
             this.collector = collector;
             this.count = 0;
         }
-
+        
         @Override
         public void declareOutputFields(OutputFieldsDeclarer declarer) {
             // no output fields
         }
-
+    
     }
     ```
-
+    
     此 Storm 螺栓记录接收到的事件的内容。 在存储服务中，它可以轻松扩展为存储元组。 [使用事件中心的 HDInsight Storm 示例]使用此同一方法将数据存储到 Azure 存储和 Power BI。
 11. 使用以下代码创建一个名为 **LogTopology** 的类：
-
+    
     ```java
     import java.io.FileReader;
     import java.util.Properties;
@@ -150,11 +139,11 @@ ms.locfileid: "84199768"
     import com.microsoft.eventhubs.samples.EventCount;
     import com.microsoft.eventhubs.spout.EventHubSpout;
     import com.microsoft.eventhubs.spout.EventHubSpoutConfig;
-
+        
     public class LogTopology {
         protected EventHubSpoutConfig spoutConfig;
         protected int numWorkers;
-
+        
         protected void readEHConfig(String[] args) throws Exception {
             Properties properties = new Properties();
             if (args.length > 1) {
@@ -163,7 +152,7 @@ ms.locfileid: "84199768"
                 properties.load(EventCount.class.getClassLoader()
                         .getResourceAsStream("Config.properties"));
             }
-
+        
             String username = properties.getProperty("eventhubspout.username");
             String password = properties.getProperty("eventhubspout.password");
             String namespaceName = properties
@@ -183,26 +172,26 @@ ms.locfileid: "84199768"
             System.out.println("  checkpoint interval: "
                     + checkpointIntervalInSeconds);
             System.out.println("  receiver credits: " + receiverCredits);
-
+     
             spoutConfig = new EventHubSpoutConfig(username, password,
                     namespaceName, entityPath, partitionCount, zkEndpointAddress,
                     checkpointIntervalInSeconds, receiverCredits);
-
+        
             // set the number of workers to be the same as partition number.
             // the idea is to have a spout and a logger bolt co-exist in one
             // worker to avoid shuffling messages across workers in storm cluster.
             numWorkers = spoutConfig.getPartitionCount();
-
+        
             if (args.length > 0) {
                 // set topology name so that sample Trident topology can use it as
                 // stream name.
                 spoutConfig.setTopologyName(args[0]);
             }
         }
-
+        
         protected StormTopology buildTopology() {
             TopologyBuilder topologyBuilder = new TopologyBuilder();
-
+       
             EventHubSpout eventHubSpout = new EventHubSpout(spoutConfig);
             topologyBuilder.setSpout("EventHubsSpout", eventHubSpout,
                     spoutConfig.getPartitionCount()).setNumTasks(
@@ -214,14 +203,14 @@ ms.locfileid: "84199768"
                     .setNumTasks(spoutConfig.getPartitionCount());
             return topologyBuilder.createTopology();
         }
-
+        
         protected void runScenario(String[] args) throws Exception {
             boolean runLocal = true;
             readEHConfig(args);
             StormTopology topology = buildTopology();
             Config config = new Config();
             config.setDebug(false);
-
+        
             if (runLocal) {
                 config.setMaxTaskParallelism(2);
                 LocalCluster localCluster = new LocalCluster();
@@ -233,7 +222,7 @@ ms.locfileid: "84199768"
                 StormSubmitter.submitTopology(args[0], config, topology);
             }
         }
-
+        
         public static void main(String[] args) throws Exception {
             LogTopology topology = new LogTopology();
             topology.runScenario(args);
@@ -251,7 +240,7 @@ ms.locfileid: "84199768"
 * [事件中心常见问题解答](event-hubs-faq.md)
 
 <!-- Links -->
-[Event Hubs overview]: event-hubs-what-is-event-hubs.md
+[Event Hubs overview]: ./event-hubs-about.md
 [HDInsight Storm]: ../hdinsight/storm/apache-storm-overview.md
 [使用事件中心的 HDInsight Storm 示例]: https://github.com/Azure-Samples/hdinsight-java-storm-eventhub
 

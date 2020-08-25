@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: 31bdf7ad778667e532ae19665d3c71ca0a624526
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: d9485181d6c18e61f4c0a8148574319ac2098a2a
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841352"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516089"
 ---
 # <a name="parse_version"></a>parse_version()
 
@@ -24,28 +24,26 @@ ms.locfileid: "87841352"
 parse_version("0.0.0.1")
 ```
 
-**语法**
+## <a name="syntax"></a>语法
 
 `parse_version` `(` *Expr* `)`
 
-**参数**
+## <a name="arguments"></a>参数
 
 * *`Expr`* ：类型为 `string` 的标量表达式，指定要解析的版本。
 
-**返回**
+> [!NOTE]
+> * 输入字符串必须包含一到四个版本部分，用数字表示，并用点（“.”）分隔。
+> * 版本的每个部分最多可包含八个数字，最大值为 99999999。
+> * 如果少于四个部分，则所有缺少的部分将被视为尾随部分 (`1.0` == `1.0.0.0`)。
+
+## <a name="returns"></a>返回
 
 如果转换成功，则结果将为小数。
 如果转换不成功，则结果将为 `null`。
 
-**备注**
+## <a name="example"></a>示例
 
-输入字符串必须包含一到四个版本部分，用数字表示，并用点（“.”）分隔。
-
-版本的每个部分最多可包含八个数字，最大值为 99999999。
-
-如果少于四个部分，则所有缺少的部分将被视为尾随部分 (`1.0` == `1.0.0.0`)。
-
-**示例**
 ```kusto
 let dt = datatable(v:string)
 ["0.0.0.5","0.0.7.0","0.0.3","0.2","0.1.2.0","1.2.3.4","1","99999999.0.0.0"];

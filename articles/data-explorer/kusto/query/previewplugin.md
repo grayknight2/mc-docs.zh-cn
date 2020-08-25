@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: 0cdf3abea0cda5da2850e95b7f6ecfdb5186d8ca
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: 464fb7143f6fff5b58ba26de1c5b77f558669d32
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841667"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516086"
 ---
 # <a name="preview-plugin"></a>preview 插件
 
@@ -24,11 +24,11 @@ ms.locfileid: "87841667"
 T | evaluate preview(50)
 ```
 
-**语法**
+## <a name="syntax"></a>语法
 
 `T` `|` `evaluate` `preview(` *NumberOfRows* `)`
 
-**返回**
+## <a name="returns"></a>返回
 
 `preview` 插件返回两个结果表：
 * 最多包含指定行数的表。
@@ -36,9 +36,8 @@ T | evaluate preview(50)
 * 只含有一行/列的表，用于保存输入记录集中的记录数。
   例如，上面的示例查询相当于运行 `T | count`。
 
-**提示**
-
-如果 `evaluate` 前面有一个包含复杂筛选器的表格式源，或者引用大多数源表列的筛选器，则最好使用 [`materialize`](materializefunction.md) 函数。 例如：
+> [!TIP]
+> 如果 `evaluate` 前面有一个包含复杂筛选器的表格式源，或者引用大多数源表列的筛选器，则最好使用 [`materialize`](materializefunction.md) 函数。 例如：
 
 ```kusto
 let MaterializedT = materialize(T);

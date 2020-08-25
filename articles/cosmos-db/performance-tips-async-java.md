@@ -6,14 +6,17 @@ ms.service: cosmos-db
 ms.devlang: java
 ms.topic: conceptual
 origin.date: 05/11/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: e550c99bed4ec12c5ac43f0d665d57270c90f681
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.custom: devx-track-java
+ms.openlocfilehash: ed89a3fdb8cf86213d63e88f9d2b41264517736c
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323279"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222467"
 ---
 # <a name="performance-tips-for-azure-cosmos-db-async-java-sdk-v2"></a>适用于 Azure Cosmos DB 异步 Java SDK v2 的性能提示
 
@@ -23,7 +26,6 @@ ms.locfileid: "85323279"
 > * [Sync Java SDK v2](performance-tips-java.md)
 > * [.NET SDK v3](performance-tips-dotnet-sdk-v3-sql.md)
 > * [.NET SDK v2](performance-tips.md)
-> 
 
 > [!IMPORTANT]  
 > 这不是最新的 Azure Cosmos DB Java SDK！ 应将项目升级到 [Azure Cosmos DB Java SDK v4](sql-api-sdk-java-v4.md)，然后阅读 Azure Cosmos DB Java SDK v4 [性能提示指南](performance-tips-java-sdk-v4-sql.md)。 请按照[迁移到 Azure Cosmos DB Java SDK v4](migrate-java-v4-sdk.md) 指南和 [Reactor 与 RxJava](https://github.com/Azure-Samples/azure-cosmos-java-sql-api-samples/blob/master/reactor-rxjava-guide.md) 指南中的说明进行升级。 
@@ -65,9 +67,9 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
 * **将客户端并置在同一 Azure 区域内以提高性能** <a name="same-region"></a>
 
-    如果可能，请将任何调用 Azure Cosmos DB 的应用程序放在与 Azure Cosmos 数据库所在的相同区域中。  根据请求采用的路由，各项请求从客户端传递到 Azure 数据中心边界时的此类延迟可能有所不同。 通过确保在与预配 Azure Cosmos DB 终结点所在的同一 Azure 区域中调用应用程序，可能会实现最低的延迟。 有关可用区域的列表，请参阅 [Azure Regions](https://status.azure.com/status/)（Azure 区域）。
+    如果可能，请将任何调用 Azure Cosmos DB 的应用程序放在与 Azure Cosmos 数据库所在的相同区域中。  根据请求采用的路由，各项请求从客户端传递到 Azure 数据中心边界时的此类延迟可能有所不同。 通过确保在与预配 Azure Cosmos DB 终结点所在的同一 Azure 区域中调用应用程序，可能会实现最低的延迟。 有关可用区域的列表，请参阅 [Azure Regions](https://azure.microsoft.com/regions/#services)（Azure 区域）。
 
-    ![Azure Cosmos DB 连接策略演示](./media/performance-tips/same-region.png)
+    :::image type="content" source="./media/performance-tips/same-region.png" alt-text="Azure Cosmos DB 连接策略演示" border="false":::
 
 ## <a name="sdk-usage"></a>SDK 用法
 * **安装最新的 SDK**
@@ -88,7 +90,7 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     * ***直接模式概述***
 
-        ![直接模式体系结构插图](./media/performance-tips-async-java/rntbdtransportclient.png)
+        :::image type="content" source="./media/performance-tips-async-java/rntbdtransportclient.png" alt-text="直接模式体系结构插图" border="false":::
 
         在直接模式下采用的客户端体系结构使得网络利用率可预测，并实现对 Azure Cosmos DB 副本的多路访问。 上图显示了直接模式如何将客户端请求路由到 Cosmos DB 后端中的副本。 直接模式体系结构在客户端上为每个数据库副本最多分配 10 个通道。 一个通道是前面带有请求缓冲区（深度为 30 个请求）的 TCP 连接。 属于某个副本的通道由该副本的服务终结点按需动态分配。 当用户在直接模式下发出请求时，TransportClient 会根据分区键将请求路由到适当的服务终结点。 请求队列在服务终结点之前缓冲请求。
 
@@ -120,13 +122,13 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
         使用直接模式时的一些重要编程技巧：
 
-        + **在应用程序中使用多线程以高效进行 TCP 数据传输** - 发出请求后，应用程序应订阅接收另一线程上的数据。 否则就会强制执行非预期的“半双工”操作，后续请求会被阻止并等待上一个请求的回复。
+        * **在应用程序中使用多线程处理进行高效的 TCP 数据传输** - 发出请求后，应用程序应订阅接收另一线程上的数据。 否则，将强制执行非预期的“半双工”操作，并且将阻止后续请求，以等待上一个请求的回复。
 
-        + **在专用线程上执行计算密集型工作负荷** - 出于类似于上一提示的原因，最好是将复杂数据处理等操作放置在单独的线程中。 从另一个数据存储中提取数据的请求（例如，如果该线程同时使用 Azure Cosmos DB 和 Spark 数据存储）可能会增加延迟，因此建议生成一个额外的线程，等待来自其他数据存储的响应。
+            * **在专用线程上执行计算密集型工作负荷** - 出于与上一个提示类似的原因，最好将复杂数据处理等操作放置在单独的线程中。 从另一数据存储拉取数据的请求（例如，如果线程同时使用 Azure Cosmos DB 和 Spark 数据存储）可能会增加延迟，建议生成一个额外的线程，等待来自其他数据存储的响应。
 
-            + Azure Cosmos DB Async Java SDK v2 中的基础网络 IO 由 Netty 管理，请参阅[关于避免编码模式阻止 Netty IO 线程的提示](troubleshoot-java-async-sdk.md#invalid-coding-pattern-blocking-netty-io-thread)。
+            * Azure Cosmos DB Async Java SDK v2 中的基础网络 IO 由 Netty 管理，请参阅[有关避免使用阻止 Netty IO 线程的编码模式的提示](troubleshoot-java-async-sdk.md#invalid-coding-pattern-blocking-netty-io-thread)。
 
-        + 数据建模 - Azure Cosmos DB SLA 假定文档大小小于 1KB。 优化数据模型和编程以优先使用较小的文档大小，往往可以减小延迟。 如果需要存储和检索大于 1KB 的文档，建议的方法是在文档中链接到 Azure Blob 存储中的数据。
+        * 数据建模 - Azure Cosmos DB SLA 假定文档大小小于 1KB。 优化数据模型和编程以优先使用较小的文档大小通常可以降低延迟。 如果需要存储和检索大于 1 KB 的文档，建议的方法是将文档链接到 Azure Blob 存储中的数据。
 
 * **优化分区集合的并行查询。**
 
@@ -172,8 +174,7 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     例如，以下代码针对事件循环 IO netty 线程执行 CPU 密集型工作：
 
-    <a name="asyncjava2-noscheduler"></a>
-    ### <a name="async-java-sdk-v2-maven-commicrosoftazureazure-cosmosdb"></a>Async Java SDK V2 (Maven com.microsoft.azure::azure-cosmosdb)
+    <a name="asyncjava2-noscheduler"></a> **Async Java SDK V2 (Maven com.microsoft.azure::azure-cosmosdb)**
 
     ```java
     Observable<ResourceResponse<Document>> createDocObs = asyncDocumentClient.createDocument(
@@ -191,8 +192,7 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     收到结果后，如果想要针对结果执行 CPU 密集型工作，应避免针对事件循环 IO netty 线程执行。 可以提供自己的计划程序，以提供自己的线程来运行工作。
 
-    <a name="asyncjava2-scheduler"></a>
-    ### <a name="async-java-sdk-v2-maven-commicrosoftazureazure-cosmosdb"></a>Async Java SDK V2 (Maven com.microsoft.azure::azure-cosmosdb)
+    <a name="asyncjava2-scheduler"></a> **Async Java SDK V2 (Maven com.microsoft.azure::azure-cosmosdb)**
 
     ```java
     import rx.schedulers;
@@ -292,8 +292,8 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     有关索引的详细信息，请参阅 [Azure Cosmos DB 索引策略](indexing-policies.md)。
 
-## <a name="throughput"></a>吞吐量
 <a name="measure-rus"></a>
+## <a name="throughput"></a>吞吐量
 
 * **测量和优化较低的每秒请求单位使用量**
 
@@ -321,9 +321,11 @@ Azure Cosmos DB 是一个快速、弹性的分布式数据库，可以在提供�
 
     客户端尝试超过帐户保留的吞吐量时，服务器的性能不会降低，并且不会使用超过保留级别的吞吐量容量。 服务器将抢先结束 RequestRateTooLarge（HTTP 状态代码 429）的请求并返回 [x-ms-retry-after-ms](https://docs.microsoft.com/rest/api/cosmos-db/common-cosmosdb-rest-request-headers) 标头，该标头指示重新尝试请求前用户必须等待的时间量（以毫秒为单位）。
 
-        HTTP Status 429,
-        Status Line: RequestRateTooLarge
-        x-ms-retry-after-ms :100
+    ```xml
+    HTTP Status 429,
+    Status Line: RequestRateTooLarge
+    x-ms-retry-after-ms :100
+    ```
 
     SDK 全部都会隐式捕获此响应，并遵循服务器指定的 retry-after 标头，并重试请求。 除非多个客户端同时访问帐户，否则下次重试就会成功。
 

@@ -1,25 +1,25 @@
 ---
 title: 使用 Azure 流分析生成 IoT 解决方案
 description: 使用收费站方案了解流分析 IoT 解决方案的入门教程
-services: stream-analytics
-author: lingliw
-ms.author: v-lingwu
-manager: digimobile
-ms.reviewer: jasonh
+author: Johnnytechn
+ms.author: v-johya
+ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 12/06/2018
-ms.date: 06/11/2019
-ms.openlocfilehash: d3add026e6a790447842dd16d52d9c92cd865f4f
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.date: 08/20/2020
+ms.custom: seodec18
+ms.openlocfilehash: f6c8b66271fb3acd39d7fbdf3f2226119eaf34ac
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "71674697"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715726"
 ---
 # <a name="build-an-iot-solution-by-using-stream-analytics"></a>使用流分析生成 IoT 解决方案
+
 ## <a name="introduction"></a>简介
-本解决方案演示如何使用 Azure 流分析从数据获得实时见解。 开发人员可以轻松将数据流（例如点击流、日志和设备生成的时间）与历史记录或参考数据结合起来，获取业务信息。 由世纪互联 Azure 托管的 Azure 流分析是可完全托管的实时流计算服务，它具有内置的复原性、低延迟及伸缩性，可让你在几分钟内上手。
+本解决方案演示如何使用 Azure 流分析从数据获得实时见解。 开发人员可以轻松将数据流（例如点击流、日志和设备生成的时间）与历史记录或参考数据结合起来，获取业务信息。 由 Azure 托管的 Azure 流分析是可完全托管的实时流计算服务，它具有内置的复原性、低延迟及伸缩性，可让你在几分钟内上手。
 
 完成后此解决方案，你将可以：
 
@@ -36,7 +36,7 @@ ms.locfileid: "71674697"
 ## <a name="scenario-introduction-hello-toll"></a>方案简介：“你好，收费站！”
 收费站是常见设施。 在世界各地的许多高速公路、桥梁和隧道中都可以看到它们的身影。 每个收费站有多个收费亭。 在人工收费亭中，需要停车来向服务员付费。 在自动收费亭中，位于每个收费亭顶部的传感器会在车辆通过收费亭时扫描挡风玻璃上贴附的 RFID 卡。 我们可以轻松地将车辆通过这些收费站的情况想象成能够执行许多有趣操作的事件流。
 
-![位于收费亭的汽车的图片](media/stream-analytics-build-an-iot-solution-using-stream-analytics/cars-in-toll-booth.jpg)
+![位于收费亭的汽车的图片](./media/stream-analytics-build-an-iot-solution-using-stream-analytics/cars-in-toll-booth.jpg)
 
 ## <a name="incoming-data"></a>传入的数据
 本解决方案使用两个数据流。 安装在收费站入口和出口处的传感器会生成第一个流。 第二个流是具有车辆登记数据的静态查找数据集。
@@ -164,7 +164,7 @@ ms.locfileid: "71674697"
 
    为了解释查询的意图，我们假设需要统计进入某个收费亭的汽车数目。 由于进入高速公路收费亭的车流是连续性的，这些入口事件类似于永不停止的流。 若要量化流，必须定义要不断度量的“时间段”。 我们进一步将问题具体化为“每三分钟有多少汽车进入收费亭？” 这通常称为轮转计数。
 
-   如你所见，Azure 流分析会使用类似 SQL 的查询语言，并添加几个扩展来指定与时间相关的查询方面。  有关详细信息，请参阅[时间管理](https://msdn.microsoft.com/library/azure/mt582045.aspx)和查询中所用的[开窗](https://msdn.microsoft.com/library/azure/dn835019.aspx)构造。
+   如你所见，Azure 流分析会使用类似 SQL 的查询语言，并添加几个扩展来指定与时间相关的查询方面。  有关详细信息，请参阅[时间管理](https://docs.microsoft.com/stream-analytics-query/time-management-azure-stream-analytics)和查询中所用的[开窗](https://docs.microsoft.com/stream-analytics-query/windowing-azure-stream-analytics)构造。
 
 3. 检查 TollApp 示例作业的输入。 当前查询中仅使用了 EntryStream 输入。
    - **EntryStream** 输入是一个事件中心连接，它将代表每次汽车进入高速公路收费亭的事件数据排队。 示例中包含的 Web 应用将会创建事件，而这些数据将在此事件中心排队。 请注意，此输入在流式处理查询的 FROM 子句中查询。
@@ -311,7 +311,7 @@ GROUP BY TUMBLINGWINDOW(minute,3), TollId, PartitionId
 ## <a name="monitor-the-job"></a>监视作业
 “监视器”  区域包含正在运行的作业的相关统计信息。 需要完成首次配置，才能使用同一区域中的存储帐户（按本文档其余部分命名收费站）。
 
-![Azure 流分析作业监视](media/stream-analytics-build-an-iot-solution-using-stream-analytics/stream-analytics-job-monitoring.png)
+![Azure 流分析作业监视](./media/stream-analytics-build-an-iot-solution-using-stream-analytics/stream-analytics-job-monitoring.png)
 
 还可通过作业仪表板的“设置”区域访问“活动日志”   。
 
@@ -327,4 +327,3 @@ GROUP BY TUMBLINGWINDOW(minute,3), TollId, PartitionId
 
 尽管本解决方案提供了详细介绍，但它不可能面面俱到。 可通过在[常用流分析使用模式的查询示例](stream-analytics-stream-analytics-query-patterns.md)中使用 SAQL 语言，发现更多查询模式。
 
-<!-- Update_Description: Update some content -->

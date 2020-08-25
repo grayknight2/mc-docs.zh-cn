@@ -4,18 +4,19 @@ titleSuffix: Azure Storage
 description: 通过计算容器各 blob 的总大小来计算 Azure Blob 存储中容器的大小。
 services: storage
 author: WenJason
-ms.custom: mvc
 ms.service: storage
+ms.subservice: blobs
+ms.devlang: powershell
 ms.topic: sample
 origin.date: 12/04/2019
-ms.date: 01/06/2020
+ms.date: 08/24/2020
 ms.author: v-jay
-ms.openlocfilehash: fd8af0b57b3ba149a1bd5a101724ef31d9ad6c5e
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 0fb781bd4c37d06d7c3dbf7a49396a397fe45d66
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75624315"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753293"
 ---
 # <a name="calculate-the-size-of-a-blob-container-with-powershell"></a>使用 PowerShell 计算 blob 容器的大小
 
@@ -26,7 +27,7 @@ ms.locfileid: "75624315"
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
 > [!IMPORTANT]
-> 此 PowerShell 脚本提供容器的估计大小，不应该用于计费计算。 有关为计费目的计算容器大小的脚本，请参阅[为计费目的计算 Blob 存储容器的大小](../scripts/storage-blobs-container-calculate-billing-size-powershell.md)。 
+> 此 PowerShell 脚本提供容器的估计大小，不应该用于计费计算。 有关为计费目的计算容器大小的脚本，请参阅[为计费目的计算 Blob 存储容器的大小](../scripts/storage-blobs-container-calculate-billing-size-powershell.md)。
 
 ## <a name="sample-script"></a>示例脚本
 
@@ -68,7 +69,7 @@ Write-Host " "
 Write-Host "Total Length = " $length
 ```
 
-## <a name="clean-up-deployment"></a>清理部署 
+## <a name="clean-up-deployment"></a>清理部署
 
 运行以下命令来删除资源组、容器和所有相关资源。
 
@@ -89,6 +90,6 @@ Remove-AzResourceGroup -Name bloblisttestrg
 
 有关为计费目的计算容器大小的脚本，请参阅[为计费目的计算 Blob 存储容器的大小](../scripts/storage-blobs-container-calculate-billing-size-powershell.md)。
 
-有关 Azure PowerShell 模块的详细信息，请参阅 [Azure PowerShell 文档](https://docs.microsoft.com/powershell/azure/overview)。
+有关 Azure PowerShell 模块的详细信息，请参阅 [Azure PowerShell 文档](https://docs.microsoft.com/powershell/azure/)。
 
 可以在 [Azure 存储的 PowerShell 示例](../blobs/storage-samples-blobs-powershell.md)中找到其他存储 PowerShell 脚本示例。

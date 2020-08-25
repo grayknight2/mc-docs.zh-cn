@@ -8,42 +8,41 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: 53829156008769209ee573d9fffc1509cdfa7101
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: deb295021296377137c2d718b5e478a984bb2853
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841589"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516100"
 ---
 # <a name="dcount-aggregation-function"></a>dcount()（聚合函数）
 
 返回摘要组中标量表达式占用的非重复值数的估计值。
 
-**语法**
+> [!NOTE]
+> `dcount()` 聚合函数主要用于估算大型集的基数。 它以性能确定准确性，并可能在执行间返回不同的结果。 输入的顺序可能会影响其输出。
+
+## <a name="syntax"></a>语法
 
 ... `|` `summarize` `dcount` `(`*`Expr`*[, *`Accuracy`*]`)` ...
 
-**参数**
+## <a name="arguments"></a>参数
 
 * Expr：要对其非重复值进行计数的标量表达式。
 * *准确度*：一个可选的 `int` 文本，用于定义请求的估计准确度。 有关支持的值，请参阅下文。 如果未指定，则使用默认值 `1`。
 
-**返回**
+## <a name="returns"></a>返回
 
 返回对组中 `Expr` 的非重复值数的估计值。
 
-**示例**
+## <a name="example"></a>示例
 
 ```kusto
 PageViewLog | summarize countries=dcount(country) by continent
 ```
 
 :::image type="content" source="images/dcount-aggfunction/dcount.png" alt-text="D 计数":::
-
-**备注**
-
-`dcount()` 聚合函数主要用于估算大型集的基数。 它以性能确定准确性，并可能在执行间返回不同的结果。 输入的顺序可能会影响其输出。
 
 获取按 `G` 分组的 `V` 的非重复值的精确计数。
 

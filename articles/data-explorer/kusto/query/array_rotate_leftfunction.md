@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 08/11/2019
-ms.date: 07/31/2020
-ms.openlocfilehash: d97af6cbca30c6cbb22c907c1b58fe4e1989f9ae
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 5831e5ecbd280d15452af156a52cdc35bc609b5a
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509545"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516116"
 ---
 # <a name="array_rotate_left"></a>array_rotate_left()
 
@@ -44,12 +44,11 @@ ms.locfileid: "87509545"
 * 向左旋转两个位置：
 
     <!-- csl: https://help.kusto.chinacloudapi.cn:443/Samples -->
-
     ```kusto
     print arr=dynamic([1,2,3,4,5]) 
     | extend arr_rotated=array_rotate_left(arr, 2)
     ```
-
+    
     |arr|arr_rotated|
     |---|---|
     |[1,2,3,4,5]|[3,4,5,1,2]|

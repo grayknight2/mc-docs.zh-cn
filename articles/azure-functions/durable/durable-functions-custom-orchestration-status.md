@@ -2,14 +2,14 @@
 title: Durable Functions 中的自定义业务流程状态 - Azure
 description: 了解如何为 Durable Functions 配置和使用自定义业务流程状态。
 ms.topic: conceptual
-ms.date: 02/13/2020
+ms.date: 08/12/2020
 ms.author: v-junlch
-ms.openlocfilehash: f8367d953d07de9d534bbb43caa7a4fcfac9985f
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: e2e2c4b5dd14543fb95e27a1f638989de13d1a54
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77428399"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222678"
 ---
 # <a name="custom-orchestration-status-in-durable-functions-azure-functions"></a>Durable Functions 中的自定义业务流程状态 (Azure Functions)
 
@@ -195,6 +195,8 @@ public static void Run(
 ```
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
+
+#### <a name="cityrecommender-orchestrator"></a>`CityRecommender` 业务流程协调程序
 
 ```javascript
 const df = require("durable-functions");

@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: 40eb3a24b57cea1b335e2752a1e39a5b998a57e8
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 0a03e7d242fea3e39c3ad5e844bb73f49a866085
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509522"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516036"
 ---
 # <a name="beta_inv"></a>beta_inv()
 

@@ -2,24 +2,28 @@
 title: 使用 HDInsight 从 YARN 上的 Spark 访问 Azure Cosmos DB Cassandra API
 description: 本文介绍如何使用 HDInsight 从 YARN 上的 Spark 使用 Azure Cosmos DB Cassandra API
 author: rockboyfor
-ms.author: v-yeche
 ms.reviewer: sngun
 ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 09/24/2018
-ms.date: 01/20/2020
-ms.openlocfilehash: b1b69df13d95db3c17c97b630700e16ff302ff32
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
+ms.author: v-yeche
+ms.openlocfilehash: 722b9ed477334506a800a108a23672ebfcb6a828
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "76270074"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222775"
 ---
 <!--Verify sucessfully-->
 # <a name="access-azure-cosmos-db-cassandra-api-from-spark-on-yarn-with-hdinsight"></a>使用 HDInsight 从 YARN 上的 Spark 访问 Azure Cosmos DB Cassandra API
 
-本文介绍如何使用 spark-shell 的 HDInsight 从 YARN 上的 Spark 访问 Azure Cosmos DB Cassandra API。 HDInsight 是世纪互联在 Azure 上的 Hortonworks Hadoop PaaS，可利用 HDFS 的对象存储，包括 [Spark](../hdinsight/spark/apache-spark-overview.md) 在内，有多种类型。  虽然本文档中的内容参考了 HDInsight Spark，但可适用于所有 Hadoop 分发。  
+本文介绍如何使用 spark-shell 的 HDInsight 从 YARN 上的 Spark 访问 Azure Cosmos DB Cassandra API。 HDInsight 是 Azure 在 Azure 上的 Hortonworks Hadoop PaaS，可利用 HDFS 的对象存储，包括 [Spark](../hdinsight/spark/apache-spark-overview.md) 在内，有多种类型。  虽然本文档中的内容参考了 HDInsight Spark，但可适用于所有 Hadoop 分发。  
+
+<!--Mooncake Customization on Azure's-->
 
 ## <a name="prerequisites"></a>必备条件
 
@@ -140,5 +144,4 @@ HDInsight Spark 附带有 Zeppelin 和 Jupyter Notebook 服务。 二者均为�
 
 * [使用 Cassandra API 的代码示例完整列表](cassandra-spark-generic.md)
 
-
-<!--Update_Description: wording update -->
+<!-- Update_Description: update meta properties, wording update, update link -->

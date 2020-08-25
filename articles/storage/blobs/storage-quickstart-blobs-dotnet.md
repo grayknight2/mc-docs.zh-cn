@@ -1,26 +1,23 @@
 ---
 title: 快速入门：Azure Blob 存储库 v12 - .NET
-description: 本快速入门介绍如何使用适用于 .NET 的 Azure Blob 存储客户端库版本 12 在 Blob（对象）存储中创建容器和 blob。 接下来，介绍如何将 blob 下载到本地计算机，以及如何列出容器中的所有 blob。
+description: 本快速入门介绍如何使用适用于 .NET 的 Azure Blob 存储客户端库版本 12 在 Blob（对象）存储中创建容器和 blob。 接下来，将介绍如何将 blob 下载到本地计算机，以及如何在容器中列出所有 blob。
 author: WenJason
 ms.author: v-jay
-origin.date: 11/05/2019
-ms.date: 03/30/2020
+origin.date: 07/24/2020
+ms.date: 08/24/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.openlocfilehash: 61ea06b063193e9c624450d91b8ccceb388d9983
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: c1e72d356b207f1f4a1cfe22eb6efe9fb25598b5
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "80290330"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753496"
 ---
 # <a name="quickstart-azure-blob-storage-client-library-v12-for-net"></a>快速入门：适用于 .NET 的 Azure Blob 存储客户端库 v12
 
 适用于 .NET 的 Azure Blob 存储客户端库 v12 入门。 Azure Blob 存储是 Azure 的适用于云的对象存储解决方案。 请按照步骤操作，安装程序包并试用基本任务的示例代码。 Blob 存储最适合存储巨量的非结构化数据。
-
-> [!NOTE]
-> 若要使用之前的 SDK 版本入门，请参阅[快速入门：适用于 .NET 的 Azure Blob 存储客户端库](storage-quickstart-blobs-dotnet-legacy.md)。
 
 使用适用于 .NET 的 Azure Blob 存储客户端库 v12 完成以下操作：
 
@@ -30,7 +27,12 @@ ms.locfileid: "80290330"
 * 将 blob 下载到本地计算机
 * 删除容器
 
-[API 参考文档](https://docs.microsoft.com/dotnet/api/azure.storage.blobs) | [库源代码](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs) | [包 (NuGet)](https://www.nuget.org/packages/Azure.Storage.Blobs) | [示例](/storage/common/storage-samples-dotnet?toc=%2fstorage%2fblobs%2ftoc.json#blob-samples)
+其他资源：
+
+* [API 参考文档](https://docs.microsoft.com/dotnet/api/azure.storage.blobs)
+* [库源代码](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs)
+* [包 (NuGet)](https://www.nuget.org/packages/Azure.Storage.Blobs)
+* [示例](/storage/common/storage-samples-dotnet?toc=%2fstorage%2fblobs%2ftoc.json#blob-samples)
 
 [!INCLUDE [storage-multi-protocol-access-preview](../../../includes/storage-multi-protocol-access-preview.md)]
 
@@ -46,21 +48,21 @@ ms.locfileid: "80290330"
 
 ### <a name="create-the-project"></a>创建项目
 
-创建名为 BlobQuickstartV12 的 .NET Core 应用程序  。
+创建名为 BlobQuickstartV12 的 .NET Core 应用程序。
 
-1. 在控制台窗口（例如 cmd、PowerShell 或 Bash）中，使用 `dotnet new` 命令创建名为 BlobQuickstartV12 的新控制台应用  。 此命令将创建包含单个源文件的简单“Hello World”C# 项目：*Program.cs*。
+1. 在控制台窗口（例如 cmd、PowerShell 或 Bash）中，使用 `dotnet new` 命令创建名为 BlobQuickstartV12 的新控制台应用。 此命令将创建包含单个源文件的简单“Hello World”C# 项目：*Program.cs*。
 
    ```console
    dotnet new console -n BlobQuickstartV12
    ```
 
-1. 切换到新创建的 BlobQuickstartV12 目录  。
+1. 切换到新创建的 BlobQuickstartV12 目录。
 
    ```console
    cd BlobQuickstartV12
    ```
 
-1. 在 BlobQuickstartV12 目录中，创建名为 data 的另一个目录   。 将在这里创建和存储 blob 数据文件。
+1. 在 BlobQuickstartV12 目录中，创建名为 data 的另一个目录 。 将在这里创建和存储 blob 数据文件。
 
     ```console
     mkdir data
@@ -78,7 +80,7 @@ dotnet add package Azure.Storage.Blobs
 
 从项目目录中执行以下操作：
 
-1. 在编辑器中打开 Program.cs  文件
+1. 在编辑器中打开 Program.cs 文件
 1. 删除 `Console.WriteLine("Hello World!");` 语句
 1. 添加 `using` 指令
 1. 更新 `Main` 方法声明以支持异步代码
@@ -179,7 +181,7 @@ BlobContainerClient containerClient = await blobServiceClient.CreateBlobContaine
 
 以下代码片段：
 
-1. 在本地 data 目录中创建文本文件  。
+1. 在本地 data 目录中创建文本文件。
 1. 对在[创建容器](#create-a-container)部分创建的容器调用 [GetBlobClient](https://docs.microsoft.com/dotnet/api/azure.storage.blobs.blobcontainerclient.getblobclient) 方法，获取对 [BlobClient](https://docs.microsoft.com/dotnet/api/azure.storage.blobs.blobclient) 对象的引用。
 1. 通过调用 [UploadAsync](https://docs.microsoft.com/dotnet/api/azure.storage.blobs.blobclient.uploadasync#Azure_Storage_Blobs_BlobClient_UploadAsync_System_IO_Stream_System_Boolean_System_Threading_CancellationToken_) 方法将本地文本文件上传到 blob。 此方法将创建 Blob（如果该 Blob 尚不存在），或者覆盖 Blob（如果该 Blob 已存在）。
 
@@ -229,9 +231,9 @@ await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
 
 ```csharp
 // Download the blob to a local file
-// Append the string "DOWNLOAD" before the .txt extension 
+// Append the string "DOWNLOADED" before the .txt extension 
 // so you can compare the files in the data directory
-string downloadFilePath = localFilePath.Replace(".txt", "DOWNLOAD.txt");
+string downloadFilePath = localFilePath.Replace(".txt", "DOWNLOADED.txt");
 
 Console.WriteLine("\nDownloading blob to\n\t{0}\n", downloadFilePath);
 
@@ -270,7 +272,7 @@ Console.WriteLine("Done");
 
 ## <a name="run-the-code"></a>运行代码
 
-此应用在本地 data  文件夹中创建测试文件，并将其上传到 Blob 存储。 然后，该示例会列出容器中的 blob，并使用新名称下载文件，这样便可对新旧文件进行对比。
+此应用在本地 data 文件夹中创建测试文件，并将其上传到 Blob 存储。 然后，该示例会列出容器中的 blob，并使用新名称下载文件，这样便可对新旧文件进行对比。
 
 导航到应用程序目录，然后生成并运行应用程序。
 
@@ -302,9 +304,9 @@ Deleting the local source and downloaded files...
 Done
 ```
 
-在开始清理过程之前，请在“data”文件夹中查看这两个文件  。 可以打开它们，然后就会观察到它们完全相同。
+在开始清理过程之前，请在“data”文件夹中查看这两个文件。 可以打开它们，然后就会观察到它们完全相同。
 
-验证文件后，按 Enter 键以删除测试文件并完成演示  。
+验证文件后，按 Enter 键以删除测试文件并完成演示。
 
 ## <a name="next-steps"></a>后续步骤
 

@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 05/25/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: jmprieur, saeeda, sureshja, hirsin
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started
-ms.openlocfilehash: 8ef3e6928645214dd8f367ab9e04e1ba2e5ea721
-ms.sourcegitcommit: 0130a709d934d89db5cccb3b4997b9237b357803
+ms.openlocfilehash: 57617071cab21bcd5e315bf4b7a157009afec3c6
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84186981"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647644"
 ---
 # <a name="application-model"></a>应用程序模型
 
@@ -86,5 +86,5 @@ Microsoft 标识平台：
 
 * 参阅[如何以及为何将应用程序添加到 Azure AD](active-directory-how-applications-are-added.md)，了解有关 Microsoft 标识平台中应用程序对象和服务主体的详细信息。
 * 参阅 [Azure Active Directory 中的租户](single-and-multi-tenant-apps.md)，了解有关单租户应用和多租户应用的详细信息。
-* 参阅 [Azure Active Directory B2C 文档](/active-directory-b2c)，了解有关 Azure AD 如何提供 Azure Active Directory B2C 以使组织能够让用户（通常是客户）使用社交标识进行登录的更多信息。
+* 参阅 [Azure Active Directory B2C 文档](../../active-directory-b2c/index.yml)，了解有关 Azure AD 如何提供 Azure Active Directory B2C 以使组织能够让用户（通常是客户）使用社交标识进行登录的更多信息。
 

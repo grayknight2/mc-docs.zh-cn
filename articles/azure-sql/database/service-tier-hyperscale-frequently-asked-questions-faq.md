@@ -11,13 +11,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: ''
 origin.date: 03/03/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: 29b575f438d0c6085d7f47b6bc7fc8a2b0544e71
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 671edbb45e99bfac25d65c6a339b5e60659d8748
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227777"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223289"
 ---
 # <a name="azure-sql-database-hyperscale-faq"></a>Azure SQL 数据库“超大规模”常见问题解答
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -44,14 +44,14 @@ ms.locfileid: "86227777"
 | | 资源类型 | 常规用途 |  超大规模 | 业务关键 |
 |:---:|:---:|:---:|:---:|:---:|
 | **最适用于** |全部|提供以预算导向的、均衡的计算和存储选项。|大多数业务工作负荷。 自动缩放存储大小，最大可达 100 TB，快速的垂直和水平计算缩放，快速数据库还原。|事务率较高、IO 延迟较低的 OLTP 应用程序。 使用多个同步更新的副本提供最高故障复原能力和快速故障转移。|
-|  **资源类型** ||单一数据库/弹性池/托管实例 | 单一数据库 | 单一数据库/弹性池/托管实例 |
-| **计算大小**|单一数据库/弹性池* | 1 - 80 个 vCore | 1 - 80 个 vCore* | 1 - 80 个 vCore |
-| |SQL 托管实例 | 8、16、24、32、40、64、80 个 vCore | 空值 | 8、16、24 个 vCore |
+|  **资源类型** ||SQL 数据库/ SQL 托管实例 | 单一数据库 | SQL 数据库/ SQL 托管实例 |
+| **计算大小**|SQL 数据库* | 1 - 80 个 vCore | 1 - 80 个 vCore* | 1 - 80 个 vCore |
+| **计算大小**|SQL 托管实例 | 8、16、24、32、40、64、80 个 vCore | 空值 | 8、16、24 个 vCore |
 | **存储类型** | 全部 |高级远程存储（每个实例） | 具有本地 SSD 缓存的分离的存储（每个实例） | 超快的本地 SSD 存储（每个实例） |
-| **存储大小** | 单一数据库/弹性池*| 5 GB - 4 TB | 最多 100 TB | 5 GB - 4 TB |
-| | SQL 托管实例  | 32 GB - 8 TB | 空值 | 32 GB - 2 TB |
+| **存储大小** | SQL 数据库 *| 5 GB - 4 TB | 最多 100 TB | 5 GB - 4 TB |
+| **存储大小** | SQL 托管实例  | 32 GB - 8 TB | 空值 | 32 GB - 2 TB |
 | **IOPS** | 单一数据库 | 每个 vCore 提供 500 IOPS，最大 7000 IOPS | 超大规模是具有多个级别缓存的多层体系结构。 有效 IOPS 将取决于工作负荷。 | 5000 IOPS，最大 200,000 IOPS|
-| | SQL 托管实例 | 取决于文件大小 | 空值 | 1375 IOPS/vCore |
+| **IOPS** | SQL 托管实例 | 取决于文件大小 | 空值 | 1375 IOPS/vCore |
 |**可用性**|全部|1 个副本，无读取扩展，无本地缓存 | 多个副本，最多 4 个读取扩展，部分本地缓存 | 3 个副本，1 个读取扩展，完整的本地存储 |
 |**备份**|全部|RA-GRS，7-35 天保留期（默认为 7 天）| RA-GRS，7 天保留期，恒定的时间时点恢复 (PITR) | RA-GRS，7-35 天保留期（默认为 7 天） |
 
@@ -205,7 +205,9 @@ ms.locfileid: "86227777"
 
 ### <a name="can-i-move-my-existing-databases-in-azure-sql-database-to-the-hyperscale-service-tier"></a>能否将 Azure SQL 数据库中的现有数据库迁移到“超大规模”服务层级
 
-是的。 可以将 Azure SQL 数据库中的现有数据库迁移到“超大规模”服务层级。 这是一种单向迁移。 无法将数据库从“超大规模”层级移到另一个服务层级。 对于概念证明 (POC)，我们建议创建数据库的副本，并将副本迁移到“超大规模”。
+是的。 可以将 Azure SQL 数据库中的现有数据库迁移到“超大规模”服务层级。 这是一种单向迁移。 无法将数据库从“超大规模”层级移到另一个服务层级。 对于概念证明 (POC)，我们建议创建数据库的副本，并将副本迁移到“超大规模”。 
+
+将现有数据库移动到超大规模所需的时间包含复制数据所需的时间以及在复制数据期间重播在源数据库中进行的更改所需的时间。 数据复制时间与数据大小成正比。 如果移动在写入活动较少的时间段内进行，则重播更改所需的时间会较短。
   
 ### <a name="can-i-move-my-hyperscale-databases-to-other-service-tiers"></a>能否将“超大规模”数据库迁移到其他服务层级
 
@@ -330,7 +332,7 @@ IOPS 和 IO 延迟根据工作负荷模式而异。 如果访问的数据缓存�
 
 ### <a name="how-long-would-it-take-to-scale-up-and-down-a-compute-replica"></a>纵向扩展和减少计算副本需要多长时间
 
-无论数据大小如何，纵向扩展或缩减计算节点都需要 5 到 10 分钟时间。
+无论数据大小如何，纵向扩展或缩减计算都需要多达 2 分钟时间。
 
 ### <a name="is-my-database-offline-while-the-scaling-updown-operation-is-in-progress"></a>进行纵向扩展/缩减操作时，数据库是否处于脱机状态
 

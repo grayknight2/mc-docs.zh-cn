@@ -4,16 +4,16 @@ description: 将 Azure 应用服务中的应用与 Azure 虚拟网络集成。
 author: ccompy
 ms.assetid: 90bc6ec6-133d-4d87-a867-fcf77da75f5a
 ms.topic: article
-origin.date: 06/08/2020
-ms.date: 06/22/2020
+origin.date: 08/05/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 12be295e23c4804c8545aa340c455ef784d6abf1
-ms.sourcegitcommit: d24e12d49708bbe78db450466eb4fccbc2eb5f99
+ms.openlocfilehash: f5b07045d4c1954ea1a9cf8cfe96936f8a6689a6
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85613323"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228249"
 ---
 # <a name="integrate-your-app-with-an-azure-virtual-network"></a>将应用与 Azure 虚拟网络集成
 
@@ -31,11 +31,11 @@ Azure 应用服务有两种变体：
 
    ![选择 VNet 集成][1]
 
-1. 下拉列表将包含所有其他区域中的所有资源管理器 VNet。 选择要与之集成的 VNet。
+1. 下拉列表包含订阅内位于相同区域中的所有 Azure 资源管理器虚拟网络。 下面是所有其他区域中资源管理器虚拟网络的列表。 选择要集成的 VNet。
 
    ![选择 VNet][2]
 
-   <!-- * If the VNet is in the same region, then either create a new subnet or pick an empty pre-existing subnet.  -->
+   <!-- * If the VNet is in the same region, either create a new subnet or select an empty preexisting subnet.  -->
 
    * 若要选择另一区域中的 VNet，必须已预配一个启用了点到站点连接的 VNet 网关。
    * 若要与经典 VNet 集成，请不要选择“虚拟网络”下拉列表，而应选择“单击此处连接到经典 VNet”。  选择所需的经典虚拟网络。 目标 VNet 中必须已预配一个启用了点到站点连接的虚拟网关。
@@ -59,9 +59,8 @@ Azure 应用服务有两种变体：
 
 需要网关的 VNet 集成不可用于：
 
-<!-- * With Linux apps -->
-
 * 通过 Azure ExpressRoute 连接的 VNet。
+* 从 Linux 应用
 * 访问服务终结点保护的资源。
 * 既支持 ExpressRoute，也支持点到站点 VPN 或站点到站点 VPN 的共存网关。
 
@@ -92,14 +91,14 @@ Azure 应用服务有两种变体：
 本地连接。 只需使用 ExpressRoute 或站点到站点 VPN 将 VNet 连接到本地。 
 
 > [!NOTE]
-> 需要网关的 VNet 集成功能不会将应用与包含 ExpressRoute 网关的 VNet 集成。 即使以[共存模式][VPNERCoex]配置 ExpressRoute 网关，VNet 集成也不会生效。
+> 需要网关的 VNet 集成功能不将应用与包含 ExpressRoute 网关的 VNet 集成。 即使以[共存模式][VPNERCoex]配置 ExpressRoute 网关，VNet 集成也不会生效。
 > 
 
 <!--  If you need to access resources through an ExpressRoute connection, then you can use the regional VNet Integration feature or an [App Service Environment][ASE], which runs in your VNet.  -->
 
 ### <a name="peering"></a>对等互连
 
-<!-- If you are using peering with the regional VNet Integration, you do not need to do any additional configuration.  -->
+<!-- If you use peering with the regional VNet Integration, you don't need to do any additional configuration.  -->
 
 如果结合对等互连使用需要网关的 VNet 集成，则需要配置几个附加的项。 若要配置对等互连以使用应用，请执行以下操作：
 
@@ -115,8 +114,8 @@ Azure 应用服务有两种变体：
 
 应用服务计划 VNet 集成 UI 会显示应用服务计划中的应用使用的所有 VNet 集成。 若要查看单个 VNet 的详细信息，请选择你感兴趣的 VNet。 在此处，可以针对需要网关的 VNet 集成执行两项操作：
 
-* **同步网络**：同步网络操作仅用于网关相关的 VNet 集成功能。 执行同步网络操作确保了证书与网络信息是同步的。如果添加或更改 VNet 的 DNS，请执行同步网络操作。 此操作会重启所有使用此 VNet 的应用。
-* **添加路由**：添加路由会驱动出站流量进入 VNet。
+* **同步网络**：同步网络操作仅用于网关相关的 VNet 集成功能。 执行同步网络操作确保了证书与网络信息是同步的。如果添加或更改 VNet 的 DNS，请执行同步网络操作。 此操作重启使用此 VNet 的任何应用。 如果你使用的是属于不同订阅的应用和 VNet，此操作无效。
+* **添加路由**：添加路由会促使出站流量进入 VNet。
 
 ### <a name="gateway-required-vnet-integration-routing"></a>需要网关的 VNet 集成路由
 在 VNet 中定义的路由用于将流量从应用导入 VNet。 若要将其他出站流量发送到 VNet 中，请在此处添加相关地址块。 此功能只适用于网关所需的 VNet 集成。 使用需要网关的 VNet 集成时，路由表不会影响应用流量。
@@ -127,7 +126,7 @@ Azure 应用服务有两种变体：
 如果更改了证书或网络信息，请选择“同步网络”。 选择“同步网络”会导致应用与 VNet 之间的连接出现短暂的中断。 虽然应用不会重启，但失去连接会导致站点功能失常。
 
 ## <a name="pricing-details"></a>定价详细信息
-<!-- The regional VNet Integration feature has no additional charge for use beyond the ASP pricing tier charges. -->
+<!-- The regional VNet Integration feature has no additional charge for use beyond the App Service plan pricing tier charges. -->
 
 使用需要网关的 VNet 集成功能会产生三项相关费用：
 
@@ -135,37 +134,65 @@ Azure 应用服务有两种变体：
 * **数据传输费用**：传出数据会产生费用，即使 VNet 位于同一数据中心也是如此。 [数据传输定价详细信息][DataPricing]中对这些费用进行了说明。
 * **VPN 网关费用**：点到站点 VPN 所需的虚拟网关会产生费用。 有关详细信息，请参阅 [VPN 网关定价][VNETPricing]。
 
-## <a name="troubleshooting"></a>故障排除
+## <a name="troubleshooting"></a>疑难解答
 
 [!INCLUDE [app-service-web-vnet-troubleshooting](../../includes/app-service-web-vnet-troubleshooting.md)]
 
 ## <a name="automation"></a>自动化
 
 <!-- regional VNet Integration
-There is CLI support for regional VNet Integration. To access to the following commands, [Install Azure CLI][installCLI]. 
+CLI support is available for regional VNet Integration. To access the following commands, [install the Azure CLI][installCLI].
 
-        az webapp vnet-integration --help
+```azurecli
+az webapp vnet-integration --help
 
-        Group
-            az webapp vnet-integration : Methods that list, add, and remove virtual network integrations
-            from a webapp.
-                This command group is in preview. It may be changed/removed in a future release.
-        Commands:
-            add    : Add a regional virtual network integration to a webapp.
-            list   : List the virtual network integrations on a webapp.
-            remove : Remove a regional virtual network integration from webapp.
+Group
+    az webapp vnet-integration : Methods that list, add, and remove virtual network
+    integrations from a webapp.
+        This command group is in preview. It may be changed/removed in a future release.
+Commands:
+    add    : Add a regional virtual network integration to a webapp.
+    list   : List the virtual network integrations on a webapp.
+    remove : Remove a regional virtual network integration from webapp.
 
-        az appservice vnet-integration --help
+az appservice vnet-integration --help
 
-        Group
-            az appservice vnet-integration : A method that lists the virtual network integrations used in an
-            appservice plan.
-                This command group is in preview. It may be changed/removed in a future release.
-        Commands:
-            list : List the virtual network integrations used in an appservice plan.
--->
+Group
+    az appservice vnet-integration : A method that lists the virtual network
+    integrations used in an appservice plan.
+        This command group is in preview. It may be changed/removed in a future release.
+Commands:
+    list : List the virtual network integrations used in an appservice plan.
+```
 
-对于需要网关的 VNet 集成，可以使用 PowerShell 将应用服务与 Azure 虚拟网络相集成。 如需随时可运行的脚本，请参阅[将 Azure 应用服务中的应用连接到 Azure 虚拟网络](https://gallery.technet.microsoft.com/scriptcenter/Connect-an-app-in-Azure-ab7527e3)。
+Powershell support for regional VNet integration is available too, but you must create generic resource with a property array of the subnet resourceID
+
+```azurepowershell
+# Parameters
+$sitename="myWebApp"
+$resourcegroupname="myRG"
+$VNetname="myVNet"
+$location="myRegion"
+$integrationsubnetname = "myIntegrationSubnet"
+$subscriptionID = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+
+#Property array with the SubnetID
+$properties = @{
+      "subnetResourceId" = "/subscriptions/"+$subscriptionID+"/resourceGroups/"+$resourcegroupname+"/providers/Microsoft.Network/virtualNetworks/"+$VNetname+"/subnets/"+$integrationsubnetname;
+      }
+      
+#Creation of the VNet integration
+$resourceID = $sitename+"/VirtualNetwork"
+New-AzResource -ResourceName $resourceID `
+-Location $location  `
+-ResourceGroupName $resourcegroupname `
+-ResourceType Microsoft.Web/sites/networkConfig `
+-PropertyObject $properties 
+
+```
+
+
+For gateway-required VNet Integration, you can integrate App Service with an Azure virtual network by using PowerShell. For a ready-to-run script, see [Connect an app in Azure App Service to an Azure virtual network](https://gallery.technet.microsoft.com/scriptcenter/Connect-an-app-in-Azure-ab7527e3).
 
 
 <!--Image references-->

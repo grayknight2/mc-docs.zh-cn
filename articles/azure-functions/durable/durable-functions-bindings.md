@@ -2,14 +2,14 @@
 title: Durable Functions 的绑定 - Azure
 description: 如何使用 Azure Functions 的 Durable Functions 扩展的触发器和绑定。
 ms.topic: conceptual
-ms.date: 12/31/2019
+ms.date: 08/12/2020
 ms.author: v-junlch
-ms.openlocfilehash: 879cc551871dc02187cee46d268f1368bb7209ef
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 2e5246efbe8cdf8152de9df9e734409aa0543384
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79291909"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222686"
 ---
 # <a name="bindings-for-durable-functions-azure-functions"></a>Durable Functions (Azure Functions) 的绑定
 
@@ -19,7 +19,7 @@ ms.locfileid: "79291909"
 
 业务流程触发器可用于创作[持久业务流程协调程序函数](durable-functions-types-features-overview.md#orchestrator-functions)。 此触发器支持启动新的业务流程协调程序函数实例和恢复“等待”任务的现有业务流程协调程序函数实例。
 
-使用适用于 Azure Functions 的 Visual Studio 工具时，使用 [OrchestrationTriggerAttribute](https://docs.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.DurableTask.OrchestrationTriggerAttribute?view=azure-dotnet) .NET 属性配置业务流程触发器。
+使用适用于 Azure Functions 的 Visual Studio 工具时，使用 [OrchestrationTriggerAttribute](https://docs.microsoft.com/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.orchestrationtriggerattribute?view=azure-dotnet) .NET 属性配置业务流程触发器。
 
 使用脚本语言（例如 JavaScript 或 C# scripting）编写业务流程协调程序函数时，由 *function.json* 文件中 `bindings` 数组的以下 JSON 对象定义业务流程协调程序触发器：
 
@@ -646,4 +646,3 @@ module.exports = async function (context) {
 > [!div class="nextstepaction"]
 > [用于实例管理的内置 HTTP API 参考](durable-functions-http-api.md)
 
-<!-- Update_Description: wording update -->

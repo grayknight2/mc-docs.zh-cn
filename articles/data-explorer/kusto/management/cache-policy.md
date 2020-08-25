@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/19/2020
-ms.date: 07/01/2020
-ms.openlocfilehash: 2f12b0e5efa1e014204870d49b7934cfdf1c4b6e
-ms.sourcegitcommit: c17e965d4ffd82fd7cd86b2648fcb0053a65df00
+ms.date: 08/18/2020
+ms.openlocfilehash: 7d5bca7995ab4bf2bb41b9a8a333861eb8403329
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470378"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516077"
 ---
-# <a name="cache-policy"></a>缓存策略
+# <a name="cache-policy-command"></a>缓存策略命令
 
 本文介绍用于创建和更改[缓存策略](cachepolicy.md)的命令 
 

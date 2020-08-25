@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/01/2020
-ms.openlocfilehash: 4aff9e7092fcc56637dc8b731c0884c6200ca6c8
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.date: 08/18/2020
+ms.openlocfilehash: b94c1bfaed3a31f66ff000359690992404904bf6
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226236"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515920"
 ---
 # <a name="getting-started-with-kusto"></a>Kusto 入门
 
@@ -34,7 +34,7 @@ Azure 数据资源管理器是一项服务，用于存储和运行基于大数�
 ## <a name="interacting-with-azure-data-explorer"></a>与 Azure 数据资源管理器交互
 
 用户与 Azure 数据资源管理器(Kusto) 进行交互的主要方式：
-* 使用众多可用的[客户端工具](../tools/index.md)中的一种。 
+* 使用某一个[查询工具](../../tools-integrations-overview.md#azure-data-explorer-query-tools)。 
 * [SQL 查询](../api/tds/t-sql.md)。
 *  [Kusto 查询语言](../query/index.md)是交互的主要方式。 通过 KQL，可发送数据查询并使用[控制命令](../management/index.md)来管理实体和发现元数据等。
 查询和控制命令都是短文本“程序”。

@@ -1,25 +1,16 @@
 ---
 title: 使用 .NET 向/从 Azure 事件中心发送/接收事件（旧版）
 description: 本文提供了创建 .NET Core 应用的演练，该应用使用旧 Microsoft.Azure.EventHubs 包向/从 Azure 事件中心发送/接收事件。
-services: event-hubs
-documentationcenter: na
-author: spelluru
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: na
-origin.date: 02/11/2020
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 050a1bdf0b39c337672e425b9bc2368a0f431dc1
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 03bb9ccaead2ab3454260fbee612b47ab003f571
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199666"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715312"
 ---
 # <a name="send-events-to-or-receive-events-from-azure-event-hubs-using-net-core-microsoftazureeventhubs"></a>使用 .NET Core (Microsoft.Azure.EventHubs) 向/从 Azure 事件中心发送/接收事件
 本快速入门介绍如何使用 **Microsoft.Azure.EventHubs** .NET Core 库向/从事件中心发送/接收事件。

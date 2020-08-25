@@ -1,21 +1,16 @@
 ---
 title: 将 Apache Flink 用于 Apache Kafka - Azure事件中心 | Microsoft Docs
 description: 本文介绍如何将 Apache Flink 连接到 Azure 事件中心
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-manager: timlt
-ms.service: event-hubs
 ms.topic: how-to
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-origin.date: 04/02/2020
-ms.date: 05/29/2020
-ms.openlocfilehash: fb1afe284dcaa22569496ab9ff8dcdbfb9c22103
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 25a4532e024c17a0ee47c50a5cfeda7e36fbb9da
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84200255"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715223"
 ---
 # <a name="use-apache-flink-with-azure-event-hubs-for-apache-kafka"></a>将 Apache Flink 与适用于 Apache Kafka 的 Azure 事件中心配合使用
 本教程演示如何在不更改你的协议客户端或运行你自己的群集的情况下，将 Apache Flink 连接到事件中心。 Azure 事件中心支持 [Apache Kafka 版本 1.0](https://kafka.apache.org/10/documentation.html)。

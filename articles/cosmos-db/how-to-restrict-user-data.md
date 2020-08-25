@@ -3,16 +3,18 @@ title: 使用 Azure Cosmos DB 限制用户对数据操作的访问
 description: 了解如何使用 Azure Cosmos DB 限制对数据操作的访问
 author: rockboyfor
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 12/09/2019
-ms.date: 02/10/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: f3fd2e1ccd5d02761a41bbd81cdfc865f691d8d6
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 075034b6bcf40ce30d874faa7a222478ea9276f7
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "76980470"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222923"
 ---
 # <a name="restrict-user-access-to-data-operations-only"></a>将用户访问权限仅限于数据操作
 
@@ -20,7 +22,9 @@ ms.locfileid: "76980470"
 - 与 Azure 门户交互时使用 Azure Active Directory 标识；
 - 从 API 和 SDK 发出调用时使用 Azure Cosmos DB [密钥](secure-access-to-data.md#master-keys)或[资源令牌](secure-access-to-data.md#resource-tokens)。
 
-每种身份验证方法授予对不同操作集的访问权限，但存在某种重叠：![按身份验证类型拆分操作](./media/how-to-restrict-user-data/operations.png)
+每种身份验证方法授予对不同操作集的访问权限，但存在某种重叠：
+
+:::image type="content" source="./media/how-to-restrict-user-data/operations.png" alt-text="按身份验证类型拆分操作" border="false":::
 
 在某些情况下，你可能希望仅限组织中的某些用户执行数据操作（即 CRUD 请求和查询）。 不需要创建或删除资源，或者不需要更改所用容器的预配吞吐量的开发人员通常希望实施这种限制。
 
@@ -50,7 +54,7 @@ Select-AzSubscription $MySubscriptionId
 
 ## <a name="create-the-custom-azure-active-directory-role"></a>创建自定义 Azure Active Directory 角色
 
-以下脚本为 Azure Cosmos 帐户创建具有“仅限密钥”访问权限的 Azure Active Directory 角色分配。 该角色基于 [Azure 资源的自定义角色](../role-based-access-control/custom-roles.md)以及 [Azure Cosmos DB 的粒度操作](../role-based-access-control/resource-provider-operations.md#microsoftdocumentdb)。 这些角色和操作是 `Microsoft.DocumentDB` Azure Active Directory 命名空间的一部分。
+以下脚本为 Azure Cosmos 帐户创建具有“仅限密钥”访问权限的 Azure Active Directory 角色分配。 该角色基于 [Azure 自定义角色](../role-based-access-control/custom-roles.md)以及 [Azure Cosmos DB 的粒度操作](../role-based-access-control/resource-provider-operations.md#microsoftdocumentdb)。 这些角色和操作是 `Microsoft.DocumentDB` Azure Active Directory 命名空间的一部分。
 
 1. 首先，创建包含以下内容的名为 `AzureCosmosKeyOnlyAccess.json` 的 JSON 文档：
 
@@ -98,5 +102,4 @@ $cdba | Set-AzResource -Force
 - 详细了解 [Cosmos DB 的基于角色的访问控制](role-based-access-control.md)
 - 获取[安全访问 Cosmos DB 中的数据](secure-access-to-data.md)的概述
 
-<!-- Update_Description: new article about how to restrict user data -->
-<!--NEW.date: 01/20/2020-->
+<!-- Update_Description: update meta properties, wording update, update link -->

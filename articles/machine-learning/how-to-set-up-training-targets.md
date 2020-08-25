@@ -9,14 +9,14 @@ ms.reviewer: sgilley
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: how-to
-ms.date: 06/11/2020
+ms.date: 07/08/2020
 ms.custom: seodec18, tracking-python
-ms.openlocfilehash: b47846ffe26f27b6540f5935b857a9e64500c855
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: 8ccbc735a95c3c19d1f4e6fda70b8393221915a8
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440888"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228446"
 ---
 # <a name="set-up-and-use-compute-targets-for-model-training"></a>设置并使用模型训练的计算目标 
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -105,12 +105,11 @@ Azure 机器学习计算群集是一个托管的计算基础结构，可让你�
 
 可以使用 Azure 机器学习计算在云中的 CPU 或 GPU 计算节点群集之间分配训练进程。 有关包括 GPU 的 VM 大小的详细信息，请参阅 [GPU 优化的虚拟机大小](https://docs.microsoft.com/azure/virtual-machines/linux/sizes-gpu)。 
 
-Azure 机器学习计算对可以分配的核心数等属性实施默认限制。 有关详细信息，请参阅[管理和请求 Azure 资源的配额](https://docs.microsoft.com/azure/machine-learning/how-to-manage-quotas)。
+Azure 机器学习计算对可以分配的核心数等属性实施默认限制。 有关详细信息，请参阅[管理和请求 Azure 资源的配额](how-to-manage-quotas.md)。
 
-还可以选择使用低优先级 VM 来运行部分或所有工作负载。 这些 VM 的可用性未得到保证，在使用时可能会被占用。 对于被占用的作业，在重新可用时将重新启动，而不是直接续用。  与普通 VM 相比，低优先级 VM 提供折扣费率，请参阅[计划和管理成本](https://docs.microsoft.com/azure/machine-learning/concept-plan-manage-cost)。
 
 > [!TIP]
-> 一般情况下，只要所需核心数方面的配额足够，群集就可以扩展到多达 100 个节点。 默认情况下，设置群集时会启用群集节点之间的通信（例如，为了支持 MPI 作业）。 但是，还可以将群集扩展到数千个节点，只需[提交支持票证](https://portal.azure.cn/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)，并请求将你的订阅、工作区或特定群集加入允许列表以禁用节点间通信即可。 
+> 一般情况下，只要所需核心数方面的配额足够，群集就可以扩展到多达 100 个节点。 默认情况下，设置群集时会启用群集节点之间的通信（例如，为了支持 MPI 作业）。 但是，可以将群集扩展到数千个节点，只需[提交支持票证](https://portal.azure.cn/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)并请求将你的订阅、工作区或特定群集加入允许列表以禁用节点间通信即可。 
 
 可在不同的运行中重复使用 Azure 机器学习计算。 计算可与工作区中的其他用户共享，并在每次运行之后保留，它会根据提交的运行数以及群集上设置的 max_nodes 自动纵向扩展或缩减节点。 min_nodes 设置控制可用节点数的下限。
 
@@ -170,7 +169,6 @@ Azure 机器学习计算对可以分配的核心数等属性实施默认限制�
     # Specify CondaDependencies obj, add necessary packages
     run_amlcompute.environment.python.conda_dependencies = CondaDependencies.create(conda_packages=['scikit-learn'])
     ```
-
 附加计算并配置运行后，下一步是[提交训练运行](#submit)。
 
 
@@ -443,7 +441,7 @@ myvm = ComputeTarget(workspace=ws, name='my-vm-name')
 
 1. 填写表单。 提供必需属性的值，尤其是“VM 系列”，以及用于运转计算的**最大节点数**。  
 
-1. 选择“创建” 。
+1. 选择“创建”。
 
 
 1. 通过在列表中选择计算目标来查看创建操作的状态：
@@ -495,7 +493,7 @@ myvm = ComputeTarget(workspace=ws, name='my-vm-name')
 
 ## <a name="set-up-with-vs-code"></a>使用 VS Code 进行设置
 
-可以使用适用于 Azure 机器学习的 [VS Code 扩展](tutorial-train-deploy-image-classification-model-vscode.md#configure-compute-targets)访问、创建和管理与工作区关联的计算目标。
+可以使用适用于 Azure 机器学习的 [VS Code 扩展](how-to-manage-resources-vscode.md#compute-clusters)访问、创建和管理与工作区关联的计算目标。
 
 ## <a name="submit-training-run-using-azure-machine-learning-sdk"></a><a id="submit"></a>使用 Azure 机器学习 SDK 提交训练运行
 

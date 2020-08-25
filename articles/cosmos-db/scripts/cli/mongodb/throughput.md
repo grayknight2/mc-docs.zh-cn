@@ -2,37 +2,40 @@
 title: 更新 MongoDB API for Azure Cosmos DB 的数据库和集合的 RU/秒
 description: 更新 MongoDB API for Azure Cosmos DB 的数据库和集合的 RU/秒
 author: rockboyfor
-ms.author: v-yeche
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.topic: sample
-origin.date: 09/25/2019
-ms.date: 10/28/2019
-ms.openlocfilehash: dc63c885e5d6799de3be82331dea0a26ffc73cf3
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
+ms.author: v-yeche
+ms.openlocfilehash: 7fb67966d7a55336e62e741ed679e6d722795aff
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "72914782"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222444"
 ---
+<!--Verified successfully-->
 # <a name="update-rus-for-a-database-and-collection-for-mongodb-api-for-azure-cosmos-db-using-azure-cli"></a>使用 Azure CLI 更新 MongoDB API for Azure Cosmos DB 的数据库和集合的 RU/秒
 
 [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../../../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
-如果选择在本地安装并使用 CLI，本主题需要运行 Azure CLI 2.0.73 版或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
+选择在本地安装并使用 CLI 时，本主题要求运行 Azure CLI 2.9.1 或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
 
 ## <a name="sample-script"></a>示例脚本
 
 此脚本为 Azure Cosmos DB for MongoDB API 创建具有共享吞吐量的数据库和具有专用吞吐量的集合，然后更新数据库和集合的吞吐量。
 
 ```azurecli
-!/bin/bash
-
-# Update throughput for MongoDB API database and collection
+#!/bin/bash
 
 # Sign in the Azure China Cloud
 az cloud set -n AzureChinaCloud
 az login
+
+# Throughput operations for a MongoDB API database and collection
 
 # Generate a unique 10 character alphanumeric string to ensure unique resource names
 uniqueId=$(env LC_CTYPE=C tr -dc 'a-z0-9' < /dev/urandom | fold -w 10 | head -n 1)
@@ -43,62 +46,106 @@ location='chinanorth2'
 accountName="cosmos-$uniqueId" #needs to be lower case
 databaseName='database1'
 collectionName='collection1'
+originalThroughput=400
+updateThroughput=500
 
-# Create a resource group
+# Create a resource group, Cosmos account, database and collection
 az group create -n $resourceGroupName -l $location
-
-# Create a Cosmos account for MongoDB API
-az cosmosdb create \
-    -n $accountName \
-    -g $resourceGroupName \
-    --kind MongoDB
-
-# Create a MongoDB API database with shared throughput
-az cosmosdb mongodb database create \
-    -a $accountName \
-    -g $resourceGroupName \
-    -n $databaseName \
-    --throughput 400
+az cosmosdb create -n $accountName -g $resourceGroupName --kind MongoDB
+az cosmosdb mongodb database create -a $accountName -g $resourceGroupName -n $databaseName --throughput $originalThroughput
 
 # Define a minimal index policy for the collection
 idxpolicy=$(cat << EOF 
-[ 
-    {"key": {"keys": ["user_id"]}}
-]
+    [ {"key": {"keys": ["user_id"]}} ]
 EOF
 )
-# Persist index policy to json file
 echo "$idxpolicy" > "idxpolicy-$uniqueId.json"
 
 # Create a MongoDB API collection
-az cosmosdb mongodb collection create \
-    -a $accountName \
-    -g $resourceGroupName \
-    -d $databaseName \
-    -n $collectionName \
-    --shard 'user_id' \
-    --throughput 400 \
-    --idx @idxpolicy-$uniqueId.json
-
+az cosmosdb mongodb collection create -a $accountName -g $resourceGroupName -d $databaseName -n $collectionName --shard 'user_id' --throughput $originalThroughput --idx @idxpolicy-$uniqueId.json
 # Clean up temporary index policy file
 rm -f "idxpolicy-$uniqueId.json"
 
-read -p 'Press any key to increase Database throughput to 500'
+# Throughput operations for MongoDB API database
+# Read the current throughput
+# Read the minimum throughput
+# Make sure the updated throughput is not less than the minimum
+# Update the throughput
+
+read -p 'Press any key to read current provisioned throughput on database'
+
+az cosmosdb mongod database throughput show \
+    -g $resourceGroupName \
+    -a $accountName \
+    -n $databaseName \
+    --query resource.throughput \
+    -o tsv
+
+read -p 'Press any key to read minimum throughput on database'
+
+minimumThroughput=$(az cosmosdb mongodb database throughput show \
+    -g $resourceGroupName \
+    -a $accountName \
+    -n $databaseName \
+    --query resource.minimumThroughput \
+    -o tsv)
+
+echo $minimumThroughput
+
+# Make sure the updated throughput is not less than the minimum allowed throughput
+if [ $updateThroughput -lt $minimumThroughput ]; then
+    updateThroughput=$minimumThroughput
+fi
+
+read -p 'Press any key to update Database throughput'
 
 az cosmosdb mongodb database throughput update \
     -a $accountName \
     -g $resourceGroupName \
     -n $databaseName \
-    --throughput 500
+    --throughput $updateThroughput
 
-read -p 'Press any key to increase Collection throughput to 500'
+# Throughput operations for MongoDB API collection
+# Read the current throughput
+# Read the minimum throughput
+# Make sure the updated throughput is not less than the minimum
+# Update the throughput
+
+read -p 'Press any key to read current provisioned throughput on collection'
+
+az cosmosdb mongodb collection throughput show \
+    -a $accountName \
+    -g $resourceGroupName \
+    -d $databaseName \
+    -n $collectionName \
+    --query resource.throughput \
+    -o tsv
+
+read -p 'Press any key to read minimum throughput on collection'
+
+minimumThroughput=$(az cosmosdb mongodb collection throughput show \
+    -a $accountName \
+    -g $resourceGroupName \
+    -d $databaseName \
+    -n $collectionName \
+    --query resource.minimumThroughput \
+    -o tsv)
+
+echo $minimumThroughput
+
+# Make sure the updated throughput is not less than the minimum allowed throughput
+if [ $updateThroughput -lt $minimumThroughput ]; then
+    updateThroughput=$minimumThroughput
+fi
+
+read -p 'Press any key to update collection throughput'
 
 az cosmosdb mongodb collection throughput update \
     -a $accountName \
     -g $resourceGroupName \
     -d $databaseName \
     -n $collectionName \
-    --throughput 500
+    --throughput $updateThroughput
 
 ```
 
@@ -130,6 +177,4 @@ az group delete --name $resourceGroupName
 
 可以在 [Azure Cosmos DB CLI GitHub 存储库](https://github.com/Azure-Samples/azure-cli-samples/tree/master/cosmosdb)中找到所有 Azure Cosmos DB CLI 脚本示例。
 
-<!--Verify successfully-->
-<!--Update_Description: new articles on mongodb throughput -->
-<!--New.date: 10/28/2019-->
+<!-- Update_Description: update meta properties, wording update, update link -->

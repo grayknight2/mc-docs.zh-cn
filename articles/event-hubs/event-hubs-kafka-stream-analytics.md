@@ -1,25 +1,16 @@
 ---
 title: Azure 事件中心 - 处理 Apache Kafka 事件
 description: 教程：本文介绍如何使用 Azure 流分析处理通过事件中心引入的 Kafka 事件
-services: event-hubs
-documentationcenter: ''
-author: spelluru
-manager: ''
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: tutorial
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.custom: seodec18
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-origin.date: 04/02/2020
-ms.date: 05/29/2020
-ms.openlocfilehash: e8f5ef34243903c5ca986ca9faec54a49f0e45a7
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 6164eb39a07cb92228344203c90b5a0b7817cff2
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84200248"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715224"
 ---
 # <a name="tutorial-process-apache-kafka-for-event-hubs-events-using-stream-analytics"></a>教程：使用 Stream analytics 处理用于事件中心的 Apache Kafka 事件 
 本文介绍如何将数据流式传输到事件中心，并使用 Azure 流分析对其进行处理。 其中包括以下步骤： 
@@ -29,6 +20,7 @@ ms.locfileid: "84200248"
 3. 创建将数据从事件中心复制到 Azure Blob 存储的流分析作业。 
 
 使用事件中心公开的 Kafka 终结点时，无需更改协议客户端或运行自己的群集。 Azure 事件中心支持 [Apache Kafka 版本 1.0](https://kafka.apache.org/10/documentation.html)。 及更高版本。 
+
 
 ## <a name="prerequisites"></a>先决条件
 
@@ -69,14 +61,15 @@ ms.locfileid: "84200248"
 3. 添加以下代码行替代注释代码： 
 
     ```java
-                final ProducerRecord<Long, String> record = new ProducerRecord<Long, String>(TOPIC, time, "{ \"eventData\": \"Test Data " + i + "\" }");
+                final ProducerRecord<Long, String> record = new ProducerRecord<Long, String>(TOPIC, time, "{ \"eventData\": \"Test Data " + i + "\" }");            
+    ```
 
-    This code sends the event data in **JSON** format. When you configure input for a Stream Analytics job, you specify JSON as the format for the input data. 
-7. **Run the producer** and stream into Event Hubs. On a Windows machine, when using a **Node.js command prompt**, switch to the `azure-event-hubs-for-kafka/quickstart/java/producer` folder before running these commands. 
+    此代码以 JSON 格式发送事件数据。 配置流分析作业的输入时，指定 JSON 作为输入数据的格式。 
+7. 运行生产者并将事件流式传输到事件中心。 在 Windows 计算机上，使用 Node.js 命令提示符时，先切换到 `azure-event-hubs-for-kafka/quickstart/java/producer` 文件夹，再运行这些命令。 
    
     ```shell
     mvn clean package
-    mvn exec:java -Dexec.mainClass="TestProducer"
+    mvn exec:java -Dexec.mainClass="TestProducer"                                    
     ```
 
 ## <a name="verify-that-event-hub-receives-the-data"></a>验证事件中心是否接收了数据
@@ -99,7 +92,7 @@ ms.locfileid: "84200248"
 2. 在“Azure 市场”菜单中选择“Analytics”，然后选择“流分析作业”。 
 3. 在“新建流分析”页上执行以下操作： 
     1. 输入作业的名称。 
-    2. 选择 **订阅**。
+    2. 选择**订阅**。
     3. 为资源组选择“新建”，并输入名称。 也可以使用现有资源组。 
     4. 选择作业的位置。
     5. 选择“创建”来创建作业。 
@@ -119,7 +112,7 @@ ms.locfileid: "84200248"
     2. 选择 **Azure 订阅**。
     3. 选择之前创建的事件中心命名空间。 
     4. 选择事件中心的测试。 
-    5. 选择“保存” 。 
+    5. 选择“保存”。 
 
         ![事件中心输入配置](./media/event-hubs-kafka-stream-analytics/event-hub-input-configuration.png)
 
@@ -132,10 +125,11 @@ ms.locfileid: "84200248"
     2. 选择 **Azure 订阅**。 
     3. 选择 Azure 存储帐户。 
     4. 输入存储流分析查询的输出数据的容器的名称。
-    5. 选择“保存” 。
+    5. 选择“保存”。
 
         ![Blob 存储输出配置](./media/event-hubs-kafka-stream-analytics/output-blob-settings.png)
  
+
 ### <a name="define-a-query"></a>定义查询
 设置用于读取传入数据流的流分析作业以后，下一步是创建一个可分析实时数据的转换。 请使用[流分析查询语言](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)来定义转换查询。 在本演练中，定义经过数据而不执行任何转换的查询。
 
@@ -164,7 +158,7 @@ ms.locfileid: "84200248"
 1. 再次运行“Kafka 生产者”，将事件发送到事件中心。 
 
     ```shell
-    mvn exec:java -Dexec.mainClass="TestProducer"
+    mvn exec:java -Dexec.mainClass="TestProducer"                                    
     ```
 1. 确认看到在“Azure Blob 存储”中生成“输出数据”。 看到容器中具有 100 行的 JSON 文件，类似以下示例行： 
 

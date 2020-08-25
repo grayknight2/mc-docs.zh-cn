@@ -1,30 +1,24 @@
 ---
-title: 适用于应用程序的品牌准则 | Microsoft Docs
+title: 应用品牌准则 | Azure
+titleSuffix: Microsoft identity platform
 description: 介绍面向开发人员的 Azure Active Directory 资源的综合性指南
 services: active-directory
-documentationcenter: dev-center-name
 author: rwike77
 manager: CelesteDG
-editor: ''
-ms.assetid: 72f4e464-1352-4a49-a18f-c37f58e7d5c4
 ms.service: active-directory
 ms.subservice: develop
-ms.devlang: na
-ms.topic: conceptual
-ms.tgt_pltfrm: na
+ms.topic: how-to
 ms.workload: identity
-origin.date: 09/24/2018
-ms.date: 08/23/2019
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: arielgo
 ms.custom: aaddev, signin_art
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: b63cc90a882ec578f93bb2c4b7341da6d4ab6c7d
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: ca4642323e303986495ca1320441c11ada38ee63
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "69993229"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647482"
 ---
 # <a name="branding-guidelines-for-applications"></a>适用于应用程序的品牌准则
 
@@ -59,7 +53,7 @@ Microsoft 不会向最终用户显示 Azure 或 Active Directory 品牌名称，
 
 ## <a name="visual-guidance-for-app-acquisition"></a>有关获取应用程序的可视指南
 
-“获取应用程序”链接必须将用户重定向到 Azure AD 的访问权限授予（授权）页，以方便组织的管理员对应用程序进行授权，使其有权访问 Microsoft 托管的组织数据。 有关如何请求访问权限的详细信息，请参阅[将应用程序与 Azure Active Directory 集成](quickstart-v1-integrate-apps-with-azure-ad.md) 一文。
+“获取应用程序”链接必须将用户重定向到 Azure AD 的访问权限授予（授权）页，以方便组织的管理员对应用程序进行授权，使其有权访问 Microsoft 托管的组织数据。 有关如何请求访问权限的详细信息，请参阅[将应用程序与 Azure Active Directory 集成](./quickstart-register-app.md) 一文。
 
 管理员许可应用后，可以选择将应用添加到其用户的 Office 365 应用启动器体验（可从 waffle 访问）。 如果想要广告此功能，可以使用类似于“将此应用程序添加到组织”词语，并显示类似于以下示例的按钮：
 

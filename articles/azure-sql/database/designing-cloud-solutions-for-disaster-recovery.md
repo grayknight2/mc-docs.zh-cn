@@ -11,14 +11,14 @@ ms.topic: conceptual
 author: WenJason
 ms.author: v-jay
 ms.reviewer: carlrab
-origin.date: 12/04/2018
-ms.date: 07/13/2020
-ms.openlocfilehash: eb649d9cbf28e99e3265c0a42279ec7b38b50cad
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+origin.date: 07/28/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: b69494fa53abb899766dd98616fd3aa0aded3754
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227853"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222804"
 ---
 # <a name="designing-globally-available-services-using-azure-sql-database"></a>使用 Azure SQL 数据库设计全球可用的服务
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -56,7 +56,13 @@ ms.locfileid: "86227853"
 > 对于灾难恢复，建议将应用程序部署配置限于两个区域。 这是因为大多数 Azure 地理位置仅有两个区域。 如果两个区域同时发生灾难性故障，此配置不会为你的应用程序提供保护。 在此类失败的不可能事件中，可以使用[异地还原操作](disaster-recovery-guidance.md#recover-using-geo-restore)在第三个区域中恢复数据库。
 >
 
- 中断问题缓解后，辅助数据库会立即自动重新与主数据库同步。 同步期间，主数据库的性能可能受影响。 具体影响取决于新主数据库自故障转移开始后获取的数据量。 下图说明了次要区域中的服务中断：
+ 中断问题缓解后，辅助数据库会立即自动重新与主数据库同步。 同步期间，主数据库的性能可能受影响。 具体影响取决于新主数据库自故障转移开始后获取的数据量。 
+
+> [!NOTE]
+> 缓解服务中断后，流量管理器会开始将连接路由到区域 A 中的应用程序，以用作优先级更高的终结点。 如果打算让主要数据库保留在区域 B 中一段时间，则应该相应地更改流量管理器配置文件中的优先级表。 
+>
+ 
+ 下图说明了次要区域中的服务中断：
 
 ![方案 1. 次要区域中发生中断后的配置。](./media/designing-cloud-solutions-for-disaster-recovery/scenario1-c.png)
 

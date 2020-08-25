@@ -1,9 +1,9 @@
 ---
-title: Azure 的 Windows 虚拟机上运行的 SQL Server 常见问题解答
+title: Azure 的 Windows 虚拟机上的 SQL Server 常见问题解答 | Microsoft Docs
 description: 本文提供有关运行 Azure VM 中的 SQL Server 时遇到的常见问题的解答。
 services: virtual-machines-windows
 documentationcenter: ''
-author: rockboyfor
+author: WenJason
 editor: ''
 tags: azure-service-management
 ms.assetid: 2fa5ee6b-51a6-4237-805f-518e6c57d11b
@@ -12,29 +12,28 @@ ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 origin.date: 08/05/2019
-ms.date: 07/06/2020
+ms.date: 08/17/2020
 ms.author: v-yeche
-ms.openlocfilehash: 1dd421592bee621482ffdff1f6cc781a083010b9
-ms.sourcegitcommit: 89118b7c897e2d731b87e25641dc0c1bf32acbde
+ms.openlocfilehash: 1dee25f854111cd899875742ae05b42ebfec5bdf
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85946161"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223264"
 ---
 <!--Verified Redirect file-->
-# <a name="frequently-asked-questions-for-sql-server-running-on-windows-virtual-machines-in-azure"></a>Azure 的 Windows 虚拟机上运行的 SQL Server 常见问题解答
+# <a name="frequently-asked-questions-for-sql-server-on-azure-vms"></a>Azure VM 上的 SQL Server 常见问题解答
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
 
 > [!div class="op_single_selector"]
 > * [Windows](frequently-asked-questions-faq.md)
 > * [Linux](../linux/frequently-asked-questions-faq.md)
 
-本文提供有关[在 Azure 的 Windows 虚拟机 (VM) 上运行 SQL Server](https://www.azure.cn/home/features/virtual-machines/#virtual-machine-SQLserver) 时出现的一些最常见问题的解答。
+本文提供有关[在 Windows Azure 虚拟机 (VM) 上运行 SQL Server](https://www.azure.cn/home/features/virtual-machines/#virtual-machine-SQLserver) 时出现的一些最常见问题的解答。
 
 [!INCLUDE [support-disclaimer](../../../../includes/support-disclaimer.md)]
 
-<a name="images"></a>
-## <a name="images"></a>映像
+## <a name="images"></a><a id="images"></a>映像
 
 1. **有哪些 SQL Server 虚拟机库映像可用？** 
 
@@ -59,7 +58,7 @@ ms.locfileid: "85946161"
 
 1. 如何使 Azure VM 上的 SQL Server 通用化并使用它部署新 VM？
 
-    可以部署 Windows Server VM（不安装 SQL Server），并使用 [SQL sysprep](https://docs.microsoft.com/sql/database-engine/install-windows/install-sql-server-using-sysprep?view=sql-server-ver15) 进程和 SQL Server 安装媒体将 Azure VM (Windows) 上的 SQL Server 通用化。 如果客户有[软件保障](https://www.microsoft.com/en-us/licensing/licensing-programs/software-assurance-default?rtc=1&activetab=software-assurance-default-pivot%3aprimaryr3)，则可以从[批量许可中心](https://www.microsoft.com/Licensing/servicecenter/default.aspx)获取其安装介质。 没有软件保障的客户可以使用具有所需版本的 Azure 市场 SQL Server VM 映像中的安装介质。
+    可以部署 Windows Server VM（不安装 SQL Server），并使用 [SQL sysprep](https://docs.microsoft.com/sql/database-engine/install-windows/install-sql-server-using-sysprep?view=sql-server-ver15) 进程和 SQL Server 安装媒体将 Azure VM (Windows) 上的 SQL Server 通用化。 如果客户有[软件保障](https://www.microsoft.com/licensing/licensing-programs/software-assurance-default?rtc=1&activetab=software-assurance-default-pivot%3aprimaryr3)，则可以从[批量许可中心](https://www.microsoft.com/Licensing/servicecenter/default.aspx)获取其安装介质。 没有软件保障的客户可以使用具有所需版本的 Azure 市场 SQL Server VM 映像中的安装介质。
 
     另外，也可使用 Azure 市场中的 SQL Server 映像之一来将 Azure VM 上的 SQL Server 通用化。 请注意，在创建你自己的映像之前，必须在源映像中删除以下注册表项。 如果不这样做，可能会导致 SQL Server 安装程序的启动文件夹扩展以及/或者 SQL IaaS 扩展处于故障状态。
    注册表项路径：  
@@ -119,7 +118,7 @@ ms.locfileid: "85946161"
 
     若要获得备用辅助可用性组或故障转移群集实例的免费被动许可证，必须满足[产品许可条款](https://www.microsoft.com/licensing/product-licensing/products)中所述的以下所有条件：
 
-    1. 已通过[软件保障](https://www.microsoft.com/en-us/licensing/licensing-programs/software-assurance-default?activetab=software-assurance-default-pivot%3aprimaryr3)获得[许可移动性](https://www.microsoft.com/en-us/licensing/licensing-programs/software-assurance-license-mobility?activetab=software-assurance-license-mobility-pivot:primaryr2)。 
+    1. 已通过[软件保障](https://www.microsoft.com/licensing/licensing-programs/software-assurance-default?activetab=software-assurance-default-pivot%3aprimaryr3)获得[许可移动性](https://www.microsoft.com/licensing/licensing-programs/software-assurance-license-mobility?activetab=software-assurance-license-mobility-pivot:primaryr2)。 
     1. 被动 SQL Server 实例不会为客户端提供 SQL Server 数据，也不会运行活动的 SQL Server 工作负荷。 它只用于与主服务器同步，或者使被动数据库保持热备用状态。 如果它正在提供数据（例如，向运行活动 SQL Server 工作负载的客户端报告，或执行未在产品条款中指定的任何工作），则它必须是付费许可的 SQL Server 实例。 允许对辅助实例执行以下活动：数据库一致性检查或 CheckDB、完整备份、事务日志备份，以及资源使用情况数据监视。 还可以在每隔 90 天运行一次灾难恢复测试的短暂时段内，同时运行主实例和相应的灾难恢复实例。 
     1. 活动的 SQL Server 许可证已涵盖在软件保障中，仅允许**一个**被动辅助 SQL Server 实例，允许的计算量不能超过已许可的活动服务器。 
     

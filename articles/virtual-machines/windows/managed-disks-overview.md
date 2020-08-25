@@ -7,15 +7,15 @@ ms.topic: conceptual
 origin.date: 04/24/2020
 ms.date: 08/10/2020
 ms.testscope: no
-ms.testdate: 07/06/2020
+ms.testdate: 08/24/2020
 ms.author: v-yeche
 ms.subservice: disks
-ms.openlocfilehash: 7b10f0543e3c3ec0a31312f36477b21ec6151579
-ms.sourcegitcommit: ac70b12de243a9949bf86b81b2576e595e55b2a6
+ms.openlocfilehash: c3acbfc406408dcbb9f98176bfe7d17b1647c01f
+ms.sourcegitcommit: c4b0a0ddd52ceca82cfdbdbdf07aad00d0f3ed03
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87917091"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88714507"
 ---
 # <a name="introduction-to-azure-managed-disks"></a>Azure 托管磁盘简介
 

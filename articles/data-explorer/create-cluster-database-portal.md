@@ -7,13 +7,13 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 origin.date: 07/22/2019
-ms.date: 05/09/2020
-ms.openlocfilehash: ab145d46cf61a42acb062ce5a9462000e9ae282f
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: 7a3c26bd2f10eaa909b961b3bf230eca50038b9f
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417680"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515871"
 ---
 # <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>快速入门：创建 Azure 数据资源管理器群集和数据库
 
@@ -107,7 +107,10 @@ Azure 数据资源管理器是一项快速且高度可缩放的数据探索服�
 
 1. 若要停止群集，请在“概述”选项卡顶部选择“停止”。
 
-    停止群集后，数据不可用于查询，并且无法引入新数据。
+    :::image type="content" source="media/create-cluster-database-portal/stop-button.png" alt-text="“停止”图标":::
+
+    > [!NOTE]
+    > 停止群集后，数据不可用于查询，并且无法引入新数据。
 
 1. 若要重新启动群集，请在“概述”选项卡顶部选择“启动”。
 

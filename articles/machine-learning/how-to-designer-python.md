@@ -10,14 +10,14 @@ author: peterclu
 ms.author: peterlu
 ms.date: 02/28/2020
 ms.custom: designer, tracking-python
-ms.openlocfilehash: 3d5258cc165f0d7ee43e125b5d716b5c88393711
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.openlocfilehash: c5fe40bb323785621830f3112052606d2cdef3d9
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097533"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228287"
 ---
-# <a name="execute-python-code-in-azure-machine-learning-designer"></a>在 Azure 机器学习设计器中执行 Python 代码
+# <a name="run-python-code-in-azure-machine-learning-designer"></a>在 Azure 机器学习设计器中运行 Python 代码
 
 本文介绍了如何使用[“执行 Python 脚本”](algorithm-module-reference/execute-python-script.md)模块将自定义逻辑添加到 Azure 机器学习设计器中。 在下面的操作指南中，你将使用 Pandas 库来执行简单的特征工程。
 
@@ -26,6 +26,8 @@ ms.locfileid: "85097533"
 默认执行环境使用 Anacondas 发行版 Python。 有关预安装包的完整列表，请参阅[“执行 Python 脚本”模块参考](algorithm-module-reference/execute-python-script.md)页。
 
 ![执行 Python 输入映射](media/how-to-designer-python/execute-python-map.png)
+
+[!INCLUDE [machine-learning-missing-ui](../../includes/machine-learning-missing-ui.md)]
 
 ## <a name="execute-python-written-in-the-designer"></a>执行在设计器中编写的 Python
 

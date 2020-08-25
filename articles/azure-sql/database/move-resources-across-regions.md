@@ -3,7 +3,7 @@ title: 将资源移到新区域
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: 了解如何将数据库或托管实例移到另一个区域。
 services: sql-database
-ms.service: sql-database
+ms.service: sql-db-mi
 ms.subservice: data-movement
 ms.custom: sqldbrb=2
 ms.devlang: ''
@@ -12,13 +12,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: carlrab
 origin.date: 06/25/2019
-ms.date: 07/13/2020
-ms.openlocfilehash: 298ab821593c1e00eb67e5e0b8cfb03fb600516b
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 0b6883eb17a3e0c3756e118e8b72d214b5748e68
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86228085"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222885"
 ---
 # <a name="move-resources-to-new-region---azure-sql-database--azure-sql-managed-instance"></a>将资源移到新区域 - Azure SQL 数据库和 Azure SQL 托管实例
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -88,7 +88,7 @@ ms.locfileid: "86228085"
 1. 使用 [Remove-AzSqlDatabaseFailoverGroup](https://docs.microsoft.com/powershell/module/az.sql/remove-azsqldatabasefailovergroup) 删除故障转移组。 
 1. 使用 [Remove-AzSqlDatabase](https://docs.microsoft.com/powershell/module/az.sql/remove-azsqldatabase) 删除源服务器上每个数据库的每个源数据库。 这会自动终止异地复制链接。
 1. 使用 [Remove-AzSqlServer](https://docs.microsoft.com/powershell/module/az.sql/remove-azsqlserver) 删除源服务器。
-1. 删除 Key Vault、审核存储容器、事件中心、AAD 实例和其他相关资源，以停止其计费。
+1. 删除密钥保管库、审核存储容器、事件中心、Azure Active Directory (Azure AD) 实例和其他相关资源，以停止其计费。
 
 ## <a name="move-elastic-pools"></a>移动弹性池
 
@@ -124,7 +124,7 @@ ms.locfileid: "86228085"
 
 ### <a name="test-synchronization"></a>测试同步
 
-**ReplicationState** 变为 `2` 后，使用辅助终结点 `<fog-name>.secondary.database.chinacloudapi.cn` 连接到每个数据库或数据库子集，并对数据库执行任何查询，以确保连接、安全性配置和数据复制正常。
+“ReplicationState”变为 `2` 后，使用辅助终结点 `<fog-name>.secondary.database.chinacloudapi.cn` 连接到每个数据库或数据库子集，并对数据库执行任何查询，以确保连接、安全性配置和数据复制正常。
 
 ### <a name="initiate-the-move"></a>启动移动
 

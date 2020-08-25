@@ -9,14 +9,14 @@ ms.topic: how-to
 ms.author: laobri
 author: lobrien
 manager: cgronlun
-ms.date: 04/28/2020
+ms.date: 06/15/2020
 ms.custom: tracking-python
-ms.openlocfilehash: 765c8820af5904061f4b6bd466b4be531add5aec
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.openlocfilehash: 6d8bc786a761d70574d6a0cc8799895f6aa32e3c
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097777"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228404"
 ---
 # <a name="use-automated-ml-in-an-azure-machine-learning-pipeline-in-python"></a>在 Python 的 Azure 机器学习管道中使用自动化 ML
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -97,6 +97,8 @@ if not compute_name in ws.compute_targets :
 
 compute_target = ws.compute_targets[compute_name]
 ```
+
+[!INCLUDE [low-pri-note](../../includes/machine-learning-low-pri-vm.md)]
 
 可将数据准备和自动化 ML 步骤之间的中间数据存储在工作区的默认数据存储中，因此我们只需要在 `Workspace` 对象上调用 `get_default_datastore()`。 
 
@@ -268,7 +270,7 @@ prepped_data = Dataset.get_by_name(ws, 'Data_prepared')
 
 比较这两种方法：
 
-| 方法 |  | 
+| 方法 | 优点和缺点 | 
 |-|-|
 |`PipelineOutputTabularDataset`| 提高性能 | 
 || 从 `PipelineData` 自然路由 | 

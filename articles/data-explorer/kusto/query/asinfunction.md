@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 10/23/2018
-ms.date: 07/31/2020
-ms.openlocfilehash: a2678cd8e564dfa6ad87c7a818a18749a1e324c3
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: de3c42bcedf9e340c8908ad44c16a3d03d8baeb0
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509253"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515783"
 ---
 # <a name="asin"></a>asin()
 

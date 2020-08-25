@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/24/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: a63459b18e2dd970e4e5d2dffaad9d3ecf22c020
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: aa4e4fb0f8df44aa66e564bbf86f2d09918ce152
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509229"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515640"
 ---
 # <a name="binary_all_or-aggregation-function"></a>binary_all_or()（聚合函数）
 

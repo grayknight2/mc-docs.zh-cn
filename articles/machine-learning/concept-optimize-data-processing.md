@@ -4,18 +4,18 @@ titleSuffix: Azure Machine Learning
 description: 了解优化数据处理速度的最佳实践，以及 Azure 机器学习在大规模数据处理方面支持哪些集成。
 services: machine-learning
 ms.service: machine-learning
-author: sgilley
 ms.author: sgilley
+author: sdgilley
 ms.subservice: core
 ms.reviewer: nibaccam
 ms.topic: conceptual
-ms.date: 05/29/2020
-ms.openlocfilehash: 96f73a881f4aa2e8ddc89200102e6d1395ca6e00
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.date: 06/26/2020
+ms.openlocfilehash: f0254b678e7f53a75b81038fb507304b523f13fc
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441109"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227861"
 ---
 # <a name="optimize-data-processing-with-azure-machine-learning"></a>使用 Azure 机器学习优化数据处理
 
@@ -81,4 +81,4 @@ CSV 文件通常用于导入和导出数据，因为它们易于在 Excel 中进
 ## <a name="next-steps"></a>后续步骤
 
 * [Azure 机器学习的数据引入选项](concept-data-ingestion.md)。
-* [使用 Azure 数据工厂进行数据引入](how-to-data-ingest-adf.md)。
+* [创建和注册数据集](how-to-create-register-datasets.md)。

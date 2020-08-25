@@ -2,25 +2,27 @@
 title: 使用 Azure Cosmos 帐户的帐户密钥和连接字符串
 description: 使用 Azure Cosmos 帐户的帐户密钥和连接字符串
 author: rockboyfor
-ms.author: v-yeche
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.topic: sample
-origin.date: 09/25/2019
-ms.date: 10/28/2019
-ms.openlocfilehash: f338565a8b55cb6f6e1b9493beab93a1a43629b4
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
+ms.author: v-yeche
+ms.openlocfilehash: ae8d5f07dc9e374661db50830e9e4e6189addf46
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "72914856"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223335"
 ---
 <!--Verify successfully-->
 # <a name="work-with-account-keys-and-connection-strings-for-an-azure-cosmos-account-using-azure-cli"></a>通过 Azure CLI 使用 Azure Cosmos 帐户的帐户密钥和连接字符串
 
 [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../../../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
-如果选择在本地安装并使用 CLI，本主题需要运行 Azure CLI 2.0.73 版或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
+选择在本地安装并使用 CLI 时，本主题要求运行 Azure CLI 2.9.1 或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
 
 ## <a name="sample-script"></a>示例脚本
 
@@ -37,15 +39,15 @@ ms.locfileid: "72914856"
 ```azurecli
 #!/bin/bash
 
+# Sign in the Azure China Cloud
+az cloud set -n AzureChinaCloud
+az login
+
 # This sample shows the following:
 # List all account keys
 # List read only account keys
 # List connection strings
 # Regenerate account keys
-
-# Sign in the Azure China Cloud
-az cloud set -n AzureChinaCloud
-az login
 
 # Generate a unique 10 character alphanumeric string to ensure unique resource names
 uniqueId=$(env LC_CTYPE=C tr -dc 'a-z0-9' < /dev/urandom | fold -w 10 | head -n 1)
@@ -70,20 +72,22 @@ az cosmosdb keys list \
 
 read -p "Press any key to list read only account keys"
 # List read-only keys
-az cosmosdb list-read-only-keys \
+az cosmosdb keys list \
     -n $accountName \
-    -g $resourceGroupName
+    -g $resourceGroupName \
+    --type read-only-keys
 
 read -p "Press any key to list connection strings"
 # List connection strings
-az cosmosdb list-connection-strings \
+az cosmosdb keys list \
     -n $accountName \
-    -g $resourceGroupName
+    -g $resourceGroupName \
+    --type connection-strings
 
 read -p "Press any key to regenerate secondary account keys"
 # Regenerate secondary account keys
 # key-kind values: primary, primaryReadonly, secondary, secondaryReadonly
-az cosmosdb regenerate-key \
+az cosmosdb keys regenerate \
     -n $accountName \
     -g $resourceGroupName \
     --key-kind secondary
@@ -106,7 +110,7 @@ az group delete --name $resourceGroupName
 |---|---|
 | [az group create](https://docs.azure.cn/cli/group?view=azure-cli-latest#az-group-create) | 创建用于存储所有资源的资源组。 |
 | [az cosmosdb create](https://docs.azure.cn/cli/cosmosdb?view=azure-cli-latest#az-cosmosdb-create) | 创建 Azure Cosmos DB 帐户。 |
-| [az cosmosdb keys list](https://docs.azure.cn/cli/cosmosdb/keys?view=azure-cli-latest#az-cosmosdb-keys-list) | 列出 Azure Cosmos DB 帐户的密钥。 |
+| [az cosmosdb keys list](https://docs.microsoft.com/cli/azure/cosmosdb/keys?view=azure-cli-latest#az-cosmosdb-keys-list) | 列出 Azure Cosmos DB 帐户的密钥。 |
 | [az cosmosdb list-read-only-keys](https://docs.azure.cn/cli/cosmosdb?view=azure-cli-latest#az-cosmosdb-list-read-only-keys) | 列出 Azure Cosmos DB 帐户的只读密钥。 |
 | [az cosmosdb list-connection-strings](https://docs.azure.cn/cli/cosmosdb?view=azure-cli-latest#az-cosmosdb-list-connection-strings) | 列出 Azure Cosmos DB 帐户的连接字符串。 |
 | [az cosmosdb regenerate-key](https://docs.azure.cn/cli/cosmosdb?view=azure-cli-latest#az-cosmosdb-regenerate-key) | 重新生成 Azure Cosmos DB 帐户的密钥。 |
@@ -118,5 +122,4 @@ az group delete --name $resourceGroupName
 
 可以在 [Azure Cosmos DB CLI GitHub 存储库](https://github.com/Azure-Samples/azure-cli-samples/tree/master/cosmosdb)中找到所有 Azure Cosmos DB CLI 脚本示例。
 
-<!--Update_Description: new articles on cosmos db common keys -->
-<!--New.date: 10/28/2019-->
+<!-- Update_Description: update meta properties, wording update, update link -->

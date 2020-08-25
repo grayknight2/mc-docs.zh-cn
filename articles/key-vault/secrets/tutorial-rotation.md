@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 1445fc3aaebdbee66fb2dd959a82e3676a07de30
-ms.sourcegitcommit: 0e778acf5aa5eb63ab233e07e7aecce3a9a5e6d4
+ms.openlocfilehash: e864fe9b6a146427e7284aecdf9202aa0a900bf7
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87296455"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227873"
 ---
 <a name="title-single-usersingle-password-rotation-tutorial"></a>title:单用户/单密码轮换教程
 ---
@@ -173,7 +173,7 @@ public class SecretRotator
 
 1. 从 [GitHub](https://github.com/jlichwa/azure-keyvault-basicrotation-tutorial/raw/master/simplerotationsample-fn.zip) 下载函数应用 zip 文件。
 
-1. 将 simplerotationsample-fn.zip 文件上传到 Azure Cloud Shell。
+1. 将 simplerotationsample-fn.zip 文件上传到 Azure CLI。
 
    ![上传文件](../media/rotate4.png)
 1. 使用以下 Azure CLI 命令将 zip 文件部署到函数应用：
@@ -247,7 +247,7 @@ az keyvault secret set --name sqluser --vault-name simplerotation-kv --value "Si
 若要部署 Web 应用，请完成以下步骤：
 
 1. 从 [GitHub](https://github.com/jlichwa/azure-keyvault-basicrotation-tutorial/raw/master/simplerotationsample-app.zip) 下载函数应用 zip 文件。
-1. 将 simplerotationsample-app.zip 文件上传到 Azure Cloud Shell。
+1. 将 simplerotationsample-app.zip 文件上传到 Azure CLI。
 1. 使用以下 Azure CLI 命令将 zip 文件部署到函数应用：
 
    ```azurecli

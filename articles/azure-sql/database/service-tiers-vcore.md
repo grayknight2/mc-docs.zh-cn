@@ -3,20 +3,20 @@ title: vCore 购买模型概述
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: 借助 vCore 购买模型，可单独缩放计算和存储资源、匹配本地性能，并优化 Azure SQL 数据库和 Azure SQL 托管实例的价格。
 services: sql-database
-ms.service: sql-database
-ms.subservice: service
+ms.service: sql-db-mi
+ms.subservice: features
 ms.topic: conceptual
 author: WenJason
 ms.author: v-jay
 ms.reviewer: sashan, moslake, carlrab
-origin.date: 11/27/2019
-ms.date: 07/13/2020
-ms.openlocfilehash: 3e48a34ff3e11520461bd59032ce89d709052482
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+origin.date: 07/21/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: e049286d4aae5b461a6e040c89515619674bb061
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86228074"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223019"
 ---
 # <a name="vcore-model-overview---azure-sql-database-and-azure-sql-managed-instance"></a>vCore 模型概述 - Azure SQL 数据库和 Azure SQL 托管实例 
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -26,13 +26,13 @@ Azure SQL 数据库和 Azure SQL 托管实例使用的虚拟核心 (vCore) 购�
 - 更高的计算、内存、I/O 和存储限制。
 - 控制硬件代系，以便更好地符合工作负荷的计算和内存要求。
 - [Azure 混合权益 (AHB)](../azure-hybrid-benefit.md) 的定价折扣。
-- 为驱动计算的硬件细节提供更高的透明度；有助于规划从本地部署的迁移。
+- 为驱动计算的硬件细节提供更高的透明度，这有助于规划从本地部署进行的迁移。
 
 ## <a name="service-tiers"></a>服务层
 
 vCore 模型中的服务层级选项包括“常规用途”、“业务关键”和“超大规模”。 服务层级通常定义存储体系结构、空间和 I/O 限制，以及与可用性和灾难恢复相关的业务连续性选项。
 
-||**常规用途**|**业务关键**|**超大规模**|
+|-|**常规用途**|**业务关键**|**超大规模**|
 |---|---|---|---|
 |最适用于|大多数业务工作负荷。 提供预算导向的、均衡且可缩放的计算和存储选项。 |它使用多个独立副本为商业应用程序提供最高级别的故障恢复能力，为每个数据库副本提供最高的 I/O 性能。|具有很高的可缩放存储和读取缩放要求的大多数业务工作负荷。  允许配置多个独立的数据库副本，提供更高的故障恢复能力。 |
 |存储|使用远程存储。<br/>**SQL 数据库预配计算**：<br/>5 GB - 4 TB<br/>**无服务器计算**<br/>5 GB - 3 TB<br/>**SQL 托管实例**：32 GB - 8 TB |使用本地 SSD 存储。<br/>**SQL 数据库预配计算**：<br/>5 GB - 4 TB<br/>**SQL 托管实例**：<br/>32 GB - 2 TB |可以根据需要灵活地自动扩展存储。 最多支持 100 TB 存储空间。 使用本地 SSD 存储作为本地缓冲池缓存和本地数据存储。 使用 Azure 远程存储作为最终的长期数据存储。 |

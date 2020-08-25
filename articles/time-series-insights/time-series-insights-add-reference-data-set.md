@@ -9,14 +9,14 @@ manager: diviso
 ms.reviewer: jasonh, kfile
 ms.workload: big-data
 ms.topic: conceptual
-ms.date: 08/05/2020
+ms.date: 08/20/2020
 ms.custom: seodec18
-ms.openlocfilehash: 6662c0a797614614c676ee1e37ae3da8d91bb10a
-ms.sourcegitcommit: 36e7f37481969f92138bfe70192b1f4a2414caf7
+ms.openlocfilehash: 28b3fb5da5a1790e222f0b0f1fd20e2b7f2515a5
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87796282"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715367"
 ---
 # <a name="create-a-reference-data-set-for-your-azure-time-series-insights-gen1-environment-using-the-azure-portal"></a>使用 Azure 门户为 Azure 时序见解 Gen1 环境创建引用数据集
 
@@ -110,7 +110,7 @@ ms.locfileid: "87796282"
 
 ## <a name="next-steps"></a>后续步骤
 
-* 以编程方式[管理引用数据](time-series-insights-manage-reference-data-csharp.md)。
+- 以编程方式[管理引用数据](time-series-insights-manage-reference-data-csharp.md)。
 
-* 有关完整的 API 参考，请阅读[参考数据 API](https://docs.microsoft.com/rest/api/time-series-insights/ga-reference-data-api) 文档。
+- 有关完整的 API 参考，请阅读[参考数据 API](https://docs.microsoft.com/rest/api/time-series-insights/gen1-reference-data-api) 文档。
 

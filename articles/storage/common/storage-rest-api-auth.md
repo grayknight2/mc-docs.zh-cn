@@ -1,22 +1,22 @@
 ---
 title: 通过共享密钥授权调用 REST API 操作
-titleSuffix: Azure Storage
+titleSuffix: Discover how to call Azure Storage REST API operations with Shared Key authorization. Get detailed information about each step of the sample operation.
 description: 通过 Azure 存储 REST API 来使用共享密钥授权向 Blob 存储发出请求。
 services: storage
 author: WenJason
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 10/01/2019
-ms.date: 03/09/2020
+ms.date: 08/24/2020
 ms.author: v-jay
-ms.reviewer: cbrooks
+ms.reviewer: ozge
 ms.subservice: common
-ms.openlocfilehash: 06e63565a8f4bfe8c2028460e1f27de4e38bc702
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 56993741986402b6c27c55d63e1f8f7d3e1aac4c
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "78412450"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753557"
 ---
 # <a name="call-rest-api-operations-with-shared-key-authorization"></a>通过共享密钥授权调用 REST API 操作
 

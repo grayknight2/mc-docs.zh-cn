@@ -7,13 +7,13 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 11/04/2019
-ms.date: 05/09/2020
-ms.openlocfilehash: fc81d00c1f2c96da01070c82ea10a4e04cb8e6a1
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: 5233d0d4f5b3fc9acac488b19f222660fa5acc27
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417587"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516024"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-redash"></a>在 Redash 中可视化 Azure 数据资源管理器的数据
 
@@ -28,7 +28,7 @@ ms.locfileid: "83417587"
 
 ## <a name="create-azure-data-explorer-connector-in-redash"></a>在 Redash 中创建 Azure 数据资源管理器连接器 
 
-1. 登录到 [Redash](https://www.redash.io/)。 选择“开始”以创建帐户。 
+1. 登录到 [Redash](https://redash.io/)。 选择“开始”以创建帐户。 
 1. 在“让我们开始吧”中选择“连接数据源”。  
 
     ![连接数据源](media/redash/connect-data-source.png)
@@ -74,7 +74,7 @@ ms.locfileid: "83417587"
     ![基于查询的下拉列表](media/redash/query-based-dropdown-list.png)
 
     > [!NOTE]
-    > 该查询使用多个值，因此必须包含以下语法：`| where Type in ((split('{{Type}}', ',')))`。 有关详细信息，请参阅 [in 运算符](https://docs.microsoft.com/azure/data-explorer/kusto/query/inoperator)。 这会导致 [Redash 应用中出现多个查询参数选项](https://redash.io/help/user-guide/querying/query-parameters#Serialized-Multi-Select-Query-Parametersredash.io)
+    > 该查询使用多个值，因此必须包含以下语法：`| where Type in ((split('{{Type}}', ',')))`。 有关详细信息，请参阅 [in 运算符](kusto/query/inoperator.md)。 这会导致 [Redash 应用中出现多个查询参数选项](https://redash.io/help/user-guide/querying/query-parameters#Serialized-Multi-Select-Query-Parametersredash.io)
 
 ## <a name="create-a-dashboard-in-redash"></a>在 Redash 中创建仪表板
 

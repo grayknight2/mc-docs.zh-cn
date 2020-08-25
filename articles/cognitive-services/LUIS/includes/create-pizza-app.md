@@ -1,17 +1,17 @@
 ---
 title: 创建 pizza 应用步骤
 description: 创建 LUIS pizza 应用的步骤。
-ms.date: 06/18/2020
+origin.date: 05/05/2020
 ms.topic: include
 ms.custom: include file
+ms.date: 06/18/2020
 ms.author: v-tawe
-origin.date: 05/05/2020
-ms.openlocfilehash: 796d5c0b3da808b5501b51e8754b6e6141ad1032
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.openlocfilehash: 5694e84630061dffd36d25d91ff27091c5ee411e
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85098538"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88602250"
 ---
 1. 使用 URL [https://luis.azure.cn](https://luis.azure.cn) 登录到 LUIS 门户。 
 

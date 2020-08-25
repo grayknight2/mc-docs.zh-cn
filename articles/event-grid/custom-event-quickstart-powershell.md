@@ -1,21 +1,17 @@
 ---
 title: 快速入门：将自定义事件发送到 Web 终结点 - 事件网格、PowerShell
 description: 快速入门：使用 Azure 事件网格和 PowerShell 发布自定义主题，然后订阅该主题的事件。 事件由 Web 应用程序处理。
-services: event-grid
-keywords: ''
-author: lingliw
-ms.author: v-lingwu
+author: Johnnytechn
+ms.author: v-johya
 origin.date: 11/05/2019
-ms.date: 3/16/2020
+ms.date: 08/10/2020
 ms.topic: quickstart
-ms.service: event-grid
-ms.custom: seodec18
-ms.openlocfilehash: 177d43b4a5e44a9c70d1f3817223b5d5f694488b
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 25354b62f9b855577a172003372c6d695714105b
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79452605"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228052"
 ---
 # <a name="quickstart-route-custom-events-to-web-endpoint-with-powershell-and-event-grid"></a>快速入门：使用 PowerShell 和事件网格将自定义事件路由到 Web 终结点
 
@@ -27,7 +23,7 @@ Azure 事件网格是针对云的事件处理服务。 在本文中，请使用 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-[!INCLUDE [quickstarts-free-trial-note.md](../../includes/quickstarts-free-trial-note.md)]
+如果没有 Azure 订阅，可在开始前创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
 
 本文要求运行最新版本的 Azure PowerShell。 如需进行安装或升级，请参阅[安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps)。
 
@@ -35,12 +31,12 @@ Azure 事件网格是针对云的事件处理服务。 在本文中，请使用 
 
 事件网格主题是 Azure 资源，必须放置在 Azure 资源组中。 该资源组是在其中部署和管理 Azure 资源的逻辑集合。
 
-使用 [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup) 命令创建资源组。
+使用 [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup) 命令创建资源组。
 
-以下示例在 *chinaeast* 位置创建名为 *gridResourceGroup* 的资源组。
+以下示例在“chinanorth2”位置创建名为“gridResourceGroup”的资源组。
 
 ```powershell
-New-AzResourceGroup -Name gridResourceGroup -Location chinaeast
+New-AzResourceGroup -Name gridResourceGroup -Location chinanorth2
 ```
 
 [!INCLUDE [event-grid-register-provider-powershell.md](../../includes/event-grid-register-provider-powershell.md)]
@@ -52,7 +48,7 @@ New-AzResourceGroup -Name gridResourceGroup -Location chinaeast
 ```powershell
 $topicname="<your-topic-name>"
 
-New-AzEventGridTopic -ResourceGroupName gridResourceGroup -Location chinaeast -Name $topicname
+New-AzEventGridTopic -ResourceGroupName gridResourceGroup -Location chinanorth2 -Name $topicname
 ```
 
 ## <a name="create-a-message-endpoint"></a>创建消息终结点
@@ -169,5 +165,6 @@ Remove-AzResourceGroup -Name gridResourceGroup
 了解如何创建主题和事件订阅以后，即可进一步学习事件网格的功能：
 
 - [关于事件网格](overview.md)
-- [通过 Azure 事件网格和逻辑应用监视虚拟机的更改](monitor-virtual-machine-changes-event-grid-logic-app.md)
+- [将 Blob 存储事件路由到自定义 Web 终结点](../storage/blobs/storage-blob-event-quickstart.md?toc=%2fazure%2fevent-grid%2ftoc.json)
 - [将大数据流式传输到数据仓库](event-grid-event-hubs-integration.md)
+

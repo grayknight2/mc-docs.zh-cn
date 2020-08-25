@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: ea6ccee3fec3fbaaec47cca144c866ae7fd5e731
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: c2fd11842815339350904fc65acdb72d5e77dfca
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841687"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515984"
 ---
 # <a name="top-nested-operator"></a>top-nested 运算符
 
@@ -29,7 +29,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 例如，`top-nested` 运算符可用于解答以下问题：“对于一个包含销售数据（如国家/地区、销售人员和销售数量）的表：按销售额排名前五位的国家/地区分别有哪些？ 每个国家/地区排名前三的销售人员是哪几位？”
 
-**语法**
+## <a name="syntax"></a>语法
 
 *T* `|` `top-nested` *TopNestedClause2* [`,` *TopNestedClause2*...]
 
@@ -37,7 +37,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 [*N*] `of` [ *`ExprName`* `=`] *`Expr`* [`with` `others` `=` *`ConstExpr`* ] `by` [ *`AggName`* `=`] *`Aggregation`* [`asc` | `desc`]
 
-**参数**
+## <a name="arguments"></a>参数
 
 对于每个 TopNestedClause：
 
@@ -67,7 +67,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 * `asc` 或 `desc`（默认）可能会控制实际从聚合值范围“底部”还是“顶部”进行选择。
 
-**返回**
+## <a name="returns"></a>返回
 
 此运算符返回一个表，其中每个聚合子句有两列：
 
@@ -75,7 +75,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 * 其中一列保存 Aggregation 计算的结果（列名为 AggregationName，如果指定了的话） 
 
-**注释**
+## <a name="notes"></a>备注
 
 不输出未指定为 `Expr` 值的输入列。
 若要获取特定级别的所有值，请添加一个聚合计数：
@@ -88,7 +88,7 @@ T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-ne
 
 如果聚合的分布相当不均匀，请限制返回的非重复值的数量（通过使用 N），并使用 `with others=` ConstExpr 选项来获得所有其他情况的“权重”指示 。
 
-**示例**
+## <a name="examples"></a>示例
 
 <!-- csl: https://help.kusto.chinacloudapi.cn:443/Samples -->
 ```kusto

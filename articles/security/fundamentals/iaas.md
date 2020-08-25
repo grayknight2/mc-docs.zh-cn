@@ -13,15 +13,15 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/01/2020
-ms.author: v-tawe
+ms.date: 08/13/2020
+ms.author: v-johya
 origin.date: 10/28/2019
-ms.openlocfilehash: 3863cda240ee87e855804cc43a80439b1e455cf2
-ms.sourcegitcommit: 79c99a9ea013b3c74706a1038a505f4eea2aaac4
+ms.openlocfilehash: a63e3057a962e3989d9935dfec116b15964de044
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84439584"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228250"
 ---
 # <a name="security-best-practices-for-iaas-workloads-in-azure"></a>Azure 中 IaaS 工作负荷的安全性最佳实践
 本文介绍了 VM 和操作系统的安全最佳做法。
@@ -33,6 +33,10 @@ ms.locfileid: "84439584"
 ## <a name="protect-vms-by-using-authentication-and-access-control"></a>通过身份验证和访问控制保护 VM
 保护 VM 安全的第一步是确保只有授权用户才能设置新 VM 以及访问 VM。
 
+> [!NOTE]
+> 若要改进 Azure 上 Linux VM 的安全性，可以与 Azure AD 身份验证集成。 使用[适用于 Linux VM 的 Azure AD 身份验证](/virtual-machines/linux/login-using-aad)时，可以通过集中进行控制和强制实施策略来允许或拒绝对 VM 的访问。
+>
+>
 
 **最佳做法**：控制 VM 访问。   
 **详细信息**：使用 [Azure 策略](/azure-policy/azure-policy-introduction)建立组织中的资源约定和创建自定义策略。 将这些策略应用于资源，如[资源组](/azure-resource-manager/resource-group-overview)。 属于该资源组的 VM 将继承该组的策略。
@@ -60,7 +64,7 @@ ms.locfileid: "84439584"
 控制 VM 访问和设置的组织可改善其整体 VM 安全性。
 
 ## <a name="use-multiple-vms-for-better-availability"></a>使用多个 VM 提高可用性
-如果 VM 运行需要具有高可用性的关键应用程序，我们强烈建议使用多个 VM。 为提高可用性，可使用[可用性集](../../virtual-machines/windows/manage-availability.md#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy) <!--not available-->上获取。
+如果 VM 运行需要具有高可用性的关键应用程序，我们强烈建议使用多个 VM。 为提高可用性，可使用[可用性集](../../virtual-machines/windows/manage-availability.md#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy) <!--not available-->.
 
 可用性集是一种逻辑分组功能，在 Azure 中使用它可以确保将 VM 资源部署在 Azure 数据中心后，这些资源相互隔离。 Azure 确保可用性集中部署的 VM 能够跨多个物理服务器、计算机架、存储单元和网络交换机运行。 如果出现硬件或 Azure 软件故障，只有一部分 VM 会受到影响，整体应用程序仍可供客户使用。 如果想要构建可靠的云解决方案，可用性集是一项关键功能。
 
@@ -141,7 +145,7 @@ Microsoft 反恶意软件包括实时保护、计划扫描、恶意软件修正�
 **最佳做法**：在 VM 上启用加密。   
 **详细信息**：Azure 磁盘加密将生成加密密钥并将其写入密钥保管库。 在 Key Vault 中管理加密密钥需要 Azure AD 身份验证。 为此，请创建 Azure AD 应用程序。 对于身份验证，可以使用基于客户端机密的身份验证或[基于客户端证书的 Azure AD 身份验证](../../active-directory/authentication/active-directory-certificate-based-authentication-get-started.md)。
 
-<!-- not availbale-->
+<!-- not available-->
 
 **最佳做法**：在加密磁盘之前创建[快照](../../virtual-machines/windows/snapshot-copy-managed-disk.md)和/或备份。 如果加密期间发生意外故障，备份可提供恢复选项。   
 **详细信息**：加密之前，需要备份包含托管磁盘的 VM。 备份之后，可以通过指定“-skipVmBackup”参数，使用“Set-AzVMDiskEncryptionExtension cmdlet”来加密托管磁盘。 有关如何备份和还原已加密 VM 的详细信息，请参阅 [Azure 备份](../../backup/backup-azure-vms-encryption.md)一文。
@@ -172,3 +176,4 @@ Azure 磁盘加密可解决以下业务需求：
 以下资源提供了有关 Azure 安全性及相关 Microsoft 服务的更多常规信息：
 * [Azure 安全团队博客](https://blogs.msdn.microsoft.com/azuresecurity/) - 随时掌握 Azure 安全性的最新信息
 * [Microsoft 安全响应中心](https://technet.microsoft.com/library/dn440717.aspx) - 可在其中报告 Microsoft 安全漏洞（包括 Azure 问题）或将其通过电子邮件发送到 secure@microsoft.com
+

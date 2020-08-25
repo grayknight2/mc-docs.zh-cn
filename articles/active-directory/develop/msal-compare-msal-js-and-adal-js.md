@@ -1,30 +1,24 @@
 ---
-title: MSAL.js 与 ADAL.js 的差异
+title: MSAL.js 与 ADAL.js 的差异 | Azure
 titleSuffix: Microsoft identity platform
 description: 了解适用于 JavaScript 的 Microsoft 身份验证库 (MSAL.js) 与适用于 JavaScript 的 Azure AD 身份验证库 (ADAL.js) 之间的差异，以及如何在两者之间做出选择。
 services: active-directory
-documentationcenter: dev-center-name
 author: navyasric
 manager: CelesteDG
-editor: ''
 ms.service: active-directory
 ms.subservice: develop
-ms.devlang: na
 ms.topic: conceptual
-ms.tgt_pltfrm: na
 ms.workload: identity
-origin.date: 04/10/2019
-ms.date: 11/05/2019
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: saeeda
 ms.custom: aaddev
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2e3c3e3b2c42956758ffaca1ae9ef66c57a0e47e
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 4545a4dfd1e925ee4ebbe2d4b8fc55a72c61cd6e
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "73830975"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647702"
 ---
 # <a name="differences-between-msal-js-and-adal-js"></a>MSAL JS 与 ADAL JS 的差异
 
@@ -36,7 +30,7 @@ ms.locfileid: "73830975"
 
 在大多数情况下都可以使用 Microsoft 标识平台和 MSAL.js，这是最新一代的 Microsoft 身份验证库。 使用 MSAL.js 可以获取通过 Azure AD（工作和学校帐户）或 Azure AD B2C 登录到应用程序的用户的令牌。
 
-如果你已熟悉 v1.0 终结点（和 ADAL.js），请阅读 [v2.0 终结点有何不同？](azure-ad-endpoint-comparison.md)。
+如果你已熟悉 v1.0 终结点（和 ADAL.js），请阅读 [v2.0 终结点有何不同？](../azuread-dev/azure-ad-endpoint-comparison.md)。
 
 但是，如果应用程序需要使用早期版本的 [Active Directory 联合身份验证服务 (ADFS)](https://docs.microsoft.com/windows-server/identity/active-directory-federation-services) 将用户登录，则你仍然需要使用 ADAL.js。
 
@@ -102,6 +96,5 @@ ms.locfileid: "73830975"
     ```
 
 ## <a name="next-steps"></a>后续步骤
-有关详细信息，请阅读 [v1.0 与 v2.0 的比较](azure-ad-endpoint-comparison.md)。
+有关详细信息，请阅读 [v1.0 与 v2.0 的比较](../azuread-dev/azure-ad-endpoint-comparison.md)。
 
-<!-- Update_Description: wording update -->

@@ -1,16 +1,14 @@
 ---
 title: Azure Functions 网络选项
 description: 在 Azure Functions 中可用的所有网络选项的概述。
-author: alexkarcher-msft
 ms.topic: conceptual
-ms.date: 07/17/2020
-ms.author: v-junlch
-ms.openlocfilehash: ecba87f983c0662d4dfae882923462b56ef94b5e
-ms.sourcegitcommit: 403db9004b6e9390f7fd1afddd9e164e5d9cce6a
+ms.date: 08/12/2020
+ms.openlocfilehash: 7a2e61e84a28e9c6f06def924218150b860c4d5f
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440521"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223311"
 ---
 # <a name="azure-functions-networking-options"></a>Azure Functions 网络选项
 
@@ -22,7 +20,7 @@ ms.locfileid: "86440521"
 
 * 可以从在多租户基础结构上运行的计划选项中进行选择，其中包含不同级别的虚拟网络连接和缩放选项：
     * [消耗计划](functions-scale.md#consumption-plan)会动态缩放以响应负载，并提供最少的网络隔离选项。
-    * Azure [应用服务计划](functions-scale.md#app-service-plan)可按固定的规模运行。
+    * Azure [应用服务计划](functions-scale.md#app-service-plan)按固定规模运行，并提供网络隔离。
 * 可以在[应用服务环境](../app-service/environment/intro.md)中运行函数。 此方法可以将函数部署到虚拟网络中，并且可以进行完全的网络控制和隔离。
 
 ## <a name="matrix-of-networking-features"></a>网络功能矩阵
@@ -84,7 +82,7 @@ Azure Functions 中的虚拟网络集成将共享基础结构与应用服务 Web
 
 ## <a name="hybrid-connections"></a>混合连接
 
-[混合连接](../service-bus-relay/relay-hybrid-connections-protocol.md)是可用于访问其他网络中的应用程序资源的一项 Azure 中继功能。 使用混合连接可以从应用访问应用程序终结点。 无法使用它访问应用程序。 在除消耗计划之外的所有计划中，混合连接可用于 Windows 上运行的函数。
+[混合连接](../azure-relay/relay-hybrid-connections-protocol.md)是可用于访问其他网络中的应用程序资源的一项 Azure 中继功能。 使用混合连接可以从应用访问应用程序终结点。 无法使用它访问应用程序。 在除消耗计划之外的所有计划中，混合连接可用于 Windows 上运行的函数。
 
 在 Azure Functions 中使用时，每个混合连接与单个 TCP 主机和端口组合相关联。 这意味着，混合连接终结点可以位于任何操作系统和任何应用程序上，前提是你能够访问 TCP 侦听端口。 混合连接功能不知道也不关心应用程序协议或者要访问的内容是什么。 它只提供网络访问。
 

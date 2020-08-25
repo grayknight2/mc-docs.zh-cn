@@ -1,21 +1,16 @@
 ---
 title: Azure 事件中心 - 客户端 SDK | Microsoft Docs
 description: 本文提供有关 Azure 事件中心的客户端 SDK 的信息。
-services: event-hubs
-documentationcenter: na
-author: spelluru
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: article
-origin.date: 05/26/2020
-ms.date: 07/01/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 077f3b34c86ec8b8d1afabb4eaa242ba0f50c53d
-ms.sourcegitcommit: 4f84bba7e509a321b6f68a2da475027c539b8fd3
+ms.openlocfilehash: 4e96a771ba29e662d94e6b87930fe3a426e20dbf
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85802764"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715148"
 ---
 # <a name="azure-event-hubs---client-sdks"></a>Azure 事件中心 - 客户端 SDK
 本文提供有关 Azure 事件中心支持的 SDK 的下列信息： 
@@ -55,6 +50,6 @@ ms.locfileid: "85802764"
 
 访问以下链接可以了解有关事件中心的详细信息：
 
-* [事件中心概述](event-hubs-what-is-event-hubs.md)
+* [事件中心概述](./event-hubs-about.md)
 * [创建事件中心](event-hubs-create.md)
 * [事件中心常见问题](event-hubs-faq.md)

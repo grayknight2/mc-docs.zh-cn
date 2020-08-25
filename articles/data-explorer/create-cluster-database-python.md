@@ -1,19 +1,19 @@
 ---
 title: 使用 Python 创建 Azure 数据资源管理器群集和数据库
 description: 了解如何使用 Python 创建 Azure 数据资源管理器群集和数据库。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 06/03/2019
-ms.date: 03/16/2020
-ms.openlocfilehash: 26e0f955c10bc5523984aac082e47702777c513d
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.date: 08/18/2020
+ms.openlocfilehash: 9fc503b6c26f87d6692c98d127b2d777e18f3a34
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "80243973"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515870"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-python"></a>使用 Python 创建 Azure 数据资源管理器群集和数据库
 
@@ -68,7 +68,7 @@ pip install azure-mgmt-kusto
         tenant=tenant_id
     )
 
-    location = 'China East'
+    location = 'China East 2'
     sku_name = 'Standard_D13_v2'
     capacity = 5
     tier = "Standard"

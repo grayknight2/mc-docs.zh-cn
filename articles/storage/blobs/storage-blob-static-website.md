@@ -7,14 +7,15 @@ ms.topic: how-to
 ms.author: v-jay
 ms.reviewer: dineshm
 origin.date: 05/14/2020
-ms.date: 07/20/2020
+ms.date: 08/24/2020
 ms.subservice: blobs
-ms.openlocfilehash: c60a1cdeb199961bf50377418565ca5f09c3a80d
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.custom: devx-track-javascript
+ms.openlocfilehash: a807ae41d8d45ca742e6e3dcff551b32eba5ee3b
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414657"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753446"
 ---
 # <a name="static-website-hosting-in-azure-storage"></a>Azure 存储中的静态网站托管
 
@@ -77,7 +78,7 @@ ms.locfileid: "86414657"
 
 以下屏幕截图显示了 Azure 门户中的公共访问级别设置：
 
-![显示如何在门户中设置公共访问级别的屏幕截图](./media/storage-manage-access-to-resources/storage-manage-access-to-resources-0.png)
+![显示如何在门户中设置公共访问级别的屏幕截图](./media/anonymous-read-access-configure/configure-public-access-container.png)
 
 尽管主静态网站终结点不受影响，但更改公共访问级别会影响主 blob 服务终结点。
 

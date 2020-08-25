@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 03/06/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: 27430355e469b4b4704ee02890b2115316b66075
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 9ca380dbaca4aee8d7fcc748080f7b2ddee7d54c
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509231"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516028"
 ---
 # <a name="binary_all_xor-aggregation-function"></a>binary_all_xor()（聚合函数）
 

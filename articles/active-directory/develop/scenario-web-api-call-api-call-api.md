@@ -2,24 +2,21 @@
 title: 调用 Web API 的 Web API - Microsoft 标识平台 | Azure
 description: 了解如何构建调用 Web API 的 Web API。
 services: active-directory
-documentationcenter: dev-center-name
 author: jmprieur
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.devlang: na
 ms.topic: conceptual
-ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 02/06/2020
+ms.date: 08/19/2020
 ms.author: v-junlch
 ms.custom: aaddev
-ms.openlocfilehash: 6fdef2b2b252f48f32dc13f69ed49c9f107d5c4a
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 81fdee6b432b27d06a0a1ab07592a39c05d3b86f
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77067635"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647677"
 ---
 # <a name="a-web-api-that-calls-web-apis-call-an-api"></a>调用 Web API 的 Web API：调用 API
 
@@ -34,23 +31,10 @@ ms.locfileid: "77067635"
 获取令牌后，将其用作持有者令牌以调用下游 API。
 
 ```csharp
-private async Task GetTodoList(bool isAppStarting)
+private async Task CallTodoListService(string accessToken)
 {
- ...
- //
- // Get an access token to call the To Do service.
- //
- AuthenticationResult result = null;
- try
- {
-  app = BuildConfidentialClient(HttpContext, HttpContext.User);
-  result = await app.AcquireTokenSilent(Scopes, account)
-                     .ExecuteAsync()
-                     .ConfigureAwait(false);
- }
-...
 
-// After the token has been returned by Microsoft Authentication Library (MSAL), add it to the HTTP authorization header before making the call to access the To Do list service.
+// After the token has been returned by Microsoft Identity Web, add it to the HTTP authorization header before making the call to access the To Do list service.
 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
 
 // Call the To Do list service.
@@ -93,4 +77,3 @@ private String callMicrosoftGraphMeEndpoint(String accessToken){
 > [!div class="nextstepaction"]
 > [调用 Web API 的 Web API：转移到生产环境](scenario-web-api-call-api-production.md)
 
-<!-- Update_Description: wording update -->

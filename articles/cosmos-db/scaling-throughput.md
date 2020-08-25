@@ -5,21 +5,23 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 12/02/2019
-ms.date: 02/10/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: cde33e48295945a6bea6df21891ba7154b56136a
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: d794a55766a474b56ced8e647f13ff26d3fe7fa8
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77028749"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222646"
 ---
 # <a name="globally-scale-provisioned-throughput"></a>全局缩放预配的吞吐量 
 
 在 Azure Cosmos DB 中，预配吞吐量以“请求单位数/秒 (RU/s 或复数形式 RUs)”表示。 RU 度量针对 Cosmos 容器执行的读取和写入操作的成本，如下图所示：
 
-![请求单位](./media/scaling-throughput/request-unit-charge-of-read-and-write-operations.png)
+:::image type="content" source="./media/scaling-throughput/request-unit-charge-of-read-and-write-operations.png" alt-text="请求单位" border="false":::
 
 可以针对 Cosmos 容器或 Cosmos 数据库预配 RU。 针对容器预配的 RU 专门适用于针对该容器执行的操作。 针对数据库预配的 RU 在该数据库中的所有容器之间共享（具有专用分配 RU 的任何容器除外）
 

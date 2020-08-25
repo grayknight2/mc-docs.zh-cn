@@ -2,13 +2,13 @@
 title: 使用 Visual Studio 开发 Azure Functions
 description: 了解如何使用 Visual Studio Code 的 Azure Functions 扩展开发和测试 Azure Functions。
 ms.topic: conceptual
-ms.date: 07/02/2020
-ms.openlocfilehash: ab6e4e237be83200eb5a5da9b1c4c77e107e21bf
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.date: 08/12/2020
+ms.openlocfilehash: 35154233b61b0481e35977d67e56fbc6ff81802d
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945276"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223408"
 ---
 # <a name="develop-azure-functions-by-using-visual-studio-code"></a>使用 Visual Studio 开发 Azure Functions
 
@@ -354,7 +354,7 @@ HTTP 触发器的请求 URL 显示在终端输出中。 在本地运行项目时
 
 ## <a name="monitoring-functions"></a>监视函数
 
-在[本地运行函数](#run-functions-locally)时，日志数据将流式传输到终端控制台。 当 Functions 项目在 Azure 中的函数应用内运行时，也可以获取日志数据。 可以连接到 Azure 中的流日志，以查看近实时的日志数据。
+在[本地运行函数](#run-functions-locally)时，日志数据将流式传输到终端控制台。 当 Functions 项目在 Azure 中的函数应用内运行时，也可以获取日志数据。 可以连接到 Azure 中的流式传输日志来查看近实时日志数据，也可以启用 Application Insights 以更全面地了解函数应用的行为。
 
 ### <a name="streaming-logs"></a>流式处理日志
 
@@ -362,10 +362,20 @@ HTTP 触发器的请求 URL 显示在终端输出中。 在本地运行项目时
 
 ![HTTP 触发器的流日志输出](./media/functions-develop-vs-code/streaming-logs-vscode-console.png)
 
+有关详细信息，请参阅[流日志](functions-monitoring.md#streaming-logs)。
+
 [!INCLUDE [functions-enable-log-stream-vs-code](../../includes/functions-enable-log-stream-vs-code.md)]
 
 > [!NOTE]
-> 流日志仅支持单个 Functions 宿主实例。 将函数扩展为多个实例时，不会在日志流中显示来自其他实例的数据。 
+> 流日志仅支持单个 Functions 宿主实例。 将函数扩展为多个实例时，不会在日志流中显示来自其他实例的数据。 Application Insights 中的[实时指标流](../azure-monitor/app/live-stream.md)支持多个实例。 同时，在近实时情况下，流分析基于[采样数据](functions-monitoring.md#configure-sampling)。
+
+### <a name="application-insights"></a>Application Insights
+
+我们建议通过将函数应用与 Application Insights 集成来监视函数的执行。 在 Azure 门户中创建函数应用时，默认情况下会完成此集成。 在 Visual Studio 发布期间创建函数应用时，需要自己集成 Application Insights。
+
+[!INCLUDE [functions-connect-new-app-insights.md](../../includes/functions-connect-new-app-insights.md)]
+
+若要了解详细信息，请参阅[监视 Azure Functions](functions-monitoring.md)。
 
 ## <a name="c-script-projects"></a>C\# 脚本项目
 

@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.custom: hdinsightactive
 origin.date: 02/17/2020
 ms.date: 06/22/2020
-ms.openlocfilehash: 4059ddbb2af0ad8e3590975dd41863ab7695be09
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+ms.openlocfilehash: 404d4bbf5b825d97ef851abf0b26b4489545a00a
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723904"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715376"
 ---
 # <a name="analyze-logs-for-apache-kafka-on-hdinsight"></a>分析 HDInsight 上 Apache Kafka 的日志
 
@@ -42,7 +42,7 @@ ms.locfileid: "84723904"
 
 2. 创建 Kafka on HDInsight 群集。 有关详细信息，请参阅 [Apache Kafka on HDInsight 入门](apache-kafka-get-started.md)文档。
 
-3. 配置 Kafka 群集以使用 Azure Monitor 日志。 有关详细信息，请参阅[使用 Azure Monitor 日志监视 HDInsight](../hdinsight-hadoop-oms-log-analytics-tutorial.md)文档。
+3. 配置 Kafka 群集以使用 Azure Monitor 日志。 
 
 > [!IMPORTANT]  
 > 在数据可用于 Azure Monitor 日志之前可能需要等待约 20 分钟。

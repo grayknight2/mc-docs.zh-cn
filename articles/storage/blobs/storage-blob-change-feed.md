@@ -4,17 +4,17 @@ description: 了解 Azure Blob 存储中的更改源日志以及如何使用这�
 author: WenJason
 ms.author: v-jay
 origin.date: 11/04/2019
-ms.date: 06/01/2020
-ms.topic: conceptual
+ms.date: 08/17/2020
+ms.topic: how-to
 ms.service: storage
 ms.subservice: blobs
 ms.reviewer: sadodd
-ms.openlocfilehash: cadf4ce6f1d121bb24399fd3d1b5ee8ac9cf55ab
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 5f42d4239e56b2697b369da2e649a793b272697c
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199737"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222801"
 ---
 # <a name="change-feed-support-in-azure-blob-storage-preview"></a>Azure Blob 存储中的更改源支持（预览版）
 
@@ -37,7 +37,7 @@ ms.locfileid: "84199737"
   - 生成解决方案来备份、镜像或复制帐户中的对象状态，以满足灾难管理或合规性要求。
 
   - 生成连接的应用程序管道，以便根据创建的或更改的对象来响应更改事件或计划执行。
-
+  
 > [!NOTE]
 > 更改源提供一个持久且有序的日志模型来记录发生在 Blob 中的更改。 在发生更改后的几分钟内，这些更改就会写入并出现在更改源日志中。 如果应用程序必须以比这快得多的速度对事件做出反应，请考虑改用 [Blob 存储事件](storage-blob-event-overview.md)。 [Blob 存储事件](storage-blob-event-overview.md)提供实时的一次性事件，使 Azure Functions 或应用程序能够快速对 Blob 中发生的更改做出反应。 
 
@@ -67,7 +67,7 @@ ms.locfileid: "84199737"
 
 4. 选择“保存”按钮以确认“数据保护”设置。
 
-    ![](media/soft-delete-enable/storage-blob-soft-delete-portal-configuration.png)
+    ![显示数据保护设置的屏幕截图。](media/soft-delete-enable/storage-blob-soft-delete-portal-configuration.png)
 
 ### <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 

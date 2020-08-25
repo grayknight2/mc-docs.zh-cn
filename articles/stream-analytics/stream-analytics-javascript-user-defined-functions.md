@@ -6,15 +6,15 @@ ms.author: v-johya
 ms.service: stream-analytics
 ms.topic: tutorial
 ms.reviewer: mamccrea
-ms.custom: mvc
+ms.custom: mvc, devx-track-javascript
 origin.date: 04/01/2018
-ms.date: 07/06/2020
-ms.openlocfilehash: dc70b665188b60ba21810353c4ba497305d097c9
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.date: 08/20/2020
+ms.openlocfilehash: e992e7e64b5fcfd7c03a0bc3682e3da3a547e678
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86225982"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715709"
 ---
 # <a name="javascript-user-defined-functions-in-azure-stream-analytics"></a>Azure 流分析中 JavaScript 用户定义的函数
  
@@ -45,7 +45,7 @@ JavaScript 用户定义的函数支持仅用于计算的且不需要外部连接
 
 然后，你必须提供以下属性并选择“保存”。
 
-|属性|说明|
+|properties|说明|
 |--------|-----------|
 |函数别名|输入一个名称以在查询中调用函数。|
 |输出类型|JavaScript 用户定义的函数将向流分析查询返回的类型。|
@@ -53,7 +53,7 @@ JavaScript 用户定义的函数支持仅用于计算的且不需要外部连接
 
 ## <a name="test-and-troubleshoot-javascript-udfs"></a>对 JavaScript UDF 进行测试和故障排除 
 
-可在任何浏览器中测试和调试 JavaScript UDF 逻辑。 流分析门户目前不支持调试和测试这些用户定义函数的逻辑。 函数按预期方式运行后，可以将其添加到流分析作业（如上所述），然后直接从查询调用它。 还可以使用[适用于 Visual Studio 的流分析工具](/stream-analytics/stream-analytics-tools-for-visual-studio-install)测试包含 JavaScript UDF 的查询逻辑。
+可在任何浏览器中测试和调试 JavaScript UDF 逻辑。 流分析门户目前不支持调试和测试这些用户定义函数的逻辑。 函数按预期方式运行后，可以将其添加到流分析作业（如上所述），然后直接从查询调用它。
 
 JavaScript 运行时错误被视为严重错误，可通过活动日志查看。 如果要检索日志，请在 Azure 门户中转到用户的作业，并选择“活动日志”。
 
@@ -79,24 +79,24 @@ Azure 流分析 JavaScript 用户定义的函数支持标准的内置 JavaScript
 
 流分析查询语言与 JavaScript 支持的类型有差别。 下表列出了两者之间的转换映射：
 
-流分析 | Javascript
+流分析 | JavaScript
 --- | ---
 bigint | Number（JavaScript 只能精确呈现最大 2^53 的整数）
 DateTime | Date（JavaScript 仅支持毫秒）
 Double | Number
-nvarchar(MAX) | String
-Record | Object
+nvarchar(MAX) | 字符串
+Record | 对象
 Array | Array
 Null | Null
 
 下面是 JavaScript 到流分析的转换：
 
-Javascript | 流分析
+JavaScript | 流分析
 --- | ---
 Number | 如果数字已舍入并介于 long.MinValue 和 long.MaxValue 之间，则为 Bigint；否则为 double
 Date | DateTime
-String | nvarchar(MAX)
-Object | Record
+字符串 | nvarchar(MAX)
+对象 | Record
 Array | Array
 Null、Undefined | Null
 其他任何类型（例如函数或错误） | 不支持（导致运行时错误）
@@ -130,6 +130,58 @@ FROM
     input PARTITION BY PARTITIONID
 ```
 
+### <a name="cast-string-to-json-object-to-process"></a>将字符串强制转换为要处理的 JSON 对象
+
+如果你有一个 JSON 字符串字段，并想将其转换为 JSON 对象以在 JavaScript UDF 中进行处理，则可以使用 JSON.parse() 函数来创建一个随后可使用的 JSON 对象。
+
+**JavaScript 用户定义的函数定义：**
+
+```javascript
+function main(x) {
+var person = JSON.parse(x);  
+return person.name;
+}
+```
+
+**示例查询：**
+```SQL
+SELECT
+    UDF.getName(input) AS Name
+INTO
+    output
+FROM
+    input
+```
+
+### <a name="use-trycatch-for-error-handling"></a>使用 try/catch 进行错误处理
+
+Try/catch 块可帮助确定传递给 JavaScript UDF 的格式错误的输入数据的问题。
+
+**JavaScript 用户定义的函数定义：**
+
+```javascript
+function main(input, x) {
+    var obj = null;
+
+    try{
+        obj = JSON.parse(x);
+    }catch(error){
+        throw input;
+    }
+    
+    return obj.Value;
+}
+```
+
+示例查询：将整个记录作为第一个参数进行传递，以便在出现错误时可将其返回。
+```SQL
+SELECT
+    A.context.company AS Company,
+    udf.getValue(A, A.context.value) as Value
+INTO
+    output
+FROM
+    input A
+```
 <!--Not available in MC: /stream-analytics/machine-learning-udf, /stream-analytics/stream-analytics-edge-csharp-udf-methods -->
 
-<!--Update_Description: update meta properties, wording update -->

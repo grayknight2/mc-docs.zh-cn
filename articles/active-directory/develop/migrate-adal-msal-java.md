@@ -10,16 +10,16 @@ ms.subservice: develop
 ms.topic: conceptual
 ms.tgt_pltfrm: Java
 ms.workload: identity
-ms.date: 05/27/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: nacanuma, twhitney
-ms.custom: aaddev
-ms.openlocfilehash: 6b523d2ed76d8a4cf1216789e02eef936794e2bb
-ms.sourcegitcommit: 0130a709d934d89db5cccb3b4997b9237b357803
+ms.custom: aaddev, devx-track-java
+ms.openlocfilehash: 049929fc289fd41ed66bb37b278e115cb65b60b1
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84186730"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647687"
 ---
 # <a name="adal-to-msal-migration-guide-for-java"></a>适用于 Java 的 ADAL 到 MSAL 迁移指南
 
@@ -37,7 +37,7 @@ MSAL for Java 是我们建议用于 Microsoft 标识平台的身份验证库。 
 
 ## <a name="differences"></a>差异
 
-如果你一直在使用面向开发人员的 Azure AD (v1.0) 终结点（和 ADAL4J），请阅读[ Microsoft 标识平台 (v2.0) 终结点有何不同？](/active-directory/develop/azure-ad-endpoint-comparison)
+如果你一直在使用面向开发人员的 Azure AD (v1.0) 终结点（和 ADAL4J），请阅读[ Microsoft 标识平台 (v2.0) 终结点有何不同？](../azuread-dev/azure-ad-endpoint-comparison.md)
 
 ## <a name="scopes-not-resources"></a>范围不是资源
 
@@ -45,7 +45,7 @@ ADAL4J 获取资源的令牌，而 MSAL for Java 则是获取范围的令牌。 
 
 可以将 `/.default` 作用域后缀添加到资源中，帮助将应用从 v1.0 终结点 (ADAL) 迁移到 Microsoft 标识平台终结点 (MSAL)。 例如，对于 `https://microsoftgraph.chinacloudapi.cn` 的资源值，等效的作用域值为 `https://microsoftgraph.chinacloudapi.cn/.default`。  如果资源未采用 URL 形式，但资源 ID 采用 `XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX` 形式，则仍可以使用作用域值 `XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX/.default`。
 
-有关不同类型作用域的更多详细信息，请参阅 [Microsoft 标识平台中的权限和许可](/active-directory/develop/v2-permissions-and-consent)以及[接受 v1.0 令牌的 Web API 的作用域](/active-directory/develop/msal-v1-app-scopes)两篇文章。
+有关不同类型作用域的更多详细信息，请参阅 [Microsoft 标识平台中的权限和许可](./v2-permissions-and-consent.md)以及[接受 v1.0 令牌的 Web API 的作用域](./msal-v1-app-scopes.md)两篇文章。
 
 ## <a name="core-classes"></a>核心类
 
@@ -86,9 +86,9 @@ MSAL for Java 添加了[令牌缓存](msal-acquire-cache-tokens.md)，在可能�
 
 v1.0 终结点（由 ADAL 使用）只发出 v1.0 令牌。
 
-v2.0 终结点（由 MSAL 使用）可以发出 v1.0 和 v2.0 令牌。 开发人员可以使用 Web API 应用程序清单的属性来选择接受的令牌版本。 请参阅[应用程序清单](/active-directory/develop/reference-app-manifest)参考文档中的 `accessTokenAcceptedVersion`。
+v2.0 终结点（由 MSAL 使用）可以发出 v1.0 和 v2.0 令牌。 开发人员可以使用 Web API 应用程序清单的属性来选择接受的令牌版本。 请参阅[应用程序清单](./reference-app-manifest.md)参考文档中的 `accessTokenAcceptedVersion`。
 
-有关 v1.0 和 v2.0 令牌的详细信息，请参阅 [Azure Active Directory 访问令牌](/active-directory/develop/access-tokens)。
+有关 v1.0 和 v2.0 令牌的详细信息，请参阅 [Azure Active Directory 访问令牌](./access-tokens.md)。
 
 ## <a name="adal-to-msal-migration"></a>ADAL 到 MSAL 的迁移
 

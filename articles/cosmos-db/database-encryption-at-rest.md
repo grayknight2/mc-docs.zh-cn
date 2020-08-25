@@ -5,15 +5,17 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 05/19/2020
-ms.date: 06/22/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.custom: seodec18
-ms.openlocfilehash: aba0516a2ac1d926f2542987cb5bc75e11a3f898
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.openlocfilehash: 2074bc09ab1f8005d8a8e47b98508b1980819bbb
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85098409"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223350"
 ---
 # <a name="data-encryption-in-azure-cosmos-db"></a>Azure Cosmos DB 中的数据加密 
 
@@ -25,7 +27,7 @@ Azure Cosmos DB 属于 PaaS 服务，非常便于使用。 存储在 Azure Cosmo
 
 静态加密是使用许多安全技术实现的，其中包括安全的密钥存储系统、加密的网络以及加密 API。 对数据进行解密和处理的系统必须与管理密钥的系统通信。 下图展示了加密数据的存储和密钥的管理是如何隔离的。 
 
-![设计图](./media/database-encryption-at-rest/design-diagram.png)
+:::image type="content" source="./media/database-encryption-at-rest/design-diagram.png" alt-text="设计图" border="false":::
 
 用户请求的基本流程如下：
 - 用户数据库帐户准备就绪以后，通过向管理服务资源提供程序发出请求来检索存储密钥。
@@ -41,17 +43,13 @@ Azure Cosmos DB 属于 PaaS 服务，非常便于使用。 存储在 Azure Cosmo
 答：没有任何额外费用。
 
 ### <a name="q-who-manages-the-encryption-keys"></a>问：加密密钥由谁管理？
-答：密钥由世纪互联管理。
-
-<!-- Notice:  Should Be 21Vianet -->
+答：密钥由 Azure 管理。
 
 ### <a name="q-how-often-are-encryption-keys-rotated"></a>问：加密密钥多久轮换一次？
-答：世纪互联针对加密密钥轮换提供一组内部指导原则，Cosmos DB 必须遵守这些指导原则。 未发布具体的指导原则。 Azure 发布了[安全开发生命周期 (SDL)](https://www.microsoft.com/sdl/default.aspx)，可以将其视为内部指导原则的一部分，其中提供的最佳做法对开发人员很有用。
-
-<!-- Notice:  Should Be 21Vianet -->
+答：Azure 针对加密密钥轮换提供一组内部指导原则，Cosmos DB 必须遵守这些指导原则。 未发布具体的指导原则。 Azure 发布了[安全开发生命周期 (SDL)](https://www.microsoft.com/sdl/default.aspx)，可以将其视为内部指导原则的一部分，其中提供的最佳做法对开发人员很有用。
 
 ### <a name="q-can-i-use-my-own-encryption-keys"></a>问：我可以使用自己的加密密钥吗？
-答：是的，此功能现在可用于新的 cosmos 帐户，这应在创建帐户时完成。 有关详细信息，请参阅[客户托管的密钥](/cosmos-db/how-to-setup-cmk)文档。
+答：是的，此功能现可用于新的 Azure Cosmos DB 帐户，这应在创建帐户时完成。 有关详细信息，请参阅[客户托管的密钥](/cosmos-db/how-to-setup-cmk)文档。
 
 ### <a name="q-what-regions-have-encryption-turned-on"></a>问：哪些区域已开启了此加密？
 答：所有 Azure Cosmos DB 区域都已针对所有用户数据开启了此加密。

@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/20/2019
-ms.date: 08/06/2020
-ms.openlocfilehash: 6ab60352a3ab47e8453ef94547572a5843463ff9
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: 0ab7d6696ad7e3905843e2580fbeac624bd2fce4
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841230"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515649"
 ---
 # <a name="series_outliers"></a>series_outliers()
 
@@ -22,11 +22,11 @@ ms.locfileid: "87841230"
 
 该函数接受一个带有动态数值数组的表达式作为输入，生成一个相同长度的动态数值数组。 数组的每个值都表示使用 Tukey 测试时可能出现异常的分数。 相同输入元素中大于 1.5 的值表示异常增加， 小于 -1.5 的值表示异常减少。
 
-**语法**
+## <a name="syntax"></a>语法
 
 `series_outliers(`*x*`, `*kind*`, `*ignore_val*`, `*min_percentile*`, `*max_percentile*`)`
 
-**参数**
+## <a name="arguments"></a>参数
 
 * x：动态数组单元格，是数值数组
 * *kind*：离群值检测算法。 目前支持 `"tukey"`（传统“Tukey”）和 `"ctukey"`（自定义“Tukey”）。 默认为 `"ctukey"`
@@ -44,7 +44,7 @@ ms.locfileid: "87841230"
 > [!TIP]
 > 使用此函数的最佳方式是将其应用于 [make-series](make-seriesoperator.md) 运算符的结果。
 
-**示例**
+## <a name="example"></a>示例
 
 带有某些干扰信息的时序会产生离群值。 若要将这些离群值（干扰信息）替换为平均值，请使用 series_outliers() 来检测出离群值，然后将其替换。
 

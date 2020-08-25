@@ -3,25 +3,27 @@ title: 使用 Compass 连接到 Azure Cosmos DB
 description: 了解如何使用 MongoDB Compass 在 Azure Cosmos DB 中存储和管理数据。
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 06/05/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 author: rockboyfor
 ms.author: v-yeche
-ms.openlocfilehash: 4b631f49c3bf74eb12cca717180498f4c57d2c6a
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: 56d765efd16f997a3b91b013c11e696e91a703f1
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85321045"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222484"
 ---
-# <a name="use-mongodb-compass-to-connect-to-azure-cosmos-dbs-api-for-mongodb"></a>使用 MongoDB Compass 连接到 Azure Cosmos DB 的 API for MongoDB
+# <a name="use-mongodb-compass-to-connect-to-azure-china-cosmos-dbs-api-for-mongodb"></a>使用 MongoDB Compass 连接到 Azure 中国 Cosmos DB API for MongoDB
 
 本教程演示在 Cosmos DB 中存储和/或管理数据时如何使用 [MongoDB Compass](https://www.mongodb.com/products/compass)。 我们使用 Azure Cosmos DB 的 API for MongoDB 来执行本演练。 对于不熟悉的人来说，Compass 是 MongoDB 的 GUI。 它通常用于直观显示数据、运行即席查询以及管理数据。
 
-Cosmos DB 是世纪互联提供的多区域分布式多模型数据库服务。 可快速创建和查询文档、键/值和图形数据库，所有这些都受益于 Cosmos DB 核心的多区域分布和水平缩放功能。
+<!--CORRECT ON  21Vianet-->
 
-<!--CORRECT ON 21Vianet-->
+Cosmos DB 是世纪互联提供的多区域分布式多模型数据库服务。 可快速创建和查询文档、键/值和图形数据库，所有这些都受益于 Cosmos DB 核心的多区域分布和水平缩放功能。
 
 ## <a name="pre-requisites"></a>先决条件
 
@@ -39,21 +41,21 @@ Cosmos DB 是世纪互联提供的多区域分布式多模型数据库服务。 
 
 1. 按照[此处](connect-mongodb-account.md)的说明，检索使用 Azure Cosmos DB 的 API MongoDB 配置的 Cosmos 帐户的连接信息。
 
-    ![连接字符串边栏选项卡的屏幕截图](./media/mongodb-compass/mongodb-compass-connection.png)
+    :::image type="content" source="./media/mongodb-compass/mongodb-compass-connection.png" alt-text="连接字符串边栏选项卡的屏幕截图":::
 
 2. 单击 Cosmos DB 中**主要/辅助连接字符串**旁边的“复制到剪贴板”按钮。 单击此按钮会将整个连接字符串复制到剪贴板。
 
-    ![“复制到剪贴板”按钮的屏幕截图](./media/mongodb-compass/mongodb-connection-copy.png)
+    :::image type="content" source="./media/mongodb-compass/mongodb-connection-copy.png" alt-text="“复制到剪贴板”按钮的屏幕截图":::
 
 3. 在桌面/计算机上打开 Compass，然后依次单击“连接”、“连接到...”。
 
 4. Compass 将自动检测剪贴板中的连接字符串，并提示你是否要使用该字符串进行连接。 单击“是”，如下面的屏幕截图所示。
 
-    ![Compass 提示连接的屏幕截图](./media/mongodb-compass/mongodb-compass-detect.png)
+    :::image type="content" source="./media/mongodb-compass/mongodb-compass-detect.png" alt-text="Compass 提示连接的屏幕截图":::
 
 5. 在上述步骤中单击“是”后，将自动填充连接字符串中的详细信息。 删除“副本集名称”字段中自动填充的值，以确保将其留空。
 
-    ![Compass 提示连接的屏幕截图](./media/mongodb-compass/mongodb-compass-replica.png)
+    :::image type="content" source="./media/mongodb-compass/mongodb-compass-replica.png" alt-text="Compass 提示连接的屏幕截图":::
 
 6. 单击页面底部的“连接”。 你的 Cosmos DB 帐户和数据库现在应该在 MongoDB Compass 中可见。
 

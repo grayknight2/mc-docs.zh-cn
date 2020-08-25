@@ -12,12 +12,12 @@ ms.topic: conceptual
 origin.date: 11/04/2019
 ms.date: 03/16/2020
 ms.custom: seodec18
-ms.openlocfilehash: 23bc7e796b07fe34645f126618de0471d228bb69
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: b4224b8aca8c32b614ca3ff53c1e83600409780a
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "78850201"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228402"
 ---
 # <a name="tune-hyperparameters-for-your-model-with-azure-machine-learning"></a>使用 Azure 机器学习优化模型的超参数
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -110,6 +110,7 @@ ms.locfileid: "78850201"
 
 ```Python
 from azureml.train.hyperdrive import RandomParameterSampling
+from azureml.train.hyperdrive import normal, uniform, choice
 param_sampling = RandomParameterSampling( {
         "learning_rate": normal(10, 3),
         "keep_probability": uniform(0.05, 0.1),
@@ -124,6 +125,7 @@ param_sampling = RandomParameterSampling( {
 
 ```Python
 from azureml.train.hyperdrive import GridParameterSampling
+from azureml.train.hyperdrive import choice
 param_sampling = GridParameterSampling( {
         "num_hidden_layers": choice(1, 2, 3),
         "batch_size": choice(16, 32)
@@ -141,6 +143,7 @@ Bayesian 采样仅支持搜索空间中的 `choice`、`uniform` 和 `quniform` �
 
 ```Python
 from azureml.train.hyperdrive import BayesianParameterSampling
+from azureml.train.hyperdrive import uniform, choice
 param_sampling = BayesianParameterSampling( {
         "learning_rate": uniform(0.05, 0.1),
         "batch_size": choice(16, 32, 64, 128)
@@ -320,7 +323,7 @@ hyperdrive_run = experiment.submit(hyperdrive_run_config)
 
 通常，为模型查找最佳参数值可以是一个迭代过程，需要多次从之前超参数优化运行中学习到的优化运行。 重复运用这些之前运行的知识将加速超参数优化过程，从而降低优化模型的成本，并有可能改进生成模型的主要指标。 通过 Bayesian 采样热启动超参数优化实验时，先前运行的试验将作为先验知识，以智能选择新样本，从而改进主要指标。 此外，使用随机或网格采样时，任何提前终止决策都将利用之前运行的指标来确定性能不佳的训练运行。 
 
-通过 Azure 机器学习，你可利用最多 5 个之前完成/已取消的超参数优化父运行的知识来热启动超参数优化运行。 可使用以下代码片段指定要热启动的父运行列表：
+使用 Azure 机器学习，你可以利用最多 5 个之前完成的/取消的超参数优化父运行的知识来热启动超参数优化运行。 可使用以下代码片段指定要热启动的父运行列表：
 
 ```Python
 from azureml.train.hyperdrive import HyperDriveRun
@@ -330,7 +333,7 @@ warmstart_parent_2 = HyperDriveRun(experiment, "warmstart_parent_run_ID_2")
 warmstart_parents_to_resume_from = [warmstart_parent_1, warmstart_parent_2]
 ```
 
-此外，在某些情况下，可能会因预算限制而取消超参数优化实验的单个训练运行，或因其他原因而失败。 现在可以从最后一个检查点恢复这种单个训练运行（假设训练脚本处理检查点）。 恢复单个训练运行将使用相同的超参数配置，并装载用于该运行的输出文件夹。 训练脚本应接受 `resume-from` 参数，该参数包含要从中恢复训练运行的检查点或模型文件。 可以使用以下代码片段恢复单个训练运行：
+此外，在某些情况下，超参数优化试验的单个训练运行可能会因预算限制而取消，或因其他原因而失败。 现在可以从最后一个检查点恢复这种单个训练运行（假设训练脚本处理检查点）。 恢复单个训练运行将使用相同的超参数配置，并装载用于该运行的输出文件夹。 训练脚本应接受 `resume-from` 参数，该参数包含要从中恢复训练运行的检查点或模型文件。 可以使用以下代码片段恢复单个训练运行：
 
 ```Python
 from azureml.core.run import Run

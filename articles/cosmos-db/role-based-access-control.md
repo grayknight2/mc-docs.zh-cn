@@ -5,14 +5,16 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 06/03/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: bafc87a5b7dd01d1d7ac4d763d513ea9bd39344c
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: b0875401149302bfaeaf7bb026427d59d3d588aa
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85321573"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222645"
 ---
 <!--Verify Successfully-->
 # <a name="role-based-access-control-in-azure-cosmos-db"></a>Azure Cosmos DB 中基于角色的访问控制
@@ -37,20 +39,22 @@ Azure Cosmos DB 为 Azure Cosmos DB 中的常见管理方案提供内置的基�
 
 Azure 门户中的“访问控制(IAM)”窗格用于针对 Azure Cosmos 资源配置基于角色的访问控制。 角色将应用到 Active Directory 中的用户、组、服务主体和托管标识。 对于个人和组，可使用内置角色或自定义角色。 以下屏幕截图显示在 Azure 门户中使用访问控制 (IAM) 的 Active Directory 集成 (RBAC)：
 
-![Azure 门户中的访问控制 (IAM) - 演示数据库安全性](./media/role-based-access-control/database-security-identity-access-management-rbac.png)
+:::image type="content" source="./media/role-based-access-control/database-security-identity-access-management-rbac.png" alt-text="Azure 门户中的访问控制 (IAM) - 演示数据库安全性":::
 
 ## <a name="custom-roles"></a>自定义角色
 
 除内置角色以外，用户还可以在 Azure 中创建[自定义角色](../role-based-access-control/custom-roles.md)，并将这些角色应用到其 Active Directory 租户内的所有订阅中的服务主体。 自定义角色可让用户使用一组自定义的资源提供程序操作来创建 RBAC 角色定义。 若要了解可以使用哪些操作来为 Azure Cosmos DB 生成自定义角色，请参阅 [Azure Cosmos DB 资源提供程序操作](../role-based-access-control/resource-provider-operations.md#microsoftdocumentdb)
 
-## <a name="preventing-changes-from-cosmos-sdk"></a>阻止来自 Cosmos SDK 的更改
+<a name="prevent-sdk-changes"></a>
+<a name="preventing-changes-from-cosmos-sdk"></a>
+## <a name="preventing-changes-from-the-azure-cosmos-db-sdks"></a>阻止从 Azure Cosmos DB SDK 进行更改
+
+可以锁定 Azure Cosmos DB 资源提供程序，以防止从使用帐户密钥连接的客户端（即通过 Azure Cosmos SDK 连接的应用程序）对资源做出任何更改。 其中也包括从 Azure 门户做出的更改。 对于需要更高程度的控制和生产环境管理的用户，此功能可能是理想的。 阻止从 SDK 进行更改还会启用资源锁和控制平面操作诊断日志等功能。 将阻止通过 Azure Cosmos DB SDK 连接的客户端更改 Azure Cosmos 帐户、数据库、容器和吞吐量的任何属性。 涉及对 Cosmos 容器本身进行数据读取和写入的操作不会受到影响。
+
+此功能启用时，对任何资源的更改都只能由具有正确 RBAC 角色和 Azure Active Directory 凭据（包括托管服务标识）的用户来进行。
 
 > [!WARNING]
-> 启用此功能可能会对应用程序造成有危害的影响。 在启用此功能之前，请仔细阅读以下内容。
-
-Azure Cosmos DB 资源提供程序可以被锁定，以防止从使用帐户密钥连接的任何客户端（即通过 Cosmos SDK 连接的应用程序）对资源做出任何更改。 其中也包括从 Azure 门户做出的更改。 如果用户想要提高控制和管理生产环境的程度，并且启用了资源锁这样的功能，另外还为控制平面操作启用了诊断日志，那么他们可能就会需要这种锁定设置。 通过 Cosmos DB SDK 连接的客户端将被阻止更改 Cosmos 帐户、数据库、容器和吞吐量的任何属性。 涉及对 Cosmos 容器本身进行数据读取和写入的操作不会受到影响。
-
-设置之后，对任何资源的更改都只能由具有正确 RBAC 角色和 Azure Active Directory 凭据（包括托管服务标识）的用户来进行。
+> 启用此功能可能对应用程序造成影响。 确保在启用前了解此影响。
 
 ### <a name="check-list-before-enabling"></a>启用前的核对清单
 
@@ -66,11 +70,11 @@ Azure Cosmos DB 资源提供程序可以被锁定，以防止从使用帐户密�
 
 - 修改存储过程、触发器或用户定义的函数。
 
-如果应用程序（或者用户通过 Azure 门户）执行这些操作中的任何一种，则需要将它们迁移，以通过 [ARM 模板](manage-sql-with-resource-manager.md)、[PowerShell](manage-with-powershell.md)、[Azure CLI](manage-with-cli.md)、[REST](https://docs.microsoft.com/rest/api/cosmos-db-resource-provider/) 或 [Azure 管理库](https://github.com/Azure-Samples/cosmos-management-net)来执行。 请注意，可使用[多种语言](/?product=featured#languages-and-tools)进行 Azure 管理。
+如果应用程序（或者用户通过 Azure 门户）执行这些操作中的任何一种，则需要将它们迁移，以通过 [ARM 模板](manage-sql-with-resource-manager.md)、[PowerShell](manage-with-powershell.md)、[Azure CLI](manage-with-cli.md)、REST 或 [Azure 管理库](https://github.com/Azure-Samples/cosmos-management-net)来执行。 请注意，可使用[多种语言](/?product=featured#languages-and-tools)进行 Azure 管理。
 
 ### <a name="set-via-arm-template"></a>通过 ARM 模板进行设置
 
-若要使用 ARM 模板设置此属性，请更新现有模板或为当前部署导出新模板，然后，将 `"disableKeyBasedMetadataWriteAccess": true` 包含到 databaseAccounts 资源的属性。 下面是具有此属性设置的 Azure 资源管理器模板的基本示例。
+若要使用 ARM 模板设置此属性，请更新现有模板或为当前部署导出新模板，然后，将 `"disableKeyBasedMetadataWriteAccess": true` 包含到 `databaseAccounts` 资源的属性。 下面是具有此属性设置的 Azure 资源管理器模板的基本示例。
 
 ```json
 {
@@ -112,8 +116,8 @@ Update-AzCosmosDBAccount -ResourceGroupName [ResourceGroupName] -Name [CosmosDBA
 
 ## <a name="next-steps"></a>后续步骤
 
-- [什么是 Azure 资源的基于角色的访问控制 (RBAC)](../role-based-access-control/overview.md)
-- [Azure 资源的自定义角色](../role-based-access-control/custom-roles.md)
+- [什么是 Azure 基于角色的访问控制 (Azure RBAC)](../role-based-access-control/overview.md)
+- [Azure 自定义角色](../role-based-access-control/custom-roles.md)
 - [Azure Cosmos DB 资源提供程序操作](../role-based-access-control/resource-provider-operations.md#microsoftdocumentdb)
 
 <!-- Update_Description: update meta properties, wording update, update link -->

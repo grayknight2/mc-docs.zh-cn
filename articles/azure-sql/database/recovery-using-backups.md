@@ -3,8 +3,8 @@ title: 从备份还原数据库
 titleSuffix: Azure SQL Database & SQL Managed Instance
 description: 了解时间点还原，它使你能够回滚 Azure SQL 数据库中的数据库或 Azure SQL 托管实例中的实例，最多 35 天。
 services: sql-database
-ms.service: sql-database
-ms.subservice: operations
+ms.service: sql-db-mi
+ms.subservice: service
 ms.custom: ''
 ms.devlang: ''
 ms.topic: conceptual
@@ -12,13 +12,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: mathoma, carlrab, danil
 origin.date: 09/26/2019
-ms.date: 07/13/2020
-ms.openlocfilehash: f2f533b59108d508c13f2ca22f677761990b956b
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 81f898d88c2487cbd72ce153c2e2b83e30f4f6b7
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227295"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222881"
 ---
 # <a name="recover-using-automated-database-backups---azure-sql-database--sql-managed-instance"></a>使用自动数据库备份进行恢复 - Azure SQL 托管实例和 SQL 托管实例
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -52,11 +52,11 @@ ms.locfileid: "86227295"
 
 对于单个订阅，并发还原请求的数目存在限制。 这些限制适用于时间点还原、异地还原和从长期保留备份中还原的任意组合。
 
-| | **处理的并发请求数最多为 #** | **提交的并发请求数最多为 #** |
+|| **处理的并发请求数最多为 #** | **提交的并发请求数最多为 #** |
 | :--- | --: | --: |
-|单个数据库（每个订阅）|10 个|60|
-|弹性池（每个池）|4|200|
-||||
+|**单个数据库（每个订阅）**|10 个|60|
+|**弹性池（每个池）**|4|200|
+
 
 没有任何内置的方法可以还原整个服务器。 有关如何完成此任务的示例，请参阅 [Azure SQL 数据库：完整服务器恢复](https://gallery.technet.microsoft.com/Azure-SQL-Database-Full-82941666)。
 
@@ -65,7 +65,7 @@ ms.locfileid: "86227295"
 
 ## <a name="point-in-time-restore"></a>时间点还原
 
-可以使用 Azure 门户、[PowerShell](https://docs.microsoft.com/powershell/module/az.sql/restore-azsqldatabase) 或 [REST API](https://docs.microsoft.com/rest/api/sql/databases)，将独立数据库、共用数据库或实例数据库还原到早期的时间点。 该请求可以指定还原的数据库的任何服务层级或计算大小。 确保要将数据库还原到其中的服务器上有足够的资源。 
+可以使用 Azure 门户、[PowerShell](https://docs.microsoft.com/powershell/module/az.sql/restore-azsqldatabase) 或 [REST API](https://docs.microsoft.com/rest/api/sql/databases/createorupdate#creates-a-database-from-pointintimerestore)，将独立数据库、共用数据库或实例数据库还原到早期的时间点。 该请求可以指定还原的数据库的任何服务层级或计算大小。 确保要将数据库还原到其中的服务器上有足够的资源。 
 
 完成后，还原过程将在原始数据库所在的同一台服务器上创建新数据库。 还原的数据库将基于其服务层级和计算大小按标准费率计费。 在数据库还原完成之前，不会产生费用。
 
@@ -85,7 +85,7 @@ ms.locfileid: "86227295"
 
 #### <a name="sql-database"></a>SQL 数据库
 
-若要使用 Azure 门户将单一数据库或共用数据库恢复到某个时间点，请打开该数据库的概述页，并在工具栏上选择“还原”。 选择备份源，然后选择要从中创建新数据库的时间点备份点。
+若要使用 Azure 门户将数据库恢复到某个时间点，请打开该数据库的概述页，并在工具栏上选择“还原”。 选择备份源，然后选择要从中创建新数据库的时间点备份点。
 
   ![数据库还原选项的屏幕截图](./media/recovery-using-backups/pitr-backup-sql-database-annotated.png)
 
@@ -111,7 +111,7 @@ ms.locfileid: "86227295"
 
 #### <a name="sql-database"></a>SQL 数据库
 
-若要使用 Azure 门户将已删除的单一数据库或共用数据库恢复到删除时间，请打开服务器概览页，然后选择“删除的数据库”。 选择要还原的已删除数据库，然后键入要使用从备份还原的数据创建的新数据库的名称。
+若要使用 Azure 门户将已删除的数据库恢复到删除时间，请打开服务器概述页，然后选择“删除的数据库”。 选择要还原的已删除数据库，然后键入要使用从备份还原的数据创建的新数据库的名称。
 
   ![还原已删除的数据库的屏幕截图](./media/recovery-using-backups/restore-deleted-sql-database-annotated.png)
 
@@ -231,7 +231,7 @@ ms.locfileid: "86227295"
 
 ### <a name="rest-api"></a>REST API
 
-使用 REST API 还原单一数据库或共用数据库：
+使用 REST API 还原数据库：
 
 | API | 说明 |
 | --- | --- |

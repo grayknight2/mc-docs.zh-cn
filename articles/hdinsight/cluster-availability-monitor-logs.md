@@ -7,12 +7,12 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 05/01/2020
-ms.openlocfilehash: 6924c400552b0bf783ca180a843cf1f4d79a1fe9
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+ms.openlocfilehash: 7421addf50b61cb9056dbcaba388649f76a9a1b3
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723780"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715262"
 ---
 # <a name="how-to-monitor-cluster-availability-with-azure-monitor-logs-in-hdinsight"></a>如何在 HDInsight 中使用 Azure Monitor 日志监视群集可用性
 
@@ -123,4 +123,3 @@ HDInsight 群集包括 Azure Monitor 日志集成，它提供可查询的指标�
 ## <a name="next-steps"></a>后续步骤
 
 * [群集可用性 - Apache Ambari](./hdinsight-cluster-availability.md)
-* [使用 Azure Monitor 日志](hdinsight-hadoop-oms-log-analytics-tutorial.md)

@@ -1,21 +1,16 @@
 ---
 title: 使用 Python 向/从 Azure 事件中心发送/接收事件（最新版）
 description: 本文演练如何创建一个可使用最新 azure/event-hubs 版本 5 包向/从 Azure 事件中心发送/接收事件的 Python 应用程序。
-services: event-hubs
-author: spelluru
-ms.service: event-hubs
-ms.workload: core
 ms.topic: quickstart
 origin.date: 02/11/2020
-ms.date: 07/01/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.custom: tracking-python
-ms.openlocfilehash: 551eb5c94b42e7bb4ba51de9f031b6030fb36f1e
-ms.sourcegitcommit: 4f84bba7e509a321b6f68a2da475027c539b8fd3
+ms.openlocfilehash: adeb971fe3c2187a3bfe43f180438d1947f45015
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85796261"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715204"
 ---
 # <a name="send-events-to-or-receive-events-from-event-hubs-by-using-python-azure-eventhub-version-5"></a>使用 Python（azure-eventhub 版本 5）向/从事件中心发送/接收事件
 本快速入门介绍如何使用 **azure-eventhub 版本 5** Python 包向事件中心发送事件以及从事件中心接收事件。
@@ -129,8 +124,8 @@ ms.locfileid: "85796261"
         # Create a consumer client for the event hub.
         client = EventHubConsumerClient.from_connection_string("EVENT HUBS NAMESPACE CONNECTION STRING", consumer_group="$Default", eventhub_name="EVENT HUB NAME", checkpoint_store=checkpoint_store)
         async with client:
-            # Call the receive method.
-            await client.receive(on_event=on_event)
+            # Call the receive method. Read from the beginning of the partition (starting_position: "-1")
+            await client.receive(on_event=on_event,  starting_position="-1")
 
     if __name__ == '__main__':
         loop = asyncio.get_event_loop()

@@ -1,21 +1,25 @@
 ---
-title: Azure Cosmos DB API for MongoDB（3.2 版本）支持的功能和语法
+title: Azure Cosmos DB 的 API for MongoDB（3.2 版本）支持的功能和语法
 description: 了解 Azure Cosmos DB 的 API for MongoDB（3.2 版本）支持的功能和语法。
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.topic: overview
 origin.date: 10/16/2019
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 author: rockboyfor
 ms.author: v-yeche
-ms.openlocfilehash: bd4d7eacfd9cc6694c890c49bcbf53cb6fb26d92
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: aff4d471407702a6a1863935127816653ceb2ffa
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85320868"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222480"
 ---
 # <a name="azure-cosmos-dbs-api-for-mongodb-32-version-supported-features-and-syntax"></a>Azure Cosmos DB 的 API for MongoDB（3.2 版本）：支持的功能和语法
+
+<!--CORRECT ON  21Vianet-->
 
 Azure Cosmos DB 是世纪互联提供的多区域分布式多模型数据库服务。 可通过任何开源 MongoDB 客户端[驱动程序](https://docs.mongodb.org/ecosystem/drivers)与 Azure Cosmos DB 的 MongoDB API 进行通信。 可以按照 MongoDB [有线协议](https://docs.mongodb.org/manual/reference/mongodb-wire-protocol)规定，通过 Azure Cosmos DB 的 MongoDB API 来使用现有客户端驱动程序。
 
@@ -26,7 +30,7 @@ Azure Cosmos DB 是世纪互联提供的多区域分布式多模型数据库服�
 
 ## <a name="protocol-support"></a>协议支持
 
-Azure Cosmos DB 的 API for MongoDB 的所有新帐户都与 MongoDB 服务器版本 **3.6** 兼容。 本文介绍 MongoDB 版本 3.2。 支持的运算符以及限制或例外已列在下面。 任何理解这些协议的客户端驱动程序应该都能够连接到 Azure Cosmos DB 的 MongoDB API。
+Azure Cosmos DB 的 API for MongoDB 的所有新帐户都与 MongoDB 服务器版本 **3.6** 兼容。 本文介绍 MongoDB 版本 3.2。 支持的运算符以及限制或例外已列在下面。 任何理解这些协议的客户端驱动程序都应该能够连接到 Azure 中国 Cosmos DB 的用于 MongoDB 的 API。
 
 ## <a name="query-language-support"></a>查询语言支持
 
@@ -229,6 +233,8 @@ Azure Cosmos DB 的 MongoDB API 支持以下数据库命令：
 }
 ```
 
+<!--Correct on the table: Deleted unnecessary column-->
+
 操作员 | 示例 |
 --- | --- |
 $eq | `{ "Volcano Name": { $eq: "Rainier" } }` |
@@ -247,6 +253,8 @@ $exists | `{ "Status": { $exists: true } }`|
 $type | `{ "Status": { $type: "string" } }`|
 $mod | `{ "Elevation": { $mod: [ 4, 0 ] } }` |
 $regex | `{ "Volcano Name": { $regex: "^Rain"} }`|
+
+<!--Correct on the table: Deleted unnecessary column-->
 
 ### <a name="notes"></a>说明
 
@@ -289,7 +297,7 @@ $regex | `{ "Volcano Name": { $regex: "^Rain"} }`|
 
 ### <a name="geospatial-operators"></a>地理空间运算符
 
-操作员 | 示例 | |
+操作员 | 示例 | 支持 |
 --- | --- | --- |
 $geoWithin | ```{ "Location.coordinates": { $geoWithin: { $centerSphere: [ [ -121, 46 ], 5 ] } } }``` | 是 |
 $geoIntersects |  ```{ "Location.coordinates": { $geoIntersects: { $geometry: { type: "Polygon", coordinates: [ [ [ -121.9, 46.7 ], [ -121.5, 46.7 ], [ -121.5, 46.9 ], [ -121.9, 46.9 ], [ -121.9, 46.7 ] ] ] } } } }``` | 是 |

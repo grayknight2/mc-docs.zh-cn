@@ -7,14 +7,16 @@ ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
 ms.topic: reference
 origin.date: 05/11/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: f5a00e7d89b88fccf86a8df612ebcf1ddef2ae36
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: 00c78eec1879011c2441e3f162200db4f2e5f37e
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323372"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222415"
 ---
 # <a name="net-change-feed-processor-sdk-download-and-release-notes"></a>.NET 更改源处理器 SDK：下载和发行说明
 
@@ -29,8 +31,8 @@ ms.locfileid: "85323372"
 > * [Async Java SDK v2](sql-api-sdk-async-java.md)
 > * [Sync Java SDK v2](sql-api-sdk-java.md)
 > * [Python](sql-api-sdk-python.md)
-> * [REST](https://docs.microsoft.com/rest/api/cosmos-db/)
-> * [REST 资源提供程序](https://docs.microsoft.com/rest/api/cosmos-db-resource-provider/)
+> * [REST](https://docs.microsoft.com/rest/api
+> * [REST Resource Provider](https://docs.microsoft.com/rest/api
 > * [SQL](sql-api-query-reference.md)
 > * [批量执行工具 - .NET v2](sql-api-sdk-bulk-executor-dot-net.md)
 > * [批量执行程序 - Java](sql-api-sdk-bulk-executor-java.md)
@@ -48,6 +50,11 @@ ms.locfileid: "85323372"
 ## <a name="release-notes"></a>发行说明
 
 ### <a name="v2-builds"></a>v2 版本
+
+<a name="2.3.1"></a>
+### <a name="231"></a>2.3.1
+* 更正了将 `FeedProcessing.ChangeFeedObserverCloseReason.Unknown` 关闭原因发送到 `FeedProcessing.IChangeFeedObserver.CloseAsync` 时，如果找不到分区或者目标副本未随读取会话保持最新将发生的情况。 在这些情况下，现在使用 `FeedProcessing.ChangeFeedObserverCloseReason.ResourceGone` 和 `FeedProcessing.ChangeFeedObserverCloseReason.ReadSessionNotAvailable` 关闭原因。
+* 添加了新的关闭原因 `FeedProcessing.ChangeFeedObserverCloseReason.ReadSessionNotAvailable`，当目标副本未随读取会话保持最新时，将发送此原因以关闭更改源观察程序。
 
 <a name="2.3.0"></a>
 ### <a name="230"></a>2.3.0
@@ -203,16 +210,16 @@ ms.locfileid: "85323372"
 
 ## <a name="release--retirement-dates"></a>发布和停用日期
 
-Azure 会在停用 SDK 时至少提前 12 个月发出通知，以便用户顺利转换为更高版本/受支持版本。
+Azure 会在停用 SDK 时至少提前 12 个月发出通知，以便用户顺利转换为更高版本/受支持版本。 新特性和功能以及优化仅添加到当前 SDK，因此建议始终尽早升级到最新的 SDK 版本。
 
-新特性和功能以及优化仅添加到当前 SDK，因此建议始终尽早升级到最新的 SDK 版本。 
-
-使用已停用的 SDK 对 Cosmos DB 发出的任何请求都会被服务拒绝。
+> [!WARNING]
+> 在 2022 年 8 月 31 日之后，Azure Cosmos DB 将不再进行 bug 修复，不再添加新功能，也不再支持 1.x 版的 Azure Cosmos DB .NET 或 .NET Core SDK for SQL API。 如果你不想升级，则从 1.x 版 SDK 发送的请求将继续由 Azure Cosmos DB 服务处理。
 
 <br/>
 
 | 版本 | 发布日期 | 停用日期 |
 | --- | --- | --- |
+| [2.3.1](#2.3.1) |2020 年 7 月 30 日 |--- |
 | [2.3.0](#2.3.0) |2020 年 4 月 2 日 |--- |
 | [2.2.8](#2.2.8) |2019 年 10 月 28 日 |--- |
 | [2.2.7](#2.2.7) |2019 年 5 月 14 日 |--- |
@@ -230,7 +237,7 @@ Azure 会在停用 SDK 时至少提前 12 个月发出通知，以便用户顺�
 | [1.1.0](#1.1.0) |2017 年 8 月 13 日 |--- |
 | [1.0.0](#1.0.0) |2017 年 7 月 7 日 |--- |
 
-## <a name="faq"></a>常见问题
+## <a name="faq"></a>常见问题解答
 
 [!INCLUDE [cosmos-db-sdk-faq](../../includes/cosmos-db-sdk-faq.md)]
 

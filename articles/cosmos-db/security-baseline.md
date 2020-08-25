@@ -5,15 +5,17 @@ author: rockboyfor
 ms.service: security
 ms.topic: conceptual
 origin.date: 03/16/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.custom: security-benchmark
-ms.openlocfilehash: b6cf73bb3dddb804c5c3bc1b4dc648e19da3ca1a
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: 34b09d37788c56393623aad7a8a98a45277b921e
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323276"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222964"
 ---
 # <a name="azure-security-baseline-for-cosmos-db"></a>Cosmos DB 的 Azure 安全基线
 
@@ -268,7 +270,7 @@ Azure Cosmos DB 为 Azure Cosmos DB 中的常见管理方案提供内置的 RBAC
 
 ### <a name="33-use-dedicated-administrative-accounts"></a>3.3：使用专用管理帐户
 
-**指导**：不适用；Azure Cosmos DB 不支持管理员帐户。  所有访问都与 Azure Active Directory 和 Azure 基于角色的访问控制 (RBAC) 相集成。
+**指导**：不适用；Azure Cosmos DB 不支持管理员帐户。  所有访问都与 Azure Active Directory 和 Azure 基于角色的访问控制 (Azure RBAC) 相集成。
 
 **Azure 安全中心监视**：不适用
 
@@ -329,7 +331,7 @@ Azure Cosmos DB 为 Azure Cosmos DB 中的常见管理方案提供内置的 RBAC
 
 如何使用 Azure 标识访问评审： https://docs.azure.cn/active-directory/governance/access-reviews-overview
 
-Azure 安全中心监视：是
+**Azure 安全中心监视**：是
 
 **责任**：客户
 
@@ -472,7 +474,7 @@ Azure 安全中心提供的支持功能： https://docs.azure.cn/security-center
 
 ### <a name="52-deploy-automated-operating-system-patch-management-solution"></a>5.2：部署自动操作系统修补管理解决方案
 
-指南：不适用；此项指导适用于计算资源。
+**指导**：不适用；此项指导适用于计算资源。
 
 **Azure 安全中心监视**：不适用
 
@@ -480,7 +482,7 @@ Azure 安全中心提供的支持功能： https://docs.azure.cn/security-center
 
 ### <a name="53-deploy-automated-third-party-software-patch-management-solution"></a>5.3：部署第三方自动软件修补管理解决方案
 
-指南：不适用；此项指导适用于计算资源。
+**指导**：不适用；此项指导适用于计算资源。
 
 **Azure 安全中心监视**：不适用
 
@@ -488,7 +490,7 @@ Azure 安全中心提供的支持功能： https://docs.azure.cn/security-center
 
 ### <a name="54-compare-back-to-back-vulnerability-scans"></a>5.4：比较连续进行的漏洞扫描
 
-指南：不适用；此项指导适用于计算资源。
+**指导**：不适用；此项指导适用于计算资源。
 
 **Azure 安全中心监视**：不适用
 
@@ -544,7 +546,7 @@ Azure 安全中心提供的支持功能： https://docs.azure.cn/security-center
 
 如何创建和使用标记： https://docs.azure.cn/azure-resource-manager/resource-group-using-tags
 
-Azure 安全中心监视：不适用
+**Azure 安全中心监视**：不适用
 
 **责任**：客户
 

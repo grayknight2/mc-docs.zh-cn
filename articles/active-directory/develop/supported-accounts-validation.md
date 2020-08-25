@@ -4,18 +4,18 @@ description: 了解向 Microsoft 标识平台注册应用时，不同受支持�
 author: SureshJa
 ms.author: v-junlch
 manager: CelesteDG
-ms.date: 04/22/2020
+ms.date: 08/19/2020
 ms.topic: conceptual
 ms.subservice: develop
 ms.custom: aaddev
 ms.service: active-directory
 ms.reviewer: lenalepa, manrath
-ms.openlocfilehash: 938b2e0c6b7a2b35f79af2a9cdc06b460a9ceda7
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+ms.openlocfilehash: 21028311f01bbb392f4675cc73447a0c42e95eaa
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82126426"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647544"
 ---
 # <a name="validation-differences-by-supported-account-types-signinaudience"></a>按受支持帐户类型列出的验证差异 (signInAudience)
 
@@ -40,7 +40,7 @@ ms.locfileid: "82126426"
 | 重定向 URI (`replyURLs`) | 有关详细信息，请参阅[重定向 URI/回复 URL 的局限性和限制](reply-url.md)。 | |  
 | API 权限 (`requiredResourceAccess`) | 无限制* | 无限制* | 
 | 此 API 定义的作用域 (`oauth2Permissions`) | 最大作用域名称长度为 120 个字符 <br><br> 对定义的作用域数没有限制* | 最大作用域名称长度为 120 个字符 <br><br> 对定义的作用域数没有限制* | | 
-| 授权客户端应用程序 (`preautorizedApplications`) | 无限制* | 无限制* |  
+| 授权客户端应用程序 (`preAuthorizedApplications`) | 无限制* | 无限制* |  
 | appRoles | 支持 <br> 无限制* | 支持 <br> 无限制* | 
 | 注销 URL | 允许 http://localhost <br><br> 最大长度为 255 个字符 | 允许 http://localhost <br><br> 最大长度为 255 个字符 |  
 

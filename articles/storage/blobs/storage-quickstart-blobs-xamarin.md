@@ -4,16 +4,16 @@ description: 本快速入门介绍如何通过 Xamarin 使用 Azure Blob 存储�
 author: WenJason
 ms.author: v-jay
 origin.date: 05/08/2020
-ms.date: 07/20/2020
+ms.date: 08/24/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.openlocfilehash: c82951927d2814bcad814206b7a2a24d78cda4ca
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.openlocfilehash: 5d5358353ee7106f8f5b1b2eb1ff74775b20d0c6
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414649"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753489"
 ---
 # <a name="quickstart-azure-blob-storage-client-library-v12-with-xamarin"></a>快速入门：通过 Xamarin 使用 Azure Blob 存储客户端库 v12
 
@@ -27,7 +27,12 @@ ms.locfileid: "86414649"
 * 将 blob 下载到设备
 * 删除容器
 
-[API 参考文档](https://docs.microsoft.com/dotnet/api/azure.storage.blobs) | [库源代码](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs) | [包 (NuGet)](https://www.nuget.org/packages/Azure.Storage.Blobs) | [示例](https://github.com/Azure-Samples/storage-blobs-xamarin-quickstart)
+参考链接：
+
+* [API 参考文档](https://docs.microsoft.com/dotnet/api/azure.storage.blobs)
+* [库源代码](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Blobs)
+* [包 (NuGet)](https://www.nuget.org/packages/Azure.Storage.Blobs)
+* [示例](https://github.com/Azure-Samples/storage-blobs-xamarin-quickstart)
 
 [!INCLUDE [storage-multi-protocol-access-preview](../../../includes/storage-multi-protocol-access-preview.md)]
 

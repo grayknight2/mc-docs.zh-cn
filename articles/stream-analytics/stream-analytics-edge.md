@@ -5,16 +5,16 @@ ms.service: stream-analytics
 author: Johnnytechn
 ms.author: v-johya
 ms.reviewer: mamccrea
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 02/14/2020
-ms.date: 07/06/2020
+ms.date: 08/20/2020
 ms.custom: seodec18
-ms.openlocfilehash: 41e8278724c23195e3644a5bc31dae3d10ce3d1b
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.openlocfilehash: dfbe3d99c0a06dbc972dba391d4db941beefd8ad
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86225989"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715774"
 ---
 # <a name="azure-stream-analytics-on-iot-edge"></a>Azure IoT Edge 流分析
  
@@ -45,15 +45,14 @@ ASA 使用 IoT 中心将 Edge 作业部署到设备。 [可在此处查看有关
 ### <a name="installation-instructions"></a>安装说明
 下表描述了高级步骤： 下面的部分将进行详细说明。
 
-|      |步骤   | 注释   |
-| ---   | ---   |  ---      |
-| 1   | 创建存储容器   | 存储容器用于保存作业定义，IoT 设备可在其中进行访问它们。 <br>  你可以重用任何现有的存储容器。     |
-| 2   | 创建 ASA 边缘作业   |  创建新的作业，选择“Edge”作为“宿主环境”。 <br> 这些作业从云创建/管理，并在你自己的 IoT Edge 设备上运行。     |
-| 3   | **在设备上设置 IoT Edge 环境**   | [Windows](/iot-edge/quickstart) 或 [Linux](/iot-edge/quickstart-linux) 说明。          |
-| 4   | 在 IoT Edge 设备上部署 ASA   |  ASA 作业定义被导出到之前创建的存储容器。       |
+| 步骤 | 注释 |
+| --- | --- |
+| 创建存储容器 | 存储容器用于保存作业定义，IoT 设备可在其中进行访问它们。 <br>  你可以重用任何现有的存储容器。 |
+| 创建 ASA 边缘作业 | 创建新的作业，选择“Edge”作为“宿主环境”。 <br> 这些作业从云创建/管理，并在你自己的 IoT Edge 设备上运行。 |
+| **在设备上设置 IoT Edge 环境** | [Windows](https://docs.microsoft.com/azure/iot-edge/quickstart) 或 [Linux](https://docs.microsoft.com/azure/iot-edge/quickstart-linux) 说明。|
+| 在 IoT Edge 设备上部署 ASA | ASA 作业定义被导出到之前创建的存储容器。 |
 
-<!-- Not Available on [Linux](/iot-edge/quickstart-linux)-->
-<!-- Not Availalble on [this step-by-step tutorial](/iot-edge/tutorial-deploy-stream-analytics)-->
+你可以按照[本分步教程](https://docs.microsoft.com/azure/iot-edge/tutorial-deploy-stream-analytics)在 IoT Edge 上部署你的第一个 ASA 作业。 下面的视频可帮助你了解在 IoT Edge 设备上运行流分析作业的过程：  
 
 <!-- Not Availalble on > [!VIDEO https://channel9.msdn.com/Events/Connect/2017/T157/player]-->
 
@@ -65,8 +64,6 @@ ASA 使用 IoT 中心将 Edge 作业部署到设备。 [可在此处查看有关
     2. 输入名称，并将容器保留为“专用”。
 
 #### <a name="create-an-asa-edge-job"></a>创建 ASA Edge 作业
-> [!Note]
-> 本教程重点介绍如何使用 Azure 门户创建 ASA 作业。 也可以[使用 Visual Studio 插件创建 ASA Edge 作业](/stream-analytics/stream-analytics-tools-for-visual-studio-edge-jobs)
 
 1. 在 Azure 门户创建一个新的“流分析作业”。 [在此处创建新的 ASA 作业的直接链接](https://portal.azure.cn/#create/Microsoft.StreamAnalyticsJob)。
 
@@ -233,16 +230,13 @@ IoT Edge 上的参考数据更新将由部署触发。 在触发后，ASA 模块
 
 * [Azure IoT Edge 的详细信息](https://docs.microsoft.com/azure/iot-edge/how-iot-edge-works)
 * [IoT Edge 教程上的 ASA ](https://docs.microsoft.com/azure/iot-edge/tutorial-deploy-stream-analytics)
-* [使用 Visual Studio 工具开发流分析 Edge 作业](/stream-analytics/stream-analytics-tools-for-visual-studio-edge-jobs)
 * [使用 API 实现流分析的 CI/CD](stream-analytics-cicd-api.md)
 
 <!--Link references-->
-[stream.analytics.developer.guide]: ../stream-analytics-developer-guide.md
+<!--Not available in MC: ../stream-analytics-developer-guide.md-->
 [stream.analytics.scale.jobs]: stream-analytics-scale-jobs.md
 [stream.analytics.introduction]: stream-analytics-introduction.md
 [stream.analytics.get.started]: stream-analytics-real-time-fraud-detection.md
 [stream.analytics.query.language.reference]: https://go.microsoft.com/fwlink/?LinkID=513299
 [stream.analytics.rest.api.reference]: https://go.microsoft.com/fwlink/?LinkId=517301
 
-<!-- Update_Description: update meta properties, update link -->
-<!--ms.date: 09/10/2017-->

@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 04/24/2019
 ms.date: 06/09/2020
-ms.openlocfilehash: f806e71c6352001469cdeb3bb07704a6f34b2b43
-ms.sourcegitcommit: 73697fa9c19a40d235df033400c74741e7d0f3f4
+ms.openlocfilehash: ea7fd29c3071bd211dc972518204621efa6cf3ad
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84574904"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515682"
 ---
 # <a name="anomaly-detection-and-forecasting-in-azure-data-explorer"></a>在 Azure 数据资源管理器中进行异常情况检测和预测
 
@@ -28,7 +28,7 @@ Azure 数据资源管理器持续从云服务或 IoT 设备收集遥测数据。
 ## <a name="time-series-decomposition-model"></a>时序分解模型
 
 用于时序预测和异常情况检测的 Azure 数据资源管理器本机实现使用一个已知的分解模型。 此模型将应用到预期的指标时序，以揭示定期行为和趋势的行为（例如服务流量、组件检测信号和 IoT 定期度量值），从而预测将来的指标值和检测异常的指标值。 此回归过程的假设条件是，时序是随机分布的，而不是存在事先已知的季节性行为和趋势行为。 然后，你可以通过季节性组件和趋势组件（统称为基线）预测将来的指标值，并忽略残余部分。 也可以仅使用残余部分基于离群值分析检测异常值。
-若要创建分解模型，请使用函数 [`series_decompose()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-decomposefunction)。 `series_decompose()` 函数采用一系列时序，并自动将每个时序分解成其季节性、趋势、残余和基线组件。 
+若要创建分解模型，请使用函数 [`series_decompose()`](/data-explorer/kusto/query/series-decomposefunction)。 `series_decompose()` 函数采用一系列时序，并自动将每个时序分解成其季节性、趋势、残余和基线组件。 
 
 例如，可以使用以下查询分解内部 Web 服务的流量：
 
@@ -48,8 +48,8 @@ demo_make_series2
 ![时序分解](media/anomaly-detection/series-decompose-timechart.png)
 
 * 原始时序带有 **num**（如红色所示）标签。 
-* 分解过程首先使用函数 [`series_periods_detect()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-periods-detectfunction) 自动检测季节性，并提取**季节性**模式（如紫色所示）。
-* 从原始时序中减去季节性模式，并使用函数 [`series_fit_line()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-fit-linefunction) 运行线性回归，以找到**趋势**组件（如浅蓝色所示）。
+* 分解过程首先使用函数 [`series_periods_detect()`](/data-explorer/kusto/query/series-periods-detectfunction) 自动检测季节性，并提取**季节性**模式（如紫色所示）。
+* 从原始时序中减去季节性模式，并使用函数 [`series_fit_line()`](/data-explorer/kusto/query/series-fit-linefunction) 运行线性回归，以找到**趋势**组件（如浅蓝色所示）。
 * 该函数减去趋势，余下的部分是**残余**组件（如绿色所示）。
 * 最后，该函数将季节性组件和趋势组件相加，以生成**基线**（如蓝色所示）。
 
@@ -80,7 +80,7 @@ demo_make_series2
 
 ## <a name="time-series-forecasting"></a>时序预测
 
-函数 [`series_decompose_forecast()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-decompose-forecastfunction) 预测一组时序的未来值。 此函数调用 `series_decompose()` 生成分解模型，然后针对每个时序，推断未来的基线组件。
+函数 [`series_decompose_forecast()`](/data-explorer/kusto/query/series-decompose-forecastfunction) 预测一组时序的未来值。 此函数调用 `series_decompose()` 生成分解模型，然后针对每个时序，推断未来的基线组件。
 
 使用以下查询可以预测下一周的 Web 服务流量：
 

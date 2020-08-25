@@ -9,13 +9,13 @@ ms.topic: conceptual
 ms.author: v-yiso
 author: Blackmist
 ms.date: 05/13/2020
-ms.custom: seodec18
-ms.openlocfilehash: 6f88dce1e845411e4f17a2bac6c5ce60f9dc88c1
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.custom: seoapril2019
+ms.openlocfilehash: cb31ca82e03228974cb3ece376b2903a3cde32b3
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441122"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227863"
 ---
 # <a name="how-azure-machine-learning-works-architecture-and-concepts"></a>Azure 机器学习的工作原理：体系结构和概念
 
@@ -44,6 +44,10 @@ ms.locfileid: "86441122"
 
 使用以下适用于 Azure 机器学习的工具：
 
+> [!IMPORTANT]
+> 以下标记了“（预览版）”的工具目前为公共预览版。
+> 该预览版在提供时没有附带服务级别协议，建议不要将其用于生产工作负载。 某些功能可能不受支持或者受限。 
+
 +  使用[适用于 Python 的 Azure 机器学习 SDK](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py) 来与任何 Python 环境中的服务交互。
 + 使用[适用于 R 的 Azure 机器学习 SDK](https://azure.github.io/azureml-sdk-for-r/reference/index.html) 来与任何 R 环境中的服务交互。
 + 使用 [Azure 机器学习 CLI](/machine-learning/reference-azure-machine-learning-cli) 自动执行机器学习活动。
@@ -62,7 +66,7 @@ ms.locfileid: "86441122"
             * [运行配置](#run-configurations)
             * [快照](#snapshots)
             * [Git 跟踪](#github-tracking-and-integration)
-            * [日志记录](#logging)
+            * [Logging](#logging)
     * [ML 管道](#ml-pipelines)
     * [模型](#models)
         * [环境](#environments)

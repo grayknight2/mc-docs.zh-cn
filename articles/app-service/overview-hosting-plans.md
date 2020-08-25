@@ -4,20 +4,20 @@ description: 了解应用服务计划在 Azure 应用服务中的工作方式，
 keywords: 应用服务, azure 应用服务, 缩放, 可缩放, 可伸缩性, 应用服务计划, 应用服务成本
 ms.assetid: dea3f41e-cf35-481b-a6bc-33d7fc9d01b1
 ms.topic: article
-origin.date: 11/09/2017
-ms.date: 02/16/2020
+origin.date: 08/12/2019
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 255fe032d03678bfdd5c4e52cdba76fbc711a58c
-ms.sourcegitcommit: 89ca2993f5978cd6dd67195db7c4bdd51a677371
+ms.openlocfilehash: 92f0e8497d7358468814e20f3c2edad6015c6d3c
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82588547"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228071"
 ---
 # <a name="azure-app-service-plan-overview"></a>Azure 应用服务计划概述
 
-在应用服务中，应用在_应用服务计划_中运行。 应用服务计划为要运行的 Web 应用定义一组计算资源。 这些计算资源类似于传统 Web 托管方案中的_服务器场_。 可将一个或多个应用配置为在相同的计算资源中（或相同的应用服务计划中）运行。
+在应用服务（Web 应用、API 应用或移动应用）中，应用始终在应用服务计划中运行。 此外，[Azure Functions](../azure-functions/functions-scale.md#app-service-plan) 也可选择在应用服务计划中运行。 应用服务计划为要运行的 Web 应用定义一组计算资源。 这些计算资源类似于传统 Web 托管方案中的_服务器场_。 可将一个或多个应用配置为在相同的计算资源中（或相同的应用服务计划中）运行。
 
 在特定的区域（例如“中国东部”）中创建应用服务计划时，将为该区域中的该计划创建一组计算资源。 放入此应用服务计划的任何应用都在应用服务计划定义的这些计算资源中运行。 每个应用服务计划定义：
 
@@ -34,7 +34,7 @@ ms.locfileid: "82588547"
 
 [!INCLUDE [app-service-dev-test-note](../../includes/app-service-dev-test-note.md)]
 
-每个层还提供应用服务功能的特定子集。 这些功能包括自定义域和 SSL 证书、自动缩放、部署槽位、备份、流量管理器集成，等等。 层越高，可用的功能越多。 若要了解每个定价层支持的功能，请参阅[应用服务计划详细信息](https://azure.microsoft.com/pricing/details/app-service/)。
+每个层还提供应用服务功能的特定子集。 这些功能包括自定义域和 TLS/SSL 证书、自动缩放、部署槽位、备份、流量管理器集成，等等。 层越高，可用的功能越多。 若要了解每个定价层支持的功能，请参阅[应用服务计划详细信息](https://azure.microsoft.com/pricing/details/app-service/plans/)。
 
 <a name="new-pricing-tier-premiumv2"></a>
 
@@ -73,22 +73,26 @@ ms.locfileid: "82588547"
 - 在专用计算层（“基本”、“标准”、“高级”、“高级 V2”）中，应用服务计划定义了应用可缩放到的 VM 实例数，因此，应用服务计划中的每个 VM 实例会产生小时费用。      不管这些 VM 实例上运行了多少个应用，其计费方式都是相同的。 为了避免意外的费用，请参阅[清理应用服务计划](app-service-plan-manage.md#delete)。
 - 在“隔离”层中，应用服务环境定义了运行应用的隔离辅助角色数目，每个辅助角色按小时计费。   此外，运行应用服务环境本身也会产生一笔基本的小时费用。
 
-使用随附的应用服务功能（配置自定义域、SSL 证书、部署槽位、备份等）不会产生费用。 例外情况包括：
+使用提供的应用服务功能（配置自定义域、TLS/SSL 证书、部署槽位、备份等）不会产生费用。 例外情况包括：
 
 - 应用服务域 - 在 Azure 中购买以及每年续订时付费。
 - 应用服务证书 - 在 Azure 中购买以及每年续订时付费。
-- 基于 IP 的 SSL 连接 - 每个基于 IP 的 SSL 连接会产生小时费用，但“标准”或更高类别的某些层免费提供了一个基于 IP 的 SSL 连接。  基于 SNI 的 SSL 连接免费。
+- 基于 IP 的 TLS 连接 - 每个基于 IP 的 TLS 连接都会产生小时费用，但某个“标准”层或更高级别的层免费提供了一个基于 IP 的 TLS 连接。 基于 SNI 的 TLS 连接免费。
 
 > [!NOTE]
 > 如果将应用服务与其他 Azure 服务集成，可能需要考虑这些服务的费用。 例如，如果使用 Azure 流量管理器在特定的地理位置缩放应用，则 Azure 流量管理器也会根据用量收取费用。 若要估算 Azure 中的跨服务费用，请参阅[定价计算器](https://www.azure.cn/pricing/calculator/)。 
->
->
+
+<!--
+Want to optimize and save on your cloud spending?
+
+[!INCLUDE [cost-management-horizontal](../../includes/cost-management-horizontal.md)]
+-->
 
 ## <a name="what-if-my-app-needs-more-capabilities-or-features"></a>如果应用需要更多的功能怎么办？
 
 随时可以提高和降低应用服务计划。 只需更改计划的定价层即可。 一开始可以选择一个较低的定价层，以后需要更多的应用服务功能时，可以提高层。
 
-例如，可以在“免费”应用服务计划中开始免费测试 Web 应用。  想要将[自定义 DNS 名称](app-service-web-tutorial-custom-domain.md)添加到 Web 应用时，只需将计划提高到“共享”层。  以后想要[创建 SSL 绑定](configure-ssl-bindings.md)时，可将计划提高到“基本”层。  想要部署[过渡环境](deploy-staging-slots.md)时，可提高到“标准”层。  需要更多的核心、内存或存储时，可提高到同一层中的更大 VM 大小。
+例如，可以在“免费”应用服务计划中开始免费测试 Web 应用。  想要将[自定义 DNS 名称](app-service-web-tutorial-custom-domain.md)添加到 Web 应用时，只需将计划提高到“共享”层。  以后想要[创建 TLS 绑定](configure-ssl-bindings.md)时，可将计划纵向扩展到“基本”层。 想要部署[过渡环境](deploy-staging-slots.md)时，可提高到“标准”层。  需要更多的核心、内存或存储时，可提高到同一层中的更大 VM 大小。
 
 反之亦然。 如果觉得自己不再需要较高层的功能，可以纵向缩减到更低的层，从而节省资金。
 

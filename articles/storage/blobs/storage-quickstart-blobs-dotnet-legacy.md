@@ -3,21 +3,24 @@ title: 快速入门：适用于 .NET 的 Azure Blob 存储客户端库
 description: 本快速入门介绍如何使用适用于 .NET 的 Azure Blob 存储客户端库在 Blob（对象）存储中创建容器和 blob。 接下来，介绍如何将 blob 下载到本地计算机，以及如何列出容器中的所有 blob。
 author: WenJason
 ms.author: v-jay
-origin.date: 07/20/2019
-ms.date: 07/20/2020
+origin.date: 07/24/2020
+ms.date: 08/24/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.openlocfilehash: 4636a185bf7d032cbf666855305162f752d85688
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.openlocfilehash: 213e0a1c1fa1faf410924fab8d24c773b7a46158
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414661"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753495"
 ---
 # <a name="quickstart-azure-blob-storage-client-library-v11-for-net"></a>快速入门：适用于 .NET 的 Azure Blob 存储客户端库 v11
 
 适用于 .NET 的 Azure Blob 存储客户端库 v11 入门。 Azure Blob 存储是 Azure 的适用于云的对象存储解决方案。 请按照步骤操作，安装程序包并试用基本任务的示例代码。 Blob 存储最适合存储巨量的非结构化数据。
+
+> [!NOTE]
+> 此快速启动使用 Azure Blob 存储客户端库的旧版本。 若要开始使用最新版本，请参阅[快速入门：适用于 .NET 的 Azure Blob 存储客户端库 v12](storage-quickstart-blobs-dotnet.md)。
 
 使用适用于 .NET 的 Azure Blob 存储客户端库完成以下操作：
 
@@ -28,7 +31,12 @@ ms.locfileid: "86414661"
 * 列出容器中所有的 blob
 * 删除容器
 
-[API 参考文档](https://docs.microsoft.com/dotnet/api/overview/azure/storage?view=azure-dotnet) | [库源代码](https://github.com/Azure/azure-storage-net/tree/master/Blob) | [包 (NuGet)](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) | [示例](https://azure.microsoft.com/resources/samples/?sort=0&service=storage&platform=dotnet&term=blob)
+其他资源：
+
+* [API 参考文档](https://docs.microsoft.com/dotnet/api/overview/azure/storage?view=azure-dotnet)
+* [库源代码](https://github.com/Azure/azure-storage-net/tree/master/Blob)
+* [包 (NuGet)](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/)
+* [示例](https://azure.microsoft.com/resources/samples/?sort=0&service=storage&platform=dotnet&term=blob)
 
 [!INCLUDE [storage-multi-protocol-access-preview](../../../includes/storage-multi-protocol-access-preview.md)]
 
@@ -133,8 +141,8 @@ namespace blob_quickstart
 
 1. 导航到 [Azure 门户](https://portal.azure.cn)。
 2. 找到自己的存储帐户。
-3. 在存储帐户概述的“设置”部分，选择“访问密钥”。  在这里，可以查看你的帐户访问密钥以及每个密钥的完整连接字符串。
-4. 找到“密钥 1”下面的“连接字符串”值，选择“复制”按钮复制该连接字符串。   下一步需将此连接字符串值添加到某个环境变量。
+3. 在存储帐户概述的“设置”部分，选择“访问密钥”。 在这里，可以查看你的帐户访问密钥以及每个密钥的完整连接字符串。
+4. 找到“密钥 1”下面的“连接字符串”值，选择“复制”按钮复制该连接字符串。 下一步需将此连接字符串值添加到某个环境变量。
 
     ![显示如何从 Azure 门户复制连接字符串的屏幕截图](../../../includes/media/storage-copy-connection-string-portal/portal-connection-string.png)
 

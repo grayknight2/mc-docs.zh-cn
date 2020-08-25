@@ -5,18 +5,21 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 05/23/2019
-ms.date: 04/27/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: a774dda6f314773be4ac2fc16004504ff9450899
-ms.sourcegitcommit: f9c242ce5df12e1cd85471adae52530c4de4c7d7
+ms.openlocfilehash: d4a3a609e441883b38261c2762bcfbfd86145a50
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82134471"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223370"
 ---
+<!--Verify Successfully-->
 # <a name="secure-azure-cosmos-keys-using-azure-key-vault"></a>使用 Azure Key Vault 保护 Azure Cosmos 密钥 
 
 >[!IMPORTANT]
@@ -51,10 +54,12 @@ ms.locfileid: "82134471"
     * 提供机密的**名称**。
     * 在“值”字段中提供 Cosmos DB 帐户的连接字符串。  然后选择“创建”  。
 
-    ![创建机密](./media/access-secrets-from-keyvault/create-a-secret.png)
+    :::image type="content" source="./media/access-secrets-from-keyvault/create-a-secret.png" alt-text="创建机密":::
 
-4. 创建机密后，将其打开并复制采用以下格式的 **机密标识符。 下一部分要用到此标识符。 
-
+4. 创建机密后，将其打开并复制采用以下格式的机密标识符。 下一部分要用到此标识符。 
+    
+    <!--Correct on the **Secret Identifier**-->
+    
     `https://<Key_Vault_Name>.vault.azure.cn/secrets/<Secret _Name>/<ID>`
 
 ## <a name="create-an-azure-web-application"></a>创建 Azure Web 应用程序
@@ -70,11 +75,11 @@ ms.locfileid: "82134471"
 
 5. 部署应用程序后， 在 Azure 门户中导航到已部署的 Web 应用程序，并启用此应用程序的“托管服务标识”。   
 
-    ![托管服务标识](./media/access-secrets-from-keyvault/turn-on-managed-service-identity.png)
+    :::image type="content" source="./media/access-secrets-from-keyvault/turn-on-managed-service-identity.png" alt-text="托管服务标识":::
 
 如果现在就运行此应用程序，将会看到以下错误，因为尚未在 Key Vault 中向此应用程序授予任何权限。
 
-![已部署的无访问权限的应用](./media/access-secrets-from-keyvault/app-deployed-without-access.png)
+:::image type="content" source="./media/access-secrets-from-keyvault/app-deployed-without-access.png" alt-text="已部署的无访问权限的应用":::
 
 ## <a name="register-the-application--grant-permissions-to-read-the-key-vault"></a>注册应用程序，并授予读取 Key Vault 的权限
 
@@ -84,11 +89,11 @@ ms.locfileid: "82134471"
 
 2. 打开“访问策略”，选择“+新增”，找到已部署的 Web 应用，选择权限，然后选择“确定”。     
 
-    ![添加访问策略](./media/access-secrets-from-keyvault/add-access-policy.png)
+    :::image type="content" source="./media/access-secrets-from-keyvault/add-access-policy.png" alt-text="添加访问策略":::
 
 现在，如果运行此应用程序，即可从 Key Vault 读取机密。
 
-![使用机密部署的应用](./media/access-secrets-from-keyvault/app-deployed-with-access.png)
+:::image type="content" source="./media/access-secrets-from-keyvault/app-deployed-with-access.png" alt-text="使用机密部署的应用":::
 
 同样，可以添加一个用户来访问 Key Vault。 需要通过选择“访问策略”  将自己添加到 Key Vault，然后授予从 Visual studio 运行此应用程序所需的全部权限。 从桌面运行此应用程序时，它会采用你的标识。
 
@@ -97,4 +102,4 @@ ms.locfileid: "82134471"
 * 若要为 Azure Cosmos DB 配置防火墙，请参阅[防火墙支持](firewall-support.md)一文。
 * 若要配置虚拟网络服务终结点，请参阅[使用 VNet 服务终结点保护访问](vnet-service-endpoint.md)一文。
 
-<!--Update_Description: update meta properties, wording update -->
+<!-- Update_Description: update meta properties, wording update, update link -->

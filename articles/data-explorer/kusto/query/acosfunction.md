@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 10/23/2018
-ms.date: 07/31/2020
-ms.openlocfilehash: cbd975885a0f0bce064bdc1ba7a5a5faf83dc9fc
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: de992ac2a6f6987a407a7f52cadbf88df73f9636
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509566"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515802"
 ---
 # <a name="acos"></a>acos()
 

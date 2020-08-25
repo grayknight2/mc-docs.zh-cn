@@ -2,38 +2,40 @@
 title: 更新 Azure Cosmos DB 的 Gremlin 数据库和图的 RU/秒
 description: 更新 Azure Cosmos DB 的 Gremlin 数据库和图的 RU/秒
 author: rockboyfor
-ms.author: v-yeche
 ms.service: cosmos-db
 ms.subservice: cosmosdb-graph
 ms.topic: sample
-origin.date: 09/25/2019
-ms.date: 10/28/2019
-ms.openlocfilehash: 0aaf6c89cd9f913589e5c029d08e897ee2f40cd7
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
+ms.author: v-yeche
+ms.openlocfilehash: 97804696299bee7a90383a05c2fe6694be1338e3
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "72914839"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222559"
 ---
 <!--Verify successfully-->
 # <a name="update-rus-for-a-gremlin-database-and-graph-for-azure-cosmos-db-using-azure-cli"></a>使用 Azure CLI 更新 Azure Cosmos DB 的 Gremlin 数据库和图的 RU/秒
 
 [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../../../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
-如果选择在本地安装并使用 CLI，本主题需要运行 Azure CLI 2.0.73 版或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
+选择在本地安装并使用 CLI 时，本主题要求运行 Azure CLI 2.9.1 或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
 
 ## <a name="sample-script"></a>示例脚本
 
 此脚本创建一个具有共享吞吐量的 Gremlin 数据库和一个具有专用吞吐量的 Gremlin 图，然后更新该数据库和该图的吞吐量。
 
 ```azurecli
-!/bin/bash
-
-# Update the throughput for a Gremlin database and graph
+#!/bin/bash
 
 # Sign in the Azure China Cloud
 az cloud set -n AzureChinaCloud
 az login
+
+# Throughput operations for a SQL API database and container
 
 # Generate a unique 10 character alphanumeric string to ensure unique resource names
 uniqueId=$(env LC_CTYPE=C tr -dc 'a-z0-9' < /dev/urandom | fold -w 10 | head -n 1)
@@ -44,48 +46,93 @@ location='chinanorth2'
 accountName="cosmos-$uniqueId" #needs to be lower case
 databaseName='database1'
 graphName='graph1'
+originalThroughput=400
+updateThroughput=500
 
-# Create a resource group
+# Create a resource group, Cosmos account, database with throughput and graph with throughput
 az group create -n $resourceGroupName -l $location
+az cosmosdb create -n $accountName -g $resourceGroupName --capabilities EnableGremlin
+az cosmosdb gremlin database create -a $accountName -g $resourceGroupName -n $databaseName --throughput $originalThroughput
+az cosmosdb gremlin graph create -a $accountName -g $resourceGroupName -d $databaseName -n $graphName -p '/zipcode' --throughput $originalThroughput
 
-# Create a Cosmos account for Gremlin API
-az cosmosdb create \
-    -n $accountName \
+# Throughput operations for Gremlin API database
+# Read the current throughput
+# Read the minimum throughput
+# Make sure the updated throughput is not less than the minimum
+# Update the throughput
+
+read -p 'Press any key to read current provisioned throughput on database'
+
+az cosmosdb gremlin database throughput show \
     -g $resourceGroupName \
-    --capabilities EnableGremlin
-
-# Create a Gremlin database with shared throughput
-az cosmosdb gremlin database create \
     -a $accountName \
-    -g $resourceGroupName \
     -n $databaseName \
-    --throughput 400
+    --query resource.throughput \
+    -o tsv
 
-# Create a Gremlin graph with dedicated throughput
-az cosmosdb gremlin graph create \
-    -a $accountName \
+read -p 'Press any key to read minimum throughput on database'
+
+minimumThroughput=$(az cosmosdb gremlin database throughput show \
     -g $resourceGroupName \
-    -d $databaseName \
-    -n $graphName \
-    -p '/zipcode' \
-    --throughput 400
+    -a $accountName \
+    -n $databaseName \
+    --query resource.minimumThroughput \
+    -o tsv)
 
-read -p 'Press any key to increase Database throughput to 500'
+echo $minimumThroughput
+
+# Make sure the updated throughput is not less than the minimum allowed throughput
+if [ $updateThroughput -lt $minimumThroughput ]; then
+    updateThroughput=$minimumThroughput
+fi
+
+read -p 'Press any key to update database throughput'
 
 az cosmosdb gremlin database throughput update \
     -a $accountName \
     -g $resourceGroupName \
     -n $databaseName \
-    --throughput 500
+    --throughput $updateThroughput
 
-read -p 'Press any key to increase Graph throughput to 500'
+# Throughput operations for Gremlin API graph
+# Read the current throughput
+# Read the minimum throughput
+# Make sure the updated throughput is not less than the minimum
+# Update the throughput
 
-az cosmosdb gremlin graph throughput update \
-    -a $accountName \
+read -p 'Press any key to read current provisioned throughput on a graph'
+
+az cosmosdb gremlin graph throughput show \
     -g $resourceGroupName \
+    -a $accountName \
     -d $databaseName \
     -n $graphName \
-    --throughput 500
+    --query resource.throughput \
+    -o tsv
+
+read -p 'Press any key to read minimum throughput on graph'
+
+minimumThroughput=$(az cosmosdb gremlin graph throughput show \
+    -g $resourceGroupName \
+    -a $accountName \
+    -d $databaseName \
+    -n $graphName \
+    --query resource.minimumThroughput \
+    -o tsv)
+
+echo $minimumThroughput
+
+# Make sure the updated throughput is not less than the minimum allowed throughput
+if [ $updateThroughput -lt $minimumThroughput ]; then
+    updateThroughput=$minimumThroughput
+fi
+
+az cosmosdb gremlin graph throughput update \
+    -g $resourceGroupName \
+    -a $accountName \
+    -d $databaseName \
+    -n $graphName \
+    --throughput $updateThroughput
 
 ```
 
@@ -117,5 +164,4 @@ az group delete --name $resourceGroupName
 
 可以在 [Azure Cosmos DB CLI GitHub 存储库](https://github.com/Azure-Samples/azure-cli-samples/tree/master/cosmosdb)中找到所有 Azure Cosmos DB CLI 脚本示例。
 
-<!--Update_Description: new articles on gremlin throughput -->
-<!--New.date: 10/28/2019-->
+<!-- Update_Description: update meta properties, wording update, update link -->

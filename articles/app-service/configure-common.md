@@ -5,15 +5,15 @@ keywords: azure 应用服务, web 应用, 应用设置, 环境变量
 ms.assetid: 9af8a367-7d39-4399-9941-b80cbc5f39a0
 ms.topic: article
 origin.date: 08/13/2019
-ms.date: 03/23/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 82e2fb3499fed9c0848a043b27e35dd2a7c73416
-ms.sourcegitcommit: 89ca2993f5978cd6dd67195db7c4bdd51a677371
+ms.openlocfilehash: a5833fc9a8033c5b648b6f908142ce48596ce5e5
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82588577"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227957"
 ---
 # <a name="configure-an-app-service-app-in-the-azure-portal"></a>在 Azure 门户中配置应用服务应用
 
@@ -21,7 +21,7 @@ ms.locfileid: "82588577"
 
 ## <a name="configure-app-settings"></a>配置应用设置
 
-<!-- For Linux apps and custom containers, App Service passes app settings to the container using the `--env` flag to set the environment variable in the container. -->
+在应用服务中，应用设置是作为环境变量传递给应用程序代码的变量。 对于 Linux 应用和自定义容器，应用服务使用 `--env` 标志将应用设置传递到容器，以在容器中设置环境变量。
 
 在 [Azure 门户]中搜索并选择“应用服务”  ，然后选择应用。 
 
@@ -33,7 +33,16 @@ ms.locfileid: "82588577"
 
 对于 ASP.NET 和 ASP.NET Core 开发人员而言，在应用服务中设置应用设置类似于在 Web.config  或 appsettings.json  中的 `<appSettings>` 内进行设置，但应用服务中的值会替代 Web.config  或 appsettings.json  中的值。 可以在 Web.config  或 appsettings.json  中保留开发设置（例如，本地 MySQL 密码），但在应用服务中保留生产机密（例如 Azure MySQL 数据库密码）会更安全。 相同的代码在本地调试时使用开发设置，部署到 Azure 时使用生产机密。
 
-<!-- Other language stacks, likewise, get the app settings as environment variables at runtime. For language-stack specific steps, see: -->
+同样，其他语言堆栈也会在运行时获取应用设置作为环境变量。 有关特定的语言堆栈步骤，请参阅：
+
+- [ASP.NET Core](configure-language-dotnetcore.md#access-environment-variables)
+- [Node.js](configure-language-nodejs.md#access-environment-variables)
+- [PHP](configure-language-php.md#access-environment-variables)
+- [Python](configure-language-python.md#access-environment-variables)
+- [Java](configure-language-java.md#data-sources)
+- [Ruby](configure-language-ruby.md#access-environment-variables)
+
+<!-- - [Custom containers](configure-custom-container.md#configure-environment-variables) -->
 
 应用程序设置在存储时始终进行加密（静态加密）。
 
@@ -52,8 +61,9 @@ ms.locfileid: "82588577"
 
 完成后，单击“更新”。  别忘了返回“配置”页并单击“保存”。  
 
-<!-- > [!NOTE] -->
-<!-- > In a default Linux container or a custom Linux container, any nested JSON key structure in the app setting name like `ApplicationInsights:InstrumentationKey` needs to be configured in App Service as `ApplicationInsights__InstrumentationKey` for the key name. In other words, any `:` should be replaced by `__` (double underscore). -->
+> [!NOTE]
+> 在默认 Linux 容器或自定义 Linux 容器中，需要在应用服务中将应用设置名称（如 `ApplicationInsights:InstrumentationKey`）中的任何嵌套 JSON 密钥结构配置为密钥名称的 `ApplicationInsights__InstrumentationKey`。 换而言之，应将任何 `:` 替换为 `__`（双下划线）。
+>
 
 ### <a name="edit-in-bulk"></a>批量编辑
 
@@ -89,14 +99,22 @@ ms.locfileid: "82588577"
 
 在运行时，连接字符串可用作环境变量，其前缀为以下连接类型：
 
-* SQL Server： `SQLCONNSTR_`
-* MySQL： `MYSQLCONNSTR_`
-* SQL 数据库： `SQLAZURECONNSTR_`
+* SQLServer：`SQLCONNSTR_`  
+* MySQL： `MYSQLCONNSTR_` 
+* SQLAzure：`SQLAZURECONNSTR_` 
 * 自定义：`CUSTOMCONNSTR_`
+* PostgreSQL：`POSTGRESQLCONNSTR_`  
 
-例如，可以使用环境变量 `MYSQLCONNSTR_connectionString1` 的形式访问名为 *connectionstring1* 的 MySql 连接字符串。 
+例如，可以使用环境变量 `MYSQLCONNSTR_connectionString1` 的形式访问名为 *connectionstring1* 的 MySql 连接字符串。 有关特定的语言堆栈步骤，请参阅：
 
-<!--  For language-stack specific steps, see: -->
+- [ASP.NET Core](configure-language-dotnetcore.md#access-environment-variables)
+- [Node.js](configure-language-nodejs.md#access-environment-variables)
+- [PHP](configure-language-php.md#access-environment-variables)
+- [Python](configure-language-python.md#access-environment-variables)
+- [Java](configure-language-java.md#data-sources)
+- [Ruby](configure-language-ruby.md#access-environment-variables)
+
+<!-- - [Custom containers](configure-custom-container.md#configure-environment-variables) -->
 
 连接字符串在存储时始终进行加密（静态加密）。
 
@@ -150,21 +168,19 @@ ms.locfileid: "82588577"
 
 在此处可以配置应用的某些常用设置。 某些设置要求[纵向扩展到更高的定价层](manage-scale-up.md)。
 
-<!-- For Linux apps and custom container apps, you can also set an optional start-up command or file. -->
-
-- **堆栈设置**：用于运行应用的软件堆栈，包括语言和 SDK 版本。
+- **堆栈设置**：用于运行应用的软件堆栈，包括语言和 SDK 版本。 对于 Linux 应用和自定义的容器应用，还可以设置可选的启动命令或文件。
 - **平台设置**：用于配置托管平台的设置，包括：
     - **位数**：32 位或 64 位。
     - **WebSocket 协议**：例如，[ASP.NET SignalR] 或 [socket.io](https://socket.io/)。
     - **Always On**：即使没有流量，也保持应用的加载状态。 对于连续性 WebJobs 或使用 CRON 表达式触发的 WebJobs，它是必需的。
       > [!NOTE]
-      > 使用 Always On 功能，你无法控制终结点。 它始终向应用程序根发送请求。
+      > 借助 Always On 功能，前端负载均衡器会将请求发送到应用程序根目录。 无法配置应用服务的此应用程序终结点。
     - **托管管道版本**：IIS [管道模式]。 如果某个旧式应用需要旧版 IIS，请将此选项设置为“经典”。 
     - **HTTP 版本**：设置为 **2.0**，以启用对 HTTPS/2 协议的支持。
     > [!NOTE]
-    > 大多数新型浏览器仅支持通过 TLS 的 HTTP/2 协议，而非加密流量继续使用 HTTP/1.1。 为确保客户端浏览器通过 HTTP/2 连接到应用，请[在 Azure 应用服务中使用 SSL 绑定保护自定义 DNS 名称](configure-ssl-bindings.md)。
+    > 大多数新型浏览器仅支持通过 TLS 的 HTTP/2 协议，而非加密流量继续使用 HTTP/1.1。 若要确保客户端浏览器使用 HTTP/2 连接到应用，请保护自定义 DNS 名称。 有关详细信息，请参阅[在 Azure 应用服务中使用 TLS/SSL 绑定保护自定义 DNS 名称](configure-ssl-bindings.md)。
     - **ARR 相关性**：在多实例部署中，请确保在会话的整个生存期内，将客户端路由到同一实例。 对于无状态应用程序，请将此选项设置为“关闭”。 
-- **调试**：为 [ASP.NET](troubleshoot-dotnet-visual-studio.md#remotedebug)、[ASP.NET Core](/visualstudio/debugger/remote-debugging-azure) 启用远程调试。 此选项在 48 小时后会自动关闭。
+- **调试**：为 [ASP.NET](troubleshoot-dotnet-visual-studio.md#remotedebug)、[ASP.NET Core](/visualstudio/debugger/remote-debugging-azure) 或 [Node.js](configure-language-nodejs.md#debug-remotely) 应用启用远程调试。 此选项在 48 小时后会自动关闭。
 - **传入的客户端证书**：要求在[相互身份验证](app-service-web-configure-tls-mutual-auth.md)中使用客户端证书。
 
 ## <a name="configure-default-documents"></a>配置默认文档
@@ -201,13 +217,45 @@ ms.locfileid: "82588577"
 
 若要配置虚拟应用程序和目录，请指定每个虚拟目录及其相对于网站根目录 (`D:\home`) 的物理路径。 还可选中“应用程序”  复选框，将虚拟目录标记为应用程序。
 
-<!-- ### Containerized apps -->
+### <a name="containerized-apps"></a>容器化应用
+
+<!-- You can [add custom storage for your containerized app](configure-connect-to-azure-storage.md). Containerized apps include all Linux apps and also the Windows and Linux custom containers running on App Service. -->
+
+单击“新 Azure 存储装载”，然后按如下所示配置自定义存储：
+
+- **名称**：显示名称。
+- **配置选项**：“基本”或“高级”。
+- **存储帐户**：具有所需容器的存储帐户。
+- **存储类型**：“Azure Blob”或“Azure 文件存储”。
+  > [!NOTE]
+  > Windows 容器应用仅支持 Azure 文件存储。
+- **存储容器**：对于基本配置，为所需的容器。
+- **共享名**：对于高级配置，为文件共享名。
+- **访问密钥**：对于高级配置，为访问密钥。
+- **装载路径**：容器中用于装载自定义存储的绝对路径。
+
+<!-- For more information, see [Access Azure Storage as a network share from a container in App Service](configure-connect-to-azure-storage.md). -->
+
+## <a name="configure-language-stack-settings"></a>配置语言堆栈设置
+
+对于 Linux 应用，请参阅：
+
+- [ASP.NET Core](configure-language-dotnetcore.md)
+- [Node.js](configure-language-nodejs.md)
+- [PHP](configure-language-php.md)
+- [Python](configure-language-python.md)
+- [Java](configure-language-java.md)
+- [Ruby](configure-language-ruby.md)
+
+<!-- ## Configure custom containers
+
+See [Configure a custom Linux container for Azure App Service](configure-custom-container.md) -->
 
 ## <a name="next-steps"></a>后续步骤
 
 - [在 Azure 应用服务中配置自定义域名]
 - [设置 Azure 应用服务中的过渡环境]
-- [在 Azure 应用服务中使用 SSL 绑定保护自定义 DNS 名称](configure-ssl-bindings.md)
+- [在 Azure 应用服务中使用 TLS/SSL 绑定保护自定义 DNS 名称](configure-ssl-bindings.md)
 - [启用诊断日志](troubleshoot-diagnostic-logs.md)
 - [在 Azure 应用服务中缩放应用]
 - [在 Azure 应用服务中监视基础知识]

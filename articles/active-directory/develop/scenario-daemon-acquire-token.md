@@ -8,15 +8,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 05/28/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.custom: aaddev
-ms.openlocfilehash: 06a58e10e6df26789d5462c12c3880b3ad061f98
-ms.sourcegitcommit: 0130a709d934d89db5cccb3b4997b9237b357803
+ms.openlocfilehash: 2b2580c45e672fa81872588447a49c60711eb2ad
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84186655"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647735"
 ---
 # <a name="daemon-app-that-calls-web-apis---acquire-a-token"></a>用于调用 Web API 的守护程序应用 - 获取令牌
 
@@ -234,17 +234,17 @@ Content: {
 # <a name="net"></a>[.NET](#tab/dotnet)
 
 > [!div class="nextstepaction"]
-> [守护程序应用 - 调用 Web API](/active-directory/develop/scenario-daemon-call-api?tabs=dotnet)
+> [守护程序应用 - 调用 Web API](./scenario-daemon-call-api.md?tabs=dotnet)
 
 # <a name="python"></a>[Python](#tab/python)
 
 > [!div class="nextstepaction"]
-> [守护程序应用 - 调用 Web API](/active-directory/develop/scenario-daemon-call-api?tabs=python)
+> [守护程序应用 - 调用 Web API](./scenario-daemon-call-api.md?tabs=python)
 
 # <a name="java"></a>[Java](#tab/java)
 
 > [!div class="nextstepaction"]
-> [守护程序应用 - 调用 Web API](/active-directory/develop/scenario-daemon-call-api?tabs=java)
+> [守护程序应用 - 调用 Web API](./scenario-daemon-call-api.md?tabs=java)
 
 ---
 

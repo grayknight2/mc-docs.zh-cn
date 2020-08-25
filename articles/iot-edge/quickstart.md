@@ -10,12 +10,12 @@ ms.topic: quickstart
 ms.service: iot-edge
 services: iot-edge
 ms.custom: mvc
-ms.openlocfilehash: e3c005fb8dabe5342eb7949f65b31ca31c449da1
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 8ad225cc4ef64f3771804a864d56708032c9493d
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "80243890"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228430"
 ---
 # <a name="quickstart-deploy-your-first-iot-edge-module-to-a-virtual-windows-device"></a>快速入门：将第一个 IoT Edge 模块部署到虚拟 Windows 设备
 
@@ -38,7 +38,7 @@ ms.locfileid: "80243890"
 
 你将使用 Azure CLI 完成本快速入门中的许多步骤。 Azure IoT 具有启用附加功能的扩展。
 
-将 Azure IoT 扩展添加到 Cloud Shell 实例。
+将 Azure IoT 扩展添加到 Azure CLI 实例。
 
    ```azurecli
    az extension add --name azure-cli-iot-ext
@@ -67,8 +67,8 @@ IoT Edge 设备：
   可能需要几分钟才能创建并启动新的虚拟机。 然后，在连接到虚拟机时下载 RDP 文件进行使用：
 
   1. 导航到 Azure 门户中新的 Windows 虚拟机。
-  1. 选择“连接”  。
-  1. 在“RDP”选项卡上，选择“下载 RDP 文件”   。
+  1. 选择“连接”。
+  1. 在“RDP”选项卡上，选择“下载 RDP 文件” 。
 
   使用远程桌面连接打开此文件，以通过用 `az vm create` 指定的管理员姓名和密码连接到 Windows 虚拟机。
 
@@ -85,7 +85,7 @@ IoT Edge 设备：
 
 免费级的 IoT 中心适用于此快速入门。 如果曾经用过 IoT 中心并且已创建免费的中心，则可使用该 IoT 中心。 每个订阅仅能有一个免费 IoT 中心。
 
-以下代码将在资源组 `IoTEdgeResources` 中创建免费的 F1 中心  。 将 `{hub_name}` 替换为 IoT 中心的唯一名称。
+以下代码将在资源组 `IoTEdgeResources` 中创建免费的 F1 中心。 将 `{hub_name}` 替换为 IoT 中心的唯一名称。
 
    ```azurecli
    az iot hub create --resource-group IoTEdgeResources --name {hub_name} --sku F1 --partition-count 2
@@ -102,13 +102,13 @@ IoT Edge 设备：
 
 由于 IoT Edge 设备的行为和托管方式与典型 IoT 设备不同，请使用 `--edge-enabled` 标志声明此标识，使之用于 IoT Edge 设备。
 
-1. 在 Azure Cloud Shell 中输入以下命令，以便在中心创建名为 **myEdgeDevice** 的设备。
+1. 在 Azure CLI 中输入以下命令，以便在中心创建名为“myEdgeDevice”的设备。
 
    ```azurecli
    az iot hub device-identity create --device-id myEdgeDevice --hub-name {hub_name} --edge-enabled
    ```
 
-   如果出现有关 iothubowner 策略密钥的错误，请确保 Cloud Shell 运行最新版的 azure-cli-iot-ext 扩展。
+   如果出现有关 iothubowner 策略密钥的错误，请确保 Azure CLI 运行最新版的 azure-cli-iot-ext 扩展。
 
 2. 检索设备的连接字符串，该字符串将物理设备与其在 IoT 中心的标识链接在一起。
 
@@ -125,7 +125,7 @@ IoT Edge 设备：
 在 IoT Edge 设备上安装 Azure IoT Edge 运行时，并使用设备连接字符串对其进行配置。
 ![关系图 - 在设备上启动运行时](./media/quickstart/start-runtime.png)
 
-IoT Edge 运行时部署在所有 IoT Edge 设备上。 它有三个组件。 **IoT Edge 安全守护程序在** IoT Edge 设备每次启动时启动，并通过启动 IoT Edge 代理引导设备。 **IoT Edge 代理**管理 IoT Edge 设备上模块（包括 IoT Edge 中心）的部署和监视。 **IoT Edge 中心**处理 IoT Edge 设备模块之间以及设备和 IoT 中心之间的通信。
+IoT Edge 运行时部署在所有 IoT Edge 设备上。 它有三个组件。 每次 IoT Edge 设备启动并通过启动 IoT Edge 代理启动设备时，**IoT Edge 安全守护程序**就会启动。 **IoT Edge 代理**管理 IoT Edge 设备上模块（包括 IoT Edge 中心）的部署和监视。 **IoT Edge 中心**处理 IoT Edge 设备模块之间以及设备和 IoT 中心之间的通信。
 
 安装脚本还包含一个名为 Moby 的容器引擎，用于管理 IoT Edge 设备上的容器映像。
 
@@ -150,7 +150,7 @@ IoT Edge 运行时部署在所有 IoT Edge 设备上。 它有三个组件。 **
    >(Get-Process -Id $PID).StartInfo.EnvironmentVariables["PROCESSOR_ARCHITECTURE"]
    >```
 
-3. Deploy-IoTEdge 命令执行以下检查：Windows 计算机使用受支持版本、启用容器功能、下载 Moby 运行时并下载 IoT Edge 运行时  。
+3. Deploy-IoTEdge 命令执行以下检查：Windows 计算机使用受支持版本、启用容器功能、下载 Moby 运行时并下载 IoT Edge 运行时。
 
    ```powershell
    . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; `
@@ -161,7 +161,7 @@ IoT Edge 运行时部署在所有 IoT Edge 设备上。 它有三个组件。 **
 
 5. 再次以管理员身份运行 PowerShell。
 
-6. Initialize-IoTEdge 命令在计算机上配置 IoT Edge 运行时  。 该命令默认为使用 Windows 容器手动预配。
+6. Initialize-IoTEdge 命令在计算机上配置 IoT Edge 运行时。 该命令默认为使用 Windows 容器手动预配。
 
    ```powershell
    . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; `

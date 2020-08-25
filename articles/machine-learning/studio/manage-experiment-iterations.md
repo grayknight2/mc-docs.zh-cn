@@ -1,7 +1,6 @@
 ---
-title: 管理试验迭代
-titleSuffix: ML Studio (classic) - Azure
-description: 如何在 Azure 机器学习工作室（经典）中管理试验迭代。 可以在任何时候复查前面运行的试验，以便质询、回顾并最终确认或优化以前的假设。
+title: 机器学习工作室（经典）：查看和重新运行试验 - Azure
+description: 在 Azure 机器学习工作室（经典）中管理试验运行。 可以在任何时候复查前面运行的试验，以便质询、回顾并最终确认或优化以前的假设。
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: studio
@@ -10,14 +9,17 @@ author: xiaoharper
 ms.author: amlstudiodocs
 ms.custom: seodec18
 ms.date: 03/20/2017
-ms.openlocfilehash: 0e8951756fad8e3d0a991be0c64bd6f47eb4effb
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: f81f33b6f51bb0485b9370bd80f2cd111f2f0b6d
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441200"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228187"
 ---
 # <a name="manage-experiment-runs-in-azure-machine-learning-studio-classic"></a>在 Azure 机器学习工作室（经典）中管理试验运行
+
+**适用于：**  ![yes](../../../includes/media/aml-applies-to-skus/yes.png)机器学习工作室（经典）   ![no](../../../includes/media/aml-applies-to-skus/no.png)[Azure 机器学习](../compare-azure-ml-to-studio-classic.md)
+
 
 开发预测分析模型是一个迭代过程 - 在修改试验的各种函数和参数时，结果会不断聚合，直到对经过培训的有效模型感到满意为止。 此过程的关键是跟踪试验参数和配置的各种迭代。
 

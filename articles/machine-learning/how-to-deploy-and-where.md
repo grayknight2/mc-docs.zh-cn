@@ -9,14 +9,14 @@ ms.topic: how-to
 ms.author: jordane
 author: jpe316
 ms.reviewer: larryfr
-ms.date: 06/12/2020
-ms.custom: seoapril2019, tracking-python
-ms.openlocfilehash: f0e68d91943d89e5a76c725622d3f711a645d694
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.date: 07/08/2020
+ms.custom: how-to, tracking-python
+ms.openlocfilehash: 39e93a7c005a4b04ee017b875036cae6c093444a
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097546"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228211"
 ---
 # <a name="deploy-models-with-azure-machine-learning"></a>使用 Azure 机器学习部署模型
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -31,6 +31,11 @@ ms.locfileid: "85097546"
 1. 测试已部署的模型（也称为“Web 服务”）。
 
 有关部署工作流涉及的概念的详细信息，请参阅[使用 Azure 机器学习管理、部署和监视模型](concept-model-management-and-deployment.md)。
+
+> [!IMPORTANT]
+> 强烈建议在部署到 Web 服务之前先进行本地调试。有关详细信息，请参阅[本地调试](/machine-learning/how-to-troubleshoot-deployment#debug-locally)
+>
+> 还可参阅 Azure 机器学习 - [部署到本地笔记本](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/deployment/deploy-to-local)
 
 ## <a name="prerequisites"></a>先决条件
 
@@ -59,7 +64,7 @@ ms.locfileid: "85097546"
 
 + **使用 Visual Studio Code**
 
-   使用 Visual Studio Code 时，可以使用图形界面选择工作区。 有关详细信息，请参阅 Visual Studio Code 扩展文档中的[部署和管理模型](tutorial-train-deploy-image-classification-model-vscode.md#deploy-the-model)。
+   使用 Visual Studio Code 时，可以使用图形界面选择工作区。 有关详细信息，请参阅 Visual Studio Code 扩展文档中的[部署和管理模型](how-to-manage-resources-vscode.md#endpoints)。
 
 ## <a name="register-your-model"></a><a id="registermodel"></a> 注册模型
 
@@ -214,6 +219,8 @@ myenv = Environment.from_conda_specification(name = 'myenv',
 myenv.register(workspace=ws)
 ```
 
+有关通过 Azure 机器学习使用和自定义 Python 环境的详细讨论，请参阅[在 Azure 机器学习中创建和使用软件环境](how-to-use-environments.md)
+
 ### <a name="2-define-scoring-code"></a><a id="script"></a> 2.定义评分代码
 
 入口脚本接收提交到已部署 Web 服务的数据，并将此数据传递给模型。 然后，该脚本接收模型返回的响应，并将该响应返回给客户端。 该脚本特定于你的模型**。 它必须能够识别模型需要和返回的数据。
@@ -222,7 +229,7 @@ myenv.register(workspace=ws)
 
 * `init()`：此函数通常将模型载入全局对象。 此函数只能在 Web 服务的 Docker 容器启动时运行一次。
 
-* `run(input_data)`：此函数使用模型来基于输入数据预测值。 运行的输入和输出通常使用 JSON 进行序列化和反序列化。 也可以处理原始二进制数据。 可以先转换数据，然后再将数据发送到模型或返回给客户端。
+* `run(input_data)`：此函数使用模型来基于输入数据预测值。 运行的输入和输出通常使用 JSON 进行序列化和反序列化。 你也可以使用原始二进制数据。 可以先转换数据，然后再将数据发送到模型或返回给客户端。
 
 #### <a name="load-model-files-in-your-entry-script"></a>在入口脚本中加载模型文件
 
@@ -545,6 +552,10 @@ az ml model profile -g <resource-group-name> -w <workspace-name> --inference-con
 
 [!INCLUDE [aml-compute-target-deploy](../../includes/aml-compute-target-deploy.md)]
 
+> [!NOTE]
+> * ACI 仅适用于大小 <1GB 的小型模型。 
+> * 建议使用单节点 AKS 对大型模型进行开发测试。
+
 ### <a name="define-your-deployment-configuration"></a>定义部署配置
 
 在部署模型之前，必须定义部署配置。 部署配置特定于将托管 Web 服务的计算目标**。 例如，在本地部署模型时，必须指定服务接受请求的端口。 该部署配置不属于入口脚本。 它用于定义将托管模型和入口脚本的计算目标的特征。
@@ -627,7 +638,7 @@ az ml model deploy -m mymodel:1 --ic inferenceconfig.json --dc deploymentconfig.
 ### <a name="ab-testing-controlled-rollout"></a>A/B 测试（受控推出）
 有关详细信息，请参阅 [ML 模型的受控推出](how-to-deploy-azure-kubernetes-service.md#deploy-models-to-aks-using-controlled-rollout-preview)。
 
-## <a name="consume-web-services"></a>使用 Web 服务
+## <a name="inference-using-web-services"></a>使用 Web 服务进行推理
 
 每个部署的 Web 服务都提供有一个 REST 终结点，因此可以使用任何编程语言创建客户端应用程序。
 如果已为服务启用基于密钥的身份验证，则需要提供服务密钥，将其作为请求标头中的令牌。
@@ -910,6 +921,12 @@ service_name = 'onnx-mnist-service'
 service = Model.deploy(ws, service_name, [model])
 ```
 
+若要对模型进行评分，请参阅[使用部署为 Web 服务的 Azure 机器学习模型](/machine-learning/how-to-consume-web-service)。 许多 ONNX 项目使用 protobuf 文件来紧凑存储训练和验证数据，这样就可能难以知道服务所需的数据格式。 作为模型开发人员，你应该为开发人员提供文档：
+
+* 输入格式（JSON 或二进制）
+* 输入数据形状和类型（例如，形状为 [100,100,3] 的浮点数组）
+* 域信息（例如，有关图像、颜色空间、组件顺序以及值是否已规范化的信息）
+
 如果使用的是 Pytorch，请阅读[将模型从 PyTorch 导出到 ONNX](https://github.com/onnx/tutorials/blob/master/tutorials/PytorchOnnxExport.ipynb)，详细了解转换和限制。 
 
 ### <a name="scikit-learn-models"></a>Scikit-learn 模型
@@ -935,7 +952,7 @@ service_name = 'my-sklearn-service'
 service = Model.deploy(ws, service_name, [model])
 ```
 
-注意：默认情况下，支持 predict_proba 的模型将使用该方法。 要重写此内容以使用预测，可以修改 POST 正文，如下所示：
+注意：默认情况下，支持 predict_proba 的模型会使用该方法。 要重写此内容以使用预测，可以修改 POST 正文，如下所示：
 ```python
 import json
 
@@ -996,7 +1013,7 @@ package.wait_for_creation(show_output=True)
 
 创建包后，可以使用 `package.pull()` 将映像拉取到本地 Docker 环境。 此命令的输出将显示映像的名称。 例如： 
 
-`Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338`。 
+`Status: Downloaded newer image for myworkspacef78fd10.azurecr.io/package:20190822181338`. 
 
 下载模型后，使用 `docker images` 命令列出本地映像：
 
@@ -1162,7 +1179,7 @@ import requests
 # Load image data
 data = open('example.jpg', 'rb').read()
 # Post raw data to scoring URI
-res = request.post(url='<scoring-uri>', data=data, headers={'Content-Type': 'application/octet-stream'})
+res = requests.post(url='<scoring-uri>', data=data, headers={'Content-Type': 'application/octet-stream'})
 ```
 
 <a id="cors"></a>

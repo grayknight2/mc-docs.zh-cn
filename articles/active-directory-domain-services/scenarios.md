@@ -9,20 +9,70 @@ ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 08/07/2020
+ms.date: 08/21/2020
 ms.author: v-junlch
-ms.openlocfilehash: 9973e860b7de49086e1c709691c1fc6023a930bc
-ms.sourcegitcommit: a5eb9a47feefb053ddbaab4b15c395972c372339
+ms.openlocfilehash: c0e85c636a8d16308ce267152399fabd8ace6adb
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88028600"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715264"
 ---
 # <a name="common-use-cases-and-scenarios-for-azure-active-directory-domain-services"></a>Azure Active Directory 域服务的常见用例和场景
 
 Azure Active Directory 域服务 (Azure AD DS) 提供托管域服务，例如域加入、组策略、轻型目录访问协议 (LDAP) 和 Kerberos/NTLM 身份验证。 Azure AD DS 与现有 Azure AD 租户集成，因此用户可使用其现有凭据登录。 可以使用这些域服务，而无需在云中部署、管理和修补域控制器，从而更顺畅地将本地资源直接迁移到 Azure。
 
 本文概述 Azure AD DS 提供价值并满足这些需求的一些常见业务场景。
+
+## <a name="common-ways-to-provide-identity-solutions-in-the-cloud"></a>在云中提供标识解决方案的常见方法
+
+将现有工作负载迁移到云时，目录感知的应用程序可以使用 LDAP 对本地 AD DS 目录进行读取或写入访问。 Windows Server 上运行的应用程序通常部署在已加入域的虚拟机 (VM) 上，因此可以使用组策略安全地对其进行管理。 若要对最终用户进行身份验证，应用程序还可能依赖于 Windows 集成的身份验证，如 Kerberos 或 NTLM 身份验证。
+
+IT 管理员通常使用以下某一解决方案为 Azure 中运行的应用程序提供标识服务：
+
+* 在 Azure 中运行的工作负载与本地 AD DS 环境之间配置站点到站点 VPN 连接。
+    * 然后，本地域控制器通过 VPN 连接提供身份验证。
+* 使用 Azure 虚拟机 (VM) 创建副本域控制器来从本地扩展 AD DS 域/林。
+    * 在 Azure VM 上运行的域控制器提供身份验证，并在本地 AD DS 环境之间复制目录信息。
+* 使用 Azure VM 上运行的域控制器在 Azure 中部署独立的 AD DS 环境。
+    * 在 Azure VM 上运行的域控制器提供身份验证，但是没有复制自本地 AD DS 环境的目录信息。
+
+借助这些方法，与本地目录的 VPN 连接使得应用程序容易发生暂时性网络问题或中断。 如果使用 Azure 中的 VM 部署域控制器，IT 团队必须管理 VM，然后对其进行保护、修补、监视、备份和故障排除。
+
+Azure AD DS 提供了替代方法，由此能够创建返回到本地 AD DS 环境的 VPN 连接，或在 Azure 中运行和管理 VM 以提供标识服务。 作为托管服务，Azure AD DS 降低了为混合环境和仅限云环境创建集成标识解决方案的复杂性。
+
+> [!div class="nextstepaction"]
+> [将 Azure AD DS 与 Azure VM 或本地上的 Azure AD 和自托管 AD DS 进行比较][compare]
+
+## <a name="azure-ad-ds-for-hybrid-organizations"></a>混合组织的 Azure AD DS
+
+许多组织都运行有一个包含云和本地应用程序工作负载的混合基础结构。 按照直接迁移策略迁移到 Azure 的旧版应用程序可能使用传统的 LDAP 连接来提供标识信息。 若要支持此混合基础结构，可以将本地 AD DS 环境中的标识信息同步到 Azure AD 租户。 然后，Azure AD DS 使用标识源在 Azure 中提供这些旧版应用程序，而无需配置和管理应用程序与本地目录服务的连接。
+
+让我们看一个 Litware Corporation 的示例，这是一个同时运行本地和 Azure 资源的混合组织：
+
+![适用于包含本地同步的混合组织的 Azure Active Directory 域服务](./media/overview/synced-tenant.png)
+
+* 需要域服务的应用程序和服务器工作负载部署在 Azure 的虚拟网络中。
+    * 这可能包括迁移到 Azure（作为直接迁移策略的一部分）的旧版应用程序。
+* 为了将标识信息从其本地目录同步到其 Azure AD 租户，Litware Corporation 部署了 Azure AD Connect。
+    * 同步的标识信息包括用户帐户和组成员身份。
+* Litware 的 IT 团队在此虚拟网络中或在对等互连的虚拟网络中为其 Azure AD 租户启用 Azure AD DS。
+* 然后，在 Azure 虚拟网络中部署的应用程序和 VM 便可使用 Azure AD DS 功能，如域加入、LDAP 读取、LDAP 绑定、NTLM、Kerberos 身份验证以及组策略等。
+
+> [!IMPORTANT]
+> 安装和配置的 Azure AD Connect 应仅用于与本地 AD DS 环境同步。 不支持在托管域中安装 Azure AD Connect 以将对象同步回 Azure AD。
+
+## <a name="azure-ad-ds-for-cloud-only-organizations"></a>仅限云的组织的 Azure AD DS
+
+仅限云的 Azure AD 租户没有本地标识源。 例如，用户帐户和组成员身份是直接在 Azure AD 中创建和管理的。
+
+现在，让我们看看 Contoso 的一个示例，这是一个使用 Azure AD 来管理标识的纯云组织。 所有用户标识、其凭据和组成员身份都在 Azure AD 中进行创建和管理。 Azure AD Connect 未配置任何其他内容来同步本地目录中的任何标识信息。
+
+![仅限云的组织的 Azure Active Directory 域服务（无本地同步）](./media/overview/cloud-only-tenant.png)
+
+* 需要域服务的应用程序和服务器工作负载部署在 Azure 的虚拟网络中。
+* Contoso 的 IT 团队在此虚拟网络中或在对等互连的虚拟网络中为其 Azure AD 租户启用 Azure AD DS。
+* 然后，在 Azure 虚拟网络中部署的应用程序和 VM 便可使用 Azure AD DS 功能，如域加入、LDAP 读取、LDAP 绑定、NTLM、Kerberos 身份验证以及组策略等。
 
 ## <a name="secure-administration-of-azure-virtual-machines"></a>安全管理 Azure 虚拟机
 
@@ -110,6 +160,7 @@ Contoso 想要将此应用程序迁移到 Azure，并淘汰目前托管此应用
 [custom-ou]: create-ou.md
 [create-gpo]: manage-group-policy.md
 [sspr]: ../active-directory/authentication/overview-authentication.md#self-service-password-reset
+[compare]: compare-identity-solutions.md
 
 <!-- EXTERNAL LINKS -->
 [windows-rds]: https://docs.microsoft.com/windows-server/remote/remote-desktop-services/rds-azure-adds

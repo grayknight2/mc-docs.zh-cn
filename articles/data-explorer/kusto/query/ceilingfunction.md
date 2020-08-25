@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: dcdbbbd7daedac856d7bd734e5a24ebb511574fe
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: acf134ab169b61bccf4a16085955575c6dba5744
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509148"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515747"
 ---
 # <a name="ceiling"></a>ceiling()
 

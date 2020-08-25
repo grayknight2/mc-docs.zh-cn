@@ -8,15 +8,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: quickstart
 ms.workload: identity
-ms.date: 04/22/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:Android
-ms.openlocfilehash: 08ea5541cd689984c97660875a079d3e8c51dbfe
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+ms.openlocfilehash: be101277c0fb1a53334d5343be4708fd5b1aea3e
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82126491"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647629"
 ---
 # <a name="quickstart-sign-in-users-and-call-the-microsoft-graph-api-from-an-android-app"></a>快速入门：从 Android 应用登录用户并调用 Microsoft Graph API
 
@@ -483,7 +483,7 @@ mMultipleAccountApp.removeAccount(accountList.get(accountListSpinner.getSelected
 尝试学习[从 Android 应用将用户登录并调用 Microsoft Graph](tutorial-v2-android.md) 教程，其中逐步介绍了如何生成一个可以获取访问令牌，并使用该令牌调用 Microsoft Graph API 的 Android 应用。
 
 > [!div class="nextstepaction"]
-> [调用图形 API Android 教程](tutorial-v2-android.md)
+> [调用图形 API Android 教程](./tutorial-v2-android.md)
 
 ### <a name="msal-for-android-library-wiki"></a>适用于 Android 库 wiki 的 MSAL
 

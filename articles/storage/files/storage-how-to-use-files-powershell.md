@@ -5,15 +5,15 @@ author: WenJason
 ms.service: storage
 ms.topic: quickstart
 origin.date: 10/26/2018
-ms.date: 07/20/2020
+ms.date: 08/24/2020
 ms.author: v-jay
 ms.subservice: files
-ms.openlocfilehash: bafb2cfb5ce85fd2174b2ce2bc7f17719b32a123
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.openlocfilehash: 79daf8bd8001ab834e6e8a4bc6fbfbec5f8c5d6f
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414741"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753632"
 ---
 # <a name="quickstart-create-and-manage-an-azure-file-share-with-azure-powershell"></a>快速入门：使用 Azure PowerShell 创建和管理 Azure 文件共享 
 本指南介绍通过 PowerShell 来使用 [Azure 文件共享](storage-files-introduction.md)的基本知识。 Azure 文件共享与其他文件共享一样，只不过是存储在云中并由 Azure 平台提供支持。 Azure 文件共享支持行业标准 SMB 协议，可以跨多个计算机、应用程序和实例进行文件共享。 
@@ -41,7 +41,7 @@ New-AzResourceGroup `
 ## <a name="create-a-storage-account"></a>创建存储帐户
 存储帐户是一个存储共享池，可以用来部署 Azure 文件共享。 一个存储帐户可以包含无限数量的共享，一个共享可以存储无限数量的文件，直到达到存储帐户的容量限制为止。 此示例创建常规用途版本 2（GPv2 存储帐户），该版本可以在硬盘驱动器 (HDD) 旋转介质上存储标准 Azure 文件共享或其他存储资源（例如 blob 或队列）。 Azure 文件还支持高级固态磁盘驱动器 (SSD)；高级 Azure 文件共享可在 FileStorage 存储帐户中创建。
 
-此示例使用 [New-AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount) cmdlet 创建存储帐户。 存储帐户名为 *mystorageaccount<random number>* ，对该存储帐户的引用存储在变量 **$storageAcct** 中。 存储帐户名称必须唯一，因此请使用 `Get-Random` 将一个数字追加到名称末尾，使之变得唯一。 
+此示例使用 [New-AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount) cmdlet 创建存储帐户。 存储帐户名为 *mystorageaccount\<random number>* ，对该存储帐户的引用存储在变量 **$storageAcct** 中。 存储帐户名称必须唯一，因此请使用 `Get-Random` 将一个数字追加到名称末尾，使之变得唯一。 
 
 ```azurepowershell 
 $storageAccountName = "mystorageacct$(Get-Random)"
@@ -89,7 +89,7 @@ Azure 文件提供两种在 Azure 文件共享中使用文件和文件夹的方�
 - 需利用无服务器资源，例如 [Azure Functions](../../azure-functions/functions-overview.md)。 
 - 你将创建将与许多 Azure 文件共享进行交互的增值服务，例如执行备份或防病毒扫描。
 
-以下示例介绍如何使用 Azure PowerShell 模块通过文件 REST 协议来操作 Azure 文件共享。 `-Context` 参数用于检索存储帐户密钥，以便对文件共享执行指示的操作。 若要检索存储帐户密钥，必须在存储帐户上有 RBAC 角色 `Owner`。
+以下示例介绍如何使用 Azure PowerShell 模块通过文件 REST 协议来操作 Azure 文件共享。 `-Context` 参数用于检索存储帐户密钥，以便对文件共享执行指示的操作。 若要检索存储帐户密钥，必须在存储帐户上有 Azure 角色 `Owner`。
 
 #### <a name="create-directory"></a>创建目录
 若要在 Azure 文件共享的根目录中创建名为 *myDirectory* 的新目录，请使用 [New-AzStorageDirectory](https://docs.microsoft.com/powershell/module/az.storage/New-AzStorageDirectory) cmdlet。

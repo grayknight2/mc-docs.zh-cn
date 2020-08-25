@@ -9,14 +9,14 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: vanto
 origin.date: 04/28/2020
-ms.date: 07/13/2020
+ms.date: 08/17/2020
 ms.custom: azure-synapse, sqldbrb=1
-ms.openlocfilehash: f1f6f9a89d174f641812db0ccc0f2b58a0d32bd9
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.openlocfilehash: e0d9e4c5b52cf680e6ae08cf662549e51eeedfb9
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86228200"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222578"
 ---
 # <a name="auditing-for-azure-sql-database-and-azure-synapse-analytics"></a>Azure SQL 数据库和 Azure Synapse Analytics 的审核
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
@@ -80,6 +80,9 @@ ms.locfileid: "86228200"
 Azure SQL 数据库和 Azure Synapse 审核在审核记录中存储字符字段的 4000 个字符的数据。 当可审核操作返回的**语句**或 **data_sensitivity_information** 值包含超过 4000 个的字符时，超出前 4000 个字符的任何数据将**被截去不进行审核**。
 以下部分介绍如何使用 Azure 门户配置审核。
 
+  > [!NOTE]
+  > 不能对已暂停的 Synapse SQL 池启用审核。 若要启用审核，请取消暂停 Synapse SQL 池。 
+
 1. 转到 [Azure 门户](https://portal.azure.cn)。
 2. 导航到“SQL 数据库”或“SQL Server”窗格中“安全性”标题下的“审核”  。
 3. 如果想设置服务器审核策略，可以选择数据库审核页中的“查看服务器设置”链接。 然后，可查看或修改服务器审核设置。 服务器审核策略应用于此服务器上所有现有和新建数据库。
@@ -94,7 +97,7 @@ Azure SQL 数据库和 Azure Synapse 审核在审核记录中存储字符字段�
 
 ### <a name="audit-to-storage-destination"></a><a id="audit-storage-destination"></a>对存储目标的审核
 
-若要配置将审核日志写入存储帐户的操作，请选择“存储”，打开“存储详细信息”。  依次选择要用于保存日志的 Azure 存储帐户以及保持期。 。 早于保留期的日志会被删除。
+若要配置将审核日志写入存储帐户的操作，请选择“存储”，打开“存储详细信息”。  依次选择要用于保存日志的 Azure 存储帐户以及保持期。  。 早于保留期的日志会被删除。
 
 - 保持期的默认值为 0（无限制保留）。 在配置用于审核的存储帐户时，可以通过在“存储设置”中移动“保留期（天数）”滑块来更改此值。
   - 如果将保留期从 0（无限期保留）更改为任何其他值，请注意：保留期仅应用于在保留期值更改后写入的日志（在保留期设置为“无限期”期间写入的日志会保留，即使在启用保留期后也是如此）。
@@ -104,12 +107,12 @@ Azure SQL 数据库和 Azure Synapse 审核在审核记录中存储字符字段�
 #### <a name="remarks"></a>备注
 
 - 审核日志将写入到 Azure 订阅的 Azure Blob 存储中的追加 Blob
-- 若要为服务器级或数据库级审核事件配置不可变日志存储，请按照 [Azure 存储提供的说明](/storage/blobs/storage-blob-immutability-policies-manage#enabling-allow-protected-append-blobs-writes)操作（请确保在配置不可变 blob 存储时选择了“允许额外追加”）。
+- 若要为服务器或数据库级审核事件配置不可变的日志存储，请遵循 [Azure 存储提供的说明](/storage/blobs/storage-blob-immutability-policies-manage#enabling-allow-protected-append-blobs-writes)。 确保在配置不可变的 blob 存储时，选择了“允许额外追加”。
 - 可以将审核日志写入到 VNet 或防火墙后面的 Azure 存储帐户。 有关具体说明，请参阅[将审核写入 VNet 和防火墙后面的存储帐户](audit-write-storage-account-behind-vnet-firewall.md)。
 - 配置审核设置后，可打开新威胁检测功能，并配置电子邮件用于接收安全警报。 使用威胁检测时，会接收针对异常数据库活动（可能表示潜在的安全威胁）发出的前瞻性警报。 有关详细信息，请参阅[威胁检测入门](threat-detection-overview.md)。
 - 有关日志格式、存储文件夹的层次结构和命名约定的详细信息，请参阅 [Blob 审核日志格式参考](/azure-sql/database/audit-log-format)。
 - 使用 AAD 身份验证时，失败的登录记录将不会出现在 SQL 审核日志中。 若要查看失败的登录审核记录，需要访问 [Azure Active Directory 门户](../../active-directory/reports-monitoring/reference-sign-ins-error-codes.md)，该门户记录这些事件的详细信息。
-- 对[只读副本](read-scale-out.md)的审核会自动启用。 若要详细了解存储文件夹、命名约定和日志格式的层次结构，请参阅 [SQL 数据库审核日志格式](audit-log-format.md)。
+- 对[只读副本](read-scale-out.md)的审核会自动启用。 有关存储文件夹的层次结构、命名约定和日志格式的详细信息，请参阅 [SQL 数据库审核日志格式](audit-log-format.md)。
 
 ### <a name="audit-to-log-analytics-destination"></a><a id="audit-log-analytics-destination"></a>对 Log Analytics 目标的审核
   
@@ -117,11 +120,9 @@ Azure SQL 数据库和 Azure Synapse 审核在审核记录中存储字符字段�
 
    ![LogAnalyticsworkspace](./media/auditing-overview/auditing_select_oms.png)
 
+有关 Azure Monitor 日志工作区的更多详细信息，请参阅[设计 Azure Monitor 日志部署](/azure-monitor/platform/design-logs-deployment)
+   
 ### <a name="audit-to-event-hub-destination"></a><a id="audit-event-hub-destination"></a>对事件中心目标的审核
-
-> [!WARNING]
-> 在具有 SQL 数据库池的服务器上启用审核会导致 SQL 数据库池重新恢复并重新暂停，这可能会产生账单费用。
-> 不能对已暂停的 SQL 数据库池启用审核。 若要启用审核，请取消暂停 SQL 数据库池。
 
 若要配置将审核日志写入事件中心的操作，请选择“事件中心(预览版)”，打开“事件中心详细信息”。  选择要将日志写入到的事件中心，然后单击“确定”。 请确保事件中心与数据库和服务器位于同一区域。
 

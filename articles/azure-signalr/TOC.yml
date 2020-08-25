@@ -73,12 +73,20 @@
       items:
         - name: 访问密钥轮换
           href: signalr-howto-key-rotation.md
+        - name: 使用托管标识
+          href: howto-use-managed-identity.md
     - name: 集成
       items:
         - name: Azure Functions 绑定
           href: signalr-concept-azure-functions.md
         - name: 事件网格集成
           href: signalr-howto-event-grid-integration.md
+    - name: 监视
+      items:
+        - name: 使用诊断日志监视 SignalR 服务
+          href: signalr-howto-diagnostic-logs.md
+        - name: 使用 Azure Policy 审核符合性
+          href: signalr-howto-azure-policy.md
 - name: 参考
   items:
     - name: Azure CLI
@@ -95,7 +103,7 @@
       href: 'https://www.azure.cn/what-is-new/'
     - name: 上市区域
       href: 'https://azure.microsoft.com/global-infrastructure/services/?products=signalr-service&regions=china-non-regional,china-north,china-north-2,china-east,china-east-2'
-    - name: 常见问题
+    - name: 常见问题解答
       href: signalr-resource-faq.md
     - name: SignalR 服务订阅级别限制
       href: 'https://docs.azure.cn/azure-subscription-service-limits#signalr-service-limits'

@@ -5,14 +5,16 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 05/06/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: c208cf29c649e3c6ef87ee293f13c32574122cec
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: 301003b70c6ee33f129bf4eaba40515a68a0d600
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323264"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222977"
 ---
 # <a name="partitioning-in-azure-cosmos-db"></a>Azure Cosmos DB 中的分区
 
@@ -36,6 +38,14 @@ Azure Cosmos DB 使用基于哈希的分区在物理分区之间分散逻辑分�
 
 <a name="choose-partitionkey"></a>
 ## <a name="choosing-a-partition-key"></a>选择分区键
+
+ 分区键具有两个组成部分：分区键路径和分区键值。 假设有一个项{ "userId" :"Andrew", "worksFor":"Microsoft" }，如果选择 "userId" 作为分区键，以下是分区键的两个部分：
+
+* 分区键路径（例如 "/userId"）。 分区键路径接受字母数字和下划线 (_) 字符。 还可以通过标准路径表示法 (/) 来使用嵌套的对象。
+
+* 分区键值（例如 "Andrew"）。 分区键值可以是字符串或数值类型。
+
+若要了解有关吞吐量、存储和分区键长度的限制，请参阅 [Azure Cosmos DB 服务配额](concepts-limits.md)一文。
 
 选择分区键是 Azure Cosmos DB 中的一个简单但重要的设计选择。 选择分区键后，将无法就地进行更改。 如果需要更改分区键，应将数据移动到带有所需新分区键的新容器。
 

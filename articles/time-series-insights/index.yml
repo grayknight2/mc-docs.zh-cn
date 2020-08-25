@@ -11,13 +11,13 @@ metadata:
   ms.collection: collection
   author: shreyasharmamsft
   ms.author: v-junlch
-  ms.date: 08/05/2020
-  ms.openlocfilehash: 3256b9f5759e9f146efefc716890563a33eadc10
-  ms.sourcegitcommit: 36e7f37481969f92138bfe70192b1f4a2414caf7
+  ms.date: 08/20/2020
+  ms.openlocfilehash: d31926b027ac5c8b74c8d903f4ea88dc7c25d42c
+  ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 08/05/2020
-  ms.locfileid: "87796302"
+  ms.lasthandoff: 08/21/2020
+  ms.locfileid: "88715238"
 landingContent:
 - title: 关于 Azure 时序见解
   linkLists:
@@ -66,6 +66,6 @@ landingContent:
     - text: Rest API 概述
       url: https://docs.microsoft.com/rest/api/time-series-insights/
     - text: 数据访问概念第 2 代
-      url: https://docs.microsoft.com/rest/api/time-series-insights/preview
+      url: https://docs.microsoft.com/rest/api/time-series-insights/reference-data-access-overview
     - text: JavaScript 客户端 SDK
       url: https://github.com/microsoft/tsiclient/blob/master/docs/API.md

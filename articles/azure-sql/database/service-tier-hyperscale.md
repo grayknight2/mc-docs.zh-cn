@@ -11,13 +11,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: ''
 origin.date: 06/03/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: e18f6c7d794008978f9090427f74d809012ec7e6
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 94f7445842951ea8166b367244aca6197f575cb4
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227120"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223288"
 ---
 # <a name="hyperscale-service-tier"></a>“超大规模”服务层级
 
@@ -179,7 +179,7 @@ Server=tcp:<myserver>.database.chinacloudapi.cn;Database=<mydatabase>;Applicatio
 
 | 问题 | 说明 |
 | :---- | :--------- |
-| 服务器的“管理备份”窗格不显示“超大规模”数据库。 视图中会将它们筛选掉。  | “超大规模”服务层级具有单独的备份管理方法，因此“长期保留”和“时间点备份保留”设置不适用。 相应地，“超大规模”数据库不会显示在“管理备份”窗格中。|
+| 服务器的“管理备份”窗格不显示“超大规模”数据库。 视图中会将它们筛选掉。  | “超大规模”服务层级具有单独的备份管理方法，因此“长期保留”和“时间点备份保留”设置不适用。 相应地，“超大规模”数据库不会显示在“管理备份”窗格中。<br><br>对于从其他 Azure SQL 数据库服务层级迁移到超大规模的数据库，预迁移备份会在源数据库的[备份保持期](automated-backups-overview.md#backup-retention)持续时间内保留。 这些备份可以用于将源数据库[还原](recovery-using-backups.md#programmatic-recovery-using-automated-backups)到迁移之前的某个时间点。|
 | 时间点还原 | 无法将非超大规模数据库还原到超大规模数据库，也无法将超大规模数据库还原到非超大规模数据库。 对于已通过更改服务层迁移到超大规模层级的非超大规模数据库，可以[以编程方式](recovery-using-backups.md#programmatic-recovery-using-automated-backups)还原到迁移之前以及数据库备份保留期内的某个时间点。 还原后的数据库是非超大规模的。 |
 | 如果数据库中的一个或多个数据文件大于 1 TB，迁移将会失败 | 在某些情况下，可以通过将大文件缩小为 1 TB 以下来解决此问题。 如果在迁移过程中迁移正在使用的数据库，请确保没有任何文件大于 1 TB。 使用以下查询来确定数据库文件的大小。 `SELECT *, name AS file_name, size * 8. / 1024 / 1024 AS file_size_GB FROM sys.database_files WHERE type_desc = 'ROWS'`;|
 | SQL 托管实例 | 超大规模数据库目前不支持 Azure SQL 托管实例。 |

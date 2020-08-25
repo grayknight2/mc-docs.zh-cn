@@ -10,27 +10,24 @@ ms.topic: conceptual
 author: WenJason
 ms.author: v-jay
 ms.reviewer: carlrab
-origin.date: 02/24/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: 99d63a151d5a90d1a603e25486db5e0a766f6a7d
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: 506ef62b29c774ecaf231e27f9e847e16201153c
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227835"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222811"
 ---
 # <a name="copy-a-transactionally-consistent-copy-of-a-database-in-azure-sql-database"></a>复制 Azure SQL 数据库中数据库的事务一致性副本
 
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
-通过 Azure SQL 数据库，可以以多种方式在相同或不同的服务器上创建现有[数据库](single-database-overview.md)的事务一致性副本。 可以使用 Azure 门户、PowerShell 或 T-SQL 复制数据库。
+通过 Azure SQL 数据库，可以以多种方式在相同或不同的服务器上创建现有[数据库](single-database-overview.md)的副本。 可以使用 Azure 门户、PowerShell、Azure CLI 或 T-SQL 复制数据库。
 
 ## <a name="overview"></a>概述
 
-数据库副本是源数据库截至复制请求发出时的快照。 你可以选择同一服务器或不同的服务器。 另外，你还可以选择保留其服务层级和计算大小，或在同一服务层级中使用不同的计算大小（版本）。 在完成该复制后，副本将成为能够完全行使功能的独立数据库。 此时，可以将其升级或降级为任何版本。 登录名、用户和权限可单独进行管理。 副本是使用异地复制技术创建的，一旦种子设定完成，异地复制链接就会自动终止。 使用异地复制的所有要求都适用于数据库复制操作。 有关详细信息，请参阅[活动异地复制概述](active-geo-replication-overview.md)。
-
-> [!NOTE]
-> 在创建数据库副本时，将用到[自动数据库备份](automated-backups-overview.md)。
+数据库副本是源数据库在发起复制请求后的某个时间点的事务一致快照。 可以为副本选择同一服务器或其他服务器。 也可以选择保留源数据库的服务层级和计算大小，或在相同或不同的服务层级中使用其他计算大小。 在完成该复制后，副本将成为能够完全行使功能的独立数据库。 复制的数据库中的登录名、用户和权限独立于源数据库进行管理。 副本使用异地复制技术创建。 副本种子设定完成后，异地复制链接会自动终止。 使用异地复制的所有要求都适用于数据库复制操作。 有关详细信息，请参阅[活动异地复制概述](active-geo-replication-overview.md)。
 
 ## <a name="logins-in-the-database-copy"></a>数据库副本中的登录名
 

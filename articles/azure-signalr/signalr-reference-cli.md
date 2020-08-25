@@ -5,20 +5,20 @@ author: sffamily
 ms.service: signalr
 ms.topic: reference
 origin.date: 11/13/2019
-ms.date: 12/16/2019
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: f45cdeb4b056e112fd13637ffcecd770ecbe92f2
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 3345bc42663abab3bae99e916547bb6e56d9e025
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75334851"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715117"
 ---
 # <a name="azure-cli-reference"></a>Azure CLI 参考
 
 下表包含使用 Azure CLI 生成的 bash 脚本的链接，该脚本适用于 Azure SignalR 服务。
 
-| | |
+| 脚本 | 说明 |
 |-|-|
 |**创建**||
 | [创建新的 SignalR 服务和资源组](scripts/signalr-cli-create-service.md) | 在新资源组中新建一个以随机产生的名称命名的 Azure SignalR 服务资源。  |

@@ -5,15 +5,15 @@ author: ccompy
 ms.assetid: 0f4c1fa4-e344-46e7-8d24-a25e247ae138
 ms.topic: quickstart
 origin.date: 08/05/2019
-ms.date: 05/22/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: mvc, seodec18
-ms.openlocfilehash: 9db1a01f66c5b125b8b8aaee3223ce889c4eab5d
-ms.sourcegitcommit: 981a75a78f8cf74ab5a76f9e6b0dc5978387be4b
+ms.openlocfilehash: b589b1c946514ed4ea06c2a82c1e78df3fed4554
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83801283"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227929"
 ---
 # <a name="create-and-use-an-internal-load-balancer-app-service-environment"></a>创建和使用内部负载均衡器应用服务环境 
 
@@ -26,7 +26,7 @@ Azure 应用服务环境是指将 Azure 应用服务部署到 Azure 虚拟网络
 
 ## <a name="overview"></a>概述 
 
-可以使用可访问 Internet 的终结点或 VNet 中的 IP 地址部署 ASE。 若要将 IP 地址设置为 VNet 地址，必须为 ASE 部署 ILB。 为 ASE 部署 ILB 时，必须提供 ASE 的名称。 该 ASE 名称将在 ASE 内的应用的域后缀中使用。  ILB ASE 的域后缀是 &lt;ASE 名称&gt;.appservicewebsites.cn。 在 ILB ASE 中创建的应用不会被放入公共 DNS 中。 
+可以使用可访问 Internet 的终结点或 VNet 中的 IP 地址部署 ASE。 若要将 IP 地址设置为 VNet 地址，必须为 ASE 部署 ILB。 为 ASE 部署 ILB 时，必须提供 ASE 的名称。 该 ASE 名称将在 ASE 内的应用的域后缀中使用。  ILB ASE 的域后缀是 &lt;ASE name&gt;.appserviceenvironment.cn。 在 ILB ASE 中创建的应用不会被放入公共 DNS 中。 
 
 早期版本的 ILB ASE 要求提供一个域后缀和一个用于建立 HTTPS 连接的默认证书。 创建 ILB ASE 时不再收集域后缀，且不再收集默认证书。 现在，在创建 ILB ASE 时，默认证书将由 Microsoft 提供，并受浏览器的信任。 仍可以在 ASE 中的应用上设置自定义域名，并在这些自定义域名中设置证书。 
 
@@ -127,7 +127,7 @@ ILB ASE 中应用的发布终结点使用创建该 ILB ASE 所用的域。 此�
 
 可将 Web 应用程序防火墙 (WAF) 设备与 ILB ASE 相结合，以便仅公开可通过 Internet 访问的应用，使其他应用只能从 VNet 内部访问。 这样，便可以生成安全的多层应用程序并实现其他目的。
 
-若要详细了解如何在 ILB ASE 中配置 WAF 设备，请参阅[在应用服务环境中配置 Web 应用程序防火墙][ASEWAF]。 本文介绍如何在 ASE 中使用 Barracuda 虚拟设备。 另一种做法是使用 Azure 应用程序网关。 应用程序网关使用 OWASP 核心规则来保护放置在它后面的任何应用程序。 有关应用程序网关的详细信息，请参阅 [Azure Web 应用程序防火墙简介][AppGW]。
+若要详细了解如何在 ILB ASE 中配置 WAF 设备，请参阅 [在应用服务环境中配置 Web 应用程序防火墙][ASEWAF]。 本文介绍如何在 ASE 中使用 Barracuda 虚拟设备。 另一种做法是使用 Azure 应用程序网关。 应用程序网关使用 OWASP 核心规则来保护放置在它后面的任何应用程序。 有关应用程序网关的详细信息，请参阅 [Azure Web 应用程序防火墙简介][AppGW]。
 
 ## <a name="ilb-ases-made-before-may-2019"></a>在 2019 年 5 之前创建的 ILB ASE
 
@@ -142,24 +142,6 @@ ILB ASE 中应用的发布终结点使用创建该 ILB ASE 所用的域。 此�
 [2]: ./media/creating_and_using_an_internal_load_balancer_with_app_service_environment/createilbase-webapp.png
 [5]: ./media/creating_and_using_an_internal_load_balancer_with_app_service_environment/createilbase-ipaddresses.png
 
-<!-- [ConfigureSSL]: ../web-sites-purchase-ssl-web-site.md -->
 <!-- [Kudu]: https://azure.microsoft.com/resources/videos/super-secret-kudu-debug-console-for-azure-web-sites/ -->
-<!-- [linuxapp]: ../containers/app-service-linux-intro.md -->
-
 <!--Links-->
-[Intro]: ./intro.md
-[MakeExternalASE]: ./create-external-ase.md
-[MakeASEfromTemplate]: ./create-from-template.md
-[MakeILBASE]: ./create-ilb-ase.md
-[ASENetwork]: ./network-info.md
-[UsingASE]: ./using-an-ase.md
-[UDRs]: ../../virtual-network/virtual-networks-udr-overview.md
-[NSGs]: ../../virtual-network/security-overview.md
-[webapps]: ../overview.md
-[mobileapps]: ../../app-service-mobile/app-service-mobile-value-prop.md
-[Functions]: ../../azure-functions/index.yml
-[Pricing]: https://www.azure.cn/pricing/details/app-service/
-[ARMOverview]: ../../azure-resource-manager/management/overview.md
-[ASEWAF]: app-service-app-service-environment-web-application-firewall.md
-[AppGW]: ../../application-gateway/application-gateway-web-application-firewall-overview.md
-[customdomain]: ../app-service-web-tutorial-custom-domain.md
+[Intro]: ./intro.md [MakeExternalASE]: ./create-external-ase.md [MakeASEfromTemplate]: ./create-from-template.md [MakeILBASE]: ./create-ilb-ase.md [ASENetwork]: ./network-info.md [UsingASE]: ./using-an-ase.md [UDRs]: ../../virtual-network/virtual-networks-udr-overview.md [NSGs]: ../../virtual-network/security-overview.md [webapps]: ../overview.md [mobileapps]: ../../app-service-mobile/app-service-mobile-value-prop.md [Functions]: ../../azure-functions/index.yml [Pricing]: https://www.azure.cn/pricing/details/app-service/ [ARMOverview]: ../../azure-resource-manager/management/overview.md [ConfigureSSL]: ../configure-ssl-certificate.md [ASEWAF]: app-service-app-service-environment-web-application-firewall.md [AppGW]: ../../application-gateway/application-gateway-web-application-firewall-overview.md [customdomain]: ../app-service-web-tutorial-custom-domain.md [linuxapp]: ../overview.md#app-service-on-linux

@@ -3,15 +3,15 @@ title: 外部错误代码 - Azure 流分析
 description: 通过外部错误代码对 Azure 流分析进行故障排除。
 ms.author: v-johya
 author: Johnnytechn
-ms.topic: conceptual
-ms.date: 07/06/2020
+ms.topic: troubleshooting
+ms.date: 08/20/2020
 ms.service: stream-analytics
-ms.openlocfilehash: 5347ca79093157b314a2ca9e0d40eeacea04e254
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.openlocfilehash: 26a04d5d1e8652e66abdce995c995e72ef1f0ec0
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226209"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715699"
 ---
 # <a name="azure-stream-analytics-external-error-codes"></a>Azure 流分析外部错误代码
 

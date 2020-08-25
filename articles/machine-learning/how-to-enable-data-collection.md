@@ -11,22 +11,24 @@ ms.author: copeters
 author: lostmygithubaccount
 ms.date: 11/12/2019
 ms.custom: seodec18
-ms.openlocfilehash: b8cb389289ab6d6b17842d5b7d23e88aa6412903
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.openlocfilehash: f31bdc7fede617421cd94c71db173f423371ca41
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097521"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228284"
 ---
 # <a name="collect-data-for-models-in-production"></a>为生产环境中的模型收集数据
 
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-本文介绍如何从 Azure 机器学习收集输入模型数据。 此外，介绍如何将输入数据部署到 Azure Kubernetes 服务 (AKS) 群集，并将输出数据存储在 Azure Blob 存储中。
+本文演示如何从 Azure Kubernetes 服务 (AKS) 群集上部署的 Azure 机器学习模型中收集数据， 然后将收集的数据存储在 Azure Blob 存储中。
 
 启用收集后，收集的数据可帮助你：
 
-* 在生产数据进入模型时[监视数据偏移](how-to-monitor-data-drift.md)。
+* 针对收集的生产数据[监视数据偏移](how-to-monitor-datasets.md)。
+
+* 使用 [Power BI](#powerbi) 分析收集的数据
 
 * 更好地决定何时重新训练或优化模型。
 
@@ -65,17 +67,17 @@ Blob 中输出数据的路径遵循以下语法：
 
 - 需要一个 AKS 群集。 有关如何创建此类群集并部署到其中的信息，请参阅[部署方式和部署位置](how-to-deploy-and-where.md)。
 
-- [设置环境](how-to-configure-environment.md)并安装 [Azure 机器学习监视 SDK](https://aka.ms/aml-monitoring-sdk)。
+- [设置环境](how-to-configure-environment.md)并安装 [Azure 机器学习监视 SDK](https://docs.microsoft.com/python/api/overview/azure/ml/install?view=azure-ml-py)。
 
 ## <a name="enable-data-collection"></a>启用数据收集
 
-无论通过 Azure 机器学习或其他工具部署的模型是什么，都可以启用数据收集。
+无论通过 Azure 机器学习或其他工具部署的模型是什么，都可以启用[数据收集](https://docs.microsoft.com/python/api/azureml-monitoring/azureml.monitoring.modeldatacollector.modeldatacollector?view=azure-ml-py)。
 
 若要启用数据收集，需要：
 
 1. 打开评分文件。
 
-1. 在该文件的顶部添加[以下代码](https://aka.ms/aml-monitoring-sdk)：
+1. 在该文件顶部，添加以下代码：
 
    ```python 
    from azureml.monitoring import ModelDataCollector
@@ -116,41 +118,10 @@ Blob 中输出数据的路径遵循以下语法：
 
 1. 若要创建新映像并部署机器学习模型，请参阅[部署方式和部署位置](how-to-deploy-and-where.md)。
 
-如果已在环境文件和评分文件中安装了带有依赖项的服务，请按照以下步骤启用数据收集：
-
-1. 转到 [Azure 机器学习](https://ml.azure.com)。
-
-1. 打开你的工作区。
-
-1. 选择“部署”**** > “选择服务”**** > “编辑”****。
-
-   ![编辑服务](././media/how-to-enable-data-collection/EditService.PNG)
-
-1. 在“高级设置”中，选择“启用 Application Insights 诊断和数据收集”**** ****。
-
-1. 选择“更新”**** 以应用更改。
 
 ## <a name="disable-data-collection"></a>禁用数据收集
 
-随时可以停止收集数据。 使用 Python 代码或 Azure 机器学习禁用数据收集。
-
-### <a name="option-1---disable-data-collection-in-azure-machine-learning"></a>选项 1 - 在 Azure 机器学习中禁用数据收集
-
-1. 登录到 [Azure 机器学习](https://ml.azure.com)。
-
-1. 打开你的工作区。
-
-1. 选择“部署”**** > “选择服务”**** > “编辑”****。
-
-   [![选择“编辑”选项](././media/how-to-enable-data-collection/EditService.PNG)](./././media/how-to-enable-data-collection/EditService.PNG#lightbox)
-
-1. 在“高级设置”中，清除“启用 Application Insights 诊断和数据收集”**** ****。
-
-1. 选择“更新”**** 以应用更改。
-
-还可以在 [Azure 机器学习](https://ml.azure.com)的工作区中访问这些设置。
-
-### <a name="option-2---use-python-to-disable-data-collection"></a>选项 2 - 使用 Python 禁用数据收集
+随时可以停止收集数据。 使用 Python 代码禁用数据收集。
 
   ```python 
   ## replace <service_name> with the name of the web service
@@ -214,27 +185,6 @@ Blob 中输出数据的路径遵循以下语法：
 
 1. 开始基于模型数据生成自定义报表。
 
-### <a name="analyze-model-data-using-azure-databricks"></a>使用 Azure Databricks 分析模型数据
+## <a name="next-steps"></a>后续步骤
 
-1. 创建一个 [Azure Databricks 工作区](https://docs.microsoft.com/azure/azure-databricks/quickstart-create-databricks-workspace-portal)。
-
-1. 转到该 Databricks 工作区。
-
-1. 在 Databricks 工作区中，选择“上传数据”。****
-
-    [![选择 Databricks“上传数据”选项](./media/how-to-enable-data-collection/dbupload.png)](././media/how-to-enable-data-collection/dbupload.png#lightbox)
-
-1. 选择“创建新表”，然后选择“其他数据源” > “Azure Blob 存储” > “在笔记本中创建表”。**** **** **** ****
-
-    [![Databricks 表创建](./media/how-to-enable-data-collection/dbtable.PNG)](././media/how-to-enable-data-collection/dbtable.PNG#lightbox)
-
-1. 更新数据的位置。 以下是示例：
-
-    ```
-    file_location = "wasbs://mycontainer@storageaccountname.blob.core.windows.net/modeldata/1a2b3c4d-5e6f-7g8h-9i10-j11k12l13m14/myresourcegrp/myWorkspace/aks-w-collv9/best_model/10/inputs/2018/*/*/data.csv" 
-    file_type = "csv"
-    ```
-
-    [![Databricks 设置](./media/how-to-enable-data-collection/dbsetup.png)](././media/how-to-enable-data-collection/dbsetup.png#lightbox)
-
-1. 遵循模板中的步骤查看和分析数据。
+针对已收集的数据[检测数据偏移](how-to-monitor-datasets.md)。

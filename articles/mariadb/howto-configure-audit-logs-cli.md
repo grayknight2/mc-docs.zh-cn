@@ -4,17 +4,18 @@ description: 本文介绍如何从 Azure CLI 配置和访问 Azure Database for 
 author: WenJason
 ms.author: v-jay
 ms.service: mariadb
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 6/24/2020
-ms.date: 07/20/2020
-ms.openlocfilehash: 67d9389b67e86f801ce68d2e4c7a5f3393c1bc4f
-ms.sourcegitcommit: 403db9004b6e9390f7fd1afddd9e164e5d9cce6a
+ms.date: 08/17/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 9b84a06da1b24e5d1f5c9c336d17e66e201e0390
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440482"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223041"
 ---
-# <a name="configure-and-access-audit-logs-in-the-azure-cli"></a>在 Azure CLI 中配置和访问审核日志
+# <a name="configure-and-access-azure-database-for-maria-db-audit-logs-in-the-azure-cli"></a>在 Azure CLI 中配置和访问 Azure Database for Maria DB 审核日志
 
 可以从 Azure CLI 配置 [Azure Database for MariaDB 审核日志](concepts-audit-logs.md)。
 
@@ -39,7 +40,7 @@ ms.locfileid: "86440482"
     az mariadb server configuration set --name audit_log_enabled --resource-group myresourcegroup --server mydemoserver --value ON
     ```
 
-1. 通过更新“audit_log_egitvents”参数，选择要记录的[事件类型](concepts-audit-logs.md#configure-audit-logging)。
+1. 通过更新 **audit_log_events** 参数，选择要记录的[事件类型](concepts-audit-logs.md#configure-audit-logging)。
     ```azurecli
     az mariadb server configuration set --name audit_log_events --resource-group myresourcegroup --server mydemoserver --value "ADMIN,CONNECTION"
     ```

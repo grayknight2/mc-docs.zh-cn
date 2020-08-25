@@ -5,16 +5,16 @@ services: storage
 author: WenJason
 ms.service: storage
 ms.topic: include
-origin.date: 03/13/2020
-ms.date: 07/20/2020
+origin.date: 07/08/2020
+ms.date: 08/24/2020
 ms.author: v-jay
 ms.custom: include file
-ms.openlocfilehash: 23a88286257b0a351dafe3fb34ba11be9b760a1c
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.openlocfilehash: f77060f69115fa98ad8fa9b7ce7f57bccb356fe2
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414979"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753308"
 ---
 下表描述了 Azure 常规用途 v1、v2、Blob 存储和块 blob 存储帐户的默认限制。 “流入量”限制是指针对发送到存储帐户的所有数据的限制。 “流出量”限制是指针对从存储帐户接收的所有数据的限制。
 
@@ -32,11 +32,7 @@ ms.locfileid: "86414979"
 
 <sup>1</sup> Azure 存储标准帐户根据请求支持更高的容量上限和更高的流入量上限。 若要请求增加帐户限制，请与 [Azure 支持](https://support.azure.cn/zh-cn/support/contact)联系。
 
-<sup>2</sup> 如果存储帐户启用了异地冗余存储 (RA-GRS) 的读取访问权限，则辅助位置的出口目标与主位置的出口目标相同。 [Azure 存储复制](/storage/common/storage-redundancy)选项包括：
-
-[!INCLUDE [azure-storage-redundancy](azure-storage-redundancy.md)]
-
-<sup>3</sup> [Azure Data Lake Storage Gen2](../articles/storage/blobs/data-lake-storage-introduction.md) 是一组专用于大数据分析的功能，基于 Azure Blob 存储而构建。
+<sup>2</sup> 如果存储帐户启用了异地冗余存储 (RA-GRS) 的读取访问权限，则辅助位置的出口目标与主位置的出口目标相同。 有关详细信息，请参阅 [Azure 存储复制](../articles/storage/common/storage-redundancy.md)。
 
 > [!NOTE]
 > 大多数情况下，Azure 建议使用常规用途 v2 存储帐户。 可以轻松将常规用途 v1 或 Azure Blob 存储帐户升级到常规用途 v2 帐户，无需停机且无需复制数据。 有关详细信息，请参阅[升级到常规用途 v2 存储帐户](../articles/storage/common/storage-account-upgrade.md)。

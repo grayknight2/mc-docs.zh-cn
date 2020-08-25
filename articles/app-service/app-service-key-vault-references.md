@@ -4,15 +4,15 @@ description: 了解如何使用 Key Vault 引用设置 Azure 应用服务和 Azu
 author: mattchenderson
 ms.topic: article
 origin.date: 10/09/2019
-ms.date: 06/22/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 525ce4a09f60000de856292eebeb1b96a91efe95
-ms.sourcegitcommit: d24e12d49708bbe78db450466eb4fccbc2eb5f99
+ms.openlocfilehash: 5c9972945da5e2dc0757d78b1b57ca311b4da2e6
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85613330"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227977"
 ---
 # <a name="use-key-vault-references-for-app-service-and-azure-functions"></a>使用应用服务和 Azure Functions 的 Key Vault 引用
 
@@ -73,7 +73,7 @@ Key Vault 引用可以用作[应用程序设置](configure-common.md#configure-a
 
 通过 Azure 资源管理器模板自动进行资源部署时，可能需要将依赖项按特定的顺序排列，这样才能使该功能发挥作用。 请注意，需将应用程序设置定义为其自己的资源，而不能使用站点定义中的 `siteConfig` 属性。 这是因为，站点需先进行定义，这样才能使用它来创建系统分配标识并将该标识用在访问策略中。
 
-函数应用的示例仿真模板可能如下所示：
+函数应用的示例伪模板可能如下所示：
 
 ```json
 {

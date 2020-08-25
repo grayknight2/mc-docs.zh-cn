@@ -1,21 +1,16 @@
 ---
 title: 将 Azure 事件中心命名空间移到另一个区域 | Microsoft Docs
 description: 本文介绍如何将 Azure 事件中心命名空间从当前区域移到另一个区域。
-services: event-hubs
-author: spelluru
-ms.service: event-hubs
 ms.topic: how-to
-ms.custom: subject-moving-resources
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-origin.date: 04/14/2020
-ms.date: 05/29/2020
-ms.reviewer: shvija
-ms.openlocfilehash: ebfda9710a81821ccee822d0b08285ad8e0f3343
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: ee98c0bacf97f7e9bf30adabeb4e923a8b0357e4
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199938"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715347"
 ---
 # <a name="move-an-azure-event-hubs-namespace-to-another-region"></a>将 Azure 事件中心命名空间移到另一个区域
 在多种情况下，可能需要将现有事件中心命名空间从一个区域移到另一个区域。 例如，可能需要创建一个具有相同配置的命名空间，以便进行测试。
@@ -50,9 +45,11 @@ ms.locfileid: "84199938"
 
    此 zip 文件包含 .json 文件，后者包括模板和用于部署模板的脚本。
 
+
 ## <a name="move"></a>移动
 
 部署模板以在目标区域中创建事件中心命名空间。 
+
 
 1. 在 Azure 门户中，选择“创建资源”。
 
@@ -77,7 +74,7 @@ ms.locfileid: "84199938"
     3. 选择目标位置或区域。 如果选择了现有资源组，则此设置为只读。 
 
     4. 在“设置”部分中，执行以下步骤：
-
+    
         1. 输入新命名空间名称。 
 
             ![部署资源管理器模板](./media/move-across-regions/deploy-template.png)
@@ -86,16 +83,14 @@ ms.locfileid: "84199938"
 
               ```
               /subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<CLUSTER'S RESOURCE GROUP>/providers/Microsoft.EventHub/clusters/<CLUSTER NAME>
-              ```
-
+              ```   
         3. 如果命名空间中的事件中心使用存储帐户来捕获事件，请为 `StorageAccounts_<original storage account name>_external` 字段指定资源组名称和存储帐户。 
-
+            
             ```
             /subscriptions/0000000000-0000-0000-0000-0000000000000/resourceGroups/<STORAGE'S RESOURCE GROUP>/providers/Microsoft.Storage/storageAccounts/<STORAGE ACCOUNT NAME>
-            ```
-
+            ```    
     5. 选择“我同意上述条款和条件”复选框。 
-
+    
     6. 现在，选择“选择购买”以启动部署过程。 
 
 ## <a name="discard-or-clean-up"></a>丢弃或清理

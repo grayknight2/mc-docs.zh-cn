@@ -3,15 +3,17 @@ title: 将应用程序包部署到计算节点
 description: 使用 Azure Batch 的应用程序包功能轻松管理要安装在 Batch 计算节点上的多个应用程序和版本。
 ms.topic: how-to
 origin.date: 04/26/2019
-ms.date: 04/29/2020
-ms.author: v-tawe
+ms.date: 08/24/2020
+ms.testscope: no
+ms.testdate: 04/29/2020
+ms.author: v-yeche
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 664dcf30f5e93ccb44a47e6a2e7507f250e59362
-ms.sourcegitcommit: d24e12d49708bbe78db450466eb4fccbc2eb5f99
+ms.openlocfilehash: b34a8599640555178efb7135807f929b092dc70f
+ms.sourcegitcommit: e633c458126612223fbf7a8853dbf19acc7f0fa5
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85613425"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88655003"
 ---
 # <a name="deploy-applications-to-compute-nodes-with-batch-application-packages"></a>使用 Batch 应用程序包将应用程序部署到计算节点
 
@@ -43,12 +45,12 @@ Batch 中的应用程序包含一个或多个应用程序包，指定应用程�
 可以在池和任务级别指定应用程序包。 创建池或任务时，可以指定其中的一个或多个包，以及（可选）指定版本。
 
 * **池应用程序包**部署到池中的每个节点。 当节点加入池以及重新启动或重置映像时，就会部署应用程序。
-  
+
     当池中的所有节点执行作业的任务时，便适合使用池应用程序包。 可以在创建池时指定一个或多个应用程序包，并且可以添加或更新现有池的包。 如果更新现有池的应用程序包，必须重新启动它的节点才能安装新包。
 * 在运行任务的命令行之前，**任务应用程序包**只部署到计划要运行任务的计算节点。 如果节点上已有指定的应用程序包和版本，则不会重新部署，而是使用现有包。
-  
+
     在共享池的环境中，任务应用程序包装很有用：不同的操作在一个池上运行，而某项作业完成时并不删除该池。 如果作业中的任务少于池中的节点，任务应用程序包可以减少数据传输，因为应用程序只部署到运行任务的节点。
-  
+
     其他可受益于任务应用程序包的方案为，运行大型应用程序但只执行少数任务的作业。 例如，预处理或合并应用程序非常庞大的预处理阶段或合并任务可能受益于使用任务应用程序包。
 
 > [!IMPORTANT]
@@ -59,7 +61,7 @@ Batch 中的应用程序包含一个或多个应用程序包，指定应用程�
 ### <a name="benefits-of-application-packages"></a>应用程序包的优点
 应用程序包可以简化 Batch 解决方案中的代码，也能降低管理任务运行的应用程序所需的开销。
 
-有了应用程序包，池的启动任务不需要指定在节点上安装一长串的单个资源文件。 不需要在 Azure 存储中或在节点上手动管理应用程序的多个版本。 而且，也不必费心生成 [SAS URL](../storage/common/storage-dotnet-shared-access-signature-part-1.md) 来提供这些文件在存储帐户中的访问权限。 Batch 在后台与 Azure 存储协作来存储应用程序包，并将其部署到计算节点。
+有了应用程序包，池的启动任务不需要指定在节点上安装一长串的单个资源文件。 不需要在 Azure 存储中或在节点上手动管理应用程序的多个版本。 而且，也不必费心生成 [SAS URL](../storage/common/storage-sas-overview.md) 来提供这些文件在存储帐户中的访问权限。 Batch 在后台与 Azure 存储协作来存储应用程序包，并将其部署到计算节点。
 
 > [!NOTE] 
 > 启动任务的总大小必须小于或等于 32768 个字符，其中包括资源文件和环境变量。 如果启动任务超出此限制，备选方案就是使用应用程序包。 还可以创建一个包含资源文件的压缩存档，将此存档作为 blob 上传到 Azure 存储，再从启动任务的命令行中解压缩该存档。 
@@ -71,8 +73,6 @@ Batch 中的应用程序包含一个或多个应用程序包，指定应用程�
 
 ### <a name="link-a-storage-account"></a>链接存储帐户
 要使用应用程序包，必须先将 [Azure 存储帐户](accounts.md#azure-storage-accounts)链接到 Batch 帐户。 如果尚未配置存储帐户，第一次单击 Batch 帐户中的“应用程序”时，Azure 门户会显示警告。
-
-
 
 ![Azure 门户中显示的“未配置存储帐户”警告][9]
 
@@ -336,24 +336,24 @@ foreach (ApplicationSummary app in applications)
 * [Batch REST API][api_rest] 还提供应用程序包的使用支持。 有关示例，请参阅[将池添加到帐户][rest_add_pool]中的 [applicationPackageReferences][rest_add_pool_with_packages] 元素，了解如何使用 REST API 指定要安装的包。 若要深入了解如何使用 Batch REST API 获取应用程序信息，请参阅[应用程序][rest_applications]。
 * 了解如何以编程方式[使用 Batch Management .NET 管理 Azure Batch 帐户和配额](batch-management-dotnet.md)。 [Batch Management .NET][api_net_mgmt] 库可以启用 Batch 应用程序或服务的帐户创建和删除功能。
 
-[api_net]: /dotnet/api/overview/batch/client?view=azure-dotnet
-[api_net_mgmt]: /dotnet/api/overview/batch/management?view=azure-dotnet
+[api_net]: https://docs.azure.cn/dotnet/api/overview/batch/client?view=azure-dotnet
+[api_net_mgmt]: https://docs.microsoft.com/dotnet/api/overview/azure/batch/management?view=azure-dotnet
 [api_rest]: https://docs.microsoft.com/rest/api/batchservice/
 [batch_mgmt_nuget]: https://www.nuget.org/packages/Microsoft.Azure.Management.Batch/
 [github_samples]: https://github.com/Azure/azure-batch-samples
 [storage_pricing]: https://www.azure.cn/pricing/details/storage/
-[net_appops]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.applicationoperations.aspx
-[net_appops_listappsummaries]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.applicationoperations.listapplicationsummaries.aspx
-[net_cloudpool]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudpool.aspx
-[net_cloudpool_pkgref]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudpool.applicationpackagereferences.aspx
-[net_cloudtask]: https://msdn.microsoft.com/library/microsoft.azure.batch.cloudtask.aspx
-[net_cloudtask_pkgref]: https://msdn.microsoft.com/library/microsoft.azure.batch.cloudtask.applicationpackagereferences.aspx
-[net_nodestate]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.computenode.state.aspx
-[net_pkgref]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.applicationpackagereference.aspx
+[net_appops]: https://docs.azure.cn/dotnet/api/microsoft.azure.batch.applicationoperations
+[net_appops_listappsummaries]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.applicationoperations
+[net_cloudpool]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.cloudpool
+[net_cloudpool_pkgref]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.cloudpool
+[net_cloudtask]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.cloudtask
+[net_cloudtask_pkgref]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.cloudtask
+[net_nodestate]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.computenode
+[net_pkgref]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.applicationpackagereference
 [portal]: https://portal.azure.cn
-[rest_applications]: https://msdn.microsoft.com/library/azure/mt643945.aspx
-[rest_add_pool]: https://msdn.microsoft.com/library/azure/dn820174.aspx
-[rest_add_pool_with_packages]: https://msdn.microsoft.com/library/azure/dn820174.aspx#bk_apkgreference
+[rest_applications]: https://docs.microsoft.com/rest/api/batchservice/application
+[rest_add_pool]: https://docs.microsoft.com/rest/api/batchservice/pool/add
+[rest_add_pool_with_packages]: https://docs.microsoft.com/rest/api/batchservice/pool/add?view=azure-dotnet#bk_apkgreference
 
 [1]: ./media/batch-application-packages/app_pkg_01.png "应用程序包概要关系图"
 [2]: ./media/batch-application-packages/app_pkg_02.png "Azure 门户中的应用程序磁贴"
@@ -368,3 +368,5 @@ foreach (ApplicationSummary app in applications)
 [12]: ./media/batch-application-packages/app_pkg_12.png "Azure 门户中的删除包确认对话框"
 [13]: ./media/batch-application-packages/package-file-structure.png "Azure 门户中的计算节点信息"
 [14]: ./media/batch-application-packages/package-file-structure-node.png "Azure 门户中显示的计算节点上的文件"
+
+<!-- Update_Description: update meta properties, wording update, update link -->

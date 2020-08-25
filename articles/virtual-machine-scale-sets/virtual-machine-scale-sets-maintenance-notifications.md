@@ -6,15 +6,15 @@ ms.author: v-junlch
 ms.topic: conceptual
 ms.service: virtual-machine-scale-sets
 ms.subservice: management
-ms.date: 08/06/2020
+ms.date: 08/20/2020
 ms.reviewer: jushiman
 ms.custom: mimckitt
-ms.openlocfilehash: bf57cc010cef2cd30eea3b6862a20a2c1163a09b
-ms.sourcegitcommit: 66563f2b68cce57b5816f59295b97f1647d7a3d6
+ms.openlocfilehash: 7c0abad3b724afb0357fba361137a90b08a1e175
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87914152"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715265"
 ---
 # <a name="planned-maintenance-notifications-for-virtual-machine-scale-sets"></a>虚拟机规模集的计划内维护通知
 
@@ -181,7 +181,7 @@ az vmss perform-maintenance -g rgName -n vmssName --instance-ids id
 
 **答:** 可用性集或虚拟机规模集中部署的虚拟机使用更新域。 执行维护时，Azure 遵循更新域约束，不会从其他更新域（在同一可用性集中）重新启动 VM。 Azure 还会至少等待 30 分钟，然后才移到下一组 VM。 
 
-有关高可用性的详细信息，请参阅 [Azure 中虚拟机的区域和可用性](../virtual-machines/windows/availability.md)。
+有关高可用性的详细信息，请参阅 [Azure 中虚拟机的区域和可用性](../virtual-machines/availability.md)。
 
 **问：如何收到有关计划内维护的通知？**
 

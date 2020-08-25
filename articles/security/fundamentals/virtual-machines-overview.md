@@ -4,9 +4,9 @@ titleSuffix: Azure security
 description: 本文概述了可用于 Azure 虚拟机的核心 Azure 安全功能。
 services: security
 documentationcenter: na
-author: lingliw
-manager: digimobile
-editor: ''
+author: TerryLanfear
+manager: rkarlin
+editor: TomSh
 ms.assetid: 467b2c83-0352-4e9d-9788-c77fb400fe54
 ms.service: security
 ms.subservice: security-fundamentals
@@ -15,14 +15,14 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 origin.date: 10/2/2019
-ms.date: 03/02/2020
-ms.author: v-lingwu
-ms.openlocfilehash: 2f92186e04c7395031d938aa394d1f2f0874135a
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/13/2020
+ms.author: v-johya
+ms.openlocfilehash: e2c54b4d99be96203ea980f74c8302843dedfad4
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417780"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227834"
 ---
 # <a name="azure-virtual-machines-security-overview"></a>Azure 虚拟机安全概述
 本文概述了可用于虚拟机的核心 Azure 安全功能。
@@ -41,7 +41,7 @@ Azure 虚拟机让你能够灵活地进行虚拟化，而无需购买和维护�
 
 ## <a name="antimalware"></a>反恶意软件
 
-通过 Azure，可使用安全供应商（例如 Microsoft、Trend Micro 和 Kaspersky）提供的反恶意软件。 此软件可帮助保护虚拟机免受恶意文件、广告程序和其他威胁的侵害。
+通过 Azure，可使用安全供应商（例如 Microsoft、Symantec、Trend Micro 和 Kaspersky）提供的反恶意软件。 此软件可帮助保护虚拟机免受恶意文件、广告程序和其他威胁的侵害。
 
 适用于 Azure 云服务和虚拟机的 Microsoft 反恶意软件是一种实时保护功能，可帮助识别并移除病毒、间谍软件和其他恶意软件。  适用于 Azure 的 Microsoft 反恶意软件提供可配置警报，能在已知恶意软件或不需要的软件试图自行安装或在 Azure 系统上运行时进行警报通知。
 
@@ -53,7 +53,10 @@ Azure 虚拟机让你能够灵活地进行虚拟化，而无需购买和维护�
 
 * [在 Azure 虚拟机上部署反恶意软件解决方案](https://azure.microsoft.com/blog/deploying-antimalware-solutions-on-azure-virtual-machines/)
 * [如何在 Windows VM 上安装和配置服务型 Trend Micro Deep Security](/virtual-machines/windows/classic/install-trend)
-* [Azure 市场中的安全解决方案](https://market.azure.cn/zh-cn)
+* [如何在 Windows VM 上安装和配置 Symantec Endpoint Protection](/virtual-machines/extensions/symantec)
+* [Azure 市场中的安全解决方案](https://market.azure.cn)
+<!--Correct in MC: /virtual-machines/extensions/symantec and https://market.azure.cn/-->
+
 
 若要实现更强大的保护，请考虑使用 [Windows Defender 高级威胁防护](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-atp/windows-defender-advanced-threat-protection)。 使用 Windows Defender ATP，可以实现：
 
@@ -61,7 +64,7 @@ Azure 虚拟机让你能够灵活地进行虚拟化，而无需购买和维护�
 * [下一代保护](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-antivirus/windows-defender-antivirus-in-windows-10)  
 * [终结点保护和响应](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-atp/overview-endpoint-detection-response)
 * [自动调查和补救](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-atp/automated-investigations-windows-defender-advanced-threat-protection)
-* [安全评分](https://docs.microsoft.com/windows/security/threat-protection/microsoft-defender-atp/configuration-score)
+* [安全评分](https://docs.microsoft.com/windows/security/threat-protection/microsoft-defender-atp/tvm-microsoft-secure-score-devices)
 * [高级追寻](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-atp/overview-hunting-windows-defender-advanced-threat-protection)
 * [管理和 API](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-atp/management-apis)
 * [Microsoft 威胁防护](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-atp/threat-protection-integration)
@@ -71,17 +74,7 @@ Azure 虚拟机让你能够灵活地进行虚拟化，而无需购买和维护�
 * [WDATP 入门](https://docs.microsoft.com/windows/security/threat-protection/microsoft-defender-atp/microsoft-defender-advanced-threat-protection)  
 * [WDATP 功能概述](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-atp/overview)  
 
-## <a name="hardware-security-module"></a>硬件安全模块
-
-提高密钥安全性可增强加密和身份验证保护。 通过将关键密码和密钥存储在 Azure 密钥保管库中，可以简化此类密码和密钥的管理和保护。
-
-密钥保管库提供将你的密钥存储在已通过 FIPS 140-2 Level 2 标准认证的硬件安全性模块 (HSM) 中的选项。 用于备份或 [透明数据加密](https://msdn.microsoft.com/library/bb934049.aspx) 的 SQL Server 加密密钥可以存储在密钥保管库中，此外还可存储应用程序中的任意密钥或机密。 对这些受保护项的权限和访问权限通过 [Azure Active Directory](/active-directory/)进行管理。
-
-了解详细信息：
-
-* [什么是 Azure 密钥保管库？](/key-vault/key-vault-overview)
-* [Azure 密钥保管库博客](https://blogs.technet.microsoft.com/kv/)
-
+<!--Not available in MC: HSM-->
 ## <a name="virtual-machine-disk-encryption"></a>虚拟机磁盘加密
 
 Azure 磁盘加密是用于加密 Windows 和 Linux 虚拟机磁盘的新功能。 Azure 磁盘加密利用 Windows 的行业标准 [BitLocker](https://technet.microsoft.com/library/cc732774.aspx) 功能和 Linux 的 [dm-crypt](https://en.wikipedia.org/wiki/Dm-crypt) 功能，为 OS 和数据磁盘提供卷加密。
@@ -124,7 +117,7 @@ Site Recovery：
 
 虚拟机需要网络连接。 若要支持该需求，Azure 要求将虚拟机连接到 Azure 虚拟网络。
 
-Azure 虚拟网络是一个构建于物理 Azure 网络结构之上的逻辑构造。 每个逻辑 Azure 虚拟网络都独立于所有其他 Azure 虚拟网络。 这种隔离有助于确保其他 Microsoft Azure 客户无法访问部署中的网络流量。
+Azure 虚拟网络是一个构建于物理 Azure 网络结构之上的逻辑构造。 每个逻辑 Azure 虚拟网络都独立于所有其他 Azure 虚拟网络。 这种隔离有助于确保其他 Azure 客户无法访问部署中的网络流量。
 
 了解详细信息：
 
@@ -143,7 +136,9 @@ Azure 安全中心可帮助防范、检测和应对威胁。 通过安全中心�
 
 了解详细信息：
 
+* [Azure 安全中心简介](/security-center/security-center-intro)
 * [Azure 安全中心常见问题解答](/security-center/security-center-faq)
+* [Azure 安全中心规划和操作](/security-center/security-center-planning-and-operations-guide)
 
 ## <a name="compliance"></a>合规性
 
@@ -166,4 +161,8 @@ TEE 可以确保无法从外部查看数据或执行操作，即使通过调试�
 
 * [Azure 机密计算介绍](https://azure.microsoft.com/blog/introducing-azure-confidential-computing/)  
 * [Azure 机密计算](https://azure.microsoft.com/blog/azure-confidential-computing/)  
+
+## <a name="next-steps"></a>后续步骤
+
+了解 VM 和操作系统的[安全最佳做法](iaas.md)。
 

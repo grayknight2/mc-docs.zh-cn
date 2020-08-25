@@ -8,15 +8,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: tutorial
 ms.workload: identity
-ms.date: 07/09/2020
+ms.date: 08/19/2020
 ms.author: v-junlch
-ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 73d1e583a82f5bd3fb6ed22107165cf99117692a
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.custom: devx-track-csharp, aaddev, identityplatformtop40
+ms.openlocfilehash: bc33d0a5b9e5bb21fcd27d2134ef375eb41d641f
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164922"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647537"
 ---
 # <a name="call-the-microsoft-graph-api-from-a-universal-windows-platform-application-xaml"></a>从通用 Windows 平台应用程序 (XAML) 调用 Microsoft Graph API
 

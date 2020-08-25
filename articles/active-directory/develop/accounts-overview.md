@@ -9,16 +9,16 @@ ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
 ms.devlang: java
-ms.date: 03/10/2020
+ms.date: 08/17/2020
 ms.author: v-junlch
-ms.custom: aaddev
+ms.custom: aaddev, devx-track-java
 ms.reviewer: shoatman
-ms.openlocfilehash: d81684e093fa2dcc7f2f5c497e15c26ff07b8a78
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 7b3addb142b3eae94d73f5030c96543c719bdd1d
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79133833"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647569"
 ---
 # <a name="accounts--tenant-profiles-android"></a>帐户和租户配置文件 (Android)
 
@@ -69,11 +69,11 @@ Microsoft 标识平台中的帐户包括：
   - `tom@live.com` 的租户配置文件在上述每个租户中存在。
 - 其他租户中有关 Tom 和 Bob 的信息可能与记录系统中的信息不同。 他们在职务、办公地点等属性方面可能不同。 他们可能是每个组织（Azure Active Directory 租户）中的组和/或角色的成员。 我们将此信息称为 bob@contoso.com 租户配置文件。
 
-在示意图中，bob@contoso.com 和 tom@live.com 有权访问不同 Azure Active Directory 租户中的资源。 
+在示意图中，bob@contoso.com 和 tom@live.com 有权访问不同 Azure Active Directory 租户中的资源。 有关详细信息，请参阅[在 Azure 门户中添加 Azure Active Directory B2B 协作用户](../external-identities/add-users-administrator.md)。
 
 ## <a name="accounts-and-single-sign-on-sso"></a>帐户和单一登录 (SSO)
 
-MSAL 令牌缓存为每个帐户存储单个刷新令牌。  该刷新令牌可用于以静默方式从多个 Microsoft 标识平台租户请求访问令牌。 在设备上安装中介后，帐户将由该中介管理，并可能会实现设备范围的单一登录。
+MSAL 令牌缓存为每个帐户存储单个刷新令牌。** 该刷新令牌可用于以静默方式从多个 Microsoft 标识平台租户请求访问令牌。 在设备上安装中介后，帐户将由该中介管理，并可能会实现设备范围的单一登录。
 
 > [!IMPORTANT]
 > 企业到消费者 (B2C) 帐户和刷新令牌的行为与 Microsoft 标识平台中其他帐户和令牌不同。 有关详细信息，请参阅 [B2C 策略和帐户](#b2c-policies--accounts)。
@@ -118,10 +118,10 @@ String issuer = account.getClaims().get("iss"); // The tenant specific authority
 ```
 
 > [!TIP]
-> 若要查看帐户对象中提供的声明列表，请参阅 [id_token 中的声明](/active-directory/develop/id-tokens#claims-in-an-id_token)
+> 若要查看帐户对象中提供的声明列表，请参阅 [id_token 中的声明](./id-tokens.md#claims-in-an-id_token)
 
 > [!TIP]
-> 若要在 id_token 中包含其他声明，请参阅可选声明文档：[如何：向 Azure AD 应用提供可选声明](/active-directory/develop/active-directory-optional-claims)
+> 若要在 id_token 中包含其他声明，请参阅可选声明文档：[如何：向 Azure AD 应用提供可选声明](./active-directory-optional-claims.md)
 
 ### <a name="access-tenant-profile-claims"></a>访问租户配置文件声明
 

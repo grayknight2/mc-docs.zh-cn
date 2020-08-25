@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: eb466aa17ebbaacaee2ecd9e5b5e3b28bbc0545a
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: 301261c3b7743b8bc035eabaffb4fe9d52d335d6
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841696"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516108"
 ---
 # <a name="toguid"></a>toguid()
 
@@ -24,17 +24,18 @@ ms.locfileid: "87841696"
 toguid("70fc66f7-8279-44fc-9092-d364d70fce44") == guid("70fc66f7-8279-44fc-9092-d364d70fce44")
 ```
 
-**语法**
+> [!NOTE]
+> 如果可能，首选使用 [guid()](./scalar-data-types/guid.md)。
 
-`toguid(`*Expr*`)`
+## <a name="syntax"></a>语法
 
-**参数**
+`toguid(`Expr`)`
+
+## <a name="arguments"></a>参数
 
 * Expr：将转换为 [`guid`](./scalar-data-types/guid.md) 标量的表达式。 
 
-**返回**
+## <a name="returns"></a>返回
 
 如果转换成功，结果将是 [`guid`](./scalar-data-types/guid.md) 标量。
 如果转换未成功，结果将是 `null`。
-
-*注意*：如果可能，首选使用 [guid()](./scalar-data-types/guid.md)。

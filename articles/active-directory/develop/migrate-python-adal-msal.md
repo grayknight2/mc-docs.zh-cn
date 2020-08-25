@@ -10,16 +10,16 @@ ms.subservice: develop
 ms.topic: conceptual
 ms.tgt_pltfrm: Python
 ms.workload: identity
-ms.date: 06/29/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: rayluo, nacanuma, twhitney
-ms.custom: aaddev, tracking-python
-ms.openlocfilehash: 1aad1292a552aa916a85815396374ec6c2f19fd2
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.custom: aaddev, devx-track-python
+ms.openlocfilehash: 510cd20c9bf38904925526ae61d4767934a99b32
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945032"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647684"
 ---
 # <a name="adal-to-msal-migration-guide-for-python"></a>适用于 Python 的 ADAL 到 MSAL 迁移指南
 
@@ -37,7 +37,7 @@ ADAL 适用于 Azure Active Directory (Azure AD) v1.0 终结点。 Microsoft 身
   - OAuth v2.0
   - OpenID Connect (OIDC)
 
-有关更多详细信息，请参阅 [Microsoft 标识平台 (v2.0) 终结点有何不同？](/active-directory/develop/azure-ad-endpoint-comparison)。
+有关更多详细信息，请参阅 [Microsoft 标识平台 (v2.0) 终结点有何不同？](../azuread-dev/azure-ad-endpoint-comparison.md)。
 
 ### <a name="scopes-not-resources"></a>范围不是资源
 
@@ -45,11 +45,11 @@ ADAL Python 获取资源的令牌，而 MSAL Python 则是获取范围的令牌�
 
 可以将 `/.default` 作用域后缀添加到资源中，帮助将应用从 v1.0 终结点 (ADAL) 迁移到 Microsoft 标识平台终结点 (MSAL)。 例如，对于 `https://microsoftgraph.chinacloudapi.cn` 的资源值，等效的作用域值为 `https://microsoftgraph.chinacloudapi.cn/.default`。  如果资源未采用 URL 形式，但资源 ID 采用 `XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX` 形式，则仍可以使用作用域值 `XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX/.default`。
 
-有关不同类型作用域的更多详细信息，请参阅 [Microsoft 标识平台中的权限和许可](/active-directory/develop/v2-permissions-and-consent)以及[接受 v1.0 令牌的 Web API 的作用域](/active-directory/develop/msal-v1-app-scopes)两篇文章。
+有关不同类型作用域的更多详细信息，请参阅 [Microsoft 标识平台中的权限和许可](./v2-permissions-and-consent.md)以及[接受 v1.0 令牌的 Web API 的作用域](./msal-v1-app-scopes.md)两篇文章。
 
 ### <a name="error-handling"></a>错误处理。
 
-适用于 Python 的 Azure Active Directory 身份验证库 (ADAL) 使用异常 `AdalError` 来指示问题。 而适用于 Python 的 MSAL 通常使用错误代码。 有关详细信息，请参阅[适用于 Python 的 MSAL 错误处理](/active-directory/develop/msal-handling-exceptions?tabs=python)。
+适用于 Python 的 Azure Active Directory 身份验证库 (ADAL) 使用异常 `AdalError` 来指示问题。 而适用于 Python 的 MSAL 通常使用错误代码。 有关详细信息，请参阅[适用于 Python 的 MSAL 错误处理](./msal-handling-exceptions.md?tabs=python)。
 
 ### <a name="api-changes"></a>API 更改
 
@@ -121,5 +121,5 @@ print("Migration completed")
 
 ## <a name="next-steps"></a>后续步骤
 
-有关详细信息，请阅读 [v1.0 与 v2.0 的比较](active-directory-v2-compare.md)。
+有关详细信息，请阅读 [v1.0 与 v2.0 的比较](../azuread-dev/azure-ad-endpoint-comparison.md)。
 

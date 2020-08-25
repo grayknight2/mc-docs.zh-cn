@@ -9,12 +9,12 @@ origin.date: 04/08/2020
 ms.date: 06/01/2020
 ms.author: v-jay
 ms.subservice: common
-ms.openlocfilehash: 90d42cd93711a255110ed5bac893fcbe582a7965
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 1ce3d7355a32dbcf7f746a7237768454c134d3e9
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199602"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753538"
 ---
 # <a name="introduction-to-the-core-azure-storage-services"></a>核心 Azure 存储服务简介
 
@@ -115,7 +115,6 @@ Azure 存储提供多种类型的存储帐户。 每种类型支持不同的功�
 - **用于 Blob 和队列数据的 Azure Active Directory (Azure AD) 集成。** Azure 存储支持通过基于角色的访问控制 (RBAC) 使用 Azure AD 为 Blob 和队列服务进行身份验证和授权。 建议使用 Azure AD 进行授权请求，以确保极高的安全性和易用性。 有关详细信息，请参阅[使用 Azure Active Directory 对 Azure Blob 和队列访问进行授权](storage-auth-aad.md)。
 - **通过共享密钥进行授权。** Azure 存储 Blob、文件、队列和表服务支持通过共享密钥授权。 使用共享密钥授权的客户端会随使用存储帐户访问密钥签名的每个请求传递一个标头。 有关详细信息，请参阅[通过共享密钥进行授权](https://docs.microsoft.com/rest/api/storageservices/authorize-with-shared-key)。
 - **使用共享访问签名 (SAS) 进行授权。** 共享访问签名 (SAS) 是一个字符串，其中包含的安全令牌可以追加到存储资源的 URI。 安全令牌封装了各种约束，例如权限、访问时间间隔。 有关详细信息，请参阅[使用共享访问签名 (SAS)](storage-sas-overview.md)。
-- **对容器和 Blob 的匿名访问。** 容器及其 Blob 也许可以公开使用。 指定某个容器或 Blob 为公用的时，任何人都可以匿名读取它，不需要进行身份验证。 有关详细信息，请参阅[管理对容器和 Blob 的匿名读取访问](../blobs/storage-manage-access-to-resources.md)。
 
 ## <a name="encryption"></a>Encryption
 

@@ -4,19 +4,21 @@ description: 了解如何跨地理区域复制 Azure Redis 缓存实例。
 author: yegu-ms
 ms.service: cache
 ms.topic: conceptual
-origin.date: 03/06/2019
-ms.date: 11/22/2019
+ms.date: 08/10/2020
 ms.author: v-junlch
-ms.openlocfilehash: d617a5fb9f443e870d6ec8ceb0b21d8a12179d48
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 5d1e5212d34a6d0bd00a2dadf82559519d3b2950
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "74461640"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222615"
 ---
 # <a name="how-to-set-up-geo-replication-for-azure-cache-for-redis"></a>如何为 Azure Redis 缓存设置异地复制
 
-“异地复制”提供一种用于链接两个高级层 Azure Redis 缓存实例的机制。 一个缓存选作主链接缓存，另一个缓存指定为辅助链接缓存。 辅助链接缓存将变为只读，写入主缓存的数据将复制到辅助链接缓存。 此功能可用于跨 Azure 区域复制缓存。 本文提供了为高级层 Azure Redis 缓存实例配置异地复制的指南。
+“异地复制”提供一种用于链接两个高级层 Azure Redis 缓存实例的机制。 一个缓存选作主链接缓存，另一个缓存指定为辅助链接缓存。 辅助链接缓存将变为只读，写入主缓存的数据将复制到辅助链接缓存。 主缓存实例和辅助缓存实例之间的数据传输受 TLS 保护。 异地复制可用于设置跨两个 Azure 区域的缓存。 本文提供了为高级层 Azure Redis 缓存实例配置异地复制的指南。
+
+> [!NOTE]
+> 异地复制设计为灾难恢复解决方案。 默认情况下，应用程序将写入主要区域并从中进行读取。 可以选择将其配置为从次要区域进行读取。 如果应用程序的其余部分保留在主要区域中，则出于担心区域之间的网络延迟会增加的原因，异地复制不会提供自动故障转移。 需要通过取消链接辅助缓存来管理和启动故障转移。 这将使它提升为新的主实例。
 
 ## <a name="geo-replication-prerequisites"></a>异地复制先决条件
 
@@ -49,11 +51,11 @@ ms.locfileid: "74461640"
 
 ## <a name="add-a-geo-replication-link"></a>添加异地复制链接
 
-1. 若要将两个缓存链接到一起以进行异地复制，请先在要用作主链接缓存的缓存的“资源”菜单中单击“异地复制”。  接下来，在“异地复制”边栏选项卡中单击“添加缓存复制链接”。  
+1. 若要将两个缓存链接到一起以进行异地复制，请先在要用作主链接缓存的缓存的“资源”菜单中单击“异地复制”。**** 接下来，在“异地复制”边栏选项卡中单击“添加缓存复制链接”。********
 
     ![添加链接](./media/cache-how-to-geo-replication/cache-geo-location-menu.png)
 
-2. 在“兼容的缓存”列表中，单击所需辅助缓存的名称。  如果列表中未显示辅助缓存，请确认是否符合辅助缓存的[异地复制先决条件](#geo-replication-prerequisites)。 若要按区域筛选缓存，请在地图中单击相应的区域，以便仅显示“兼容的缓存”列表中的缓存。 
+2. 在“兼容的缓存”列表中，单击所需辅助缓存的名称。**** 如果列表中未显示辅助缓存，请确认是否符合辅助缓存的[异地复制先决条件](#geo-replication-prerequisites)。 若要按区域筛选缓存，请在地图中单击相应的区域，以便仅显示“兼容的缓存”列表中的缓存。****
 
     ![异地复制兼容缓存](./media/cache-how-to-geo-replication/cache-geo-location-select-link.png)
     
@@ -61,19 +63,19 @@ ms.locfileid: "74461640"
 
     ![异地复制上下文菜单](./media/cache-how-to-geo-replication/cache-geo-location-select-link-context-menu.png)
 
-3. 单击“链接”将两个缓存链接在一起并开始复制过程。 
+3. 单击“链接”将两个缓存链接在一起并开始复制过程。****
 
     ![链接缓存](./media/cache-how-to-geo-replication/cache-geo-location-confirm-link.png)
 
-4. 可以在“异地复制”边栏选项卡上查看复制过程的进度。 
+4. 可以在“异地复制”边栏选项卡上查看复制过程的进度。****
 
     ![链接状态](./media/cache-how-to-geo-replication/cache-geo-location-linking.png)
 
-    还可以在主缓存和辅助缓存的“概述”边栏选项卡上查看链接状态。 
+    还可以在主缓存和辅助缓存的“概述”边栏选项卡上查看链接状态。****
 
     ![缓存状态](./media/cache-how-to-geo-replication/cache-geo-location-link-status.png)
 
-    复制过程完成后，“链接状态”改为“成功”。  
+    复制过程完成后，“链接状态”改为“成功”。********
 
     ![缓存状态](./media/cache-how-to-geo-replication/cache-geo-location-link-successful.png)
 
@@ -81,7 +83,7 @@ ms.locfileid: "74461640"
 
 ## <a name="remove-a-geo-replication-link"></a>删除异地复制链接
 
-1. 若要删除两个缓存之间的链接并停止异地复制，请在“异地复制”边栏选项卡中，单击“取消链接缓存”。  
+1. 若要删除两个缓存之间的链接并停止异地复制，请在“异地复制”边栏选项卡中，单击“取消链接缓存”。 
     
     ![取消链接缓存](./media/cache-how-to-geo-replication/cache-geo-location-unlink.png)
 
@@ -151,7 +153,7 @@ ms.locfileid: "74461640"
 
 复制是持续异步进行的，而不是按特定的计划进行。 针对主缓存的所有写入会即时异步复制到辅助缓存。
 
-### <a name="how-long-does-geo-replication-replication-take"></a>异地复制需要多长时间？ <a name="how-long-does-geo-replication-replication-take"></a>
+### <a name="how-long-does-geo-replication-replication-take"></a>异地复制需要多长时间？
 
 复制是增量、异步且持续的，所需时间与区域间的延迟并无太大区别。 在某些情况下，辅助缓存可能需要对主缓存中的数据进行完全同步。 在这种情况下，复制时间取决于多个因素，例如：主缓存上的负载、可用网络带宽和区域间的延迟。 我们发现，在一个异地复制对之间完整复制 53 GB 的内容可能需要 5-10 分钟时间。
 
@@ -167,15 +169,15 @@ ms.locfileid: "74461640"
 
 ### <a name="how-much-does-it-cost-to-replicate-my-data-across-azure-regions"></a>跨 Azure 区域复制数据的费用是多少？
 
-使用异地复制时，主链接缓存中的数据会被复制到辅助链接缓存中。 如果两个链接缓存位于同一区域，则数据传输不会产生费用。 如果两个链接缓存位于不同的区域，则数据传输费用是跨任一区域移动数据所产生的网络传出费用。
+使用异地复制时，主链接缓存中的数据会复制到辅助链接缓存中。 如果两个链接缓存位于同一区域，则数据传输不会产生费用。 如果两个链接缓存位于不同的区域，则数据传输费用是跨任一区域移动数据所产生的网络传出费用。 有关详细信息，请参阅[带宽定价详细信息](https://www.azure.cn/pricing/details/bandwidth/)。
 
-### <a name="why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache"></a>尝试删除链接缓存时为何操作会失败？ <a name="why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache"></a>
+### <a name="why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache"></a>尝试删除链接缓存时为何操作会失败？
 
 在删除异地复制链接之前，无法删除已链接的异地复制缓存及其资源组。 如果尝试删除包含一个或两个链接缓存的资源组，则会删除该资源组中的其他资源，但该资源组保持 `deleting` 状态，而资源组中的任意链接缓存则保持 `running` 状态。 若要完全删除资源组及其包含的链接缓存，请根据[删除异地复制链接](#remove-a-geo-replication-link)中所述取消链接这些缓存。
 
-### <a name="what-region-should-i-use-for-my-secondary-linked-cache"></a>应为辅助链接缓存选择哪个区域？  <a name="what-region-should-i-use-for-my-secondary-linked-cache"></a>
+### <a name="what-region-should-i-use-for-my-secondary-linked-cache"></a>应为辅助链接缓存选择哪个区域？
 
-一般而言，建议将缓存放置在应用程序所在的同一 Azure 区域，便于应用程序访问。 对于使用单独主要区域和故障回复区域的应用程序，建议将主缓存和辅助缓存放置在这些区域。
+一般而言，建议将缓存放置在应用程序所在的同一 Azure 区域，便于应用程序访问。 对于使用单独主要区域和故障回复区域的应用程序，建议将主缓存和辅助缓存放置在这些区域。 有关配对区域的详细信息，请参阅[最佳做法 - Azure 配对区域](../best-practices-availability-paired-regions.md)。
 
 ### <a name="how-does-failing-over-to-the-secondary-linked-cache-work"></a>辅助链接缓存如何进行故障转移？
 

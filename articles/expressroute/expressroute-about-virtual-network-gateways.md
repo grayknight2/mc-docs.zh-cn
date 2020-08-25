@@ -8,14 +8,15 @@ ms.topic: conceptual
 origin.date: 10/14/2019
 ms.author: v-yiso
 ms.date: 12/23/2019
-ms.openlocfilehash: 72639c4bbc28b0bd6cd1c4b23da9c74d4ce47336
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 046089558b71b024bf664b5cd7710609d946cc84
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75334769"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227921"
 ---
-# <a name="expressroute-virtual-network-gateway-and-fastpath"></a>ExpressRoute 虚拟网络网关和 FastPath
+# <a name="about-expressroute-virtual-network-gateways"></a>关于 ExpressRoute 虚拟网络网关
+
 若要通过 ExpressRoute 连接 Azure 虚拟网络和本地网络，必须首先创建虚拟网络网关。 虚拟网络网关有两个用途：在网络之间交换 IP 路由和路由网络流量。 本文介绍网关类型、网关 SKU 和按 SKU 估算的性能。 
 
 ## <a name="gateway-types"></a>网关类型

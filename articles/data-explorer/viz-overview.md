@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 06/02/2020
 ms.date: 07/08/2020
-ms.openlocfilehash: 8b337b62f5257adea352a8772ea12decfd147f27
-ms.sourcegitcommit: 5fb9ae9adc04e79d6d0e78c9e69dbe8aa3ceb00a
+ms.openlocfilehash: 0e3c62f61b5ed05b5fd10f5466fee4508b0300a6
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86100213"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515667"
 ---
 # <a name="data-visualization-with-azure-data-explorer"></a>使用 Azure 数据资源管理器进行数据可视化 
 
@@ -36,7 +36,7 @@ For more information see, [Visualize data with Azure Data Explorer dashboards](a
 
 ## <a name="kusto-query-language-visualizations"></a>Kusto 查询语言可视化
 
-Kusto 查询语言 [`render operator`](https://docs.microsoft.com/azure/data-explorer/kusto/query/renderoperator) 提供各种可视化效果（如表格、饼图和条形图）来描述查询结果。 查询可视化用于异常情况检测和预测、机器学习等。
+Kusto 查询语言 [`render operator`](/data-explorer/kusto/query/renderoperator) 提供各种可视化效果（如表格、饼图和条形图）来描述查询结果。 查询可视化用于异常情况检测和预测、机器学习等。
 
 ## <a name="power-bi"></a>Power BI
 

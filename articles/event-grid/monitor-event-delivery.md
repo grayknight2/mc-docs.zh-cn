@@ -1,30 +1,22 @@
 ---
-title: 监视 Azure 事件网格消息传送
-description: 本文介绍如何使用 Azure 门户查看 Azure 事件网格消息的传送状态。
-services: event-grid
-author: Johnnytechn
-manager: timlt
-ms.service: event-grid
+title: 查看 Azure 事件网格指标和设置警报
+description: 本文介绍如何使用 Azure 门户查看 Azure 事件网格主题和订阅的指标，并创建相关警报。
 ms.topic: conceptual
-origin.date: 01/23/2020
-ms.date: 06/12/2020
+author: Johnnytechn
 ms.author: v-johya
-ms.openlocfilehash: 141fad23a9a3a3434d9aaf61140c0d09a8f6b7d2
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+origin.date: 01/23/2020
+ms.date: 08/10/2020
+ms.openlocfilehash: 0f5fa52ded25f68c18a5d329a3c95c8a1c94e3d7
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723257"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228007"
 ---
 # <a name="monitor-event-grid-message-delivery"></a>监视事件网格消息传送 
+本文介绍如何使用门户查看事件网格主题和订阅的指标，并创建相关警报。 
 
-本文介绍如何使用门户查看事件传送的状态。
-
-事件网格提供持久传送。 它会将每个订阅的每条消息至少发送一次。 事件会立即发送到每个订阅的已注册 webhook。 如果 webhook 在首次发送后 60 秒内未确认已接收事件，则事件网格会重试事件传送。
-
-有关事件传送和重试的信息，请参阅[事件网格消息传送和重试](delivery-and-retry.md)。
-
-## <a name="delivery-metrics"></a>传送指标
+## <a name="metrics"></a>指标
 
 门户将显示用于表示事件消息传送状态的指标。
 
@@ -44,51 +36,70 @@ ms.locfileid: "84723257"
     > [!NOTE]
     > 有关指标的完整列表，请参阅 [Azure 事件网格支持的指标](metrics.md)。
 
-## <a name="event-subscription-status"></a>事件订阅状态
+## <a name="view-custom-topic-metrics"></a>查看自定义主题指标
 
-若要查看事件订阅的指标，可以按订阅类型搜索或按特定资源的订阅搜索。
+如果已发布自定义主题，则可以查看其指标。 
 
-若要按事件订阅类型搜索，请选择“所有服务”****。
+1. 登录到 [Azure 门户](https://portal.azure.cn/)。
+2. 在主题的搜索栏中，键入“事件网格主题”，然后从下拉列表中选择“事件网格主题” 。 
 
-![选择所有服务](./media/monitor-event-delivery/all-services.png)
+    :::image type="content" source="./media/custom-event-quickstart-portal/select-event-grid-topics.png" alt-text="搜索并选择“事件网格主题”":::
+3. 从主题列表中选择自定义主题。 
 
-搜索事件网格****，并从可用选项中选择“事件网格订阅”****。
+    :::image type="content" source="./media/monitor-event-delivery/select-custom-topic.png" alt-text="选择自定义主题":::
+4. 在“事件网格主题”页上查看自定义事件主题的指标。 在下图中，展示资源组、订阅等内容的“基本信息”部分已最小化。 
 
-![搜索事件订阅](./media/monitor-event-delivery/search-and-select.png)
+    :::image type="content" source="./media/monitor-event-delivery/custom-topic-metrics.png" alt-text="查看事件指标":::
 
-按事件类型、订阅和位置进行筛选。 针对要查看的订阅选择“指标”****。
+可以使用“事件网格主题”页面的“指标”选项卡，创建包含支持的指标的图表。
 
-![筛选事件订阅](./media/monitor-event-delivery/filter-events.png)
+:::image type="content" source="./media/monitor-event-delivery/topics-metrics-page.png" alt-text="“主题 - 指标”页":::
 
-查看事件主题和订阅的指标。
+若要详细了解指标，请参阅 [Azure Monitor 中的指标](../azure-monitor/platform/data-platform-metrics.md)
 
-![查看事件指标](./media/monitor-event-delivery/subscription-metrics.png)
+有关示例，请参阅“已发布事件”指标的指标图表。
 
-若要查找特定资源的指标，请选择该资源。 然后，选择“事件”****。
+:::image type="content" source="./media/monitor-event-delivery/custom-topic-metrics-example.png" alt-text="“已发布事件”指标":::
 
-![选择资源的事件](./media/monitor-event-delivery/select-events.png)
 
-你会看到该资源的订阅指标。
+## <a name="view-subscription-metrics"></a>查看订阅指标
+1. 按照上一部分的步骤导航到“事件网格主题”页。 
+2. 从底部窗格中选择订阅，如以下示例所示。 
 
-## <a name="custom-event-status"></a>自定义事件状态
+    :::image type="content" source="./media/monitor-event-delivery/select-event-subscription.png" alt-text="选择事件订阅":::    
 
-如果已发布自定义主题，则可以查看其指标。 选择该主题的资源组，然后选择主题。
+    也可在 Azure 门户的搜索栏中搜索“事件网格订阅”，然后通过选择“主题类型”、“订阅”和“位置”来查看事件订阅。 
 
-![选择自定义主题](./media/monitor-event-delivery/select-custom-topic.png)
+    :::image type="content" source="./media/monitor-event-delivery/event-subscriptions-page.png" alt-text="从“事件网格订阅”页选择事件订阅":::        
 
-查看自定义事件主题的指标。
+    对于自定义主题，请选择“事件网格主题”作为**主题类型**。 对于系统主题，请选择 Azure 资源的类型，例如“存储帐户(Blob，GPv2)”。 
+3. 对于图表中的订阅，请在主页上查看订阅的指标。 可以查看过去 1 小时、6 小时、12 小时、1 天、7 天或 30 天的“常规”、“错误”、“延迟”和“死信”指标。 
 
-![查看事件指标](./media/monitor-event-delivery/custom-topic-metrics.png)
+    :::image type="content" source="./media/monitor-event-delivery/subscription-home-page-metrics.png" alt-text="订阅主页上的指标":::    
 
-## <a name="set-alerts"></a>设置警报
+## <a name="view-system-topic-metrics"></a>查看系统主题指标
 
-可以为自定义主题和事件域设置针对主题和域级别指标的警报。 在“概览”边栏选项卡中，从左侧的资源菜单选择“警报”****，以便查看、管理和创建警报规则。 [了解有关 Azure Monitor 警报的详细信息](../azure-monitor/platform/alerts-overview.md)
+1. 登录到 [Azure 门户](https://portal.azure.cn/)。
+2. 在主题的搜索栏中，键入“事件网格系统主题”，然后从下拉列表中选择“事件网格系统主题” 。 
 
-![查看事件指标](./media/monitor-event-delivery/select-alerts.png)
+    :::image type="content" source="./media/monitor-event-delivery/search-system-topics.png" alt-text="搜索并选择“事件网格系统主题”":::
+3. 从主题列表中选择系统主题。 
+
+    :::image type="content" source="./media/monitor-event-delivery/select-system-topic.png" alt-text="选择系统主题":::
+4. 在“事件网格系统主题”页上查看系统主题的指标。 在下图中，展示资源组、订阅等内容的“基本信息”部分已最小化。 
+
+    :::image type="content" source="./media/monitor-event-delivery/system-topic-overview-metrics.png" alt-text="在概览页上查看系统主题指标":::
+
+可以使用“事件网格主题”页面的“指标”选项卡，创建包含支持的指标的图表。
+
+:::image type="content" source="./media/monitor-event-delivery/system-topic-metrics-page.png" alt-text="“系统主题 - 指标”页":::
+
+若要详细了解指标，请参阅 [Azure Monitor 中的指标](../azure-monitor/platform/data-platform-metrics.md)
+
 
 ## <a name="next-steps"></a>后续步骤
+请参阅以下文章：
 
-* 有关事件传送和重试的信息，请参阅[事件网格消息传送和重试](delivery-and-retry.md)。
-* 有关事件网格的介绍，请参阅[关于事件网格](overview.md)。
-* 若要快速开始使用事件网格，请参阅[使用 Azure 事件网格创建和路由自定义事件](custom-event-quickstart.md)。
+- 若要了解如何创建有关指标和活动日志操作的警报，请参阅[设置警报](set-alerts.md)。
+- 有关事件传送和重试的信息，请参阅[事件网格消息传送和重试](delivery-and-retry.md)。
 

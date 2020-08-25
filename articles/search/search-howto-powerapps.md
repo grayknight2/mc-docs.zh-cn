@@ -10,12 +10,12 @@ ms.devlang: rest-api
 ms.topic: tutorial
 origin.date: 04/25/2020
 ms.date: 07/17/2020
-ms.openlocfilehash: fb73b8a7ef036b57ce9b9e5c69cbf62bc1aa59e3
-ms.sourcegitcommit: fe9ccd3bffde0dd2b528b98a24c6b3a8cbe370bc
+ms.openlocfilehash: 20c186b2760d556a5ea486aaba37daa4495d0050
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86471873"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516007"
 ---
 # <a name="tutorial-query-a-cognitive-search-index-from-power-apps"></a>教程：从 Power Apps 查询认知搜索索引
 
@@ -245,7 +245,7 @@ Power Apps 中的连接器是一个数据源连接。 在此步骤中，你将�
 
 <!--     Remember that the fields can be set to calculated values.
 
-    For the example, setting using the *"Image, Title and Subtitle"* layout and specifying the *Image* function as the concatenation of the root path for the data and the file name (for instance, `"https://mystore.blob.core.windows.net/multilang/" & ThisItem.metadata_storage_name`) will produce the result below.
+    For the example, setting using the *"Image, Title and Subtitle"* layout and specifying the *Image* function as the concatenation of the root path for the data and the file name (for instance, `"https://mystore.blob.core.chinacloudapi.cn/multilang/" & ThisItem.metadata_storage_name`) will produce the result below.
 
     :::image type="content" source="./media/search-howto-powerapps/2-8-2-final.png" alt-text="Final app" border="true":::         -->
 

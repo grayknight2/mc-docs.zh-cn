@@ -4,16 +4,16 @@ description: Azure 安全控制 - 日志记录和监视
 author: msmbaldwin
 ms.service: security
 ms.topic: conceptual
-ms.date: 05/28/2020
-ms.author: v-tawe
+ms.date: 08/13/2020
+ms.author: v-johya
 ms.custom: security-benchmark
 origin.date: 04/14/2020
-ms.openlocfilehash: afa321cd71b4b1ee8349d86aab0f39a01c498721
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: ccda292435a965e4185bda0462b8d388ca032cf1
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84200090"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228353"
 ---
 # <a name="security-control-logging-and-monitoring"></a>安全控制：日志记录和监视
 
@@ -27,9 +27,9 @@ ms.locfileid: "84200090"
 
 Microsoft 维护 Azure 资源的时间源，但是，你可以选择管理计算资源的时间同步设置。
 
-- [如何为 Azure Windows 计算资源配置时间同步](https://docs.azure.cn/virtual-machines/windows/time-sync)
+- [如何为 Azure Windows 计算资源配置时间同步](/virtual-machines/windows/time-sync)
 
-- [如何为 Azure Linux 计算资源配置时间同步](https://docs.azure.cn/virtual-machines/linux/time-sync)
+- [如何为 Azure Linux 计算资源配置时间同步](/virtual-machines/linux/time-sync)
 
 ## <a name="22-configure-central-security-log-management"></a>2.2：配置中心安全日志管理
 
@@ -39,13 +39,12 @@ Microsoft 维护 Azure 资源的时间源，但是，你可以选择管理计算
 
 通过 Azure Monitor 引入日志，以聚合终结点设备、网络资源和其他安全系统生成的安全数据。 在 Azure Monitor 中，使用 Log Analytics 工作区来查询和执行分析，并使用 Azure 存储帐户进行长期/存档存储。
 
-或者，可以启用将数据加入 Azure Sentinel 或第三方 SIEM 的功能。 
+或者，可以启用数据并将其加入第三方 SIEM。 
 
-- [如何加入 Azure Sentinel](https://docs.azure.cn/sentinel/quickstart-onboard)
+<!--Not available in MC:  Azure Sentinel-->
+- [如何使用 Azure Monitor 收集平台日志和指标](/azure-monitor/platform/diagnostic-settings)
 
-- [如何使用 Azure Monitor 收集平台日志和指标](https://docs.azure.cn/azure-monitor/platform/diagnostic-settings)
-
-- [如何使用 Azure Monitor 收集 Azure 虚拟机内部主机日志](https://docs.azure.cn/azure-monitor/learn/quick-collect-azurevm)
+- [如何使用 Azure Monitor 收集 Azure 虚拟机内部主机日志](/azure-monitor/learn/quick-collect-azurevm)
 
 - [如何开始使用 Azure Monitor 和第三方 SIEM 集成](https://azure.microsoft.com/blog/use-azure-monitor-to-integrate-with-siem-tools/)
 
@@ -57,9 +56,9 @@ Microsoft 维护 Azure 资源的时间源，但是，你可以选择管理计算
 
 在 Azure 资源上启用诊断设置，以访问审核、安全和诊断日志。 活动日志自动可用，包括事件源、日期、用户、时间戳、源地址、目标地址和其他有用元素。
 
-- [如何使用 Azure Monitor 收集平台日志和指标](https://docs.azure.cn/azure-monitor/platform/diagnostic-settings)
+- [如何使用 Azure Monitor 收集平台日志和指标](/azure-monitor/platform/diagnostic-settings)
 
-- [了解 Azure 中的日志记录和不同的日志类型](https://docs.azure.cn/azure-monitor/platform/platform-logs-overview)
+- [了解 Azure 中的日志记录和不同的日志类型](/azure-monitor/platform/platform-logs-overview)
 
 ## <a name="24-collect-security-logs-from-operating-systems"></a>2.4：从操作系统收集安全日志
 
@@ -69,7 +68,7 @@ Microsoft 维护 Azure 资源的时间源，但是，你可以选择管理计算
 
 如果计算资源归 Microsoft 所有，则 Microsoft 负责监视它。 如果计算资源归你的组织所有，则由你负责监视。 可以使用 Azure 安全中心监视 OS。 安全中心从操作系统收集的数据包括 OS 类型和版本、OS（Windows 事件日志）、正在运行的进程、计算机名称、IP 地址和登录用户。 Log Analytics 代理还会收集故障转储文件。
 
-- [如何使用 Azure Monitor 收集 Azure 虚拟机内部主机日志](https://docs.azure.cn/azure-monitor/learn/quick-collect-azurevm)
+- [如何使用 Azure Monitor 收集 Azure 虚拟机内部主机日志](/azure-monitor/learn/quick-collect-azurevm)
 
 - [了解 Azure 安全中心数据收集](https://docs.azure.cn/security-center/security-center-enable-data-collection)
 
@@ -81,9 +80,9 @@ Microsoft 维护 Azure 资源的时间源，但是，你可以选择管理计算
 
 在 Azure Monitor 中，根据组织的合规性规章设置 Log Analytics 工作区保留期。 使用 Azure 存储帐户进行长期/存档存储。
 
-- [更改 Log Analytics 中的数据保留期](https://docs.azure.cn/azure-monitor/platform/manage-cost-storage#change-the-data-retention-period)
+- [更改 Log Analytics 中的数据保留期](/azure-monitor/platform/manage-cost-storage#change-the-data-retention-period)
 
-- [如何为 Azure 存储帐户日志配置保留策略](https://docs.azure.cn/storage/common/storage-monitor-storage-account#configure-logging)
+- [如何为 Azure 存储帐户日志配置保留策略](/storage/common/storage-monitor-storage-account#configure-logging)
 
 ## <a name="26-monitor-and-review-logs"></a>2.6：监视和审查日志
 
@@ -94,9 +93,10 @@ Microsoft 维护 Azure 资源的时间源，但是，你可以选择管理计算
 分析和监视日志中的异常行为，并定期查看结果。 使用 Azure Monitor 的 Log Analytics 工作区查看日志并对日志数据执行查询。
 
 
-- [了解 Log Analytics 工作区](https://docs.azure.cn/azure-monitor/log-query/get-started-portal)
+<!--Not available in MC:  Azure Sentinel-->
+- [了解 Log Analytics 工作区](/azure-monitor/log-query/get-started-portal)
 
-- [如何在 Azure Monitor 中执行自定义查询](https://docs.azure.cn/azure-monitor/log-query/get-started-queries)
+- [如何在 Azure Monitor 中执行自定义查询](/azure-monitor/log-query/get-started-queries)
 
 ## <a name="27-enable-alerts-for-anomalous-activities"></a>2.7：针对异常活动启用警报
 
@@ -106,10 +106,11 @@ Microsoft 维护 Azure 资源的时间源，但是，你可以选择管理计算
 
 使用 Azure 安全中心和 Log Analytics 工作区监视安全日志和事件中的异常活动并发出警报。
 
+<!--Not available in MC:  Azure Sentinel-->
 
 - [如何在 Azure 安全中心管理警报](https://docs.azure.cn/security-center/security-center-managing-and-responding-alerts)
 
-- [如何针对 Log Analytics 日志数据发出警报](https://docs.azure.cn/azure-monitor/learn/tutorial-response)
+- [如何针对 Log Analytics 日志数据发出警报](/azure-monitor/learn/tutorial-response)
 
 ## <a name="28-centralize-anti-malware-logging"></a>2.8：集中管理反恶意软件日志记录
 
@@ -119,11 +120,11 @@ Microsoft 维护 Azure 资源的时间源，但是，你可以选择管理计算
 
 为 Azure 虚拟机和云服务启用反恶意软件事件集合。
 
-- [如何为虚拟机配置 Microsoft Antimalware](https://docs.microsoft.com/powershell/module/servicemanagement/azure/set-azurevmmicrosoftantimalwareextension?view=azuresmps-4.0.0)
+- [如何为虚拟机配置 Microsoft Antimalware](https://docs.microsoft.com/powershell/module/servicemanagement/azure.service/set-azurevmmicrosoftantimalwareextension?view=azuresmps-4.0.0)
 
-- [如何为云服务配置 Microsoft Antimalware](https://docs.microsoft.com/powershell/module/servicemanagement/azure/set-azureserviceantimalwareextension?view=azuresmps-4.0.0)
+- [如何为云服务配置 Microsoft Antimalware](https://docs.microsoft.com/powershell/module/servicemanagement/azure.service/set-azureserviceantimalwareextension?view=azuresmps-4.0.0)
 
-- [了解 Microsoft Antimalware](https://docs.azure.cn/security/fundamentals/antimalware)
+- [了解 Microsoft Antimalware](/security/fundamentals/antimalware)
 
 ## <a name="29-enable-dns-query-logging"></a>2.9：启用 DNS 查询日志记录
 
@@ -143,11 +144,12 @@ Microsoft 维护 Azure 资源的时间源，但是，你可以选择管理计算
 
 - [Azure 安全中心中的数据收集](https://docs.azure.cn/security-center/security-center-enable-data-collection#data-collection-tier)
 
-- [如何在 Azure Monitor 中执行自定义查询](https://docs.azure.cn/azure-monitor/log-query/get-started-queries)
+- [如何在 Azure Monitor 中执行自定义查询](/azure-monitor/log-query/get-started-queries)
 
-- [Azure Monitor 中的 Syslog 数据源](https://docs.azure.cn/azure-monitor/platform/data-sources-syslog)
+- [Azure Monitor 中的 Syslog 数据源](/azure-monitor/platform/data-sources-syslog)
 
 
 ## <a name="next-steps"></a>后续步骤
 
 - 请参阅下一个安全控制：[标识和访问控制](security-control-identity-access-control.md)
+

@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 origin.date: 05/19/2020
 ms.date: 07/01/2020
-ms.openlocfilehash: dfd1771c4023f51732c4df2b6036ef9e94e4a85c
-ms.sourcegitcommit: c17e965d4ffd82fd7cd86b2648fcb0053a65df00
+ms.openlocfilehash: 87e8307e088b488b93951dfc796eb57d00f7cec8
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470477"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515911"
 ---
 # <a name="data-mappings"></a>数据映射
 
@@ -45,7 +45,8 @@ CSV 映射可以应用于所有分隔符分隔的格式：CSV、TSV、PSV、SCSV
 | `ordinal`       | CSV 中的列顺序号                                                             |
 | `constantValue` | （可选）要用于列而不是 CSV 内某个值的常数值 |
 
-> [!NOTE] > `Ordinal` 和 `ConstantValue` 互斥。
+> [!NOTE]
+> `Ordinal` 和 `ConstantValue` 互斥。
 
 ### <a name="example-of-the-csv-mapping"></a>CSV 映射示例
 

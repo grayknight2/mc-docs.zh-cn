@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 05/28/2020
+ms.date: 08/19/2020
 ms.author: v-junlch
 ms.reviewer: hirsin
 ms.custom: aaddev
-ms.openlocfilehash: e497dff418223bd362e98a99928055a345007de6
-ms.sourcegitcommit: 0130a709d934d89db5cccb3b4997b9237b357803
+ms.openlocfilehash: 953692d07a1a070d1c76d0dafac764af692f9661
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84186854"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647496"
 ---
 # <a name="admin-consent-on-the-microsoft-identity-platform"></a>Microsoft 标识平台中的管理员同意
 
@@ -88,6 +88,6 @@ http://localhost/myapp/permissions?admin_consent=True&tenant=fa00d692-e9c7-4460-
 ## <a name="next-steps"></a>后续步骤
 - 请参阅[如何将应用转换为多租户应用](howto-convert-app-to-be-multi-tenant.md)
 - 了解如何[在授权代码授予流期间在 OAuth 2.0 协议层提供许可支持](v2-oauth2-auth-code-flow.md#request-an-authorization-code)。
-- 了解[多租户应用程序如何使用许可框架](active-directory-devhowto-multi-tenant-overview.md)来实现“用户”许可和“管理员”许可，为更高级的多层应用程序模式提供支持。
+- 了解[多租户应用程序如何使用许可框架](./howto-convert-app-to-be-multi-tenant.md)来实现“用户”许可和“管理员”许可，为更高级的多层应用程序模式提供支持。
 - 了解 [Azure AD 应用程序许可体验](application-consent-experience.md)
 

@@ -1,26 +1,16 @@
 ---
 title: 快速入门：从 Python 应用读取捕获的数据 - Azure 事件中心
 description: 快速入门：使用 Azure Python SDK 演示事件中心捕获功能的脚本。
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-editor: ''
-ms.assetid: bdff820c-5b38-4054-a06a-d1de207f01f6
-ms.service: event-hubs
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
-ms.custom: seodec18, tracking-python
-origin.date: 01/15/2020
-ms.date: 07/01/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 4711b0f753796b0f56a428e5cbc9346284c4f641
-ms.sourcegitcommit: 4f84bba7e509a321b6f68a2da475027c539b8fd3
+ms.openlocfilehash: 9d85ab58bf2ddfcd2429fd1a75247023450fbd2a
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85796144"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715114"
 ---
 # <a name="quickstart-event-hubs-capture-walkthrough-python-azure-eventhub-version-1"></a>快速入门：事件中心捕获演练：Python（azure-eventhub 版本 1）
 
@@ -202,4 +192,4 @@ ms.locfileid: "85796144"
 [1]: ./media/event-hubs-archive-python/event-hubs-python1.png
 [About Azure storage accounts]:../storage/common/storage-create-storage-account.md
 [Visual Studio Code]: https://code.visualstudio.com/
-[Event Hubs overview]: event-hubs-what-is-event-hubs.md
+[Event Hubs overview]: ./event-hubs-about.md

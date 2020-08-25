@@ -2,18 +2,19 @@
 title: 快速入门：Azure 队列存储库 v12 - Java
 description: 了解如何使用 Azure 队列 Java v12 库创建队列并向队列中添加消息。 接下来，介绍如何在队列中读取和删除消息。 还将介绍如何删除队列。
 author: WenJason
+ms.custom: devx-track-java
 ms.author: v-jay
 origin.date: 12/4/2019
-ms.date: 03/09/2020
+ms.date: 08/24/2020
 ms.service: storage
 ms.subservice: queues
 ms.topic: quickstart
-ms.openlocfilehash: fc3a1191148ca8efcb26127e176fdd9cef0f6757
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.openlocfilehash: 8122b3914f6463caa186a794b37a31538e890fd3
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414596"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753317"
 ---
 # <a name="quickstart-azure-queue-storage-client-library-v12-for-java"></a>快速入门：适用于 Java 的 Azure 队列存储客户端库 v12
 
@@ -28,7 +29,12 @@ ms.locfileid: "86414596"
 * 接收和删除队列中的消息
 * 删除队列
 
-[API 参考文档](https://azuresdkdocs.blob.core.windows.net/$web/java/azure-storage-queue/12.0.0/index.html) | [库源代码](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage/azure-storage-queue) | [包 (Maven)](https://mvnrepository.com/artifact/com.azure/azure-storage-queue) | [示例](/storage/common/storage-samples-java?toc=%2fstorage%2fqueues%2ftoc.json#queue-samples)
+其他资源：
+
+* [API 参考文档](https://azuresdkdocs.blob.core.windows.net/$web/java/azure-storage-queue/12.0.0/index.html)
+* [库源代码](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage/azure-storage-queue)
+* [包 (Maven)](https://mvnrepository.com/artifact/com.azure/azure-storage-queue)
+* [示例](/storage/common/storage-samples-java?toc=%2fstorage%2fqueues%2ftoc.json#queue-samples)
 
 ## <a name="prerequisites"></a>先决条件
 
@@ -168,7 +174,7 @@ Azure 队列存储是一个可存储大量消息的服务。 队列消息大小�
 * [获取连接字符串](#get-the-connection-string)
 * [创建队列](#create-a-queue)
 * [向队列添加消息](#add-messages-to-a-queue)
-* [查看队列中的消息](#peek-at-messages -in-a-queue)
+* [查看队列中的消息](#peek-at-messages-in-a-queue)
 * [更新队列中的消息](#update-a-message-in-a-queue)
 * [接收和删除队列中的消息](#receive-and-delete-messages-from-a-queue)
 * [删除队列](#delete-a-queue)
@@ -367,6 +373,6 @@ Done
 有关教程、示例、快速入门和其他文档，请访问：
 
 > [!div class="nextstepaction"]
-> [面向 Java 云开发人员的 Azure](/developer/java/)
+> [面向 Java 云开发人员的 Azure](/java/)
 
 * 若要查看更多 Azure 队列存储示例应用，请继续阅读 [Azure 队列存储 SDK v12 Java 客户端库示例](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage/azure-storage-queue/src/samples/java/com/azure/storage/queue)。

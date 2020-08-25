@@ -10,12 +10,12 @@ ms.service: machine-learning
 ms.subservice: core
 ms.topic: how-to
 ms.date: 04/21/2020
-ms.openlocfilehash: 369d7c2a11ca15d2936e2f0e6111e05f88e6a31b
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: a91be7802f9fe3a7631ebc4978ae9c31e97fa913
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440886"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227908"
 ---
 # <a name="how-to-run-jupyter-notebooks-in-your-workspace-preview"></a>如何在工作区中运行 Jupyter Notebook（预览）
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -185,11 +185,20 @@ Azure 机器学习在你创建 ipynb 文件时会创建一个检查点文件。
 笔记本会自动查找连接的计算实例上安装的所有 Jupyter 内核。  若要向计算实例添加内核，请执行以下步骤：
 
 1. 选择笔记本工具栏中的“[打开终端](#terminal)”。
-1. 使用终端窗口创建新环境。
+1. 使用终端窗口创建新环境。  例如，以下代码会创建 `newenv`：
+    ```shell
+    conda create --name newenv
+    ```
 1. 激活该环境。  例如，创建 `newenv` 的结果如下：
 
     ```shell
-    source activate newenv
+    conda activate newenv
+    ```
+1. 在新环境中安装 pip 和 ipykernel 包，并为该 conda 环境创建内核
+
+    ```shell
+    conda install pip
+    conda install ipykernel
     python -m ipykernel install --user --name newenv --display-name "Python (newenv)"
     ```
 
@@ -199,17 +208,17 @@ Azure 机器学习在你创建 ipynb 文件时会创建一个检查点文件。
 
 “计算”下拉列表旁的指示器显示计算的状态。  在计算的下拉列表中也会显示状态。  
 
-|颜色 |计算状态 |
+|Color |计算状态 |
 |---------|---------| 
 | 绿色 | 正在运行计算 |
-| 红色 |计算失败 | 
+| Red |计算失败 | 
 | 黑色 | 已停止计算 |
 |  浅蓝色 |正在创建、正在启动、正在重新启动、正在设置计算 |
 |  灰色 |正在删除、正在停止计算 |
 
 “内核”下拉列表旁的指示器显示内核的状态。
 
-|颜色 |内核状态 |
+|Color |内核状态 |
 |---------|---------|
 |  绿色 |内核已连接、空闲、繁忙|
 |  灰色 |内核未连接 |

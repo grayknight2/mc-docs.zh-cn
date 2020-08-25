@@ -5,15 +5,15 @@ author: ccompy
 ms.assetid: 66774bde-13f5-45d0-9a70-4e9536a4f619
 ms.topic: article
 origin.date: 06/08/2020
-ms.date: 06/22/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18, fasttrack-edit
-ms.openlocfilehash: d5cc96f011ce3565ee64eb69d79cc3064a10b9ec
-ms.sourcegitcommit: d24e12d49708bbe78db450466eb4fccbc2eb5f99
+ms.openlocfilehash: 8f471b23ddb136d6cf4195a923715060e01be28a
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85611902"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227982"
 ---
 # <a name="azure-app-service-hybrid-connections"></a>Azure 应用服务混合连接
 
@@ -38,13 +38,12 @@ ms.locfileid: "85611902"
 
 - 应用可以访问本地系统和服务。
 - 该功能不需要可访问 Internet 的终结点。
-- 设置过程快速而轻松。 
+- 设置过程快速而轻松。 无需网关
 - 每个混合连接与单个“主机:端口”组合匹配，这非常有利于安全性。
 - 通常不需要在防火墙中开放端口。 连接全部是通过标准 Web 端口建立的。
 - 由于该功能在网络级别运行，它并不知道应用使用的语言以及终结点使用的技术。
 - 可以通过单个应用使用它在多个网络中提供访问。 
-
-<!-- - It is supported in GA for Windows apps and is in preview for Linux apps. -->
+- 它在 Windows 应用正式版和 Linux 应用预览版中受支持。
 
 ### <a name="things-you-cannot-do-with-hybrid-connections"></a>混合连接无法提供的功能 ###
 
@@ -170,26 +169,30 @@ ms.locfileid: "85611902"
 
 Azure CLI 支持混合连接。 提供的命令可在应用和应用服务计划级别上运行。  应用级命令为：
 
-    az webapp hybrid-connection
+```azurecli
+az webapp hybrid-connection
 
-    Group
-        az webapp hybrid-connection : Methods that list, add and remove hybrid-connections from webapps.
-            This command group is in preview. It may be changed/removed in a future release.
-    Commands:
-        add    : Add a hybrid-connection to a webapp.
-        list   : List the hybrid-connections on a webapp.
-        remove : Remove a hybrid-connection from a webapp.
+Group
+    az webapp hybrid-connection : Methods that list, add and remove hybrid-connections from webapps.
+        This command group is in preview. It may be changed/removed in a future release.
+Commands:
+    add    : Add a hybrid-connection to a webapp.
+    list   : List the hybrid-connections on a webapp.
+    remove : Remove a hybrid-connection from a webapp.
+```
 
 利用应用服务计划命令，你可以设置给定混合连接将使用的密钥。 每个混合连接上都设置了两个密钥，一个主密钥和一个辅助密钥。 可以选择通过以下命令使用主密钥或辅助密钥。 这样，你就可以在需要定期再生成密钥时切换密钥。 
 
-    az appservice hybrid-connection --help
+```azurecli
+az appservice hybrid-connection --help
 
-    Group
-        az appservice hybrid-connection : A method that sets the key a hybrid-connection uses.
-            This command group is in preview. It may be changed/removed in a future release.
-    Commands:
-        set-key : Set the key that all apps in an appservice plan use to connect to the hybrid-
-                  connections in that appservice plan.
+Group
+    az appservice hybrid-connection : A method that sets the key a hybrid-connection uses.
+        This command group is in preview. It may be changed/removed in a future release.
+Commands:
+    set-key : Set the key that all apps in an appservice plan use to connect to the hybrid-
+                connections in that appservice plan.
+```
 
 ## <a name="secure-your-hybrid-connections"></a>保护混合连接 ##
 

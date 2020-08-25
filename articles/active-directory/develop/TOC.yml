@@ -4,8 +4,6 @@
   items:
     - name: 什么是 Microsoft 标识平台？
       href: v2-overview.md
-    - name: Microsoft 标识平台的发展
-      href: about-microsoft-identity-platform.md
 - name: 快速入门
   expanded: true
   items:
@@ -15,10 +13,10 @@
       items:
         - name: 注册应用程序
           href: quickstart-register-app.md
-        - name: 配置用于访问 Web API 的应用
-          href: quickstart-configure-app-access-web-apis.md
-        - name: 配置用于公开 Web API 的应用
+        - name: 配置应用以公开 Web API
           href: quickstart-configure-app-expose-web-apis.md
+        - name: 配置应用以访问 Web API
+          href: quickstart-configure-app-access-web-apis.md
         - name: 修改应用支持的帐户
           href: quickstart-modify-supported-accounts.md
         - name: 删除应用
@@ -47,8 +45,6 @@
       items:
         - name: ASP.NET
           href: quickstart-v2-dotnet-native-aspnet.md
-        - name: ASP.NET Core
-          href: 'https://azure.microsoft.com/resources/samples/active-directory-dotnet-native-aspnetcore-v2'
     - name: 移动和桌面应用
       items:
         - name: Android
@@ -296,6 +292,9 @@
               displayName: 'firstline worker, frontline worker, flw'
             - name: 单个和多个帐户公共客户端应用
               href: single-multi-account.md
+            - name: 处理错误和异常
+              href: msal-android-handling-exceptions.md
+              displayName: 'android, mobile'
             - name: 日志记录
               href: msal-logging.md?tabs=android
         - name: iOS 和 macOS
@@ -341,8 +340,6 @@
               href: msal-js-use-ie-browser.md
             - name: 已知问题 - IE 和 Microsoft Edge
               href: msal-js-known-issues-ie-edge-browsers.md
-            - name: 已知问题 - Safari
-              href: msal-js-known-issues-safari-browser.md
             - name: 处理错误和异常
               href: msal-handling-exceptions.md?tabs=javascript
             - name: 日志记录
@@ -475,6 +472,8 @@
           href: active-directory-claims-mapping.md
         - name: 配置可选声明
           href: active-directory-optional-claims.md
+        - name: 在声明中使用目录架构扩展属性
+          href: active-directory-schema-extensions.md
         - name: 在 Chrome 浏览器中处理 SameSite Cookie 更改
           href: howto-handle-samesite-cookie-changes-chrome-browser.md
         - name: 在 Safari 中处理 ITP
@@ -571,6 +570,10 @@
           href: vs-active-directory-webapi-what-happened.md
         - name: 诊断身份验证期间的错误
           href: vs-active-directory-error.md
+    - name: 将应用推向市场
+      items:
+        - name: 发布到 Office 365 卖家仪表板
+          href: 'https://docs.microsoft.com/office/dev/store/use-the-seller-dashboard-to-submit-to-the-office-store'
 - name: 参考
   items:
     - name: 应用程序清单
@@ -586,7 +589,7 @@
     - name: 身份验证和授权错误代码
       displayName: AADSTS
       href: reference-aadsts-error-codes.md
-    - name: 重大变化
+    - name: 中断性变更
       href: reference-breaking-changes.md
 - name: 资源
   items:
@@ -599,7 +602,7 @@
     - name: Azure 路线图
       href: 'https://azure.microsoft.com/roadmap/?category=security-identity'
     - name: Azure 资源的托管标识
-      href: /active-directory/managed-identities-azure-resources/overview
+      href: ../managed-identities-azure-resources/overview.md
     - name: 获取帮助
       displayName: 'support, help options'
       href: developer-support-help-options.md

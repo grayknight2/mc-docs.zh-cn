@@ -9,17 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 02/24/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9afad27e50dd72f69771e036fab425ec18faf436
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: 13e4e5ebea54dfe8063f094a9ca2cef11afcba6a
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77653439"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647552"
 ---
 # <a name="considerations-for-using-universal-windows-platform-with-msalnet"></a>将通用 Windows 平台与 MSAL.NET 配合使用时的注意事项
 将通用 Windows 平台 (UWP) 与 MSAL.NET 配合使用的应用程序的开发人员应当考虑本文中所述的概念。

@@ -7,14 +7,15 @@ author: tgore03
 ms.service: cloud-services
 ms.devlang: nodejs
 ms.topic: conceptual
-ms.date: 07/20/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
-ms.openlocfilehash: ea87d78659b36acf81228756443c36d3ece58f1a
-ms.sourcegitcommit: d32699135151e98471daebe6d3f5b650f64f826e
+ms.custom: devx-track-javascript
+ms.openlocfilehash: 2acdcef8e2b0f1b6b87310f911d085f77ffff74a
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160366"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647704"
 ---
 # <a name="build-and-deploy-a-nodejs-application-to-an-azure-cloud-service"></a>生成 Node.js 应用程序并将其部署到 Azure 云服务
 
@@ -88,7 +89,7 @@ http.createServer(function (req, res) {
 ## <a name="deploy-the-application-to-azure"></a>将应用程序部署到 Azure
 
 > [!NOTE]
-> 要完成本教程，需要一个 Azure 帐户。 可以[注册试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
+> 要完成本教程，需要一个 Azure 帐户。 可以[注册试用版](https://www.azure.cn/pricing/1rmb-trial)。
 
 ### <a name="download-the-azure-publishing-settings"></a>下载 Azure 发布设置
 要将应用程序部署到 Azure，必须先为 Azure 订阅下载发布设置。
@@ -175,10 +176,10 @@ Publish-AzureServiceProject -ServiceName $ServiceName  -Location "China East" -L
 
 <!-- URL List -->
 
-[使用轻型 Web 应用]: ../app-service/app-service-web-get-started-nodejs.md
-[Azure PowerShell]: /powershell-install-configure
+[使用轻型 Web 应用]: ../app-service/quickstart-nodejs.md
+[Azure PowerShell]: https://docs.microsoft.com/powershell/azure/
 [用于 .NET 2.7 的 Azure SDK]: https://www.microsoft.com/en-us/download/details.aspx?id=48178
-[将 PowerShell 连接]: /powershell-install-configure
+[将 PowerShell 连接]: https://docs.microsoft.com/powershell/azure/
 [nodejs.org]: https://nodejs.org/
 [创建 Azure 托管服务概述]: /cloud-services/
 [Node.js 开发人员中心]: /develop/nodejs/
@@ -192,3 +193,7 @@ Publish-AzureServiceProject -ServiceName $ServiceName  -Location "China East" -L
 [A browser window displaying the hello world page; the URL indicates the page is hosted on Azure.]: ./media/cloud-services-nodejs-develop-deploy-app/node21.png
 [The status of the Stop-AzureService command]: ./media/cloud-services-nodejs-develop-deploy-app/node48.png
 [The status of the Remove-AzureService command]: ./media/cloud-services-nodejs-develop-deploy-app/node49.png
+
+
+
+

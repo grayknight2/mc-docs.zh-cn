@@ -5,21 +5,21 @@ services: storage
 author: WenJason
 ms.service: storage
 ms.topic: how-to
-origin.date: 11/26/2019
-ms.date: 01/06/2020
+origin.date: 07/20/2020
+ms.date: 08/24/2020
 ms.author: v-jay
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: 1a5955691fce9169d475d4980d30ee33dedb7879
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 87c818623f6f2820a158056b921ab7b206e887f9
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75624448"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753447"
 ---
 # <a name="specify-a-customer-provided-key-on-a-request-to-blob-storage-with-net"></a>使用 .NET 在对 Blob 存储的请求中指定客户提供的密钥
 
-对 Azure Blob 存储发出请求的客户端可以选择在单个请求中提供加密密钥。 在请求中包含加密密钥可以精细控制 Blob 存储操作的加密设置。 客户提供的密钥（预览版）可以存储在 Azure Key Vault 或另一密钥存储中。
+对 Azure Blob 存储发出请求的客户端可以选择在单个请求中提供加密密钥。 在请求中包含加密密钥可以精细控制 Blob 存储操作的加密设置。 客户提供的密钥可以存储在 Azure Key Vault 或其他密钥存储中。
 
 本文介绍如何使用 .NET 在请求中指定客户提供的密钥。
 

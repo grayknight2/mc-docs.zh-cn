@@ -1,16 +1,16 @@
 ---
-author: mgblythe
+author: orspod
 ms.service: data-explorer
 ms.topic: include
 origin.date: 11/14/2018
-ms.date: 05/15/2020
+ms.date: 08/18/2020
 ms.author: v-tawe
-ms.openlocfilehash: 7d3f2317bff8c2cf4e5bfd8b715824e6e9aa8071
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.openlocfilehash: 9ecc179a623d3a2d5c8888584c9bc0d59f82e22d
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417606"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88602412"
 ---
 Power BI Desktop 中有了数据以后，即可创建基于该数据的报表。 将创建一个简单的包含柱状图的报表，以便按州显示作物损坏情况。
 

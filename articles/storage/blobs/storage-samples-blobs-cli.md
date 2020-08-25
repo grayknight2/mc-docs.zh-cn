@@ -1,33 +1,26 @@
 ---
 title: 适用于 Blob 存储的 Azure CLI 示例 | Microsoft Docs
-description: 适用于 Azure Blob 存储的 Azure CLI 示例
-services: storage
-documentationcenter: na
-author: forester123
-manager: digimobile
-editor: tysonn
-ms.assetid: ''
-ms.custom: mvc
-ms.service: storage
-ms.workload: storage
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: sample
+description: 查看有关使用 Azure Blob 存储的 Azure CLI 示例的链接，例如创建存储帐户、删除具有特定前缀的容器等。
+author: WenJason
+ms.author: v-jay
 origin.date: 06/13/2017
-ms.date: 10/23/2017
-ms.author: v-johch
-ms.openlocfilehash: 1b5b184f30bf83b503aca29ee201a4798028b718
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.date: 08/24/2020
+ms.service: storage
+ms.subservice: blobs
+ms.topic: sample
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 386810980e4b4469ab2afb769d5f9efa6ad7bfb1
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "63844343"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753555"
 ---
 # <a name="azure-cli-samples-for-azure-blob-storage"></a>适用于 Azure Blob 存储的 Azure CLI 示例
 
 下表包含的链接指向使用创建和管理 Azure 存储的 Azure CLI 生成的 Bash 脚本。
 
-| | |
+| Script | 说明 |
 |---|---|
 |**存储帐户**||
 | [创建存储帐户并检索/轮换访问密钥](../scripts/storage-common-rotate-account-keys-cli.md?toc=%2fcli%2ftoc.json) | 创建 Azure 存储帐户并检索和轮换其访问密钥。 |

@@ -7,14 +7,17 @@ ms.subservice: cosmosdb-sql
 ms.devlang: nodejs
 ms.topic: reference
 origin.date: 05/11/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: c40b1597839d9213f6699b5dfedb9431a6480a6c
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.custom: devx-track-javascript
+ms.openlocfilehash: 41aea4c3769a1dbf77b17523bd8bab435f9dd497
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323327"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222404"
 ---
 # <a name="azure-cosmos-db-nodejs-sdk-for-sql-api-release-notes-and-resources"></a>适用于 SQL API 的 Azure Cosmos DB Node.js SDK：发行说明和资源
 > [!div class="op_single_selector"]
@@ -37,7 +40,7 @@ ms.locfileid: "85323327"
 |---------|---------|
 |下载 SDK  |   [NPM](https://www.npmjs.com/package/@azure/cosmos) 
 |API 文档  |  [JavaScript SDK 参考文档](https://docs.microsoft.com/javascript/api/%40azure/cosmos/?view=azure-node-latest)
-|SDK 安装说明  |  [安装说明](https://github.com/Azure/azure-cosmos-js#installation)
+|SDK 安装说明  |  [安装说明](https://github.com/Azure/azure-sdk-for-js)
 |参与 SDK | [GitHub](https://github.com/Azure/azure-cosmos-js/tree/master)
 | 示例 | [Node.js 代码示例](sql-api-nodejs-samples.md)
 | 入门教程 | [JavaScript SDK 入门](sql-api-nodejs-get-started.md)
@@ -462,17 +465,8 @@ Add DISTINCT and LIMIT/OFFSET queries (#306)
 * GA SDK。
 
 ## <a name="release--retirement-dates"></a>发布和停用日期
-Azure 会在停用 SDK 时至少提前 12 个月发出通知，以便用户顺利转换为更高版本/受支持版本。
 
-新特性和功能以及优化仅添加到当前 SDK，因此建议始终尽早升级到最新的 SDK 版本。
-
-使用已停用的 SDK 对 Cosmos DB 发出的任何请求都会被服务拒绝。
-
-> [!WARNING]
-> Node 客户端 SDK for SQL API 的所有 1.x 版本将在 2020 年 8 月 30 日停用。 这只影响客户端节点 SDK，不影响服务器端脚本（存储过程、触发器和 UDF）。
-> 
->
-<br/>
+Azure 会在停用 SDK 时至少提前 12 个月发出通知，以便用户顺利转换为更高版本/受支持版本。 新特性和功能以及优化仅添加到当前 SDK，因此建议始终尽早升级到最新的 SDK 版本。
 
 | 版本 | 发布日期 | 停用日期 |
 | --- | --- | --- |
@@ -529,7 +523,7 @@ Azure 会在停用 SDK 时至少提前 12 个月发出通知，以便用户顺�
 | [1.0.1](#1.0.1) |2015年 5 月 15日 |2020 年 8 月 30 日 |
 | [1.0.0](#1.0.0) |2015 年 4 月 8 日 |2020 年 8 月 30 日 |
 
-## <a name="faq"></a>常见问题
+## <a name="faq"></a>常见问题解答
 [!INCLUDE [cosmos-db-sdk-faq](../../includes/cosmos-db-sdk-faq.md)]
 
 ## <a name="see-also"></a>另请参阅

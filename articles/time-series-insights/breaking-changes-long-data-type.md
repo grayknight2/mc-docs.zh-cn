@@ -8,14 +8,14 @@ ms.author: v-junlch
 manager: diviso
 ms.workload: big-data
 ms.topic: conceptual
-ms.date: 08/04/2020
+ms.date: 08/20/2020
 ms.custom: dpalled
-ms.openlocfilehash: a598d0e66bba5ecca88d6f86278bfdba85601665
-ms.sourcegitcommit: 36e7f37481969f92138bfe70192b1f4a2414caf7
+ms.openlocfilehash: a0a9dd78081b315d70d933063866d6343f1ab8b5
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87801855"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715344"
 ---
 # <a name="adding-support-for-long-data-type-in-azure-time-series-insights-gen2"></a>Azure 时序见解第 2 代中添加了对 long 数据类型的支持
 
@@ -65,7 +65,7 @@ ms.locfileid: "87801855"
 
 整数数据写入到 **propertyValue_long**。 **propertyValue_double** 中以前引入的（和将来引入的）数字数据不会进行复制。
 
-如果你要跨这两个列查询 **propertyValue** 属性的数据，则需要在 TSX 中使用 **coalesce()** 标量函数。 此函数接受相同 **DataType** 的参数，并返回参数列表中的第一个非 null 值。 有关详细信息，请参阅 [Azure 时序见解第 2 代数据访问概念](https://docs.microsoft.com/rest/api/time-series-insights/preview#other-functions)。
+如果你要跨这两个列查询 **propertyValue** 属性的数据，则需要在 TSX 中使用 **coalesce()** 标量函数。 此函数接受相同 **DataType** 的参数，并返回参数列表中的第一个非 null 值。 有关详细信息，请参阅 [Azure 时序见解第 2 代数据访问概念](https://docs.microsoft.com/rest/api/time-series-insights/reference-time-series-expression-syntax#other-functions)。
 
 #### <a name="variable-definition-in-tsx---numeric"></a>TSX 中的变量定义 - 数字
 
@@ -77,7 +77,7 @@ ms.locfileid: "87801855"
 
 [![新的变量定义](./media/time-series-insights-long-data-type/var-def.png)](./media/time-series-insights-long-data-type/var-def.png#lightbox)
 
-还可以使用 **coalesce($event.propertyValue.Double, toDouble($event.propertyValue.Long))** 作为自定义[时序表达式](https://docs.microsoft.com/rest/api/time-series-insights/preview#time-series-expression-and-syntax)。
+还可以使用 **coalesce($event.propertyValue.Double, toDouble($event.propertyValue.Long))** 作为自定义[时序表达式](https://docs.microsoft.com/rest/api/time-series-insights/reference-time-series-expression-syntax)。
 
 #### <a name="inline-variable-definition-using-tsx-query-apis---numeric"></a>使用 TSX 查询 API 的内联变量定义 - 数字
 
@@ -125,7 +125,7 @@ ms.locfileid: "87801855"
 }
 ```
 
-还可以使用 **coalesce($event.propertyValue.Double, toDouble($event.propertyValue.Long))** 作为自定义[时序表达式](https://docs.microsoft.com/rest/api/time-series-insights/preview#time-series-expression-and-syntax)。
+还可以使用 **coalesce($event.propertyValue.Double, toDouble($event.propertyValue.Long))** 作为自定义[时序表达式](https://docs.microsoft.com/rest/api/time-series-insights/reference-time-series-expression-syntax)。
 
 > [!NOTE]
 > 建议在可能使用这些变量的所有位置更新它们。 这些位置包括时序模型、已保存的查询和 Power BI 连接器查询。
@@ -146,7 +146,7 @@ ms.locfileid: "87801855"
 
 还可以使用 **coalesce($event.propertyValue.Double, toDouble($event.propertyValue.Long))** 作为自定义[时序表达式](https://docs.microsoft.com/rest/api/time-series-insights/preview#time-series-expression-and-syntax)。
 
-分类变量仍要求值为整数类型。 在自定义[时序表达式](https://docs.microsoft.com/rest/api/time-series-insights/preview#time-series-expression-and-syntax)中，**coalesce()** 中的所有参数的 **DataType** 都必须是 **Long** 类型。
+分类变量仍要求值为整数类型。 在自定义[时序表达式](https://docs.microsoft.com/rest/api/time-series-insights/reference-time-series-expression-syntax)中，**coalesce()** 中的所有参数的 **DataType** 都必须是 **Long** 类型。
 
 #### <a name="inline-variable-definition-using-tsx-query-apis---categorical"></a>使用 TSX 查询 API 的内联变量定义 - 类别
 
@@ -226,7 +226,7 @@ ms.locfileid: "87801855"
 }
 ```
 
-分类变量仍要求值为整数类型。 在自定义[时序表达式](https://docs.microsoft.com/rest/api/time-series-insights/preview#time-series-expression-and-syntax)中，**coalesce()** 中的所有参数的 **DataType** 都必须是 **Long** 类型。
+分类变量仍要求值为整数类型。 在自定义[时序表达式](https://docs.microsoft.com/rest/api/time-series-insights/reference-time-series-expression-syntax)中，**coalesce()** 中的所有参数的 **DataType** 都必须是 **Long** 类型。
 
 > [!NOTE]
 > 建议在可能使用这些变量的所有位置更新它们。 这些位置包括时序模型、已保存的查询和 Power BI 连接器查询。

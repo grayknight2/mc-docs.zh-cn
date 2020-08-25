@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 07/08/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: lenalepa, sureshja, jesakowi
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started
-ms.openlocfilehash: d49252af1f8217c764935ffb5b6e0227dd1799f2
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.openlocfilehash: 95d77f7713ad7de4b53072f41a65ccede7c89747
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164968"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647473"
 ---
 # <a name="microsoft-identity-platform-best-practices-and-recommendations"></a>Microsoft 标识平台最佳做法和建议
 
@@ -25,7 +25,7 @@ ms.locfileid: "86164968"
 
 如果你刚刚入门，请查看 [Microsoft 标识平台文档](index.yml)来了解身份验证基础知识、Microsoft 标识平台中的应用方案，等等。
 
-使用以下查检表确保应用程序与 [Microsoft 标识平台](/active-directory/develop/)有效集成。
+使用以下查检表确保应用程序与 [Microsoft 标识平台](./index.yml)有效集成。
 
 > [!TIP]
 > Azure 门户中的集成助手可帮助你应用其中许多最佳做法和建议。 选择 Azure 门户中的任何[应用注册](https://portal.azure.cn/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)，然后选择“集成助手(预览版)”菜单项，开始使用助手。
@@ -58,7 +58,7 @@ ms.locfileid: "86164968"
 
 ![复选框](./media/active-directory-integration-checklist/checkbox-two.svg) 不要仅使用用户名/密码。 不要使用[资源所有者密码凭据流 (ROPC)](v2-oauth-ropc.md)，因为它会直接处理用户的密码。 此流所需的信任度和用户公开度很高，仅当无法使用其他更安全的流时，才应使用此流。 在某些情况下，此流仍然是必需的，但请注意，使用它会对应用程序施加约束。  有关其他新式方法，请阅读[身份验证流和应用程序方案](authentication-flows-app-scenarios.md)。
 
-![复选框](./media/active-directory-integration-checklist/checkbox-two.svg) 保护和管理 Web 应用、Web API 和守护程序应用的机密应用凭据。 使用[证书凭据](active-directory-certificate-credentials.md)，而不是密码凭据（客户端机密）。 如果必须使用密码凭据，请不要手动设置。 不要将凭据存储在代码或配置中，切勿允许人类处理这些凭据。 如果可能，请使用 [Azure 资源的托管标识](/active-directory/managed-identities-azure-resources/overview)或 [Azure Key Vault](/key-vault/key-vault-whatis) 存储和定期轮换凭据。
+![复选框](./media/active-directory-integration-checklist/checkbox-two.svg) 保护和管理 Web 应用、Web API 和守护程序应用的机密应用凭据。 使用[证书凭据](active-directory-certificate-credentials.md)，而不是密码凭据（客户端机密）。 如果必须使用密码凭据，请不要手动设置。 不要将凭据存储在代码或配置中，切勿允许人类处理这些凭据。 如果可能，请使用 [Azure 资源的托管标识](../managed-identities-azure-resources/overview.md)或 [Azure Key Vault](../../key-vault/general/basic-concepts.md) 存储和定期轮换凭据。
 
 ![复选框](./media/active-directory-integration-checklist/checkbox-two.svg) 确保应用程序请求最低特权权限。 只在有需要时，才请求应用程序绝对需要的权限。 了解不同的[权限类型](v2-permissions-and-consent.md#permission-types)。 仅在必要时使用应用程序权限；尽量使用委托的权限。 有关 Microsoft Graph 权限的完整列表，请参阅此[权限参考](https://docs.microsoft.com/graph/permissions-reference)。
 

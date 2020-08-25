@@ -1,18 +1,18 @@
 ---
 title: 保护 Azure Functions
 description: 了解如何使 Azure 中运行的函数代码更安全，使其免遭常见攻击的威胁。
-ms.date: 07/01/2020
+ms.date: 08/12/2020
 ms.topic: conceptual
-ms.openlocfilehash: eb4af7cedb907573655f8949f3b965d9be0133e5
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.openlocfilehash: 0d6f8859f94ed0699b3d3488656c18993e5d1e3b
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945334"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222667"
 ---
 # <a name="securing-azure-functions"></a>保护 Azure Functions
 
-对于 Web 或云托管应用程序来说，无服务器函数的安全开发、部署和操作的规划在诸多方面都几乎相同。 [Azure 应用服务](/app-service/)提供函数应用的托管基础结构。 本文介绍了运行函数代码的安全策略，以及应用服务如何帮助你保护函数。 
+对于 Web 或云托管应用程序来说，无服务器函数的安全开发、部署和操作的规划在诸多方面都几乎相同。 [Azure 应用服务](../app-service/index.yml)提供函数应用的托管基础结构。 本文介绍了运行函数代码的安全策略，以及应用服务如何帮助你保护函数。 
 
 [!INCLUDE [app-service-security-intro](../../includes/app-service-security-intro.md)]
 
@@ -23,7 +23,15 @@ ms.locfileid: "85945334"
 ### <a name="security-center"></a>安全中心
 
 安全中心与门户中的函数应用集成。 它免费提供了对潜在配置相关安全漏洞的快速评估。 在专用计划中运行的函数应用也可以使用安全中心的实时安全功能，但需要额外付费。 若要了解更多信息，请参阅[保护你的 Azure 应用服务 Web 应用和 API](../security-center/security-center-app-services.md)。 
- 
+
+### <a name="log-and-monitor"></a>日志和监视器
+
+检测攻击的方法之一是通过活动监视活动和日志分析。 Functions 与 Application Insights 相集成，可收集函数应用的日志、性能和错误数据。 Application Insights 可自动检测性能异常，并且包含了强大的分析工具来帮助你诊断问题并了解函数的使用方式。 若要了解详细信息，请参阅[监视 Azure Functions](functions-monitoring.md)。
+
+Functions 还与 Azure Monitor 日志集成，使你能够将函数应用日志与系统事件合并，以便更轻松地进行分析。 你可以使用诊断设置将函数的平台日志和指标流式导出配置到你选择的目标位置，例如 Log Analytics 工作区。
+
+对于企业级威胁检测和响应自动化，请将日志和事件流式传输到 Log Analytics 工作区。 
+
 ### <a name="require-https"></a>需要 HTTPS
 
 默认情况下，客户端可以使用 HTTP 或 HTTPS 连接到函数终结点。 应将 HTTP 重定向到 HTTPS，因为 HTTPS 使用 SSL/TLS 协议来提供安全连接，该连接经过了加密和身份验证。 若要了解如何操作，请参阅[实施 HTTPS](../app-service/configure-ssl-bindings.md#enforce-https)。
@@ -46,7 +54,7 @@ ms.locfileid: "85945334"
 
 下表比较了不同类型的访问密钥的用法：
 
-| 操作                                        | 作用域                    | 有效密钥         |
+| 操作                                        | 范围                    | 有效密钥         |
 |-----------------------------------------------|--------------------------|--------------------|
 | 执行函数                            | 特定函数        | 函数           |
 | 执行函数                            | 任何函数             | 函数或主机   |
@@ -71,13 +79,13 @@ ms.locfileid: "85945334"
 
 #### <a name="user-management-permissions"></a>用户管理权限
 
-函数支持内置 [Azure 基于角色的访问控制 (RBAC)](../role-based-access-control/overview.md)。 函数支持的 RBAC 角色有[参与者](../role-based-access-control/built-in-roles.md#contributor)、[所有者](../role-based-access-control/built-in-roles.md#owner)和[读者](../role-based-access-control/built-in-roles.md#owner)。 
+函数支持内置 [Azure 基于角色的访问控制 (Azure RBAC)](../role-based-access-control/overview.md)。 函数支持的 Azure 角色有[参与者](../role-based-access-control/built-in-roles.md#contributor)、[所有者](../role-based-access-control/built-in-roles.md#owner)和[读者](../role-based-access-control/built-in-roles.md#owner)。 
 
 权限在函数应用级别有效。 参与者角色是执行大多数函数应用级任务所必需的。 只有所有者角色才能删除函数应用。 
 
 #### <a name="organize-functions-by-privilege"></a>按权限组织函数 
 
-应用程序设置中存储的连接字符串和其他凭据为函数应用中的所有函数提供了关联资源中相同的权限集。 请考虑将具有特定凭据访问权限的函数数量降至最少，具体方法是将不使用这些凭据的函数移动到单独的函数应用中。 你始终可以使用技术在不同函数应用中的函数之间传递数据。  
+应用程序设置中存储的连接字符串和其他凭据为函数应用中的所有函数提供了关联资源中相同的权限集。 请考虑将具有特定凭据访问权限的函数数量降至最少，具体方法是将不使用这些凭据的函数移动到单独的函数应用中。 你始终可以使用诸如[函数链](https://docs.microsoft.com/learn/modules/chain-azure-functions-data-using-bindings/)之类的技术在不同函数应用中的函数之间传递数据。  
 
 #### <a name="managed-identities"></a>托管标识
 

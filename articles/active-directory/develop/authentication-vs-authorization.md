@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 06/29/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: jmprieur, saeeda, sureshja, hirsin
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started
-ms.openlocfilehash: 47dc752e62fc5a18cf99dc6ecab6b3f871d9e42d
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.openlocfilehash: 3c7a96764130b040ff36d38a74a062494fb37b25
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945117"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647639"
 ---
 # <a name="authentication-vs-authorization"></a>身份验证和授权
 
@@ -38,7 +38,7 @@ ms.locfileid: "85945117"
 
 Azure Active Directory (Azure AD) 就是云中的一个集中标识提供程序。 通过将身份验证和授权委托给它可实现以下场景：要求用户位于特定位置的条件访问策略、使用[多重身份验证](../authentication/concept-mfa-howitworks.md)（有时称为双因素身份验证或 2FA），以及允许用户登录一次后可自动登录到共享同一集中目录的所有 Web 应用。 此功能被称为“单一登录 (SSO)”。
 
-Microsoft 标识平台将标识提供为一项服务、支持行业标准协议（例如 OAuth 2.0 和 OpenID Connect），还提供用于不同平台的开源库来帮助你快速开始编码，从而简化了对应用程序开发人员的授权和身份验证。 借助它，开发人员可构建这样的应用程序，即进行所有 Microsoft 标识的登录，并获取令牌来调用 [Microsoft Graph](https://developer.microsoft.com/graph/)、其他 Microsoft API 或者开发人员生成的 API。 有关详细信息，请参[Microsoft 标识平台的发展](about-microsoft-identity-platform.md)。
+Microsoft 标识平台将标识提供为一项服务、支持行业标准协议（例如 OAuth 2.0 和 OpenID Connect），还提供用于不同平台的开源库来帮助你快速开始编码，从而简化了对应用程序开发人员的授权和身份验证。 借助它，开发人员可构建这样的应用程序，即进行所有 Microsoft 标识的登录，并获取令牌来调用 [Microsoft Graph](https://developer.microsoft.com/graph/)、其他 Microsoft API 或者开发人员生成的 API。
 
 下面是 Microsoft 标识平台使用的各种协议的简单比较：
 

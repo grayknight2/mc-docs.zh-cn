@@ -1,14 +1,14 @@
 ---
 title: Azure Functions C# developer reference（Azure Functions C# 开发人员参考）
 description: '了解如何开发使用 C # 的 Azure 功能。'
-ms.topic: reference
-ms.date: 02/18/2020
-ms.openlocfilehash: 23fb7c15a0b913e55781dd74fb9ee6e1c2e8b9fd
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.topic: conceptual
+ms.date: 08/12/2020
+ms.openlocfilehash: 9a3474913bae07a71baf99f64748ea29893d4571
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79292988"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223407"
 ---
 # <a name="azure-functions-c-developer-reference"></a>Azure Functions C# developer reference（Azure Functions C# 开发人员参考）
 
@@ -31,7 +31,7 @@ Functions 运行时版本使用特定版本的 .NET。 下表显示了可与项�
 | ---- | ---- |
 | Functions 3.x | .NET Core 3.1 |
 | Functions 2.x | .NET Core 2.2 |
-| Functions 1.x | .NET Framework 4.6 |
+| Functions 1.x | .NET Framework 4.7 |
 
 若要了解详细信息，请参阅 [Azure Functions 运行时版本概述](functions-versions.md)
 
@@ -202,6 +202,28 @@ Visual Studio 使用 [Azure Functions Core Tools](functions-run-local.md#install
 [3/1/2018 9:59:53 AM] Starting Host (HostId=contoso2-1518597420, Version=2.0.11353.0, ProcessId=22020, Debug=False, Attempt=0, FunctionsExtensionVersion=)
 ```
 
+## <a name="readytorun"></a>ReadyToRun
+
+可以将函数应用编译为 [ReadyToRun 二进制文件](https://docs.microsoft.com/dotnet/core/whats-new/dotnet-core-3-0#readytorun-images)。 ReadyToRun 是一种预先编译形式，可以提高启动性能，帮助降低在[消耗计划](functions-scale.md#consumption-plan)中运行时的[冷启动](functions-scale.md#cold-start)的影响。
+
+ReadyToRun 在 .NET 3.0 中提供，并且需要 [Azure Functions 运行时版本 3.0](functions-versions.md)。
+
+若要将项目编译为 ReadyToRun，请通过添加 `<PublishReadyToRun>` 和 `<RuntimeIdentifier>` 元素来更新项目文件。 以下是用于发布到 Windows 32 位函数应用的配置。
+
+```xml
+<PropertyGroup>
+  <TargetFramework>netcoreapp3.1</TargetFramework>
+  <AzureFunctionsVersion>v3</AzureFunctionsVersion>
+  <PublishReadyToRun>true</PublishReadyToRun>
+  <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+</PropertyGroup>
+```
+
+> [!IMPORTANT]
+> ReadyToRun 目前不支持交叉编译。 必须在与部署目标相同的平台上生成应用。 此外，请注意函数应用中配置的“位数”。 例如，如果 Azure 中的函数应用为 Windows 64 位，则在 Windows 上编译应用时必须使用 `win-x64` 作为[运行时标识符](https://docs.microsoft.com/dotnet/core/rid-catalog)。
+
+也可以通过命令行使用 ReadyToRun 生成应用。 有关详细信息，请参阅 [`dotnet publish`](https://docs.microsoft.com/dotnet/core/tools/dotnet-publish) 中的 `-p:PublishReadyToRun=true` 选项。
+
 ## <a name="supported-types-for-bindings"></a>绑定支持的类型
 
 每个绑定都具有其自己支持的类型；例如，blob 触发器属性可以应用于字符串参数、POCO 参数、`CloudBlockBlob` 参数或任何其他几种受支持的类型之一。 [适用于 blob 绑定的绑定参考文章](functions-bindings-storage-blob-trigger.md#usage)列出了所有受支持的参数类型。 有关详细信息，请参阅[触发器和绑定](functions-triggers-bindings.md)与[每个绑定类型的绑定参考文档](functions-triggers-bindings.md#next-steps)。
@@ -238,7 +260,7 @@ public static class ICollectorExample
 
 ## <a name="logging"></a>日志记录
 
-若要使用 C# 将输出记录到流式传输日志中，请包括 `ILogger` 类型的参数。 建议将其命名为 `log`，如下例所示：  
+若要使用 C# 将输出记录到流式传输日志中，请包括 [ILogger](https://docs.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger) 类型的参数。 建议将其命名为 `log`，如下例所示：  
 
 ```csharp
 public static class SimpleExample
@@ -252,6 +274,8 @@ public static class SimpleExample
     }
 } 
 ```
+
+避免在 Azure Functions 中使用 `Console.Write`。 有关详细信息，请参阅“监视 Azure Functions”文章中的[使用 C# 函数编写日志](functions-monitoring.md#write-logs-in-c-functions)****。
 
 ## <a name="async"></a>异步
 
@@ -413,5 +437,3 @@ public static class IBinderExampleMultipleAttributes
 > [!div class="nextstepaction"]
 > [详细了解有关 Azure Functions 的最佳做法](functions-best-practices.md)
 
-
-<!-- Update_Description: link update -->

@@ -1,21 +1,18 @@
 ---
 title: 教程：将自定义事件发送到混合连接 - 事件网格
 description: 教程：使用 Azure 事件网格和 Azure CLI 发布一个主题，然后订阅该事件。 混合连接用于终结点。
-services: event-grid
-keywords: ''
-author: lingliw
-ms.author: v-lingwu
+author: Johnnytechn
+ms.author: v-johya
 origin.date: 11/05/2019
-ms.date: 3/16/2020
+ms.date: 08/10/2020
 ms.topic: tutorial
-ms.service: event-grid
-ms.custom: seodec18
-ms.openlocfilehash: 27ea3a7cce3b0a30ca06c45289e3620ef6483056
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: a0294c11aa066bffd7d3b2f051a240f6d197a77a
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79452524"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228046"
 ---
 # <a name="tutorial-route-custom-events-to-azure-relay-hybrid-connections-with-azure-cli-and-event-grid"></a>教程：使用 Azure CLI 和事件网格将自定义事件路由到 Azure 中继混合连接
 
@@ -33,12 +30,12 @@ Azure 事件网格是针对云的事件处理服务。 Azure 中继混合连接�
 
 事件网格主题是 Azure 资源，必须放置在 Azure 资源组中。 该资源组是在其中部署和管理 Azure 资源的逻辑集合。
 
-使用 [az group create](/cli/group#az-group-create) 命令创建资源组。 
+使用“[az group create](/cli/group#az-group-create)”命令创建资源组。 
 
-以下示例在 *chinaeast* 位置创建名为 *gridResourceGroup* 的资源组。
+以下示例在“chinanorth2”位置创建名为“gridResourceGroup”的资源组。
 
 ```azurecli
-az group create --name gridResourceGroup --location chinaeast
+az group create --name gridResourceGroup --location chinanorth2
 ```
 
 ## <a name="create-a-custom-topic"></a>创建自定义主题
@@ -46,7 +43,7 @@ az group create --name gridResourceGroup --location chinaeast
 事件网格主题提供用户定义的终结点，可向其发布事件。 以下示例在资源组中创建自定义主题。 将 `<topic_name>` 替换为自定义主题的唯一名称。 事件网格主题名称必须唯一，因为它由 DNS 条目表示。
 
 ```azurecli
-az eventgrid topic create --name <topic_name> -l chinaeast -g gridResourceGroup
+az eventgrid topic create --name <topic_name> -l chinanorth2 -g gridResourceGroup
 ```
 
 ## <a name="subscribe-to-a-custom-topic"></a>订阅自定义主题
@@ -122,5 +119,6 @@ az group delete --name gridResourceGroup
 了解如何创建主题和事件订阅以后，即可进一步学习事件网格的功能：
 
 - [关于事件网格](overview.md)
-- [通过 Azure 事件网格和逻辑应用监视虚拟机的更改](monitor-virtual-machine-changes-event-grid-logic-app.md)
+- [将 Blob 存储事件路由到自定义 Web 终结点](../storage/blobs/storage-blob-event-quickstart.md?toc=%2fazure%2fevent-grid%2ftoc.json)
 - [将大数据流式传输到数据仓库](event-grid-event-hubs-integration.md)
+

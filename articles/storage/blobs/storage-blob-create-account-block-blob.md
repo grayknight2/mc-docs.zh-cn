@@ -4,17 +4,18 @@ description: 演示如何创建具有高级性能特征的 Azure BlockBlobStorag
 author: WenJason
 services: storage
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 05/10/2020
-ms.date: 06/01/2020
+ms.date: 08/24/2020
 ms.author: v-jay
 ms.subservice: blobs
-ms.openlocfilehash: 9402a12e91afa950adefc8e8702df27603d0e7be
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 065be3c7b648c9a7cc05f77e915b6f9afecc0e79
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199754"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753452"
 ---
 # <a name="create-a-blockblobstorage-account"></a>创建 BlockBlobStorage 帐户
 
@@ -103,10 +104,6 @@ az login
 
 8. 选择“高级”选项卡。
 
-9. 若要优化用于数据分析的存储帐户，请将“分层命名空间”设为“启用”。 否则，请将此选项设置为默认值。
-
-   若要了解详细信息，请参阅 [Azure Data Lake Storage Gen2 简介](data-lake-storage-introduction.md)。
-
 8. 选择“查看+创建”可查看存储帐户设置。
 
 9. 选择“创建” 。
@@ -146,8 +143,6 @@ az login
 
    New-AzStorageAccount -ResourceGroupName $resourcegroup -Name $storageaccount -Location $location -Kind "BlockBlobStorage" -SkuName "Premium_LRS"
    ```
-   若要优化用于数据分析的存储帐户，请将 `-EnableHierarchicalNamespace $True` 添加到命令中。 若要了解详细信息，请参阅 [Azure Data Lake Storage Gen2 简介](data-lake-storage-introduction.md)。
-
 ## <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
 若要使用 Azure CLI 创建块 Blob 帐户，必须先安装 Azure CLI 版本 2.0.46 或更高版本。 运行 `az --version` 即可查找版本。 如需进行安装或升级，请参阅[安装 Azure CLI](/cli/install-azure-cli)。
@@ -176,8 +171,6 @@ az login
     --kind "BlockBlobStorage" \
     --sku "Premium_LRS"
    ```
-
-   若要优化用于数据分析的存储帐户，请将 `--hierarchical-namespace true` 添加到命令中。 若要了解详细信息，请参阅 [Azure Data Lake Storage Gen2 简介](data-lake-storage-introduction.md)。
 
 ---
 

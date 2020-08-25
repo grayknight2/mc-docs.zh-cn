@@ -11,12 +11,12 @@ ms.subservice: core
 ms.topic: how-to
 ms.date: 05/28/2020
 ms.custom: seodec18
-ms.openlocfilehash: a49e383f33c924506a31d25dda63e94d06802f9c
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: 34750d8918d6b32dc7b4ad974fe3db2cb038a30f
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440967"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228231"
 ---
 # <a name="featurization-in-automated-machine-learning"></a>自动化机器学习中的特征化
 
@@ -64,7 +64,7 @@ ms.locfileid: "86440967"
 | ------------- | ------------- |
 |删除高基数或者无差异的特征* |从训练集和验证集中删除这些特征。 适用于所有值都缺失的特征、所有行使用同一值的特征，或者包含高基数（例如哈希、ID 或 GUID）的特征。|
 |插补缺少的值* |对于数字特征，将在列中插补平均值。<br/><br/>对于分类特征，将插补最常用值。|
-|生成其他特征* |对于日期时间特征：年、月、日、星期、年日期、季、年周、小时、分钟、秒。<br/><br/>对于文本特征：基于单元语法、双元语法和三元语法的字词频率。|
+|生成其他特征* |对于日期时间特征：年、月、日、星期、年日期、季、年周、小时、分钟、秒。<br><br> 对于预测任务，将创建以下附加的日期/时间特征：ISO 年份、半年、字符串形式的日历月份、周、字符串形式的周几、一季中的日期、一年中的日期、AM/PM（如果是中午 (12 pm) 之前的时间，则此项为 0，否则为 1）、字符串形式的 AM/PM、一天中的小时（12 小时制）<br/><br/>对于文本特征：基于单元语法、双元语法和三元语法的字词频率。 详细了解[如何通过 BERT 执行此操作](#bert-integration)。|
 |转换和编码*|将唯一值较少的数字特征转换为分类特征。<br/><br/>将为低基数分类特征使用 One-hot 编码。 将为高基数分类特征使用 One-hot-hash 编码。|
 |单词嵌入|文本特征化器使用预先训练的模型将文本标记的矢量转换为句子矢量。 每个单词在文档中的嵌入矢量与其余矢量聚合在一起，以生成文档特征矢量。|
 |目标编码|对于分类特征，此步骤将每个类别映射到回归问题的平均目标值，并映射到分类问题的每个类的类概率。 应用基于频率的加权和 k 折交叉验证，以减少稀疏数据类别导致的映射过度拟合与干扰。|
@@ -106,7 +106,7 @@ ms.locfileid: "86440967"
 插补缺少的特征值 |Passed <br><br><br> 完成| 在训练数据中未检测到缺失特征值。 详细了解[缺失值插补。](https://docs.microsoft.com/azure/machine-learning/how-to-use-automated-ml-for-ml-models#advanced-featurization-options) <br><br> 在训练数据中检测到缺失特征值并进行了插补。
 高基数特征处理 |Passed <br><br><br> 完成| 已分析输入，但未检测到任何高基数特征。 详细了解[高基数特征检测](#automatic-featurization)。 <br><br> 在输入中检测到了高基数特征，并进行了处理。
 验证拆分处理 |完成| 已将验证配置设置为 `'auto'`，并且训练数据包含的行少于 20,000 行。 <br> 已使用交叉验证来验证经过训练的模型的每个迭代。 详细了解[验证数据](https://docs.microsoft.com/azure/machine-learning/how-to-configure-auto-train#train-and-validation-data)。 <br><br> 已将验证配置设置为 `'auto'`，并且训练数据包含的行多于 20,000 行。 <br> 输入数据已被拆分成训练数据集和验证数据集，以用于验证模型。
-类均衡检测 |Passed <br><br><br><br><br> 收到警报 | 输入已经过分析，训练数据中的所有类都是均衡的。 如果某个数据集中每个类都有良好的表示形式（按样本的数量和比率进行度量），则将该数据集视为均衡的数据集。 <br><br><br> 在输入中检测到了不均衡类。 若要修复模型偏差，请解决均衡问题。 详细了解[不均衡数据](https://docs.microsoft.com/azure/machine-learning/concept-manage-ml-pitfalls#identify-models-with-imbalanced-data)。
+类均衡检测 |Passed <br><br><br><br><br> 收到警报 <br><br><br><br> 完成| 输入已经过分析，训练数据中的所有类都是均衡的。 如果某个数据集中每个类都有良好的表示形式（按样本的数量和比率进行度量），则将该数据集视为均衡的数据集。 <br><br> 在输入中检测到了不均衡类。 若要修复模型偏差，请解决均衡问题。 详细了解[不均衡数据](https://docs.microsoft.com/azure/machine-learning/concept-manage-ml-pitfalls#identify-models-with-imbalanced-data)。 <br><br> 在输入中检测到不均衡类，并且扫描逻辑已确定要应用均衡。
 内存问题检测 |Passed <br><br><br><br> 完成 |<br> 已分析了选定的值（范围、滞后、滚动窗口），但未检测到潜在的内存不足问题。 详细了解时序[预测配置](https://docs.microsoft.com/azure/machine-learning/how-to-auto-train-forecast#configure-and-run-experiment)。 <br><br><br>已分析了选定的值（范围、滞后、滚动窗口），可能会导致你的试验遇到内存不足问题。 滞后或滚动窗口配置已关闭。
 频率检测 |Passed <br><br><br><br> 完成 |<br> 已分析了时序，所有数据点都与检测到的频率保持一致。 <br> <br> 已分析时序，检测到了与已检测到的频率不一致的数据点。 这些数据点已从数据集中删除。 详细了解[时序预测的数据准备](https://docs.microsoft.com/azure/machine-learning/how-to-auto-train-forecast#preparing-data)。
 
@@ -114,13 +114,13 @@ ms.locfileid: "86440967"
 
 你可以自定义特征化设置，以确保用于训练机器学习模型的数据和特征能够产生相关的预测。
 
-若要自定义特征化，请在 `AutoMLConfig` 对象中指定  `"featurization": FeaturizationConfig`。 如果使用 Azure 机器学习工作室进行试验，请参阅[操作方法文章](how-to-use-automated-ml-for-ml-models.md#customize-featurization)。
+若要自定义特征化，请在 `AutoMLConfig` 对象中指定  `"featurization": FeaturizationConfig`。 如果使用 Azure 机器学习工作室进行试验，请参阅[操作方法文章](how-to-use-automated-ml-for-ml-models.md#customize-featurization)。 若要为预测任务类型自定义特征化，请参阅[预测操作指南](how-to-auto-train-forecast.md#customize-featurization)。
 
 支持的自定义项包括：
 
 |自定义|定义|
 |--|--|
-|列用途更新|替代指定列的特征类型。|
+|列用途更新|重写指定列的自动检测到的特征类型。|
 |转换器参数更新 |更新指定转换器的参数。 当前支持 Imputer（平均值、最频繁使用的值和中值）和 HashOneHotEncoder。 |
 |删除列 |指定要从特征化中删除的列。|
 |阻止转换器| 指定要在特征化过程中使用的块转换器。|
@@ -138,6 +138,52 @@ featurization_config.add_transformer_params('Imputer', ['engine-size'], {"strate
 featurization_config.add_transformer_params('Imputer', ['city-mpg'], {"strategy": "median"})
 featurization_config.add_transformer_params('Imputer', ['bore'], {"strategy": "most_frequent"})
 featurization_config.add_transformer_params('HashOneHotEncoder', [], {"number_of_bits": 3})
+```
+
+## <a name="bert-integration"></a>BERT 集成 
+[BERT](https://techcommunity.microsoft.com/t5/azure-ai/how-bert-is-integrated-into-azure-automated-machine-learning/ba-p/1194657) 在自动化 ML 的特征化层中使用。 在此层中，我们会检测列包含的是自由文本还是其他类型的数据（例如时间戳或简单编号），并相应地进行特征化。 对于 BERT，我们会使用用户提供的标签来微调/训练模型，然后将文档嵌入项（对于 BERT，这些是与特殊 [CLS] 标记相关联的最终隐藏状态）作为特征与许多典型数据集具有的其他特征（例如基于时间戳的特征，如周几）或编号一起输出。 
+
+若要启用 BERT，应使用 GPU 计算进行训练。 如果使用 CPU 计算，则 AutoML 会启用 BiLSTM DNN 特征化器，而非启用 BERT。 为了调用 BERT，必须在 automl_settings 中设置“enable_dnn:True”，并使用 GPU 计算（例如，vm_size = "STANDARD_NC6" 或更高的 GPU）。 有关示例，请参阅[此笔记本](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/automated-machine-learning/classification-text-dnn/auto-ml-classification-text-dnn.ipynb)。
+
+对于 BERT，AutoML 需执行以下步骤（请注意，必须在 automl_settings 中设置“enable_dnn:True”，这些项才能发生）：
+
+1. 预处理包括所有文本列的标记化，你会在最终模型的特征化摘要中看到“StringCast”转换器。 请访问[此笔记本](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/automated-machine-learning/classification-text-dnn/auto-ml-classification-text-dnn.ipynb)，通过示例了解如何使用 `get_featurization_summary()` 方法生成模型的特征化摘要。
+
+```python
+text_transformations_used = []
+for column_group in fitted_model.named_steps['datatransformer'].get_featurization_summary():
+    text_transformations_used.extend(column_group['Transformations'])
+text_transformations_used
+```
+
+2. 将所有文本列连接到单个文本列中，因此你在最终模型中会看到“StringConcatTransformer”。 
+
+> [!NOTE]
+> 我们实现的 BERT 将训练示例的总文本长度限制为 128 个标记。 这意味着，在连接时，所有文本列理想情况下的长度最多应为 128 个标记。 理想情况下，如果存在多个列，则应修剪每个列，使此条件得到满足。 例如，如果数据中有两个文本列，则应将这两个文本列修剪为每个列 64 个标记（假设你希望两个列在最终连接的文本列中得到相同的体现），然后再将数据馈送到 AutoML。 对于长度大于 128 个标记的连接列，BERT 的 tokenizer 层会将此输入截断为 128 个标记。
+
+3. 在特征扫描步骤中，AutoML 会基于数据的样本将 BERT 与基线（单词特征包 + 预先训练的单词嵌入项）进行比较，并确定 BERT 是否会改进准确度。 如果它确定 BERT 的性能比基线更好，则 AutoML 会使用适用于文本特征化的 BERT 作为最佳的特征化策略，并继续对整个数据进行特征化。 在这种情况下，你会在最终模型中看到“PretrainedTextDNNTransformer”。
+
+BERT 的运行时间通常比大多数其他的特征化器更长。 可以通过在群集中提供更多计算资源来加快速度。 如果有多个节点可用（最多可以使用 8 个节点），则 AutoML 会在多个节点之间分布 BERT 训练。 这可以通过将 [max_concurrent_iterations](https://docs.microsoft.com/python/api/azureml-train-automl-client/azureml.train.automl.automlconfig.automlconfig?view=azure-ml-py) 设置为大于 1 的值来实现。 为了获得更好的性能，我们建议使用带 RDMA 功能的 SKU（例如“STANDARD_NC24r”或“STANDARD_NC24rs_V3”）
+
+AutoML 目前支持大约 100 种语言，它根据数据集的语言选择合适的 BERT 模型。 对于德语数据，我们使用德语 BERT 模型。 对于英语，我们使用英语 BERT 模型。 对于所有其他语言，我们使用多语言 BERT 模型。
+
+在下面的代码中，将触发德语 BERT 模型，因为数据集语言被指定为“deu”，而根据 [ISO 分类](https://iso639-3.sil.org/code/deu)，这个 3 个字母的代码表示德语：
+
+```python
+from azureml.automl.core.featurization import FeaturizationConfig
+
+featurization_config = FeaturizationConfig(dataset_language='deu')
+
+automl_settings = {
+    "experiment_timeout_minutes": 120,
+    "primary_metric": 'accuracy', 
+# All other settings you want to use 
+    "featurization": featurization_config,
+    
+  "enable_dnn": True, # This enables BERT DNN featurizer
+    "enable_voting_ensemble": False,
+    "enable_stack_ensemble": False
+}
 ```
 
 ## <a name="next-steps"></a>后续步骤

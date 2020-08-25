@@ -1,20 +1,20 @@
 ---
-title: Azure CLI 脚本示例 - 使用应用服务创建 SignalR 服务
-description: Azure CLI 脚本示例 - 使用应用服务创建 SignalR 服务
+title: 使用 Azure CLI 通过应用服务创建 SignalR 服务
+description: 使用 Azure CLI 通过应用服务创建 SignalR 服务 了解适用于 Azure SignalR 服务的所有 CLI 命令。
 author: sffamily
 ms.service: signalr
 ms.devlang: azurecli
 ms.topic: sample
-origin.date: 04/20/2018
-ms.date: 11/25/2019
+origin.date: 11/13/2018
+ms.date: 08/21/2020
 ms.author: v-tawe
 ms.custom: mvc
-ms.openlocfilehash: a5798a5a1bab596c2acd807f7968d0807192be6f
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 329b120858f8bfe67d82d0a9271a30292a526c5e
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75600586"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715294"
 ---
 # <a name="create-a-signalr-service-with-an-app-service"></a>使用应用服务创建 SignalR 服务
 

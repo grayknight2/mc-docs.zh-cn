@@ -11,12 +11,12 @@ author: csteegz
 ms.reviewer: larryfr
 ms.date: 03/05/2020
 ms.custom: tracking-python
-ms.openlocfilehash: f96ac5b01435eb911a1452beccb638a239459294
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: 5e006763f37d0df460844ab9e4b17be2580ee4cd
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441189"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228203"
 ---
 # <a name="deploy-a-deep-learning-model-for-inference-with-gpu"></a>使用 GPU 为推理部署深度学习模型
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -161,6 +161,9 @@ channels:
 在此示例中，该文件将保存为 `myenv.yml`。
 
 ## <a name="define-the-deployment-configuration"></a>定义部署配置
+
+> [!IMPORTANT]
+> AKS 不允许 Pod 共享 GPU，支持 GPU 的 Web 服务的副本数只能与群集中的 GPU 数相同。
 
 部署配置定义用于运行 web 服务的 Azure Kubernetes 服务环境：
 

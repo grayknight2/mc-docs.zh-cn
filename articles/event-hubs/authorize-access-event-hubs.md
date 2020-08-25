@@ -1,20 +1,16 @@
 ---
 title: 授予对 Azure 事件中心的访问权限
 description: 本文介绍授权访问 Azure 事件中心资源的不同选项。
-services: event-hubs
-ms.service: event-hubs
-documentationcenter: ''
-author: spelluru
 ms.topic: conceptual
-origin.date: 02/12/2020
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 3e89899bbae3224ad4c98e009304bf8d2d26ae75
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: b3491a061b5ff7783e77271feeea8223ca7f0e6d
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199455"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715324"
 ---
 # <a name="authorize-access-to-azure-event-hubs"></a>授予对 Azure 事件中心的访问权限
 每次你发布或使用事件中心的事件/数据时，客户端会尝试访问事件中心资源。 每个对安全资源的请求都必须经过授权，以便服务确保客户端具有发布/使用数据所需的权限。 

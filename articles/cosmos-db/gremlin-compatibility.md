@@ -6,14 +6,16 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-graph
 ms.topic: reference
 origin.date: 09/10/2019
-ms.date: 06/22/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: fa8556dda9b2ee9b76e20521dabeb0bc273ed230
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.openlocfilehash: 0f42c851b0f31104d82a724cef5d47664cb1f036
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85098393"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223211"
 ---
 # <a name="azure-cosmos-db-gremlin-compatibility"></a>Azure Cosmos DB Gremlin 兼容性
 Azure Cosmos DB Graph 引擎严格遵循 [Apache TinkerPop](https://tinkerpop.apache.org/docs/current/reference/#graph-traversal-steps) 遍历步骤规范，但在实现中存在特定于 Azure Cosmos DB 的差异。 若要查看支持的 Gremlin 步骤列表，请参阅 [Gremlin API 线路协议支持](gremlin-support.md)一文。
@@ -70,7 +72,7 @@ Azure Cosmos DB Graph 引擎严格遵循 [Apache TinkerPop](https://tinkerpop.ap
     g.V().has('category', 'A').fold().union(unfold(), __.V().has('category', 'B'))
     ```
 
-    可以使用 [Gremlin `executionProfile()` 步骤](graph-execution-profile.md 检查查询的性能。
+    可以使用 [Gremlin `executionProfile()` 步骤](graph-execution-profile.md)查看查询的性能。
 
 ## <a name="next-steps"></a>后续步骤
 * 访问 [Cosmos DB 用户之声](https://support.azure.cn/support/contact/)页以共享反馈并帮助团队专注于对你重要的功能。

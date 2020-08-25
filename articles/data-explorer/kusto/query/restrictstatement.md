@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
+ms.date: 08/18/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c0cd36ebc0b58caef3b5d6bde2695b34b905848e
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.openlocfilehash: 8d833b02c03c91ea9dc4a13e242ffbda93e56204
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841497"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516003"
 ---
 # <a name="restrict-statement"></a>Restrict 语句
 
@@ -26,7 +26,10 @@ Restrict 语句限制一组表/视图实体，这些实体对其后的查询语�
 
 Restrict 语句主要适用于中间层应用程序，这些应用程序接受来自用户的查询并希望对这些查询应用行级安全机制。 中间层应用程序可以在用户的查询前加上逻辑模型，这是一组 let 语句，用于定义视图以限制用户对数据的访问权限（例如 `T | where UserId == "..."`）。 作为要添加的最后一个语句，它会将用户限制为只能访问该逻辑模型。
 
-**语法**
+> [!NOTE]
+> Restrict 语句可用于限制对另一个数据库或群集中的实体的访问（群集名称不支持通配符）。
+
+## <a name="syntax"></a>语法
 
 `restrict` `access` `to` `(` [*EntitySpecifier* [`,` ...]] `)`
 
@@ -37,51 +40,46 @@ Restrict 语句主要适用于中间层应用程序，这些应用程序接受�
 
 所有并非由 restrict 语句指定的表、表格视图或模式将对查询的其余部分变为“不可见”。 
 
-**备注**
-
-Restrict 语句可用于限制对另一个数据库或群集中的实体的访问（群集名称不支持通配符）。
-
-**参数**
+## <a name="arguments"></a>参数
 
 Restrict 语句可以获取一个或多个参数，这些参数定义实体名称解析期间的许可限制。 实体可以是：
-- 出现在 `restrict` 语句前面的 [let 语句](./letstatement.md)。 
+* 出现在 `restrict` 语句前面的 [let 语句](./letstatement.md)。 
 
-```kusto
-// Limit access to 'Test' let statement only
-let Test = () { print x=1 };
-restrict access to (Test);
-```
+  ```kusto
+  // Limit access to 'Test' let statement only
+  let Test = () { print x=1 };
+  restrict access to (Test);
+  ```
 
-- 在数据库元数据中定义的[表](../management/tables.md)或[函数](../management/functions.md)。
+* 在数据库元数据中定义的[表](../management/tables.md)或[函数](../management/functions.md)。
 
-```kusto
-// Assuming the database that the query uses has table Table1 and Func1 defined in the metadata, 
-// and other database 'DB2' has Table2 defined in the metadata
- 
-restrict access to (database().Table1, database().Func1, database('DB2').Table2);
-```
+    ```kusto
+    // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata, 
+    // and other database 'DB2' has Table2 defined in the metadata
+    
+    restrict access to (database().Table1, database().Func1, database('DB2').Table2);
+    ```
 
-- 可以匹配多个 [let 语句](./letstatement.md)或表/函数的通配符模式  
+* 可以匹配多个 [let 语句](./letstatement.md)或表/函数的通配符模式  
 
-```kusto
-let Test1 = () { print x=1 };
-let Test2 = () { print y=1 };
-restrict access to (*);
-// Now access is restricted to Test1, Test2 and no tables/functions are accessible.
+    ```kusto
+    let Test1 = () { print x=1 };
+    let Test2 = () { print y=1 };
+    restrict access to (*);
+    // Now access is restricted to Test1, Test2 and no tables/functions are accessible.
 
-// Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
-// Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
-restricts access to (database().*);
-// Now access is restricted to all tables/functions of the current database ('DB2' is not accessible).
+    // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
+    // Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
+    restricts access to (database().*);
+    // Now access is restricted to all tables/functions of the current database ('DB2' is not accessible).
 
-// Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
-// Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
-restricts access to (database('DB2').*);
-// Now access is restricted to all tables/functions of the database 'DB2'
-```
+    // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
+    // Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
+    restricts access to (database('DB2').*);
+    // Now access is restricted to all tables/functions of the database 'DB2'
+    ```
 
-
-**示例**
+## <a name="examples"></a>示例
 
 下面的示例演示了中间层应用程序如何在用户的查询前面加上一个逻辑模型，以防止用户查询任何其他用户的数据。
 

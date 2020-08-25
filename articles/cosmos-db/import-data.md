@@ -1,28 +1,30 @@
 ---
-title: 教程：适用于 Azure Cosmos DB 的数据库迁移工具
-description: 教程：了解如何使用开源 Azure Cosmos DB 数据迁移工具从各种源将数据导入 Azure Cosmos DB 中，这些源包括 MongoDB、SQL Server、表存储、Amazon DynamoDB、CSV 和 JSON 文件。 将 CSV 转换为 JSON。
+title: 教程 - 适用于 Azure Cosmos DB 的数据库迁移工具
+description: 教程 - 本文演示了如何使用开源 Azure Cosmos DB 数据迁移工具将数据从各种源导入到 Azure Cosmos DB，包括 MongoDB、SQL Server、表存储、Amazon DynamoDB、CSV 和 JSON 文件。 将 CSV 转换为 JSON。
 author: rockboyfor
 ms.service: cosmos-db
 ms.topic: tutorial
 origin.date: 11/05/2019
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.date: 12/16/2019
-ms.openlocfilehash: f50ad169108c5e99ba22fc9ceabb0d95409204c9
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 90e100a6efc8a7b7f64f70ac4eb11f18765d3c84
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79292550"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222911"
 ---
 # <a name="tutorial-use-data-migration-tool-to-migrate-your-data-to-azure-cosmos-db"></a>教程：使用数据迁移工具将数据迁移到 Azure Cosmos DB
 
-本教程说明如何使用可将数据从各种源导入 Azure Cosmos 容器和表的 Azure Cosmos DB 数据迁移工具。 可从 JSON 文件、CSV 文件、SQL、MongoDB、Azure 表存储、Amazon DynamoDB 导入，甚至还可以从 Azure Cosmos DB SQL API 集合导入。 可将该数据迁移到集合和表中，以便在 Azure Cosmos DB 中使用。 数据迁移工具还可用于从 SQL API 的单分区集合迁移到多分区集合。
+本教程说明如何使用可将数据从各种源导入 Azure Cosmos 容器和表的 Azure Cosmos DB 数据迁移工具。 可从 JSON 文件、CSV 文件、SQL、MongoDB、Azure 表存储、Amazon DynamoDB 导入，甚至还可以从 Azure Cosmos DB SQL API 集合导入。 可将该数据迁移到集合和表中，以便在 Azure Cosmos DB 中使用。 还可在从单个分区集合迁移到 SQL API 的多分区集合时使用数据迁移工具。
 
 要使用 Azure Cosmos DB 的哪个 API？
 
 * **[SQL API](documentdb-introduction.md)** - 可以使用数据迁移工具中提供的任何源选项导入数据。
 * **[表 API](table-introduction.md)** - 可以使用数据迁移工具或 AzCopy 导入数据。 有关详细信息，请参阅[导入要在 Azure Cosmos DB 表 API 中使用的数据](table-import.md)。
-* **[Azure Cosmos DB 的用于 MongoDB 的 API](mongodb-introduction.md)** - 数据迁移工具目前不支持将 Azure Cosmos DB 的用于 MongoDB 的 API 用作源或目标。 若要将数据迁入或迁出 Azure Cosmos DB 中的集合，请参阅[如何使用 Azure Cosmos DB 的用于 MongoDB 的 API 迁移 Cosmos 数据库中的 MongoDB 数据](mongodb-migrate.md)以获取说明。 仍可使用数据迁移工具将数据从 MongoDB 导出到 Azure Cosmos DB SQL API 集合，以便与 SQL API 配合使用。
+* **[Azure Cosmos DB 的用于 MongoDB 的 API](mongodb-introduction.md)** - 数据迁移工具目前不支持将 Azure Cosmos DB 的用于 MongoDB 的 API 作为源或目标。 如果想要从 Azure Cosmos DB 的集合中迁入或迁出数据，请参阅[如何使用 Azure Cosmos DB 的用于 MongoDB 的 API 将 MongoDB 数据迁移到 Cosmos 数据库](mongodb-migrate.md)的相关说明。 仍可使用数据迁移工具将数据从 MongoDB 导出到 Azure Cosmos DB SQL API 集合中，以便使用 SQL API。
 * **[Gremlin API](graph-introduction.md)** - Gremlin API 帐户目前不支持将数据迁移工具用作导入工具。
 
 本教程涵盖以下任务：
@@ -30,7 +32,7 @@ ms.locfileid: "79292550"
 > [!div class="checklist"]
 > * 安装数据迁移工具
 > * 从不同的数据源导入数据
-> * 将 Azure Cosmos DB 导出到 JSON
+> * 从 Azure Cosmos DB 导出到 JSON
 
 <a name="Prerequisites"></a>
 ## <a name="prerequisites"></a>先决条件
@@ -69,7 +71,7 @@ ms.locfileid: "79292550"
 
 ## <a name="select-data-source"></a>选择数据源
 
-安装好工具后，即可导入数据。 希望导入什么类型的数据？
+安装该工具之后，就可以导入数据。 要导入什么类型的数据？
 
 * [JSON 文件](#JSON)
 * [MongoDB](#MongoDB)
@@ -89,14 +91,14 @@ ms.locfileid: "79292550"
 
 借助 JSON 文件源导入程序选项，可以导入一个或多个只包含单个文档的 JSON 文件或者每个都包含一组 JSON 文档的 JSON 文件。 添加包含 JSON 文件的文件夹以供导入时，可以选择递归搜索子文件夹中的文件。
 
-![JSON 文件源选项的屏幕截图 - 数据库迁移工具](./media/import-data/jsonsource.png)
+:::image type="content" source="./media/import-data/jsonsource.png" alt-text="JSON 文件源选项的屏幕截图 - 数据库迁移工具":::
 
 连接字符串采用以下格式：
 
 `AccountEndpoint=<CosmosDB Endpoint>;AccountKey=<CosmosDB Key>;Database=<CosmosDB Database>`
 
-* `<CosmosDB Endpoint>` 是终结点 URI。 可从 Azure 门户获取此值。 导航到 Azure Cosmos 帐户。 打开“概述”窗格并复制 URI 值   。
-* `<AccountKey>` 是“密码”或“主要密钥”  。 可从 Azure 门户获取此值。 导航到 Azure Cosmos 帐户。 打开“连接字符串”或“密钥”窗格，然后复制“密码”或“主要密钥”值    。
+* `<CosmosDB Endpoint>` 是终结点 URI。 可从 Azure 门户获取此值。 导航到 Azure Cosmos 帐户。 打开“概述”窗格并复制 URI 值 。
+* `<AccountKey>` 是“密码”或“主要密钥”。 可从 Azure 门户获取此值。 导航到 Azure Cosmos 帐户。 打开“连接字符串”或“密钥”窗格，然后复制“密码”或“主要密钥”值  。
 * `<CosmosDB Database>` 是 CosmosDB 数据库名称。
 
 示例： `AccountEndpoint=https://myCosmosDBName.documents.azure.cn:443/;AccountKey=wJmFRYna6ttQ79ATmrTMKql8vPri84QBiHTt6oinFkZRvoe7Vv81x9sn6zlVlBY10bEPMgGM982wfYXpWXWB9w==;Database=myDatabaseName`
@@ -127,11 +129,11 @@ dt.exe /s:JsonFile /s.Files:D:\\CompanyData\\Companies.json /t:DocumentDBBulk /t
 ## <a name="import-from-mongodb"></a>从 MongoDB 导入
 
 > [!IMPORTANT]
-> 如果要导入到使用 Azure Cosmos DB 的用于 MongoDB 的 API 配置的 Cosmos 帐户，请遵照这些[说明](mongodb-migrate.md)进行操作。
+> 如果要导入到 Cosmos 帐户（配置了 Azure Cosmos DB 的用于 MongoDB 的 API），请遵照这些[说明](mongodb-migrate.md)操作。
 
 借助 MongoDB 源导入程序选项，可从单个 MongoDB 集合中导入，并且选择使用查询筛选文档，以及使用投影来修改文档结构。  
 
-![MongoDB 源选项的屏幕截图](./media/import-data/mongodbsource.png)
+:::image type="content" source="./media/import-data/mongodbsource.png" alt-text="MongoDB 源选项的屏幕截图":::
 
 连接字符串是标准 MongoDB 格式：
 
@@ -140,7 +142,7 @@ dt.exe /s:JsonFile /s.Files:D:\\CompanyData\\Companies.json /t:DocumentDBBulk /t
 > [!NOTE]
 > 使用验证命令来确保可以访问在连接字符串字段中指定的 MongoDB 实例。
 
-输入要从其中导入数据的集合的名称。 可以选择为查询（例如 `{pop: {$gt:5000}}`）或投影（例如 `{loc:0}`）指定或提供一个文件来筛选和形成要导入的数据。
+输入将从其中导入数据的集合的名称。 可以选择为查询（例如 `{pop: {$gt:5000}}`）或投影（例如 `{loc:0}`）指定或提供一个文件来筛选和形成要导入的数据。
 
 下面是一些从 MongoDB 中导入的命令行示例：
 
@@ -158,9 +160,9 @@ dt.exe /s:MongoDB /s.ConnectionString:mongodb://<dbuser>:<dbpassword>@<host>:<po
 > [!IMPORTANT]
 > 如果要导入到支持 MongoDB 的 Azure Cosmos DB 帐户，请遵照这些[说明](mongodb-migrate.md)操作。
 
-借助 MongoDB 导出 JSON 文件源导入程序选项，可以导入一个或多个通过 mongoexport 实用程序生成的 JSON 文件。  
+借助 MongoDB 导出 JSON 文件源导入程序选项，可以导入一个或多个通过 mongoexport 实用工具生成的 JSON 文件。  
 
-![MongoDB 导出源选项的屏幕截图](./media/import-data/mongodbexportsource.png)
+:::image type="content" source="./media/import-data/mongodbexportsource.png" alt-text="MongoDB 导出源选项的屏幕截图":::
 
 添加包含 MongoDB 导出 JSON 文件的文件夹以供导入时，可以选择递归搜索子文件夹中的文件。
 
@@ -175,7 +177,7 @@ dt.exe /s:MongoDBExport /s.Files:D:\mongoemployees.json /t:DocumentDBBulk /t.Con
 
 借助 SQL 源导入程序选项，可以从单个 SQL Server 数据库中导入，并且可以选择通过查询来筛选要导入的记录。 此外，可以通过指定嵌套分隔符（稍后进行详细介绍）来修改文档结构。  
 
-![SQL 源选项的屏幕截图 - 数据库迁移工具](./media/import-data/sqlexportsource.png)
+:::image type="content" source="./media/import-data/sqlexportsource.png" alt-text="SQL 源选项的屏幕截图 - 数据库迁移工具":::
 
 连接字符串的格式是标准 SQL 连接字符串格式。
 
@@ -186,11 +188,11 @@ dt.exe /s:MongoDBExport /s.Files:D:\mongoemployees.json /t:DocumentDBBulk /t.Con
 
 `select CAST(BusinessEntityID AS varchar) as Id, Name, AddressType as [Address.AddressType], AddressLine1 as [Address.AddressLine1], City as [Address.Location.City], StateProvinceName as [Address.Location.StateProvinceName], PostalCode as [Address.PostalCode], CountryRegionName as [Address.CountryRegionName] from Sales.vStoreWithAddresses WHERE AddressType='Main Office'`
 
-它返回以下（部分）结果：
+它将返回以下（部分）结果：
 
-![SQL 查询结果的屏幕截图](./media/import-data/sqlqueryresults.png)
+:::image type="content" source="./media/import-data/sqlqueryresults.png" alt-text="SQL 查询结果的屏幕截图":::
 
-请注意 Address.AddressType 和 Address.Location.StateProvinceName 等别名。 通过指定嵌套分隔符“.”，导入工具会在导入过程中创建 Address 和 Address.Location 子文档。 下面是在 Azure Cosmos DB 中生成文档的示例：
+请注意 Address.AddressType 和 Address.Location.StateProvinceName 等别名。 通过指定嵌套分隔符“.”，导入工具会在导入过程中创建 Address 和 Address.Location 子文档。 下面是 Azure Cosmos DB 中的生成文档的示例：
 
 *{ "id":"956", "Name":"Finer Sales and Service", "Address": { "AddressType":"Main Office", "AddressLine1": "#500-75 O'Connor Street", "Location": { "City":"Ottawa", "StateProvinceName":"Ontario" }, "PostalCode":"K4B 1S2", "CountryRegionName":"Canada" } }*
 
@@ -209,13 +211,13 @@ dt.exe /s:SQL /s.ConnectionString:"Data Source=<server>;Initial Catalog=Adventur
 
 CSV 文件源导入程序选项可用于导入一个或多个 CSV 文件。 添加包含 CSV 文件的文件夹以供导入时，可以选择递归搜索子文件夹中的文件。
 
-![CSV 源选项的屏幕截图 - CSV 到 JSON](media/import-data/csvsource.png)
+:::image type="content" source="media/import-data/csvsource.png" alt-text="CSV 源选项的屏幕截图 - CSV 到 JSON":::
 
 与 SQL 源相似，嵌套分隔符属性可用于在导入过程中创建层次结构关系（子文档）。 请考虑以下 CSV 标头行和数据行︰
 
-![CSV 示例记录的屏幕截图 - CSV 到 JSON](./media/import-data/csvsample.png)
+:::image type="content" source="./media/import-data/csvsample.png" alt-text="CSV 示例记录的屏幕截图 - CSV 到 JSON":::
 
-请注意 DomainInfo.Domain_Name 和 RedirectInfo.Redirecting 等别名。 通过指定嵌套分隔符“.”，导入工具会在导入过程中创建 DomainInfo 和 RedirectInfo 子文档。 下面是在 Azure Cosmos DB 中生成文档的示例：
+请注意 DomainInfo.Domain_Name 和 RedirectInfo.Redirecting 等别名。 通过指定嵌套分隔符“.”，导入工具会在导入过程中创建 DomainInfo 和 RedirectInfo 子文档。 下面是 Azure Cosmos DB 中的生成文档的示例：
 
 *{ "DomainInfo": { "Domain_Name":"ACUS.GOV", "Domain_Name_Address": "https:\//www.ACUS.GOV" }, "Federal Agency":"Administrative Conference of the United States", "RedirectInfo": { "Redirecting":"0", "Redirect_Destination": "" }, "id":"9cc565c5-ebcd-1c03-ebd3-cc3e2ecd814d" }*
 
@@ -223,7 +225,7 @@ CSV 文件源导入程序选项可用于导入一个或多个 CSV 文件。 添�
 
 关于 CSV 导入，还需要注意两个事项︰
 
-1. 默认情况下，不带引号的值总是会去掉制表符和空格，而带引号的值保持原样。 通过使用“剪裁带引号的值”复选框或 /s.TrimQuoted 命令行选项，可以重写此行为。
+1. 默认情况下，不带引号的值总是会去掉制表符和空格，而带引号的值将保持原样。 通过使用“剪裁带引号的值”复选框或 /s.TrimQuoted 命令行选项，可以重写此行为。
 2. 默认情况下，不带引号的 null 视为 null 值。 通过使用“将不带引号的 NULL 作为字符串处理”复选框或 /s.NoUnquotedNulls 命令行选项，可以重写此行为（即，将不带引号的 null 视为“null”字符串）。
 
 下面是 CSV 导入的命令行示例：
@@ -239,7 +241,7 @@ dt.exe /s:CsvFile /s.Files:.\Employees.csv /t:DocumentDBBulk /t.ConnectionString
 
 从 Azure 表存储导入的数据可输出到 Azure Cosmos DB 表和实体，以便与表 API 配合使用。 导入的数据还可输出到集合和文档，以便与 SQL API 配合使用。 但是，表 API 只能在命令行实用工具中用作目标。 无法使用数据迁移工具用户界面导出到表 API。 有关详细信息，请参阅[导入要在 Azure Cosmos DB 表 API 中使用的数据](table-import.md)。
 
-![Azure 表存储源选项的屏幕截图](./media/import-data/azuretablesource.png)
+:::image type="content" source="./media/import-data/azuretablesource.png" alt-text="Azure 表存储源选项的屏幕截图":::
 
 Azure 表存储连接字符串的格式为：
 
@@ -252,7 +254,7 @@ Azure 表存储连接字符串的格式为：
 > [!NOTE]
 > 使用验证命令来确保可以访问在连接字符串字段中指定的 Azure 表存储实例。
 
-输入要从其中导入数据的 Azure 表的名称。 可以选择指定 [筛选器](../vs-azure-tools-table-designer-construct-filter-strings.md)。
+输入要从其中导入数据的 Azure 表的名称。 可以选择指定[筛选器](../vs-azure-tools-table-designer-construct-filter-strings.md)。
 
 Azure 表存储源导入程序选项具有下列附加选项︰
 
@@ -278,9 +280,9 @@ dt.exe /s:AzureTable /s.ConnectionString:"DefaultEndpointsProtocol=https;Account
 
 借助 Amazon DynamoDB 源导入程序选项，可以从单个 Amazon DynamoDB 表导入数据。 此选项可以选择性地筛选要导入的实体。 提供多个模板，以便尽可能简化导入设置。
 
-![Amazon DynamoDB 源选项的屏幕截图 - 数据库迁移工具](./media/import-data/dynamodbsource1.png)
+:::image type="content" source="./media/import-data/dynamodbsource1.png" alt-text="Amazon DynamoDB 源选项的屏幕截图 - 数据库迁移工具":::
 
-![Amazon DynamoDB 源选项的屏幕截图 - 数据库迁移工具](./media/import-data/dynamodbsource2.png)
+:::image type="content" source="./media/import-data/dynamodbsource2.png" alt-text="Amazon DynamoDB 源选项的屏幕截图 - 数据库迁移工具":::
 
 Amazon DynamoDB 连接字符串的格式为：
 
@@ -300,7 +302,7 @@ dt.exe /s:DynamoDB /s.ConnectionString:ServiceURL=https://dynamodb.us-east-1.ama
 
 借助 JSON 文件、MongoDB 导出文件和 CSV 文件源导入程序选项，可以从 Azure Blob 存储中导入一个或多个文件。 在指定 Blob 容器 URL 和帐户密钥后，提供正则表达式来选择要导入的文件。
 
-![Blob 文件源选项的屏幕截图](./media/import-data/blobsource.png)
+:::image type="content" source="./media/import-data/blobsource.png" alt-text="Blob 文件源选项的屏幕截图":::
 
 下面是一个用于从 Azure Blob 存储导入 JSON 文件的命令行示例：
 
@@ -313,7 +315,7 @@ dt.exe /s:JsonFile /s.Files:"blobs://<account key>@account.blob.core.chinaclouda
 
 借助 Azure Cosmos DB 源导入程序选项，可从一个或多个 Azure Cosmos 容器中导入数据，并且（可选）使用查询来筛选文档。  
 
-![Azure Cosmos DB 源选项的屏幕截图](./media/import-data/documentdbsource.png)
+:::image type="content" source="./media/import-data/documentdbsource.png" alt-text="Azure Cosmos DB 源选项的屏幕截图":::
 
 Azure Cosmos DB 连接字符串的格式为：
 
@@ -324,7 +326,7 @@ Azure Cosmos DB 连接字符串的格式为：
 `Database=<CosmosDB Database>;`
 
 > [!NOTE]
-> 若要确保可以访问在连接字符串字段中指定的 Azure Cosmos DB 实例，请使用“Verify”命令。
+> 使用“验证”命令来确保可以访问在连接字符串字段中指定的 Azure Cosmos DB 实例。
 
 若要从单个 Azure Cosmos 容器导入，请输入要从其中导入数据的集合的名称。 若要从多个 Azure Cosmos 容器导入，请提供与一个或多个集合名称相匹配的正则表达式（例如 collection01 | collection02 | collection03）。 可以选择为查询指定或提供一个文件来筛选和形成要导入的数据。
 
@@ -338,7 +340,7 @@ Azure Cosmos DB 源导入程序选项具有下列高级选项：
 3. 重试间隔：指定在发生暂时性故障（例如网络连接中断）时重试 Azure Cosmos DB 连接等待的时间间隔。
 4. 连接模式：指定要用于 Azure Cosmos DB 的连接模式。 可用选项包括 DirectTcp、DirectHttps 和网关。 直接连接模式速度更快，而网关模式对于防火墙更加友好，因为它仅使用端口 443。
 
-![Azure Cosmos DB 源高级选项的屏幕截图](./media/import-data/documentdbsourceoptions.png)
+:::image type="content" source="./media/import-data/documentdbsourceoptions.png" alt-text="Azure Cosmos DB 源高级选项的屏幕截图":::
 
 > [!TIP]
 > 导入工具默认设置为 DirectTcp 连接模式。 如果遇到防火墙问题，请切换到网关连接模式，因为它只需要端口 443。
@@ -364,9 +366,9 @@ dt.exe /s:DocumentDB /s.ConnectionString:"AccountEndpoint=<CosmosDB Endpoint>;Ac
 
 借助 HBase 源导入程序选项，可以从 HBase 表中导入数据并且选择筛选数据。 提供多个模板，以便尽可能简化导入设置。
 
-![HBase 源选项的屏幕截图](./media/import-data/hbasesource1.png)
+:::image type="content" source="./media/import-data/hbasesource1.png" alt-text="HBase 源选项的屏幕截图":::
 
-![HBase 源选项的屏幕截图](./media/import-data/hbasesource2.png)
+:::image type="content" source="./media/import-data/hbasesource2.png" alt-text="HBase 源选项的屏幕截图":::
 
 HBase Stargate 连接字符串的格式为︰
 
@@ -382,12 +384,11 @@ dt.exe /s:HBase /s.ConnectionString:ServiceURL=<server-address>;Username=<userna
 ```
 
 <a name="SQLBulkTarget"></a>
-<a name="SQLBulkImport"></a>
 ## <a name="import-to-the-sql-api-bulk-import"></a>导入到 SQL API（批量导入）
 
-借助 Azure Cosmos DB 批量导入程序，可以使用 Azure Cosmos DB 存储的过程从所有可用的源选项导入，以提高效率。 该工具支持导入到一个单分区 Azure Cosmos 容器。 它还支持分片导入，通过这种方法可跨多个单分区 Azure Cosmos 容器对数据进行分区。 有关数据分区的详细信息，请参阅 [ Azure Cosmos DB 中的分区和扩展](partition-data.md)。 该工具将在目标集合中创建、执行然后删除存储过程。  
+借助 Azure Cosmos DB 批量导入程序，可以使用 Azure Cosmos DB 存储过程从任何可用的源选项导入，以提高效率。 该工具支持导入到一个单分区 Azure Cosmos 容器。 它还支持分片导入，通过这种方法可跨多个单分区 Azure Cosmos 容器对数据进行分区。 有关将数据分区的详细信息，请参阅 [Azure Cosmos DB 中的分区和扩展](partition-data.md)。 该工具将在目标集合中创建、执行然后删除存储过程。  
 
-![Azure Cosmos DB 批量选项的屏幕截图](./media/import-data/documentdbbulk.png)
+:::image type="content" source="./media/import-data/documentdbbulk.png" alt-text="Azure Cosmos DB 批量选项的屏幕截图":::
 
 Azure Cosmos DB 连接字符串的格式为：
 
@@ -398,7 +399,7 @@ Azure Cosmos DB 帐户连接字符串可从 Azure 门户的“密钥”页中检
 `Database=<CosmosDB Database>;`
 
 > [!NOTE]
-> 若要确保可以访问在连接字符串字段中指定的 Azure Cosmos DB 实例，请使用“Verify”命令。
+> 使用“验证”命令来确保可以访问在连接字符串字段中指定的 Azure Cosmos DB 实例。
 
 若要导入到单个集合，请输入要将数据导入到的集合的名称，然后单击“添加”按钮。 若要导入到多个集合，请分别输入每个集合名称，或使用以下语法指定多个集合：*collection_prefix*[开始索引 - 结束索引]。 使用前述语法指定多个集合时，请注意以下指导原则：
 
@@ -406,10 +407,10 @@ Azure Cosmos DB 帐户连接字符串可从 Azure 门户的“密钥”页中检
 2. 可以使用缩写的语法：collection[3] 创建步骤 1 中所述的同一组集合。
 3. 可以提供多个替代。 例如，collection[0-1] [0-9] 会生成 20 个带前导零的集合名称（collection01、...02、...03）。
 
-指定集合名称后，请选择集合所需的吞吐量（400 RU 到 10,000 RU）。 为了获得最佳导入性能，请选择更高的吞吐量。 有关性能级别的信息信息，请参阅 [ Azure Cosmos DB 中的性能级别](performance-levels.md)。
+指定集合名称后，选择集合所需的吞吐量（400 RU 到 10,000 RU）。 为了获得最佳导入性能，请选择更高的吞吐量。 有关性能级别的详细信息，请参阅 [Azure Cosmos DB 中的性能级别](performance-levels.md)。
 
 > [!NOTE]
-> 性能吞吐量设置仅适用于创建集合。 如果指定的集合已存在，则不会修改其吞吐量。
+> 性能吞吐量设置仅适用于集合创建。 如果指定的集合已存在，则不会修改其吞吐量。
 
 导入到多个集合时，导入工具支持基于哈希的分片。 在此方案中，请指定要用作分区键的文档属性。 （如果分区键留空，文档将跨多个目标集合随机分片。）
 
@@ -417,11 +418,11 @@ Azure Cosmos DB 帐户连接字符串可从 Azure 门户的“密钥”页中检
 
 导入过程中可以使用多个高级选项。 首先，虽然工具包含默认的批量导入存储过程 (BulkInsert.js)，但可以选择指定自己的导入存储过程︰
 
- ![Azure Cosmos DB 批量插入 sproc 选项的屏幕截图](./media/import-data/bulkinsertsp.png)
+ :::image type="content" source="./media/import-data/bulkinsertsp.png" alt-text="Azure Cosmos DB 批量插入 sproc 选项的屏幕截图":::
 
 此外，在导入日期类型时（例如从 SQL Server 或 MongoDB 导入），可以选择三个导入选项之一：
 
- ![Azure Cosmos DB 日期时间导入选项的屏幕截图](./media/import-data/datetimeoptions.png)
+ :::image type="content" source="./media/import-data/datetimeoptions.png" alt-text="Azure Cosmos DB 日期时间导入选项的屏幕截图":::
 
 * 字符串：保持字符串值
 * Epoch：保持 Epoch 数字值
@@ -437,7 +438,7 @@ Azure Cosmos DB 批量导入程序具有下列高级附加选项：
 6. 重试间隔：指定在发生暂时性故障（例如网络连接中断）时重试 Azure Cosmos DB 连接等待的时间间隔。
 7. 连接模式：指定要用于 Azure Cosmos DB 的连接模式。 可用选项包括 DirectTcp、DirectHttps 和网关。 直接连接模式速度更快，而网关模式对于防火墙更加友好，因为它仅使用端口 443。
 
-    ![Azure Cosmos DB 批量导入高级选项的屏幕截图](./media/import-data/docdbbulkoptions.png)
+    :::image type="content" source="./media/import-data/docdbbulkoptions.png" alt-text="Azure Cosmos DB 批量导入高级选项的屏幕截图":::
 
     > [!TIP]
     > 导入工具默认设置为 DirectTcp 连接模式。 如果遇到防火墙问题，请切换到网关连接模式，因为它只需要端口 443。
@@ -446,9 +447,9 @@ Azure Cosmos DB 批量导入程序具有下列高级附加选项：
 <a name="DocumentDBSeqTarget"></a>
 ## <a name="import-to-the-sql-api-sequential-record-import"></a>导入到 SQL API（顺序记录导入）
 
-借助 Azure Cosmos DB 顺序记录导入程序，可以从任何可用的源选项中逐条导入记录。 如果要导入到已达到存储过程配额的现有集合中，可以选择此选项。 该工具支持导入到单个（单分区和多分区）Azure Cosmos 容器。 它还支持分片导入，通过这种方法可跨多个单分区或多分区 Azure Cosmos 容器对数据进行分区。 有关数据分区的详细信息，请参阅 [ Azure Cosmos DB 中的分区和扩展](partition-data.md)。
+借助 Azure Cosmos DB 顺序记录导入程序，可以从任何可用的源选项中逐条导入记录。 如果要导入到已达到存储过程配额的现有集合中，可以选择此选项。 该工具支持导入到单个（单分区和多分区）Azure Cosmos 容器。 它还支持分片导入，通过这种方法可跨多个单分区或多分区 Azure Cosmos 容器对数据进行分区。 有关将数据分区的详细信息，请参阅 [Azure Cosmos DB 中的分区和扩展](partition-data.md)。
 
-![Azure Cosmos DB 顺序记录导入选项的屏幕截图](./media/import-data/documentdbsequential.png)
+:::image type="content" source="./media/import-data/documentdbsequential.png" alt-text="Azure Cosmos DB 顺序记录导入选项的屏幕截图":::
 
 Azure Cosmos DB 连接字符串的格式为：
 
@@ -459,7 +460,7 @@ Azure Cosmos DB 连接字符串的格式为：
 `Database=<Azure Cosmos database>;`
 
 > [!NOTE]
-> 若要确保可以访问在连接字符串字段中指定的 Azure Cosmos DB 实例，请使用“Verify”命令。
+> 使用“验证”命令来确保可以访问在连接字符串字段中指定的 Azure Cosmos DB 实例。
 
 若要导入到单个集合，请输入数据要导入到的集合的名称，然后单击“添加”按钮。 若要导入到多个集合，请分别输入每个集合名称。 也可以使用以下语法指定多个集合：*collection_prefix*[开始索引 - 结束索引]。 通过前述语法指定多个集合时，请注意以下指导原则：
 
@@ -467,7 +468,7 @@ Azure Cosmos DB 连接字符串的格式为：
 2. 可以使用缩写的语法：collection[3] 创建步骤 1 中所述的同一组集合。
 3. 可以提供多个替代。 例如，collection[0-1] [0-9] 创建 20 个带前导零的集合名称（collection01、...02、...03）。
 
-指定集合名称后，请选择集合所需的吞吐量（400 RU 到 250,000 RU）。 为了获得最佳导入性能，请选择更高的吞吐量。 有关性能级别的信息信息，请参阅 [ Azure Cosmos DB 中的性能级别](performance-levels.md)。 任何导入到吞吐量大于 10,000 RU 的集合的内容都需要分区键。 如果选择拥有超过 250,000 个 RU，则需要在门户中提交一个请求来增加帐户。
+指定集合名称后，选择集合所需的吞吐量（400 RU 到 250,000 RU）。 为了获得最佳导入性能，请选择更高的吞吐量。 有关性能级别的详细信息，请参阅 [Azure Cosmos DB 中的性能级别](performance-levels.md)。 任何导入到吞吐量大于 10,000 RU 的集合的内容都需要分区键。 如果选择拥有超过 250,000 个 RU，则需要在门户中提交一个请求来增加帐户。
 
 > [!NOTE]
 > 吞吐量设置仅适用于集合或数据库创建。 如果指定的集合已存在，则不会修改其吞吐量。
@@ -478,7 +479,7 @@ Azure Cosmos DB 连接字符串的格式为：
 
 导入过程中可以使用多个高级选项。 首先，在导入日期类型时（例如从 SQL Server 或 MongoDB 导入），可以选择三个导入选项之一：
 
- ![Azure Cosmos DB 日期时间导入选项的屏幕截图](./media/import-data/datetimeoptions.png)
+ :::image type="content" source="./media/import-data/datetimeoptions.png" alt-text="Azure Cosmos DB 日期时间导入选项的屏幕截图":::
 
 * 字符串：保持字符串值
 * Epoch：保持 Epoch 数字值
@@ -493,7 +494,7 @@ Azure Cosmos DB - 顺序记录导入程序具有下列高级附加选项：
 5. 重试间隔：指定在发生暂时性故障（例如网络连接中断）期间重试 Azure Cosmos DB 连接等待的时间间隔。
 6. 连接模式：指定要用于 Azure Cosmos DB 的连接模式。 可用选项包括 DirectTcp、DirectHttps 和网关。 直接连接模式速度更快，而网关模式对于防火墙更加友好，因为它仅使用端口 443。
 
-![Azure Cosmos DB 顺序记录导入高级选项的屏幕截图](./media/import-data/documentdbsequentialoptions.png)
+:::image type="content" source="./media/import-data/documentdbsequentialoptions.png" alt-text="Azure Cosmos DB 顺序记录导入高级选项的屏幕截图":::
 
 > [!TIP]
 > 导入工具默认设置为 DirectTcp 连接模式。 如果遇到防火墙问题，请切换到网关连接模式，因为它只需要端口 443。
@@ -503,7 +504,7 @@ Azure Cosmos DB - 顺序记录导入程序具有下列高级附加选项：
 
 允许迁移工具在导入过程中创建 Azure Cosmos DB SQL API 集合时，可以指定集合的索引策略。 在 Azure Cosmos DB 批量导入和 Azure Cosmos DB 顺序记录选项的高级选项部分，导航到“索引策略”部分。
 
-![Azure Cosmos DB 索引策略高级选项的屏幕截图](./media/import-data/indexingpolicy1.png)
+:::image type="content" source="./media/import-data/indexingpolicy1.png" alt-text="Azure Cosmos DB 索引策略高级选项的屏幕截图":::
 
 使用索引策略高级选项，可以选择一个索引策略文件，手动输入索引策略，或从一组默认模板中选择（右键单击索引策略文本框）。
 
@@ -512,7 +513,7 @@ Azure Cosmos DB - 顺序记录导入程序具有下列高级附加选项：
 * 默认。 针对字符串执行等式查询时，此策略最佳。 如果针对数值使用 ORDER BY、范围和等式查询，此策略也适用。 与范围模板相比，此策略的索引存储开销较低。
 * 范围。 此策略最适合对数字和字符串同时使用 ORDER BY、范围和等式查询的情况。 与默认或哈希模板相比，此策略的索引存储开销较高。
 
-![Azure Cosmos DB 索引策略高级选项的屏幕截图](./media/import-data/indexingpolicy2.png)
+:::image type="content" source="./media/import-data/indexingpolicy2.png" alt-text="Azure Cosmos DB 索引策略高级选项的屏幕截图":::
 
 > [!NOTE]
 > 如果未指定索引策略，将应用默认策略。 有关索引策略的详细信息，请参阅 [Azure Cosmos DB 索引策略](index-policy.md)。
@@ -521,9 +522,9 @@ Azure Cosmos DB - 顺序记录导入程序具有下列高级附加选项：
 
 使用 Azure Cosmos DB JSON 导出程序，可以将任何可用的源选项导出到包含一组 JSON 文档的 JSON 文件。 该工具可自行处理导出。 或者，你也可以选择查看生成的迁移命令并自己运行该命令。 生成的 JSON 文件可能存储在本地或 Azure Blob 存储中。
 
-![Azure Cosmos DB JSON 本地文件导出选项的屏幕截图](./media/import-data/jsontarget.png)
+:::image type="content" source="./media/import-data/jsontarget.png" alt-text="Azure Cosmos DB JSON 本地文件导出选项的屏幕截图":::
 
-![Azure Cosmos DB JSON Azure Blob 存储导出选项的屏幕截图](./media/import-data/jsontarget2.png)
+:::image type="content" source="./media/import-data/jsontarget2.png" alt-text="Azure Cosmos DB JSON Azure Blob 存储导出选项的屏幕截图":::
 
 可根据需要选择美化生成的 JSON。 此操作会增加生成文档的大小，同时提高内容的易读性。
 
@@ -580,23 +581,23 @@ dt.exe /ErrorDetails:All /s:DocumentDB /s.ConnectionString:"AccountEndpoint=<Cos
 3. 如果选择一个现有文件，该文件将被覆盖，且不提供追加选项。
 4. 然后，选择是记录所有、关键还是无错误消息。 最后，确定更新屏幕上的传输消息及其进度的频率。
 
-    ![“高级配置”屏幕的屏幕截图](./media/import-data/AdvancedConfiguration.png)
+    :::image type="content" source="./media/import-data/AdvancedConfiguration.png" alt-text="“高级配置”屏幕的屏幕截图":::
 
 ## <a name="confirm-import-settings-and-view-command-line"></a>确认导入设置并查看命令行
 
 1. 在指定源信息、目标信息和高级配置后，查看迁移摘要，并根据需要查看或复制生成的迁移命令。 （复制命令对于自动执行导入操作非常有用。）
 
-    ![摘要屏幕的屏幕截图](./media/import-data/summary.png)
+    :::image type="content" source="./media/import-data/summary.png" alt-text="摘要屏幕的屏幕截图":::
 
-    ![摘要屏幕的屏幕截图](./media/import-data/summarycommand.png)
+    :::image type="content" source="./media/import-data/summarycommand.png" alt-text="摘要屏幕的屏幕截图":::
 
-2. 对源和目标选项满意后，单击“导入”  。 在导入过程中，已用时间、传输计数和失败信息（如果未在“高级”配置中提供文件名）将会更新。 完成后，可以导出结果（例如，用于处理所有导入失败结果）。
+2. 对源和目标选项满意后，单击“导入”。 在导入过程中，已用时间、传输计数和失败信息（如果未在“高级”配置中提供文件名）将会更新。 完成后，可以导出结果（例如，用于处理所有导入失败结果）。
 
-    ![Azure Cosmos DB JSON 导出选项的屏幕截图](./media/import-data/viewresults.png)
+    :::image type="content" source="./media/import-data/viewresults.png" alt-text="Azure Cosmos DB JSON 导出选项的屏幕截图":::
 
 3. 还可以通过重置所有值或保留现有设置来启动新导入。 （例如，可以选择保留连接字符串信息、源和目标选项等。）
 
-    ![Azure Cosmos DB JSON 导出选项的屏幕截图](./media/import-data/newimport.png)
+    :::image type="content" source="./media/import-data/newimport.png" alt-text="Azure Cosmos DB JSON 导出选项的屏幕截图":::
 
 ## <a name="next-steps"></a>后续步骤
 
@@ -605,11 +606,11 @@ dt.exe /ErrorDetails:All /s:DocumentDB /s.ConnectionString:"AccountEndpoint=<Cos
 > [!div class="checklist"]
 > * 已安装数据迁移工具
 > * 已从不同的数据源导入数据
-> * 已将 Azure Cosmos DB 导出到 JSON
+> * 已从 Azure Cosmos DB 导出到 JSON
 
-现在可以继续学习下一教程，了解如何使用 Azure Cosmos DB 查询数据。
+现在可以继续学习下一教程并了解如何使用 Azure Cosmos DB 查询数据。
 
 > [!div class="nextstepaction"]
 >[如何查询数据？](../cosmos-db/tutorial-query-sql-api.md)
 
-<!--Update_Description: update meta properties, wording update -->
+<!-- Update_Description: update meta properties, wording update, update link -->

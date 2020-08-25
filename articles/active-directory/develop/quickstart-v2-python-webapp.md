@@ -8,15 +8,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: quickstart
 ms.workload: identity
-ms.date: 06/30/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
-ms.custom: aaddev, tracking-python, scenarios:getting-started, languages:Python
-ms.openlocfilehash: c90f81ec5d889efbdc7d6a73c9ea560e6ed113fd
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.custom: aaddev, devx-track-python, scenarios:getting-started, languages:Python
+ms.openlocfilehash: 5f8c121d81653d6221f72ac7c3695cf3f6778374
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945005"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647600"
 ---
 # <a name="quickstart-add-sign-in-with-microsoft-to-a-python-web-app"></a>快速入门：向 Python Web 应用添加 Microsoft 登录功能
 
@@ -140,7 +140,7 @@ ms.locfileid: "85945005"
     python app.py
     ```
    > [!IMPORTANT]
-   > 本快速入门应用程序使用客户端机密将自己标识为机密客户端。 由于客户端机密是以纯文本形式添加到项目文件的，因此为了安全起见，建议在考虑将应用程序用作生产应用程序之前，使用证书来代替客户端机密。 若要详细了解如何使用证书，请参阅[这些说明](/active-directory/develop/active-directory-certificate-credentials)。
+   > 本快速入门应用程序使用客户端机密将自己标识为机密客户端。 由于客户端机密是以纯文本形式添加到项目文件的，因此为了安全起见，建议在考虑将应用程序用作生产应用程序之前，使用证书来代替客户端机密。 若要详细了解如何使用证书，请参阅[这些说明](./active-directory-certificate-credentials.md)。
 
 ## <a name="more-information"></a>详细信息
 

@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 03/11/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: ff1725c9ee72c22902cb0d2de8e629848899021f
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 8a4a0c54ed6cd4b9a14b4d5285c18236e0eb14a8
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509524"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515951"
 ---
 # <a name="base64_encode_fromarray"></a>base64_encode_fromarray()
 

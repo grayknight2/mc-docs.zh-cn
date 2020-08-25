@@ -5,15 +5,17 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 05/19/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: b6dc5ea59797012f5c12effbc045c2e83763ea13
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: a0e0ff08549803b24334ea0c88964186a412ac1e
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323325"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223414"
 ---
 <!--Verified successfully-->
 # <a name="what-is-azure-synapse-link-for-azure-cosmos-db-preview"></a>什么是 Azure Synapse Link for Azure Cosmos DB（预览版）？
@@ -29,7 +31,7 @@ Azure Synapse Link for Azure Cosmos DB 是一种云原生混合事务和分析�
 
 下图显示了 Azure Synapse Link 与 Azure Cosmos DB 和 Azure Synapse Analytics 的集成： 
 
-![Azure Synapse Analytics 与 Azure Cosmos DB 集成的体系结构关系图](./media/synapse-link/synapse-analytics-cosmos-db-architecture.png)
+:::image type="content" source="./media/synapse-link/synapse-analytics-cosmos-db-architecture.png" alt-text="Azure Synapse Analytics 与 Azure Cosmos DB 集成的体系结构关系图" border="false":::
 
 <a name="synapse-link-benefits"></a>
 ## <a name="benefits"></a>优点
@@ -128,6 +130,8 @@ Azure Cosmos DB 分析存储是 Azure Cosmos DB 中的操作数据的面向列�
 
 * 目前，只能为新容器（在新 Azure Cosmos DB 帐户和现有 Azure Cosmos DB 帐户中）启用分析存储。
 
+* 在预览版中，对于启用了 Synapse Link 的数据库帐户，不支持对容器进行备份和还原。 如果拥有需要备份和还原功能的生产工作负荷，建议不要在这些数据库帐户上启用 Synapse Link。 
+
 * 通过 Synapse SQL 无服务器访问 Azure Cosmos DB 分析存储当前处于封闭预览阶段。 若要请求访问权限，请向 [Azure Cosmos DB 团队](mailto:cosmosdbsynapselink@microsoft.com)发送电子邮件。
 
 * 当前无法访问预配了 Synapse SQL 的 Azure Cosmos DB 分析存储。
@@ -150,5 +154,4 @@ Azure Synapse Link 的计费模型包括使用 Azure Cosmos DB 分析存储和 S
 
 * [Azure Synapse Link for Azure Cosmos DB 用例](synapse-link-use-cases.md)
 
-<!-- Update_Description: new article about synapse link -->
-<!--NEW.date: 06/08/2020-->
+<!-- Update_Description: update meta properties, wording update, update link -->

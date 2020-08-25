@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: ac9cde19ef0934b7b76593c66c13c8ba86c0dfcb
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 417e2ebdee6f099aa8861a5b0c92efc212f16eba
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509156"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515816"
 ---
 # <a name="coalesce"></a>coalesce()
 

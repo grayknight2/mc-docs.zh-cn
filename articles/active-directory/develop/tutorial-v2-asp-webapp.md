@@ -9,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: tutorial
 ms.workload: identity
-ms.date: 05/28/2020
+ms.date: 08/19/2020
 ms.author: v-junlch
-ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 52473edcb68f62e4ad6c268a6c758193c99511d2
-ms.sourcegitcommit: 0130a709d934d89db5cccb3b4997b9237b357803
+ms.custom: devx-track-csharp, aaddev, identityplatformtop40
+ms.openlocfilehash: bf85a7a5c1807b81129a6598c2d7eecacd94a0d0
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84186860"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647540"
 ---
 # <a name="add-sign-in-to-microsoft-to-an-aspnet-web-app"></a>向 ASP.NET Web 应用添加 Microsoft 登录功能
 
@@ -54,7 +54,7 @@ ms.locfileid: "84186860"
 
 ### <a name="create-your-aspnet-project"></a>创建 ASP.NET 项目
 
-1. 在 Visual Studio 中：转到“文件” > “新建” > “项目”。  
+1. 在 Visual Studio 中：转到“文件” > “新建” > “项目”。
 2. 在 Visual C#\Web 下，选择“ASP.NET Web 应用程序(.NET Framework)” 。
 3. 为应用程序命名，并单击“确定”。
 4. 选择“空”并选中添加“MVC”引用的复选框 。
@@ -79,7 +79,7 @@ ms.locfileid: "84186860"
 
 > [!TIP]
 > 如果项目的根文件夹中没有 `Startup.cs` 文件，请执行以下操作：
-> 1. 右键单击项目的根文件夹，然后选择“添加” > “新建项” > “OWIN 启动类”。  <br/>
+> 1. 右键单击项目的根文件夹，然后选择“添加” > “新建项” > “OWIN 启动类”。<br/>
 > 2. 将其命名为 **Startup.cs**。
 >
 >> 确保选择的类是 OWIN Startup 类，而不是标准 C# 类。 验证是否可以看到命名空间上的 [assembly:OwinStartup(typeof({NameSpace}.Startup))]。
@@ -264,7 +264,7 @@ OpenIDConnectAuthenticationOptions 中提供的参数充当应用程序与 Micro
     ```
 
 ### <a name="more-information"></a>详细信息
-此页以 SVG 格式添加登录按钮，背景为黑色：<br/>![Microsoft 登录](./media/active-directory-develop-guidedsetup-aspnetwebapp-use/aspnetsigninbuttonsample.png)<br/> 有关更多登录按钮，请转到[品牌准则](/active-directory/develop/active-directory-branding-guidelines "品牌准则")。
+此页以 SVG 格式添加登录按钮，背景为黑色：<br/>![Microsoft 登录](./media/active-directory-develop-guidedsetup-aspnetwebapp-use/aspnetsigninbuttonsample.png)<br/> 有关更多登录按钮，请转到[品牌准则](./howto-add-branding-in-azure-ad-apps.md "品牌准则")。
 
 ## <a name="add-a-controller-to-display-users-claims"></a>添加控制器来显示用户声明
 此控制器演示如何使用 `[Authorize]` 属性来保护控制器。 此属性只允许通过身份验证的用户，从而限制对控制器的访问。 以下代码使用该属性来显示作为登录的一部分被检索的用户声明：
@@ -372,8 +372,8 @@ OpenIDConnectAuthenticationOptions 中提供的参数充当应用程序与 Micro
 1. 选择“新注册”。
 1. “注册应用程序”页出现后，请输入应用程序的注册信息：
    1. 在“名称”部分输入一个会显示给应用用户的有意义的应用程序名称，例如 **ASPNET-Tutorial**。
-   1. 将在步骤 1 中从 Visual Studio 复制的 SSL URL（例如 `https://localhost:44368/`）添加到“回复 URL”中，然后选择“注册”。 
-1. 选择“身份验证”菜单，在“隐式授权”下选择“ID 令牌”，然后选择“保存”。   
+   1. 将在步骤 1 中从 Visual Studio 复制的 SSL URL（例如 `https://localhost:44368/`）添加到“回复 URL”中，然后选择“注册”。
+1. 选择“身份验证”菜单，在“隐式授权”下选择“ID 令牌”，然后选择“保存”。
 1. 在根文件夹中的 web.config 文件内的 `configuration\appSettings` 节下添加以下内容：
 
     ```xml
@@ -403,7 +403,7 @@ OpenIDConnectAuthenticationOptions 中提供的参数充当应用程序与 Micro
 - 应用程序开发人员添加了任何需要“管理员许可”的附加权限。
 - 或者，在配置的租户（“企业应用程序”->“用户设置”）中，用户无法许可代表他们访问公司数据的应用。
 
-有关详细信息，请参阅 [Microsoft 标识平台终结点中的权限和许可](/active-directory/develop/v2-permissions-and-consent)。
+有关详细信息，请参阅 [Microsoft 标识平台终结点中的权限和许可](./v2-permissions-and-consent.md)。
 
 ### <a name="view-application-results"></a>查看应用程序结果
 
@@ -417,14 +417,14 @@ OpenIDConnectAuthenticationOptions 中提供的参数充当应用程序与 Micro
 
 浏览到控制器视图后，应当会显示包含用户基本属性的表格：
 
-|属性 |Value |说明 |
+|properties |值 |说明 |
 |---|---|---|
 |**名称** |用户全名 | 用户的名字和姓氏
 |**用户名** |user<span>@domain.com</span> | 用于标识用户的用户名|
 |**主题** |使用者 |唯一标识 Web 上用户的字符串|
 |**租户 ID** |Guid | 唯一表示用户的 Azure AD 组织的 **guid**|
 
-此外，还应当显示包含身份验证请求中所有声明的表格。 有关详细信息，请参阅 [ID 令牌中的声明列表](/active-directory/develop/active-directory-token-and-claims)。
+此外，还应当显示包含身份验证请求中所有声明的表格。 有关详细信息，请参阅 [ID 令牌中的声明列表](./id-tokens.md)。
 
 ### <a name="test-access-to-a-method-that-has-an-authorize-attribute-optional"></a>测试对具有 Authorize 属性的方法的访问（可选）
 
@@ -468,13 +468,13 @@ GlobalFilters.Filters.Add(new AuthorizeAttribute());
 
 #### <a name="option-3-use-a-custom-method-to-validate-issuers"></a>选项 3：使用自定义方法来验证颁发者
 
-可通过 IssuerValidator 参数实现自定义方法来验证颁发者。 有关如何使用此参数的详细信息，请参阅 [TokenValidationParameters 类](/previous-versions/visualstudio/dn464192(v=vs.114))。
+可通过 IssuerValidator 参数实现自定义方法来验证颁发者。 有关如何使用此参数的详细信息，请参阅 [TokenValidationParameters 类](https://docs.microsoft.com/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters)。
 
 ## <a name="next-steps"></a>后续步骤
 
 了解 Web 应用如何调用 Web API。
 
-### <a name="learn-how-to-create-the-application-used-in-this-quickstart-guide"></a>了解如何创建本快速入门指南中使用的应用程序
+### <a name="learn-how-to-create-the-application-used-in-this-quickstart"></a>了解如何创建本快速入门中使用的应用程序
 
 详细了解使用 Microsoft 标识平台调用 Web API 的 Web 应用：
 

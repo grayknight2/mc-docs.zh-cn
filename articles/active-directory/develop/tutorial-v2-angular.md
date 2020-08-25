@@ -3,21 +3,21 @@ title: Angular 单页应用教程 - Azure
 titleSuffix: Microsoft identity platform
 description: 了解 Angular SPA 应用程序如何才能从 Microsoft 标识平台终结点调用需要访问令牌的 API。
 services: active-directory
-author: hahamil
+author: hamiltonha
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
 ms.topic: tutorial
 ms.workload: identity
-ms.date: 06/30/2020
+ms.date: 08/19/2020
 ms.author: v-junlch
-ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 8aaf47f2d7d83316b8414aa89f24422fb1adb326
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.custom: aaddev, identityplatformtop40, devx-track-javascript
+ms.openlocfilehash: a6e28f8f2c8430f902d2410f4ebedef05220f026
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945228"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647543"
 ---
 # <a name="tutorial-sign-in-users-and-call-the-microsoft-graph-api-from-an-angular-single-page-application"></a>教程：从 Angular 单页应用程序将用户登录并调用 Microsoft Graph API
 
@@ -31,7 +31,7 @@ ms.locfileid: "85945228"
 
 ## <a name="how-the-sample-app-works"></a>示例应用工作原理
 
-![示意图，展示了本教程中生成的示例应用的工作原理](./media/active-directory-develop-guidedsetup-javascriptspa-introduction/javascriptspa-intro.svg)
+![示意图，展示了本教程中生成的示例应用的工作原理](./media/tutorial-v2-angular/diagram-auth-flow-spa-angular.svg)
 
 ### <a name="more-information"></a>详细信息
 
@@ -60,17 +60,18 @@ ms.locfileid: "85945228"
 
 使用以下 npm 命令生成一个新的 Angular 应用程序：
 
-```Bash
+```bash
 npm install -g @angular/cli@8                    # Install the Angular CLI
-npm install @angular/material@8 @angular/cdk@8   # Install the Angular Material component library (optional, for UI)
 ng new my-application --routing=true --style=css # Generate a new Angular app
+cd my-application                                # Change to the app directory
+npm install @angular/material@8 @angular/cdk@8   # Install the Angular Material component library (optional, for UI)
 npm install msal @azure/msal-angular             # Install MSAL and MSAL Angular in your application
 ng generate component page-name                  # To add a new page (such as a home or profile page)
 ```
 
 ## <a name="register-your-application"></a>注册应用程序
 
-按照说明在 Azure 门户中[注册单页应用程序](/active-directory/develop/scenario-spa-app-registration)。
+按照说明在 Azure 门户中[注册单页应用程序](./scenario-spa-app-registration.md)。
 
 在注册的应用“概述”页上，记下“应用程序(客户端) ID”值供稍后使用。 
 
@@ -123,7 +124,7 @@ ng generate component page-name                  # To add a new page (such as a 
     |值名称|关于|
     |---------|---------|
     |Enter_the_Application_Id_Here|在应用程序注册的“概览”页中，这是你的“应用程序(客户端) ID”值。  |
-    |Enter_the_Cloud_Instance_Id_Here|这是 Azure 云的实例。 对于主要云或全球 Azure 云，请输入 **https://login.partner.microsoftonline.cn** 。 对于国家/地区云（例如中国云），请参阅[国家/地区云](/active-directory/develop/authentication-national-cloud)。|
+    |Enter_the_Cloud_Instance_Id_Here|这是 Azure 云的实例。 对于主要云或全球 Azure 云，请输入 **https://login.partner.microsoftonline.cn** 。 对于国家/地区云（例如中国云），请参阅[国家/地区云](./authentication-national-cloud.md)。|
     |Enter_the_Tenant_Info_Here| 设置为以下选项之一：如果应用程序支持此组织目录中的帐户，请将此值替换为目录（租户）ID 或租户名称（例如 contoso.microsoft.com）。 如果应用程序支持“任何组织目录中的帐户”，请将此值替换为 **organizations**。 如果应用程序支持“任何组织目录中的帐户”，请将此值替换为“common” |
     |Enter_the_Redirect_Uri_Here|替换为 **http://localhost:4200** 。|
 
@@ -138,7 +139,7 @@ ng generate component page-name                  # To add a new page (such as a 
 3. 将以下 import 语句添加到 `src/app/app.component.ts` 的顶部：
 
     ```javascript
-    import { MsalService } from '@azure/msal-angular';
+    import { MsalService, BroadcastService } from '@azure/msal-angular';
     import { Component, OnInit } from '@angular/core';
     ```
 ## <a name="sign-in-a-user"></a>将用户登录
@@ -148,6 +149,8 @@ ng generate component page-name                  # To add a new page (such as a 
 ```javascript
 export class AppComponent implements OnInit {
     constructor(private broadcastService: BroadcastService, private authService: MsalService) { }
+
+    ngOnInit() { }
 
     login() {
         const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;

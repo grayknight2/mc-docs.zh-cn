@@ -4,19 +4,25 @@ description: 了解 Windows 上 Azure 应用服务中的 OS 功能。 了解你�
 ms.assetid: 39d5514f-0139-453a-b52e-4a1c06d8d914
 ms.topic: article
 origin.date: 10/30/2018
-ms.date: 01/13/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 545743d1248a0350a87b65f90fbb1993cd52ff3e
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 7932b003f7aa6719c9fdba3e584ea0b7a8f8706f
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75600439"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228472"
 ---
 # <a name="operating-system-functionality-on-azure-app-service"></a>Azure 应用服务上的操作系统功能
 本文介绍了可供在 [Azure 应用服务](overview.md)上运行的所有 Windows 应用使用的常见基准操作系统功能。 这些功能包括文件、网络和注册表访问以及诊断日志和事件。 
 
+<!-- container -->
+<!-- 
+> [!NOTE] 
+> [Linux apps](overview.md#app-service-on-linux) in App Service run in their own containers. No access to the host operating system is allowed, you do have root access to the container. Likewise, for [apps running in Windows containers](quickstart-custom-container.md?pivots=container-windows), you have administrative access to the container but no access to the host operating system. 
+>
+-->
 <a id="tiers"></a>
 
 ## <a name="app-service-plan-tiers"></a>应用服务计划层
@@ -58,7 +64,7 @@ ms.locfileid: "75600439"
 
 <a id="NetworkDrives"></a>
 
-### <a name="network-drives-aka-unc-shares"></a>网络驱动器（即 UNC 共享）
+### <a name="network-drives-unc-shares"></a>网络驱动器（UNC 共享）
 应用服务中有一个独具特色的方面能够简化应用的部署和维护，这就是所有用户内容都存储在一组 UNC 共享中。 此模型很好地映射到具有多个负载均衡服务器的本地 Web 托管环境所用内容存储的公共模式。 
 
 在应用服务内，每个数据中心都创建了许多 UNC 共享。 在每个数据中心针对所有客户的某个百分比的用户内容将分配给各 UNC 共享。 此外，单个客户的订阅的所有文件内容将始终置于相同的 UNC 共享中。 

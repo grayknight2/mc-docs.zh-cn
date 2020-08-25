@@ -1,22 +1,17 @@
 ---
-title: 使用 Azure CLI 创建事件中心 - Azure 事件中心 | Azure
+title: 使用 Azure CLI 创建事件中心 - Azure 事件中心 | Microsoft Docs
 description: 本快速入门介绍如何使用 Azure CLI 创建事件中心，然后使用 Java 发送和接收事件。
-services: event-hubs
-author: spelluru
-manager: timlt
-ms.service: event-hubs
-ms.devlang: java
 ms.topic: quickstart
-ms.custom: seodec18
-origin.date: 02/11/2020
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 36278b17688e06f516a765b4c9a98c56c7c6ff99
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 619b48ef3fddde74052b0e0862c344004f1e9da4
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199776"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715226"
 ---
 # <a name="quickstart-create-an-event-hub-using-azure-cli"></a>快速入门：使用 Azure CLI 创建事件中心
 
@@ -48,7 +43,7 @@ az account set --subscription MyAzureSub
 ``` 
 
 ## <a name="create-a-resource-group"></a>创建资源组
-资源组是 Azure 资源的逻辑集合。 所有资源在资源组中进行部署和管理。 运行以下命令创建资源组：
+资源组是 Azure 资源的逻辑集合。 所有资源在资源组中进行部署和管理。 运行以下命令来创建资源组：
 
 ```azurecli
 # Create a resource group. Specify a name for the resource group.
@@ -71,7 +66,7 @@ az eventhubs namespace create --name <Event Hubs namespace> --resource-group <re
 az eventhubs eventhub create --name <event hub name> --resource-group <resource group name> --namespace-name <Event Hubs namespace>
 ```
 
-祝贺！ 现已使用 Azure CLI 创建了一个事件中心命名空间，并在该命名空间中创建了一个事件中心。 
+祝贺你！ 现已使用 Azure CLI 创建了一个事件中心命名空间，并在该命名空间中创建了一个事件中心。 
 
 ## <a name="next-steps"></a>后续步骤
 

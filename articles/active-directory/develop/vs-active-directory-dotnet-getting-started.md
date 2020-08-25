@@ -3,20 +3,19 @@ title: .NET MVC 项目中的 Azure AD 入门 | Azure
 description: 通过 Visual Studio 连接服务连接到或创建 Azure AD 之后，如何在 .NET MVC 项目中开始使用 Azure Active Directory
 author: ghogen
 manager: jillfra
-ms.assetid: 1c8b6a58-5144-4965-a905-625b9ee7b22b
 ms.prod: visual-studio-windows
 ms.technology: vs-azure
 ms.workload: azure-vs
-ms.topic: conceptual
-ms.date: 02/25/2020
+ms.topic: how-to
+ms.date: 08/20/2020
 ms.author: v-junlch
-ms.custom: aaddev, vs-azure
-ms.openlocfilehash: 90bc63a4876b15edc15d26b93e4375f8b0d83f6c
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.custom: devx-track-csharp, aaddev, vs-azure
+ms.openlocfilehash: 6e90c46929e1ed954c20e94af9e1b523956ba558
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77653114"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647526"
 ---
 # <a name="getting-started-with-azure-active-directory-aspnet-mvc-projects"></a>Azure Active Directory（ASP.NET MVC 项目）入门
 
@@ -83,7 +82,6 @@ ms.locfileid: "77653114"
 
 ## <a name="next-steps"></a>后续步骤
 
-- [Azure Active Directory 的身份验证方案](authentication-scenarios.md)
+- [Azure Active Directory 的身份验证方案](./authentication-vs-authorization.md)
 - [向 ASP.NET Web 应用添加 Microsoft 登录功能](quickstart-v2-aspnet-webapp.md)
 
-<!-- Update_Description: link update -->

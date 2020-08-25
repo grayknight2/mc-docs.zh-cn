@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: 365d14228148948661ede10feffe36cc14cf65f4
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: 95b61697f723ada2e2d119aeef67169de79f1b36
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841731"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515659"
 ---
 # <a name="mv-apply-operator"></a>mv-apply 运算符
 
@@ -36,7 +36,7 @@ T | mv-apply Metric to typeof(real) on
 1. 将零个或更多列添加到生成的子表。 这些列包含未扩展的源列的值，并在需要时重复。
 1. 返回结果的并集。
 
-`mv-expand` 运算符获取以下输入：
+`mv-apply` 运算符获取以下输入：
 
 1. 一个或多个表达式，其计算结果为要扩展的动态数组。
    每个扩展子表中的记录数是每个动态数组的最大长度。 如果指定了多个表达式，且相应数组的长度不同，则会添加 NULL 值。
@@ -58,7 +58,7 @@ T | mv-apply Metric to typeof(real) on
 
 可以将 `mv-apply` 运算符视为 [`mv-expand`](./mvexpandoperator.md) 运算符的通用化（事实上，如果子查询只包含投影，则后者可以通过前者来实现。）
 
-**语法**
+## <a name="syntax"></a>语法
 
 T `|` `mv-apply` [ItemIndex] ColumnsToExpand [RowLimit] `on` `(` SubQuery `)`    
 
@@ -76,7 +76,7 @@ RowLimit 只是：
 
 SubQuery 具有与任何查询语句相同的语法。
 
-**参数**
+## <a name="arguments"></a>参数
 
 * ItemIndex：如果使用，则指示 `long` 类型的列的名称，该列在数组扩展阶段追加到输入，并指示扩展值的从 0 开始的数组索引。
 
@@ -99,7 +99,7 @@ SubQuery 具有与任何查询语句相同的语法。
 
 * 与 [`mv-expand`](./mvexpandoperator.md) 运算符不同，`mv-apply` 运算符仅支持数组扩展。 不支持扩展属性包。
 
-**示例**
+## <a name="examples"></a>示例
 
 ## <a name="getting-the-largest-element-from-the-array"></a>获取数组中最大的元素
 

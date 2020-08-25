@@ -5,16 +5,16 @@ author: Johnnytechn
 ms.author: v-johya
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 06/21/2018
-ms.date: 07/06/2020
+ms.date: 08/20/2020
 ms.custom: seodec18
-ms.openlocfilehash: 5c383b8fe97d73528d8d5390864d5b55a9a47c88
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.openlocfilehash: b38a548cb5fc5af442a0b0c66e25344b94d32e29
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226170"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715777"
 ---
 # <a name="understand-stream-analytics-job-monitoring-and-how-to-monitor-queries"></a>了解流分析作业监视以及如何监视查询
 
@@ -30,7 +30,7 @@ Azure 门户提供了可用于监视和排查查询和作业性能问题的关�
 ## <a name="metrics-available-for-stream-analytics"></a>可用于流分析的指标
 | 指标                 | 定义                               |
 | ---------------------- | ---------------------------------------- |
-|| 数据转换错误数 | 无法转换为预期输出架构的输出事件的数量。 可以将错误策略更改为“删除”，以删除遇到此情况的事件。 |
+| 数据转换错误数 | 无法转换为预期输出架构的输出事件的数量。 可以将错误策略更改为“删除”，以删除遇到此情况的事件。 |
 | 早期输入事件数       | 应用程序时间戳早于其到达时间超过 5 分钟的事件。 |
 | 失败的函数请求数 | 失败的 Azure 机器学习函数（如果存在）调用数。 |
 | 函数事件数        | 发送到 Azure 机器学习函数（如果存在）的事件数。 |

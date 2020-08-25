@@ -12,13 +12,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: vanto
 origin.date: 03/09/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: 3aae880dae7039693e3687bbf520b2b90c0728c9
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 2877d9ecb61b8c2db3bf77b1b1f666cfa1a81796
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227975"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222884"
 ---
 # <a name="azure-sql-database-and-azure-synapse-analytics-network-access-controls"></a>Azure SQL 数据库和 Azure Synapse Analytics 网络访问控制
 
@@ -99,7 +99,7 @@ start          end
 
 ## <a name="ip-firewall-rules"></a>IP 防火墙规则
 
-基于 IP 的防火墙是 Azure 中逻辑 SQL Server 的一项功能，在显式[添加客户端计算机的 IP 地址](firewall-create-server-level-portal-quickstart.md)之前，它会阻止对数据库服务器的所有访问。
+基于 IP 的防火墙是 Azure 中逻辑 SQL Server 的一项功能，在显式[添加客户端计算机的 IP 地址](firewall-create-server-level-portal-quickstart.md)之前，它会阻止对服务器的所有访问。
 
 ## <a name="virtual-network-firewall-rules"></a>虚拟网络防火墙规则
 

@@ -8,13 +8,13 @@ ms.subservice: core
 ms.topic: conceptual
 ms.author: sgilley
 author: sdgilley
-ms.date: 06/26/2020
-ms.openlocfilehash: dc070842e9b278c34c795b57a27734029d0561e5
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.date: 07/27/2020
+ms.openlocfilehash: 7b1e710072101e7230f7451ab36b4684334b76e0
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441121"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227868"
 ---
 #  <a name="what-are-compute-targets-in-azure-machine-learning"></a>什么是 Azure 机器学习中的计算目标? 
 
@@ -53,7 +53,7 @@ Azure 机器学习为不同的计算资源提供不同的支持。  你也可以
 * Azure 门户
 * Python SDK [ComputeInstance](https://docs.microsoft.com/python/api/azureml-core/azureml.core.compute.computeinstance(class)?view=azure-ml-py) 和 [AmlCompute](https://docs.microsoft.com/python/api/azureml-core/azureml.core.compute.amlcompute(class)?view=azure-ml-py) 类
 * [R SDK](https://azure.github.io/azureml-sdk-for-r/reference/index.html#section-compute-targets)（预览版）
-* Resource Manager 模板
+* 资源管理器模板。 有关示例模板，请参阅[创建 Azure 机器学习计算模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-machine-learning-compute-create-amlcompute)。
 * [Azure CLI 的机器学习扩展](reference-azure-machine-learning-cli.md#resource-management)。  
 
 创建时，这些计算资源会自动成为工作区的一部分，这与其他类型的计算目标不同。

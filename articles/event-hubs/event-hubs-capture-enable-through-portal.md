@@ -1,26 +1,16 @@
 ---
 title: 事件中心 - 使用 Azure 门户捕获流式处理事件
 description: 本文介绍如何使用 Azure 门户捕获通过 Azure 事件中心流式处理的事件。
-services: event-hubs
-documentationcenter: ''
-author: spelluru
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.custom: seodec18
-ms.devlang: na
 ms.topic: conceptual
-origin.date: 02/12/2020
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 607928f7d2738991f090d4b1b2f822ec556bda14
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 01b714801f827d3a1b3040f6d5f6e12bc90cf024
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199433"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715314"
 ---
 # <a name="enable-capturing-of-events-streaming-through-azure-event-hubs"></a>启用捕获通过 Azure 事件中心流式处理的事件
 
@@ -41,29 +31,29 @@ Azure [事件中心捕获][capture-overview]用于自动将事件中心中的流
 > [!NOTE]
 > 可以允许或禁止当捕获时间段内未发生任何事件时发出空文件。 
 
-<!-- Not Available ## Capture data to an Azure Data Lake Store account-->
+<!-- Not Available ## Capture data to an Azure Data Lake Store account
 
-1. 请按照[创建存储帐户](../storage/common/storage-account-create.md?tabs=azure-portal#create-a-storage-account)一文创建 Azure 存储帐户。 请在“高级”选项卡上将“分层命名空间”设置为“启用”，使其成为 Azure Data Lake Storage Gen 2 帐户  。
-2. 创建事件中心时，请执行以下步骤： 
+1. Follow [Create a storage account](../storage/common/storage-account-create.md?tabs=azure-portal#create-a-storage-account) article to create an Azure Storage account. Set **Hierarchical namespace** to **Enabled** on the **Advanced** tab to make it an Azure Data Lake Storage Gen 2 account.
+2. When creating an event hub, do the following steps: 
 
-    1. 将“捕获”设置为“打开” 。 
-    2. 选择“Azure 存储”作为捕获提供程序。 “捕获提供程序”对应的 Azure Data Lake Store 选项为 Azure Data Lake Storage Gen 1 。 要使用 Azure Data Lake Storage Gen 2，请选择“Azure 存储”。
-    2. 选择“选择容器”按钮。 
+    1. Select **On** for **Capture**. 
+    2. Select **Azure Storage** as the capture provider. The **Azure Data Lake Store** option you see for the **Capture provider** is for the Gen 1 of Azure Data Lake Storage. To use a Gen 2 of Azure Data Lake Storage, you select **Azure Storage**.
+    2. Select the **Select Container** button. 
 
-        ![启用捕获到 Data Lake Storage Gen 2](./media/event-hubs-capture-enable-through-portal/data-lake-storage-gen2.png)
-3. 从列表中选择 Azure Data Lake Storage Gen 2 帐户。 
+        ![Enable capture to Data Lake Storage Gen 2](./media/event-hubs-capture-enable-through-portal/data-lake-storage-gen2.png)
+3. Select the **Azure Data Lake Storage Gen 2** account from the list. 
 
-    ![选择 Data Lake Storage Gen2](./media/event-hubs-capture-enable-through-portal/select-data-lake-storage-gen2.png)
-4. 选择“容器”（Data Lake Storage Gen 2 中的文件系统）。
+    ![Select Data Lake Storage Gen 2](./media/event-hubs-capture-enable-through-portal/select-data-lake-storage-gen2.png)
+4. Select the **container** (file system in Data Lake Storage Gen 2).
 
-    ![在存储中选择文件系统](./media/event-hubs-capture-enable-through-portal/select-file-system-data-lake-storage.png)
-5. 在“创建事件中心”页面上，选择“创建” 。 
+    ![Select file system in the storage](./media/event-hubs-capture-enable-through-portal/select-file-system-data-lake-storage.png)
+5. On the **Create Event Hub** page, select **Create**. 
 
-    ![选择“创建”按钮](./media/event-hubs-capture-enable-through-portal/create-event-hub-data-lake-storage.png)
+    ![Select Create button](./media/event-hubs-capture-enable-through-portal/create-event-hub-data-lake-storage.png)
 
     > [!NOTE]
-    > 你使用此用户界面 (UI) 在 Azure Data Lake Storage Gen 2 中创建的容器将显示在“存储资源管理器”中的“文件系统”下 。 同样，你在 Data Lake Storage Gen 2 帐户下创建的文件系统在此 UI 中将显示为容器。 
-
+    > The container you create in a Azure Data Lake Storage Gen 2 using this user interface (UI) is shown under **File systems** in **Storage Explorer**. Similarly, the file system you create in a Data Lake Storage Gen 2 account shows up as a container in this UI. 
+-->
 <!-- 
 ## Capture data to Azure Data Lake Storage Gen 1 
 
@@ -73,6 +63,7 @@ To capture data to Azure Data Lake Storage Gen 1, you create a Data Lake Storage
 
 1. Create a Data Lake Storage account, following the instructions in [Get started with Azure Data Lake Storage Gen 1 using the Azure portal](../data-lake-store/data-lake-store-get-started-portal.md).
 2. Follow the instructions in the [Assign permissions to Event Hubs](../data-lake-store/data-lake-store-archive-eventhub-capture.md#assign-permissions-to-event-hubs) section to create a folder within the Data Lake Storage Gen 1 account in which you want to capture the data from Event Hubs, and assign permissions to Event Hubs so that it can write data into your Data Lake Storage Gen 1 account.  
+
 
 ### Create an event hub
 

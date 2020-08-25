@@ -1,19 +1,16 @@
 ---
 title: Azure 事件中心的安全控制
 description: 本文提供了用于评估 Azure 事件中心（网络、标识、数据保护等）的安全控制清单。
-services: event-hubs
-ms.service: event-hubs
-author: spelluru
 ms.topic: conceptual
-origin.date: 09/23/2019
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 05590b43f64b635e1779435c5067496a6dc471cd
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 751de9fd6bb06cbfa9d1e4168627ff85444ef02b
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199770"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715205"
 ---
 # <a name="security-controls-for-azure-event-hubs"></a>Azure 事件中心的安全控制
 

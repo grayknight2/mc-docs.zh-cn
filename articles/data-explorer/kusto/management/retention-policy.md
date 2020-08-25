@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/19/2020
-ms.date: 07/01/2020
-ms.openlocfilehash: e0333d1124f9d0eec1744f691f96c4e29ab2a884
-ms.sourcegitcommit: c17e965d4ffd82fd7cd86b2648fcb0053a65df00
+ms.date: 08/18/2020
+ms.openlocfilehash: 7e9d6ae7c2f60d29abc22adb0c922dd8f7bf45e0
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470334"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515884"
 ---
-# <a name="retention-policy"></a>保留策略
+# <a name="retention-policy-command"></a>保留策略命令
 
 本文介绍用于创建和更改[保留策略](retentionpolicy.md)的控制命令。
 
@@ -28,8 +28,8 @@ ms.locfileid: "86470334"
 .show <entity_type> *  policy retention
 ```
 
-- `entity_type`：表或数据库
-- `database_or_table`：`database_name` 或 `database_name.table_name` 或 `table_name`（在数据库上下文中）
+* `entity_type`：表或数据库
+* `database_or_table`：`database_name` 或 `database_name.table_name` 或 `table_name`（在数据库上下文中）
 
 **示例**
 
@@ -49,8 +49,8 @@ ms.locfileid: "86470334"
 .delete <entity_type> <database_or_table> policy retention
 ```
 
-- `entity_type`：表或数据库
-- `database_or_table`：`database_name` 或 `database_name.table_name` 或 `table_name`（在数据库上下文中）
+* `entity_type`：表或数据库
+* `database_or_table`：`database_name` 或 `database_name.table_name` 或 `table_name`（在数据库上下文中）
 
 **示例**
 
@@ -59,6 +59,7 @@ ms.locfileid: "86470334"
 ```kusto
 .delete table MyTable policy retention
 ```
+
 
 ## <a name="alter-retention-policy"></a>更改保留策略
 
@@ -72,15 +73,15 @@ ms.locfileid: "86470334"
 .alter-merge <entity_type> <database_or_table_name> policy retention [softdelete = <timespan>] [recoverability = disabled|enabled]
 ```
 
-- `entity_type`：表或数据库
-- `database_or_table`：`database_name` 或 `database_name.table_name` 或 `table_name`（在数据库上下文中）
-- `table_name`：数据库上下文中表的名称。 通配符（此处允许使用 `*`）。
-- `retention_policy` :
+* `entity_type`：表或数据库
+* `database_or_table`：`database_name` 或 `database_name.table_name` 或 `table_name`（在数据库上下文中）
+* `table_name`：数据库上下文中表的名称。  通配符（此处允许使用 `*`）。
+* `retention_policy` :
 
 ```kusto
-    "{
+    "{ 
         \"SoftDeletePeriod\": \"10.00:00:00\", \"Recoverability\": \"Disabled\"
-    }"
+    }" 
 ```
 
 **示例**

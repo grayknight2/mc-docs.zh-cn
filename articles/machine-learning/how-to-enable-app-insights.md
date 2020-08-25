@@ -11,12 +11,12 @@ ms.author: larryfr
 author: blackmist
 ms.date: 06/09/2020
 ms.custom: tracking-python
-ms.openlocfilehash: be11e14aecf6114f0fd02c583cdd5b1a9574dc6c
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.openlocfilehash: 6fc555a9493919c3b2a6737e233c5341dbab7f85
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097519"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228285"
 ---
 # <a name="monitor-and-collect-data-from-ml-web-service-endpoints"></a>监视机器学习 Web 服务终结点以及从中收集数据
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -128,6 +128,8 @@ ms.locfileid: "85097519"
 
 3. 生成一个映像并将它部署到 [AKS 或 ACI](how-to-deploy-and-where.md) 上。
 
+有关日志记录和数据收集的详细信息，请参阅[在 Azure 机器学习中启用日志记录](how-to-enable-logging.md)和[在生产环境中从模型收集数据](how-to-enable-data-collection.md)。
+
 ### <a name="disable-tracking-in-python"></a>在 Python 中禁用跟踪
 
 若要禁用 Azure Application Insights，请使用以下代码：
@@ -153,11 +155,16 @@ ms.locfileid: "85097519"
 1. 选择“启用 Application Insights 诊断和数据收集”
 
     ![启用 App Insights](./media/how-to-enable-app-insights/enable-app-insights.png)
-## <a name="evaluate-data"></a>评估数据
+
+## <a name="view-metrics-and-logs"></a>查看指标和日志
+
 服务的数据将存储在 Azure Application Insights 帐户中，此帐户与 Azure 机器学习位于同一资源组。
 查看数据：
 
-1. 转到 [Azure 门户](https://ms.portal.azure.cn/)中的 Azure 机器学习工作区，然后单击 Application Insights 链接
+1. 在 [Azure 门户](https://ms.portal.azure.cn/)中转到 Azure 机器学习工作区。
+1. 选择“终结点”。
+1. 选择已部署的服务。
+1. 向下滚动以查找 Application Insights url，并单击该链接。
 
     [![AppInsightsLoc](./media/how-to-enable-app-insights/AppInsightsLoc.png)](././media/how-to-enable-app-insights/AppInsightsLoc.png#lightbox)
 

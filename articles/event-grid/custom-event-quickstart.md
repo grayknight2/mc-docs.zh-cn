@@ -1,50 +1,46 @@
 ---
 title: 快速入门：使用事件网格和 Azure CLI 发送自定义事件
 description: 快速入门使用 Azure 事件网格和 Azure CLI 发布自定义主题，然后订阅该主题的事件。 事件由 Web 应用程序处理。
-services: event-grid
-keywords: ''
-author: spelluru
-ms.author: v-lingwu
+author: Johnnytechn
+ms.author: v-johya
 origin.date: 11/05/2019
-ms.date: 3/16/2020
+ms.date: 08/10/2020
 ms.topic: quickstart
-ms.service: event-grid
-ms.custom:
-- seodec18
-- seo-javascript-september2019
-- seo-python-october2019
-ms.openlocfilehash: 74e4407aded9be7304039a9eb2af2e96471070fa
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: e32a1854d6cbf286f9ad087a3e2538feb651abb5
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79452600"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228048"
 ---
 # <a name="quickstart-route-custom-events-to-web-endpoint-with-azure-cli-and-event-grid"></a>快速入门：使用 Azure CLI 和事件网格将自定义事件路由到 Web 终结点
 
-Azure 事件网格是针对云的事件处理服务。 在本文中，将使用 Azure CLI 创建一个自定义主题，然后订阅该自定义主题，再触发可查看结果的事件。 通常，你会将事件发送到处理事件数据并执行操作的终结点。 但是，为了简化本文，你将事件发送到收集并显示消息的 Web 应用。
+Azure 事件网格是针对云的事件处理服务。 在本文中，将使用 Azure CLI 创建一个自定义主题，然后订阅该自定义主题，再触发可查看结果的事件。
+
+通常，你会将事件发送到处理事件数据并执行操作的终结点。 但是，为了简化本文，你将事件发送到收集并显示消息的 Web 应用。
 
 完成后即可看到事件数据已发送到 Web 应用。
 
 ![在 Azure 事件网格查看器中查看结果](./media/custom-event-quickstart/azure-event-grid-viewer-record-inserted-event.png)
 
-[!INCLUDE [quickstarts-free-trial-note.md](../../includes/quickstarts-free-trial-note.md)]
+如果没有 Azure 订阅，可在开始前创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
 
+<!--Not available in MC: cloud-shell-->
+如果选择在本地安装并使用 CLI，本文需要运行最新版 Azure CLI（2.0.70 或更高版本）。 要查找版本，请运行 `az --version`。 如果需要进行安装或升级，请参阅[安装 Azure CLI](/cli/install-azure-cli)。
 
-如果选择在本地安装并使用 CLI，本文需要运行最新版的 Azure CLI（2.0.24 或更高版本）。 若要查找版本，请运行 `az --version`。 如果需要进行安装或升级，请参阅[安装 Azure CLI](/cli/install-azure-cli)。
-
-如果不使用 Cloud Shell，则必须先使用 `az login` 登录。
+如果在本地使用 CLI，则必须先使用 `az login` 进行登录。
 
 ## <a name="create-a-resource-group"></a>创建资源组
 
 事件网格主题是 Azure 资源，必须放置在 Azure 资源组中。 该资源组是在其中部署和管理 Azure 资源的逻辑集合。
 
-使用 [az group create](/cli/group#az-group-create) 命令创建资源组。 
+使用“[az group create](/cli/group#az-group-create)”命令创建资源组。 
 
-以下示例在 *chinaeast* 位置创建名为 *gridResourceGroup* 的资源组。
+以下示例在“chinanorth2”位置创建名为“gridResourceGroup”的资源组。
 
 ```azurecli
-az group create --name gridResourceGroup --location chinaeast
+az group create --name gridResourceGroup --location chinanorth2
 ```
 
 [!INCLUDE [event-grid-register-provider-cli.md](../../includes/event-grid-register-provider-cli.md)]
@@ -56,7 +52,7 @@ az group create --name gridResourceGroup --location chinaeast
 ```azurecli
 topicname=<your-topic-name>
 
-az eventgrid topic create --name $topicname -l chinaeast -g gridResourceGroup
+az eventgrid topic create --name $topicname -l chinanorth2 -g gridResourceGroup
 ```
 
 ## <a name="create-a-message-endpoint"></a>创建消息终结点
@@ -88,14 +84,16 @@ Web 应用的终结点必须包括后缀 `/api/updates/`。
 endpoint=https://$sitename.chinacloudsites.cn/api/updates
 
 az eventgrid event-subscription create \
-  --source-resource-id "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.EventGrid/topics/$topicname" 
-  --name demoViewerSub 
+  --source-resource-id "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.EventGrid/topics/$topicname" \
+  --name demoViewerSub \
   --endpoint $endpoint
+  
 ```
 
 再次查看 Web 应用，并注意现已向该应用发送了订阅验证事件。 选择眼睛图标以展开事件数据。 事件网格发送验证事件，以便终结点可以验证它是否想要接收事件数据。 Web 应用包含用于验证订阅的代码。
 
 ![在 Azure 事件网格查看器中查看订阅事件](./media/custom-event-quickstart/azure-event-grid-viewer-subscription-validation-event.png)
+
 
 ## <a name="send-an-event-to-your-custom-topic"></a>向自定义主题发送事件
 
@@ -151,5 +149,5 @@ az group delete --name gridResourceGroup
 
 - [关于事件网格](overview.md)
 - [将 Blob 存储事件路由到自定义 Web 终结点](../storage/blobs/storage-blob-event-quickstart.md?toc=%2fazure%2fevent-grid%2ftoc.json)
-- [通过 Azure 事件网格和逻辑应用监视虚拟机的更改](monitor-virtual-machine-changes-event-grid-logic-app.md)
 - [将大数据流式传输到数据仓库](event-grid-event-hubs-integration.md)
+

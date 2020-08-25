@@ -1,19 +1,19 @@
 ---
 title: 使用 Azure 数据资源管理器 C# SDK 创建策略
 description: 本文介绍如何使用 C# 创建策略。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 09/24/2019
-ms.date: 06/09/2020
-ms.openlocfilehash: a42a3800b94101cab56c5dae34801e4d1bee6701
-ms.sourcegitcommit: 73697fa9c19a40d235df033400c74741e7d0f3f4
+ms.date: 08/18/2020
+ms.openlocfilehash: 8136add700f88db907dd406bf8e6579bb9d4a269
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84574899"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515839"
 ---
 # <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-c"></a>使用 C# 为 Azure 数据资源管理器创建数据库和表策略
 
@@ -159,4 +159,4 @@ await kustoManagementClient.Databases.AddPrincipalsAsync(resourceGroupName, clus
 ```
 ## <a name="next-steps"></a>后续步骤
 
-* [阅读有关数据库和表策略的更多信息](https://docs.microsoft.com/azure/data-explorer/kusto/management/policies)
+* [阅读有关数据库和表策略的更多信息](/data-explorer/kusto/management/policies)

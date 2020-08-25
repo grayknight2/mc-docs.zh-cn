@@ -9,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: quickstart
 ms.workload: identity
-ms.date: 07/09/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
-ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:JavaScript
-ms.openlocfilehash: cc4532a309b8f01a9c815dcd4d2a3982dd98f6d0
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:JavaScript, devx-track-javascript
+ms.openlocfilehash: 64e782823bf3176397af01b24ccda6bf27c59fce
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164943"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647610"
 ---
 # <a name="quickstart-sign-in-users-and-get-an-access-token-in-a-javascript-spa"></a>快速入门：在 JavaScript SPA 中登录用户并获得访问令牌
 
@@ -57,8 +57,8 @@ ms.locfileid: "86164943"
 > 1. 在“支持的帐户类型”下，选择“任何组织目录中的帐户”。 
 > 1. 选择“注册”。 在应用的“概述”页上，记下“应用程序(客户端) ID”值，供稍后使用 。
 > 1. 本快速入门要求启用[隐式授权流](v2-oauth2-implicit-grant-flow.md)。 在已注册的应用程序的左窗格中，选择“身份验证”。
-> 1. 在“平台配置”下，选择“添加平台”。  左侧将打开一个面板。 在此面板中选择“Web 应用程序”区域。
-> 1. 在左侧将“重定向 URI”值设置为 `http://localhost:3000/`。 然后选择“访问令牌”和“ID 令牌”。 
+> 1. 在“平台配置”下，选择“添加平台”。 左侧将打开一个面板。 在此面板中选择“Web 应用程序”区域。
+> 1. 在左侧将“重定向 URI”值设置为 `http://localhost:3000/`。 然后选择“访问令牌”和“ID 令牌”。
 > 1. 选择“配置” 。
 
 > [!div class="sxs-lookup" renderon="portal"]
@@ -111,7 +111,7 @@ ms.locfileid: "86164943"
 >
 > 其中：
 > - \<Enter_the_Application_Id_Here> 是所注册应用程序的应用程序（客户端）ID。
-> - \<Enter_the_Cloud_Instance_Id_Here> 是 Azure 云的实例。 对于**国家**云（例如“中国”云），请参阅[国家云](/active-directory/develop/authentication-national-cloud)。
+> - \<Enter_the_Cloud_Instance_Id_Here> 是 Azure 云的实例。 对于**国家**云（例如“中国”云），请参阅[国家云](./authentication-national-cloud.md)。
 > - \<Enter_the_Tenant_info_here> 设置为以下选项之一：
 >    - 如果应用程序支持“此组织目录中的帐户”，请将此值替换为“租户 ID”或“租户名称”（例如，*contoso.microsoft.com*）。
 >    - 如果应用程序支持“任何组织目录中的帐户”，请将此值替换为 **organizations**。
@@ -204,7 +204,7 @@ npm install msal
 const myMSALObj = new Msal.UserAgentApplication(msalConfig);
 ```
 
-> |Where  | 说明 |
+> |其中  | 说明 |
 > |---------|---------|
 > |`clientId`     | 在 Azure 门户中注册的应用程序的应用程序 ID|
 > |`authority`    | （可选）支持帐户类型的颁发机构 URL，如前面的配置部分所述。 默认颁发机构为 `https://login.partner.microsoftonline.cn/common`。 |
@@ -232,7 +232,7 @@ myMSALObj.loginPopup(loginRequest)
 });
 ```
 
-> |Where  | 说明 |
+> |其中  | 说明 |
 > |---------|---------|
 > | `scopes`   | （可选）包含在登录时为了获得用户许可而请求的范围。 例如：`["https://microsoftgraph.chinacloudapi.cn/user.read"]`（针对 Microsoft Graph）或 `[ "<Application ID URL>/scope" ]`（针对自定义 Web API，即 `api://<Application ID>/access_as_user`）。 |
 
@@ -262,7 +262,7 @@ myMSALObj.acquireTokenSilent(tokenRequest)
     });
 ```
 
-> |Where  | 说明 |
+> |其中  | 说明 |
 > |---------|---------|
 > | `scopes`   | 包含请求的需要在 API 的访问令牌中返回的作用域。 例如：`[ "https://microsoftgraph.chinacloudapi.cn/mail.read" ]`（针对 Microsoft Graph）或 `[ "<Application ID URL>/scope" ]`（针对自定义 Web API，即 `api://<Application ID>/access_as_user`）。|
 
@@ -300,7 +300,7 @@ myMSALObj.acquireTokenPopup(requestObj)
 有关为本快速入门生成应用程序的更详细分步指导，请参阅：
 
 > [!div class="nextstepaction"]
-> [有关登录和调用 MS Graph 的教程](tutorial-v2-javascript-spa.md)
+> [有关登录和调用 MS Graph 的教程](./tutorial-v2-javascript-spa.md)
 
 若要浏览 MSAL 存储库中的文档、常见问题解答、问题等，请参阅：
 

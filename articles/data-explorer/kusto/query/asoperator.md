@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: a4404dfaab78c7d1fe735a1b6d0ac0e496dd37f3
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 87ac780ae4ff2e83c12189380ff304e1917e5ce2
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509529"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515780"
 ---
 # <a name="as-operator"></a>as 运算符
 
@@ -30,11 +30,9 @@ ms.locfileid: "87509529"
 * *名称*：表格表达式的临时名称。
 * `hint.materialized`：如果设置为 `true`，则表格表达式的值将被具体化，就像它已由 [materialize()](./materializefunction.md) 函数调用包装了一样。
 
-**说明**
-
-* `as` 提供的名称将用于 [union](./unionoperator.md) 的 `withsource=` 列、[find](./findoperator.md) 的 `source_` 列和 [search](./searchoperator.md) 的 `$table` 列。
-
-* 在 [join](./joinoperator.md) 的外部表格输入 (`$left`) 中使用运算符命名的表格表达式也可用于 join 的表格内部输入 (`$right`)。
+> [!NOTE]
+> * `as` 提供的名称将用于 [union](./unionoperator.md) 的 `withsource=` 列、[find](./findoperator.md) 的 `source_` 列和 [search](./searchoperator.md) 的 `$table` 列。
+> * 在 [join](./joinoperator.md) 的外部表格输入 (`$left`) 中使用运算符命名的表格表达式也可用于 join 的表格内部输入 (`$right`)。
 
 ## <a name="examples"></a>示例
 

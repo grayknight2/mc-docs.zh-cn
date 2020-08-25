@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: quickstart
 ms.workload: identity
-ms.date: 04/22/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.custom: aaddev, identityplatformtop40
 ms.reviewer: aragra, lenalepa, sureshja
-ms.openlocfilehash: 916d07c38c15f0c668a1a8113aa259dee33a567f
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+ms.openlocfilehash: ebc4612710e90f0b3d7470992cd4a7ad212c077a
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82126492"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647633"
 ---
 # <a name="quickstart-register-an-application-with-the-microsoft-identity-platform"></a>快速入门：将应用程序注册到 Microsoft 标识平台
 
@@ -49,7 +49,7 @@ ms.locfileid: "82126492"
     * 对于 Web 应用程序，请提供应用的基 URL。 例如，`https://localhost:31544` 可以是本地计算机上运行的 Web 应用的 URL。 用户将使用此 URL 登录到 Web 客户端应用程序。
     * 对于公共客户端应用程序，请提供 Azure AD 返回令牌响应时所用的 URI。 输入特定于应用程序的值，例如 `myapp://auth`。
 
-    如需 Web 应用程序或本机应用程序的示例，请参阅 [Microsoft 标识平台](/active-directory/develop)中的快速入门。
+    如需 Web 应用程序或本机应用程序的示例，请参阅 [Microsoft 标识平台](./index.yml)中的快速入门。
 
 1. 完成后，选择“注册”  。
 
@@ -69,7 +69,7 @@ Azure AD 会向应用分配唯一的应用程序 ID 或客户端 ID。 门户会
 
 * 若要管理支持的帐户，请参阅[快速入门：修改应用程序支持的帐户](quickstart-modify-supported-accounts.md)。
 
-* 若要生成应用并添加功能，请参阅 [Microsoft 标识平台](/active-directory/develop)中的快速入门。
+* 若要生成应用并添加功能，请参阅 [Microsoft 标识平台](./index.yml)中的快速入门。
 
 * 了解有关表示已注册应用程序的两个 Azure AD 对象及它们之间的关系的详细信息，请参阅[应用程序对象和服务主体对象](app-objects-and-service-principals.md)。
 

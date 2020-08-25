@@ -2,15 +2,15 @@
 author: WenJason
 ms.service: storage
 ms.topic: include
-origin.date: 06/07/2019
-ms.date: 10/28/2019
+origin.date: 08/10/2020
+ms.date: 08/24/2020
 ms.author: v-jay
-ms.openlocfilehash: 5fe7938f614db04825400fb14486a4c641d60f88
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: e2ae94c2fdde963846c10735d31076e23ebeda75
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "72958467"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753306"
 ---
 #### <a name="additional-premium-file-share-level-limits"></a>其他高级文件共享级别限制
 
@@ -24,11 +24,11 @@ ms.locfileid: "72958467"
 
 #### <a name="file-level-limits"></a>文件级别限制
 
-|区域  |高级文件  |标准文件 |
+|区域  |标准文件  |高级文件  |
 |---------|---------|---------|
-|大小                  |1 TiB         |1 TiB|
-|每个文件的最大 IOPS     |5,000         |1,000|
-|并发句柄数    |2,000         |2,000|
-|流出量  |300 MiB/秒|      查看标准文件吞吐量值|
-|流入量  |200 MiB/秒| 查看标准文件吞吐量值|
-|吞吐量| 查看高级文件流入量/流出量值| 最多 60 MiB/秒|
+|大小     |1 TiB         |4 TiB         |
+|每个文件的最大 IOPS      |1,000         |5,000         |
+|并发句柄数     |2,000         |2,000         |
+|流出量     |查看标准文件吞吐量值         |300 MiB/秒         |
+|流入量     |查看标准文件吞吐量值         |200 MiB/秒         |
+|吞吐量     |最多 60 MiB/秒         |查看高级文件流入量/流出量值         |

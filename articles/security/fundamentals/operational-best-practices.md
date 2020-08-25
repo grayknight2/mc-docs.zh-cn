@@ -14,15 +14,15 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/29/2020
-ms.author: v-tawe
+ms.date: 08/13/2020
+ms.author: v-johya
 origin.date: 05/06/2019
-ms.openlocfilehash: 2878d892ebf144e950be22cc02a263d01c7f0d4c
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 7e3345a8b4a28c0b6f13b1f766862225910bdec3
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84200055"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228147"
 ---
 # <a name="azure-operational-security-best-practices"></a>Azure 操作安全性最佳做法
 本文提供了用于保护 Azure 中的数据、应用程序和其他资产的一系列操作最佳做法。
@@ -52,7 +52,7 @@ Azure 操作安全性是指用户可用于在 Azure 中保护其数据、应用�
 ## <a name="organize-azure-subscriptions-into-management-groups"></a>将 Azure 订阅组织到管理组中
 如果你的组织有多个订阅，则可能需要一种方法来高效地管理这些订阅的访问权限、策略和符合性。 [Azure 管理组](/governance/management-groups/create)提供了高于订阅的一个作用域级别。 可将订阅组织到名为“管理组”的容器中，并将治理条件应用到管理组。 管理组中的所有订阅都将自动继承应用于管理组的条件。
 
-可以在目录中构建管理组和订阅的灵活结构。 为每个目录指定了一个称为根管理组的顶级管理组。 此根管理组内置在层次结构中，包含其所有下级管理组和订阅。 根管理组允许在目录级别应用全局策略和 RBAC 分配。
+可以在目录中构建管理组和订阅的灵活结构。 为每个目录指定了一个称为根管理组的顶级管理组。 此根管理组内置在层次结构中，包含其所有下级管理组和订阅。 该根管理组允许在目录级别应用全局策略和 Azure 角色分配。
 
 下面是管理组使用方面的一些最佳做法：
 
@@ -152,8 +152,9 @@ Azure 操作安全性是指用户可用于在 Azure 中保护其数据、应用�
 **最佳做法**：确定负责监视策略违规的角色，并确保快速执行正确的修正操作。   
 **详细信息**：让已分配的角色通过 [Azure 门户](../../governance/policy/how-to/get-compliance-data.md#portal)或[命令行](../../governance/policy/how-to/get-compliance-data.md#command-line)来监视符合性。
 
-**最佳做法**：Azure Policy 是组织的书面策略的技术表示形式。 将所有 Azure 策略映射到组织策略，以减少混乱并增强一致性。   
-**详细信息**：通过在 [Azure Policy 定义](../../governance/policy/concepts/definition-structure.md#display-name-and-description)或 [Azure Policy 计划](../../governance/policy/concepts/definition-structure.md#initiatives)描述中添加对组织策略的引用，在组织的文档中或 Azure Policy 定义本身中记录映射。
+**最佳做法**：Azure Policy 是组织的书面策略的技术表示形式。 将所有 Azure 策略定义映射到组织策略，以减少混乱并增强一致性。   
+**详细信息**：通过在[策略定义](../../governance/policy/concepts/definition-structure.md#display-name-and-description)说明中添加对组织策略的引用，在组织的文档中或 Azure Policy 定义本身中记录映射。
+<!--Not available in MC: ../../governance/policy/concepts/initiative-definition-structure.md-->
 
 <!-- not available -->
 
@@ -163,3 +164,4 @@ Azure 操作安全性是指用户可用于在 Azure 中保护其数据、应用�
 以下资源提供了有关 Azure 安全性及相关 Microsoft 服务的更多常规信息：
 * [Azure 安全团队博客](https://blogs.msdn.microsoft.com/azuresecurity/) - 随时掌握 Azure 安全性的最新信息
 * [Microsoft 安全响应中心](https://technet.microsoft.com/library/dn440717.aspx) - 可在其中报告 Microsoft 安全漏洞（包括 Azure 问题）或将其通过电子邮件发送到 secure@microsoft.com
+

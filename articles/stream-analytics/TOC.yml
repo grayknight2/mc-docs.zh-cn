@@ -20,16 +20,10 @@
           href: quick-create-azure-resource-manager.md
         - name: PowerShell
           href: stream-analytics-quick-create-powershell.md
-        - name: Visual Studio
-          href: stream-analytics-quick-create-vs.md
-        - name: Visual Studio Code
-          href: quick-create-vs-code.md
 - name: 教程
   items:
     - name: 1 - 运行 Azure Functions
       href: stream-analytics-with-azure-functions.md
-    - name: 2 - 在 Azure Pipelines 中使用 CI/CD 进行部署
-      href: stream-analytics-tools-visual-studio-cicd-vsts.md
 - name: 示例
   items:
     - name: 代码示例
@@ -41,10 +35,6 @@
   items:
     - name: 选择流分析技术
       href: streaming-technologies.md
-    - name: 选择作业开发工具
-      href: feature-comparison.md
-    - name: 本地开发
-      href: develop-locally.md
     - name: 安全性
       items:
         - name: 安全基线
@@ -93,7 +83,7 @@
       href: stream-analytics-window-functions.md
     - name: 地理空间函数
       href: stream-analytics-geospatial-functions.md
-    - name: 兼容性级别
+    - name: 兼容级别
       href: stream-analytics-compatibility-level.md
     - name: 通用查询模式
       href: stream-analytics-stream-analytics-query-patterns.md
@@ -123,12 +113,8 @@
           href: stream-analytics-test-query.md
         - name: 停止或删除作业
           href: stream-analytics-clean-up-your-job.md
-        - name: 复制或备份作业
-          href: copy-job.md
         - name: 进行作业配对以确保可靠性
           href: stream-analytics-job-reliability.md
-        - name: 使用 SQL 参考数据
-          href: sql-reference-data.md
     - name: 构建解决方案
       items:
         - name: 实时欺诈检测
@@ -159,8 +145,6 @@
           href: stream-analytics-monitor-and-manage-jobs-use-powershell.md
         - name: 监视作业 - Azure .NET SDK
           href: stream-analytics-monitor-jobs.md
-        - name: 监视作业 - Visual Studio
-          href: stream-analytics-monitor-jobs-use-vs.md
     - name: 自动化
       items:
         - name: 使用 .NET SDK
@@ -169,37 +153,7 @@
           href: 'https://github.com/Azure/azure-stream-analytics/tree/master/Samples/ASAOneClick'
         - name: 对 IoT Edge 作业使用 API
           href: stream-analytics-cicd-api.md
-    - name: Visual Studio
-      items:
-        - name: 安装工具
-          href: stream-analytics-tools-for-visual-studio-install.md
-        - name: 使用示例数据在本地进行测试
-          href: stream-analytics-vs-tools-local-run.md
-        - name: 使用实时数据在本地进行测试
-          href: stream-analytics-live-data-local-testing.md
-        - name: 在 Visual Studio 中查看作业
-          href: stream-analytics-vs-tools.md
-        - name: 使用作业关系图调试查询
-          href: debug-locally-using-job-diagram.md
-        - name: 开发 Edge 作业
-          href: stream-analytics-tools-for-visual-studio-edge-jobs.md
-        - name: 设置 CI/CD 管道
-          href: stream-analytics-tools-for-visual-studio-cicd.md
-    - name: Visual Studio Code
-      items:
-        - name: 使用 IntelliSense 完成代码
-          href: vs-code-intellisense.md
-        - name: 使用示例数据在本地进行测试
-          href: visual-studio-code-local-run.md
-        - name: 使用实时数据在本地进行测试
-          href: visual-studio-code-local-run-live-input.md
-        - name: 使用作业关系图调试查询
-          href: debug-locally-using-job-diagram-vs-code.md
-        - name: 设置 CI/CD 管道
-          href: setup-cicd-vs-code.md
-        - name: 探索作业
-          href: visual-studio-code-explore-jobs.md
-    - name: 故障排除
+    - name: 疑难解答
       items:
         - name: 输入
           href: stream-analytics-troubleshoot-input.md
@@ -223,12 +177,8 @@
               href: internal-error-codes.md
     - name: 与机器学习集成
       items:
-        - name: 使用 ML 模型进行情绪分析
-          href: stream-analytics-machine-learning-integration-tutorial.md
         - name: 异常检测
           href: stream-analytics-machine-learning-anomaly-detection.md
-        - name: 使用 REST API
-          href: stream-analytics-how-to-configure-azure-machine-learning-endpoints-in-stream-analytics.md
     - name: 利用 ML 函数进行缩放
       href: stream-analytics-scale-with-machine-learning-functions.md
 - name: 流分析查询语言
@@ -246,7 +196,7 @@
             - name: 聚合函数概述
               href: 'https://docs.microsoft.com/stream-analytics-query/aggregate-functions-azure-stream-analytics'
               maintainContext: true
-            - name: 平均值
+            - name: AVG
               href: 'https://docs.microsoft.com/stream-analytics-query/avg-azure-stream-analytics'
               maintainContext: true
             - name: COUNT
@@ -261,7 +211,7 @@
             - name: MAX
               href: 'https://docs.microsoft.com/stream-analytics-query/max-azure-stream-analytics'
               maintainContext: true
-            - name: 最小值
+            - name: MIN
               href: 'https://docs.microsoft.com/stream-analytics-query/min-azure-stream-analytics'
               maintainContext: true
             - name: Percentile_Cont
@@ -577,7 +527,7 @@
       href: /dotnet/api/microsoft.azure.management.streamanalytics
     - name: REST
       href: 'https://docs.microsoft.com/rest/api/streamanalytics'
-    - name: Resource Manager 模板
+    - name: 资源管理器模板
       href: /azure/templates/microsoft.streamanalytics/allversions
 - name: 资源
   items:

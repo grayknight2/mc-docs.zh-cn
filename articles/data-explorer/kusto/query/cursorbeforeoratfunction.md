@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/19/2020
-ms.date: 07/31/2020
+ms.date: 08/18/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b019640d05792245ff2b20ab906e46a8c90b3aff
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.openlocfilehash: 83348585543c7c7453eae6ef7845537f41ab2ff4
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509242"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515704"
 ---
 # <a name="cursor_before_or_at"></a>cursor_before_or_at()
 

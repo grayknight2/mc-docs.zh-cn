@@ -7,14 +7,14 @@ ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 08/07/2020
+ms.date: 08/21/2020
 ms.author: v-junlch
-ms.openlocfilehash: fffbbf9d247152c21bcb2274f43e8916b6e25b92
-ms.sourcegitcommit: a5eb9a47feefb053ddbaab4b15c395972c372339
+ms.openlocfilehash: c965a57d9a4ccb31af5bfd848a99c0cfa50bc648
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88028633"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715178"
 ---
 # <a name="create-an-azure-active-directory-domain-services-resource-forest-and-outbound-forest-trust-to-an-on-premises-domain-using-azure-powershell"></a>使用 Azure PowerShell 创建 Azure Active Directory 域服务资源林以及到本地域的出站林信任
 
@@ -149,14 +149,14 @@ New-AzureADServicePrincipal -AppId "2565bd9d-da50-47d4-8b85-4c97f669dc36"
 1. 使用 Azure VPN 或 Azure ExpressRoute 连接创建与 Azure 的本地网络的混合连接。 混合网络配置超出了本文档的范围，你的环境中可能已存在该配置。 有关特定方案的详细信息，请参阅以下文章：
 
     * [Azure 站点到站点 VPN](/vpn-gateway/vpn-gateway-about-vpngateways)。
-    * [Azure ExpressRoute 概述](/vpn-gateway/vpn-gateway-about-vpngateways)。
+    * [Azure ExpressRoute 概述](/expressroute/expressroute-introduction)。
 
     > [!IMPORTANT]
     > 如果直接创建与托管域的虚拟网络的连接，请使用单独的网关子网。 请勿在托管域的子网中创建网关。
 
 1. 若要管理托管域，请创建管理 VM，将它加入托管域，并安装所需 AD DS 管理工具。
 
-    在部署托管域资源林期间，[创建 Windows Server VM](join-windows-vm.md)，然后[安装核心 AD DS 管理工具](tutorial-create-management-vm.md)以安装所需管理工具。 等待将管理 VM 加入托管域，直到在成功部署域之后执行以下步骤之一。
+    在部署托管域资源林期间，[创建 Windows Server VM](/active-directory-domain-services/join-windows-vm)，然后[安装核心 AD DS 管理工具](/active-directory-domain-services/tutorial-create-management-vm)以安装所需管理工具。 等待将管理 VM 加入托管域，直到在成功部署域之后执行以下步骤之一。
 
 1. 验证本地网络与 Azure 虚拟网络之间的网络连接。
 

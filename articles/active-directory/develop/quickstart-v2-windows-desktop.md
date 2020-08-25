@@ -8,15 +8,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: quickstart
 ms.workload: identity
-ms.date: 07/09/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 060b503b4953b36113c9021462df6a132bc3f200
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.openlocfilehash: 7854bd64583cf72f882d274e84a4e6f7225d9ddc
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164937"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647598"
 ---
 # <a name="quickstart-acquire-a-token-and-call-microsoft-graph-api-from-a-windows-desktop-app"></a>快速入门：获取令牌并从 Windows 桌面应用中调用 Microsoft Graph API
 
@@ -176,5 +176,5 @@ authResult = await App.PublicClientApp.AcquireTokenSilent(scopes, firstAccount)
 试用 Windows 桌面教程，了解有关构建应用程序和新功能的完整分布指南，包括本快速入门的完整说明。
 
 > [!div class="nextstepaction"]
-> [调用 Graph API 教程](tutorial-v2-windows-desktop.md)
+> [调用 Graph API 教程](./tutorial-v2-windows-desktop.md)
 

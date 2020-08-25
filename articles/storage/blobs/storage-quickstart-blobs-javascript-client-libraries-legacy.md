@@ -3,25 +3,28 @@ title: 快速入门：浏览器中适用于 JavaScript v10 的 Azure Blob 存储
 description: 了解如何在 HTML 页中使用 JavaScript v10 SDK 上传、列出和删除 blob。
 services: storage
 author: WenJason
-ms.custom: mvc
+ms.custom: mvc, devx-track-javascript
 ms.service: storage
 ms.author: v-jay
-origin.date: 01/24/2020
-ms.date: 06/01/2020
+origin.date: 07/24/2020
+ms.date: 08/24/2020
 ms.topic: quickstart
 ms.subservice: blobs
-ms.openlocfilehash: fe69a893232b0c08ffebd16d52f8df98195f6575
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: ff0f782f282d4f3ad4deeca3d4eaea5bc3eb9281
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199654"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753441"
 ---
 <!-- Customer intent: As a web application developer I want to interface with Azure Blob storage entirely on the client so that I can build a SPA application that is able to upload and delete files on blob storage. -->
 
 # <a name="quickstart-manage-blobs-with-javascript-v10-sdk-in-browser"></a>快速入门：在浏览器中使用 JavaScript v10 SDK 管理 blob
 
 本快速入门介绍如何使用完全在浏览器中运行的 JavaScript 代码来管理 Blob。 Blob 是可以保存大量文本或二进制数据（包括图像、文档、流媒体和存档数据）的对象。 你将采取必要的安全措施来确保对 Blob 存储帐户的访问受到保护。
+
+> [!NOTE]
+> 此快速启动使用 Azure Blob 存储客户端库的旧版本。 若要开始使用最新版本，请参阅[快速入门：在浏览器中使用 JavaScript v12 SDK 管理 Blob](quickstart-blobs-javascript-browser.md)。
 
 ## <a name="prerequisites"></a>先决条件
 
@@ -35,13 +38,13 @@ ms.locfileid: "84199654"
 
 必须先将帐户配置为启用[跨域资源共享](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services)（简称 CORS），然后 Web 应用程序才能从客户端访问 Blob 存储。
 
-返回到 Azure 门户，然后选择存储帐户。 若要定义新的 CORS 规则，请导航到“设置”部分，然后单击“CORS”链接。  对于本快速入门，请创建开放的 CORS 规则：
+返回到 Azure 门户，然后选择存储帐户。 若要定义新的 CORS 规则，请导航到“设置”部分，然后单击“CORS”链接。 对于本快速入门，请创建开放的 CORS 规则：
 
 ![Azure Blob 存储帐户 CORS 设置](media/storage-quickstart-blobs-javascript-client-libraries-v10/azure-blob-storage-cors-settings.png)
 
 下表描述了每项 CORS 设置，并对用于定义规则的值进行了说明。
 
-|设置  |Value  | 说明 |
+|设置  |值  | 说明 |
 |---------|---------|---------|
 | 允许的域 | * | 接受一个逗号分隔的列表，其中的域设置为可以接受的域。 将值设置为 `*` 意味着所有域都可以访问存储帐户。 |
 | 允许的方法     | delete、get、head、merge、post、options 和 put | 列出允许对存储帐户执行操作的 HTTP 谓词。 对于本快速入门，请选择所有可用的选项。 |
@@ -56,7 +59,7 @@ ms.locfileid: "84199654"
 
 ## <a name="create-a-shared-access-signature"></a>创建共享访问签名
 
-在浏览器中运行的代码可以使用共享访问签名 (SAS) 对发往 Blob 存储的请求进行授权。 使用 SAS 时，客户端可以在没有帐户访问密钥或连接字符串的情况下授权对存储资源的访问。 有关 SAS 的详细信息，请参阅[使用共享访问签名 (SAS)](../common/storage-sas-overview.md)。
+在浏览器中运行的代码可以使用共享访问签名 (SAS) 对发往 Blob 存储的请求进行授权。 使用 SAS 时，客户端可以在没有帐户访问密钥或连接字符串的情况下授权访问存储资源。 有关 SAS 的详细信息，请参阅[使用共享访问签名 (SAS)](../common/storage-sas-overview.md)。
 
 可以使用 Azure CLI、Azure 门户或 Azure 存储资源管理器来创建 SAS。 下表描述了使用 CLI 生成 SAS 时需要提供值的参数。
 
@@ -80,7 +83,7 @@ az storage account generate-sas \
 
 你可能会觉得每个参数之后的一系列值有点费解。 这些参数值取自相应权限的第一个字母。 下表解释了这些值的来源：
 
-| 参数        | Value   | 说明  |
+| 参数        | 值   | 说明  |
 |------------------|---------|---------|
 | *权限*    | racwdl  | 此 SAS 允许 *read*（读取）、*append*（追加）、*create*（创建）、*write*（编写）、*delete*（删除）和 *list*（列出）功能。 |
 | *resource-types* | sco     | 受 SAS 影响的资源为 *service*（服务）、*container*（容器）和 *object*（对象）。 |
@@ -123,7 +126,7 @@ az storage account generate-sas \
 
 ### <a name="configure-the-debugger"></a>配置调试器
 
-若要在 VS Code 中设置调试器扩展，请选择“调试”>“添加配置...”，然后根据在前面“先决条件”部分选择的扩展，选择“Chrome”或“Microsoft Edge”。   此操作会创建 *launch.json* 文件并在编辑器中打开它。
+若要在 VS Code 中设置调试器扩展，请选择“调试”>“添加配置...”，然后根据在前面“先决条件”部分选择的扩展，选择“Chrome”或“Microsoft Edge”。 此操作会创建 *launch.json* 文件并在编辑器中打开它。
 
 接下来，修改 *launch.json* 文件，使 `url` 值包含 `/index.html`，如下所示：
 

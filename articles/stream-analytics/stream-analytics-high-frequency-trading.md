@@ -1,20 +1,20 @@
 ---
 title: 使用 Azure 流分析进行高频交易
 description: 如何在 Azure 流分析作业中进行线性回归模型训练和评分。
-author: lingliw
-ms.author: v-lingwu
-manager: digimobile
-ms.reviewer: jasonh
+author: Johnnytechn
+ms.author: v-johya
+ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 12/07/2018
-ms.date: 08/07/2019
-ms.openlocfilehash: fc754f5bad149b87172a808fab0df5fcd00a0ad1
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.date: 08/20/2020
+ms.custom: seodec18
+ms.openlocfilehash: bb380ba148269a5624cde04dc48b26ae0d318dad
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75856906"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715705"
 ---
 # <a name="high-frequency-trading-simulation-with-stream-analytics"></a>使用流分析进行高频交易模拟
 用户可以在 Azure 流分析中结合使用 SQL 语言和 JavaScript 的用户定义函数 (UDF) 与用户定义聚合 (UDA) 进行高级分析。 高级分析可能包括在线机器学习训练和评分，以及有状态过程模拟。 本文介绍如何在 Azure 流分析作业中执行线性回归操作，该作业在高频交易方案中进行持续的训练和评分。
@@ -65,7 +65,7 @@ socket.On(Socket.EVENT_CONNECT, () =>
 >事件的时间戳为 **lastUpdated**，采用纪元时间。
 
 ### <a name="predictive-model-for-high-frequency-trading"></a>高频交易预测模型
-我们使用 Darryl Shen 在[其文章](http://eprints.maths.ox.ac.uk/1895/1/Darryl%20Shen%20%28for%20archive%29.pdf)中介绍的线性模型进行演示。
+我们使用 Darryl Shen 在[其文章](https://docplayer.net/23038840-Order-imbalance-based-strategy-in-high-frequency-trading.html)中介绍的线性模型进行演示。
 
 大额委托失衡 (VOI) 是基于当前买入/卖出价量和上次买入/卖出价量的一个函数。 该文章明确了 VOI 和未来价格波动的相关性。 它构建了一个线性模型，该模型基于过去 5 个 VOI 值以及接下来 10 次交易的价格变化。 使用前一天的数据对模型进行线性回归训练。 
 
@@ -455,12 +455,13 @@ FROM simulation /* output trade simulation to PBI */
 
 ![PNL Power BI 图表视觉对象](./media/stream-analytics-high-frequency-trading/pnl-power-bi-chart.png)
 
+
 ## <a name="summary"></a>总结
 可以在 Azure 流分析中使用中等复杂程度的查询来实现逼真的高频交易模型。 由于缺少内置的线性回归函数，我们必须将模型从五个输入变量简化为两个。 但如果用户有决心，也可以 JavaScript UDA 方式实现更高维且更复杂的算法。 
 
-需要指出的是，除 JavaScript UDA 之外的大部分查询可以在 Visual Studio 中通过[用于 Visual Studio 的 Azure 流分析工具](stream-analytics-tools-for-visual-studio-install.md)进行测试和调试。 在编写初始查询以后，作者在 Visual Studio 中花不到 30 分钟的时间对查询进行了测试和调试。 
+需要指出的是，除 JavaScript UDA 之外的大部分查询可以在 Visual Studio 中通过用于 Visual Studio 的 Azure 流分析工具进行测试和调试。 在编写初始查询以后，作者在 Visual Studio 中花不到 30 分钟的时间对查询进行了测试和调试。 
 
 目前，UDA 不能在 Visual Studio 中调试。 我们正在努力实现该功能，希望能够对 JavaScript 代码进行单步调试。 另请注意，进入 UDA 的字段的名称为小写。 在查询测试过程中，这并没有引起注意。 但在兼容性级别为 1.1 的 Azure 流分析中，我们保留字段名称的大小写，这样更显自然。
 
 我希望本文能够激发所有 Azure 流分析用户的热情，促使他们使用我们的服务在近实时环境中持续进行高级分析。 如果你有任何反馈，请告知我们，以便我们改进高级分析方案的查询实现。
-<!-- Update_Description: update meta properties -->
+

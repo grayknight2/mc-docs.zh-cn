@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 12/09/2019
 ms.date: 07/08/2020
-ms.openlocfilehash: a7ded8d70b5cb950a4ccadb2fcf087401dfb2c8b
-ms.sourcegitcommit: 5fb9ae9adc04e79d6d0e78c9e69dbe8aa3ceb00a
+ms.openlocfilehash: 8e1aa33b9a1b69d90d099711fb07da1349941ad2
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86100235"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515821"
 ---
 # <a name="manage-cluster-horizontal-scaling-scale-out-in-azure-data-explorer-to-accommodate-changing-demand"></a>在 Azure 数据资源管理器中管理水平缩放（横向扩展）群集以适应不断变化的需求
 
@@ -30,7 +30,7 @@ ms.locfileid: "86100235"
 
 1. 在 Azure 门户中，转到 Azure 数据资源管理器群集资源。 在“设置”下选择“横向扩展”。  
 
-2. 在“横向扩展”窗口中，选择想要的自动缩放方法：手动缩放、优化自动缩放或自定义自动缩放  。
+2. 在“横向扩展”窗口中，选择想要的自动缩放方法：**手动缩放**或**自定义自动缩放**。
 
 ### <a name="manual-scale"></a>手动缩放
 

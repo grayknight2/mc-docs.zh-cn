@@ -4,14 +4,14 @@ description: 了解如何在 Azure Functions 中发送 Azure 服务总线触发�
 author: craigshoemaker
 ms.assetid: daedacf0-6546-4355-a65c-50873e74f66b
 ms.topic: reference
-ms.date: 03/03/2020
+ms.date: 08/11/2020
 ms.author: v-junlch
-ms.openlocfilehash: fbe5e81437b1e6ecb60f3c3074f383b55d614453
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: e393fc4e5380b61c1754f5fb91c75beb6386bc7a
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79292845"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223023"
 ---
 # <a name="azure-service-bus-bindings-for-azure-functions"></a>Azure Functions 的 Azure 服务总线绑定
 

@@ -10,12 +10,12 @@ ms.author: aashishb
 author: aashishb
 ms.reviewer: larryfr
 ms.date: 05/19/2020
-ms.openlocfilehash: 87921a75c6329cf7347e2d18f9a5723675b6891c
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: 1d22a7dea1d51605b4c129d8c8ef1d3085320f0c
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441194"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228456"
 ---
 # <a name="enterprise-security-for-azure-machine-learning"></a>Azure 机器学习的企业安全性
 
@@ -34,7 +34,7 @@ ms.locfileid: "86441194"
 1. 客户端将令牌提供给 Azure 资源管理器和所有 Azure 机器学习服务。
 1. 机器学习服务将机器学习服务令牌提供给用户计算目标（例如机器学习计算）。 运行完成后，用户计算目标使用此令牌回调机器学习服务。 范围限制为工作区。
 
-[![Azure 机器学习中的身份验证](media/concept-enterprise-security/authentication.png)](media/concept-enterprise-security/authentication-expanded.png#lightbox)
+[![Azure 机器学习中的身份验证](media/concept-enterprise-security/authentication.png)](media/concept-enterprise-security/authentication.png#lightbox)
 
 有关详细信息，请参阅[为 Azure 机器学习资源和工作流设置身份验证](how-to-setup-authentication.md)。 本文提供有关身份验证的信息和示例，包括如何使用服务主体和自动化工作流。
 
@@ -75,7 +75,7 @@ ms.locfileid: "86441194"
 | 查看模型/映像 | ✓ | ✓ | ✓ |
 | 调用 Web 服务 | ✓ | ✓ | ✓ |
 
-如果内置角色不符合你的需求，可以创建自定义角色。 只有针对工作区上和机器学习计算的操作支持自定义角色。 自定义角色对工作区及其中的计算资源拥有读取、写入或删除权限。 可以使角色在特定工作区级别、特定资源组级别或特定订阅级别可用。 有关详细信息，请参阅[管理 Azure 机器学习工作区中的用户和角色](how-to-assign-roles.md)。
+如果内置角色不符合你的需求，可以创建自定义角色。 支持自定义角色来控制工作区内所有操作，例如创建计算、提交运行、注册数据存储或部署模型。 自定义角色对工作区各种资源（如群集、数据存储、模型和终结点）可以具有读取、写入或删除权限。 可以使角色在特定工作区级别、特定资源组级别或特定订阅级别可用。 有关详细信息，请参阅[管理 Azure 机器学习工作区中的用户和角色](how-to-assign-roles.md)。
 
 > [!WARNING]
 > Azure Active Directory 企业对企业协作支持 Azure 机器学习，但目前 Azure Active Directory 的企业对消费者协作不支持。
@@ -107,22 +107,29 @@ Azure 机器学习依赖于其他 Azure 服务提供计算资源。 计算资源
 
 有关详细信息，请参阅[如何在独立的虚拟网络中安全地运行试验和推理](how-to-enable-virtual-network.md)。
 
-还可以为工作区启用 Azure 专用链接。 通过专用链接，你可以限制从 Azure 虚拟网络到工作区的通信。 有关详细信息，请参阅[如何配置专用链接](how-to-configure-private-link.md)。
+
 
 ## <a name="data-encryption"></a>数据加密
+
+> [!IMPORTANT]
+> 对于培训期间的生产级别加密，Microsoft 建议使用 Azure 机器学习计算群集。 对于推断期间的生产级别加密，Microsoft 建议使用 Azure Kubernetes 服务。
+>
+> Azure 机器学习计算实例是开发/测试环境。 使用它时，我们建议将文件（如笔记本和脚本）存储在文件共享中。 数据应存储在数据存储中。
 
 ### <a name="encryption-at-rest"></a>静态加密
 
 > [!IMPORTANT]
 > 如果工作区包含敏感数据，我们建议在创建工作区时设置 [hbi_workspace 标志](https://docs.microsoft.com/python/api/azureml-core/azureml.core.workspace(class)?view=azure-ml-py#create-name--auth-none--subscription-id-none--resource-group-none--location-none--create-resource-group-true--sku--basic---friendly-name-none--storage-account-none--key-vault-none--app-insights-none--container-registry-none--cmk-keyvault-none--resource-cmk-uri-none--hbi-workspace-false--default-cpu-compute-target-none--default-gpu-compute-target-none--exist-ok-false--show-output-true-)。 
 
-`hbi_workspace` 标志控制 Microsoft 为诊断而收集的数据量，并在 Microsoft 托管环境中启用其他加密。 此外，该标志还可启用以下功能：
+`hbi_workspace` 标志控制 Microsoft 为诊断而收集的数据量，并在 Microsoft 托管环境中启用其他加密。 此外，该标志启用以下操作：
 
-* 开始加密 Amlcompute 群集中的本地暂存磁盘，前提是尚未在该订阅中创建任何以前的群集。 否则，需要提供支持票证来启用对计算群集的暂存磁盘的加密 
+* 开始加密 Azure 机器学习计算群集中的本地暂存磁盘，前提是尚未在该订阅中创建任何以前的群集。 否则，需要提供支持票证来启用对计算群集的暂存磁盘的加密 
 * 在不同运行之间清理本地暂存磁盘
 * 利用密钥保管库，将存储帐户、容器注册表和 SSH 帐户的凭据从执行层安全地传递到计算群集
 * 启用 IP 筛选，以确保基础批处理池不会由除 AzureMachineLearningService 以外的任何外部服务调用
 
+> [!WARNING]
+> 只能在创建工作区时设置 `hbi_workspace` 标志。 不能更改现有工作区的这个标志。
 
 有关 Azure 中静态加密工作原理的详细信息，请参阅 [Azure 数据静态加密](https://docs.microsoft.com/azure/security/fundamentals/encryption-atrest)。
 
@@ -147,10 +154,6 @@ Azure 机器学习在 Azure Cosmos DB 实例中存储指标和元数据。 此�
 若要使用客户管理的密钥来预配订阅中的 Cosmos DB 实例，请执行以下操作：
 
 * 在订阅中注册 Microsoft.MachineLearning 和 Microsoft.DocumentDB 资源提供程序（如果尚未注册）。
-
-* 授予机器学习应用（在标识和访问管理中）对订阅的参与者权限。
-
-    ![在门户中的标识和访问管理中向“Azure 机器学习应用”授权](./media/concept-enterprise-security/authorize-azure-machine-learning.png)
 
 * 创建 Azure 机器学习工作区时，请使用以下参数。 这两个参数都是必需的，并且在 SDK、CLI、REST API 和资源管理器模板中受支持。
 
@@ -228,7 +231,7 @@ Azure Databricks 可在 Azure 机器学习管道中使用。 默认情况下，A
 
 Azure 机器学习使用 TLS 来保护各种 Azure 机器学习微服务之间的内部通信。 所有 Azure 存储访问也都通过安全通道进行。
 
-Azure 机器学习使用 TLS 来保护对评分终结点的外部调用。 有关详细信息，请参阅[使用 TLS 通过 Azure 机器学习来保护 Web 服务](https://docs.microsoft.com/azure/machine-learning/how-to-secure-web-service)。
+Azure 机器学习使用 TLS 来保护对评分终结点的外部调用。 有关详细信息，请参阅[使用 TLS 通过 Azure 机器学习来保护 Web 服务](/machine-learning/how-to-secure-web-service)。
 
 ### <a name="using-azure-key-vault"></a>使用 Azure Key Vault
 
@@ -312,7 +315,7 @@ Microsoft 还建议不要在环境变量中存储敏感信息（如帐户密钥�
 
 用户还可根据需要预配附加到工作区的其他计算目标（例如 Azure Kubernetes 服务或 VM）。
 
-[![创建工作区工作流](media/concept-enterprise-security/create-workspace.png)](media/concept-enterprise-security/create-workspace-expanded.png#lightbox)
+[![创建工作区工作流](media/concept-enterprise-security/create-workspace.png)](media/concept-enterprise-security/create-workspace.png#lightbox)
 
 ### <a name="save-source-code-training-scripts"></a>保存源代码（训练脚本）
 
@@ -320,7 +323,7 @@ Microsoft 还建议不要在环境变量中存储敏感信息（如帐户密钥�
 
 与 Azure 机器学习工作区关联的是包含源代码（训练脚本）的目录（试验）。 这些脚本存储在本地计算机和云中（位于订阅的 Azure Blob 存储中）。 代码快照用于执行或检查历史审核。
 
-[![代码快照工作流](media/concept-enterprise-security/code-snapshot.png)](media/concept-enterprise-security/code-snapshot-expanded.png#lightbox)
+[![代码快照工作流](media/concept-enterprise-security/code-snapshot.png)](media/concept-enterprise-security/code-snapshot.png#lightbox)
 
 ### <a name="training"></a>培训
 
@@ -347,7 +350,7 @@ Microsoft 还建议不要在环境变量中存储敏感信息（如帐户密钥�
 
 在以下流示意图中，当训练计算目标将运行指标从 Cosmos DB 数据库中的存储写回到 Azure 机器学习时，将执行此步骤。 客户端可以调用 Azure 机器学习。 而机器学习又会从 Cosmos DB 数据库提取指标，然后将指标返回给客户端。
 
-[![训练工作流](media/concept-enterprise-security/training-and-metrics.png)](media/concept-enterprise-security/training-and-metrics-expanded.png#lightbox)
+[![训练工作流](media/concept-enterprise-security/training-and-metrics.png)](media/concept-enterprise-security/training-and-metrics.png#lightbox)
 
 ### <a name="creating-web-services"></a>创建 Web 服务
 
@@ -362,7 +365,7 @@ Microsoft 还建议不要在环境变量中存储敏感信息（如帐户密钥�
 * 将评分请求详细信息存储在用户订阅的 Application Insights 中。
 * 此外，将遥测推送到 Microsoft/Azure 订阅。
 
-[![推理工作流](media/concept-enterprise-security/inferencing.png)](media/concept-enterprise-security/inferencing-expanded.png#lightbox)
+[![推理工作流](media/concept-enterprise-security/inferencing.png)](media/concept-enterprise-security/inferencing.png#lightbox)
 
 ## <a name="next-steps"></a>后续步骤
 

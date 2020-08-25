@@ -5,14 +5,14 @@ author: WenJason
 ms.author: v-jay
 ms.service: mariadb
 ms.topic: conceptual
-origin.date: 06/02/2020
-ms.date: 07/06/2020
-ms.openlocfilehash: 9efb46077b0f8fbb9c74f797b57e573d42916f90
-ms.sourcegitcommit: 7ea2d04481512e185a60fa3b0f7b0761e3ed7b59
+origin.date: 07/09/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: a968c3aa9b91367a6166fbf1a7d2f7461fb2446c
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85845881"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222947"
 ---
 # <a name="ssltls-connectivity-in-azure-database-for-mariadb"></a>Azure Database for MariaDB 中的 SSL/TLS 连接
 Azure Database for MariaDB 支持使用安全套接字层 (SSL) 将数据库服务器连接到客户端应用程序。 通过在数据库服务器与客户端应用程序之间强制实施 SSL 连接，可以加密服务器与应用程序之间的数据流，有助于防止“中间人”攻击。
@@ -21,6 +21,8 @@ Azure Database for MariaDB 支持使用安全套接字层 (SSL) 将数据库服�
 默认情况下，应将数据库服务配置为需要 SSL 连接才可连接到 MariaDB。  建议尽量不要禁用 SSL 选项。
 
 通过 Azure 门户和 CLI 预配新的 Azure Database for MariaDB 服务器时，默认情况下会强制实施 SSL 连接。
+
+在某些情况下，应用程序需要具备从受信任的证书颁发机构 (CA) 证书文件生成的本地证书文件才能实现安全连接。 目前，客户只能使用预定义的证书连接到位于 https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem 的 Azure Database for MariaDB 服务器。 
 
 Azure 门户中显示了各种编程语言的连接字符串。 这些连接字符串包含连接到数据库所需的 SSL 参数。 在 Azure 门户中，选择服务器。 在“设置”标题下，选择“连接字符串” 。 SSL 参数因连接器而异，例如“ssl=true”、“sslmode=require”或“sslmode=required”，以及其他变体。
 
@@ -45,9 +47,9 @@ Azure Database for MariaDB 提供了为客户端连接强制使用 TLS 版本的
 例如，将此最低 TLS 设置版本的值设置为 TLS 1.0 意味着服务器将允许使用 TLS 1.0、1.1 和 1.2 + 的客户端进行连接。 或者，将此选项设置为 1.2 意味着仅允许使用 TLS 1.2+ 的客户端进行连接，并且将拒绝 TLS 1.0 和 TLS 1.1 的所有连接。
 
 > [!Note] 
-> Azure Database for MariaDB 默认情况下为所有新服务器禁用 TLS。 
+> 默认情况下，Azure Database for MariaDB 不会强制执行最低 TLS 版本要求（`TLSEnforcementDisabled` 设置）。
 >
-> 目前，Azure Database for MariaDB 支持的 TLS 版本为 TLS 1.0、1.1 和 1.2。 强制实施到特定的最低 TLS 版本后，你不能将它更改为“已禁用”。
+> 一旦强制实施最低 TLS 版本要求后，以后将无法禁用最低版本强制实施。
 
 若要了解如何为 Azure Database for MariaDB 设置 TLS 设置，请参阅[如何配置 TLS 设置](howto-tls-configurations.md)。
 

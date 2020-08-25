@@ -2,7 +2,7 @@
 title: 配置指标和资源日志的流式导出
 description: 了解如何配置指标和资源日志的流式导出，包括将 Azure SQL 数据库和 Azure SQL 托管实例中的智能诊断分析导出到所选目标，以存储有关资源利用率和查询执行统计的信息。
 services: sql-database
-ms.service: sql-database
+ms.service: sql-db-mi
 ms.subservice: performance
 ms.custom: seoapril2019
 ms.devlang: sqldbrb=2
@@ -11,13 +11,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: jrasnik, carlrab
 origin.date: 04/06/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: 77f0b119ea9748731fc0cadf6ed88708444a43fe
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 844ebd11adcfe93593837f6fb8a4363a6e3e1dd0
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227370"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222887"
 ---
 # <a name="configure-streaming-export-of-azure-sql-database-and-sql-managed-instance-diagnostic-telemetry"></a>配置 Azure SQL 数据库和 Azure SQL 托管实例诊断遥测的流式导出
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -26,7 +26,7 @@ ms.locfileid: "86227370"
 
 此外，介绍可将此诊断遥测数据流式传输到哪些目标，以及如何选择不同的目标。 目标选项包括：
 
-- Log Analytics 和 SQL Analytics
+- Log Analytics
 - 事件中心
 - Azure 存储
 
@@ -133,9 +133,9 @@ ms.locfileid: "86227370"
 > [!IMPORTANT]
 > 除了为弹性池配置诊断遥测数据，还需为弹性池中的每个数据库配置诊断遥测数据。
 
-### <a name="single-and-pooled-databases-in-azure-sql-database"></a>Azure SQL 数据库中的单一数据库和共用数据库
+### <a name="databases-in-azure-sql-database"></a>Azure SQL 数据库中的数据库
 
-可将单一数据库或共用数据库资源设置为收集以下诊断遥测数据：
+可将数据库资源设置为收集以下诊断遥测数据：
 
 | 资源 | 监视遥测数据 |
 | :------------------- | ------------------- |

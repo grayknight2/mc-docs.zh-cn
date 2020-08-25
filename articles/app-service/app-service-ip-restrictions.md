@@ -5,21 +5,21 @@ author: ccompy
 ms.assetid: 3be1f4bd-8a81-4565-8a56-528c037b24bd
 ms.topic: article
 origin.date: 06/06/2019
-ms.date: 03/30/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 5989a29280f6f311ade7db5d4183728644bec1d7
-ms.sourcegitcommit: 6bb9e8c0029b507ebad2533d94825723c868b32f
+ms.openlocfilehash: bfd21f79a1255cf0c05032bb4ab16b8463170c25
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82975032"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227978"
 ---
-# <a name="azure-app-service-access-restrictions"></a>Azure 应用服务访问限制 #
+# <a name="azure-app-service-access-restrictions"></a>Azure 应用服务访问限制
 
-使用访问限制可以定义一个按优先级排序的允许/拒绝列表，用于控制在网络中对应用的访问。 此列表包含 IP 地址。 如果存在一个或多个条目，则在列表末尾会存在一个隐式的“拒绝所有”。
+使用访问限制可以定义一个按优先级排序的允许/拒绝列表，用于控制在网络中对应用的访问。 该列表可以包含 IP 地址或 Azure 虚拟网络子网。 如果存在一个或多个条目，则在列表末尾会存在一个隐式的“拒绝所有”。
 
-访问限制功能适用于所有应用服务托管的工作负载，包括 Web 应用、API 应用和 Functions。
+访问限制功能适用于所有应用服务托管工作负载，包括 Web 应用、API 应用、Linux 应用、Linux 容器应用和 Functions。
 
  <!-- If the FROM address is in a subnet that is configured with service endpoints to Microsoft.Web, then the source subnet is compared against the virtual network rules in your access restrictions list.  -->
 
@@ -27,13 +27,15 @@ ms.locfileid: "82975032"
 
 访问限制功能是在应用服务前端角色（即代码运行所在的辅助角色主机中的上游）中实现的。 因此，访问限制是有效的网络 ACL。
 
-<!-- The ability to restrict access to your web app from an Azure Virtual Network (VNet) is called [service endpoints][serviceendpoints]. Service endpoints enable you to restrict access to a multi-tenant service from selected subnets. It must be enabled on both the networking side as well as the service that it is being enabled with.  -->
+<!-- The ability to restrict access to your web app from an Azure Virtual Network (VNet) is called [service endpoints][serviceendpoints]. Service endpoints enable you to restrict access to a multi-tenant service from selected subnets. It must be enabled on both the networking side as well as the service that it is being enabled with. It does not work to restrict traffic to apps that are hosted in an App Service Environment.  -->
+
+如果处于应用服务环境中，则可以使用 IP 地址规则控制对应用的访问。
 
 ![访问限制流](media/app-service-ip-restrictions/access-restrictions-flow.png)
 
 ## <a name="adding-and-editing-access-restriction-rules-in-the-portal"></a>在门户中添加并编辑访问限制规则 ##
 
-若要向应用添加访问限制规则，请通过菜单打开“网络”>“访问限制”，然后单击“配置访问限制”   
+若要向应用添加访问限制规则，请使用菜单打开“网络”>“访问限制”，然后单击“配置访问限制”   
 
 ![应用服务网络选项](media/app-service-ip-restrictions/access-restrictions.png)  
 
@@ -124,12 +126,12 @@ management.chinacloudapi.cn/subscriptions/**subscription ID**/resourceGroups/**r
 }
 ```
 
-## <a name="azure-function-app-access-restrictions"></a>Azure 函数应用访问限制
+## <a name="azure-functions-access-restrictions"></a>Azure Functions 访问限制
 
 访问限制也适用于与应用服务计划具有相同功能的函数应用。 启用访问限制会针对任何不允许的 IP 禁用门户代码编辑器。
 
 ## <a name="next-steps"></a>后续步骤
-[Azure 函数应用的访问限制](../azure-functions/functions-networking-options.md#inbound-ip-restrictions)
+[Azure Functions 的访问限制](../azure-functions/functions-networking-options.md#inbound-ip-restrictions)
 
 [应用程序网关与服务终结点的集成](networking/app-gateway-with-service-endpoints.md)
 

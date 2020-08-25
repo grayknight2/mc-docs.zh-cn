@@ -5,14 +5,15 @@ author: sffamily
 ms.service: signalr
 ms.topic: tutorial
 origin.date: 03/01/2019
-ms.date: 12/16/2019
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: d963f9a35ff89eb8f65a01b7596bfeee485cffef
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.custom: devx-track-javascript
+ms.openlocfilehash: b4afdb329b3dc872d10425f539dd93fd8e73d5f0
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75334852"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715115"
 ---
 # <a name="tutorial-azure-signalr-service-authentication-with-azure-functions"></a>教程：使用 Azure Functions 进行 Azure SignalR 服务身份验证
 
@@ -48,20 +49,20 @@ ms.locfileid: "75334852"
 
 1. 单击用于创建新 Azure 资源的“创建资源”( **+** ) 按钮。 
 
-1. 搜索“SignalR 服务”并将其选中。  单击**创建**。
+1. 搜索“SignalR 服务”并将其选中。  单击“创建”。 
 
     ![新建 SignalR 服务](media/signalr-tutorial-authenticate-azure-functions/signalr-quickstart-new.png)
 
 1. 输入以下信息。
 
-    | 名称 | Value |
+    | 名称 | 值 |
     |---|---|
     | 资源名称 | SignalR 服务实例的唯一名称 |
     | 资源组 | 创建具有唯一名称的新资源组 |
     | 位置 | 选择靠近自己的位置 |
     | 定价层 | 免费 |
 
-1. 单击**创建**。
+1. 单击“创建”。 
 
 1. 部署该实例后，在门户中打开它并找到其“设置”页。 将服务模式设置更改为“无服务器”  。
 
@@ -146,7 +147,7 @@ ms.locfileid: "75334852"
 
 1. 出现提示时，请提供以下信息。
 
-    | 名称 | Value |
+    | 名称 | 值 |
     |---|---|
     | 函数应用文件夹 | 选择主项目文件夹 |
     | 模板 | HTTP 触发器 |
@@ -205,7 +206,7 @@ Web 应用还需要使用一个 HTTP API 来发送聊天消息。 我们将创�
 
 1. 出现提示时，请提供以下信息。
 
-    | 名称 | Value |
+    | 名称 | 值 |
     |---|---|
     | 函数应用文件夹 | 选择主项目文件夹 |
     | 模板 | HTTP 触发器 |
@@ -302,9 +303,9 @@ Web 应用还需要使用一个 HTTP API 来发送聊天消息。 我们将创�
 
 1. 打开 VS Code 命令面板（Windows 快捷键为 `Ctrl-Shift-P`，macOS 快捷键为 `Cmd-Shift-P`）。
 
-1. 搜索并选择“Azure:  Sign in to Azure Cloud”命令。
+1. 搜索并选择“Azure: Sign in to Azure Cloud”命令。
 
-1. 选择“Azure China”  命令。
+1. 选择“Azure China”**** 命令。
 
 1. 在浏览器中遵照说明完成登录过程。
 
@@ -312,13 +313,13 @@ Web 应用还需要使用一个 HTTP API 来发送聊天消息。 我们将创�
 
 在 Azure 中运行的函数应用需要 Azure 存储帐户。 你还会使用 Azure 存储的静态网站功能托管聊天 UI 的网页。
 
-1. 在 Azure 门户中，单击用于创建新 Azure 资源的“创建资源”(+  ) 按钮。 
+1. 在 Azure 门户中，单击用于创建新 Azure 资源的“创建资源”(+) 按钮。
 
-1. 选择“存储”  类别，然后选择“存储帐户”  。
+1. 选择“存储”**** 类别，然后选择“存储帐户”****。
 
 1. 输入以下信息。
 
-    | 名称 | Value |
+    | 名称 | 值 |
     |---|---|
     | 订阅 | 选择包含 SignalR 服务实例的订阅 |
     | 资源组 | 选择相同资源组 |
@@ -329,21 +330,21 @@ Web 应用还需要使用一个 HTTP API 来发送聊天消息。 我们将创�
     | 复制 | 本地冗余存储 (LRS) |
     | 访问层 | 热 |
 
-1. 单击“查看 + 创建”  ，然后单击“创建”  。
+1. 单击“查看 + 创建”****，然后单击“创建”****。
 
 ### <a name="configure-static-websites"></a>配置静态网站
 
 1. 创建存储帐户后，在 Azure 门户中打开它。
 
-1. 选择“静态网站”  。
+1. 选择“静态网站”****。
 
-1. 选择“启用”以启用静态网站功能。 
+1. 选择“启用”以启用静态网站功能。****
 
-1. 在“索引文档名称”  中，输入 index.html  。
+1. 在“索引文档名称”**** 中，输入 index.html**。
 
 1. 单击“保存”  。
 
-1. “主终结点”  随即出现。 请记下此值。 配置函数应用需要它。
+1. “主终结点”**** 随即出现。 请记下此值。 配置函数应用需要它。
 
 ### <a name="configure-function-app-for-authentication"></a>为函数应用配置身份验证
 
@@ -370,15 +371,15 @@ Web 应用还需要使用一个 HTTP API 来发送聊天消息。 我们将创�
 
 ### <a name="deploy-function-app-to-azure"></a>将函数应用部署到 Azure
 
-1. 打开 VS Code 命令面板（Windows 快捷键为 `Ctrl-Shift-P`，macOS 快捷键为 `Cmd-Shift-P`），然后选择“Azure Functions:  部署到函数应用”。
+1. 打开 VS Code 命令面板（Windows 快捷键为 `Ctrl-Shift-P`，macOS 快捷键为 `Cmd-Shift-P`），然后选择“Azure Functions: 部署到函数应用”。****
 
 1. 出现提示时，请提供以下信息。
 
-    | 名称 | Value |
+    | 名称 | 值 |
     |---|---|
     | 要部署的文件夹 | 选择主项目文件夹 |
     | 订阅 | 选择订阅 |
-    | 函数应用 | 选择“创建新函数应用”  |
+    | 函数应用 | 选择“创建新函数应用”**** |
     | 函数应用名称 | 输入唯一的名称 |
     | 资源组 | 选择 SignalR 服务实例所在的同一资源组 |
     | 存储帐户 | 选择前面创建的存储帐户 |
@@ -389,17 +390,17 @@ Web 应用还需要使用一个 HTTP API 来发送聊天消息。 我们将创�
 
 1. 打开 VS Code 命令面板（Windows 快捷键为 `Ctrl-Shift-P`，macOS 快捷键为 `Cmd-Shift-P`）。
 
-1. 搜索并选择“Azure Functions:  上传本地设置”命令。
+1. 搜索并选择“Azure Functions: 上传本地设置”命令。****
 
 1. 出现提示时，请提供以下信息。
 
-    | 名称 | Value |
+    | 名称 | 值 |
     |---|---|
     | 本地设置文件 | local.settings.json |
     | 订阅 | 选择订阅 |
     | 函数应用 | 选择前面部署的函数应用 |
 
-本地设置将上传到 Azure 中的函数应用。 如果系统提示是否要覆盖现有设置，请选择“全是”。 
+本地设置将上传到 Azure 中的函数应用。 如果系统提示是否要覆盖现有设置，请选择“全是”。****
 
 
 ### <a name="enable-app-service-authentication"></a>启用应用服务身份验证
@@ -408,17 +409,17 @@ Web 应用还需要使用一个 HTTP API 来发送聊天消息。 我们将创�
 
 1. 打开 VS Code 命令面板（Windows 快捷键为 `Ctrl-Shift-P`，macOS 快捷键为 `Cmd-Shift-P`）。
 
-1. 搜索并选择“Azure Functions:  在门户中打开”命令。
+1. 搜索并选择“Azure Functions: 在门户中打开”命令。****
 
 1. 选择订阅和函数应用的名称，在 Azure 门户中打开该函数应用。
 
-1. 在已在门户中打开的函数应用中，找到“平台功能”选项卡，并选择“身份验证/授权”。  
+1. 在已在门户中打开的函数应用中，找到“平台功能”选项卡，并选择“身份验证/授权”。********
 
-1. 启用应用服务身份验证。 
+1. 启用应用服务身份验证。****
 
-1. 在“请求未经过身份验证时需执行的操作”中，选择“使用 {前面选择的身份验证提供程序} 登录”。 
+1. 在“请求未经过身份验证时需执行的操作”中，选择“使用 {前面选择的身份验证提供程序} 登录”。****
 
-1. 在“允许的外部重定向 URL”中，输入前面记下的存储帐户主要 Web 终结点的 URL。 
+1. 在“允许的外部重定向 URL”中，输入前面记下的存储帐户主要 Web 终结点的 URL。****
 
 1. 遵循所选登录提供程序的文档完成配置。
 
@@ -445,17 +446,17 @@ Web 应用还需要使用一个 HTTP API 来发送聊天消息。 我们将创�
 
 1. 打开 VS Code 命令面板（Windows 快捷键为 `Ctrl-Shift-P`，macOS 快捷键为 `Cmd-Shift-P`）。
 
-1. 搜索并选择“Azure 存储:  部署到静态网站”命令。
+1. 搜索并选择“Azure 存储: 部署到静态网站”命令。
 
 1. 输入以下值：
 
-    | 名称 | Value |
+    | 名称 | 值 |
     |---|---|
     | 订阅 | 选择订阅 |
     | 存储帐户 | 选择前面创建的存储帐户 |
-    | 要部署的文件夹 | 选择“浏览”  ，然后选择“内容”  文件夹 |
+    | 要部署的文件夹 | 选择“浏览”****，然后选择“内容”** 文件夹 |
 
-“内容”  文件夹中的文件现在应部署到静态网站。
+“内容”** 文件夹中的文件现在应部署到静态网站。
 
 ### <a name="enable-function-app-cross-origin-resource-sharing-cors"></a>启用函数应用跨域资源共享 (CORS)
 
@@ -463,29 +464,29 @@ Web 应用还需要使用一个 HTTP API 来发送聊天消息。 我们将创�
 
 1. 在 Azure 门户中打开函数应用。
 
-1. 在“平台功能”  选项卡下，选择“CORS”  。
+1. 在“平台功能”**** 选项卡下，选择“CORS”****。
 
     ![找到“CORS”](media/signalr-tutorial-authenticate-azure-functions/signalr-find-cors.png)
 
-1. 在“允许的来源”  部分中，添加一个将静态网站项主终结点  作为值的条目（删除尾部 /  ）。
+1. 在“允许的来源”** 部分中，添加一个将静态网站项主终结点** 作为值的条目（删除尾部 /**）。
 
 1. 为了使 SignalR JavaScript SDK 可从浏览器调用函数应用，必须启用 CORS 中对凭据的支持。 选中“启用 Access-Control-Allow-Credentials”复选框。
 
     ![启用 Access-Control-Allow-Credentials](media/signalr-tutorial-authenticate-azure-functions/signalr-cors-credentials.png)
 
-1. 单击“保存”以保存 CORS 设置  。
+1. 单击“保存”以保存 CORS 设置。
 
 ### <a name="try-the-application"></a>尝试运行应用程序
 
 1. 在浏览器中，导航到存储帐户的主要 Web 终结点。
 
-1. 选择“登录”，使用所选的身份验证提供程序进行身份验证。 
+1. 选择“登录”，使用所选的身份验证提供程序进行身份验证。****
 
 1. 在主要聊天框中输入公共消息并发送这些消息。
 
 1. 单击聊天历史记录中的用户名发送私人消息。 只有选定的接收者可以收到这些消息。
 
-祝贺！ 现已部署一个实时无服务器聊天应用！
+恭喜！ 现已部署一个实时无服务器聊天应用！
 
 ![演示](media/signalr-tutorial-authenticate-azure-functions/signalr-serverless-chat.gif)
 

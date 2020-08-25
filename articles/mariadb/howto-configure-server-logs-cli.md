@@ -5,17 +5,19 @@ author: WenJason
 ms.author: v-jay
 ms.service: mariadb
 ms.devlang: azurecli
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 4/13/2020
-ms.date: 04/27/2020
-ms.openlocfilehash: 2dd0697331bd83b11e39b915c27a5381a3da8c48
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+ms.date: 08/17/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: d00f9ab8efd8a98da509483ee7406dcaaf808ae6
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82127081"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223040"
 ---
-# <a name="configure-and-access-slow-query-logs-by-using-azure-cli"></a>使用 Azure CLI 配置和访问慢查询日志
+# <a name="configure-and-access-azure-database-for-maria-db-slow-query-logs-by-using-azure-cli"></a>使用 Azure CLI 配置和访问 Azure Database for Maria DB 慢查询日志
+
 可以使用 Azure CLI（Azure 命令行实用工具）下载 Azure Database for MariaDB 慢查询日志。
 
 ## <a name="prerequisites"></a>先决条件

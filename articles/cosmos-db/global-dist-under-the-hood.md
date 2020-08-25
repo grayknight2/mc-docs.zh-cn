@@ -4,16 +4,18 @@ description: 本文提供有关 Azure Cosmos DB 多区域分布的技术详细�
 author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 12/02/2019
-ms.date: 02/10/2020
+origin.date: 07/02/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: 0959970f1331b348a9346a37786ebc7343b6b5e4
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 99d34f7c8b3aa0d01b584c8bf83572b3fcb54473
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "76980534"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222870"
 ---
 # <a name="multiple-region-data-distribution-with-azure-cosmos-db---under-the-hood"></a>Azure Cosmos DB 多区域分配数据 - 揭秘
 
@@ -21,7 +23,7 @@ Azure Cosmos DB 是 Azure 的一个基础服务，因此它将部署在中国境
 
 <!-- Not Available on including the public, sovereign, Department of Defense (DoD) and government clouds-->
 
-![系统拓扑](./media/global-dist-under-the-hood/distributed-system-topology.png)
+:::image type="content" source="./media/global-dist-under-the-hood/distributed-system-topology.png" alt-text="系统拓扑" border="false":::
 
 **Azure Cosmos DB 中的多区域分布是统包式：** 随时可以点击几下鼠标或者使用单个 API 调用以编程方式来添加或删除与 Cosmos 数据库关联的地理区域。 而 Cosmos 数据库包含一组 Cosmos 容器。 在 Cosmos DB 中，容器充当逻辑性的分布和缩放单元。 创建的集合、表和图形（在内部）只是 Cosmos 容器。 容器对架构完全不可知，它提供查询范围。 Cosmos 容器中的数据在引入时会自动编制索引。 自动编制索引使用户无需进行繁琐的架构或索引管理（尤其是在多区域分布式设置中）就能查询数据。  
 
@@ -33,7 +35,7 @@ Azure Cosmos DB 是 Azure 的一个基础服务，因此它将部署在中国境
 
 如下图所示，容器中的数据朝两个维分布 - 在某个区域内部，或者在中国境内的各个区域：  
 
-![物理分区](./media/global-dist-under-the-hood/distribution-of-resource-partitions.png)
+:::image type="content" source="./media/global-dist-under-the-hood/distribution-of-resource-partitions.png" alt-text="物理分区" border="false":::
 
 物理分区是通过一组副本（称作副本集）实现的。  每台计算机托管数百个副本，这些副本对应于一组固定进程中的各个物理分区，如上图所示。 对应于物理分区的副本在区域中群集与数据中心内的计算机之间进行动态定位和负载均衡。  
 
@@ -55,7 +57,7 @@ Cosmos DB 的多区域分布依赖于两个关键抽象 – 副本集和分区�
 
 一组物理分区，其中的每个分区配置了 Cosmos 数据库区域，旨在管理跨所有已配置分区复制的相同键集。 这种更高的协调基元称为分区集 - 管理给定键集的物理分区的地理分布式动态叠加层。  给定的物理分区（副本集）限定在群集范围内，而分区集可跨群集、数据中心和地理区域，如下图所示：  
 
-![分区集](./media/global-dist-under-the-hood/dynamic-overlay-of-resource-partitions.png)
+:::image type="content" source="./media/global-dist-under-the-hood/dynamic-overlay-of-resource-partitions.png" alt-text="分区集" border="false":::
 
 可将分区集视为地理分散的“超副本集”，它由多个拥有相同键集的副本集构成。 类似于副本集，分区集的成员身份也是动态的 – 它会根据在给定分区集中添加/删除新分区的隐式物理分区管理操作（例如，在容器中扩展吞吐量、在 Cosmos 数据库中添加/删除区域，或发生故障时）进行波动。 由于（分区集的）每个分区可在其自身的副本集中管理分区集成员身份，因此，成员身份是完全分散且高度可用的。 在重新配置分区集期间，还会建立物理分区之间的叠加层拓扑。 该拓扑是根据源与目标物理分区之间的一致性级别、地理距离和可用网络带宽动态选择的。  
 

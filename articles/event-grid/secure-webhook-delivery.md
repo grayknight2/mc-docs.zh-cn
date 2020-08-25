@@ -1,23 +1,21 @@
 ---
 title: 在 Azure 事件网格中使用 Azure AD 进行安全的 WebHook 传递
 description: 介绍如何将事件传递到受到 Azure Active Directory 通过 Azure 事件网格进行保护的 HTTPS 终结点
-services: event-grid
-author: Johnnytechn
-ms.service: event-grid
 ms.topic: conceptual
-origin.date: 11/18/2019
-ms.date: 06/12/2020
+author: Johnnytechn
 ms.author: v-johya
-ms.openlocfilehash: d33afd0b8a8b4906c67b41bb2042ed3e8dc2c60b
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+origin.date: 11/18/2019
+ms.date: 08/10/2020
+ms.openlocfilehash: 50251cb0f73450c7f54e28b7486fbfa4323a45e4
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723525"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227991"
 ---
 # <a name="publish-events-to-azure-active-directory-protected-endpoints"></a>将事件发布到受 Azure Active Directory 保护的终结点
 
-本文介绍如何利用 Azure Active Directory 来保护事件订阅和 Webhook 终结点之间的连接。 有关 Azure AD 应用程序和服务主体的概述，请参阅 [Microsoft 标识平台 (v2.0) 概述](/active-directory/develop/v2-overview)。
+本文介绍如何利用 Azure Active Directory 来保护事件订阅和 Webhook 终结点之间的连接。 有关 Azure AD 应用程序和服务主体的概述，请参阅 [Microsoft 标识平台 (v2.0) 概述](../active-directory/develop/v2-overview.md)。
 
 本文使用 Azure 门户进行演示，但也可通过 CLI、PowerShell 或 SDK 来启用此功能。
 
@@ -33,7 +31,7 @@ ms.locfileid: "84723525"
 使用下面的 PowerShell 脚本在 Azure AD 应用程序中创建角色和服务主体。 需要来自 Azure AD 应用程序的租户 ID 和对象 ID：
 
    > [!NOTE]
-   > 你必须是 [Azure AD 应用程序管理员角色](/active-directory/users-groups-roles/directory-assign-admin-roles#available-roles)的成员才能执行此脚本。
+   > 你必须是 [Azure AD 应用程序管理员角色](../active-directory/users-groups-roles/directory-assign-admin-roles.md#available-roles)的成员才能执行此脚本。
     
 1. 修改 PowerShell 脚本的 $myTenantId，以便使用 Azure AD 租户 ID。
 1. 修改 PowerShell 脚本的 $myAzureADApplicationObjectId，以便使用 Azure AD 应用程序的对象 ID。
@@ -43,7 +41,7 @@ ms.locfileid: "84723525"
 # This is your Tenant Id. 
 $myTenantId = "<the Tenant Id of your Azure AD Application>"
 
-Connect-AzureAD -TenantId $myTenantId
+Connect-AzureAD -AzureEnvironmentName AzureChinaCloud -TenantId $myTenantId
     
 # This is your Azure AD Application's ObjectId. 
 $myAzureADApplicationObjectId = "<the Object Id of your Azure AD Application>"

@@ -1,18 +1,16 @@
 ---
 title: 充当事件网格源的 Azure Blob 存储
 description: 介绍为 Azure 事件网格 Blob 存储事件提供的属性
-services: event-grid
 author: Johnnytechn
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 05/06/2020
+ms.date: 08/10/2020
 ms.author: v-johya
-ms.openlocfilehash: aeb7dcf01e6ff0cded88ce1d78b427b0c2299a9a
-ms.sourcegitcommit: 372899a2a21794e631eda1c6a11b4fd5c38751d2
+ms.openlocfilehash: 4e08d59d306815838b77dc19b74b75e781ff62c0
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85852048"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228024"
 ---
 # <a name="azure-blob-storage-as-an-event-grid-source"></a>充当事件网格源的 Azure Blob 存储
 
@@ -29,13 +27,16 @@ ms.locfileid: "85852048"
 
 当客户端通过调用 Blob REST API 创建、替换或删除 Blob 时，将触发这些事件。
 
+> [!NOTE]
+> `$logs` 和 `$blobchangefeed` 容器未与事件网格集成，因此这些容器中的活动将不会生成事件。 此外，将 DFS 终结点 `(abfss://URI) ` 用于启用了非分层命名空间的帐户将不会生成事件，但 blob 终结点 `(wasb:// URI)` 会生成事件。
+
  |事件名称 |说明|
  |----------|-----------|
  |**Microsoft.Storage.BlobCreated** |创建或替换 Blob 时触发。 <br>具体而言，当客户端使用 Blob REST API 中可用的 `PutBlob`、`PutBlockList` 或 `CopyBlob` 操作时，将触发此事件。   |
  |**Microsoft.Storage.BlobDeleted** |删除 Blob 时触发。 <br>具体而言，当客户端调用 Blob REST API 中可用的 `DeleteBlob` 操作时，将触发此事件。 |
 
 > [!NOTE]
-> 若要确保 **Microsoft.Storage.BlobCreated** 事件仅在块 Blob 完全提交后触发，请针对 `CopyBlob`、`PutBlob` 和 `PutBlockList` REST API 调用筛选此事件。 这些 API 调用仅在数据已完全提交到块 Blob 后才触发 **Microsoft.Storage.BlobCreated** 事件。 若要了解如何创建筛选器，请参阅[筛选事件网格的事件](/event-grid/how-to-filter-events)。
+> 若要确保 **Microsoft.Storage.BlobCreated** 事件仅在块 Blob 完全提交后触发，请针对 `CopyBlob`、`PutBlob` 和 `PutBlockList` REST API 调用筛选此事件。 这些 API 调用仅在数据已完全提交到块 Blob 后才触发 **Microsoft.Storage.BlobCreated** 事件。 若要了解如何创建筛选器，请参阅[筛选事件网格的事件](./how-to-filter-events.md)。
 
 ### <a name="list-of-the-events-for-azure-data-lake-storage-gen-2-rest-apis"></a>Azure Data Lake Storage Gen 2 REST API 的事件列表
 
@@ -51,10 +52,9 @@ ms.locfileid: "85852048"
 |**Microsoft.Storage.DirectoryDeleted**|删除目录时触发。 <br>具体而言，当客户端使用 Azure Data Lake Storage Gen2 REST API 中提供的 `DeleteDirectory` 操作时，会触发此事件。|
 
 > [!NOTE]
-> 若要确保 **Microsoft.Storage.BlobCreated** 事件仅在块 Blob 完全提交后触发，请针对 `FlushWithClose` REST API 调用筛选此事件。 此 API 调用仅在数据已完全提交到块 Blob 后才触发 **Microsoft.Storage.BlobCreated** 事件。 若要了解如何创建筛选器，请参阅[筛选事件网格的事件](/event-grid/how-to-filter-events)。
+> 若要确保 **Microsoft.Storage.BlobCreated** 事件仅在块 Blob 完全提交后触发，请针对 `FlushWithClose` REST API 调用筛选此事件。 此 API 调用仅在数据已完全提交到块 Blob 后才触发 **Microsoft.Storage.BlobCreated** 事件。 若要了解如何创建筛选器，请参阅[筛选事件网格的事件](./how-to-filter-events.md)。
 
-<a id="example-event" ></a>
-
+<a name="example-event"></a>
 ### <a name="the-contents-of-an-event-response"></a>事件响应的内容
 
 触发某个事件后，事件网格服务会将有关该事件的数据发送到订阅终结点。
@@ -301,7 +301,7 @@ ms.locfileid: "85852048"
 | eventType | string | 此事件源的一个注册事件类型。 |
 | EventTime | string | 基于提供程序 UTC 时间的事件生成时间。 |
 | id | string | 事件的唯一标识符。 |
-| 数据 | object | Blob 存储事件数据。 |
+| data | 对象 (object) | Blob 存储事件数据。 |
 | dataVersion | string | 数据对象的架构版本。 发布者定义架构版本。 |
 | metadataVersion | string | 事件元数据的架构版本。 事件网格定义顶级属性的架构。 事件网格提供此值。 |
 
@@ -329,7 +329,6 @@ ms.locfileid: "85852048"
 |---------|---------|
 | [快速入门：使用 Azure CLI 将 Blob 存储事件路由到自定义 Web 终结点](../storage/blobs/storage-blob-event-quickstart.md?toc=%2fazure%2fevent-grid%2ftoc.json) | 介绍如何使用 Azure CLI 将 Blob 存储事件发送到 WebHook。 |
 | [快速入门：使用 PowerShell 将 Blob 存储事件路由到自定义 Web 终结点](../storage/blobs/storage-blob-event-quickstart-powershell.md?toc=%2fazure%2fevent-grid%2ftoc.json) | 介绍如何使用 Azure PowerShell 将 Blob 存储事件发送到 WebHook。 |
-| [快速入门：使用 Azure 门户创建和路由 Blob 存储事件](blob-event-quickstart-portal.md) | 介绍如何使用门户将 Blob 存储事件发送到 WebHook。 |
 | [Azure CLI：订阅 Blob 存储帐户的事件](./scripts/event-grid-cli-blob.md) | 用于订阅 Blob 存储帐户的事件的示例脚本。 它将事件发送到 WebHook。 |
 | [PowerShell：订阅 Blob 存储帐户的事件](./scripts/event-grid-powershell-blob.md) | 用于订阅 Blob 存储帐户的事件的示例脚本。 它将事件发送到 WebHook。 |
 | [资源管理器模板：创建 Blob 存储和订阅](https://github.com/Azure/azure-quickstart-templates/tree/master/101-event-grid-subscription-and-storage) | 部署 Azure Blob 存储帐户并订阅该存储帐户的事件。 它将事件发送到 WebHook。 |

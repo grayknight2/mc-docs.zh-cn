@@ -1,19 +1,19 @@
 ---
 title: 使用 Azure 资源管理器模板为 Azure 数据资源管理器创建 IoT 中心数据连接
 description: 本文介绍如何使用 Azure 资源管理器模板为 Azure 数据资源管理器创建 IoT 中心数据连接。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 11/28/2019
-ms.date: 05/09/2020
-ms.openlocfilehash: 964a27c9aa12bc727db014e10fc590c096dc1fb5
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/13/2020
+ms.openlocfilehash: 75fe58b59522dc3c39b55a862a1dc66e4dd329a2
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417652"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515858"
 ---
 # <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>使用 Azure 资源管理器模板为 Azure 数据资源管理器创建 IoT 中心数据连接
 
@@ -23,9 +23,10 @@ ms.locfileid: "83417652"
 > * [Python](data-connection-iot-hub-python.md)
 > * [Azure Resource Manager 模板](data-connection-iot-hub-resource-manager.md)
 
-Azure 数据资源管理器是一项快速且高度可缩放的数据探索服务，适用于日志和遥测数据。 Azure 数据资源管理器提供了从事件中心、IoT 中心和写入 blob 容器的 blob 引入数据（数据加载）的功能。 本文使用 Azure 资源管理器模板为 Azure 数据资源管理器创建 IoT 中心数据连接。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+本文使用 Azure 资源管理器模板为 Azure 数据资源管理器创建 IoT 中心数据连接。
 
-## <a name="prerequisites"></a>必备条件
+## <a name="prerequisites"></a>先决条件
 
 * 如果没有 Azure 订阅，请在开始前创建一个[试用 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 * 创建[群集和数据库](create-cluster-database-portal.md)

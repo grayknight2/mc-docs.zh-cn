@@ -1,19 +1,17 @@
 ---
 title: Azure 事件网格传送和重试
 description: 介绍 Azure 事件网格如何传送事件以及如何处理未送达的消息。
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
 origin.date: 02/27/2020
-ms.date: 3/16/2020
-ms.author: v-yiso
-ms.openlocfilehash: 2e5dadec96b17bc0473056ed4ce7f5aa8d07c079
-ms.sourcegitcommit: b80d236ce3c706abc25bbaa41b0ccddd896e48fc
+ms.date: 08/10/2020
+author: Johnnytechn
+ms.author: v-johya
+ms.openlocfilehash: c37fdb0ffde534ef8dae77bb039d59ddb41bcf1b
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81873150"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228042"
 ---
 # <a name="event-grid-message-delivery-and-retry"></a>事件网格消息传送和重试
 
@@ -43,15 +41,16 @@ ms.locfileid: "81873150"
 
 ```azurecli
 storageid=$(az storage account show --name <storage_account_name> --resource-group <resource_group_name> --query id --output tsv)
-endpoint=https://$sitename.azurewebsites.net/api/updates
+endpoint=https://$sitename.chinacloudsites.cn/api/updates
 
 az eventgrid event-subscription create \
-  --resource-id $storageid \
+  --source-resource-id $storageid \
   --name <event_subscription_name> \
   --endpoint $endpoint \
   --max-events-per-batch 1000 \
   --preferred-batch-size-in-kilobytes 512
 ```
+<!--Correct in MC about the argument of "--source-resource-id"-->
 
 有关将 Azure CLI 与事件网格配合使用的详细信息，请参阅[使用 Azure CLI 将存储事件路由到 Web 终结点](../storage/blobs/storage-blob-event-quickstart.md)。
 
@@ -83,8 +82,12 @@ az eventgrid event-subscription create \
 从功能上讲，延迟传送的目的是保护不正常的终结点以及事件网格系统。 如果不采用退让机制并延迟向不正常的终结点传送事件，事件网格的重试策略和卷功能可能很容易使系统瘫痪。
 
 ## <a name="dead-letter-events"></a>死信事件
+当事件网格无法在特定时间段内或在尝试传递事件一定次数后传递事件时，它可以将未传递的事件发送到存储帐户。 此过程称为“死信处理”。 满足以下条件之一时，事件网格会将事件视为死信。 
 
-当事件网格无法传递事件时，它会将未送达的事件发送到某个存储帐户。 此过程称为死信处理。 默认情况下，事件网格不启用死信处理。 若要启用该功能，在创建事件订阅时必须指定一个存储帐户来存放未送达的事件。 你将从此存储帐户中拉取事件来解决传递问题。
+- 事件未在生存期内传递
+- 尝试传递事件的次数已超出限制
+
+如果满足上述任一条件，则会将该事件删除或视为死信。  默认情况下，事件网格不启用死信处理。 若要启用该功能，在创建事件订阅时必须指定一个存储帐户来存放未送达的事件。 你将从此存储帐户中拉取事件来解决传递问题。
 
 事件网格已进行所有重试尝试后会将事件发送到死信位置。 如果事件网格收到 400（错误请求）或 413（请求实体太大）响应代码，它会立即将事件发送到死信终结点。 这些响应代码指示事件传送将永远不会成功。
 
@@ -92,7 +95,7 @@ az eventgrid event-subscription create \
 
 在设置死信位置之前，必须有一个包含容器的存储帐户。 在创建事件订阅时，需要提供此容器的终结点。 终结点的格式如下：`/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Storage/storageAccounts/<storage-name>/blobServices/default/containers/<container-name>`
 
-你可能希望在事件发送到死信位置时收到通知。 每当死信 blob 存储收到未送达的事件时，事件网格都会通知处理程序。 处理程序使用你希望采取的、用于协调未送达的事件的操作进行响应。
+你可能希望在事件发送到死信位置时收到通知。 若要使用事件网格来响应未送达的事件，请为死信 blob 存储[创建事件订阅](../storage/blobs/storage-blob-event-quickstart.md?toc=%2fevent-grid%2ftoc.json)。 每当死信 blob 存储收到未送达的事件时，事件网格都会通知处理程序。 处理程序使用你希望采取的、用于协调未送达的事件的操作进行响应。
 
 有关设置死信位置的示例，请参阅[死信和重试策略](manage-event-delivery.md)。
 
@@ -130,3 +133,4 @@ az eventgrid event-subscription create \
 
 * 若要查看事件传送的状态，请参阅[监视事件网格消息传送](monitor-event-delivery.md)。
 * 若要自定义事件传送选项，请参阅[死信和重试策略](manage-event-delivery.md)。
+

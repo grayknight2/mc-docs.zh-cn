@@ -8,25 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/24/2020
-ms.date: 08/06/2020
+ms.date: 08/18/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 1c27be568e11eeeb12423580bd16492422df6332
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.openlocfilehash: d4021da2570747a6a44efd3f2be6475f3898e33c
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841563"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515909"
 ---
 # <a name="sql_request-plugin"></a>sql_request 插件
 
 ::: zone pivot="azuredataexplorer"
 
-  `evaluate` `sql_request` `(` *ConnectionString* `,` *SqlQuery* [`,` *SqlParameters* [`,` *Options*]] `)`
-
 `sql_request` 插件将 SQL 查询发送到 SQL Server 网络终结点，并返回结果中的第一个行集。
 
-**参数**
+## <a name="syntax"></a>语法
+
+  `evaluate` `sql_request` `(` *ConnectionString* `,` *SqlQuery* [`,` *SqlParameters* [`,` *Options*]] `)`
+
+## <a name="arguments"></a>参数
 
 * ConnectionString：一个 `string` 文本，用于指示指向 SQL Server 网络终结点的连接字符串。 请了解[有效的身份验证方法](#authentication)以及指定[网络终结点](#specify-the-network-endpoint)的方法。
 

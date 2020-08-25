@@ -4,16 +4,16 @@ description: Azure 安全控制 - 数据保护
 author: msmbaldwin
 ms.service: security
 ms.topic: conceptual
-ms.date: 05/28/2020
-ms.author: v-tawe
+ms.date: 08/13/2020
+ms.author: v-johya
 ms.custom: security-benchmark
 origin.date: 04/14/2020
-ms.openlocfilehash: 9cddd84812221772e01414c2882fda3d7bea3ab1
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: a627a5eba7dbd28d2be63034c52ad94ef28e4d9d
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84200096"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228371"
 ---
 # <a name="security-control-data-protection"></a>安全控制：数据保护
 
@@ -27,7 +27,7 @@ ms.locfileid: "84200096"
 
 使用标记可以帮助跟踪存储或处理敏感信息的 Azure 资源。
 
-- [如何创建和使用标记](https://docs.azure.cn/azure-resource-manager/resource-group-using-tags)
+- [如何创建和使用标记](/azure-resource-manager/resource-group-using-tags)
 
 ## <a name="42-isolate-systems-storing-or-processing-sensitive-information"></a>4.2：隔离存储或处理敏感信息的系统
 
@@ -35,13 +35,13 @@ ms.locfileid: "84200096"
 |--|--|--|
 | 4.2 | 13.2、2.10 | 客户 |
 
-使用单独的订阅和管理组对各个安全域（如环境类型和数据敏感度级别）实现隔离。 你可以限制对应用程序和企业环境所需 Azure 资源的访问级别。 可以通过 Active Directory 基于角色的访问控制来控制对 Azure 资源的访问。 
+使用单独的订阅和管理组对各个安全域（如环境类型和数据敏感度级别）实现隔离。 你可以限制对应用程序和企业环境所需 Azure 资源的访问级别。 可以通过 Azure 基于角色的访问控制 (Azure RBAC) 来控制对 Azure 资源的访问。 
 
 <!-- not available-->
 
-- [如何创建管理组](https://docs.azure.cn/governance/management-groups/create)
+- [如何创建管理组](/governance/management-groups/create)
 
-- [如何创建和使用标记](https://docs.azure.cn/azure-resource-manager/resource-group-using-tags)
+- [如何创建和使用标记](/azure-resource-manager/resource-group-using-tags)
 
 ## <a name="43-monitor-and-block-unauthorized-transfer-of-sensitive-information"></a>4.3：监视和阻止未经授权的敏感信息传输
 
@@ -53,7 +53,7 @@ ms.locfileid: "84200096"
 
 对于 Microsoft 管理的基础平台，Microsoft 会将所有客户内容视为敏感数据，并全方位防范客户数据丢失和泄露。 为了确保 Azure 中的客户数据保持安全，Microsoft 已实施并维护一套可靠的数据保护控制机制和功能。
 
-- [了解 Azure 中的客户数据保护](https://docs.azure.cn/security/fundamentals/protection-customer-data)
+- [了解 Azure 中的客户数据保护](/security/fundamentals/protection-customer-data)
 
 ## <a name="44-encrypt-all-sensitive-information-in-transit"></a>4.4：加密传输中的所有敏感信息
 
@@ -65,7 +65,7 @@ ms.locfileid: "84200096"
 
 请按照 Azure 安全中心的建议，了解静态加密和传输中的加密（如果适用）。
 
-- [了解 Azure 传输中的加密](https://docs.azure.cn/security/fundamentals/encryption-overview#encryption-of-data-in-transit)
+- [了解 Azure 传输中的加密](/security/fundamentals/encryption-overview#encryption-of-data-in-transit)
 
 ## <a name="45-use-an-active-discovery-tool-to-identify-sensitive-data"></a>4.5：使用有效的发现工具识别敏感数据
 
@@ -77,13 +77,13 @@ ms.locfileid: "84200096"
 
 使用 Azure 信息保护标识 Office 365 文档中的敏感信息。
 
-使用 Azure SQL 信息保护可帮助对 Azure SQL 数据库中存储的信息进行分类和标记。
+使用 Azure SQL 信息保护有助于对 Azure SQL 数据库中存储的信息进行分类和标记。
 
-- [如何实现 Azure SQL 数据发现](https://docs.azure.cn/sql-database/sql-database-data-discovery-and-classification)
+- [如何实现 Azure SQL 数据发现](/sql-database/sql-database-data-discovery-and-classification)
 
 <!-- not available -->
 
-- [了解 Azure 中的客户数据保护](https://docs.azure.cn/security/fundamentals/protection-customer-data)
+- [了解 Azure 中的客户数据保护](/security/fundamentals/protection-customer-data)
 
 ## <a name="46-use-role-based-access-control-to-control-access-to-resources"></a>4.6：使用基于角色的访问控制来控制对资源的访问
 
@@ -93,7 +93,7 @@ ms.locfileid: "84200096"
 
 使用 Azure AD RBAC 控制对数据和资源的访问，否则请使用特定于服务的访问控制方法。
 
-- [如何在 Azure 中配置 RBAC](https://docs.azure.cn/role-based-access-control/role-assignments-portal)
+- [如何在 Azure 中配置 RBAC](/role-based-access-control/role-assignments-portal)
 
 ## <a name="47-use-host-based-data-loss-prevention-to-enforce-access-control"></a>4.7：使用基于主机的数据丢失防护来强制实施访问控制
 
@@ -105,7 +105,7 @@ ms.locfileid: "84200096"
 
 对于 Microsoft 管理的底层平台，Microsoft 会将所有客户内容视为敏感数据，并会全方位地防范客户数据丢失和遭到透露。 为了确保 Azure 中的客户数据保持安全，Microsoft 已实施并维护一套可靠的数据保护控制机制和功能。
 
-- [了解 Azure 中的客户数据保护](https://docs.azure.cn/security/fundamentals/protection-customer-data)
+- [了解 Azure 中的客户数据保护](/security/fundamentals/protection-customer-data)
 
 ## <a name="48-encrypt-sensitive-information-at-rest"></a>4.8：静态加密敏感信息
 
@@ -115,9 +115,9 @@ ms.locfileid: "84200096"
 
 在所有 Azure 资源上使用静态加密。 Microsoft 建议允许 Azure 管理加密密钥，但在某些情况下，你可以选择管理自己的密钥。 
 
-- [了解 Azure 中的静态加密](https://docs.azure.cn/security/fundamentals/encryption-atrest)
+- [了解 Azure 中的静态加密](/security/fundamentals/encryption-atrest)
 
-- [如何配置客户管理的加密密钥](https://docs.azure.cn/storage/common/storage-encryption-keys-portal)
+- [如何配置客户管理的加密密钥](/storage/common/storage-encryption-keys-portal)
 
 ## <a name="49-log-and-alert-on-changes-to-critical-azure-resources"></a>4.9：记录对关键 Azure 资源的更改并对此类更改发出警报
 
@@ -127,9 +127,10 @@ ms.locfileid: "84200096"
 
 将 Azure Monitor 与 Azure 活动日志结合使用，以创建在关键 Azure 资源发生更改时发出的警报。
 
-- [如何针对 Azure 活动日志事件创建警报](https://docs.azure.cn/azure-monitor/platform/alerts-activity-log)
+- [如何针对 Azure 活动日志事件创建警报](/azure-monitor/platform/alerts-activity-log)
 
 
 ## <a name="next-steps"></a>后续步骤
 
 - 请参阅下一个安全控制：[漏洞管理](security-control-vulnerability-management.md)
+

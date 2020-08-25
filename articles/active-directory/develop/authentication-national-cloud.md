@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 06/29/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: negoe,celested
 ms.custom: aaddev,references_regions
-ms.openlocfilehash: 6065f41fa9223e30758d2104f59bb66e8184bf49
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.openlocfilehash: 21a61b2df34d9a08160696d6a43ac1adcc09fff3
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945118"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647640"
 ---
 # <a name="national-clouds"></a>国家云
 
@@ -67,7 +67,7 @@ ms.locfileid: "85945118"
 
 ## <a name="microsoft-graph-api"></a>Microsoft Graph API
 
-若要了解如何在国家云环境中调用 Microsoft Graph API，请转到[国家云部署中的 Microsoft Graph](https://developer.microsoft.com/graph/docs/concepts/deployments)。
+若要了解如何在国家云环境中调用 Microsoft Graph API，请转到[国家云部署中的 Microsoft Graph](https://docs.microsoft.com/graph/deployments)。
 
 > [!IMPORTANT]
 > 全球服务的特定区域中的某些服务和功能可能并非在所有国家云中都可用。 若要了解哪些服务可用，请访问[可用产品（按区域）](https://azure.microsoft.com/global-infrastructure/services/?products=all&regions=usgov-non-regional,us-dod-central,us-dod-east,usgov-arizona,usgov-iowa,usgov-texas,usgov-virginia,china-non-regional,china-east,china-east-2,china-north,china-north-2,germany-non-regional,germany-central,germany-northeast)。
@@ -78,7 +78,5 @@ ms.locfileid: "85945118"
 
 - [Azure 中国世纪互联](https://docs.microsoft.com/azure/china/)
 
-- [Azure AD 身份验证基础知识](authentication-scenarios.md)
-
-<!-- Update_Description: wording update -->
+- [Azure AD 身份验证基础知识](./authentication-vs-authorization.md)
 

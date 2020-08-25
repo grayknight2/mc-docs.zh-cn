@@ -2,25 +2,27 @@
 title: 创建启用 IP 防火墙的 Azure Cosmos 帐户
 description: 创建启用 IP 防火墙的 Azure Cosmos 帐户
 author: rockboyfor
-ms.author: v-yeche
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.topic: sample
-origin.date: 09/25/2019
-ms.date: 10/28/2019
-ms.openlocfilehash: 4499ef668249489d5d5a332ee18b0e82e0e1803f
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
+ms.author: v-yeche
+ms.openlocfilehash: fb8ee0880e23c9a7ffa2b64c04dad766709ee635
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "72914847"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223426"
 ---
 <!--Verify successfully-->
 # <a name="create-an-azure-cosmos-account-with-ip-firewall-using-azure-cli"></a>使用 Azure CLI 创建启用 IP 防火墙的 Azure Cosmos 帐户
 
 [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../../../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
-如果选择在本地安装并使用 CLI，本主题需要运行 Azure CLI 2.0.73 版或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
+选择在本地安装并使用 CLI 时，本主题要求运行 Azure CLI 2.9.1 或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
 
 ## <a name="sample-script"></a>示例脚本
 
@@ -30,11 +32,11 @@ ms.locfileid: "72914847"
 ```azurecli
 #!/bin/bash
 
-# Create an Azure Cosmos Account with IP Firewall
-
 # Sign in the Azure China Cloud
 az cloud set -n AzureChinaCloud
 az login
+
+# Create an Azure Cosmos Account with IP Firewall
 
 # Generate a unique 10 character alphanumeric string to ensure unique resource names
 uniqueId=$(env LC_CTYPE=C tr -dc 'a-z0-9' < /dev/urandom | fold -w 10 | head -n 1)
@@ -80,5 +82,4 @@ az group delete --name $resourceGroupName
 
 可以在 [Azure Cosmos DB CLI GitHub 存储库](https://github.com/Azure-Samples/azure-cli-samples/tree/master/cosmosdb)中找到所有 Azure Cosmos DB CLI 脚本示例。
 
-<!--Update_Description: new articles on cosmos common ipfirewall -->
-<!--New.date: 10/28/2019-->
+<!-- Update_Description: update meta properties, wording update, update link -->

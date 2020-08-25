@@ -8,13 +8,13 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: peterlu
-ms.date: 04/27/2020
-ms.openlocfilehash: e7b7c3d898b4c9e5ff2d68eb393e45a09f9de289
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.date: 07/27/2020
+ms.openlocfilehash: 9437fdc8eef932a65107e7d894c0942601eeefa7
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097489"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227865"
 ---
 # <a name="execute-r-script-module"></a>“执行 R 脚本”模块
 
@@ -119,6 +119,22 @@ azureml_main <- function(dataframe1, dataframe2){
 > [!div class="mx-imgBorder"]
 > ![预览上传的图像](media/module/upload-image-in-r-script.png)
 
+## <a name="access-to-registered-dataset"></a>访问已注册的数据集
+
+可以参阅以下示例代码，在工作区中[访问已注册的数据集](/machine-learning/how-to-create-register-datasets#access-datasets-in-your-script)：
+
+```R
+  azureml_main <- function(dataframe1, dataframe2){
+  print("R script run.")
+  run = get_current_run()
+  ws = run$experiment$workspace
+  dataset = azureml$core$dataset$Dataset$get_by_name(ws, "YOUR DATASET NAME")
+  dataframe2 <- dataset$to_pandas_dataframe()
+  # Return datasets as a Named List
+  return(list(dataset1=dataframe1, dataset2=dataframe2))
+}
+```
+
 ## <a name="how-to-configure-execute-r-script"></a>如何配置“执行 R 脚本”
 
 “执行 R 脚本”模块包含可用作起点的代码示例。 若要配置“执行 R 脚本”模块，请提供一组输入和要运行的代码。
@@ -177,6 +193,25 @@ azureml_main <- function(dataframe1, dataframe2){
  
     > [!NOTE]
     > 现有 R 代码可能需要稍做更改才能在设计器管道中运行。 例如，以 CSV 格式提供的输入数据应显式转换为数据集，然后才能在代码中使用。 R 语言中使用的数据和列类型与在设计器中使用的数据和列类型在某些方面也有所不同。
+
+    如果脚本大于 16KB，请使用脚本包端口以避免错误，如命令行超过 16597 个字符的限制。 
+    
+    将脚本和其他自定义资源捆绑到一个 zip 文件，然后将该 zip 文件作为文件数据集上传到工作室。 然后可以从设计器创作页面左侧模块窗格中的“我的数据集”列表中拖取数据集模块。 将数据集模块连接到“执行 R 脚本”模块的“脚本包”端口。
+    
+    下面是使用脚本包中的脚本的示例代码：
+
+    ```R
+    azureml_main <- function(dataframe1, dataframe2){
+    # Source the custom R script: my_script.R
+    source("./Script Bundle/my_script.R")
+
+    # Use the function that defined in my_script.R
+    dataframe1 <- my_func(dataframe1)
+
+    sample <- readLines("./Script Bundle/my_sample.txt")
+    return (list(dataset1=dataframe1, dataset2=data.frame("Sample"=sample)))
+    }
+    ```
 
 1.  对于“随机种子”，请输入要在 R 环境中用作随机种子值的值。 此参数相当于在 R 代码中调用 `set.seed(value)`。  
 
@@ -320,9 +355,8 @@ azureml_main <- function(dataframe1, dataframe2){
 
 以下预安装的 R 包当前可用：
 
-|              |            | 
-|--------------|------------| 
 | 程序包      | 版本    | 
+|--------------|------------| 
 | askpass      | 1.1        | 
 | assertthat   | 0.2.1      | 
 | backports    | 1.1.4      | 

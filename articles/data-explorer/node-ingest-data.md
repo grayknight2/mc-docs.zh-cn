@@ -7,15 +7,21 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 06/03/2019
-ms.date: 05/09/2020
-ms.openlocfilehash: dd92d83b168b4ea459ab28d1efbefb155dcd8fa3
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: 6c35308943610dd3218b21e391b8f76a4697830c
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417598"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515629"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-node-library"></a>使用 Azure 数据资源管理器 Node 库引入数据
+
+> [!div class="op_single_selector"]
+> * [.NET](net-sdk-ingest-data.md)
+> * [Python](python-ingest-data.md)
+> * [Node](node-ingest-data.md)
+> * [Go](go-ingest-data.md)
 
 Azure 数据资源管理器是一项快速且高度可缩放的数据探索服务，适用于日志和遥测数据。 Azure 数据资源管理器为 Node 提供了两个客户端库：[引入库](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-ingest)和[数据库](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-data)。 可以使用这些库在群集中引入（加载）数据并从代码中查询数据。 本文首先在测试群集中创建一个表和数据映射。 然后将引入排列到群集并验证结果。
 
@@ -36,11 +42,6 @@ Azure 数据资源管理器是一项快速且高度可缩放的数据探索服�
 ```bash
 npm i azure-kusto-ingest azure-kusto-data
 ```
-
-> [!NOTE]
-> 请将终结点从  
-> `CLOUD_LOGIN_URL = "https://login.microsoftonline.com/"` 到 `CLOUD_LOGIN_URL = "https://login.partner.microsoftonline.cn"`  
-> （在下载的库文件 `<YourPythonInstallPath>\Lib\site-packages\azure\kusto\data\security.py` 中），使其可在 Azure 中国内运行。
 
 ## <a name="add-import-statements-and-constants"></a>添加导入语句和常量
 

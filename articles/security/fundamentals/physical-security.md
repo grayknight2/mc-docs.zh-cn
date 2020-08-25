@@ -1,6 +1,6 @@
 ---
-title: Azure 数据中心的物理安全性 - 世纪互联 Azure |Azure 文档
-description: 本文介绍 Microsoft 如何保护 Azure 数据中心，包括物理基础结构、安全性与合规性产品。
+title: Azure 数据中心的物理安全性 - Azure | Azure Docs
+description: 本文介绍 Microsoft 采取哪些措施来保护 Azure 数据中心（包括物理基础结构、安全性与合规性产品/服务）的安全。
 services: security
 documentationcenter: na
 author: TerryLanfear
@@ -13,25 +13,25 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/02/2020
-ms.author: v-tawe
+ms.date: 08/13/2020
+ms.author: v-johya
 origin.date: 04/28/2019
-ms.openlocfilehash: db3688600de57f324e0875e57f96e30741ec9d91
-ms.sourcegitcommit: 79c99a9ea013b3c74706a1038a505f4eea2aaac4
+ms.openlocfilehash: 0b5d687ed33bd325c4a36d979fcb49e533497a0f
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84439562"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228083"
 ---
 # <a name="azure-facilities-premises-and-physical-security"></a>Azure 设施、场地和物理安全性
-本文介绍 Microsoft 如何保护 Azure 基础结构。
+本文介绍 Microsoft 采取哪些措施来保护 Azure 基础结构的安全。
 
 ## <a name="datacenter-infrastructure"></a>数据中心基础结构
-Azure 由[全球分布式数据中心基础结构](https://en.azure.cn/home/features/products-by-region)组成，该基础结构支持数千个联机服务，并跨越全球 100 多个高度安全的设施。
+Azure 由[全球分布式数据中心基础结构](https://azure.microsoft.com/global-infrastructure/)组成，该基础结构支持数千个联机服务，并跨越全球 100 多个高度安全的设施。
 
-该基础结构旨在使应用程序更靠近全球用户、预留数据的驻留位置，并为客户提供全面的符合性与复原选项。 Azure 在全球有 52 个区域，并已在 140 个国家/地区推出。
+该基础结构旨在使应用程序更靠近全球用户、预留数据的驻留位置，并为客户提供全面的符合性与复原选项。 Azure 在全球设立了 58 个区域，并已在 140 个国家/地区推出。
 
-区域是指通过大规模弹性网络互连的一系列数据中心。 该网络默认包含内容分发、负载均衡、冗余和加密功能。 Azure 包含的全球区域比任何其他云提供商所包含的都多，因此允许你灵活地选择部署应用程序所需的位置。
+区域是指通过大规模弹性网络互连的一系列数据中心。 该网络包括区域内的或在区域间传播的所有 Azure 流量的内容分发、负载均衡、冗余和[默认情况下的数据链路层加密](encryption-overview.md#encryption-of-data-in-transit)。 Azure 包含的全球区域比任何其他云提供商所包含的都多，因此允许你灵活地选择部署应用程序所需的位置。
 
 Azure 区域组织为地域形式。 Azure 地域保证数据驻留、主权、符合性和恢复能力的要求在地域边界内得到遵从。
 
@@ -74,7 +74,8 @@ Microsoft 使用最佳做法过程和[符合 NIST 800-88](https://csrc.nist.gov/
 ## <a name="compliance"></a>合规性
 Azure 基础结构的设计和管理符合广泛的国际和行业特定标准，例如 ISO 27001、HIPAA、FedRAMP、SOC 1 和 SOC 2。 此外还符合国家/地区特定的标准，包括澳大利亚的 IRAP、英国的 G-Cloud 和新加坡的 MTCS。 严苛的第三方审核（例如英国标准协会进行的审核）可验证 Azure 是否遵循严格的安全控制标准。
 
-有关 Azure 遵守的合规标准的完整列表，请参阅[合规性产品](https://www.microsoft.com/trustcenter/compliance/complianceofferings)。
+有关 Azure 遵守的合规标准的完整列表，请参阅[合规性产品](https://www.trustcenter.cn/default.html)。
+<!--Correct on the link of "https://www.trustcenter.cn/default.html"-->
 
 ## <a name="next-steps"></a>后续步骤
 若要详细了解 Microsoft 如何帮助保护 Azure 基础结构，请参阅：
@@ -88,5 +89,6 @@ Azure 基础结构的设计和管理符合广泛的国际和行业特定标准�
 - [Azure 基础结构监视](infrastructure-monitoring.md)
 - [Azure 基础结构完整性](infrastructure-integrity.md)
 - [Azure 客户数据保护](protection-customer-data.md)
+
 
 

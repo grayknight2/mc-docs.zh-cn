@@ -1,38 +1,35 @@
 ---
 title: 快速入门：将自定义事件发送到事件中心 - 事件网格、Azure CLI
 description: 快速入门：使用 Azure 事件网格和 Azure CLI 发布一个主题，然后订阅该事件。 事件中心用于终结点。
-services: event-grid
-keywords: ''
-author: lingliw
-ms.author: v-lingwu
+author: Johnnytechn
+ms.author: v-johya
 origin.date: 11/05/2019
-ms.date: 3/16/2020
+ms.date: 08/10/2020
 ms.topic: quickstart
-ms.service: event-grid
-ms.custom: seodec18
-ms.openlocfilehash: c2c6169b3952599f7d521866e2f56ee1ad05f592
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 58a02ff3c8696b47368fbc72f5e231cab908ef64
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79452599"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228049"
 ---
 # <a name="quickstart-route-custom-events-to-azure-event-hubs-with-azure-cli-and-event-grid"></a>快速入门：使用 Azure CLI 和事件网格将自定义事件路由到 Azure 事件中心
 
 Azure 事件网格是针对云的事件处理服务。 Azure 事件中心是受支持的事件处理程序之一。 在本文中，将使用 Azure CLI 创建一个自定义主题，然后订阅该自定义主题，再触发可查看结果的事件。 将事件发送到事件中心。
 
-[!INCLUDE [quickstarts-free-trial-note.md](../../includes/quickstarts-free-trial-note.md)]
+如果没有 Azure 订阅，可在开始前创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
 
 ## <a name="create-a-resource-group"></a>创建资源组
 
 事件网格主题是 Azure 资源，必须放置在 Azure 资源组中。 该资源组是在其中部署和管理 Azure 资源的逻辑集合。
 
-使用 [az group create](/cli/group#az-group-create) 命令创建资源组。 
+使用“[az group create](/cli/group#az-group-create)”命令创建资源组。 
 
-以下示例在 *chinaeast* 位置创建名为 *gridResourceGroup* 的资源组。
+以下示例在“chinanorth2”位置创建名为“gridResourceGroup”的资源组。
 
 ```azurecli
-az group create --name gridResourceGroup --location chinaeast
+az group create --name gridResourceGroup --location chinanorth2
 ```
 
 [!INCLUDE [event-grid-register-provider-cli.md](../../includes/event-grid-register-provider-cli.md)]
@@ -43,7 +40,7 @@ az group create --name gridResourceGroup --location chinaeast
 
 ```azurecli
 topicname=<your-topic-name>
-az eventgrid topic create --name $topicname -l chinaeast -g gridResourceGroup
+az eventgrid topic create --name $topicname -l chinanorth2 -g gridResourceGroup
 ```
 
 ## <a name="create-event-hub"></a>创建事件中心
@@ -104,8 +101,8 @@ done
 
 通常，你将创建一个从事件中心检索事件的应用程序。 若要创建从事件中心获取消息的应用程序，请参阅：
 
-* [使用 .NET Standard 中的事件处理程序主机接收消息入门](../event-hubs/event-hubs-dotnet-standard-getstarted-receive-eph.md)
-* [使用 Java 从 Azure 事件中心接收事件](../event-hubs/event-hubs-java-get-started-receive-eph.md)
+* [使用 .NET Standard 中的事件处理程序主机接收消息入门](../event-hubs/event-hubs-dotnet-standard-getstarted-send.md)
+* [使用 Java 从 Azure 事件中心接收事件](../event-hubs/event-hubs-java-get-started-send.md)
 * [使用 Apache Storm 从事件中心接收事件](../event-hubs/event-hubs-storm-getstarted-receive.md)
 
 ## <a name="clean-up-resources"></a>清理资源
@@ -120,5 +117,6 @@ az group delete --name gridResourceGroup
 了解如何创建主题和事件订阅以后，即可进一步学习事件网格的功能：
 
 - [关于事件网格](overview.md)
-- [通过 Azure 事件网格和逻辑应用监视虚拟机的更改](monitor-virtual-machine-changes-event-grid-logic-app.md)
+- [将 Blob 存储事件路由到自定义 Web 终结点](../storage/blobs/storage-blob-event-quickstart.md?toc=%2fazure%2fevent-grid%2ftoc.json)
 - [将大数据流式传输到数据仓库](event-grid-event-hubs-integration.md)
+

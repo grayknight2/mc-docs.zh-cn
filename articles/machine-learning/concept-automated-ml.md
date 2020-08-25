@@ -10,12 +10,12 @@ ms.reviewer: jmartens
 author: cartacioS
 ms.author: sacartac
 ms.date: 04/22/2020
-ms.openlocfilehash: adbd6ed1ff7c0aba8d8434e1284eff121c30e57f
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: 40d9279754ffab2183561c61ab3e948f4a2c3465
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441126"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228461"
 ---
 # <a name="what-is-automated-machine-learning-automl"></a>什么是自动化机器学习 (AutoML)？
 
@@ -98,6 +98,10 @@ ms.locfileid: "86441126"
 
 模型生成是自动化的，同时，你也可以[了解特征对于生成的模型而言如何重要或者彼此相关](how-to-configure-auto-train.md#explain)。
 
+了解如何使用[远程计算目标](how-to-auto-train-remote.md)。
+
+
+
 > [!VIDEO https://www.microsoft.com/videoplayer/embed/RE2Xc9t]
 
 
@@ -132,7 +136,7 @@ ms.locfileid: "86441126"
 
 + Azure 机器学习工作室：[通过以下步骤](how-to-use-automated-ml-for-ml-models.md#customize-featurization)在“查看其他配置”部分中启用“自动特征化”。
 
-+ Python SDK：在 [AutoMLConfig](/python/api/azureml-train-automl-client/azureml.train.automl.automlconfig.automlconfig) 对象中指定 `"feauturization": 'auto' / 'off' / 'FeaturizationConfig'`。 详细了解 [启用特征化]((how-to-configure-auto-features.md)。 
++ Python SDK：在 [AutoMLConfig](/python/api/azureml-train-automl-client/azureml.train.automl.automlconfig.automlconfig) 对象中指定 `"feauturization": 'auto' / 'off' / 'FeaturizationConfig'`。 详细了解如何[启用特征化](how-to-configure-auto-features.md)。 
 
 ## <a name="ensemble-models"></a><a name="ensemble"></a> 系综模型
 
@@ -170,7 +174,7 @@ ms.locfileid: "86441126"
 
  使用远程计算时，有更多的功能可用，如下表中所示。 其中一些功能仅在企业工作区中可用。
 
-| 功能                                                    | Remote | Local | 需要 <br>企业工作区 |
+| Feature                                                    | Remote | Local | 需要 <br>企业工作区 |
 |------------------------------------------------------------|--------|-------|-------------------------------|
 | 数据流式处理（最高 100 GB 的大数据支持）          | ✓      |       | ✓                             |
 | 基于 DNN-BERT 的文本特征化和训练             | ✓      |       | ✓                             |

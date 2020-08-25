@@ -11,12 +11,12 @@ author: nishankgu
 ms.author: nigup
 ms.date: 05/08/2020
 ms.custom: contperfq4
-ms.openlocfilehash: eb7904e7aa3aa572727f916bedd5c0f934499809
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.openlocfilehash: eca0ab4183687b29300eb249a84f3320f25c0f1c
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097510"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228278"
 ---
 # <a name="manage--increase-quotas-for-resources-with-azure-machine-learning"></a>管理和增加 Azure 机器学习资源的配额
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -28,7 +28,6 @@ ms.locfileid: "85097510"
 在设计和扩展生产工作负载的 Azure 机器学习资源时，请考虑这些限制。 例如，如果群集未达到节点目标数量，那么可能是已达到订阅的 Azure 机器学习计算核心限制。 如果想将限制或配额提高到默认值限制以上，可以免费打开联机客户支持请求。 由于 Azure 容量限制，无法将限制提高到超过下表中显示的最大限制值。 如果没有“最大限制”列，则资源没有可调整的限制。
 
 
-除了管理配额，还可以了解如何[计划和管理 Azure 机器学习的成本](concept-plan-manage-cost.md)。
 
 ## <a name="special-considerations"></a>特殊注意事项
 
@@ -72,7 +71,7 @@ ms.locfileid: "85097510"
 | 单个 Azure 机器学习计算 (AmlCompute) 资源中的最大节数点 | 100 个节点 |
 | 每个节点的最大 GPU MPI 进程数 | 1-4 |
 | 每个节点的最大 GPU 辅助角色数 | 1-4 |
-| 最长作业生存期 | 90 天<sup>1</sup> |
+| 最长作业生存期 | 21 天<sup>1</sup> |
 | 低优先级节点上的最大作业生存期 | 7 天<sup>2</sup> |
 | 每个节点的最大参数服务器数 | 1 |
 
@@ -144,13 +143,10 @@ Azure 机器学习计算与订阅中的其他 Azure 资源配额分开管理。 
 
 请求配额增加时，需要选择要请求提高配额的服务，这可能是机器学习服务配额、容器实例或存储配额的服务。 此外，对于 Azure 机器学习计算，可以在按照上述步骤查看配额时单击“请求配额”按钮。
 
-> [!NOTE]
-> [免费试用版订阅](https://azure.microsoft.com/offers/ms-azr-0044p)不符合增加限制或配额的条件。 如果有[免费试用版订阅](https://azure.microsoft.com/offers/ms-azr-0044p)，可将其升级到[即用即付](https://azure.microsoft.com/offers/ms-azr-0003p/)订阅。 有关详细信息，请参阅[将 Azure 免费试用版订阅升级到即用即付订阅](../billing/billing-upgrade-azure-subscription.md)和[免费试用版订阅常见问题解答](https://azure.microsoft.com/free/free-account-faq)。
 
 ## <a name="next-steps"></a>后续步骤
 
 通过以下文章，了解详细信息：
 
-+ [计划和管理 Azure 机器学习的成本](concept-plan-manage-cost.md)
 
 + [如何增加配额](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-quota-errors)。

@@ -1,21 +1,16 @@
 ---
 title: 快速入门：使用 Go 发送和接收事件 - Azure 事件中心
 description: 快速入门：本文演示了创建 Go 应用程序的过程，可使用该应用程序从 Azure 事件中心发送事件。
-services: event-hubs
-author: ShubhaVijayasarathy
-manager: kamalb
-ms.service: event-hubs
-ms.workload: core
 ms.topic: quickstart
-origin.date: 11/05/2019
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: e33afd350e9f3f88780e8a0157e44c8f99001f00
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: fe142b7804f841aebd79c2993d12fbe8ab6a5afe
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199783"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715234"
 ---
 # <a name="quickstart-send-events-to-or-receive-events-from-event-hubs-using-go"></a>快速入门：使用 Go 将事件发送到事件中心或从其接收事件
 Azure 事件中心是一个大数据流式处理平台和事件引入服务，每秒能够接收和处理数百万个事件。 事件中心可以处理和存储分布式软件和设备生成的事件、数据或遥测。 可以使用任何实时分析提供程序或批处理/存储适配器转换和存储发送到数据中心的数据。 有关事件中心的详细概述，请参阅[事件中心概述](event-hubs-about.md)和[事件中心功能](event-hubs-features.md)。
@@ -133,7 +128,7 @@ log.Printf("got partition IDs: %s\n", info.PartitionIDs)
 
 ### <a name="create-a-storage-account-and-container"></a>创建存储帐户和容器
 
-使用 Azure 存储容器在接收器之间共享分区租用和事件流中的检查点等状态。 可以使用 Go SDK 创建存储帐户和容器，但也可以按照[关于 Azure 存储帐户](../storage/common/storage-create-storage-account.md)中的说明进行创建。
+使用 Azure 存储容器在接收器之间共享分区租用和事件流中的检查点等状态。 可以使用 Go SDK 创建存储帐户和容器，但也可以按照[关于 Azure 存储帐户](../storage/common/storage-account-create.md)中的说明进行创建。
 
 [Go 示例存储库](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/storage)中和教程对应的示例中提供了使用 Go SDK 创建存储项目的示例。
 

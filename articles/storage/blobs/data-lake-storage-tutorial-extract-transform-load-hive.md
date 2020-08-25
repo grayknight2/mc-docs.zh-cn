@@ -6,15 +6,15 @@ ms.subservice: data-lake-storage-gen2
 ms.service: storage
 ms.topic: tutorial
 origin.date: 11/19/2019
-ms.date: 07/20/2020
+ms.date: 08/24/2020
 ms.author: v-jay
 ms.reviewer: jamesbak
-ms.openlocfilehash: bb36e3b0337b8a107e239c3f8bdc1e051f422007
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.openlocfilehash: 2f8e4d8c8077dbafef317724ab6af58be738b6ad
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414694"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753633"
 ---
 # <a name="tutorial-extract-transform-and-load-data-by-using-azure-hdinsight"></a>教程：使用 Azure HDInsight 提取、转换和加载数据
 
@@ -39,7 +39,7 @@ ms.locfileid: "86414694"
 
     请参阅[快速入门：通过 Azure 门户在 Azure HDInsight 中开始使用 Apache Hadoop 和 Apache Hive](/hdinsight/hadoop/apache-hadoop-linux-create-cluster-get-started-portal)。
 
-* **Azure SQL 数据库**：使用 Azure SQL 数据库作为目标数据存储。 如果没有 SQL 数据库，请参阅[在 Azure 门户中创建 Azure SQL 数据库](../../sql-database/sql-database-get-started.md)。
+* **Azure SQL 数据库**：使用 Azure SQL 数据库作为目标数据存储。 如果 Azure SQL 数据库中没有数据库，请参阅[通过 Azure 门户在 Azure SQL 数据库中创建数据库](../../sql-database/sql-database-get-started.md)。
 
 * **Azure CLI**：如果尚未安装 Azure CLI，请参阅[安装 Azure CLI](/cli/install-azure-cli?view=azure-cli-latest)。
 
@@ -250,7 +250,7 @@ ms.locfileid: "86414694"
    ```bash
    TDSVER=8.0 tsql -H '<server-name>.database.chinacloudapi.cn' -U '<admin-login>' -p 1433 -D '<database-name>'
     ```
-   * 将 `<server-name>` 占位符替换为 SQL 数据库服务器名称。
+   * 将 `<server-name>` 占位符替换为逻辑 SQL 服务器名称。
 
    * 使用 SQL 数据库的管理员登录名替换 `<admin-login>` 占位符。
 

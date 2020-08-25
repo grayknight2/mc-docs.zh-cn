@@ -3,15 +3,15 @@ title: 配置错误代码 - Azure 流分析
 description: 通过配置错误代码对 Azure 流分析进行故障排除。
 ms.author: v-johya
 author: Johnnytechn
-ms.topic: conceptual
-ms.date: 07/06/2020
+ms.topic: troubleshooting
+ms.date: 08/20/2020
 ms.service: stream-analytics
-ms.openlocfilehash: cd01151f3877eb8ac66b71a0007b224d2f661b07
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.openlocfilehash: 6c7fa5b8cf59a26867e7db8e33d6d80feec866ec
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226254"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715718"
 ---
 # <a name="azure-stream-analytics-configuration-error-codes"></a>Azure 流分析配置错误代码
 

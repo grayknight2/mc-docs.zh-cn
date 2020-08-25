@@ -4,14 +4,14 @@ description: 了解如何执行管理任务，如重启 Azure Redis 缓存和为
 author: yegu-ms
 ms.service: cache
 ms.topic: conceptual
-ms.date: 07/10/2020
+ms.date: 08/10/2020
 ms.author: v-junlch
-ms.openlocfilehash: 97c456bba9a7b243948dc1b12ba9deee47d196b5
-ms.sourcegitcommit: 65a7360bb14b0373e18ec8eaa288ed3ac7b24ef4
+ms.openlocfilehash: f892e9a4c4cd21a36c70a74fc5a54a6e7d11dde2
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86219741"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223220"
 ---
 # <a name="how-to-administer-azure-cache-for-redis"></a>如何管理 Azure Redis 缓存
 本主题介绍如何为 Azure Redis 缓存实例执行管理任务，如[重启](#reboot)和[计划更新](#schedule-updates)。
@@ -35,7 +35,7 @@ ms.locfileid: "86219741"
 
 对客户端应用程序的影响因用户重新启动的节点而有所不同。
 
-* **主** - 重新启动主节点时，Azure Redis 缓存将故障转移到副本节点，并将其提升为主节点。 在此故障转移期间，可能会有一个较短的时间间隔无法连接到缓存。
+* **主** - 重新启动主节点时，Azure Cache for Redis 会故障转移到副本节点，并将其提升为主节点。 在此故障转移期间，可能会有一个较短的时间间隔无法连接到缓存。
 * **副本** - 重新启动副本节点时，通常不会影响缓存客户端。
 * **主和副本** - 同时重新启动这两个缓存节点时，缓存中的所有数据都会丢失，并且无法连接到缓存，直到主节点重新联机。 如果已配置[数据持久性](cache-how-to-premium-persistence.md)，则在缓存重新联机时会还原最新备份，但在最新备份后发生的所有缓存写入都将丢失。
 * **已启用群集的高级缓存的节点** - 重新启动已启用群集的高级缓存的一个或多个节点时，所选节点的行为与重新启动非群集缓存的相应节点时相同。
@@ -47,7 +47,7 @@ ms.locfileid: "86219741"
 * [能否使用 PowerShell、CLI 或其他管理工具重新启动缓存？](#can-i-reboot-my-cache-using-powershell-cli-or-other-management-tools)
 
 ### <a name="which-node-should-i-reboot-to-test-my-application"></a>测试应用程序时应重新启动哪个节点？
-若要针对缓存的主节点故障测试应用程序的复原能力，请重新启动 **主** 节点。 若要针对辅助节点的故障测试应用程序的复原能力，请重新启动副本节点。 若要针对缓存的总故障测试应用程序的复原能力，请同时重新启动这 **两个** 节点。
+若要针对缓存的主节点故障测试应用程序的复原能力，请重新启动 **主** 节点。 若要针对副本节点故障测试应用程序的复原能力，请重新启动“副本”节点。 若要针对缓存的总故障测试应用程序的复原能力，请同时重新启动这 **两个** 节点。
 
 ### <a name="can-i-reboot-the-cache-to-clear-client-connections"></a>能否通过重新启动缓存来清除客户端连接？
 能，如果重新启动缓存，则会清除所有客户端连接。 当所有客户端连接均已用完（由于客户端应用程序中的逻辑错误或 Bug）时，重新启动很有用。 每个定价层对于不同大小都有不同的[客户端连接数限制](cache-configure.md#default-redis-server-configuration)，达到这些限制后，将不再接受客户端连接。 通过重新启动缓存可以清除所有客户端连接。

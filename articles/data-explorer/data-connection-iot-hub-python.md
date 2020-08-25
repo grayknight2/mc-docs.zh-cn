@@ -1,19 +1,19 @@
 ---
 title: 使用 Python 为 Azure 数据资源管理器创建 IoT 中心数据连接
 description: 本文介绍如何使用 Python 为 Azure 数据资源管理器创建 IoT 中心数据连接。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 10/07/2019
-ms.date: 05/09/2020
-ms.openlocfilehash: 6a4ff4c9cb3429ad0ab17834d1e4ee6821037935
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/13/2020
+ms.openlocfilehash: a0e36fb5cfaa5fc9c4e45ea719eb8e2c078bb4b9
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417770"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515859"
 ---
 # <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-python-preview"></a>使用 Python 为 Azure 数据资源管理器创建 IoT 中心数据连接（预览版）
 
@@ -23,20 +23,16 @@ ms.locfileid: "83417770"
 > * [Python](data-connection-iot-hub-python.md)
 > * [Azure Resource Manager 模板](data-connection-iot-hub-resource-manager.md)
 
-在本文中，你将使用 Python 为 Azure 数据资源管理器创建 IoT 中心数据连接。 Azure 数据资源管理器是一项快速且高度可缩放的数据探索服务，适用于日志和遥测数据。 Azure 数据资源管理器提供了从事件中心、IoT 中心引入或加载数据，以及将 blob 写入 blob 容器的功能。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+在本文中，你将使用 Python 为 Azure 数据资源管理器创建 IoT 中心数据连接。 
 
-## <a name="prerequisites"></a>必备条件
+## <a name="prerequisites"></a>先决条件
 
 * 具有活动订阅的 Azure 帐户。 [创建试用帐户](https://www.azure.cn/pricing/1rmb-trial/)。
-
 * [Python 3.4+](https://www.python.org/downloads/)。
-
 * [一个群集和数据库](create-cluster-database-python.md)。
-
 * [表和列映射](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)。
-
 * [数据库和表策略](database-table-policies-python.md)（可选）。
-
 * [配置了共享访问策略的 IoT 中心](ingest-data-iot-hub.md#create-an-iot-hub)。
 
 [!INCLUDE [data-explorer-data-connection-install-package-python](includes/data-explorer-data-connection-install-package-python.md)]
@@ -94,13 +90,13 @@ poller = kusto_management_client.data_connections.create_or_update(resource_grou
 | client_id | *xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx* | 可以访问租户中资源的应用程序的客户端 ID。|
 | client_secret | *xxxxxxxxxxxxxx* | 可以访问租户中资源的应用程序的客户端密码。 |
 | resource_group_name | *testrg* | 包含群集的资源组的名称。|
-| cluster_name | mykustocluster  | 群集的名称。|
-| database_name | mykustodatabase  | 群集中目标数据库的名称。|
+| cluster_name | mykustocluster** | 群集的名称。|
+| database_name | mykustodatabase** | 群集中目标数据库的名称。|
 | data_connection_name | *myeventhubconnect* | 所需的数据连接名称。|
 | table_name | *StormEvents* | 目标数据库中目标表的名称。|
 | mapping_rule_name | *StormEvents_CSV_Mapping* | 与目标表相关的列映射的名称。|
 | data_format | *csv* | 消息的数据格式。|
-| iot_hub_resource_id | 资源 ID  | 包含要引入的数据的 IoT 中心的资源 ID。|
+| iot_hub_resource_id | 资源 ID | 包含要引入的数据的 IoT 中心的资源 ID。|
 | shared_access_policy_name | *iothubforread* | 共享访问策略的名称，这些策略定义设备与服务连接到 IoT 中心所需的权限。 |
 | consumer_group | *$Default* | 事件中心的使用者组。|
 | location | *中国东部 2* | 数据连接资源的位置。|

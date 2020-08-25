@@ -3,20 +3,20 @@ title: 在 SQL Server VM 中构建和部署模型 - Team Data Science Process
 description: 使用 Azure VM 上的 SQL Server 和公开提供的数据集生成和部署机器学习模型。
 services: machine-learning
 author: marktab
-manager: cgronlun
-editor: cgronlun
+manager: marktab
+editor: marktab
 ms.service: machine-learning
 ms.subservice: team-data-science-process
 ms.topic: article
-ms.date: 01/29/2017
+ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: acb12aae0016829629f994ed54da35b7f60d1021
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.openlocfilehash: 46a088c7083d00edf28efc96927b76a816fdd2b8
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097132"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228502"
 ---
 # <a name="the-team-data-science-process-in-action-using-sql-server"></a>团队数据科学过程实务：使用 SQL Server
 在本教程中，将逐步指导完成使用 SQL Server 和可公开取得的数据集 [NYC 出租车行程](https://www.andresmh.com/nyctaxitrips/)，构建和部署机器学习模型的过程。 该程序遵循标准数据科学工作流，包括：引入和浏览数据，设计功能以促进学习，并构建和部署模型。
@@ -66,7 +66,7 @@ NYC 出租车行程数据是大约 20 GB（未压缩时约为 48 GB）的压缩 
 
 要设置 Azure 数据科学环境：
 
-1. [创建存储帐户](../../storage/common/storage-quickstart-create-account.md)
+1. [创建存储帐户](../../storage/common/storage-account-create.md)
 2. [创建 Azure 机器学习工作区](../studio/create-workspace.md)
 3. [预配数据科研虚拟机](../data-science-virtual-machine/setup-sql-server-virtual-machine.md)，提供 SQL Server 和 IPython Notebook 服务器。
    
@@ -111,17 +111,17 @@ NYC 出租车行程数据是大约 20 GB（未压缩时约为 48 GB）的压缩 
      
        ![SQL Server 属性][14]
    * 从左侧的“**选择页**”列表中选择“**数据库设置**”。
-   * 验证**数据库默认位置**，并/或将其更改为所选的**数据磁盘**位置。 如果使用默认位置设置创建新的数据库，则这是新数据库所在的位置。
+   * 验证**数据库默认位置**，并/或将其更改为所选的**数据磁盘**位置。 此位置是使用默认设置创建的新数据库所在的位置。
      
        ![SQL 数据库默认设置][15]  
-5. 若要创建新数据库和一组文件组来保存已分区的表，请打开示例脚本 **create\_db\_default.sql**。 该脚本会在默认数据位置创建一个名为 **TaxiNYC** 的新数据库和 12 个文件组。 每个文件组将保存一个月内的 trip\_data 和 trip\_fare 数据。 根据需要修改数据库名称。 单击“ **! 执行**”，运行此脚本。
+5. 若要创建新数据库和一组文件组来保存已分区的表，请打开示例脚本 **create\_db\_default.sql**。 该脚本会在默认数据位置创建一个名为 **TaxiNYC** 的新数据库和 12 个文件组。 每个文件组将保存一个月内的 trip\_data 和 trip\_fare 数据。 根据需要修改数据库名称。 单击“执行”以运行该脚本。
 6. 接下来，创建两个分区表，一个用于 trip\_data，另一个用于 trip\_fare。 打开示例脚本 **create\_partitioned\_table.sql**，其功能如下：
    
    * 创建分区函数，以按月拆分数据。
    * 创建分区方案，以将每个月的数据映射到不同的文件组。
    * 创建两个映射到分区方案的分区表：**nyctaxi\_trip** 将保存 trip\_data，而 **nyctaxi\_fare** 将保存 trip\_fare 数据。
      
-     单击“ **! 执行**”，运行该脚本并创建分区表。
+     单击“执行”，运行该脚本并创建分区表。
 7. 在“**示例脚本**”文件夹中，提供了两个示例 PowerShell 脚本，可用于演示将数据并行批量导入到 SQL Server 表的方式。
    
    * **bcp\_parallel\_generic.ps1** 是将数据并行批量导入到表的通用脚本。 修改此脚本以设置此脚本的注释行中指示的输入和目标变量。
@@ -131,9 +131,9 @@ NYC 出租车行程数据是大约 20 GB（未压缩时约为 48 GB）的压缩 
     ![批量导入数据][16]
    
     也可以选择身份验证模式，默认值为 Windows 身份验证。 单击工具栏中的绿色箭头运行。 该脚本将启动 24 个并行批量导入操作，每个分区表对应 12 个操作。 也可以通过打开上述步骤中设置的 SQL Server 默认数据文件夹，监测数据导入进度。
-9. PowerShell 脚本将报告起始和结束时间。 所有批量导入完成时，将报告结束时间。 检查目标日志文件夹，以验证批量导入成功，即未报告目标日志文件夹存在任何错误。
-10. 数据库已就绪，可以进行浏览、功能设计及需要的其他操作。 由于这些表是根据 **pickup\_datetime** 字段进行分区的，因此，分区方案将为在 **WHERE** 子句中包括 **pickup\_datetime** 条件的查询带来好处。
-11. 在 **SQL Server Management Studio** 中，探索提供的示例脚本 **sample\_queries.sql**。 要运行任意示例查询，请突出显示查询行，并单击工具栏中的“ **! 执行**”。
+9. PowerShell 脚本将报告起始和结束时间。 所有批量导入完成时，将报告结束时间。 检查目标日志文件夹以验证批量导入成功，即未报告目标日志文件夹存在任何错误。
+10. 数据库已就绪，可以进行浏览、功能设计及需要的其他操作。 由于这些表是根据 pickup\_datetime 字段进行分区的，因此，将 pickup\_datetime 条件纳入 WHERE 子句的查询将从分区方案获益  。
+11. 在 **SQL Server Management Studio** 中，探索提供的示例脚本 **sample\_queries.sql**。 要运行任意示例查询，请突出显示查询行，并单击工具栏中的“执行”。
 12. NYC 出租车行程数据加载到两个独立的表中。 若要改进联接操作，强烈建议为表建立索引。 示例脚本 **create\_partitioned\_index.sql** 会在复合联接键 **medallion、hack\_license 和 pickup\_datetime** 上创建分区索引。
 
 ## <a name="data-exploration-and-feature-engineering-in-sql-server"></a><a name="dbexplore"></a>SQL Server 中的数据浏览和功能设计
@@ -150,7 +150,7 @@ NYC 出租车行程数据是大约 20 GB（未压缩时约为 48 GB）的压缩 
 
 准备好进行 Azure 机器学习后，也可以：  
 
-1. 保存最终的 SQL 查询，以提取和采样数据，并直接将查询复制和粘贴到 Azure 机器学习中的“[导入数据][import-data]”模块，或者
+1. 保存最终的 SQL 查询，以提取和采样数据，并直接将查询复制和粘贴到 Azure 机器学习中的[导入数据][import-data]模块，或者
 2. 保留计划用于在新数据库表中进行建模的抽样和工程数据，并使用 Azure 机器学习的[导入数据][import-data]模块中的新表。
 
 在本部分中，我们将保存最终查询以提取和采样数据。 第二种方法在 [IPython Notebook 中的数据浏览和特征工程](#ipnb)部分进行了演示。
@@ -230,7 +230,7 @@ NYC 出租车行程数据是大约 20 GB（未压缩时约为 48 GB）的压缩 
     AND   pickup_longitude != '0' AND dropoff_longitude != '0'
 
 #### <a name="feature-engineering-in-sql-queries"></a>SQL 查询中的功能设计
-标签生成和地理转换浏览查询还可通过删除计数部分，用于生成标签/功能。 其他功能设计 SQL 示例在 [IPython Notebook 中的数据浏览和特征工程](#ipnb)部分提供。 使用可在 SQL Server 数据库实例直接运行的 SQL 查询，以更高效的方式在完整数据集或其大型子集上运行功能生成查询。 该查询可能会在 **SQL Server Management Studio**、IPython Notebook 或任何可本地或远程访问数据库的开发工具/环境中执行。
+标签生成和地理转换浏览查询还可通过删除计数部分，用于生成标签/功能。 其他功能设计 SQL 示例在 [IPython Notebook 中的数据浏览和特征工程](#ipnb)部分提供。 使用可在 SQL Server 数据库实例直接运行的 SQL 查询，以更高效的方式在完整数据集或其大型子集上运行功能生成查询。 该查询可能在 SQL Server Management Studio、IPython Notebook 或任何可本地或远程访问数据库的开发工具或环境中执行。
 
 #### <a name="preparing-data-for-model-building"></a>准备建模的数据
 下面的查询可联接 **nyctaxi\_trip** 和 **nyctaxi\_fare** 表，生成一个二元分类标签 **tipped**、多类分类标签 **tip\_class**，以及从完整联接的数据集中提取 1% 的随机样本。 可以复制此查询，然后将其直接粘贴到 [Azure 机器学习工作室](https://studio.azureml.net)的[导入数据][import-data]模块中，以便从 Azure 中的 SQL Server 数据库实例进行直接数据引入。 此查询将排除具有不正确（0，0）坐标的记录。
@@ -254,7 +254,7 @@ NYC 出租车行程数据是大约 20 GB（未压缩时约为 48 GB）的压缩 
 ## <a name="data-exploration-and-feature-engineering-in-ipython-notebook"></a><a name="ipnb"></a>IPython Notebook 中的数据浏览和功能设计
 在此部分中，我们会在之前创建的 SQL Server 数据库中使用 Python 和 SQL 查询，执行数据浏览和功能生成。 “**Sample IPython Notebooks**”文件夹中提供了名为 **machine-Learning-data-science-process-sql-story.ipynb** 的示例 IPython notebook。 [GitHub](https://github.com/Azure/Azure-MachineLearning-DataScience/tree/master/Misc/DataScienceProcess/iPythonNotebooks) 也提供此 Notebook。
 
-以下是处理大数据时的建议顺序：
+使用大数据时，遵循以下建议的顺序：
 
 * 将小型数据示例读入到内存中的数据帧。
 * 使用抽样数据执行一些可视化效果和浏览。
@@ -487,7 +487,7 @@ NYC 出租车行程数据是大约 20 GB（未压缩时约为 48 GB）的压缩 
     cursor.commit()
 
 #### <a name="feature-engineering-bin-features-for-numerical-columns"></a>特征工程：适用于数值列的收纳组功能
-此示例会将连续的数值字段转换为预设的类别范围，即将数值字段转换为分类字段。
+此示例将连续的数值字段转换为预设的类别范围，即将数值字段转换为分类字段。
 
     nyctaxi_one_percent_insert_col = '''
         ALTER TABLE nyctaxi_one_percent ADD trip_time_bin int

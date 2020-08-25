@@ -1,19 +1,19 @@
 ---
 title: 使用 C# 为 Azure 数据资源管理器创建 IoT 中心数据连接
 description: 本文介绍如何使用 C# 为 Azure 数据资源管理器创建 IoT 中心数据连接。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 10/07/2019
-ms.date: 05/09/2020
-ms.openlocfilehash: a67da001c530e3cdf3125a078294f6760f8a5ba4
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/13/2020
+ms.openlocfilehash: 69f168e9e26584548866f4a4ab094d60be630b1f
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417666"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515860"
 ---
 # <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-c-preview"></a>使用 C#（预览版）为 Azure 数据资源管理器创建 IoT 中心数据连接
 
@@ -23,11 +23,12 @@ ms.locfileid: "83417666"
 > * [Python](data-connection-iot-hub-python.md)
 > * [Azure Resource Manager 模板](data-connection-iot-hub-resource-manager.md)
 
-Azure 数据资源管理器是一项快速且高度可缩放的数据探索服务，适用于日志和遥测数据。 Azure 数据资源管理器提供了从事件中心、IoT 中心和写入 blob 容器的 blob 引入数据（数据加载）的功能。 在本文中，你将使用 C# 为 Azure 数据资源管理器创建 IoT 中心数据连接。
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+在本文中，你将使用 C# 为 Azure 数据资源管理器创建 IoT 中心数据连接。
 
-## <a name="prerequisites"></a>必备条件
+## <a name="prerequisites"></a>先决条件
 
-* 如果尚未安装 Visual Studio 2019，可以下载并使用**免费的** [Visual Studio 2019 Community Edition](https://www.visualstudio.com/downloads/)。 在安装 Visual Studio 的过程中，请确保启用“Azure 开发”。 
+* 如果尚未安装 Visual Studio 2019，可以下载并使用**免费的** [Visual Studio 2019 Community Edition](https://www.visualstudio.com/downloads/)。 在安装 Visual Studio 的过程中，请确保启用“Azure 开发”。
 * 如果没有 Azure 订阅，请在开始前创建一个[试用 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 * 创建[群集和数据库](create-cluster-database-csharp.md)
 * 创建[表和列映射](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
@@ -84,13 +85,13 @@ await kustoManagementClient.DataConnections.CreateOrUpdate(resourceGroupName, cl
 | clientId | *xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx* | 可以访问租户中资源的应用程序的客户端 ID。|
 | clientSecret | *xxxxxxxxxxxxxx* | 可以访问租户中资源的应用程序的客户端密码。 |
 | resourceGroupName | *testrg* | 包含群集的资源组的名称。|
-| clusterName | mykustocluster  | 群集的名称。|
-| databaseName | mykustodatabase  | 群集中目标数据库的名称。|
+| clusterName | mykustocluster** | 群集的名称。|
+| databaseName | mykustodatabase** | 群集中目标数据库的名称。|
 | dataConnectionName | *myeventhubconnect* | 所需的数据连接名称。|
 | tableName | *StormEvents* | 目标数据库中目标表的名称。|
 | mappingRuleName | *StormEvents_CSV_Mapping* | 与目标表相关的列映射的名称。|
 | dataFormat | *csv* | 消息的数据格式。|
-| iotHubResourceId | 资源 ID  | 包含要引入的数据的 IoT 中心的资源 ID。 |
+| iotHubResourceId | 资源 ID | 包含要引入的数据的 IoT 中心的资源 ID。 |
 | sharedAccessPolicyName | *iothubforread* | 共享访问策略的名称，这些策略定义设备与服务连接到 IoT 中心所需的权限。 |
 | consumerGroup | *$Default* | 事件中心的使用者组。|
 | location | *中国东部 2* | 数据连接资源的位置。|

@@ -3,15 +3,15 @@ title: 外部可用性错误代码 - Azure 流分析
 description: 通过外部可用性错误代码排查 Azure 流分析问题。
 ms.author: v-johya
 author: Johnnytechn
-ms.topic: conceptual
-ms.date: 07/06/2020
+ms.topic: troubleshooting
+ms.date: 08/20/2020
 ms.service: stream-analytics
-ms.openlocfilehash: 809067a39bf9e28b13b1b6c6c12df8e5c4ca4e6c
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.openlocfilehash: af538c2a68649d010bf502d9eec3f1a5c5aba3f0
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226278"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715721"
 ---
 # <a name="azure-stream-analytics-external-availability-error-codes"></a>Azure 流分析外部可用性错误代码
 

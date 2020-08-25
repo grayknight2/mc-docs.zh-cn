@@ -7,14 +7,17 @@ ms.subservice: cosmosdb-sql
 ms.devlang: java
 ms.topic: reference
 origin.date: 05/11/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: c501f1c2c8fa7288c2d4903e1993191c0fac347d
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.custom: devx-track-java
+ms.openlocfilehash: d8cbdec9f4b69effd6a55da689a282baf8ed4d07
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323375"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222424"
 ---
 # <a name="azure-cosmos-db-async-java-sdk-for-sql-api-release-notes-and-resources"></a>适用于 SQL API 的 Azure Cosmos DB Async Java SDK：发行说明和资源
 > [!div class="op_single_selector"]
@@ -27,8 +30,8 @@ ms.locfileid: "85323375"
 > * [Async Java SDK v2](sql-api-sdk-async-java.md)
 > * [Sync Java SDK v2](sql-api-sdk-java.md)
 > * [Python](sql-api-sdk-python.md)
-> * [REST](https://docs.microsoft.com/rest/api/cosmos-db/)
-> * [REST 资源提供程序](https://docs.microsoft.com/rest/api/cosmos-db-resource-provider/)
+> * [REST](https://docs.microsoft.com/rest/api
+> * [REST 资源提供程序](/azure-resource-manager/management/azure-services-resource-providers)
 > * [SQL](sql-api-query-reference.md)
 > * [批量执行工具 - .NET v2](sql-api-sdk-bulk-executor-dot-net.md)
 > * [批量执行程序 - Java](sql-api-sdk-bulk-executor-java.md)
@@ -74,10 +77,10 @@ SQL API Async Java SDK 与 SQL API Java SDK 的区别在于，前者通过支持
 
 ## <a name="263---2019-10-23"></a>2.6.3 - 2019-10-23
 - 解决了报告错误（重试策略已损坏）的状态代码：
-  - `RequestRateTooLargeException.getStatusCode` 现在会正确返回 `TOO_MANY_REQUESTS`。
-  - `ServiceUnavailableException.getStatusCode` 现在会正确返回 `SERVICE_UNAVAILABLE`。
-  - commons 和 direct-impl 中的 `DocumentClientExceptionTest` 现在会验证是否为所有 `DocumentClientException` 子类型返回了正确的状态代码。
-  
+    - `RequestRateTooLargeException.getStatusCode` 现在会正确返回 `TOO_MANY_REQUESTS`。
+    - `ServiceUnavailableException.getStatusCode` 现在会正确返回 `SERVICE_UNAVAILABLE`。
+    - commons 和 direct-impl 中的 `DocumentClientExceptionTest` 现在会验证是否为所有 `DocumentClientException` 子类型返回了正确的状态代码。
+
 ## <a name="262---2019-10-05"></a>2.6.2 - 2019-10-05
 - 修复了将 MaxItemCount 设置为 -1 时的查询故障 ([#261](https://github.com/Azure/azure-cosmosdb-java/issues/261))。
 - 修复了有关分区拆分的 NPE bug ([#267](https://github.com/Azure/azure-cosmosdb-java/pull/267))。
@@ -232,7 +235,7 @@ SQL API Async Java SDK 与 SQL API Java SDK 的区别在于，前者通过支持
 
 - `FeedResponsePage` 已重命名为 `FeedReponse`
 - 对 `ConnectionPolicy` 配置的一些小修改。
-    ConnectionPolicy 中的所有时间字段和方法均采用“InMillis”作为后缀，以使时间单位更加精确。
+  ConnectionPolicy 中的所有时间字段和方法均采用“InMillis”作为后缀，以使时间单位更加精确。
 - 已删除 `ConnectionPolicy#setProxy()`。
 - `FeedOptions#pageSize` 已重命名为 `FeedOptions#maxItemCount`
 - 版本 1.0.0 取代了 0.9.x 版本。
@@ -242,9 +245,8 @@ SQL API Async Java SDK 与 SQL API Java SDK 的区别在于，前者通过支持
 - `azure-documentdb-rx` SDK 的第一版。
 - CRUD 文档 API 完全不阻止使用 Netty。 已使用阻止 SDK `azure-documentdb` 将查询异步 API 实现为包装器。
 
-
 ## <a name="release-and-retirement-dates"></a>发布日期和停用日期
-Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺利转换到更新的/受支持的版本。
+Azure 会在停用 SDK 时至少提前 12 个月发出通知，以便用户顺利转换为更高版本/受支持版本。
 
 新特性、功能和优化仅添加到最新的 SDK 中。 因此建议你始终尽早升级到最新的 SDK 版本。
 

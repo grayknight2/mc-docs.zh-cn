@@ -6,16 +6,16 @@ author: WenJason
 ms.service: storage
 ms.topic: article
 origin.date: 10/20/2017
-ms.date: 06/01/2020
+ms.date: 08/24/2020
 ms.author: v-jay
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: c7941cdd1107350a3cd2cc4e689d5f6e60a99bb7
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 0df83b64de1a6a02e015d18aae10d8c7f9894c99
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199667"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753576"
 ---
 # <a name="client-side-encryption-and-azure-key-vault-for-azure-storage"></a>Azure 存储的客户端加密和 Azure Key Vault
 [!INCLUDE [storage-selector-client-side-encryption-include](../../../includes/storage-selector-client-side-encryption-include.md)]
@@ -73,7 +73,9 @@ ms.locfileid: "84199667"
 
 在加密过程中，客户端库会生成 16 个字节的随机 IV 和 32 个字节的随机 CEK，并使用此信息对队列消息文本执行信封加密。 然后，将已包装的 CEK 和一些附加加密元数据添加到已加密的队列消息中。 此修改后的消息（如下所示）存储在服务中。
 
-    <MessageText>{"EncryptedMessageContents":"6kOu8Rq1C3+M1QO4alKLmWthWXSmHV3mEfxBAgP9QGTU++MKn2uPq3t2UjF1DO6w","EncryptionData":{…}}</MessageText>
+```xml
+<MessageText>{"EncryptedMessageContents":"6kOu8Rq1C3+M1QO4alKLmWthWXSmHV3mEfxBAgP9QGTU++MKn2uPq3t2UjF1DO6w","EncryptionData":{…}}</MessageText>
+```
 
 在解密过程中，将从队列消息中提取已包装的密钥并将其解包。 还会从队列消息中提取 IV，与解包的密钥一起使用来对队列消息数据进行解密。 请注意，加密元数据很少（不到 500 个字节），因此虽然它计入队列消息的 64KB 限制，但影响应是可管理的。
 

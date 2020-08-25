@@ -3,13 +3,14 @@ author: erhopf
 ms.author: v-tawe
 ms.service: cognitive-services
 ms.topic: include
+origin.date: 05/11/2020
 ms.date: 06/12/2020
-ms.openlocfilehash: 1f7c8136862a5042dac4565ccda0804d30ade430
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+ms.openlocfilehash: 01b43b13b48637b6d1ef94630cb78de8383e29a7
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723847"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88602557"
 ---
 ## <a name="authenticate-with-azure-active-directory"></a>使用 Azure Active Directory 进行身份验证
 

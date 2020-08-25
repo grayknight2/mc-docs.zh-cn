@@ -5,13 +5,13 @@ author: yegu-ms
 ms.author: v-junlch
 ms.service: cache
 ms.topic: conceptual
-ms.date: 06/16/2020
-ms.openlocfilehash: fb11f344ef0e119eb4f9482248a23a0ee2c25394
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.date: 08/10/2020
+ms.openlocfilehash: d38adeb24aa41bd5167c58bdeb5acc21bc668ce4
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097292"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223136"
 ---
 # <a name="troubleshoot-data-loss-in-azure-cache-for-redis"></a>排查 Azure Cache for Redis 中的数据丢失问题
 
@@ -23,7 +23,7 @@ ms.locfileid: "85097292"
 
 ## <a name="partial-loss-of-keys"></a>密钥部分丢失
 
-将密钥存储在内存中后，Azure Cache for Redis 不会随机删除密钥。 但是，在响应“过期”或“逐出”策略以及显式密钥删除命令时，它确实会删除密钥。 此外，在高级或标准版 Azure Cache for Redis 实例中写入到主节点的密钥可能不会立即提供到副本中。 数据将以异步的非阻塞方式从主节点复制到副本。
+将密钥存储在内存中后，Azure Cache for Redis 不会随机删除密钥。 但是，在响应“过期”或“逐出”策略以及显式密钥删除命令时，它确实会删除密钥。 此外，在高级或标准版 Azure Cache for Redis 实例中写入到主节点的密钥可能不会立即在副本中出现。 数据将以异步的非阻塞方式从主节点复制到副本。
 
 如果你发现密钥在缓存中消失，请查看以下可能原因：
 
@@ -80,7 +80,7 @@ cmdstat_hdel:calls=1,usec=47,usec_per_call=47.00
 
 ### <a name="async-replication"></a>异步复制
 
-“标准”或“高级”层中的任何 Azure Cache for Redis 实例都配置有一个主节点和至少一个副本。 数据将通过一个后台进程以异步方式从主节点复制到副本。 [redis.io](https://redis.io/topics/replication) 网站概括性地介绍了 Redis 数据复制的工作原理。 如果客户端频繁写入 Redis，可能会发生部分数据丢失，因为在这种情况下无法保证此复制会即时完成。 例如，如果在客户端向主节点写入密钥之后，但在后台进程有机会将此密钥发送到副本之前主节点关闭，那么，在副本接管为新的主节点时，密钥就会丢失。 
+标准或高级层中的任何 Azure Cache for Redis 实例都配置有一个主节点和至少一个副本。 数据将通过一个后台进程以异步方式从主节点复制到副本。 [redis.io](https://redis.io/topics/replication) 网站概括性地介绍了 Redis 数据复制的工作原理。 如果客户端频繁写入 Redis，可能会发生部分数据丢失，因为在这种情况下无法保证此复制会即时完成。 例如，如果在客户端向主节点写入密钥之后、后台进程有机会将此密钥发送到副本之前主节点关闭，那么，在副本接管为新的主节点时，密钥就会丢失。 
 
 ## <a name="major-or-complete-loss-of-keys"></a>密钥严重丢失或完全丢失
 
@@ -112,7 +112,7 @@ Azure Cache for Redis 默认使用 **db0** 数据库。 如果切换到其他数
 
 Redis 是内存中数据存储。 数据保存在托管 Redis 缓存的物理机或虚拟机上。 “基本”层中的 Azure Cache for Redis 实例只在单个虚拟机 (VM) 上运行。 如果该 VM 关闭，则缓存中存储的所有数据都会丢失。 
 
-“标准”层和“高级”层中的缓存在复制的配置中使用两个 VM，能够以更高的复原能力防范数据丢失。 当此类缓存中的主节点发生故障时，副本节点将会自动接管工作以便提供数据服务。 这些 VM 位于独立的容错域和更新域中，从而可以最大程度地减少主节点和副本同时发生故障的几率。 但是，如果发生严重的数据中心故障，这些 VM 仍可能会一起关闭。 此时，数据将会丢失，但这种情况非常罕见。
+“标准”层和“高级”层中的缓存在复制的配置中使用两个 VM，能够以更高的复原能力防范数据丢失。 当此类缓存中的主节点发生故障时，副本节点将会接管工作并自动提供数据。 这些 VM 位于独立的容错域和更新域中，从而可以最大程度地减少主节点和副本同时发生故障的几率。 但是，如果发生严重的数据中心故障，这些 VM 仍可能会一起关闭。 此时，数据将会丢失，但这种情况非常罕见。
 
 考虑使用 [Redis 数据持久性](https://redis.io/topics/persistence)和[异地复制](/azure-cache-for-redis/cache-how-to-geo-replication)来改善数据保护，防范此类基础结构故障。
 

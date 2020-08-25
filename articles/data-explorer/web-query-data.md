@@ -7,13 +7,13 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 origin.date: 06/15/2020
-ms.date: 07/08/2020
-ms.openlocfilehash: c4d72cb00968c0d3c6543f2f7793aa232f041307
-ms.sourcegitcommit: 5fb9ae9adc04e79d6d0e78c9e69dbe8aa3ceb00a
+ms.date: 08/18/2020
+ms.openlocfilehash: 99d7ef98d152eba0acd7b3329ffcb77e6385c677
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86100222"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516042"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>快速入门：在 Azure 数据资源管理器 Web UI 中查询数据
 
@@ -115,6 +115,12 @@ Azure 数据资源管理器是一项快速且高度可缩放的数据探索服�
     结果应如下图所示。
 
     ![柱形图](media/web-query-data/column-chart.png)
+
+> [!NOTE]
+> 查询表达式中的空白行可能影响执行查询的那一部分。
+>
+> 如果未选定文本，则假定以空行分隔查询或命令。
+> 如果选定了文本，则运行选定的文本。
 
 ## <a name="work-with-the-table-grid"></a>使用网格型
 
@@ -219,7 +225,7 @@ Azure 数据资源管理器是一项快速且高度可缩放的数据探索服�
 
 ## <a name="provide-feedback"></a>提供反馈
 
-1. 在应用程序的右上角，选择反馈图标 ![反馈图标](media/web-query-data/icon-feedback.png)。
+1. 在应用程序的右上角，选择反馈图标 ![反馈图标](media/web-query-data/icon-feedback.png).
 
 1. 输入反馈，然后选择“提交”。
 

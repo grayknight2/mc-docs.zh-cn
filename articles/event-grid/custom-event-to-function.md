@@ -1,26 +1,23 @@
 ---
 title: 快速入门：将自定义事件发送到 Azure 函数 - 事件网格
 description: 快速入门：使用 Azure 事件网格和 Azure CLI 或门户发布一个主题，然后订阅该事件。 Azure 函数用于终结点。
-services: event-grid
-keywords: ''
-author: lingliw
-ms.author: v-lingwu
+author: Johnnytechn
+ms.author: v-johya
 origin.date: 11/05/2019
-ms.date: 3/16/2020
+ms.date: 08/10/2020
 ms.topic: quickstart
-ms.service: event-grid
-ms.openlocfilehash: 2ceb92d5690bce78634c85aea996472ef885769a
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: c13d8e9c43e6353eff4c95581537ea97f66b630e
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79452592"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228047"
 ---
 # <a name="quickstart-route-custom-events-to-an-azure-function-with-event-grid"></a>快速入门：使用事件网格将自定义事件路由到 Azure 函数
 
 Azure 事件网格是针对云的事件处理服务。 Azure 函数是受支持的事件处理程序之一。 在本文中，将使用 Azure 门户创建一个自定义主题，然后订阅该自定义主题，再触发可查看结果的事件。 将事件发送至 Azure 函数。
 
-[!INCLUDE [quickstarts-free-trial-note.md](../../includes/quickstarts-free-trial-note.md)]
+如果没有 Azure 订阅，可在开始前创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
 
 ## <a name="create-azure-function"></a>创建 Azure 函数
 
@@ -136,7 +133,7 @@ Azure 事件网格是针对云的事件处理服务。 Azure 函数是受支持�
     $endpoint = (Get-AzEventGridTopic -ResourceGroupName $resourceGroupName -Name $topicName).Endpoint
     $keys = Get-AzEventGridTopicKey -ResourceGroupName $resourceGroupName -Name $topicName
     ```
-4. 准备事件。 在 Cloud Shell 窗口中复制并运行这些语句。 
+4. 准备事件。 在 PowerShell 窗口中复制并运行这些语句。 
 
     ```powershell
     $eventID = Get-Random 99999
@@ -175,9 +172,9 @@ Azure 事件网格是针对云的事件处理服务。 Azure 函数是受支持�
 ## <a name="clean-up-resources"></a>清理资源
 如果打算继续处理此事件，请不要清除本文中创建的资源。 否则，请删除本文中创建的资源。
 
-1. 在左侧菜单中选择“资源组”。  如果左侧菜单中未显示此选项，请在左侧菜单中选择“所有服务”，然后选择“资源组”。   
+1. 在左侧菜单中选择“资源组”。 如果左侧菜单中未显示此选项，请在左侧菜单中选择“所有服务”，然后选择“资源组”。   
 2. 选择资源组以启动“资源组”页。  
-3. 在工具栏中选择“删除资源组”。  
+3. 在工具栏中选择“删除资源组”。 
 4. 输入资源组的名称以确认删除，然后选择“删除”。  
 
     ![资源组](./media/custom-event-to-function/delete-resource-groups.png)
@@ -190,5 +187,5 @@ Azure 事件网格是针对云的事件处理服务。 Azure 函数是受支持�
 
 - [关于事件网格](overview.md)
 - [将 Blob 存储事件路由到自定义 Web 终结点](../storage/blobs/storage-blob-event-quickstart.md?toc=%2fevent-grid%2ftoc.json)
-- [通过 Azure 事件网格和逻辑应用监视虚拟机的更改](monitor-virtual-machine-changes-event-grid-logic-app.md)
 - [将大数据流式传输到数据仓库](event-grid-event-hubs-integration.md)
+

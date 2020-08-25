@@ -3,22 +3,22 @@ title: 自动故障转移组
 titleSuffix: Azure SQL Database & SQL Managed Instance
 description: 自动故障转移组可用于管理服务器中一组数据库或托管实例中所有数据库的复制和自动/协调式故障转移。
 services: sql-database
-ms.service: sql-database
+ms.service: sql-db-mi
 ms.subservice: high-availability
-ms.custom: sqldbrb=2
+ms.custom: sqldbrb=2, devx-track-azurecli
 ms.devlang: ''
 ms.topic: conceptual
 author: WenJason
 ms.author: v-jay
 ms.reviewer: mathoma, carlrab
-origin.date: 2/10/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: ec89eb25dd4ef10262b8b8d97d720762f0ca5818
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+origin.date: 07/09/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: 3aa800115ed5d34cc6a551cb4eb2456da65636c8
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86228195"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222845"
 ---
 # <a name="use-auto-failover-groups-to-enable-transparent-and-coordinated-failover-of-multiple-databases"></a>使用自动故障转移组可以实现多个数据库的透明、协调式故障转移
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -240,7 +240,7 @@ ms.locfileid: "86228195"
 
 ### <a name="creating-a-failover-group-between-managed-instances-in-different-subscriptions"></a>在不同订阅中的托管实例之间创建故障转移组
 
-可以在两个不同订阅中的 SQL 托管实例之间创建故障转移组。 使用 PowerShell API 时，可以通过为辅助 SQL 托管实例指定 `PartnerSubscriptionId` 参数来执行此操作。 使用 REST API 时，`properties.managedInstancePairs` 参数中包含的每个实例 ID 都可以有自己的订阅 ID。
+可以在两个不同订阅中的 SQL 托管实例之间创建故障转移组，前提是订阅与相同的 [Azure Active Directory 租户](/active-directory/fundamentals/active-directory-whatis#terminology)关联。 使用 PowerShell API 时，可以通过为辅助 SQL 托管实例指定 `PartnerSubscriptionId` 参数来执行此操作。 使用 REST API 时，`properties.managedInstancePairs` 参数中包含的每个实例 ID 都可以有自己的订阅 ID。
   
 > [!IMPORTANT]
 > Azure 门户不支持创建跨不同订阅的故障转移组。 此外，对于跨不同订阅和/或资源组的现有故障转移组，无法通过门户从主要 SQL 托管实例手动启动故障转移。 改为从异地辅助实例启动它。
@@ -399,7 +399,7 @@ CREATE LOGIN foo WITH PASSWORD = '<enterStrongPasswordHere>', SID = <login_sid>;
 
 ## <a name="programmatically-managing-failover-groups"></a>以编程方式管理故障转移组
 
-如上所述，也可以使用 Azure PowerShell 和 REST API 以编程方式管理自动故障转移组和活动异地复制。 下表描述了可用的命令集。 活动异地复制包括一组用于管理的 Azure 资源管理器 API，其中包括 [Azure SQL 数据库 REST API](https://docs.microsoft.com/rest/api/sql/) 和 [Azure PowerShell cmdlet](https://docs.microsoft.com/powershell/azure/overview)。 这些 API 需要使用资源组，并支持基于角色的安全性 (RBAC)。 有关如何实现访问角色的详细信息，请参阅 [Azure 基于角色的访问控制](../../role-based-access-control/overview.md)。
+如上所述，也可以使用 Azure PowerShell 和 REST API 以编程方式管理自动故障转移组和活动异地复制。 下表描述了可用的命令集。 活动异地复制包括一组用于管理的 Azure 资源管理器 API，其中包括 [Azure SQL 数据库 REST API](https://docs.microsoft.com/rest/api/sql/) 和 [Azure PowerShell cmdlet](https://docs.microsoft.com/powershell/azure/)。 这些 API 需要使用资源组，并支持基于角色的安全性 (RBAC)。 有关如何实现访问角色的详细信息，请参阅 [Azure 基于角色的访问控制 (Azure RBAC)](../../role-based-access-control/overview.md)。
 
 ### <a name="manage-sql-database-failover"></a>管理 SQL 数据库故障转移
 

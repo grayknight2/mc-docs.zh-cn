@@ -1,20 +1,22 @@
 ---
-title: 教程：如何在 Azure Cosmos DB 中使用 SQL 进行查询？
-description: 教程：了解如何使用查询板块在 Azure Cosmos DB 中使用 SQL 查询进行查询
+title: 教程 - 如何在 Azure Cosmos DB 中使用 SQL 进行查询？
+description: 教程 - 了解如何使用查询板块在 Azure Cosmos DB 中使用 SQL 查询进行查询
 author: rockboyfor
-ms.author: v-yeche
 ms.service: cosmos-db
 ms.custom: tutorial-develop, mvc
 ms.topic: tutorial
 origin.date: 11/05/2019
-ms.date: 02/10/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
+ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: 771b1cba7c976c510f8c6c1a0e4e6f53ca03ea46
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 1e687da40d93fff04eb42529710a4ee3153961f1
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77067886"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222531"
 ---
 # <a name="tutorial-query-azure-cosmos-db-by-using-the-sql-api"></a>教程：使用 SQL API 查询 Azure Cosmos DB
 
@@ -57,6 +59,7 @@ Azure Cosmos DB [SQL API](documentdb-introduction.md) 支持使用 SQL 查询文
   "isRegistered": false
 }
 ```
+
 ## <a name="where-can-i-run-sql-queries"></a>可在何处运行 SQL 查询？
 
 通过 [REST API 和 SDK](sql-api-sdk-dotnet.md) 或[查询演练](https://www.documentdb.com/sql/demo)（它对现有示例数据集运行查询），可在 Azure 门户中使用数据资源管理器运行查询。
@@ -66,17 +69,19 @@ Azure Cosmos DB [SQL API](documentdb-introduction.md) 支持使用 SQL 查询文
 
 ## <a name="prerequisites"></a>先决条件
 
-本教程假定已拥有 Azure Cosmos DB 帐户和集合。 没有这些内容？ 完成 [5 分钟快速入门](create-cosmosdb-resources-portal.md)。
+本教程假定已拥有 Azure Cosmos DB 帐户和集合。 没有这些资源？ 完成 [5 分钟快速入门](create-cosmosdb-resources-portal.md)。
 
 ## <a name="example-query-1"></a>示例查询 1
 
-若使用上述示例家庭文档，则以下 SQL 查询返回其 ID 字段匹配 `WakefieldFamily` 的文档。 由于它是 `SELECT *` 语句，因此该查询的输出为完整的 JSON 文档：
+若使用上述示例家族文档，以下 SQL 查询会返回其 ID 字段匹配 `WakefieldFamily` 的文档。 由于它是 `SELECT *` 语句，因此该查询的输出为完整的 JSON 文档：
 
 **查询**
 
+```sql
     SELECT * 
     FROM Families f 
     WHERE f.id = "WakefieldFamily"
+```
 
 **结果**
 
@@ -115,25 +120,29 @@ Azure Cosmos DB [SQL API](documentdb-introduction.md) 支持使用 SQL 查询文
 
 **查询**
 
+```sql
     SELECT c.givenName 
     FROM Families f 
     JOIN c IN f.children 
     WHERE f.id = 'WakefieldFamily'
+```
 
 **结果**
 
-    [
-        {
-            "givenName": "Jesse"
-        },
-        {
-            "givenName": "Lisa"
-        }
-    ]
+```
+[
+    {
+        "givenName": "Jesse"
+    },
+    {
+        "givenName": "Lisa"
+    }
+]
+```
 
 ## <a name="next-steps"></a>后续步骤
 
-在本教程中已完成以下操作：
+在本教程中，已完成以下任务：
 
 > [!div class="checklist"]
 > * 已了解如何使用 SQL 进行查询  
@@ -143,4 +152,4 @@ Azure Cosmos DB [SQL API](documentdb-introduction.md) 支持使用 SQL 查询文
 > [!div class="nextstepaction"]
 > [多区域分配数据](tutorial-global-distribution-sql-api.md)
 
-<!-- Update_Description: update meta properties, wording update -->
+<!-- Update_Description: update meta properties, wording update, update link -->

@@ -1,22 +1,14 @@
 ---
-title: Azure Functions 中的 OpenAPI 元数据 | Microsoft Docs
+title: Azure Functions 中的 OpenAPI 元数据
 description: Azure Functions 中的 OpenAPI 支持概述
-services: functions
-author: alexkarcher-msft
-manager: jeconnoc
-ms.assetid: ''
-ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: conceptual
-origin.date: 03/23/2017
-ms.date: 06/05/2020
-ms.author: v-junlch
-ms.openlocfilehash: 0db4d818552949bdd6000f1ba6614c360da0223c
-ms.sourcegitcommit: f1a76ee3242698123a3d77f44c860db040b48f70
+ms.date: 08/10/2020
+ms.openlocfilehash: 296979efb321aa479d4ca72c8019a692a18f109f
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84563689"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222601"
 ---
 # <a name="openapi-20-metadata-support-in-azure-functions-preview"></a>Azure Functions 中的 OpenAPI 2.0 元数据支持（预览版）
 Azure Functions 中的 OpenAPI 2.0（以前称为 Swagger）元数据支持一项预览版功能，可用于在 Function App 中编写 OpenAPI 2.0 定义。 随后可使用 Function App 托管该文件。
@@ -28,6 +20,9 @@ Azure Functions 中的 OpenAPI 2.0（以前称为 Swagger）元数据支持一�
 
 [!INCLUDE [intro](../../includes/functions-bindings-intro.md)]
 
+>[!TIP]
+>建议先从[入门教程](./functions-openapi-definition.md)开始，然后返回到本文档，了解有关特定功能的详细信息。
+
 ## <a name="enable-openapi-definition-support"></a><a name="enable"></a>启用 OpenAPI 定义支持
 可在函数应用的“平台功能”的“API 定义”页中配置所有 OpenAPI 设置**** ****。
 
@@ -38,6 +33,8 @@ Azure Functions 中的 OpenAPI 2.0（以前称为 Swagger）元数据支持一�
 
 ## <a name="generate-a-swagger-skeleton-from-your-functions-metadata"></a><a name="generate-definition"></a>通过函数元数据生成 Swagger 框架
 模板可帮助你开始编写第一个 OpenAPI 定义。 定义模板功能通过使用 function.json 文件中的所有元数据，为每个 HTTP 触发器函数创建稀疏的 OpenAPI 定义。 将需要按 [OpenAPI 规范](https://swagger.io/specification/)填写 API 详细信息，如请求和响应模板。
+
+有关分步说明，请参阅[入门教程](./functions-openapi-definition.md)。
 
 ### <a name="available-templates"></a><a name="templates"></a>可用模板
 
@@ -61,7 +58,6 @@ Azure Functions 中的 OpenAPI 2.0（以前称为 Swagger）元数据支持一�
 >
 
 ## <a name="next-steps"></a>后续步骤
+* [入门教程](./functions-openapi-definition.md)。 请尝试一下演练，查看运行中的 OpenAPI 定义。
 * [Azure Functions GitHub 存储库](https://github.com/Azure/Azure-Functions/)。 查看 Functions 存储库，针对 API 定义支持预览提供反馈。 为要更新的任何内容制作一个 GitHub 发布。
 * [Azure Functions 开发人员参考](functions-reference.md)。 了解如何编码函数以及如何定义触发器和绑定。
-
-<!-- Update_Description: link update -->

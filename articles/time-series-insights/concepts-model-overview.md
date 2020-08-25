@@ -8,14 +8,14 @@ ms.workload: big-data
 ms.service: time-series-insights
 services: time-series-insights
 ms.topic: conceptual
-ms.date: 08/04/2020
+ms.date: 08/20/2020
 ms.custom: seodec18
-ms.openlocfilehash: 8b1c359d9a5f59ab52d1ab8151f46906a356e0a6
-ms.sourcegitcommit: 36e7f37481969f92138bfe70192b1f4a2414caf7
+ms.openlocfilehash: 93ab23f29ff80b8751e36dc06e87b72f3f62ad73
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87801824"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715277"
 ---
 # <a name="time-series-model-in-azure-time-series-insights-gen2"></a>Azure 时序见解第 2 代中的时序模型
 
@@ -70,7 +70,7 @@ ms.locfileid: "87801824"
 
 [![时序模型概述图表](./media/v2-update-tsm/time-series-model-overview.png)](./media/v2-update-tsm/time-series-model-overview.png#lightbox)
 
-可以通过[模型设置 API](https://docs.microsoft.com/rest/api/time-series-insights/preview-model#model-settings-api) 来管理时序模型设置。
+可以通过[模型设置 API](https://docs.microsoft.com/rest/api/time-series-insights/reference-model-apis) 来管理时序模型设置。
 
 ## <a name="time-series-model-instances"></a>时序模型实例
 
@@ -83,6 +83,10 @@ ms.locfileid: "87801824"
 实例字段是描述性信息的集合，可包含层次结构级别的值，以及制造商、运营商等信息。
 
 为 Azure 时序见解第 2 代环境配置事件源后，会在时序模型中自动发现和创建实例。 
+
+[Contoso 风力发电厂演示](https://insights.timeseries.azure.cn/preview/samples)提供了多个实时实例示例。
+
+[![时序模型实例示例](./media/v2-update-tsm/time-series-model-instance.png)](./media/v2-update-tsm/time-series-model-instance.png#lightbox)
 
 ### <a name="instance-properties"></a>实例属性
 
@@ -120,7 +124,7 @@ ms.locfileid: "87801824"
 ```
 
 > [!TIP]
-> 有关实例 API 创建、读取、更新和删除 (CRUD) 支持，请阅读[数据查询](time-series-insights-update-tsq.md#time-series-model-query-tsm-q-apis)一文和[实例 API REST 文档](https://docs.microsoft.com/rest/api/time-series-insights/preview-model#instances-api)。
+> 有关实例 API 创建、读取、更新和删除 (CRUD) 支持，请阅读[数据查询](time-series-insights-update-tsq.md#time-series-model-query-tsm-q-apis)一文和[实例 API REST 文档](https://docs.microsoft.com/rest/api/time-series-insights/reference-model-apis#instances-api)。
 
 ## <a name="time-series-model-hierarchies"></a>时序模型层次结构
 
@@ -128,7 +132,7 @@ ms.locfileid: "87801824"
 
 可以在给定的 Azure 时序见解第 2 代环境中配置多个层次结构。 一个时序模型实例可以映射到一个或多个层次结构（多对多的关系）。
 
-[Contoso 风力发电厂演示](https://insights.timeseries.azure.com/preview/samples)显示了标准实例和类型层次结构。
+[Contoso 风力发电厂演示](https://insights.timeseries.azure.cn/preview/samples)显示了标准实例和类型层次结构。
 
 [![时序模型层次结构示例](./media/v2-update-tsm/time-series-model-hierarchies.png)](./media/v2-update-tsm/time-series-model-hierarchies.png#lightbox)
 
@@ -177,7 +181,7 @@ ms.locfileid: "87801824"
 * `ManufactureDate` 定义包含父级 `year` 和子级 `month` 的层次结构。 每个 `ManufactureDate` 可以包含多个 `years`，而后者又可以包含多个 `months`。
 
 > [!TIP]
-> 有关层次结构 API 创建、读取、更新和删除 (CRUD) 支持，请阅读[数据查询](concepts-query-overview.md#time-series-model-query-tsm-q-apis)一文和[层次结构 API REST 文档](https://docs.microsoft.com/rest/api/time-series-insights/preview-model#hierarchies-api)。
+> 有关层次结构 API 创建、读取、更新和删除 (CRUD) 支持，请阅读[数据查询](concepts-query-overview.md#time-series-model-query-tsm-q-apis)一文和[层次结构 API REST 文档](https://docs.microsoft.com/rest/api/time-series-insights/reference-model-apis#hierarchies-api)。
 
 ### <a name="hierarchy-example"></a>层次结构示例
 
@@ -215,12 +219,12 @@ ms.locfileid: "87801824"
 
 一个类型可以包含一个或多个变量。 例如，某个时序模型实例的类型为“温度传感器”，其中包括变量“平均温度”、“最小温度”和“最大温度”。   
 
-[Contoso 风力发电厂演示](https://insights.timeseries.azure.com/preview/samples)可视化了与相应实例关联的多个时序模型类型。
+[Contoso 风力发电厂演示](https://insights.timeseries.azure.cn/preview/samples)可视化了与相应实例关联的多个时序模型类型。
 
 [![时序模型类型示例](./media/v2-update-tsm/time-series-model-types.png)](./media/v2-update-tsm/time-series-model-types.png#lightbox)
 
 > [!TIP]
-> 有关类型 API 创建、读取、更新和删除 (CRUD) 支持，请阅读[数据查询](concepts-query-overview.md#time-series-model-query-tsm-q-apis)一文和[类型 API REST 文档](https://docs.microsoft.com/rest/api/time-series-insights/preview-model#types-api)。
+> 有关类型 API 创建、读取、更新和删除 (CRUD) 支持，请阅读[数据查询](concepts-query-overview.md#time-series-model-query-tsm-q-apis)一文和[类型 API REST 文档](https://docs.microsoft.com/rest/api/time-series-insights/reference-model-apis#types-api)。
 
 ### <a name="type-properties"></a>Type 属性
 
@@ -277,7 +281,7 @@ ms.locfileid: "87801824"
 
 ## <a name="next-steps"></a>后续步骤
 
-* 若要详细了解如何通过 API 编辑模型，请阅读[时序模型](https://docs.microsoft.com/rest/api/time-series-insights/preview-model)参考文档。
+* 若要详细了解如何通过 API 编辑模型，请阅读[时序模型](https://docs.microsoft.com/rest/api/time-series-insights/reference-model-apis)参考文档。
 
 * 探究可以使用[时序模型变量](./concepts-variables.md)创建的公式和计算
 

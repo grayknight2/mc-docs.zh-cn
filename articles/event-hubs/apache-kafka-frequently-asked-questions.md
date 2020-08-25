@@ -1,24 +1,16 @@
 ---
 title: 常见问题解答 - 用于 Apache Kafka 的 Azure 事件中心
 description: 本文介绍使用不同协议（AMQP、Apache Kafka 和 HTTPS）的使用者和生成者在使用 Azure 事件中心时如何交换事件。
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-manager: ''
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.author: v-tawe
-origin.date: 04/01/2020
-ms.date: 05/29/2020
-ms.openlocfilehash: b99e3c3429b67e92932af2427cabd5cc93f5f6a0
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+origin.date: 06/23/2020
+ms.date: 08/21/2020
+ms.openlocfilehash: 2d1955b9214763e7665439b1d0ad54946aed060b
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199905"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715182"
 ---
 # <a name="frequently-asked-questions---event-hubs-for-apache-kafka"></a>常见问题解答 - 用于 Apache Kafka 的事件中心 
 本文解答了有关迁移到用于 Apache Kafka 的事件中心的一些常见问题。
@@ -51,4 +43,5 @@ Kafka 使用者组
 - [针对事件中心的 Apache Kafka 开发人员指南](apache-kafka-developer-guide.md)
 - [针对事件中心的 Apache Kafka 迁移指南](apache-kafka-migration-guide.md)
 - [针对事件中心的 Apache Kafka 故障排除指南](apache-kafka-troubleshooting-guide.md)
-- [建议的配置](https://github.com/Azure/azure-event-hubs-for-kafka/blob/master/CONFIGURATION.md)
+- [建议的配置](apache-kafka-configurations.md)
+

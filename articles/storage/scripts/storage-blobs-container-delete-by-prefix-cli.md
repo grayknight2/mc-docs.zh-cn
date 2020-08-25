@@ -1,29 +1,24 @@
 ---
 title: Azure CLI 脚本示例 - 根据前缀删除容器 | Microsoft Docs
-description: 根据容器名称前缀删除 Azure 存储 blob 容器。
+description: 根据容器名称前缀删除 Azure 存储 blob 容器，然后清除部署。 有关脚本示例中使用的命令，查看帮助链接。
 services: storage
-documentationcenter: na
 author: WenJason
-manager: digimobile
-editor: tysonn
-ms.assetid: ''
-ms.custom: mvc
 ms.service: storage
-ms.workload: storage
-ms.tgt_pltfrm: na
-ms.devlang: azurecli
+ms.subservice: blobs
+ms.devlang: cli
 ms.topic: sample
 origin.date: 06/22/2017
-ms.date: 02/25/2019
+ms.date: 08/24/2020
 ms.author: v-jay
-ms.openlocfilehash: ee6ccd09d155b877b84fce4b46f075f747d7ce3c
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: cba0f7d372109e28815b0da6039470523fe62ac2
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "63823272"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753295"
 ---
-# <a name="delete-containers-based-on-container-name-prefix"></a>根据容器名称前缀删除容器
+# <a name="use-an-azure-cli-script-to-delete-containers-based-on-container-name-prefix"></a>根据容器名称前缀使用 Azure CLI 脚本来删除容器
 
 此脚本首先会在 Azure Blob 存储中创建几个示例容器，然后根据容器名称的前缀删除一些容器。
 

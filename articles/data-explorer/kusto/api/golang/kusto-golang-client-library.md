@@ -1,18 +1,18 @@
 ---
 title: Azure 数据资源管理器 Go SDK
 description: 本文介绍 Azure 数据资源管理器 Go SDK。
-author: danield137
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: vladikb
 ms.topic: reference
 origin.date: 04/16/2020
-ms.date: 07/01/2020
-ms.openlocfilehash: db13044c9bd0a53ec9b9be371026d2d90c0ed01e
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.date: 08/18/2020
+ms.openlocfilehash: 45adcd8d8e56d8491f7bafa3dccd45a9536abaae
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226366"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516121"
 ---
 # <a name="azure-data-explorer-golang-sdk"></a>Azure 数据资源管理器 Golang SDK
 

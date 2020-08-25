@@ -12,13 +12,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: ''
 origin.date: 03/12/2019
-ms.date: 07/13/2020
-ms.openlocfilehash: 102d22be2e16a81536ac299200ab5156d3b07891
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: f3c660d3907a919a19515fbf257b3395699cc43d
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86228141"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223158"
 ---
 # <a name="what-is-a-logical-sql-server-in-azure-sql-database-and-azure-synapse"></a>什么是 Azure SQL 数据库和 Azure Synapse Analytics 中的逻辑 SQL server？
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
@@ -35,7 +35,7 @@ SQL 数据库和 Azure Synapse 中的服务器：
 - 是数据库、弹性池和数据仓库的父资源
 - 为数据库、弹性池和数据仓库数据库提供命名空间
 - 是具有强生存期语义的逻辑容器 - 删除服务器并删除其数据库、弹性池和 SQK 池
-- 参与 [Azure 基于角色的访问控制 (RBAC)](/role-based-access-control/overview) - 服务器中的数据库、弹性池和数据仓库数据库从服务器继承访问权限
+- 参与 [Azure 基于角色的访问控制 (Azure RBAC)](/role-based-access-control/overview) - 服务器中的数据库、弹性池和数据仓库数据库从服务器继承访问权限
 - 是数据库、弹性池和数据仓库数据库的标识的高阶元素，用于 Azure 资源管理目的（请参阅数据库和池的 URL 方案）
 - 在区域中并置资源
 - 为数据库访问提供连接终结点 (`<serverName>`.database.chinacloudapi.cn)

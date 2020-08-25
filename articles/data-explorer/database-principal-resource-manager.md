@@ -1,19 +1,19 @@
 ---
 title: 使用 Azure 资源管理器模板向 Azure 数据资源管理器添加数据库主体
 description: 本文介绍如何使用 Azure 资源管理器模板向 Azure 数据资源管理器添加数据库主体。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 02/03/2020
-ms.date: 05/09/2020
-ms.openlocfilehash: 239d0e9c55926b1e174ce8f72dd29431258a5272
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: 911058ffaabd6a761b8e4f5ea2decaff4d90255b
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417766"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515841"
 ---
 # <a name="add-database-principals-for-azure-data-explorer-by-using-an-azure-resource-manager-template"></a>使用 Azure 资源管理器模板向 Azure 数据资源管理器添加数据库主体
 

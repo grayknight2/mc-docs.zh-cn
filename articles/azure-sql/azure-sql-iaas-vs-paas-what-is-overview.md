@@ -12,14 +12,14 @@ keywords: SQL Server 云, 云端 SQL Server, PaaS 数据库, 云 SQL Server, DBa
 author: WenJason
 ms.author: v-jay
 ms.reviewer: ''
-origin.date: 05/27/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: 08e301a4322029840280fb9141afda13d00b6fc7
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+origin.date: 07/27/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: 95d3e79ba5a72107145113f7c9903efdb955ffee
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227511"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222893"
 ---
 # <a name="what-is-azure-sql"></a>什么是 Azure SQL？ 
 [!INCLUDE[appliesto-asf](includes/appliesto-asf.md)]
@@ -60,7 +60,7 @@ Azure 会持续监视你的数据是否受到威胁。 借助 Azure SQL，你可
 有多个因素可能会影响你在不同数据产品/服务之间所做的选择：
 
 - [成本](#cost)：PaaS 和 IaaS 选项都包括基本价格，其中涵盖了底层基础结构和许可证的费用。 但是，使用 IaaS 选项时，需要投入额外的时间和资源来管理数据库，而 PaaS 的价格已包括这些管理功能的费用。 借助 IaaS 选项可在不使用资源时将其关闭来降低成本；对于 PaaS，除非删除资源，然后在需要时重新创建资源，否则它会一直运行。
-- [管理](#administration)：PaaS 选项可减少管理数据库所需投入的时间。 但是，它还会限制你可以执行或运行的自定义管理任务和脚本的范围。 例如，单一数据库或共用数据库不支持 CLR，但 SQL 托管实例的实例支持 CLR。 此外，PaaS 中没有部署选项支持使用跟踪标志。
+- [管理](#administration)：PaaS 选项可减少管理数据库所需投入的时间。 但是，它还会限制你可以执行或运行的自定义管理任务和脚本的范围。 例如，SQL 数据库不支持 CLR，但 SQL 托管实例的实例支持 CLR。 此外，PaaS 中没有部署选项支持使用跟踪标志。
 - [服务级别协议](#service-level-agreement-sla)：IaaS 和 PaaS 都提供较高的行业标准 SLA。 在基础结构方面，PaaS 选项保证 99.99% 的 SLA，而 IaaS 保证 99.95% 的 SLA，这意味着，需要实施附加的机制才能确保数据库的可用性。 可获得 99.99% 的 SLA，只需创建附加的 SQL 虚拟机并实现 SQL Server Always On 可用性组高可用性解决方案即可。 
 - [迁移到 Azure 所需的时间](#market)：Azure VM 中 SQL Server 与你的环境完全匹配，因此从本地迁移到 Azure VM 与在不同的本地服务器之间迁移数据库没有什么不同。 SQL 托管实例还可实现轻松迁移；但是，可能需要在迁移之前应用某些更改。 
 
@@ -166,7 +166,6 @@ Azure SQL 托管实例大大简化了将现有应用程序迁移到 Azure 的过
 
 如果现有或新的应用程序需要大型数据库或者需要访问 SQL Server 或 Windows/Linux 中的所有功能，而且你想要避免购置新本地硬件所耗的时间和费用，那么理想的选择是 Azure VM 上的 SQL。 此外，如果想要将现有的本地应用程序和数据库按原样迁移到 Azure，而 SQL 数据库或 SQL 托管实例并不合适，则上述解决方案也是一个不错的选择。 由于无需更改表示层、应用层和数据层，所以在重新构建现有解决方案时可以节省时间和预算。 相反地，可以将重点放在将所有解决方案迁移到 Azure，并执行 Azure 平台可能需要的某些性能优化。 有关详细信息，请参阅 [Azure 虚拟机上 SQL Server 的性能最佳做法](virtual-machines/windows/performance-guidelines-best-practices.md)。
 
-[!INCLUDE [sql-database-create-manage-portal](includes/sql-database-create-manage-portal.md)]
 
 ## <a name="next-steps"></a>后续步骤
 

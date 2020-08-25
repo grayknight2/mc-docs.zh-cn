@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/24/2020
-ms.date: 07/01/2020
-ms.openlocfilehash: ce26d031d2e3e6ff3eb40df57d2c4cb78f866f5e
-ms.sourcegitcommit: c17e965d4ffd82fd7cd86b2648fcb0053a65df00
+ms.date: 08/18/2020
+ms.openlocfilehash: 52a04c3b01c0a8c0f9e287f9fddb1e9a80ef95af
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470423"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515666"
 ---
-# <a name="roworder-policy"></a>RowOrder 策略
+# <a name="roworder-policy-command"></a>roworder 策略命令
 
 本文介绍用于创建和更改[行顺序策略](../management/roworderpolicy.md)的控制命令。
 
@@ -44,7 +44,7 @@ ms.locfileid: "86470423"
 .alter-merge table <table_name> policy roworder (<row_order_policy>)
 ```
 
-**示例**
+**示例** 
 
 下面的示例将 `TenantId` 列上的行顺序策略（升序）设置为主键，将 `Timestamp` 列上的行顺序策略（升序）设置为辅助键。 然后查询策略。
 
@@ -53,9 +53,9 @@ ms.locfileid: "86470423"
 
 .alter tables (events1, events2, events3) policy roworder (TenantId asc, Timestamp desc)
 
-.show table events policy roworder
+.show table events policy roworder 
 ```
 
-| TableName | RowOrderPolicy                 |
-| --------- | ------------------------------ |
-| events    | (TenantId asc, Timestamp desc) |
+|TableName|RowOrderPolicy| 
+|---|---|
+|events|(TenantId asc, Timestamp desc)|

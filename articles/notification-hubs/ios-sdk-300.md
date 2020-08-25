@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.service: notification-hubs
 ms.reviewer: thsomasu
 ms.lastreviewed: 06/01/2020
-ms.openlocfilehash: 170b7334f53a7c61faa937819d34ad245ab130ec
-ms.sourcegitcommit: 5656c18d7d2faa09329b1a15e352d1622e252d5f
+ms.openlocfilehash: 7538daab0e206212c4ee525896cd5998e18bcd8d
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86863056"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516009"
 ---
 # <a name="tutorial-send-push-notifications-to-ios-apps-using-azure-notification-hubs-version-300-preview1"></a>教程：使用 Azure 通知中心（版本 3.0.0 预览版 1）向 iOS 应用发送推送通知
 
@@ -318,7 +318,7 @@ ms.locfileid: "86863056"
 
 下面是可能需要查看的有关发送通知的其他教程列表：
 
-- Azure 移动应用：有关如何从与通知中心集成的移动应用后端发送通知的示例，请参阅 [向 iOS 应用添加推送通知](/azure/app-service-mobile/app-service-mobile-ios-get-started-push)。
+- Azure 移动应用：有关如何从与通知中心集成的移动应用后端发送通知的示例，请参阅 [向 iOS 应用添加推送通知](/app-service-mobile/app-service-mobile-ios-get-started-push)。
 - ASP.NET： [使用通知中心向用户发送推送通知](notification-hubs-aspnet-backend-ios-apple-apns-notification.md)。
 - Azure 通知中心 Java SDK：有关从 Java 发送通知的信息，请参阅 [如何通过 Java 使用通知中心](notification-hubs-java-push-notification-tutorial.md) 。 这种方法已在 Eclipse for Android 开发环境中进行测试。
 - PHP： [如何通过 PHP 使用通知中心](notification-hubs-php-push-notification-tutorial.md)。
@@ -353,6 +353,6 @@ ms.locfileid: "86863056"
 - [注册管理](notification-hubs-push-notification-registration-management.md)
 - [使用标记](notification-hubs-tags-segment-push-message.md)
 - [使用自定义模板](notification-hubs-templates-cross-platform-push-messages.md)
-- [使用共享访问签名进行服务总线访问控制](/azure/service-bus-messaging/service-bus-sas)
+- [使用共享访问签名进行服务总线访问控制](/service-bus-messaging/service-bus-sas)
 - [以编程方式生成 SAS 令牌](https://docs.microsoft.com/rest/api/eventhub/generate-sas-token)
 - [Apple 安全性：常见加密](https://developer.apple.com/security/)

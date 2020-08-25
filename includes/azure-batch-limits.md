@@ -8,20 +8,21 @@ ms.topic: include
 ms.date: 04/20/2020
 ms.author: v-tawe
 ms.custom: include file
-ms.openlocfilehash: 09317150422361f5c1cf1ec96b43ec2d0b008f17
-ms.sourcegitcommit: 3cf647177c22b24f76236c57cae19482ead6a283
+ms.openlocfilehash: 9f64791657ccfc1a569075a6d19dcdd1988a9a45
+ms.sourcegitcommit: c4b0a0ddd52ceca82cfdbdbdf07aad00d0f3ed03
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88038497"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88753613"
 ---
 | **资源** | **默认限制** | **最大限制** |
 | --- | --- | --- |
 | 每订阅每区域的 Azure Batch 帐户数 | 1-3 |50 |
 | 每个批处理帐户的专用核心数 | 90-900 | 联系支持人员 |
-| 每个批处理帐户的低优先级核心数 | 10-100 | 联系支持人员 |
 | 每个批处理帐户的[活动](https://docs.microsoft.com/rest/api/batchservice/job/get#jobstate)作业和作业计划（已完成作业无限制） | 100-300 | 1,000<sup>1</sup> |
 | 每个批处理帐户的池数 | 20-100 | 500<sup>1</sup> |
+
+<!--Not Available on | Low-priority cores per Batch account | 10-100 | Contact support |-->
 
 <sup>1</sup>若要请求超过此限制的增加，请与 Azure 支持联系。
 

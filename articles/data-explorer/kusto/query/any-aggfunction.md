@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: 83d3333cd0f7aad81b9af7adb802fb7811be8317
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: f26d33aac892f5c5e5e8723ff4a52d00357ac14c
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509554"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515785"
 ---
 # <a name="any-aggregation-function"></a>Any()（聚合函数）
 

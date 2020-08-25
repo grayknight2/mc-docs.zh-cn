@@ -1,15 +1,16 @@
 ---
 title: 在 Azure 中创建用于响应 HTTP 请求的函数
 description: 了解如何通过命令行创建函数，然后将本地项目发布到 Azure Functions 中托管的无服务器实例。
-ms.date: 07/02/2020
+ms.date: 08/11/2020
 ms.topic: quickstart
+ms.custom: devx-track-azurecli
 zone_pivot_groups: programming-languages-set-functions
-ms.openlocfilehash: f5664435400401adf560486b66904ed9d2eec96c
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.openlocfilehash: aa82e5169b5dd4c3dc89dc9b4f485e6fab8ad434
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945268"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222595"
 ---
 # <a name="quickstart-create-a-function-in-azure-that-responds-to-http-requests"></a>快速入门：在 Azure 中创建用于响应 HTTP 请求的函数
 
@@ -37,7 +38,7 @@ ms.locfileid: "85945268"
 ::: zone-end  
 ::: zone pivot="programming-language-java"  
 > [!NOTE]
-> 如果 Maven 不是你的首选开发工具，请查看面向使用 [IntelliJ IDEA](https://docs.microsoft.com/azure/developer/java/toolkit-for-intellij/quickstart-functions) 和 [Visual Studio Code](/azure-functions/functions-create-first-function-vs-code?pivots=programming-language-java) 的 Java 开发人员的类似教程。
+> 如果 Maven 不是你的首选开发工具，请查看面向使用 `Gradle`、[IntelliJ IDEA](https://docs.microsoft.com/azure/developer/java/toolkit-for-intellij/quickstart-functions) 和 [Visual Studio Code](./functions-create-first-function-vs-code.md?pivots=programming-language-java) 的 Java 开发人员的类似教程。
 ::: zone-end  
 
 [!INCLUDE [functions-requirements-cli](../../includes/functions-requirements-cli.md)]
@@ -92,7 +93,7 @@ mvn archetype:generate "-DarchetypeGroupId=com.microsoft.azure" "-DarchetypeArti
 Maven 会请求你提供所需的值，以在部署上完成项目的生成。   
 系统提示时提供以下值：
 
-| Prompt | Value | 说明 |
+| Prompt | 值 | 说明 |
 | ------ | ----- | ----------- |
 | **groupId** | `com.fabrikam` | 一个值，用于按照 Java 的[包命名规则](https://docs.oracle.com/javase/specs/jls/se6/html/packages.html#7.7)在所有项目中标识你的项目。 |
 | **artifactId** | `fabrikam-functions` | 一个值，该值是 jar 的名称，没有版本号。 |
@@ -102,6 +103,9 @@ Maven 会请求你提供所需的值，以在部署上完成项目的生成。
 键入 `Y` 或按 Enter 进行确认。
 
 Maven 在名为 artifactId 的新文件夹（在此示例中为 `fabrikam-functions`）中创建项目文件。 
+
+若要在 Azure 中的 Java 11 上运行，必须修改 pom.xml 文件中的值。 若要了解详细信息，请参阅 [Java 版本](functions-reference-java.md#java-versions)。 
+
 ::: zone-end  
 导航到项目文件夹：
 
@@ -164,7 +168,7 @@ namespace LocalFunctionProj
 }
 ```
 
-返回对象是 [ActionResult](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.actionresult)，它将响应消息作为 [OkObjectResult](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult) (200) 或 [BadRequestObjectResult](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.badrequestobjectresult) (400) 返回。 要了解详细信息，请参阅 [Azure Functions HTTP 触发器和绑定](/azure-functions/functions-bindings-http-webhook?tabs=csharp)。
+返回对象是 [ActionResult](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.actionresult)，它将响应消息作为 [OkObjectResult](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.okobjectresult) (200) 或 [BadRequestObjectResult](https://docs.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.badrequestobjectresult) (400) 返回。 要了解详细信息，请参阅 [Azure Functions HTTP 触发器和绑定](./functions-bindings-http-webhook.md?tabs=csharp)。
 ::: zone-end
 
 ::: zone pivot="programming-language-java"
@@ -227,7 +231,7 @@ public class Function {
 
 #### <a name="pomxml"></a>pom.xml
 
-为托管应用而创建的 Azure 资源的设置在插件的 configuration 元素中使用生成的 pom.xml 文件中 `com.microsoft.azure` 的 groupId 定义。  例如，以下 configuration 元素指示基于 Maven 的部署在 `chinanorth` 区域中的 `java-functions-group` 资源组内创建一个函数应用。 该函数应用本身在 Windows 上运行，后者托管在 `java-functions-app-service-plan` 计划（默认情况下是一个无服务器消耗计划）中。    
+为托管应用而创建的 Azure 资源的设置在插件的 configuration 元素中使用生成的 pom.xml 文件中 `com.microsoft.azure` 的 groupId 定义。 例如，以下 configuration 元素指示基于 Maven 的部署在 `chinanorth2` 区域中的 `java-functions-group` 资源组内创建一个函数应用。 该函数应用本身在 Windows 上运行，后者托管在 `java-functions-app-service-plan` 计划（默认情况下是一个无服务器消耗计划）中。    
 
 ```java
             <plugin>
@@ -252,8 +256,9 @@ public class Function {
                     <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details for all valid configurations for application insights-->
                     <!-- <disableAppInsights></disableAppInsights> -->
                     <runtime>
-                        <!-- runtime os, could be windows-->
+                        <!-- runtime os, could be windows->
                         <os>windows</os>
+                        <javaVersion>8</javaVersion>
                         <!-- for docker function, please set the following parameters -->
                         <!-- <image>[hub-user/]repo-name[:tag]</image> -->
                         <!-- <serverId></serverId> -->
@@ -270,10 +275,11 @@ public class Function {
                     <execution>
                         <id>package-functions</id>
                         <goals>
-                            <goal>package</goal>
 ```
 
 你可以更改这些设置，以控制在 Azure 中创建资源的方式。 有关 Maven 插件支持的设置的完整列表，请参阅[配置详细信息](https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details)。
+
+如果要在 Java 11（而不是 Java 8）上运行函数应用，则必须使用 Java 11 值手动更新 pom.xml 文件。 若要了解详细信息，请参阅 [Java 版本](functions-reference-java.md#java-versions)。 在 Java 11 上运行时，请确保  
 
 #### <a name="functiontestjava"></a>FunctionTest.java
 
@@ -301,7 +307,7 @@ module.exports = async function (context, req) {
 }
 ```
 
-对于 HTTP 触发器，该函数将接收 *function.json* 中定义的变量 `req` 中的请求数据。 在 *function.json* 中定义为 `$return` 的返回对象是响应。 要了解详细信息，请参阅 [Azure Functions HTTP 触发器和绑定](/azure-functions/functions-bindings-http-webhook?tabs=javascript)。
+对于 HTTP 触发器，该函数将接收 *function.json* 中定义的变量 `req` 中的请求数据。 在 *function.json* 中定义为 `$return` 的返回对象是响应。 要了解详细信息，请参阅 [Azure Functions HTTP 触发器和绑定](./functions-bindings-http-webhook.md?tabs=javascript)。
 ::: zone-end
 
 ::: zone pivot="programming-language-typescript"
@@ -445,16 +451,16 @@ Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
 az login
 ```
     
-使用 [az group create](/cli/group#az-group-create) 命令创建资源组。 以下示例在 `chinanorth` 区域中创建名为 `AzureFunctionsQuickstart-rg` 的资源组。 （通常，你会在 `az account list-locations` 命令输出的、与你靠近的某个可用区域中创建资源组和资源。）
+使用“[az group create](/cli/group#az-group-create)”命令创建资源组。 以下示例在 `chinanorth2` 区域中创建名为 `AzureFunctionsQuickstart-rg` 的资源组。 （通常，你会在 `az account list-locations` 命令输出的、与你靠近的某个可用区域中创建资源组和资源。）
 
 ```azurecli
-az group create --name AzureFunctionsQuickstart-rg --location chinanorth
+az group create --name AzureFunctionsQuickstart-rg --location chinanorth2
 ```
     
 使用 [az storage account create](/cli/storage/account#az-storage-account-create) 命令在资源组和区域中创建常规用途存储帐户。 在以下示例中，请将 `<STORAGE_NAME>` 替换为适合自己的全局唯一名称。 名称只能包含 3 到 24 个数字和小写字母字符。 `Standard_LRS` 指定 [Functions 支持](storage-considerations.md#storage-account-requirements)的常规用途帐户。
 
 ```azurecli
-az storage account create --name <STORAGE_NAME> --location chinanorth --resource-group AzureFunctionsQuickstart-rg --sku Standard_LRS
+az storage account create --name <STORAGE_NAME> --location chinanorth2 --resource-group AzureFunctionsQuickstart-rg --sku Standard_LRS
 ```
 
 在本快速入门中使用的存储帐户只会产生几美分的费用。
@@ -467,24 +473,24 @@ az storage account create --name <STORAGE_NAME> --location chinanorth --resource
 
 
 ```azurecli
-az functionapp create --resource-group AzureFunctionsQuickstart-rg --consumption-plan-location chinanorth --runtime node --runtime-version 10 --functions-version 2 --name <APP_NAME> --storage-account <STORAGE_NAME>
+az functionapp create --resource-group AzureFunctionsQuickstart-rg --consumption-plan-location chinanorth2 --runtime node --runtime-version 10 --functions-version 2 --name <APP_NAME> --storage-account <STORAGE_NAME>
 ```
 ::: zone-end  
 
 ::: zone pivot="programming-language-csharp"  
 ```azurecli
-az functionapp create --resource-group AzureFunctionsQuickstart-rg --consumption-plan-location chinanorth --runtime dotnet --functions-version 2 --name <APP_NAME> --storage-account <STORAGE_NAME>
+az functionapp create --resource-group AzureFunctionsQuickstart-rg --consumption-plan-location chinanorth2 --runtime dotnet --functions-version 2 --name <APP_NAME> --storage-account <STORAGE_NAME>
 ```
 ::: zone-end  
 
 ::: zone pivot="programming-language-powershell"  
 ```azurecli
-az functionapp create --resource-group AzureFunctionsQuickstart-rg --consumption-plan-location chinanorth --runtime powershell --functions-version 2 --name <APP_NAME> --storage-account <STORAGE_NAME>
+az functionapp create --resource-group AzureFunctionsQuickstart-rg --consumption-plan-location chinanorth2 --runtime powershell --functions-version 2 --name <APP_NAME> --storage-account <STORAGE_NAME>
 ```
 ::: zone-end  
 
 ::: zone pivot="programming-language-javascript,programming-language-typescript,programming-language-powershell,programming-language-csharp"  
-此命令将创建一个函数应用，该应用在 [Azure Functions 消耗计划](functions-scale.md#consumption-plan)下指定的语言运行时中运行，根据本教程产生的用量，此操作是免费的。 
+此命令将创建一个函数应用，该应用在 [Azure Functions 消耗计划](functions-scale.md#consumption-plan)下指定的语言运行时中运行，根据本教程产生的用量，此操作是免费的。 该命令还会在同一资源组中预配关联的 Azure Application Insights 实例，可以使用它来监视函数应用和查看日志。 有关详细信息，请参阅[监视 Azure Functions](functions-monitoring.md)。 该实例在激活之前不会产生费用。
     
 ## <a name="deploy-the-function-project-to-azure"></a>将函数项目部署到 Azure
 ::: zone-end  
@@ -549,7 +555,7 @@ mvn azure-functions:deploy
 
 + 资源组。 命名为 java-functions-group。
 + 存储帐户。 Functions 所需。 此名称根据存储帐户名称要求随机生成。
-+ 托管计划。 在 chinanorth 区域中为函数应用提供无服务器托管。 名称为 java-functions-app-service-plan。
++ 托管计划。 在 chinanorth2 区域中为函数应用提供无服务器托管。 名称为 java-functions-app-service-plan。
 + 函数应用。 函数应用是函数的部署和执行单元。 名称根据 artifactId 随机生成，其后面追加了一个随机生成的数字。 
 
 部署会打包项目文件，并使用 [zip 部署](functions-deployment-technologies.md#zip-deploy)将其部署到新的函数应用。 此代码从 Azure 中的部署包运行。
@@ -571,6 +577,16 @@ mvn azure-functions:deploy
 结合“调用 URL”运行 [`curl`](https://curl.haxx.se/)，并追加参数 `&name=Functions`。 该命令的输出应是文本“Hello Functions”。
 
 ![使用 curl 在 Azure 上运行函数后的输出](./media/functions-create-first-azure-function-azure-cli/function-test-cloud-curl.png)
+
+---
+
+> [!TIP]
+> 若要查看已发布的函数应用的准实时日志，请使用 [Application Insights 实时指标流](functions-monitoring.md#streaming-logs)。
+>
+> 运行以下命令，在浏览器中打开实时指标流。
+>   ```
+>   func azure functionapp logstream <APP_NAME> --browser
+>   ```
 
 ## <a name="clean-up-resources"></a>清理资源
 

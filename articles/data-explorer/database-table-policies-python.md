@@ -1,19 +1,19 @@
 ---
 title: '使用 Azure 数据资源管理器 Python 库为 Azure 数据资源管理器群集和数据库创建策略 '
 description: 本文介绍如何使用 Python 创建策略。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 09/24/2019
-ms.date: 06/09/2020
-ms.openlocfilehash: f7a7cc662aa6a3d86b9de677c60243927c3987a9
-ms.sourcegitcommit: 73697fa9c19a40d235df033400c74741e7d0f3f4
+ms.date: 08/18/2020
+ms.openlocfilehash: 36b380c4f1c628d73cb8223dde0f76ed50370e2c
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84574897"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515838"
 ---
 # <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-python"></a>使用 Python 为 Azure 数据资源管理器创建数据库和表策略
 
@@ -37,11 +37,6 @@ pip install azure-common
 pip install azure-mgmt-kusto
 pip install azure-kusto-data (Optional, for changing table's policies)
 ```
-
-> [!NOTE]
-> 请将终结点从  
-> `CLOUD_LOGIN_URL = "https://login.microsoftonline.com/"` 到 `CLOUD_LOGIN_URL = "https://login.partner.microsoftonline.cn"`  
-> （在下载的库文件 `<YourPythonInstallPath>\Lib\site-packages\azure\kusto\data\security.py` 中），使其可在 Azure 中国内运行。
 
 ## <a name="authentication"></a>身份验证
 为了运行本文中的示例，我们需要可以访问资源的 Azure AD 应用程序和服务主体。 可以使用相同的 Azure AD 应用程序通过[测试群集和数据库](create-cluster-database-csharp.md#authentication)进行身份验证。 如果要使用其他 Azure AD 应用程序，请参阅[创建 Azure AD 应用程序](https://docs.azure.cn/active-directory/develop/howto-create-service-principal-portal)以创建免费的 Azure AD 应用程序并在订阅范围内添加角色分配。 它还演示如何获取 `Directory (tenant) ID`、`Application ID` 和 `Client Secret`。 可能需要将新的 Azure AD 应用程序添加为数据库中的主体，请参阅[管理 Azure 数据资源管理器数据库权限](manage-database-permissions.md)。    
@@ -174,4 +169,4 @@ kustoManagementClient.databases.add_principals(resource_group_name=resource_grou
 
 ## <a name="next-steps"></a>后续步骤
 
-* [阅读有关数据库和表策略的更多信息](https://docs.microsoft.com/azure/data-explorer/kusto/management/policies)
+* [阅读有关数据库和表策略的更多信息](/data-explorer/kusto/management/policies)

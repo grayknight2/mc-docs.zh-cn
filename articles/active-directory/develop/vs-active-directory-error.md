@@ -7,15 +7,15 @@ ms.prod: visual-studio-windows
 ms.technology: vs-azure
 ms.workload: azure-vs
 ms.topic: how-to
-ms.date: 07/09/2020
+ms.date: 08/20/2020
 ms.author: v-junlch
 ms.custom: aaddev, vs-azure
-ms.openlocfilehash: 1627e9d3b4031b960e37aa57d456613d07cb5e39
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.openlocfilehash: 7e42be2b0ff4408e896944f87bb2a701bd67b7f7
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164891"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647523"
 ---
 # <a name="diagnosing-errors-with-the-azure-active-directory-connected-service"></a>使用 Azure Active Directory 连接服务诊断错误
 
@@ -96,6 +96,5 @@ ms.locfileid: "86164891"
 
 若要更改身份验证类型，请删除不兼容的身份验证类型，并尝试重新添加连接服务。
 
-有关详细信息，请参阅 [Azure AD 的身份验证方案](authentication-vs-authorization.md)。
+有关详细信息，请参阅 [Azure AD 的身份验证方案](./authentication-vs-authorization.md)。
 
-<!-- Update_Description: wording update -->

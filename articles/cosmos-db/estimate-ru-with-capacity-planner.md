@@ -1,34 +1,40 @@
 ---
 title: 使用 Azure Cosmos DB Capacity Planner 估算成本
-description: 可以使用 Azure Cosmos DB Capacity Planner 估算你的工作负荷所需的吞吐量（RU/秒）和成本。 本文介绍了如何使用新版本的 Capacity Planner 来估算所需的吞吐量和成本。
+description: 可以使用 Azure Cosmos DB Capacity Planner 估算工作负荷所需的吞吐量（RU/秒）。 本文介绍了如何使用新版本的 Capacity Planner 来估算所需的吞吐量。
 author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 07/30/2019
 ms.date: 06/22/2020
 ms.author: v-yeche
-ms.openlocfilehash: 45257c66dbb8769ea834e4643d191464bf87e1ad
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.openlocfilehash: b865debb0362f0192a34336a4d1146af53af8590
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102023"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222929"
 ---
 <!--Verified successfully-->
 # <a name="estimate-rus-using-the-azure-cosmos-db-capacity-planner"></a>使用 Azure Cosmos DB Capacity Planner 估算 RU/秒
 
-针对你的工作负荷为 Azure Cosmos 数据库和容器配置适当数量的预配吞吐量（也称为[请求单位（RU/秒）](request-units.md)）对于优化成本和性能非常重要。 本文介绍了如何使用 Azure Cosmos DB [Capacity Planner](https://cosmos.azure.com/capacitycalculator/) 来估算你的工作负荷所需的吞吐量（RU/秒）和成本。 
+针对你的工作负荷为 Azure Cosmos 数据库和容器配置适当数量的预配吞吐量（也称为[请求单位（RU/秒）](request-units.md)）对于优化成本和性能非常重要。 本文介绍了如何使用 Azure Cosmos DB [Capacity Planner](https://cosmos.azure.com/capacitycalculator/) 来估算工作负荷所需的吞吐量（RU/秒）。 
 
-## <a name="how-to-estimate-throughput-and-cost-with-azure-cosmos-db-capacity-planner"></a>如何使用 Azure Cosmos DB Capacity Planner 评估吞吐量和成本
+<!--Not Available on and cost-->
+
+## <a name="how-to-estimate-throughput-with-azure-cosmos-db-capacity-planner"></a>如何使用 Azure Cosmos DB Capacity Planner 估算吞吐量
+
+<!--Not Available on and cost-->
 
 Capacity Planner 可在两种模式下使用。
 
 |**模式** |**说明**  |
 |---------|---------|
-|基本|提供快速、大概的 RU/秒和成本估算。 此模式为索引编制策略、一致性和其他参数采用默认的 Azure Cosmos DB 设置。 <br/><br/>当评估要在 Azure Cosmos DB 上运行的潜在工作负荷时，可以使用基本模式进行快速、大概的估算。|
-|高级|提供更详细的 RU/秒和成本估算，还可以调整其他设置 - 索引编制策略、一致性级别以及影响成本和吞吐量的其他参数。 <br/><br/>当为新项目估算 RU/秒或需要更详细的估算时，请使用高级模式。 |
+|基本|提供快速、大概的 RU/秒估算。 此模式为索引编制策略、一致性和其他参数采用默认的 Azure Cosmos DB 设置。 <br/><br/>当评估要在 Azure Cosmos DB 上运行的潜在工作负荷时，可以使用基本模式进行快速、大概的估算。|
+|高级|提供更详细的 RU/秒估算，还可以调整其他设置 - 索引编制策略、一致性级别以及影响成本和吞吐量的其他参数。 <br/><br/>当为新项目估算 RU/秒或需要更详细的估算时，请使用高级模式。 |
 
-## <a name="estimate-provisioned-throughput-and-cost-using-basic-mode"></a>使用基本模式估算预配吞吐量和成本
+<!--Not Available on and cost-->
+
+## <a name="estimate-provisioned-throughput-using-basic-mode"></a>使用基本模式估算预配吞吐量
 若要使用基本模式针对你的工作负荷进行快速估算，请导航到 [Capacity Planner](https://cosmos.azure.com/capacitycalculator/)。 根据你的工作负荷输入以下参数： 
 
 |**输入** |**说明**  |
@@ -42,9 +48,11 @@ Capacity Planner 可在两种模式下使用。
 
 填写所需的详细信息后，选择“计算”。 “成本预估”选项卡将显示存储和预配吞吐量的总成本。 可以在此选项卡中展开“显示详细信息”链接，以获取读取和写入请求所需的吞吐量的细目。 每次更改任何字段的值后，请选择“计算”来重新计算估计的成本。 
 
-![Capacity Planner 基本模式](./media/estimate-ru-with-capacity-planner/basic-mode.png)
+:::image type="content" source="./media/estimate-ru-with-capacity-planner/basic-mode.png" alt-text="Capacity Planner 基本模式":::
 
-## <a name="estimate-provisioned-throughput-and-cost-using-advanced-mode"></a>使用高级模式估算预配吞吐量和成本
+<!--Not Available on and cost-->
+
+## <a name="estimate-provisioned-throughput-using-advanced-mode"></a>使用高级模式估算预配吞吐量
 
 高级模式允许你提供会影响 RU/秒估计值的更多设置。 若要使用此选项，请导航到 [Capacity Planner](https://cosmos.azure.com/capacitycalculator/) 并使用你用于 Azure 的帐户登录到该工具。 登录选项位于右侧边角。 
 
@@ -63,7 +71,7 @@ Capacity Planner 可在两种模式下使用。
 
 还可以使用“保存估计值”按钮下载包含当前估计值的 CSV 文件。 
 
-![Capacity Planner 高级模式](./media/estimate-ru-with-capacity-planner/advanced-mode.png)
+:::image type="content" source="./media/estimate-ru-with-capacity-planner/advanced-mode.png" alt-text="Capacity Planner 高级模式":::
 
 <!--Not Available on US dollars-->
 <!--Not Available on The prices shown in the Azure Cosmos DB capacity planner are estimates based on the public pricing rates for throughput and storage. All prices are shown in US dollars.-->

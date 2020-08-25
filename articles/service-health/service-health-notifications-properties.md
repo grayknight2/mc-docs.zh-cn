@@ -1,22 +1,16 @@
 ---
 title: 什么是 Azure 服务运行状况通知？
-description: 借助服务运行状况通知，可以查看由 Microsoft Azure 发布的服务运行状况消息。
-author: dkamstra
-services: monitoring
-ms.service: azure-monitor
+description: 借助服务运行状况通知，可以查看 Azure 发布的服务运行状况消息。
 ms.topic: conceptual
-origin.date: 04/12/2018
-ms.date: 01/20/2020
-ms.author: v-yiso
-ms.subservice: logs
-ms.openlocfilehash: ff9ba4444367ef5877adca12b8dec1445782c419
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.date: 08/10/2020
+ms.openlocfilehash: f4e7149e526ee1de4ea2b1218572e04d5abc66d8
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75859708"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223325"
 ---
-# <a name="view-service-health-notifications-by-using-the-azure-portal"></a>使用 Azure 门户查看服务运行状况通知
+# <a name="use-the-azure-portal-to-view-service-health-notifications"></a>使用 Azure 门户查看服务运行状况通知
 
 服务运行状况通知由 Azure 发布，包含有关订阅下资源的信息。 这些通知是活动日志事件的一个子类别，也可在活动日志中找到。 服务运行状况通知可能仅提供信息，也可能提示执行某个操作，具体取决于类别。
 
@@ -67,7 +61,7 @@ Properties.communicationId | 与此事件关联的通信。
 - 信息 - 标准计划内维护
 
 **信息** (properties.incidentType == Information)
-- 信息 - 可能需要管理员采取操作来防止影响现有服务
+- 信息 - 可能需要管理员采取操作来防止影响现有服务。
 
 **安全性** (properties.incidentType == Security)
 - 警告 - 影响现有服务并可能需要管理员采取行动的安全警告。
@@ -77,3 +71,4 @@ Properties.communicationId | 与此事件关联的通信。
 - 错误 - 访问多个区域中多项服务时普遍出现的问题影响大批客户。
 - 警告 - 访问特定服务和/或特定区域时出现的问题影响一部分客户。
 - 信息 - 出现了影响管理操作和/或延迟，但不影响服务可用性的问题。
+

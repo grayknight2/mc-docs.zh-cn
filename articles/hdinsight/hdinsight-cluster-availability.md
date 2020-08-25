@@ -10,12 +10,12 @@ ms.custom: hdinsightactive
 origin.date: 05/01/2020
 ms.date: 06/22/2020
 ms.author: v-yiso
-ms.openlocfilehash: 2307ebd7d3149298f853263b172d0cc9df59bef6
-ms.sourcegitcommit: ac70b12de243a9949bf86b81b2576e595e55b2a6
+ms.openlocfilehash: 03d202095a053d662bd6fc8dfc83994402003551
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87917252"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715382"
 ---
 # <a name="how-to-monitor-cluster-availability-with-apache-ambari-in-azure-hdinsight"></a>如何在 Azure HDInsight 中使用 Apache Ambari 监视群集可用性
 
@@ -90,4 +90,4 @@ Ambari 提供许多与可用性相关的预定义警报，其中包括：
 ## <a name="next-steps"></a>后续步骤
 - [HDInsight 中的 Apache Hadoop 群集的可用性和可靠性](hdinsight-high-availability-linux.md)
 - [群集可用性 - Azure Monitor 日志](./cluster-availability-monitor-logs.md)
-- [使用 Azure Monitor 日志](hdinsight-hadoop-oms-log-analytics-tutorial.md)
+

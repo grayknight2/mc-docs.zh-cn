@@ -2,26 +2,20 @@
 title: Azure PowerShell 脚本示例 - 计算要计费的 Blob 容器总大小 | Microsoft Docs
 description: 出于计费目的计算 Azure Blob 存储中容器的总大小。
 services: storage
-documentationcenter: na
 author: WenJason
-manager: digimobile
-editor: tysonn
-ms.assetid: ''
-ms.custom: mvc
 ms.service: storage
-ms.workload: storage
-ms.tgt_pltfrm: na
+ms.subservice: blobs
 ms.devlang: powershell
 ms.topic: sample
 origin.date: 11/07/2017
-ms.date: 04/22/2019
+ms.date: 08/24/2020
 ms.author: v-jay
-ms.openlocfilehash: 89709744ea3ec7863798f480013b76b96632c1d6
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: ea08897885953d8450eb00e17061fbb91e490191
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "63823296"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753579"
 ---
 # <a name="calculate-the-total-billing-size-of-a-blob-container"></a>计算要计费的 Blob 容器总大小
 
@@ -126,7 +120,7 @@ For-Each Signed Identifier[512 bytes]
 #    and upload some blobs into the container
 # note: this retrieves all of the blobs in the container in one command.
 #       connect Azure with Login-AzAccount -EnvironmentName AzureChinaCloud before you run the script.
-#       requests sent as part of this tool will incur transactional costs. 
+#       requests sent as part of this tool will incur transactional costs.
 # command line usage: script.ps1 -ResourceGroup {YourResourceGroupName} -StorageAccountName {YourAccountName} -ContainerName {YourContainerName}
 #
 
@@ -164,7 +158,7 @@ function Retry-OnRequest
 
     # Retry on storage server timeout errors
     $clientTimeOut = New-TimeSpan -Minutes 15
-    $retryPolicy = New-Object -TypeName Microsoft.WindowsAzure.Storage.RetryPolicies.ExponentialRetry -ArgumentList @($clientTimeOut, 10)        
+    $retryPolicy = New-Object -TypeName Microsoft.Azure.Storage.RetryPolicies.ExponentialRetry -ArgumentList @($clientTimeOut, 10)
     $requestOption = @{}
     $requestOption.RetryPolicy = $retryPolicy
 
@@ -218,13 +212,13 @@ function Get-BlobBytes
 
     if (!$IsPremiumAccount)
     {
-        if($Blob.BlobType -eq [Microsoft.WindowsAzure.Storage.Blob.BlobType]::BlockBlob)
+        if($Blob.BlobType -eq [Microsoft.Azure.Storage.Blob.BlobType]::BlockBlob)
         {
             $blobSizeInBytes += 8
-            # Default is Microsoft.WindowsAzure.Storage.Blob.BlockListingFilter.Committed. Need All
-            $action = { param($requestOption) return $Blob.ICloudBlob.DownloadBlockList([Microsoft.WindowsAzure.Storage.Blob.BlockListingFilter]::All, $null, $requestOption) }                
+            # Default is Microsoft.Azure.Storage.Blob.BlockListingFilter.Committed. Need All
+            $action = { param($requestOption) return $Blob.ICloudBlob.DownloadBlockList([Microsoft.Azure.Storage.Blob.BlockListingFilter]::All, $null, $requestOption) }
 
-            $blocks=Retry-OnRequest $action      
+            $blocks=Retry-OnRequest $action
 
             if ($null -eq $blocks)
             {
@@ -233,19 +227,19 @@ function Get-BlobBytes
             else
             {
                 $blocks | ForEach-Object { $blobSizeInBytes += $_.Length + $_.Name.Length }
-            }  
+            }
         }
-        elseif($Blob.BlobType -eq [Microsoft.WindowsAzure.Storage.Blob.BlobType]::PageBlob)
+        elseif($Blob.BlobType -eq [Microsoft.Azure.Storage.Blob.BlobType]::PageBlob)
         {
-            # It could cause server time out issue when trying to get page ranges of highly fragmented page blob 
+            # It could cause server time out issue when trying to get page ranges of highly fragmented page blob
             # Get page ranges in segment can mitigate chance of meeting such kind of server time out issue
             # See https://blogs.msdn.microsoft.com/windowsazurestorage/2012/03/26/getting-the-page-ranges-of-a-large-page-blob-in-segments/ for details.
             $pageRangesSegSize = 148 * 1024 * 1024L
             $totalSize = $Blob.ICloudBlob.Properties.Length
             $pageRangeSegOffset = 0
-        
+
             $pageRangesTemp = New-Object System.Collections.ArrayList
-        
+
             while ($pageRangeSegOffset -lt $totalSize)
             {
                 $action = {param($requestOption) return $Blob.ICloudBlob.GetPageRanges($pageRangeSegOffset, $pageRangesSegSize, $null, $requestOption) }
@@ -281,8 +275,8 @@ function Get-BlobBytes
             }
 
             $pageRanges.Add($lastRange) | Out-Null
-            $pageRanges |  ForEach-Object { 
-                    $blobSizeInBytes += 12 + $_.EndOffset - $_.StartOffset 
+            $pageRanges |  ForEach-Object {
+                    $blobSizeInBytes += 12 + $_.EndOffset - $_.StartOffset
                 }
         }
         else
@@ -304,7 +298,7 @@ function Get-ContainerBytes
 {
     param(
         [Parameter(Mandatory=$true)]
-        [Microsoft.WindowsAzure.Storage.Blob.CloudBlobContainer]$Container,
+        [Microsoft.Azure.Storage.Blob.CloudBlobContainer]$Container,
         [Parameter(Mandatory=$false)]
         [bool]$IsPremiumAccount = $false)
 
@@ -330,7 +324,7 @@ function Get-ContainerBytes
         $Blobs = Get-AzStorageBlob -Context $storageContext -Container $Container.Name -MaxCount $MaxReturn -ContinuationToken $Token
         if($Blobs -eq $Null) { break }
 
-        #Set-StrictMode will cause Get-AzureStorageBlob returns result in different data types when there is only one blob
+        #Set-StrictMode will cause Get-AzStorageBlob returns result in different data types when there is only one blob
         if($Blobs.GetType().Name -eq "AzureStorageBlob")
         {
             $Token = $Null
@@ -413,6 +407,6 @@ else
 
 - 有关 Azure 存储计费的详细信息，请参阅[了解 Windows Azure 存储计费](https://blogs.msdn.microsoft.com/windowsazurestorage/2010/07/08/understanding-windows-azure-storage-billing-bandwidth-transactions-and-capacity/)。
 
-- 有关 Azure PowerShell 模块的详细信息，请参阅 [Azure PowerShell 文档](https://docs.microsoft.com/powershell/azure/overview)。
+- 有关 Azure PowerShell 模块的详细信息，请参阅 [Azure PowerShell 文档](https://docs.microsoft.com/powershell/azure/)。
 
 - 有关其他存储 PowerShell 脚本示例，可查看[适用于 Azure 存储的 PowerShell 示例](../blobs/storage-samples-blobs-powershell.md)。

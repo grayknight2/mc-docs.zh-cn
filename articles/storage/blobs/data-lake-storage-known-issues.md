@@ -5,16 +5,16 @@ author: WenJason
 ms.subservice: data-lake-storage-gen2
 ms.service: storage
 ms.topic: conceptual
-origin.date: 05/10/2020
-ms.date: 07/20/2020
+origin.date: 07/21/2020
+ms.date: 08/24/2020
 ms.author: v-jay
 ms.reviewer: jamesbak
-ms.openlocfilehash: 51c1c0b2412d9ace0d9eea5c07a15dbc354cdd6d
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.openlocfilehash: bb0efe7b583b9aae352723c65ea5d2b6e3a22dae
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414682"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753401"
 ---
 # <a name="known-issues-with-azure-data-lake-storage-gen2"></a>Azure Data Lake Storage Gen2 的已知问题
 
@@ -55,8 +55,6 @@ Blob API 和 Data Lake Storage Gen2 API 可以对相同的数据执行操作。
 * [获取页面范围](https://docs.microsoft.com/rest/api/storageservices/get-page-ranges)
 * [增量复制 Blob](https://docs.microsoft.com/rest/api/storageservices/incremental-copy-blob)
 * [从 URL 放置页](https://docs.microsoft.com/rest/api/storageservices/put-page-from-url)
-* [放置 Blob（追加）](https://docs.microsoft.com/rest/api/storageservices/put-blob)
-* [追加块](https://docs.microsoft.com/rest/api/storageservices/append-block)
 * [通过 URL 追加块](https://docs.microsoft.com/rest/api/storageservices/append-block-from-url)
 
 具有分层命名空间的帐户不支持非托管 VM 磁盘。 若要在存储帐户中启用分层命名空间，请将非托管 VM 磁盘置于未启用分层命名空间功能的存储帐户中。
@@ -84,10 +82,6 @@ Blob API 和 Data Lake Storage Gen2 API 可以对相同的数据执行操作。
 ## <a name="third-party-applications"></a>第三方应用程序
 
 对于使用 REST API 保持正常运行的第三方应用程序，如果将这些应用程序与调用 Blob API 的 Data Lake Storage Gen2 应用程序配合使用，则它们可继续正常运行。
-
-## <a name="access-control-lists-acl-and-anonymous-read-access"></a>访问控制列表 (ACL) 和匿名读取访问
-
-如果已将[匿名读取访问](storage-manage-access-to-resources.md)授予容器，则 ACL 对该容器或该容器中的文件没有影响。
 
 ## <a name="windows-azure-storage-blob-wasb-driver-unsupported-with-data-lake-storage-gen2"></a>Windows Azure Storage Blob (WASB) 驱动程序（不支持用于 Data Lake Storage Gen2）
 

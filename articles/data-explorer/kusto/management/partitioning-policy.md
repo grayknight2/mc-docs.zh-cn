@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 03/04/2020
-ms.date: 07/01/2020
-ms.openlocfilehash: bda83e295d57bc6276044a5a6891192b427a6508
-ms.sourcegitcommit: c17e965d4ffd82fd7cd86b2648fcb0053a65df00
+ms.date: 08/18/2020
+ms.openlocfilehash: 666c07bf38f8cea50c477a72c9c0f00c663e8ff9
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470348"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515993"
 ---
-# <a name="data-partitioning-policy-management"></a>数据分区策略管理
+# <a name="partitioning-policy-command"></a>分区策略命令
 
 [此处](../management/partitioningpolicy.md)详细介绍了数据分区策略。
 
@@ -30,9 +30,9 @@ ms.locfileid: "86470348"
 
 ### <a name="output"></a>输出
 
-| 策略名称      | 实体名称 | 策略                                  | 子实体 | 实体类型 |
-| ---------------- | ----------- | --------------------------------------- | -------------- | ----------- |
-| DataPartitioning | 表名称  | 策略对象的 JSON 序列化 | Null           | 表       |
+|策略名称 | 实体名称 | 策略 | 子实体 | 实体类型
+|---|---|---|---|---
+|DataPartitioning | 表名称 | 策略对象的 JSON 序列化 | Null | 表
 
 ## <a name="alter-and-alter-merge-policy"></a>alter 和 alter-merge policy
 

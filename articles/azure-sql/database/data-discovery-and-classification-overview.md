@@ -2,7 +2,7 @@
 title: 数据发现和分类
 description: Azure SQL 数据库、Azure SQL 托管实例和 Azure Synapse Analytics 的数据发现和分类
 services: sql-database
-ms.service: sql-database
+ms.service: sql-db-mi
 ms.subservice: security
 ms.custom: sqldbrb=1
 titleSuffix: Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse
@@ -12,14 +12,14 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: vanto
 origin.date: 04/28/2020
-ms.date: 07/13/2020
+ms.date: 08/17/2020
 tags: azure-synapse
-ms.openlocfilehash: 1839aab500e0a74550ec5485dc7efde305552444
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.openlocfilehash: 7dd17589332f3b17cf3d28522d9bd31bb1d9fc3d
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227601"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222812"
 ---
 # <a name="data-discovery--classification"></a>数据发现和分类
 [!INCLUDE[appliesto-sqldb-sqlmi-asa](../includes/appliesto-sqldb-sqlmi-asa.md)]
@@ -136,7 +136,7 @@ ms.locfileid: "86227601"
 - 参与者
 - SQL 安全管理器
 
-若要了解有关基于角色的权限的详细信息，请参阅 [Azure 资源的 RBAC](/role-based-access-control/overview)。
+在 [Azure RBAC](/role-based-access-control/overview) 中了解有关基于角色的权限的详细信息。
 
 ## <a name="manage-classifications"></a><a id="manage-classification"></a>管理分类
 

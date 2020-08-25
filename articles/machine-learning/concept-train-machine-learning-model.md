@@ -10,12 +10,12 @@ ms.subservice: core
 ms.topic: conceptual
 ms.date: 05/13/2020
 ms.custom: tracking-python
-ms.openlocfilehash: 3866cf97718f305c6a65716fec24201f96d5d6de
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.openlocfilehash: 44727e9bca871978dcfe006a7cec357100033821
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097039"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227840"
 ---
 # <a name="train-models-with-azure-machine-learning"></a>使用 Azure 机器学习训练模型
 
@@ -92,26 +92,37 @@ Azure 机器学习提供多种方法来训练模型，从使用 SDK 的代码优
 * [示例：使用自动化机器学习的管道](https://aka.ms/pl-automl)
 * [示例：使用估算器的管道](https://aka.ms/pl-estimator)
 
+### <a name="understand-what-happens-when-you-submit-a-training-job"></a>了解提交训练作业时会发生的情况
+
+Azure 训练生命周期包括：
+
+1. 将项目文件夹中的文件压缩，忽略那些在 .amlignore 或 .gitignore 中指定的文件 
+1. 纵向扩展计算群集 
+1. 构建 dockerfile 或将其下载到计算节点 
+    1. 系统会计算以下各项的哈希： 
+        - 基础映像 
+        - 自定义 Docker 步骤（请参阅[使用自定义 Docker 基础映像部署模型](/machine-learning/how-to-deploy-custom-docker-image)）
+        - Conda 定义 YAML（请参阅[在 Azure 机器学习中创建和使用软件环境](/machine-learning/how-to-use-environments)）
+    1. 在工作区 Azure 容器注册表 (ACR) 中查找时，系统使用此哈希作为键
+    1. 如果找不到，它会在全局 ACR 中寻找匹配项
+    1. 如果找不到，系统会生成新映像（该映像会被缓存并注册到工作区 ACR）
+1. 将压缩的项目文件下载到计算节点上的临时存储
+1. 解压缩项目文件
+1. 执行 `python <entry script> <arguments>` 的计算节点
+1. 将写入到 `./outputs` 的日志、模型文件和其他文件保存到与工作区关联的存储帐户
+1. 纵向缩减计算，包括删除临时存储 
+
+如果选择在本地计算机上进行训练（“配置为本地运行”），则无需使用 Docker。 可以在本地使用 Docker，前提是你选择这样做（有关示例，请参阅[配置 ML 管道](https://docs.microsoft.com/azure/machine-learning/how-to-debug-pipelines#configure-ml-pipeline )部分）。
+
 ## <a name="r-sdk"></a>R SDK
 
-R SDK 使你能够将 R 语言与 Azure 机器学习结合使用。 SDK 使用网状包绑定到 Azure 机器学习的 Python SDK。 这样，便可以从任何 R 环境访问 Python SDK 中实现的核心对象和方法。
+R SDK 使你能够将 R 语言与 Azure 机器学习结合使用。 SDK 使用网状包绑定到 Azure 机器学习的 Python SDK。 这样，便可以从任何 R 环境访问在 Python SDK 中实现的核心对象和方法。
 
 有关详细信息，请参阅以下文章：
 
 * [教程：创建逻辑回归模型](tutorial-1st-r-experiment.md)
 * [R 参考的 Azure 机器学习 SDK](https://azure.github.io/azureml-sdk-for-r/index.html)
 
-## <a name="azure-machine-learning-designer"></a>Azure 机器学习设计器
-
-使用设计器，你可以在 Web 浏览器中使用拖放界面来训练模型。
-
-+ [什么是设计器？](concept-designer.md)
-+ [教程：预测汽车价格](tutorial-designer-automobile-price-train-score.md)
-+ [回归：预测价格](how-to-designer-sample-regression-automobile-price-basic.md)
-+ [分类：预测收入](how-to-designer-sample-classification-predict-income.md)
-+ [分类：预测客户流失、购买欲和追加销售](how-to-designer-sample-classification-churn.md)
-+ [使用自定义 R 脚本的分类：预测航班延误](how-to-designer-sample-classification-flight-delay.md)
-+ [文本分类：维基百科 SP 500 数据集](how-to-designer-sample-text-classification.md)
 
 ## <a name="many-models-solution-accelerator"></a>多模型解决方案加速器
 
@@ -131,6 +142,10 @@ R SDK 使你能够将 R 语言与 Azure 机器学习结合使用。 SDK 使用�
 
 * [将 CLI 扩展用于 Azure 机器学习](reference-azure-machine-learning-cli.md)
 * [Azure 上的 MLOps](https://github.com/microsoft/MLOps)
+
+## <a name="vs-code"></a>VS Code
+
+可以使用 VS Code 扩展运行和管理训练作业。 请参阅 [VS Code 资源管理操作指南](how-to-manage-resources-vscode.md#experiments)，以了解更多信息。
 
 ## <a name="next-steps"></a>后续步骤
 

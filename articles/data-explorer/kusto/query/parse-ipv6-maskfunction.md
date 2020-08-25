@@ -8,13 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/24/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: 9be89895d319d0008a08f0f74b18ecccc20e0d94
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: 26a0a785cb859e0a7c2135919c0a37d1e7994b2e
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841365"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516091"
 ---
 # <a name="parse_ipv6_mask"></a>parse_ipv6_mask()
  
@@ -25,11 +25,11 @@ parse_ipv6_mask("127.0.0.1", 24) == '0000:0000:0000:0000:0000:ffff:7f00:0000'
 parse_ipv6_mask(":fe80::85d:e82c:9446:7994", 120) == 'fe80:0000:0000:0000:085d:e82c:9446:7900'
 ```
 
-**语法**
+## <a name="syntax"></a>语法
 
 `parse_ipv6_mask(`*`Expr`*`, `*`PrefixMask`*`)`
 
-**参数**
+## <a name="arguments"></a>参数
 
 * *`Expr`* ：表示将转换为规范 IPv6 表示形式的 IPv6/IPv4 网络地址的字符串表达式。 字符串可以包含使用 [IP 前缀表示法](#ip-prefix-notation)的网络掩码。
 * *`PrefixMask`* ：从 0 到 128 的整数，表示所考虑的最高有效位数。
@@ -39,12 +39,12 @@ parse_ipv6_mask(":fe80::85d:e82c:9446:7994", 120) == 'fe80:0000:0000:0000:085d:e
 IP 地址可以通过斜杠 (`/`) 字符使用 `IP-prefix notation` 定义。
 斜杠 (`/`) 左边的 IP 地址是基本 IP 地址。 斜杠 (`/`) 右边的数字（1 到 127）是网络掩码中连续 1 位的数目。
 
-**返回**
+## <a name="returns"></a>返回
 
 如果转换成功，则结果将是表示规范 IPv6 网络地址的字符串。
 如果转换未成功，结果将为 `null`。
 
-**示例**
+## <a name="example"></a>示例
 
 <!-- csl: https://help.kusto.chinacloudapi.cn/Samples -->
 ```kusto

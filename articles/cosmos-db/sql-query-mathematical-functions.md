@@ -5,15 +5,17 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 09/13/2019
-ms.date: 02/10/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
 ms.custom: query-reference
-ms.openlocfilehash: 3fca67a8618e1c712b3ca8030b183af02e19770d
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 946e578a1a11a5b3a812dc98bcdf8175e5fb2551
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77028961"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223418"
 ---
 # <a name="mathematical-functions-azure-cosmos-db"></a>数学函数 (Azure Cosmos DB)  
 
@@ -33,18 +35,32 @@ ms.locfileid: "77028961"
 
 ## <a name="functions"></a>函数
 
-以下支持的内置数学函数通常基于输入参数执行计算，并返回数值表达式。
+以下支持的内置数学函数通常基于输入参数执行计算，并返回数值表达式：
 
-||||  
-|-|-|-|  
-|[ABS](sql-query-abs.md)|[ACOS](sql-query-acos.md)|[ASIN](sql-query-asin.md)|  
-|[ATAN](sql-query-atan.md)|[ATN2](sql-query-atn2.md)|[CEILING](sql-query-ceiling.md)|  
-|[COS](sql-query-cos.md)|[COT](sql-query-cot.md)|[DEGREES](sql-query-degrees.md)|  
-|[EXP](sql-query-exp.md)|[FLOOR](sql-query-floor.md)|[LOG](sql-query-log.md)|  
-|[LOG10](sql-query-log10.md)|[PI](sql-query-pi.md)|[POWER](sql-query-power.md)|  
-|[RADIANS](sql-query-radians.md)|[RAND](sql-query-rand.md)|[ROUND](sql-query-round.md)|
-|[SIGN](sql-query-sign.md)|[SIN](sql-query-sin.md)|[SQRT](sql-query-sqrt.md)|
-|[SQUARE](sql-query-square.md)|[TAN](sql-query-tan.md)|[TRUNC](sql-query-trunc.md)||  
+* [ABS](sql-query-abs.md)
+* [ACOS](sql-query-acos.md)
+* [ASIN](sql-query-asin.md)
+* [ATAN](sql-query-atan.md)
+* [ATN2](sql-query-atn2.md)
+* [CEILING](sql-query-ceiling.md)
+* [COS](sql-query-cos.md)
+* [COT](sql-query-cot.md)
+* [DEGREES](sql-query-degrees.md)
+* [EXP](sql-query-exp.md)
+* [FLOOR](sql-query-floor.md)
+* [LOG](sql-query-log.md)
+* [LOG10](sql-query-log10.md)
+* [PI](sql-query-pi.md)
+* [POWER](sql-query-power.md)
+* [RADIANS](sql-query-radians.md)
+* [RAND](sql-query-rand.md)
+* [ROUND](sql-query-round.md)
+* [SIGN](sql-query-sign.md)
+* [SIN](sql-query-sin.md)
+* [SQRT](sql-query-sqrt.md)
+* [SQUARE](sql-query-square.md)
+* [TAN](sql-query-tan.md)
+* [TRUNC](sql-query-trunc.md)
 
 除 RAND 以外的所有数学函数都为确定性函数。 这意味着在每次使用特定的输入值集调用这些函数时，它们都将返回相同的结果。
 

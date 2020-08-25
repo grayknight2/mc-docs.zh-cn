@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 02/24/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: zachowd, lenalepa, jesakowi
-ms.custom: aaddev
-ms.openlocfilehash: 8fd9d33eeb5573937d3b8e81547eb266b350a3f8
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.custom: aaddev, has-adal-ref
+ms.openlocfilehash: 6869c51a1594795d066fc74bf13f822614eeee12
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77653301"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647493"
 ---
 # <a name="azure-active-directory-consent-framework"></a>Azure Active Directory 许可框架
 
@@ -28,7 +28,7 @@ ms.locfileid: "77653301"
 
 同意框架使用公共或机密客户端，建立在 OAuth 2.0 及其各种流程的基础之上，例如，代码授权和客户端凭据授权。 通过使用 OAuth 2.0，Azure AD 可生成多种不同类型的客户端应用程序（例如手机、平板电脑、服务器上的客户端应用程序或 Web 应用程序），并获取对所需资源的访问权限。
 
-有关将许可框架与 OAuth2.0 授权配合使用的详细信息，请参阅[使用 OAuth 2.0 和 Azure AD 授权访问 Web 应用程序](v2-oauth2-auth-code-flow.md)及 [Azure AD 的身份验证方案](authentication-scenarios.md)。 有关通过 Microsoft Graph 获取 Office 365 的授权访问权限的信息，请参阅[使用 Microsoft Graph 进行应用身份验证](https://developer.microsoft.com/graph/docs/authorization/auth_overview)。
+有关将许可框架与 OAuth2.0 授权配合使用的详细信息，请参阅[使用 OAuth 2.0 和 Azure AD 授权访问 Web 应用程序](v2-oauth2-auth-code-flow.md)及 [Azure AD 的身份验证方案](./authentication-vs-authorization.md)。 有关通过 Microsoft Graph 获取 Office 365 的授权访问权限的信息，请参阅[使用 Microsoft Graph 进行应用身份验证](https://docs.microsoft.com/graph/)。
 
 ## <a name="consent-experience---an-example"></a>同意体验 - 示例
 
@@ -65,6 +65,5 @@ ms.locfileid: "77653301"
 ## <a name="next-steps"></a>后续步骤
 
 * 请参阅[如何将应用转换为多租户应用](howto-convert-app-to-be-multi-tenant.md)
-* 有关详细信息，请参阅[在授权代码授权流期间如何在 OAuth 2.0 协议层支持同意](/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code)
+* 有关详细信息，请参阅[在授权代码授权流期间如何在 OAuth 2.0 协议层支持同意](../azuread-dev/v1-protocols-oauth-code.md#request-an-authorization-code)
 
-<!-- Update_Description: wording update -->

@@ -35,6 +35,8 @@
       href: template-create-instance.md
     - name: 使用 Azure AD PowerShell 配置作用域内同步
       href: powershell-scoped-synchronization.md
+    - name: 使用 Azure PowerShell 创建资源林和信任
+      href: create-resource-forest-powershell.md
 - name: 概念
   items:
     - name: 管理基础知识
@@ -113,6 +115,8 @@
           href: join-rhel-linux-vm.md
         - name: Ubuntu Server
           href: join-ubuntu-linux-vm.md
+        - name: SUSE Linux Enterprise
+          href: join-suse-linux-vm.md
     - name: 部署应用程序
       items:
         - name: 为 SharePoint Server 启用配置文件同步

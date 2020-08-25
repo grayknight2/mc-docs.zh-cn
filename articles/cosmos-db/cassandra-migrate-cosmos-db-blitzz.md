@@ -3,17 +3,19 @@ title: 使用 Blitzz 将数据从 Cassandra 迁移到 Azure Cosmos DB Cassandra 
 description: 了解如何使用 Blitzz 将数据从 Apache Cassandra 数据库迁移到 Azure Cosmos DB Cassandra API。
 author: rockboyfor
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 08/21/2019
-ms.date: 04/27/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: 147f0dd158bfe739ca4f284a03c016890fb904ac
-ms.sourcegitcommit: f9c242ce5df12e1cd85471adae52530c4de4c7d7
+ms.openlocfilehash: b8ff29a32e87e04c1bcdb6a6ad762aae814581f3
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82134983"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222786"
 ---
 # <a name="migrate-data-from-cassandra-to-azure-cosmos-db-cassandra-api-account-using-blitzz"></a>使用 Blitzz 将数据从 Cassandra 迁移到 Azure Cosmos DB Cassandra API 帐户
 
@@ -53,9 +55,9 @@ Blitzz 的迁移解决方案按照分步方法迁移复杂的运营工作负荷�
 
 1. 若要获取 Blitzz 安装和二进制文件，可以在 [Blitzz 网站](https://www.blitzz.io)上请求演示版， 也可以向相关团队发送[电子邮件](mailto:success@blitzz.io)。
 
-    ![Blitzz 复制器工具下载](./media/cassandra-migrate-cosmos-db-blitzz/blitzz-replicant-download.png)
+    :::image type="content" source="./media/cassandra-migrate-cosmos-db-blitzz/blitzz-replicant-download.png" alt-text="Blitzz 复制器工具下载":::
 
-    ![Blitzz 复制器文件](./media/cassandra-migrate-cosmos-db-blitzz/replicant-files.png)
+    :::image type="content" source="./media/cassandra-migrate-cosmos-db-blitzz/replicant-files.png" alt-text="Blitzz 复制器文件":::
 
 1. 在 CLI 终端设置源数据库配置。 使用 **`vi conf/conn/cassandra.yml`** 命令打开配置文件，添加一个包含 Cassandra 节点 IP 地址的逗号分隔的列表，并添加端口号、用户名、密码以及任何其他必需的详细信息。 下面是一个示例，介绍了配置文件中的内容：
 
@@ -72,9 +74,9 @@ Blitzz 的迁移解决方案按照分步方法迁移复杂的运营工作负荷�
 
     ```
 
-    ![打开 Cassandra 连接编辑器](./media/cassandra-migrate-cosmos-db-blitzz/open-connection-editor-cassandra.png)
+    :::image type="content" source="./media/cassandra-migrate-cosmos-db-blitzz/open-connection-editor-cassandra.png" alt-text="打开 Cassandra 连接编辑器":::
 
-    ![Cassandra 连接配置](./media/cassandra-migrate-cosmos-db-blitzz/cassandra-connection-configuration.png)
+    :::image type="content" source="./media/cassandra-migrate-cosmos-db-blitzz/cassandra-connection-configuration.png" alt-text="Cassandra 连接配置":::
 
     填充配置详细信息以后，保存并关闭该文件。
 
@@ -93,11 +95,9 @@ Blitzz 的迁移解决方案按照分步方法迁移复杂的运营工作负荷�
 
 1. 在迁移数据之前，请将容器吞吐量提高到快速迁移应用程序所需的量。 例如，可将吞吐量提高到 100000 RU。 在开始迁移之前提高吞吐量可以缩短数据迁移时间。
 
-    ![缩放 Azure Cosmos 容器吞吐量](./media/cassandra-migrate-cosmos-db-blitzz/scale-throughput.png)
+    :::image type="content" source="./media/cassandra-migrate-cosmos-db-blitzz/scale-throughput.png" alt-text="缩放 Azure Cosmos 容器吞吐量":::
 
-    在迁移完成后，请降低吞吐量。 可以根据存储的数据量以及每次操作所需的 RU 数，估算数据迁移后所需的吞吐量。 若要详细了解如何估算所需的 RU 数，请参阅[对容器和数据库预配吞吐量](set-throughput.md)。
-    
-    <!--Not Available on [Estimate RU/s using the Azure Cosmos DB capacity planner](estimate-ru-with-capacity-planner.md)-->
+    在迁移完成后，请降低吞吐量。 可以根据存储的数据量以及每次操作所需的 RU 数，估算数据迁移后所需的吞吐量。 若要详细了解如何估算所需的 RU，请参阅[预配容器和数据库的吞吐量](set-throughput.md)和[使用 Azure Cosmos DB Capacity Planner 估算 RU/秒](estimate-ru-with-capacity-planner.md)这两篇文章。
 
 1. 在“连接字符串”窗格中获取“联系点、端口、用户名”，以及 Azure Cosmos 帐户的“主密码”。    需要在配置文件中使用这些值。
 
@@ -131,7 +131,7 @@ Blitzz 的迁移解决方案按照分步方法迁移复杂的运营工作负荷�
 
     复制器 UI 显示复制进度。 完成架构迁移和快照操作以后，进度会显示 100%。 完成迁移后，即可在目标 Azure Cosmos 数据库上验证数据。
 
-    ![Cassandra 数据迁移输出](./media/cassandra-migrate-cosmos-db-blitzz/cassandra-data-migration-output.png)
+    :::image type="content" source="./media/cassandra-migrate-cosmos-db-blitzz/cassandra-data-migration-output.png" alt-text="Cassandra 数据迁移输出":::
 
 1. 由于你已使用“完全”模式进行迁移，因此可以执行多项操作，例如在源 Apache Cassandra 数据库上插入、更新或删除数据。 稍后验证它们是否已在目标 Azure Cosmos 数据库上实时复制。 迁移后，请务必降低为 Azure Cosmos 容器配置的吞吐量。
 
@@ -147,8 +147,7 @@ Blitzz 的迁移解决方案按照分步方法迁移复杂的运营工作负荷�
 
 * [在容器和数据库上预配吞吐量](set-throughput.md) 
 * [分区键最佳做法](partitioning-overview.md#choose-partitionkey)
-
-    <!--Not Available on * [Estimate RU/s using the Azure Cosmos DB capacity planner](estimate-ru-with-capacity-planner.md) articles-->
+* [使用 Azure Cosmos DB Capacity Planner 估算 RU/秒](estimate-ru-with-capacity-planner.md)
 
 <!-- Update_Description: update meta properties, wording update, update link -->
 

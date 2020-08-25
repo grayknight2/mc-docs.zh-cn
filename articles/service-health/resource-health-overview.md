@@ -2,13 +2,13 @@
 title: Azure 资源运行状况概述
 description: Azure 资源运行状况概述
 ms.topic: conceptual
-ms.date: 03/31/2020
-ms.openlocfilehash: cfe1a67cae777e0b42c9fcb249842c4c7ed29823
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.date: 08/10/2020
+ms.openlocfilehash: 4280c8723ad56798e60799caf9ea4b7a20f2d491
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "80581598"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222904"
 ---
 # <a name="resource-health-overview"></a>资源运行状况概述
  
@@ -18,7 +18,7 @@ Azure 资源运行状况有助于在服务问题影响到 Azure 资源时进行�
 
 ## <a name="resource-definition-and-health-assessment"></a>资源定义和运行状况评估
 
-资源是 Azure 服务中的一个特定实例，例如虚拟机、Web 应用或 SQL 数据库。  资源运行状况依赖于各种 Azure 服务发出的信号来评估资源是否正常运行。 如果资源运行不正常，资源运行状况将分析其他信息以确定问题根源。 它还会报告 Microsoft 采取的用于解决此问题的操作或可以采取的用于解决问题的措施。
+资源是 Azure 服务中的一个特定实例，例如虚拟机、Web 应用或 SQL 数据库。 资源运行状况依赖于各种 Azure 服务发出的信号来评估资源是否正常运行。 如果资源运行不正常，资源运行状况将分析其他信息以确定问题根源。 它还会报告 Microsoft 采取的用于解决此问题的操作或可以采取的用于解决问题的措施。
 
 有关如何评估运行状况的详细信息，请参阅 [Azure 资源运行状况](resource-health-checks-resource-types.md)中的资源类型和运行状况检查列表。
 
@@ -28,13 +28,13 @@ Azure 资源运行状况有助于在服务问题影响到 Azure 资源时进行�
 
 ### <a name="available"></a>可用
 
-“可用”表示服务尚未检测到影响资源运行状况的事件。  如果过去 24 小时内资源在计划外停机后进行了恢复，则会看到“最近已解决”通知。
+“可用”表示服务尚未检测到影响资源运行状况的事件。** 如果过去 24 小时内资源在计划外停机后进行了恢复，则会看到“最近已解决”通知。
 
 ![显示“最近已解决”通知的虚拟机的“可用”状态](./media/resource-health-overview/Available.png)
 
 ### <a name="unavailable"></a>不可用
 
-“不可用”  表示服务已检测到影响资源运行状况的正在发生的平台或非平台事件。
+“不可用”** 表示服务已检测到影响资源运行状况的正在发生的平台或非平台事件。
 
 #### <a name="platform-events"></a>平台事件
 
@@ -52,17 +52,17 @@ Azure 资源运行状况有助于在服务问题影响到 Azure 资源时进行�
 
 ### <a name="unknown"></a>未知
 
-“未知”表示资源运行状况未收到此资源的相关信息已超过 10 分钟  。 尽管此状态不是资源状态的最终指示，但它是故障排除过程中一个重要的数据点。
+“未知”表示资源运行状况未收到此资源的相关信息已超过 10 分钟**。 尽管此状态不是资源状态的最终指示，但它是故障排除过程中一个重要的数据点。
 
-如果资源正在按预期方式运行，资源状态会在几分钟后更改为“可用”  。
+如果资源正在按预期方式运行，资源状态会在几分钟后更改为“可用”。
 
-如果资源遇到问题，“未知”运行状态可能意味着平台中的事件正在影响资源  。
+如果资源遇到问题，“未知”运行状态可能意味着平台中的事件正在影响资源**。
 
 ![虚拟机的“未知”状态](./media/resource-health-overview/Unknown.png)
 
 ### <a name="degraded"></a>已降级
 
-“已降级”表示资源已检测到性能降低，但仍可供使用  。
+“已降级”表示资源已检测到性能降低，但仍可供使用**。
 
 对于何时将资源报告为已降级，不同的资源具有自己的标准。
 
@@ -70,13 +70,13 @@ Azure 资源运行状况有助于在服务问题影响到 Azure 资源时进行�
 
 ## <a name="reporting-an-incorrect-status"></a>报告不正确的状态
 
-如果你认为当前运行状况不正确，可以通过选择“报告不正确的运行状况”  告知我们。 如果某个 Azure 问题正在影响你，建议通过“资源运行状况”来联系支持人员。
+如果你认为当前运行状况不正确，可以通过选择“报告不正确的运行状况”**** 告知我们。 如果某个 Azure 问题正在影响你，建议通过“资源运行状况”来联系支持人员。
 
 ![用于提交不正确状态相关信息的表单](./media/resource-health-overview/incorrect-status.png)
 
 ## <a name="history-information"></a>历史记录信息
 
-可在资源运行状况的“运行状况历史记录”  部分中访问最多 30 天的历史记录。
+可在资源运行状况的“运行状况历史记录”部分中访问最多 30 天的历史记录。
 
 ![过去两周内的“资源运行状况”事件列表](./media/resource-health-overview/history-blade.png)
 
@@ -86,11 +86,11 @@ Azure 资源运行状况有助于在服务问题影响到 Azure 资源时进行�
 
 1. 登录到 Azure 门户。
 2. 浏览资源。
-3. 在左窗格中的资源菜单上，选择“资源运行状况”  。
+3. 在左窗格中的资源菜单上，选择“资源运行状况”****。
 
 ![通过资源视图打开“资源运行状况”](./media/resource-health-overview/from-resource-blade.png)
 
-此外，还可以通过选择“所有服务”  ，并在筛选器文本框中键入“资源运行状况”  来访问“资源运行状况”。 在“帮助 + 支持”  窗格中，选择 [资源运行状况](https://portal.azure.cn/#blade/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/resourceHealth)。
+此外，还可以通过选择“所有服务”****，并在筛选器文本框中键入“资源运行状况”**** 来访问“资源运行状况”。 在“帮助 + 支持”**** 窗格中，选择 [资源运行状况](https://portal.azure.cn/#blade/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/resourceHealth)。
 
 ![通过“所有服务”打开“资源运行状况”](./media/resource-health-overview/FromOtherServices.png)
 

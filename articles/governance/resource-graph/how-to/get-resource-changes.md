@@ -6,12 +6,12 @@ ms.author: v-tawe
 origin.date: 10/09/2019
 ms.date: 03/02/2020
 ms.topic: how-to
-ms.openlocfilehash: b392eaa20a27d93b7632df0e88b1f993b0e0f8fd
-ms.sourcegitcommit: ac70b12de243a9949bf86b81b2576e595e55b2a6
+ms.openlocfilehash: 5e90bc8bfee3bb226c32782758e31e58a07aa31c
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87917285"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515664"
 ---
 # <a name="get-resource-changes"></a>获取资源更改
 
@@ -222,10 +222,10 @@ POST https://management.chinacloudapi.cn/providers/Microsoft.ResourceGraph/resou
                 "provisioningState": "Succeeded",
                 "creationTime": "2018-07-27T18:37:21.7708872Z",
                 "primaryEndpoints": {
-                    "blob": "https://mystorageaccount.blob.core.windows.net/",
-                    "queue": "https://mystorageaccount.queue.core.windows.net/",
-                    "table": "https://mystorageaccount.table.core.windows.net/",
-                    "file": "https://mystorageaccount.file.core.windows.net/"
+                    "blob": "https://mystorageaccount.blob.core.chinacloudapi.cn/",
+                    "queue": "https://mystorageaccount.queue.core.chinacloudapi.cn/",
+                    "table": "https://mystorageaccount.table.core.chinacloudapi.cn/",
+                    "file": "https://mystorageaccount.file.core.chinacloudapi.cn/"
                 },
                 "primaryLocation": "chinaeast",
                 "statusOfPrimary": "available"
@@ -269,10 +269,10 @@ POST https://management.chinacloudapi.cn/providers/Microsoft.ResourceGraph/resou
                 "provisioningState": "Succeeded",
                 "creationTime": "2018-07-27T18:37:21.7708872Z",
                 "primaryEndpoints": {
-                    "blob": "https://mystorageaccount.blob.core.windows.net/",
-                    "queue": "https://mystorageaccount.queue.core.windows.net/",
-                    "table": "https://mystorageaccount.table.core.windows.net/",
-                    "file": "https://mystorageaccount.file.core.windows.net/"
+                    "blob": "https://mystorageaccount.blob.core.chinacloudapi.cn/",
+                    "queue": "https://mystorageaccount.queue.core.chinacloudapi.cn/",
+                    "table": "https://mystorageaccount.table.core.chinacloudapi.cn/",
+                    "file": "https://mystorageaccount.file.core.chinacloudapi.cn/"
                 },
                 "primaryLocation": "chinaeast",
                 "statusOfPrimary": "available"

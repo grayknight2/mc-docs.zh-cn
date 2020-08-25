@@ -1,19 +1,19 @@
 ---
 title: 使用 C# 添加 Azure 数据资源管理器的数据库主体
 description: 本文介绍如何使用 C# 添加 Azure 数据资源管理器的数据库主体。
-author: lucygoldbergmicrosoft
+author: orspod
 ms.author: v-tawe
-ms.reviewer: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 02/03/2020
-ms.date: 05/09/2020
-ms.openlocfilehash: 05c8f846b68ded85b423c88778642de769585564
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: d51570aacc2686c98810b3c8b11b5c393a6c4fe4
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417633"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515843"
 ---
 # <a name="add-database-principals-for-azure-data-explorer-by-using-c"></a>使用 C# 添加 Azure 数据资源管理器的数据库主体
 

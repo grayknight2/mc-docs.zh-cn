@@ -2,21 +2,21 @@
 title: 用于解决常见安全要求的 playbook
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: 本文介绍了 Azure SQL 数据库和 Azure SQL 托管实例中的常见安全要求和最佳做法
-ms.service: sql-database
+ms.service: sql-db-mi
 ms.subservice: security
 ms.custom: sqldbrb=2
 author: WenJason
 ms.author: v-jay
 ms.topic: article
 origin.date: 02/20/2020
-ms.date: 07/13/2020
+ms.date: 08/17/2020
 ms.reviewer: ''
-ms.openlocfilehash: 71fda2b12f03f36977f0551f9443901b08a8e7b9
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.openlocfilehash: 0956a6eb0bb894d97bb85f812b2b272b38c8b93b
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227792"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223306"
 ---
 # <a name="playbook-for-addressing-common-security-requirements-with-azure-sql-database-and-azure-sql-managed-instance"></a>用于解决 Azure SQL 数据库和 Azure SQL 托管实例常见安全要求的 playbook
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -236,9 +236,9 @@ SQL 身份验证是指使用用户名和密码连接到 Azure SQL 数据库或 S
   - 确保不要将用户分配到不必要的角色。
 
 - 在 Azure 资源管理器中：
-  - 使用内置角色（如果可用）或自定义 RBAC 角色，并分配所需的权限。
-    - [Azure 的内置角色](../../role-based-access-control/built-in-roles.md)
-    - [Azure 资源的自定义角色](../../role-based-access-control/custom-roles.md)
+  - 使用内置角色（如果可用）或 Azure 自定义角色，并分配所需的权限。
+    - [Azure 内置角色](../../role-based-access-control/built-in-roles.md)
+    - [Azure 自定义角色](../../role-based-access-control/custom-roles.md)
 
 **最佳做法**：
 
@@ -287,7 +287,7 @@ SQL 身份验证是指使用用户名和密码连接到 Azure SQL 数据库或 S
 - 识别有权访问系统的用户（和自动化过程）的综合层次结构。
 
 - 根据所需的用户组创建角色，并将权限分配给角色。
-  - 对于在 Azure 门户中或通过 PowerShell 自动化完成的管理级任务，请使用 RBAC 角色。 查找符合要求的内置角色，或者使用可用权限创建自定义 RBAC 角色
+  - 对于在 Azure 门户中或通过 PowerShell 自动化完成的管理级任务，请使用 RBAC 角色。 查找符合要求的内置角色，或者使用可用权限创建 Azure 自定义角色
   - 在托管实例中为服务器范围的任务（创建新的登录名和数据库）创建服务器角色。
   - 为数据库级任务创建数据库角色。
 
@@ -320,7 +320,7 @@ SQL 身份验证是指使用用户名和密码连接到 Azure SQL 数据库或 S
 
 - 始终确保针对安全相关的操作提供审核线索。
 
-- 可以检索内置 RBAC 角色的定义以查看所用的权限，并通过 PowerShell 根据这些信息的摘录和累积创建自定义角色。
+- 可以检索 Azure 内置角色的定义以查看所用的权限，并通过 PowerShell 根据这些信息的摘录和累积创建自定义角色。
 
 - 由于 db_owner 数据库角色的任何成员都可以更改透明数据加密 (TDE) 等安全设置或更改 SLO，因此，应谨慎地授予此成员身份。 但是，许多任务要求使用 db_owner 特权。 例如，更改数据库选项等任何数据库设置的任务。 在任何解决方案中，审核都发挥着关键的作用。
 
@@ -338,8 +338,8 @@ SQL 身份验证是指使用用户名和密码连接到 Azure SQL 数据库或 S
   - [对存储过程签名](https://docs.microsoft.com/dotnet/framework/data/adonet/sql/signing-stored-procedures-in-sql-server)
 
 - 对于 Azure 资源管理：
-  - [Azure 的内置角色](../../role-based-access-control/built-in-roles.md)
-  - [Azure 资源的自定义角色](../../role-based-access-control/custom-roles.md)
+  - [Azure 内置角色](../../role-based-access-control/built-in-roles.md)
+  - [Azure 自定义角色](../../role-based-access-control/custom-roles.md)
   - [使用 Azure AD Privileged Identity Management 提升访问权限](https://www.microsoft.com/itshowcase/using-azure-ad-privileged-identity-management-for-elevated-access)
 
 ### <a name="perform-regular-code-reviews"></a>执行定期代码评审

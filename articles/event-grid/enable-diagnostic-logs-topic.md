@@ -1,19 +1,17 @@
 ---
 title: Azure 事件网格 - 为主题或域启用诊断日志
 description: 本文提供了有关如何为 Azure 事件网格主题启用诊断日志的分步说明。
-services: event-grid
 author: Johnnytechn
-ms.service: event-grid
 ms.topic: how-to
 origin.date: 01/30/2020
-ms.date: 06/12/2020
+ms.date: 08/10/2020
 ms.author: v-johya
-ms.openlocfilehash: 3e00d937ce9a47b3dd276fb6f0215c694044d241
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+ms.openlocfilehash: d2839bf280236609c98b99d5fa40d1de7a1b43bd
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723346"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228044"
 ---
 #  <a name="enable-diagnostic-logs-for-azure-event-grid-topics-or-domains"></a>为 Azure 事件网格主题或域启用诊断日志
 诊断设置允许事件网格用户在以下任一位置捕获和查看“发布和传递失败”**** 日志：存储帐户、事件中心或 Log Analytics 工作区。 本文提供了有关如何为事件网格主题启用这些设置的分步说明。
@@ -26,15 +24,19 @@ ms.locfileid: "84723346"
     - 事件中心
     - Log Analytics 工作区
 
-## <a name="steps-for-enabling-diagnostic-logs-for-a-topic"></a>为主题启用诊断日志的步骤
+## <a name="enable-diagnostic-logs-for-a-custom-topic"></a>为自定义主题启用诊断日志
 
 > [!NOTE]
 > 以下过程提供了有关如何为主题启用诊断日志的分步说明。 为域启用诊断日志的步骤非常相似。 在步骤 2 中，导航到 Azure 门户中的事件网格域****。  
 
 1. 登录到 [Azure 门户](https://portal.azure.cn)。
 2. 导航到要为其启用诊断日志设置的事件网格主题。 
-3. 在左侧菜单中的“监视”下，选择“诊断设置”**** ****。
-4. 在“诊断设置”页面上，选择“添加新的诊断设置”。**** **** 
+    1. 在顶部的搜索栏中，搜索“事件网格主题”。 
+    
+        ![搜索自定义主题](./media/enable-diagnostic-logs-topic/search-custom-topics.png)
+    1. 从列表中选择要为其配置诊断设置的**主题**。 
+1. 在左侧菜单中的“监视”下，选择“诊断设置”**** ****。
+1. 在“诊断设置”页面上，选择“添加新的诊断设置”。**** **** 
     
     ![“添加诊断设置”按钮](./media/enable-diagnostic-logs-topic/diagnostic-settings-add.png)
 5. 为诊断设置指定一个名称。**** 
@@ -48,11 +50,43 @@ ms.locfileid: "84723346"
         ![流式传输到事件中心](./media/enable-diagnostic-logs-topic/archive-event-hub.png)
     - 如果选择“发送到 Log Analytics”****，请选择 Log Analytics 工作区。
         ![发送到 Log Analytics](./media/enable-diagnostic-logs-topic/send-log-analytics.png)
-8. 选择“保存” ****。 然后，选择右上角的 X**** 以关闭页面。 
+8. 选择“保存” 。 然后，选择右上角的 X**** 以关闭页面。 
 9. 现在，返回“诊断设置”**** 页面，确认在“诊断设置”**** 表中看到了一个新条目。 
     ![列表中的诊断设置](./media/enable-diagnostic-logs-topic/diagnostic-setting-list.png)
 
      你还可以为主题启用所有指标的收集。 
+
+## <a name="enable-diagnostic-logs-for-a-system-topic"></a>为系统主题启用诊断日志
+
+1. 登录到 [Azure 门户](https://portal.azure.cn)。
+2. 导航到要为其启用诊断日志设置的事件网格主题。 
+    1. 在顶部的搜索栏中，搜索“事件网格系统主题”。 
+    
+        ![搜索系统主题](./media/enable-diagnostic-logs-topic/search-system-topics.png)
+    1. 选择要为其配置诊断设置的**系统主题**。 
+    
+        ![选择系统主题](./media/enable-diagnostic-logs-topic/select-system-topic.png)
+3. 在左侧菜单中的“监视”下选择“诊断设置”，然后选择“添加诊断设置”。 
+
+    ![添加诊断设置 - 按钮](./media/enable-diagnostic-logs-topic/system-topic-add-diagnostic-settings-button.png)
+4. 为诊断设置指定一个名称。**** 
+7. 在“日志”部分中选择“DeliveryFailures”。 
+    ![选择“传递失败”](./media/enable-diagnostic-logs-topic/system-topic-select-delivery-failures.png)
+6. 为日志启用一个或多个捕获目标，然后通过选择以前创建的捕获资源对其进行配置。 
+    - 如果选择“发送到 Log Analytics”****，请选择 Log Analytics 工作区。
+        ![发送到 Log Analytics](./media/enable-diagnostic-logs-topic/system-topic-select-log-workspace.png) 
+    - 如果选择“存档到存储帐户”****，请选择“存储帐户 - 配置”****，然后选择你的 Azure 订阅中的存储帐户。 
+
+        ![存档到 Azure 存储帐户](./media/enable-diagnostic-logs-topic/system-topic-select-storage-account.png)
+    - 如果选择“流式传输到事件中心”****，请选择“事件中心 - 配置”****，然后选择事件中心命名空间、事件中心和访问策略。 
+        ![流式传输到事件中心](./media/enable-diagnostic-logs-topic/system-topic-select-event-hub.png)
+8. 选择“保存” 。 然后，选择右上角的 X**** 以关闭页面。 
+9. 现在，返回“诊断设置”**** 页面，确认在“诊断设置”**** 表中看到了一个新条目。 
+    ![列表中的诊断设置](./media/enable-diagnostic-logs-topic/system-topic-diagnostic-settings-targets.png)
+
+     还可以为系统主题启用收集所有指标的功能。
+
+    ![系统主题 - 启用所有指标](./media/enable-diagnostic-logs-topic/system-topics-metrics.png)
 
 ## <a name="view-diagnostic-logs-in-azure-storage"></a>查看 Azure 存储中的诊断日志 
 

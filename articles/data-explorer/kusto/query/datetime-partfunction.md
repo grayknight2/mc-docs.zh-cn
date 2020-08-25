@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 03/18/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: 264d20812fcfdee8c3a2fe9d26c2c76bf714da31
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: e1b652acee33f22c46d80334ba18d258abf9f2d1
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841600"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516099"
 ---
 # <a name="datetime_part"></a>datetime_part()
 
@@ -24,38 +24,37 @@ ms.locfileid: "87841600"
 datetime_part("Day",datetime(2015-12-14))
 ```
 
-**语法**
+## <a name="syntax"></a>语法
 
 `datetime_part(`*part*`,`*datetime*`)`
 
-**参数**
+## <a name="arguments"></a>参数
 
 * `date`: `datetime`
 * `part`: `string`
 
 `part` 的可能值： 
-- Year
-- Quarter
-- Month
-- week_of_year
-- 日期
-- DayOfYear
-- Hour
-- Minute
-- Second
-- Millisecond
-- Microsecond
-- Nanosecond
+* Year
+* Quarter
+* Month
+* week_of_year
+* 日期
+* DayOfYear
+* Hour
+* Minute
+* Second
+* Millisecond
+* Microsecond
+* Nanosecond
 
-**返回**
+## <a name="returns"></a>返回
 
 一个表示已提取部分的整数。
 
-**注意**
+> [!NOTE]
+> `week_of_year` 返回一个表示周数的整数。 周数从一年的第一周算起，该周包括第一个周四。
 
-`week_of_year` 返回一个表示周数的整数。 周数从一年的第一周算起，该周包括第一个周四。
-
-**示例**
+## <a name="examples"></a>示例
 
 ```kusto
 let dt = datetime(2017-10-30 01:02:03.7654321); 

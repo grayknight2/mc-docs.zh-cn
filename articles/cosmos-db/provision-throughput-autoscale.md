@@ -4,15 +4,17 @@ description: 了解好处、用例、以及如何在自动缩放模式下预配 
 author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 05/11/2020
-ms.date: 06/01/2020
+origin.date: 06/04/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
 ms.author: v-yeche
-ms.openlocfilehash: 950f1f311cd88a0a78d0af04e13ab9b98d8945cf
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+ms.openlocfilehash: 2043e24b66e81e42833d83d1ebfc39e6a6c265ae
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723297"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222450"
 ---
 <!--Verified successfully-->
 <!--Latest content-->
@@ -33,7 +35,7 @@ Azure Cosmos DB 使你可以在数据库和容器上设置标准（手动）或�
 
 * 可缩放：数据库和容器根据需要自动缩放预配吞吐量。 客户端连接、应用程序不会中断，对 Azure Cosmos DB SLA 没有影响。
 
-* 经济高效：自动缩放可通过在不使用时进行缩减来优化 RU/s 使用和成本使用。 你只需按小时为工作负载需要的资源付费。
+* 经济高效：自动缩放可通过在不使用时进行缩减来优化 RU/s 使用和成本使用。 你只需按小时为工作负载需要的资源付费。 在一个月的所有小时中，如果设置自动缩放最大 RU/s(Tmax)，并使用 66% 或更少小时的全额 Tmax，则将通过自动缩放节省开支。 若要了解详细信息，请参阅[如何在标准（手动）和自动缩放预配吞吐量之间进行选择](how-to-choose-offer.md)一文。
 
 * **高度可用：** 使用自动缩放的数据库和容器利用相同的多区域分布式容错且高度可用的 Azure Cosmos DB 后端来确保数据持久性和高可用性。
 
@@ -57,23 +59,24 @@ Azure Cosmos DB 使你可以在数据库和容器上设置标准（手动）或�
 
 通过自动缩放配置容器和数据库时，需要指定所需的最大吞吐量 `Tmax`。 Azure Cosmos DB 会缩放吞吐量 `T`，如 `0.1*Tmax <= T <= Tmax`。 例如，如果将最大吞吐量设置为 20,000 RU/s,，则吞吐量将在 2000 到 20,000 RU/s 之间进行缩放。 由于缩放是自动且即时的，因此在任何时间点，都可以无延迟地消耗预配 `Tmax`。 
 
-每小时都会按系统在该小时内缩放到的最高吞吐量 `T` 进行计费。
+每小时将向你收取系统在该小时内扩展到的最高吞吐量 `T` 的费用。
 
 自动缩放最大吞吐量 `Tmax` 的入口点从 4000 RU/s 开始，这表示可在 400 - 4000 RU/s 之间进行缩放。 可以按增量 1000 RU/s 设置 `Tmax`，并随时更改值。  
 
 ## <a name="enable-autoscale-on-existing-resources"></a>对现有资源启用自动缩放
-使用 [Azure 门户](how-to-provision-autoscale-throughput.md#enable-autoscale-on-existing-database-or-container)在现有数据库或容器上启用自动缩放。 随时可以在自动缩放与标准（手动）预配吞吐量之间切换。 有关详细信息，请参阅[此文档](autoscale-faq.md#how-does-the-migration-between-autoscale-and-standard-manual-provisioned-throughput-work)。
+
+使用 [Azure 门户](how-to-provision-autoscale-throughput.md#enable-autoscale-on-existing-database-or-container)在现有数据库或容器上启用自动缩放。 随时可以在自动缩放与标准（手动）预配吞吐量之间切换。 有关详细信息，请参阅[此文档](autoscale-faq.md#how-does-the-migration-between-autoscale-and-standard-manual-provisioned-throughput-work)。 目前对于所有 API，只能使用 Azure 门户在现有资源上启用自动缩放。
 
 <a name="autoscale-limits"></a>
 ## <a name="throughput-and-storage-limits-for-autoscale"></a>自动缩放的吞吐量和存储限制
 
-对于 `Tmax` 的任何值，数据库或容器都可以存储总共 `0.01 * Tmax GB`。 达到此存储量之后，将基于新的存储值自动增加最大 RU/s，而不会影响应用程序。 
+对于 `Tmax` 的任何值，数据库或容器均可以存储总计 `0.01 * Tmax GB`。 达到此存储量之后，将基于新的存储值自动增加最大 RU/s，而不会影响应用程序。 
 
 例如，如果从 50,000 RU/s 的最大 RU/s（在 5000 - 50,000 RU/s 之间缩放）开始，则最多可存储 500 GB 数据。 如果超过 500 GB（例如，存储现在为 600 GB），则新的最大 RU/s 将是 60,000 RU/s（在 6000 - 60,000 RU/s 之间缩放）。
 
 将数据库级别吞吐量与自动缩放结合使用时，可以让前 25 个容器共享 4000 的自动缩放最大 RU/s（在 400 - 4000 RU/s 之间缩放），只要未超过 40 GB 存储即可。 有关详细信息，请参阅[此文档](autoscale-faq.md#can-i-change-the-max-rus-on-the-database-or-container)。
 
-## <a name="comparison--containers-configured-with-manual-vs-autoscale-throughput"></a>比较 – 使用手动与自动缩放吞吐量配置的容器
+## <a name="comparison---containers-configured-with-manual-vs-autoscale-throughput"></a>配置了手动吞吐量与自动缩放吞吐量的容器比较
 有关更多详细信息，请参阅有关如何在标准（手动）与自动缩放吞吐量之间进行选择的此[文档](how-to-choose-offer.md)。  
 
 || 具有标准（手动）吞吐量的容器  | 具有自动缩放吞吐量的容器 |
@@ -91,5 +94,4 @@ Azure Cosmos DB 使你可以在数据库和容器上设置标准（手动）或�
 * 了解[如何对 Azure Cosmos 数据库或容器预配自动缩放吞吐量](how-to-provision-autoscale-throughput.md)。
 * 深入了解 Azure Cosmos DB 中的[分区](partition-data.md)。
 
-<!-- Update_Description: new article about provision throughput autoscale -->
-<!--NEW.date: 06/01/2020-->
+<!-- Update_Description: update meta properties, wording update, update link -->

@@ -5,14 +5,16 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 05/19/2020
-ms.date: 07/06/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: 5f5fc5166073c55275416d7688bc8e9667ca4b96
-ms.sourcegitcommit: f5484e21fa7c95305af535d5a9722b5ab416683f
+ms.openlocfilehash: b1639a7ff8fc96b9373406af10c3346fe77cddb7
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85323277"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222962"
 ---
 # <a name="introduction-to-provisioned-throughput-in-azure-cosmos-db"></a>Azure Cosmos DB 中的预配吞吐量简介
 
@@ -27,9 +29,9 @@ Azure Cosmos 数据库是一组容器的管理单元。 数据库包含一组不
 
 ## <a name="set-throughput-on-a-container"></a>对容器设置吞吐量  
 
-在 Azure Cosmos 容器上预配的吞吐量专门保留给该容器使用。 容器始终可获得预配的吞吐量。 对容器预配的吞吐量有 SLA 提供的经济保障。 若要了解如何在容器上配置吞吐量，请参阅[在 Azure Cosmos 容器上预配吞吐量](how-to-provision-container-throughput.md)。
+在 Azure Cosmos 容器上预配的吞吐量专门保留给该容器使用。 容器始终可获得预配的吞吐量。 对容器预配的吞吐量有 SLA 提供的经济保障。 若要了解如何对容器配置标准（手动）吞吐量，请参阅[对 Azure Cosmos 容器预配吞吐量](how-to-provision-container-throughput.md)。 若要了解如何对容器配置自动缩放吞吐量，请参阅[预配自动缩放吞吐量](how-to-provision-autoscale-throughput.md)。
 
-在容器上设置预配吞吐量是最频繁使用的选项。 可以通过使用[请求单位 (RU)](request-units.md) 预配任意数量的吞吐量来弹性缩放容器的吞吐量。 
+对容器设置预配吞吐量是最常用的选项。 可以通过使用[请求单位 (RU)](request-units.md) 预配任意数量的吞吐量来弹性缩放容器的吞吐量。 
 
 为容器预配的吞吐量在其物理分区之间均匀分布。假设有一个适当的分区键，它在物理分区之间均匀分配逻辑分区，那么吞吐量也均匀分布在容器的所有逻辑分区上。 无法选择性地指定逻辑分区的吞吐量。 由于某个容器的一个或多个逻辑分区由物理分区托管，因此，物理分区专属于该容器，并支持对该容器预配的吞吐量。 
 
@@ -41,9 +43,12 @@ Azure Cosmos 数据库是一组容器的管理单元。 数据库包含一组不
 
 下图显示了物理分区如何托管容器的一个或多个逻辑分区：
 
-![物理分区](./media/set-throughput/resource-partition.png)
+:::image type="content" source="./media/set-throughput/resource-partition.png" alt-text="物理分区" border="false":::
 
 ## <a name="set-throughput-on-a-database"></a>对数据库设置吞吐量
+
+> [!NOTE]
+> 当前在启用了[客户管理的密钥](how-to-setup-cmk.md)的帐户中，无法预配 Azure Cosmos 数据库吞吐量。
 
 对 Azure Cosmos 数据库预配吞吐量时，在该数据库中的所有容器（称作共享的数据库容器）之间共享吞吐量。 一种例外是在数据库中的特定容器上指定了预配的吞吐量。 在容器之间共享数据库级预配吞吐量相当于在计算机群集上托管数据库。 由于数据库中的所有容器共享一台计算机上的可用资源，因此，任何特定容器的性能自然不可预测。 若要了解如何对数据库配置预配吞吐量，请参阅[对 Azure Cosmos 数据库配置预配吞吐量](how-to-provision-database-throughput.md)。 若要了解如何对数据库配置自动缩放吞吐量，请参阅[预配自动缩放吞吐量](how-to-provision-autoscale-throughput.md)。
 
@@ -73,7 +78,7 @@ Azure Cosmos 数据库是一组容器的管理单元。 数据库包含一组不
 
 如果工作负荷涉及到删除数据库中的所有集合并重新创建集合，则我们建议删除空数据库，再重新创建新的数据库，然后创建集合。 下图显示了物理分区如何托管属于数据库中不同容器的一个或多个逻辑分区：
 
-![物理分区](./media/set-throughput/resource-partition2.png)
+:::image type="content" source="./media/set-throughput/resource-partition2.png" alt-text="物理分区" border="false":::
 
 ## <a name="set-throughput-on-a-database-and-a-container"></a>对数据库和容器设置吞吐量
 
@@ -82,7 +87,7 @@ Azure Cosmos 数据库是一组容器的管理单元。 数据库包含一组不
 * 可以创建一个具有标准（手动）预配吞吐量（“K”RU）的名为 *Z* 的 Azure Cosmos 数据库。 
 * 接下来，在该数据库中创建名为 *A*、*B*、*C*、*D* 和 *E* 的五个容器。 创建容器 B 时，请确保启用“为此容器预配专用吞吐量”选项，并在此容器上显式配置“P”个 RU 的预配吞吐量。 请注意，只有在创建数据库和容器时，才能配置共享吞吐量和专用吞吐量。 
 
-    ![在容器级别设置吞吐量](./media/set-throughput/coll-level-throughput.png)
+    :::image type="content" source="./media/set-throughput/coll-level-throughput.png" alt-text="在容器级别设置吞吐量":::
 
 * “K”RU 吞吐量在 *A*、*C*、*D* 和 *E* 这四个容器之间共享。提供给 A、C、D 或 E 的确切吞吐量各不相同。    每个容器的吞吐量没有 SLA 的保障。
 * 保证名为 B 的容器始终可以获得“P”RU 吞吐量。  该容器有 SLA 的保障。
@@ -92,11 +97,16 @@ Azure Cosmos 数据库是一组容器的管理单元。 数据库包含一组不
 
 ## <a name="update-throughput-on-a-database-or-a-container"></a>更新数据库或容器的吞吐量
 
-创建 Azure Cosmos 容器或数据库后，可以更新预配的吞吐量。 可对数据库或容器配置的最大预配吞吐量没有限制。 [最小预配吞吐量](concepts-limits.md#storage-and-throughput)取决于以下因素： 
+创建 Azure Cosmos 容器或数据库后，可以更新预配的吞吐量。 可对数据库或容器配置的最大预配吞吐量没有限制。 
 
-* 容器中当前存储的数据大小
-* 曾经对容器预配的最大吞吐量
-* 具有共享吞吐量的数据库中 Azure Cosmos 容器的当前数量。 
+若要估算数据库或容器的[最小预配吞吐量](concepts-limits.md#storage-and-throughput)，请查找以下内容的最大值：
+
+* 400 RU/s 
+* 当前存储空间 (GB) * 10 RU/s
+* 数据库或容器上预配的最高 RU/s / 100
+* 容器计数 * 100 RU/s（仅限共享吞吐量数据库）
+
+实际的最小 RU/s 可能因帐户配置而异。 可以使用 [Azure Monitor 指标](monitor-cosmos-db.md#view-operation-level-metrics-for-azure-cosmos-db)来查看资源上预配吞吐量 (RU/s) 和存储的历史记录。
 
 可以使用 SDK 以编程方式检索容器或数据库的最小吞吐量，或者在 Azure 门户中查看值。 使用 .NET SDK 时，可以通过 [DocumentClient.ReplaceOfferAsync](https://docs.azure.cn/dotnet/api/microsoft.azure.documents.client.documentclient.replaceofferasync?view=azure-dotnet) 方法缩放预配的吞吐量值。 使用 Java SDK 时，可以通过 [RequestOptions.setOfferThroughput](sql-api-java-sdk-samples.md) 方法缩放预配的吞吐量值。 
 

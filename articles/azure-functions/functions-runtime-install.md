@@ -1,22 +1,16 @@
 ---
-title: Azure Functions 运行时安装 | Microsoft Docs
+title: Azure Functions 运行时安装
 description: 如何安装 Azure Functions 运行时预览版 2
-services: functions
 author: apwestgarth
-manager: stefsch
-ms.assetid: ''
-ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: conceptual
-origin.date: 11/28/2017
-ms.date: 06/04/2019
+ms.date: 08/12/2020
 ms.author: v-junlch
-ms.openlocfilehash: b4317d8c96a891022fc563dc76194be77d52da4a
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: fce1bf29d3137d45883bf4a492d2b37ba8e98e79
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "66491498"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222712"
 ---
 # <a name="install-the-azure-functions-runtime-preview-2"></a>安装 Azure Functions 运行时预览版 2
 

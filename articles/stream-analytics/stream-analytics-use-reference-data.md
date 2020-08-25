@@ -8,12 +8,12 @@ ms.service: stream-analytics
 ms.topic: conceptual
 origin.date: 10/8/2019
 ms.date: 07/06/2020
-ms.openlocfilehash: e002b2dc48869310357523175197a412aebfe0a8
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.openlocfilehash: eb5b6797d72bce3b31a945cab4b20d7ee68d37b2
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226009"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715730"
 ---
 # <a name="using-reference-data-for-lookups-in-stream-analytics"></a>使用参考数据在流分析中查找
 
@@ -95,7 +95,7 @@ Azure SQL 数据库参考数据由流分析作业进行检索并作为快照存�
 
 ### <a name="configure-sql-database-reference"></a>配置 SQL 数据库参考
 
-若要配置 SQL 数据库参考数据，首先需要创建**参考数据**输入。 下表介绍了在创建参考数据输入时需要提供的每个属性及其说明。 有关详细信息，请参阅[将 SQL 数据库中的参考数据用于 Azure 流分析作业](sql-reference-data.md)。
+若要配置 SQL 数据库参考数据，首先需要创建**参考数据**输入。 下表介绍了在创建参考数据输入时需要提供的每个属性及其说明。
 
 可以使用 [Azure SQL 托管实例](/sql-database/sql-database-managed-instance)作为参考数据输入。 必须[在 SQL 托管实例中配置公共终结点](/sql-database/sql-database-managed-instance-public-endpoint-configure)，然后在 Azure 流分析中手动配置以下设置。 还可以通过手动配置以下设置来支持运行附加了数据库的 SQL Server 的 Azure 虚拟机。
 

@@ -4,20 +4,18 @@ description: 如何配置访问自定义开发的 Azure AD 应用程序中的特
 services: active-directory
 author: rwike77
 manager: CelesteDG
-ms.assetid: ''
 ms.service: active-directory
-ms.subservice: app-mgmt
+ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 01/06/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: e9059ddcaa61a9146cc9b8380023befd8810afef
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: cb8acae96366da40d46a892185b68d34f79d9d19
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75776837"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647616"
 ---
 # <a name="how-to-find-a-specific-api-needed-for-a-custom-developed-application"></a>如何为自定义开发的应用程序查找所需的特定 API
 
@@ -33,8 +31,5 @@ ms.locfileid: "75776837"
 
 ## <a name="next-steps"></a>后续步骤
 
-- [了解 Azure Active Directory 应用程序清单](/active-directory/develop/active-directory-application-manifest)
+- [了解 Azure Active Directory 应用程序清单](./reference-app-manifest.md)
 
-
-
-<!-- Update_Description: wording update -->

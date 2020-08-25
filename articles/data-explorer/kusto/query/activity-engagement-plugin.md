@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: 7ee88764f7a054a681c0b0449aeb03642d1f4b0a
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 43b396fa2adb4285dd3af4b051742d77431a8e43
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509561"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515799"
 ---
 # <a name="activity_engagement-plugin"></a>activity_engagement 插件
 

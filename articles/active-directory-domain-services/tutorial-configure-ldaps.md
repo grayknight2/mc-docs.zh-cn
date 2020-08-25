@@ -7,14 +7,14 @@ ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 08/07/2020
+ms.date: 08/21/2020
 ms.author: v-junlch
-ms.openlocfilehash: 987be87bf62d36d239ed5ea9f60bd4e1f36afe40
-ms.sourcegitcommit: a5eb9a47feefb053ddbaab4b15c395972c372339
+ms.openlocfilehash: b312c4b27160a24b0419db4b551f0c301a16d056
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88028628"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715341"
 ---
 # <a name="tutorial-configure-secure-ldap-for-an-azure-active-directory-domain-services-managed-domain"></a>教程：为 Azure Active Directory 域服务托管域配置安全 LDAP
 
@@ -229,7 +229,7 @@ Thumbprint                                Subject
     | 源                            | IP 地址 |
     | 源 IP 地址/CIDR 范围 | 环境的有效 IP 地址或范围 |
     | 源端口范围                | *            |
-    | 目标                       | 任意          |
+    | 目标                       | Any          |
     | 目标端口范围           | 636          |
     | 协议                          | TCP          |
     | 操作                            | Allow        |
@@ -265,7 +265,7 @@ Thumbprint                                Subject
 接下来，绑定到托管域。 如果你在托管域上禁用了 NTLM 密码哈希同步，则用户（和服务帐户）将无法执行 LDAP 简单绑定。 有关禁用 NTLM 密码哈希同步的详细信息，请参阅[保护托管域][secure-domain]。
 
 1. 选择“连接”菜单选项，然后选择“绑定...”。
-1. 提供属于“AAD DC 管理员”组的用户帐户的凭据，例如 *contosoadmin*。 输入用户帐户的密码，然后输入域，例如 *aaddscontoso.com*。
+1. 提供属于托管域的用户帐户的凭据。 输入用户帐户的密码，然后输入域，例如 *aaddscontoso.com*。
 1. 对于“绑定类型”，请选择“使用凭据绑定”选项。
 1. 选择“确定”绑定到托管域。
 

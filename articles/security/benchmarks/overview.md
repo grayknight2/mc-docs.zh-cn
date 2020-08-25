@@ -5,16 +5,16 @@ author: msmbaldwin
 manager: rkarlin
 ms.service: security
 ms.topic: conceptual
-ms.date: 05/08/2019
-ms.author: v-tawe
+ms.date: 08/13/2020
+ms.author: v-johya
 ms.custom: security-benchmark
 origin.date: 12/16/2019
-ms.openlocfilehash: 15d3140e299b7dc51d11517fe13afdf588dc75e2
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 083416d45fb219be4e8a0ff9cde816439ae6328f
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84200229"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228350"
 ---
 # <a name="overview-of-the-azure-security-benchmark"></a>Azure 安全基准检验概述
 
@@ -44,7 +44,7 @@ Azure 安全基准检验中使用了以下控制：
 
 - **Azure ID**：与建议对应的 Azure 安全基准检验 ID。 
 - **CIS ID**：与此建议对应的 CIS 基准检验建议。  
-- **责任**：客户和/或服务提供商是否负责实现此建议。 安全责任将在公有云中共同分担。 某些安全控制仅适用于云服务提供商，因此该提供商负责处理相关事项。 这些是通常的看法 – 某些单独服务的责任不同于 Azure 安全基准检验中列出的责任。 单个服务的基线建议中介绍了这些差异。 
+- **责任**：客户和/或服务提供商是否负责实现此建议。 安全责任将在公有云中共同分担。 某些安全控制仅适用于云服务提供商，因此该提供商负责处理相关事项。 这些是通常的看法 - 某些单独服务的责任不同于 Azure 安全基准中列出的责任。 单个服务的基线建议中介绍了这些差异。 
 - **详细信息**：此建议的原理阐述，以及关于如何实现建议的指南的链接。 如果 Azure 安全中心支持此建议，这些信息也会列出。
 
 我们欢迎你提供详细反馈并积极参与 Azure 安全基准检验工作。 若要向 Azure 安全基准检验团队提供直接意见，请填写 [https://aka.ms/AzSecBenchmark](https://aka.ms/AzSecBenchmark) 中的表单。
@@ -54,3 +54,4 @@ Azure 安全基准检验中使用了以下控制：
 - 请查看第一个安全控制：[网络安全](security-control-network-security.md)
 - 阅读 [Azure 安全基准检验简介](introduction.md)
 - 下载 [Azure 安全基准检验 v1 Excel 电子表格](https://github.com/MicrosoftDocs/SecurityBenchmarks/tree/master/spreadsheets)
+

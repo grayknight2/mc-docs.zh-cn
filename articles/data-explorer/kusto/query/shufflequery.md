@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: 03b6ffe6bac6c99fa735af98b449a0d1c0cf2156
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: a16d0417405b53b74ae9b5809817b17e036671fc
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841493"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515678"
 ---
 # <a name="shuffle-query"></a>随机执行查询
 
@@ -24,11 +24,7 @@ Kusto 中支持随机执行的运算符是 [join](joinoperator.md)、[summarize]
 
 可以使用查询参数 `hint.strategy = shuffle` 或 `hint.shufflekey = <key>` 设置随机执行查询策略。
 
-在表上定义[数据分区策略](../management/partitioningpolicy.md)。 
-
-将 `shufflekey` 设置为表的哈希分区键以提高性能，因为需要在群集节点之间移动的数据量将减少。
-
-**语法**
+## <a name="syntax"></a>语法
 
 ```kusto
 T | where Event=="Start" | project ActivityId, Started=Timestamp
@@ -149,7 +145,7 @@ on ActivityId, numeric_column
 > [!Note]
 > 具有许多分区可能会消耗更多的群集资源并降低性能。 应改为从 hint.strategy = shuffle 着手，谨慎选择分区数，然后逐渐开始增加分区。
 
-**示例**
+## <a name="examples"></a>示例
 
 下面的示例展示了随机执行 `summarize` 如何显著提高性能。
 

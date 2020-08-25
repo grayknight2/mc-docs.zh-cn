@@ -5,15 +5,15 @@ author: Johnnytechn
 ms.author: v-johya
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 06/21/2019
-ms.date: 07/06/2020
-ms.openlocfilehash: b03780174c96c63dc5f10536d56af480a5fccbcf
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.date: 08/20/2020
+ms.openlocfilehash: fe534b8521dec197e4058dadd1f724649da0c86b
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226029"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715769"
 ---
 # <a name="set-up-alerts-for-azure-stream-analytics-jobs"></a>为 Azure 流分析作业设置警报
 
@@ -63,19 +63,11 @@ ms.locfileid: "86226029"
 |SU% 利用率|大于|最大值|80|有多个因素可以提高 SU% 利用率。 可以使用查询并行化进行缩放，或者增加流单元数。 有关详细信息，请参阅[利用 Azure 流分析中的查询并行化](stream-analytics-parallelization.md)。|
 |运行时错误|大于|总计|0|检查活动或资源日志，并对输入、查询或输出进行相应更改。|
 |水印延迟|大于|最大值|当此指标在过去 15 分钟的平均值大于延迟容限（以秒为单位）时。 如果未修改延迟容限，默认值将设置为 5 秒。|尝试增加 SU 数量或将查询并行化。 有关 SU 的详细信息，请参阅[了解和调整流单元](stream-analytics-streaming-unit-consumption.md#how-many-sus-are-required-for-a-job)。 有关并行化查询的详细信息，请参阅[利用 Azure 流分析中的查询并行化](stream-analytics-parallelization.md)。|
-|输入反序列化错误|大于|总计|0|检查活动或资源日志，并对输入进行相应更改。 |
-
-## <a name="get-help"></a>获取帮助
-
-有关在 Azure 门户中配置警报的详细信息，请参阅 [接收警报通知](../azure-monitor/platform/alerts-overview.md)。  
-
-如需获取进一步的帮助，可前往[有关 Azure 流分析的 Microsoft 问答页](https://docs.microsoft.com/answers/topics/azure-stream-analytics.html)。
+|输入反序列化错误|大于|总计|0|检查活动或资源日志，并对输入进行相应更改。|
 
 ## <a name="next-steps"></a>后续步骤
-* [Azure 流分析简介](stream-analytics-introduction.md)
-* [Azure 流分析入门](stream-analytics-get-started.md)
+
 * [缩放 Azure 流分析作业](stream-analytics-scale-jobs.md)
 * [Azure 流分析查询语言参考](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/library/azure/dn835031.aspx)
 
 

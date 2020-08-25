@@ -2,16 +2,16 @@
 title: 在 .NET Azure Functions 中使用依赖项注入
 description: 了解如何在 .NET 函数中使用依赖项注入来注册和使用服务
 author: craigshoemaker
-ms.topic: reference
-ms.date: 07/15/2020
+ms.topic: conceptual
+ms.date: 08/12/2020
 ms.author: v-junlch
 ms.reviewer: jehollan
-ms.openlocfilehash: 4ccaac4a1000626449b43f6d29000ddf538437f8
-ms.sourcegitcommit: 403db9004b6e9390f7fd1afddd9e164e5d9cce6a
+ms.openlocfilehash: ec9070194d97d58e13535bb4bf2a46964e5abed1
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440383"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222668"
 ---
 # <a name="use-dependency-injection-in-net-azure-functions"></a>在 .NET Azure Functions 中使用依赖项注入
 
@@ -121,7 +121,65 @@ Azure Functions 应用提供与 [ASP.NET 依赖项注入](https://docs.microsoft
 - **限定范围**：限定范围的服务的生存期与函数执行生存期相匹配。 作用域服务在每次执行时创建一次。 在执行期间对该服务的后续请求会重复使用现有服务实例。
 - **单一实例**：单一实例服务生存期与主机生存期相匹配，并且在该实例上的各个函数执行之间重用。 对于连接和客户端（例如 `DocumentClient` 或 `HttpClient` 实例），建议使用单一实例生存期服务。
 
-在 GitHub 上查看或下载[不同服务生存期的示例](https://aka.ms/functions/di-sample)。
+在 GitHub 上查看或下载[不同服务生存期的示例](https://github.com/Azure/azure-functions-dotnet-extensions/tree/main/src/samples/DependencyInjection/Scopes)。
+
+## <a name="logging-services"></a>日志记录服务
+
+如果需要自己的日志记录提供程序，请将自定义类型注册为 [`ILoggerProvider`](https://docs.microsoft.com/dotnet/api/microsoft.extensions.logging.iloggerfactory)（可通过 [Microsoft.Extensions.Logging.Abstractions](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions/) NuGet 包获取）的实例。
+
+Azure Functions 会自动添加 Application Insights。
+
+> [!WARNING]
+> - 请勿将 `AddApplicationInsightsTelemetry()` 添加到服务集合，因为它注册的服务与环境提供的服务发生冲突。
+> - 如果使用内置 Application Insights 功能，请勿注册自己的 `TelemetryConfiguration` 或 `TelemetryClient`。 如果需要配置自己的 `TelemetryClient` 实例，请通过插入的 `TelemetryConfiguration` 创建一个实例，如[监视 Azure Functions](./functions-monitoring.md#version-2x-and-later-2) 中所示。
+
+### <a name="iloggert-and-iloggerfactory"></a>ILogger<T> 和 ILoggerFactory
+
+主机会将 `ILogger<T>` 和 `ILoggerFactory` 服务注入构造函数中。  但是在默认情况下，会从函数日志中筛选出新日志记录筛选器。  需要修改 `host.json` 文件，以选择加入其他筛选器和类别。
+
+下面的示例演示如何添加包含向主机公开的日志的 `ILogger<HttpTrigger>`。
+
+```csharp
+namespace MyNamespace
+{
+    public class HttpTrigger
+    {
+        private readonly ILogger<HttpTrigger> _log;
+
+        public HttpTrigger(ILogger<HttpTrigger> log)
+        {
+            _log = log;
+        }
+
+        [FunctionName("HttpTrigger")]
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
+        {
+            _log.LogInformation("C# HTTP trigger function processed a request.");
+
+            // ...
+    }
+}
+```
+
+下面的示例 `host.json` 文件添加日志筛选器。
+
+```json
+{
+    "version": "2.0",
+    "logging": {
+        "applicationInsights": {
+            "samplingExcludedTypes": "Request",
+            "samplingSettings": {
+                "isEnabled": true
+            }
+        },
+        "logLevel": {
+            "MyNamespace.HttpTrigger": "Information"
+        }
+    }
+}
+```
 
 ## <a name="function-app-provided-services"></a>函数应用提供的服务
 
@@ -201,5 +259,6 @@ public class HttpTrigger
 
 有关详细信息，请参阅以下资源：
 
-- [适用于函数的最佳做法](functions-best-practices.md)
+- [如何监视函数应用](functions-monitoring.md)
+- [函数的最佳做法](functions-best-practices.md)
 

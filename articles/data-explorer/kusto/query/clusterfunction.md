@@ -8,15 +8,15 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/31/2020
+ms.date: 08/18/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 9631b8a882e69613db037b8e8797ebf6f2840a47
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.openlocfilehash: f71458f152779d6feb98e4d93f38c6428a2afa03
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509147"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515818"
 ---
 # <a name="cluster-scope-function"></a>cluster()（范围函数）
 
@@ -57,7 +57,7 @@ cluster('help.kusto.chinacloudapi.cn').database('Samples').StormEvents | count
 |---|
 |59066|
 
-### <a name="use-cluster-inside-let-statements"></a>在 let 语句中使用 cluster()
+### <a name="use-cluster-inside-let-statements"></a>在 let 语句中使用 cluster() 
 
 可以重写与上述查询相同的查询，以便使用可接收参数 `clusterName` 的内联函数（let 语句）- 该参数会传递到 cluster() 函数中。
 
@@ -73,7 +73,7 @@ foo('help')
 |---|
 |59066|
 
-### <a name="use-cluster-inside-functions"></a>在 Functions 内使用 cluster()
+### <a name="use-cluster-inside-functions"></a>在 Functions 内使用 cluster() 
 
 可以重写与上述查询相同的查询，以便在可接收参数 `clusterName` 的函数中使用它 - 该参数会传递到 cluster() 函数中。
 

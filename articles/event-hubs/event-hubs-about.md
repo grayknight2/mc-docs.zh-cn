@@ -1,22 +1,16 @@
 ---
-title: 什么是 Azure 事件中心？ - 大数据引入服务 | Azure
+title: 什么是 Azure 事件中心？ - 大数据引入服务 | Microsoft Docs
 description: 了解 Azure 事件中心 - 每秒可引入数百万个事件的大数据流式处理服务。
-services: event-hubs
-documentationcenter: na
-author: ShubhaVijayasarathy
-manager: timlt
-ms.service: event-hubs
 ms.topic: overview
-ms.custom: seodec18
-origin.date: 12/06/2018
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: a1e055ca72ab2d7294ba1e0efbd4da80c6baf8eb
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: b9fafba3054933fca75f9bac55e2848a7e6b4c7f
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199448"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715320"
 ---
 # <a name="azure-event-hubs--a-big-data-streaming-platform-and-event-ingestion-service"></a>Azure 事件中心 — 大数据流式处理平台和事件引入服务
 Azure 事件中心是大数据流式处理平台和事件引入服务。 它可以每秒接收和处理数百万个事件。 可以使用任何实时分析提供程序或批处理/存储适配器转换和存储发送到事件中心的数据。
@@ -52,7 +46,7 @@ Azure 事件中心是大数据流式处理平台和事件引入服务。 它可�
 
 在 [Azure Blob 存储](https://azure.microsoft.com/services/storage/blobs/)或 [Azure Data Lake Storage](https://azure.microsoft.com/services/data-lake-store/)  中近乎实时地[捕获](event-hubs-capture-overview.md)数据，以进行长期保留或微批处理。 可以基于用于派生实时分析的同一个流实现此行为。 设置捕获极其简单。 无需管理费用即可运行它，并且可以使用事件中心 [吞吐量单位](event-hubs-scalability.md#throughput-units)自动进行缩放。 使用事件中心可以专注于数据处理而不是数据捕获。
 
-Azure 事件中心还能与 [Azure Functions](/azure-functions/) 集成，以构成无服务器体系结构。
+Azure 事件中心还能与 [Azure Functions](../azure-functions/index.yml) 集成，以构成无服务器体系结构。
 
 ## <a name="scalable"></a>可缩放
 
@@ -95,6 +89,7 @@ Event Hubs on Stack is free during public preview. For more information, see [Ev
 - [Go](event-hubs-go-get-started-send.md)
 - [C（仅发送）](event-hubs-c-getstarted-send.md)
 - [Apache Storm（仅接收）](event-hubs-storm-getstarted-receive.md)
+
 
 若要了解有关事件中心的详细信息，请参阅以下文章：
 

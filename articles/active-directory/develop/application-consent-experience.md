@@ -5,21 +5,20 @@ description: 详细了解 Azure AD 许可体验，以便了解如何在 Azure AD
 services: active-directory
 author: rwike77
 manager: CelesteDG
-ms.assetid: ''
 ms.service: active-directory
 ms.subservice: develop
 ms.custom: aaddev
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 03/10/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: zachowd
-ms.openlocfilehash: 513e69ea9423493c61884a453121b04f9ae9603d
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: c8512f07ce9ff7939a477bc03924a1f8b78d6a57
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "79133830"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647703"
 ---
 # <a name="understanding-azure-ad-application-consent-experiences"></a>了解 Azure AD 应用程序许可体验
 
@@ -29,10 +28,10 @@ ms.locfileid: "79133830"
 
 许可是指用户授权应用程序代表他们访问受保护资源的过程。 可以要求管理员或用户同意访问其组织/个人数据。
 
-授予许可的实际用户体验将根据在用户租户上设置的策略、用户的授权范围（或角色）以及客户端应用程序请求的[权限](/active-directory/azuread-dev/v1-permissions-consent)类型而有所不同。 这意味着应用程序开发人员和租户管理员可以对许可体验进行一些控制。 管理员可以在租户或应用上灵活地设置和禁用策略，以控制其租户中的许可体验。 应用程序开发人员可以指示正在请求的权限类型以及是否希望引导用户完成用户许可流或管理员许可流。
+授予许可的实际用户体验将根据在用户租户上设置的策略、用户的授权范围（或角色）以及客户端应用程序请求的[权限](../azuread-dev/v1-permissions-consent.md)类型而有所不同。 这意味着应用程序开发人员和租户管理员可以对许可体验进行一些控制。 管理员可以在租户或应用上灵活地设置和禁用策略，以控制其租户中的许可体验。 应用程序开发人员可以指示正在请求的权限类型以及是否希望引导用户完成用户许可流或管理员许可流。
 
 - **用户许可流**是指应用程序开发人员将用户定向到授权终结点，意图仅记录当前用户的许可。
-- **管理员许可流**是指应用程序开发人员将用户定向到管理员许可终结点，意图记录整个租户的许可。 若要确保管理员许可流正常工作，应用程序开发人员必须列出应用程序清单中 `RequiredResourceAccess` 属性中的所有权限。 有关详细信息，请参阅[应用程序清单](/active-directory/develop/reference-app-manifest)。
+- **管理员许可流**是指应用程序开发人员将用户定向到管理员许可终结点，意图记录整个租户的许可。 若要确保管理员许可流正常工作，应用程序开发人员必须列出应用程序清单中 `RequiredResourceAccess` 属性中的所有权限。 有关详细信息，请参阅[应用程序清单](./reference-app-manifest.md)。
 
 ## <a name="building-blocks-of-the-consent-prompt"></a>许可提示的构建基块
 
@@ -52,6 +51,7 @@ ms.locfileid: "79133830"
 | 6 | 权限 | 此列表包含客户端应用程序请求的权限。 用户应始终评估所请求的权限类型，以了解客户端应用程序获权代表他们（如果他们接受）访问哪些数据。 作为应用程序开发人员，最好使用最小特权请求访问权限。 |
 | 7 | 权限说明 | 此值由公开权限的服务提供。 若要查看权限说明，必须切换权限旁边的 V 形图标。 |
 | 8 | 应用条款 | 这些条款包含指向应用程序服务条款和隐私声明的链接。 发布者有责任在其服务条款中概述其规则。 此外，发布者有责任在其隐私声明中公开他们使用和共享用户数据的方式。 如果发布者没有为多租户应用程序提供指向这些值的链接，则会在许可提示上显示加粗警告。 |
+| 9 | https://account.activedirectory.windowsazure.cn/r#/applications | 在此链接中，用户可以查看和删除当前有权访问其数据的任何非 Microsoft 应用程序。 |
 
 ## <a name="common-consent-scenarios"></a>常见许可方案
 
@@ -81,7 +81,7 @@ ms.locfileid: "79133830"
     1. 非管理员用户将看到与上面所示的 2.ii 相同的屏幕。
 
 ## <a name="next-steps"></a>后续步骤
-- 获取有关 [Azure AD 同意框架如何实现同意](/active-directory/develop/active-directory-integrating-applications)的分步概述。
-- 有关详细信息，请参阅[多租户应用程序如何使用同意框架](active-directory-devhowto-multi-tenant-overview.md)实现“用户”和“管理员”同意（支持更多高级多层应用程序模式）。
+- 获取有关 [Azure AD 同意框架如何实现同意](./quickstart-register-app.md)的分步概述。
+- 有关详细信息，请参阅[多租户应用程序如何使用同意框架](./howto-convert-app-to-be-multi-tenant.md)实现“用户”和“管理员”同意（支持更多高级多层应用程序模式）。
 - 了解[如何配置应用的发布者域](howto-configure-publisher-domain.md)。
 

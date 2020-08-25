@@ -1,33 +1,25 @@
 ---
 title: 适用于 Azure Blob 存储的 Azure PowerShell 示例 | Microsoft Docs
-description: 适用于 Azure Blob 存储的 Azure PowerShell 示例
-services: storage
-documentationcenter: na
-author: yunan2016
-manager: digimobile
-editor: tysonn
-ms.assetid: ''
-ms.custom: mvc
-ms.service: storage
-ms.workload: storage
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: sample
+description: 查看 Azure PowerShell 脚本示例的链接，了解如何使用 Azure Blob 存储，例如创建存储帐户、跨帐户迁移 blob 等。
+author: WenJason
+ms.author: v-jay
 origin.date: 11/07/2017
-ms.date: 12/04/2017
-ms.author: v-nany
-ms.openlocfilehash: 8349e00e9278e7b3410998ce309c1d97ac9a3e58
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.date: 08/24/2020
+ms.service: storage
+ms.subservice: blobs
+ms.topic: sample
+ms.openlocfilehash: 2fcf15ab4d7fd47eb1e87459a657e66d7e12ea15
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "63844337"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753542"
 ---
 # <a name="azure-powershell-samples-for-azure-blob-storage"></a>适用于 Azure Blob 存储的 Azure PowerShell 示例
 
 下表包含用于创建和管理 Azure 存储的 PowerShell 脚本示例的链接。
 
-| | |
+| Script | 说明 |
 |---|---|
 |**存储帐户**||
 | [创建存储帐户并检索/轮换访问密钥](../scripts/storage-common-rotate-account-keys-powershell.md?toc=%2fpowershell%2fmodule%2ftoc.json)| 创建 Azure 存储帐户并检索和轮换其中一个访问密钥。 |

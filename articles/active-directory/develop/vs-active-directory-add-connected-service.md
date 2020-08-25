@@ -5,17 +5,17 @@ author: ghogen
 manager: jillfra
 ms.prod: visual-studio-windows
 ms.technology: vs-azure
-ms.custom: aaddev, vs-azure
+ms.custom: devx-track-csharp, aaddev, vs-azure
 ms.workload: azure-vs
-ms.topic: conceptual
-ms.date: 04/23/2020
+ms.topic: how-to
+ms.date: 08/20/2020
 ms.author: v-junlch
-ms.openlocfilehash: 9c9a55f81e977a5eb1adcda9a0090cb7227615f3
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+ms.openlocfilehash: 84f8205dafb53ece6374a4d7344492195f45a0a8
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82126376"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647527"
 ---
 # <a name="add-an-azure-active-directory-by-using-connected-services-in-visual-studio"></a>在 Visual Studio 中使用连接服务添加 Azure Active Directory
 
@@ -28,7 +28,7 @@ ms.locfileid: "82126376"
 ## <a name="prerequisites"></a>先决条件
 
 - Azure 帐户：如果没有 Azure 帐户，可以[注册试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
-- **Visual Studio 2015** 或更高版本。 [立即下载 Visual Studio](https://aka.ms/vsdownload?utm_source=mscom&utm_campaign=msdocs)。
+- **Visual Studio 2015** 或更高版本。 [立即下载 Visual Studio](https://visualstudio.microsoft.com/downloads/)。
 
 ### <a name="connect-to-azure-active-directory-using-the-connected-services-dialog"></a>使用“连接服务”对话框连接到 Azure Active Directory
 
@@ -72,6 +72,6 @@ ms.locfileid: "82126376"
 
 ## <a name="next-steps"></a>后续步骤
 
-- [Azure Active Directory 的身份验证方案](authentication-scenarios.md)
+- [Azure Active Directory 的身份验证方案](./authentication-vs-authorization.md)
 - [向 ASP.NET Web 应用添加 Microsoft 登录功能](quickstart-v2-aspnet-webapp.md)
 

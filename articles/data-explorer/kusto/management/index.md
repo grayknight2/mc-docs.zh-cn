@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 07/01/2020
-ms.openlocfilehash: b9d6f342520f3fac5efe734ce8dd0db7bca574d3
-ms.sourcegitcommit: c17e965d4ffd82fd7cd86b2648fcb0053a65df00
+ms.date: 08/18/2020
+ms.openlocfilehash: 18eca4d4a89bf9e2287ded01e24f79d268771363
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470461"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515885"
 ---
 # <a name="management-control-commands-overview"></a>管理（控制命令）概述
 
@@ -42,6 +42,13 @@ Kusto 使用三种机制来区分查询和控制命令：语言级别机制、�
 请注意，不管什么情况，整个组合从技术上来说是一个控制命令，而不是一个查询，因此请求的文本必须以点 (`.`) 字符开头，而且请求必须发送到服务的管理终结点。
 
 另请注意，[查询语句](../query/statements.md)出现在文本的查询部分（不能将它们置于命令本身之前）。
+
+>[!NOTE]
+> 不要太频繁地运行 [command-then-query] 操作。
+> command-then-query 将通过管道传输控制命令的结果集并对其应用筛选器/聚合。
+>  * 例如： `.show ... | where ... | summarize ...`
+>   * 运行 `.show cluster extents | count`（强调 `| count`）之类的内容时，Kusto 会先准备一个数据表，它包含群集中所有盘区的所有详细信息。 然后，系统将这个仅限内存中的表发送到引擎来进行计数。 实际上，为了向你提供这样简单的答案，系统也要在非优化的路径中费力操作。
+
 
 **AdminThenQuery** 以下述两种方式之一进行指示：
 
@@ -73,3 +80,5 @@ $command_results | extend LastColumn=useless(TableName)
 let text="Hello, World!";
 print str=Text
 ```
+
+

@@ -8,13 +8,13 @@ ms.subservice: core
 ms.topic: conceptual
 ms.author: v-yiso
 author: sdgilley
-ms.date: 06/22/2020
-ms.openlocfilehash: 44a1bf02894683edcafe91e105a075b13f3fb689
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.date: 07/27/2020
+ms.openlocfilehash: 2ccbbb34fa7f82a10b71b828f8a9650f05d4bd87
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86441123"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228459"
 ---
 # <a name="what-is-an-azure-machine-learning-compute-instance"></a>什么是 Azure 机器学习计算实例？
 
@@ -30,7 +30,7 @@ Azure 机器学习计算实例是面向数据科学家的基于云的托管式�
 
 计算实例是完全托管式基于云的工作站，已针对机器学习开发环境进行优化。 它提供以下优势：
 
-|主要优点||
+|主要优点|描述|
 |----|----|
 |工作效率|可以在 Azure 机器学习工作室中使用集成的笔记本及以下工具来构建和部署模型：<br/>-  Jupyter<br/>-  JupyterLab<br/>-  RStudio（预览版）<br/>计算实例与 Azure 机器学习工作区和工作室完全集成。 你可以与工作区中的其他数据科学家共享笔记本和数据。 你还可以使用 [SSH](how-to-set-up-vs-code-remote.md) 设置 VS Code 远程开发 |
 |无需自行管理且安全|减少安全保护工作，增强企业的安全要求合规性。 计算实例提供可靠的管理策略和安全网络配置，例如：<br/><br/>- 通过资源管理器模板或 Azure 机器学习 SDK 自动预配<br/>- [基于角色的访问控制 (RBAC)](/azure/role-based-access-control/overview)<br/>- [虚拟网络支持](how-to-enable-virtual-network.md#compute-instance)<br/>- 用于启用/禁用 SSH 访问的 SSH 策略<br/>已启用 TLS 1.2 |
@@ -38,6 +38,10 @@ Azure 机器学习计算实例是面向数据科学家的基于云的托管式�
 |完全可自定义|支持多种 Azure VM 类型，包括 GPU 和持久性低级自定义，例如，安装相应的包和驱动程序可以轻而易举地实现高级方案。 |
 
 ## <a name="tools-and-environments"></a><a name="contents"></a>工具和环境
+
+> [!IMPORTANT]
+> 下面标记了“（预览版）”的工具目前为公共预览版。
+> 该预览版在提供时没有附带服务级别协议，建议不要将其用于生产工作负载。 某些功能可能不受支持或者受限。 
 
 使用 Azure 机器学习计算实例可以在工作区中的完全集成式笔记本体验中创作、训练和部署模型。
 
@@ -123,7 +127,7 @@ Python 包都安装在 **Python 3.6 - AzureML** 环境中。
 * 通过 SSH 连接到计算实例。 默认已禁用 SSH 访问，但可以在创建计算实例时启用。 SSH 访问是通过公钥/私钥机制实现的。 选项卡中将提供 IP 地址、用户名和端口号等 SSH 连接详细信息。
 * 获取有关特定计算实例的详细信息，例如 IP 地址和区域。
 
-使用 [RBAC](/role-based-access-control/overview) 可以控制工作区中的哪些用户可以创建、删除、启动、停止和重启计算实例。 充当工作区参与者和所有者角色的所有用户可以在整个工作区中创建、删除、启动、停止和重启计算实例。 但是，只有特定计算实例的创建者可在该计算实例上访问 Jupyter、JupyterLab 和 RStudio。 计算实例的创建者具有专用的计算实例，拥有 访问权限，且可通过 Jupyter 进入终端。 计算实例具有创建者用户的单用户登录名，所有操作将使用该用户的标识进行试验运行的 RBAC 控制和权限划分。 SSH 访问是通过公钥/私钥机制控制的。
+使用 [RBAC](/role-based-access-control/overview) 可以控制工作区中的哪些用户可以创建、删除、启动、停止和重启计算实例。 充当工作区参与者和所有者角色的所有用户可以在整个工作区中创建、删除、启动、停止和重启计算实例。 但是，只有特定计算实例的创建者可在该计算实例上访问 Jupyter、JupyterLab 和 RStudio。 计算实例的创建者拥有专用的计算实例，具有根访问权限，且可从终端通过 Jupyter/JupyterLab/RStudio 进入。 计算实例具有创建者用户的单用户登录名，所有操作将使用该用户的标识进行试验运行的 RBAC 控制和权限划分。 SSH 访问是通过公钥/私钥机制控制的。
 
 可以通过 RBAC 来控制这些操作：
 * *Microsoft.MachineLearningServices/workspaces/computes/read*
@@ -151,7 +155,7 @@ Python 包都安装在 **Python 3.6 - AzureML** 环境中。
 也可以通过以下方式创建实例
 * 直接从[集成式笔记本体验](tutorial-1st-experiment-sdk-setup.md#azure)
 * 在 Azure 门户中配置
-* 通过 Azure 资源管理器模板
+* 通过 Azure 资源管理器模板。 有关示例模板，请参阅[创建 Azure 机器学习计算实例模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-machine-learning-compute-create-computeinstance)。
 * 使用 [Azure 机器学习 SDK](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/training/train-on-computeinstance/train-on-computeinstance.ipynb)
 * 从 [Azure 机器学习的 CLI 扩展](reference-azure-machine-learning-cli.md#computeinstance)
 

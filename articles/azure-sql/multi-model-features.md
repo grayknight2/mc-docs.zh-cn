@@ -1,9 +1,9 @@
 ---
 title: 多模型功能
-description: Azure SQL 数据库允许使用同一数据库中的多个数据模型。
+description: Azure SQL 允许使用同一数据库中的多个数据模型。
 services: sql-database
-ms.service: sql-database
-ms.subservice: development
+ms.service: sql-db-mi
+ms.subservice: features
 ms.custom: sqldbrb=2
 ms.devlang: ''
 ms.topic: conceptual
@@ -11,13 +11,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: ''
 origin.date: 12/17/2018
-ms.date: 07/13/2020
-ms.openlocfilehash: 86b14dbcd45e424f94d989a6c505cdfe89070a39
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 02337d241443226d6c2fd94cdf7820c4a304b755
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227614"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223392"
 ---
 # <a name="multi-model-capabilities-of-azure-sql-database--sql-managed-instance"></a>Azure SQL 数据库和 SQL 托管实例的多模型功能
 [!INCLUDE[appliesto-sqldb-sqlmi](includes/appliesto-sqldb-sqlmi.md)]
@@ -97,10 +97,7 @@ JSON 是用于在新式 Web 与移动应用程序中交换数据的流行数据�
 
 空间数据表示有关物理位置和几何对象形状的信息。 这些对象可能是点位置或更复杂的对象，例如国家/地区/区域、道路或湖泊。
 
-使用 Azure SQL 系列产品可以分析和查询以 JavaScript 对象表示法 [(JSON)](https://www.json.org/) 格式表示的数据，并将关系数据导出为 JSON 文本。
-
-
- 支持两种空间数据类型： 
+ 两种支持的空间数据类型如下： 
 
 - 几何类型在欧几里得（平面）坐标系中表示数据。
 - 地理类型在环球坐标系中表示数据。

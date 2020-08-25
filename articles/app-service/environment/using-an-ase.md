@@ -5,15 +5,15 @@ author: ccompy
 ms.assetid: a22450c4-9b8b-41d4-9568-c4646f4cf66b
 ms.topic: article
 origin.date: 05/10/2020
-ms.date: 05/22/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 54651792c5f0092321ffd9038f83dedc9d504f31
-ms.sourcegitcommit: 981a75a78f8cf74ab5a76f9e6b0dc5978387be4b
+ms.openlocfilehash: 583edc3d02be3efdd3de4565d71b15e5cfd4a460
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83801183"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228508"
 ---
 # <a name="use-an-app-service-environment"></a>使用应用服务环境
 
@@ -71,7 +71,9 @@ ms.locfileid: "83801183"
 
     ![“隔离”定价层][2]
 
-    <!-- linux web apps not available -->
+    > [!NOTE]
+    > Linux 应用和 Windows 应用不能位于同一应用服务计划中，但可以位于同一应用服务环境中。
+    >
 
 1. 选择“查看 + 创建”，确保信息正确，然后选择“创建”。 
 
@@ -125,15 +127,15 @@ SCM URL 用于访问 Kudu 控制台，也可用于通过 Web 部署发布应用�
 
 在自己的 DNS 服务器中通过 ILB ASE 配置 DNS：
 
-1. 为 <ASE name>.appserviceenvironment.net 创建区域
+1. 为 &lt;ASE 名称&gt;.appserviceenvironment.net 创建一个区域
 1. 在该区域中创建一条指向* ILB IP 地址的 A 记录
 1. 在该区域中创建一条指向 @ ILB IP 地址的 A 记录
-1. 在 <ASE name>.appserviceenvironment.net named scm 中创建名为 scm 的区域
+1. 在 &lt;ASE 名称&gt;.appserviceenvironment.net 中创建名为 scm 的区域
 1. 在 scm 区域中创建一条指向 * ILB IP 地址的 A 记录
 
 在 Azure DNS 专用区域中配置 DNS：
 
-1. 创建名为 <ASE name>.appserviceenvironment.net 的 Azure DNS 专用区域
+1. 创建名为“&lt;ASE 名称&gt;.appserviceenvironment.net”的 Azure DNS 专用区域
 1. 在该区域中创建一条指向* ILB IP 地址的 A 记录
 1. 在该区域中创建一条指向 @ ILB IP 地址的 A 记录
 1. 在该区域中创建一条将 *.scm 指向 ILB IP 地址的 A 记录
@@ -145,8 +147,6 @@ ASE 默认域后缀的 DNS 设置不会将你的应用限制为只能由这些�
 ## <a name="publishing"></a>发布
 
 与多租户应用服务一样，在 ASE 中，可以使用以下方法发布应用：
-
-<!--- Continuous integration. not available-->
 
 - Web 部署
 - FTP
@@ -197,7 +197,7 @@ ASE 为其中的所有应用提供 1 TB 存储空间。 “独立”定价 SKU �
 
 **创建警报**
 
-若要针对日志创建警报，请遵循[使用 Azure Monitor 创建、查看和管理日志警报][logalerts] 中的说明。 简单地说：
+若要针对日志创建警报，请按[使用 Azure Monitor 创建、查看和管理日志警报][logalerts]中的说明操作。 简单地说：
 
 * 在 ASE 门户中打开“警报”页面
 * 选择“新建警报规则”
@@ -215,18 +215,18 @@ ASE 为其中的所有应用提供 1 TB 存储空间。 “独立”定价 SKU �
 - **Late**：ASE 将在应用服务升级过程的下半阶段升级。
 
 <!-- https://resources.azure.com not available
-If you are using https://resources.azure.com, you can set the upgradePreferences value by:
+If you're using https://resources.azure.com, follow these steps to set the **upgradePreferences** value:
 
-1. Going to resources.azure.com and signing in with your Azure account
-1. Navigate through subscriptions\/\[subscription name\]\/resourceGroups\/\[resource group name\]\/providers\/Microsoft.Web\/hostingEnvironments\/\[ASE name\]
-1. Selecting Read/Write at the top
-1. Select Edit
-1. Change the value for upgradePreference to whatever is desired from the three choices.
-1. Select Patch
+1. Go to resources.azure.com and sign in with your Azure account.
+1. Go through the resources to subscriptions\/\[subscription name\]\/resourceGroups\/\[resource group name\]\/providers\/Microsoft.Web\/hostingEnvironments\/\[ASE name\].
+1. Select **Read/Write** at the top.
+1. Select **Edit**.
+1. Set **upgradePreference** to whichever one of the three values you want.
+1. Select **Patch**.
 
 ![resources azure com display][5]
 
-The upgradePreferences feature really makes the most sense when you have multiple ASEs as your "Early" upgraded ASEs will be upgraded before your "Late" ASEs. When you have multiple ASEs, you should have your dev/test ASEs set to be "Early" and your production ASEs to be set as "Late".
+The **upgradePreferences** feature makes the most sense when you have multiple ASEs because your "Early" ASEs will be upgraded before your "Late" ASEs. When you have multiple ASEs, you should set your development and test ASEs to be "Early" and your production ASEs to be "Late".
 -->
 
 ## <a name="pricing"></a>定价
@@ -255,6 +255,30 @@ The upgradePreferences feature really makes the most sense when you have multipl
 
 1. 选择“确定” 。
 
+## <a name="ase-cli"></a>ASE CLI
+
+可通过命令行功能管理 ASE。  下面对 az cli 命令进行了说明。
+
+```azurecli
+C:\>az appservice ase --help
+
+Group
+    az appservice ase : Manage App Service Environments v2.
+        This command group is in preview. It may be changed/removed in a future release.
+Commands:
+    create         : Create app service environment.
+    delete         : Delete app service environment.
+    list           : List app service environments.
+    list-addresses : List VIPs associated with an app service environment.
+    list-plans     : List app service plans associated with an app service environment.
+    show           : Show details of an app service environment.
+    update         : Update app service environment.
+
+For more specific examples, use: az find "az appservice ase"
+```
+
+
+
 <!--Image references-->
 [1]: ./media/using_an_app_service_environment/usingase-appcreate.png
 [2]: ./media/using_an_app_service_environment/usingase-pricingtiers.png
@@ -282,3 +306,4 @@ The upgradePreferences feature really makes the most sense when you have multipl
 [AppDeploy]: ../deploy-local-git.md
 [ASEWAF]: app-service-app-service-environment-web-application-firewall.md
 [AppGW]: ../../application-gateway/application-gateway-web-application-firewall-overview.md
+[logalerts]: ../../azure-monitor/platform/alerts-log.md

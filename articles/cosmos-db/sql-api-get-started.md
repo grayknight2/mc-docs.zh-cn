@@ -1,21 +1,24 @@
 ---
 title: 教程 - 生成用于管理 Azure Cosmos DB SQL API 帐户中数据的 .NET 控制台应用
-description: 教程：了解如何使用 C# 控制台应用程序创建 Azure Cosmos DB SQL API 资源。
+description: 教程 - 了解如何使用 C# 控制台应用程序创建 Azure Cosmos DB SQL API 资源。
 author: rockboyfor
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
 ms.topic: tutorial
 origin.date: 11/05/2019
-ms.date: 04/27/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
 ms.author: v-yeche
-ms.openlocfilehash: 505c11b62c8423218121327f1e597f8b868ea28a
-ms.sourcegitcommit: f9c242ce5df12e1cd85471adae52530c4de4c7d7
+ms.openlocfilehash: bd17256c48089d1224168d82a8c3588f58880ae9
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82134697"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222432"
 ---
+<!--Verified successfully-->
 # <a name="tutorial-build-a-net-console-app-to-manage-data-in-azure-cosmos-db-sql-api-account"></a>教程：生成一个用于在 Azure Cosmos DB SQL API 帐户中管理数据的 .NET 控制台应用
 
 > [!div class="op_single_selector"]
@@ -29,7 +32,7 @@ ms.locfileid: "82134697"
 
 本教程使用 3.0 版或更高版的 [Azure Cosmos DB .NET SDK](https://www.nuget.org/packages/Microsoft.Azure.Cosmos)。 可以使用 [.NET Framework 或 .NET Core](https://dotnet.microsoft.com/download)。
 
-本教程的内容包括：
+本教程涉及：
 
 > [!div class="checklist"]
 >
@@ -55,23 +58,23 @@ ms.locfileid: "82134697"
 
 ## <a name="step-1-create-an-azure-cosmos-db-account"></a>步骤 1：创建 Azure Cosmos DB 帐户
 
-创建 Azure Cosmos DB 帐户。 如果已经有要使用的帐户，请跳过此部分。 若要使用 Azure Cosmos DB 模拟器，请按照 [Azure Cosmos DB 模拟器](local-emulator.md)中的步骤设置该模拟器。 然后跳转到[步骤 2：设置 Visual Studio 项目](#SetupVS)。
+让我们创建一个 Azure Cosmos DB 帐户。 如果已经有要使用的帐户，请跳过此部分。 若要使用 Azure Cosmos DB 模拟器，请按照 [Azure Cosmos DB 模拟器](local-emulator.md)中的步骤设置该模拟器。 然后跳转到[步骤 2：设置 Visual Studio 项目](#SetupVS)。
 
 [!INCLUDE [create-dbaccount-preview](../../includes/cosmos-db-create-dbaccount.md)]
 
 <a name="SetupVS"></a>
 ## <a name="step-2-set-up-your-visual-studio-project"></a>步骤 2：设置 Visual Studio 项目
 
-1. 打开 Visual Studio 并选择“创建新项目”  。
-1. 在“创建新项目”  中，选择用于 C# 的“控制台应用(.NET Framework)”  ，然后选择“下一步”  。
-1. 将项目命名为 *CosmosGettingStartedTutorial*，然后选择“创建”。 
+1. 打开 Visual Studio 并选择“创建新项目”。
+1. 在“创建新项目”中，选择用于 C# 的“控制台应用(.NET Framework)”，然后选择“下一步”。
+1. 将项目命名为 *CosmosGettingStartedTutorial*，然后选择“创建”。
 
-    ![配置项目](./media/sql-api-get-started/configure-cosmos-getting-started-2019.png)
+    :::image type="content" source="./media/sql-api-get-started/configure-cosmos-getting-started-2019.png" alt-text="配置项目":::
 
-1. 在“解决方案资源管理器”  中，右键单击 Visual Studio 解决方案下方的新控制台应用程序，然后选择“管理 NuGet 包”。 
-1. 在“NuGet 包管理器”  中选择“浏览”  ，然后搜索“Microsoft.Azure.Cosmos”  。 选择“Microsoft.Azure.Cosmos”  ，然后选择“安装”  。
+1. 在“解决方案资源管理器”中，右键单击 Visual Studio 解决方案下方的新控制台应用程序，然后选择“管理 NuGet 包”。
+1. 在“NuGet 包管理器”中选择“浏览”，然后搜索“Microsoft.Azure.Cosmos”。 选择“Microsoft.Azure.Cosmos”，然后选择“安装”。
 
-    ![安装用于 Azure Cosmos DB 客户端 SDK 的 NuGet](./media/sql-api-get-started/cosmos-getting-started-manage-nuget-2019.png)
+    :::image type="content" source="./media/sql-api-get-started/cosmos-getting-started-manage-nuget-2019.png" alt-text="安装 Azure Cosmos DB 客户端 SDK 的 NuGet":::
 
     Azure Cosmos DB SQL API 客户端库的包 ID 是 [Azure Cosmos DB 客户端库](https://www.nuget.org/packages/Microsoft.Azure.Cosmos/)。
 
@@ -119,13 +122,13 @@ ms.locfileid: "82134697"
     ```
 
     > [!NOTE]
-    > 如果你熟悉旧版 .NET SDK，则可能熟悉术语“集合”和“文档”。   由于 Azure Cosmos DB 支持多个 API 模型，因此 3.0 版的 .NET SDK 使用通用术语“容器”和“项”。   容器可以是集合、图或表。  项可以是文档、边缘/顶点或行，是容器中的内容。  有关详细信息，请参阅[在 Azure Cosmos DB 中使用数据库、容器和项](databases-containers-items.md)。
+    > 如果你熟悉旧版 .NET SDK，则可能熟悉术语“集合”和“文档”。  由于 Azure Cosmos DB 支持多个 API 模型，因此 3.0 版的 .NET SDK 使用通用术语“容器”和“项”。  容器可以是集合、图或表。 项可以是文档、边缘/顶点或行，是容器中的内容。 有关详细信息，请参阅[在 Azure Cosmos DB 中使用数据库、容器和项](databases-containers-items.md)。
 
-1. 打开 [Azure 门户](https://portal.azure.cn)。 找到 Azure Cosmos DB 帐户，然后选择“密钥”。 
+1. 打开 [Azure 门户](https://portal.azure.cn)。 找到 Azure Cosmos DB 帐户，然后选择“密钥”。
 
-    ![从 Azure 门户获取 Azure Cosmos DB 密钥](./media/sql-api-get-started/cosmos-getting-started-portal-keys.png)
+    :::image type="content" source="./media/sql-api-get-started/cosmos-getting-started-portal-keys.png" alt-text="从 Azure 门户获取 Azure Cosmos DB 密钥":::
 
-1. 在 *Program.cs* 中，将 `<your endpoint URL>` 替换为 **URI** 的值。 将 `<your primary key>` 替换为“主密钥”  的值。
+1. 在 *Program.cs* 中，将 `<your endpoint URL>` 替换为 **URI** 的值。 将 `<your primary key>` 替换为“主密钥”的值。
 
 1. 在 **Main** 方法下面，添加名为 **GetStartedDemoAsync** 的新异步任务，将新的 `CosmosClient` 实例化。
 
@@ -179,9 +182,9 @@ ms.locfileid: "82134697"
 
 1. 选择 F5 来运行应用程序。
 
-    控制台会显示消息“演示结束，请按任意键退出”。  此消息确认应用程序已连接到 Azure Cosmos DB。 然后，可以关闭控制台窗口。
+    控制台会显示消息“演示结束，请按任意键退出”。 此消息确认应用程序已连接到 Azure Cosmos DB。 然后即可关闭控制台窗口。
 
-祝贺！ 你已成功连接到 Azure Cosmos DB 帐户。
+祝贺你！ 你已成功连接到 Azure Cosmos DB 帐户。
 
 ## <a name="step-4-create-a-database"></a>步骤 4：创建数据库
 
@@ -309,7 +312,7 @@ ms.locfileid: "82134697"
             });
     ```
 
-祝贺！ 你已成功创建 Azure Cosmos 数据库。  
+祝贺你！ 你已成功创建 Azure Cosmos 数据库。  
 
 <a name="CreateColl"></a>
 ## <a name="step-5-create-a-container"></a>步骤 5：创建容器
@@ -354,7 +357,7 @@ ms.locfileid: "82134697"
 
 1. 选择 F5 来运行应用程序。
 
-祝贺！ 你已成功创建 Azure Cosmos 容器。  
+祝贺你！ 你已成功创建 Azure Cosmos 容器。  
 
 <a name="CreateDoc"></a>
 ## <a name="step-6-add-items-to-the-container"></a>步骤 6：向容器添加项
@@ -363,9 +366,9 @@ ms.locfileid: "82134697"
 
 在此示例中，让我们首先创建 `Family` 类来表示存储在 Azure Cosmos DB 中的对象。 我们还会创建在 `Family` 中使用的 `Parent`、`Child`、`Pet`、`Address` 子类。 该项必须有一个以 JSON 格式序列化为 `id` 的 `Id` 属性。
 
-1. 选择 Ctrl+Shift+A，打开“添加新项”  。 将新类 `Family.cs` 添加到项目。
+1. 选择 Ctrl+Shift+A，打开“添加新项”。 将新类 `Family.cs` 添加到项目。
 
-    ![向项目添加新的 Family.cs 类的屏幕截图](./media/sql-api-get-started/cosmos-getting-started-add-family-class-2019.png)
+    :::image type="content" source="./media/sql-api-get-started/cosmos-getting-started-add-family-class-2019.png" alt-text="显示将新的 Family.cs 类添加到项目中的屏幕截图":::
 
 1. 复制 `Family`、`Parent`、`Child`、`Pet` 和 `Address` 类并将其粘贴到 `Family.cs` 中。
 
@@ -522,7 +525,7 @@ ms.locfileid: "82134697"
 
     ```
 
-    代码会进行检查，确保不存在 ID 相同的项。 我们会插入两个项，Andersen 家族和 Wakefield 家族各一个。  
+    代码会进行检查，确保不存在 ID 相同的项。 我们会插入两个项，Andersen 家族和 Wakefield 家族各一个。 
 
 1. 在 `GetStartedDemoAsync` 方法中添加对 `AddItemsToContainerAsync` 的调用。
 
@@ -541,7 +544,7 @@ ms.locfileid: "82134697"
 
 1. 选择 F5 来运行应用程序。
 
-祝贺！ 你已成功创建两个 Azure Cosmos 项。  
+祝贺你！ 你已成功创建两个 Azure Cosmos 项。  
 
 <a name="Query"></a>
 ## <a name="step-7-query-azure-cosmos-db-resources"></a>步骤 7：查询 Azure Cosmos DB 资源
@@ -596,7 +599,7 @@ Azure Cosmos DB 支持对存储在每个容器中的 JSON 文档进行各种查�
 
 1. 选择 F5 来运行应用程序。
 
-祝贺！ 你已成功查询 Azure Cosmos 容器。
+祝贺你！ 你已成功查询 Azure Cosmos 容器。
 
 <a name="ReplaceItem"></a>
 ## <a name="step-8-replace-a-json-item"></a>步骤 8：替换 JSON 项
@@ -645,7 +648,7 @@ Azure Cosmos DB 支持对存储在每个容器中的 JSON 文档进行各种查�
 
 1. 选择 F5 来运行应用程序。
 
-祝贺！ 你已成功替换 Azure Cosmos 项。
+祝贺你！ 你已成功替换 Azure Cosmos 项。
 
 <a name="DeleteDocument"></a>
 ## <a name="step-9-delete-item"></a>步骤 9：删除项目
@@ -690,7 +693,7 @@ Azure Cosmos DB 支持对存储在每个容器中的 JSON 文档进行各种查�
 
 1. 选择 F5 来运行应用程序。
 
-祝贺！ 你已成功删除 Azure Cosmos 项。
+祝贺你！ 你已成功删除 Azure Cosmos 项。
 
 <a name="DeleteDatabase"></a>
 ## <a name="step-10-delete-the-database"></a>步骤 10：删除数据库
@@ -739,7 +742,7 @@ Azure Cosmos DB 支持对存储在每个容器中的 JSON 文档进行各种查�
 
 1. 选择 F5 来运行应用程序。
 
-祝贺！ 你已成功删除 Azure Cosmos 数据库。
+祝贺你！ 你已成功删除 Azure Cosmos 数据库。
 
 <a name="Run"></a>
 ## <a name="step-11-run-your-c-console-application-all-together"></a>步骤 11：一起运行 C# 控制台应用程序！
@@ -773,7 +776,7 @@ Deleted Database: FamilyDatabase
 End of demo, press any key to exit.
 ```
 
-祝贺！ 已经完成了本教程，并且获得了一个正常工作的 C# 控制台应用程序！
+祝贺你！ 已经完成了本教程，并且获得了一个正常工作的 C# 控制台应用程序！
 
 <a name="GetSolution"></a>
 ## <a name="get-the-complete-tutorial-solution"></a>获取完整的教程解决方案
@@ -786,7 +789,7 @@ End of demo, press any key to exit.
 * 一个 [Azure Cosmos DB 帐户][cosmos-db-create-account]。
 * GitHub 上提供的 [GetStarted](https://github.com/Azure-Samples/cosmos-dotnet-getting-started) 解决方案。
 
-若要在 Visual Studio 中还原对 Azure Cosmos DB .NET SDK 的引用，请在解决方案资源管理器中右键单击此解决方案，然后选择“还原 NuGet 包”   。 接下来，在 *App.config* 文件中更新 `EndPointUri` 和 `PrimaryKey` 值，如[步骤 3：连接到 Azure Cosmos DB 帐户](#Connect)所述。
+若要在 Visual Studio 中还原对 Azure Cosmos DB .NET SDK 的引用，请在解决方案资源管理器中右键单击此解决方案，然后选择“还原 NuGet 包” 。 接下来，在 *App.config* 文件中更新 `EndPointUri` 和 `PrimaryKey` 值，如[步骤 3：连接到 Azure Cosmos DB 帐户](#Connect)所述。
 
 就这么简单，生成以后即可开始操作！
 

@@ -5,16 +5,16 @@ author: chenkennt
 ms.service: signalr
 ms.topic: conceptual
 origin.date: 03/01/2019
-ms.date: 11/25/2019
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 66964de47c440fbcda6e40f4097b16ae0c6a0c8a
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: ba5b12c9a7bf98e927819446009fbe0943242b06
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "74179126"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715283"
 ---
-# <a name="resiliency-and-disaster-recovery"></a>复原能力和灾难恢复
+# <a name="resiliency-and-disaster-recovery-in-azure-signalr-service"></a>Azure SignalR 服务中的复原能力和灾难恢复
 
 复原能力和灾难恢复是联机系统的常见需求。 Azure SignalR 服务可保证 99.9% 的可用性，但它仍是一个区域性的服务。
 服务实例始终在一个区域中运行，出现区域范围的服务中断时，它不会故障转移到另一个区域。

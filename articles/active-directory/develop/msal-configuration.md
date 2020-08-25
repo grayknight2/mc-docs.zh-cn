@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: reference
 ms.workload: identity
-ms.date: 07/08/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.custom: aaddev
 ms.reviewer: shoatman
-ms.openlocfilehash: babbd0dce5f9214979c455e5b30fb408c48a6d73
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.openlocfilehash: 04f2c20ebe1f03bd8f291e409d748e3810bb2b98
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164959"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647553"
 ---
 # <a name="android-microsoft-authentication-library-configuration-file"></a>Android Microsoft 身份验证库配置文件
 
@@ -57,7 +57,7 @@ Android Microsoft 身份验证库 (MSAL) 随附了一个[默认的配置 JSON �
     "type": "AAD",
     "audience": {
         "type": "AzureADMyOrg",
-        "tenantId": "contoso.com" // Provide your specific tenant ID here
+        "tenant_id": "contoso.com" // Provide your specific tenant ID here
     }
 },
 // Example AzureAD Multiple Organizations

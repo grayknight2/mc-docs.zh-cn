@@ -11,17 +11,20 @@ ms.workload: infrastructure-services
 origin.date: 06/28/2019
 ms.date: 08/12/2019
 ms.author: v-yiso
-ms.openlocfilehash: e5fe2d797b49b4ab05113690ac95b0a7a4b7a48f
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 6381a9903be2000532fac1a79efb2e712be27eff
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "68738017"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228193"
 ---
 # <a name="designing-for-high-availability-with-expressroute"></a>使用 ExpressRoute 进行高可用性设计
 
 ExpressRoute 旨在实现高可用性，以便与 Microsoft 资源建立运营商级专用网络连接。 换句话说，Microsoft 网络中的 ExpressRoute 路径不存在单一故障点。 为了最大限度地提高可用性，还应该规划好 ExpressRoute 线路的客户与服务提供商细分。 本文先探讨使用 ExpressRoute 构建可靠网络连接时的网络体系结构注意事项，然后探讨如何微调功能，以帮助改善 ExpressRoute 线路的高可用性。
 
+>[!NOTE]
+>本文所述的概念同样适用于在虚拟 WAN 下或其外部创建 ExpressRoute 线路的情况。
+>
 
 ## <a name="architecture-considerations"></a>体系结构注意事项
 

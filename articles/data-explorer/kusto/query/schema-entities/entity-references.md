@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
 ms.date: 07/31/2020
-ms.openlocfilehash: 6472432216a463e9e1fe4ae48f7f1997511bb087
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.openlocfilehash: 368c8a0386ace4faa467fc9243f8f1f3a0ce1d01
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509237"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515630"
 ---
 # <a name="entity-references"></a>实体引用
 
@@ -40,5 +40,5 @@ union *, database("DB1").T*
 
 ## <a name="next-steps"></a>后续步骤
 
-* [架构实体类型](https://docs.microsoft.com/azure/data-explorer/kusto/query/schema-entities/)
-* [架构实体名称](https://docs.microsoft.com/azure/data-explorer/kusto/query/schema-entities/entity-names)
+* [架构实体类型](/data-explorer/kusto/query/schema-entities/)
+* [架构实体名称](/data-explorer/kusto/query/schema-entities/entity-names)

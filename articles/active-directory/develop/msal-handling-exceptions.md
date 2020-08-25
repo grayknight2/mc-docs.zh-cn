@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 07/08/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: saeeda, jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 75be1b9ac534e9409c3692c2ae64da5ff2b31abe
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.openlocfilehash: 411d16df703a921a06e5bfbf636a6b6f388b2402
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164956"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647698"
 ---
 # <a name="handle-msal-exceptions-and-errors"></a>处理 MSAL 异常和错误
 
@@ -236,7 +236,7 @@ myMSALObj.acquireTokenSilent(request).then(function (response) {
 * 成功的响应包含 `"access_token"` 项。 响应的格式由 OAuth2 协议定义。 有关详细信息，请参阅 [5.1 成功的响应](https://tools.ietf.org/html/rfc6749#section-5.1)
 * 错误的响应包含 `"error"`，通常为 `"error_description"`。 响应的格式由 OAuth2 协议定义。 有关详细信息，请参阅 [5.2 错误的响应](https://tools.ietf.org/html/rfc6749#section-5.2)
 
-返回错误时，`"error_description"` 项包含用户可读的消息；它通常包含 Microsoft 标识平台错误代码。 有关各个错误代码的详细信息，请参阅[身份验证和授权错误代码](/active-directory/develop/reference-aadsts-error-codes)。
+返回错误时，`"error_description"` 项包含用户可读的消息；它通常包含 Microsoft 标识平台错误代码。 有关各个错误代码的详细信息，请参阅[身份验证和授权错误代码](./reference-aadsts-error-codes.md)。
 
 在适用于 Python 的 MSAL 中，很少引发异常，因为大多数错误都是通过返回错误值来处理的。 仅当尝试使用库的方式出现问题时（例如 API 参数的格式不正确时），才会引发 `ValueError` 异常。
 

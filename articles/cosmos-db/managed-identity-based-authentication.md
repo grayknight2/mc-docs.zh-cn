@@ -3,17 +3,19 @@ title: 如何使用系统分配的托管标识访问 Azure Cosmos DB 数据
 description: 了解如何配置 Azure Active Directory (Azure AD) 系统分配的托管标识（托管服务标识），以访问 Azure Cosmos DB 中的密钥。
 author: rockboyfor
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.topic: how-to
 origin.date: 03/20/2020
-ms.date: 05/06/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
 ms.author: v-yeche
 ms.reviewer: sngun
-ms.openlocfilehash: 7ba86ca757a9501e694180446e673f3483a679e2
-ms.sourcegitcommit: 81241aa44adbcac0764e2b5eb865b96ae56da6b7
+ms.openlocfilehash: 7b1a84e96cb0d44717d5d52fd16c401ae407d99c
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83002103"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223193"
 ---
 <!--Verified successfully on Portal section-->
 # <a name="use-system-assigned-managed-identities-to-access-azure-cosmos-db-data"></a>使用系统分配的托管标识访问 Azure Cosmos DB 数据
@@ -32,11 +34,11 @@ ms.locfileid: "83002103"
 
 1. 打开“平台功能” > “标识”选项卡   ： 
 
-    ![显示了函数应用的“平台功能”和“标识”选项的屏幕截图。](./media/managed-identity-based-authentication/identity-tab-selection.png)
+    :::image type="content" source="./media/managed-identity-based-authentication/identity-tab-selection.png" alt-text="显示了函数应用的“平台功能”和“标识”选项的屏幕截图。":::
 
 1. 在“标识”选项卡上，开启系统标识的“状态”并选择“保存”     。 “标识”窗格应如下所示  ：  
 
-    ![显示了系统标识“状态”设置为“开启”的屏幕截图。](./media/managed-identity-based-authentication/identity-tab-system-managed-on.png)
+    :::image type="content" source="./media/managed-identity-based-authentication/identity-tab-system-managed-on.png" alt-text="显示了系统标识“状态”设置为“开启”的屏幕截图。":::
 
 ## <a name="grant-access-to-your-azure-cosmos-account"></a>向 Azure Cosmos 帐户授予访问权限
 
@@ -45,7 +47,7 @@ ms.locfileid: "83002103"
 |内置角色  |说明  |
 |---------|---------|
 |[DocumentDB 帐户参与者](../role-based-access-control/built-in-roles.md#documentdb-account-contributor)|可管理 Azure Cosmos DB 帐户。 允许检索读取/写入密钥。 |
-|[Cosmos DB 帐户读取者](../role-based-access-control/built-in-roles.md#cosmos-db-account-reader-role)|可以读取 Azure Cosmos DB 帐户数据。 允许检索读取密钥。 |
+|[Cosmos DB 帐户读者角色](../role-based-access-control/built-in-roles.md#cosmos-db-account-reader-role)|可以读取 Azure Cosmos DB 帐户数据。 允许检索读取密钥。 |
 
 > [!IMPORTANT]
 > Azure Cosmos DB 中对基于角色的访问控制的支持仅适用于控制平面操作。 将通过主密钥或资源令牌保护数据平面操作。 有关详细信息，请参阅[保护对数据的访问](secure-access-to-data.md)一文。
@@ -57,23 +59,37 @@ ms.locfileid: "83002103"
 
 在此方案中，函数应用将读取水族箱的温度，然后将此数据写回到 Azure Cosmos DB 中的容器。 由于函数应用必须写入数据，因此你需要分配“DocumentDB 帐户参与者”角色  。 
 
+### <a name="assign-the-role-using-azure-portal"></a>使用 Azure 门户分配角色
+
 1. 登录到 Azure 门户并转到你的 Azure Cosmos DB 帐户。 依次打开“访问控制(IAM)”窗格和“角色分配”选项卡   ：
 
-    ![显示了“访问控制”窗格和“角色分配”选项卡的屏幕截图。](./media/managed-identity-based-authentication/cosmos-db-iam-tab.png)
+    :::image type="content" source="./media/managed-identity-based-authentication/cosmos-db-iam-tab.png" alt-text="显示了“访问控制”窗格和“角色分配”选项卡的屏幕截图。":::
 
 1. 选择“+ 添加”   >   “添加角色分配”。
 
 1. “添加角色分配”面板会在右侧打开  ：
 
-    ![显示了“添加角色分配”窗格的屏幕截图。](./media/managed-identity-based-authentication/cosmos-db-iam-tab-add-role-pane.png)
+    :::image type="content" source="./media/managed-identity-based-authentication/cosmos-db-iam-tab-add-role-pane.png" alt-text="显示了“添加角色分配”窗格的屏幕截图。":::
 
     * **角色**：选择“DocumentDB 帐户参与者” 
     * **将访问权限分配到**：在“选择系统分配的托管标识”子部分下，选择“函数应用”   。
     * **选择**：窗格中将会填充你的订阅中具有托管系统标识的所有函数应用  。 在本例中，请选择“FishTankTemperatureService”函数应用  ： 
 
-        ![显示了由示例填充的“添加角色分配”窗格的屏幕截图。](./media/managed-identity-based-authentication/cosmos-db-iam-tab-add-role-pane-filled.png)
+        :::image type="content" source="./media/managed-identity-based-authentication/cosmos-db-iam-tab-add-role-pane-filled.png" alt-text="显示了由示例填充的“添加角色分配”窗格的屏幕截图。":::
 
 1. 选择函数应用后，选择“保存”  。
+
+### <a name="assign-the-role-using-azure-cli"></a>使用 Azure CLI 分配角色
+
+若要使用 Azure CLI 分配角色，请使用以下命令：
+
+```azurecli
+$scope = az cosmosdb show --name '<Your_Azure_Cosmos_account_name>' --resource-group '<CosmosDB_Resource_Group>' --query id
+
+$principalId = az webapp identity show -n '<Your_Azure_Function_name>' -g '<Azure_Function_Resource_Group>' --query principalId
+
+az role assignment create --assignee $principalId --role "DocumentDB Account Contributor" --scope $scope
+```
 
 ## <a name="programmatically-access-the-azure-cosmos-db-keys"></a>以编程方式访问 Azure Cosmos DB 密钥
 
@@ -116,7 +132,7 @@ namespace Monitor
 }
 ```
 
-你将使用 [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication) 库来获取系统分配的托管标识令牌。 若要了解获取令牌的其他方法以及有关 `Microsoft.Azure.Service.AppAuthentication` 库的详细信息，请参阅[服务到服务身份验证](../key-vault/service-to-service-authentication.md)一文。
+你将使用 [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication) 库来获取系统分配的托管标识令牌。 若要了解获取令牌的其他方法以及有关 `Microsoft.Azure.Service.AppAuthentication` 库的详细信息，请参阅[服务到服务身份验证](../key-vault/general/service-to-service-authentication.md)一文。
 
 ```csharp
 using System;
@@ -207,6 +223,4 @@ namespace Monitor
 * [使用 Azure Key Vault 保护 Azure Cosmos DB 密钥](access-secrets-from-keyvault.md)
 * [Azure Cosmos DB 的安全基线](security-baseline.md)
 
-<!-- Update_Description: new article about managed identity based authentication -->
-<!--NEW.date: 04/27/2020-->
-
+<!-- Update_Description: update meta properties, wording update, update link -->

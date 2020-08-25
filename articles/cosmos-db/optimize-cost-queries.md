@@ -2,31 +2,35 @@
 title: 优化在 Azure Cosmos DB 中运行查询所需的成本和 RU/秒
 description: 了解如何评估查询的请求单位费用，并在查询性能和成本方面优化查询。
 author: rockboyfor
-ms.author: v-yeche
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 08/01/2019
-ms.date: 02/10/2020
-ms.openlocfilehash: f19ea907d2f97041059594bdb4bec690ecd0edd9
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+origin.date: 07/24/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
+ms.author: v-yeche
+ms.openlocfilehash: c676c192699d2fe4d74a6dfbbc4fe1137eac7679
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "77028788"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223454"
 ---
 # <a name="optimize-query-cost-in-azure-cosmos-db"></a>优化 Azure Cosmos DB 中的查询成本
 
-Azure Cosmos DB 提供了丰富的数据库操作，包括对容器中的项进行操作的关系和分层查询。 与这些操作关联的成本取决于完成操作所需的 CPU、IO 和内存。 可以考虑将请求单位 (RU) 视为执行各种数据库操作以提供请求所需的资源的单一度量值，而无需虑和管理硬件资源。 本文介绍如何评估查询的请求单位费用，并在性能和成本方面优化查询。 
+Azure Cosmos DB 提供了丰富的数据库操作，包括对容器中的项进行操作的关系和分层查询。 与这些操作关联的成本取决于完成操作所需的 CPU、IO 和内存。 可以考虑将请求单位 (RU) 视为执行各种数据库操作以提供请求所需的资源的单一度量值，而无需虑和管理硬件资源。 本文介绍如何评估查询的请求单位费用，并在性能和成本方面优化查询。
 
-Azure Cosmos DB 中的查询通常按吞吐量从最快/最高效到较慢/效率较低进行排序，如下所示：  
+Azure Cosmos DB 中的读取通常按吞吐量从最快/效率最高到较慢/效率较低进行排序，如下所示：  
 
-* 针对单个分区键和项键的 GET 操作。
+* 点读取（对单个项 ID 和分区键进行键/值查找）。
 
 * 单个分区键内具有筛选器子句的查询。
 
 * 针对任何属性都没有等于或范围筛选器子句的查询。
 
 * 不包含筛选器的查询。
+
+因为对项 ID 进行键/值查找是最高效的读取方式，所以应确保项 ID 具有有意义的值。
 
 从一个或多个分区读取数据的查询会导致较高的延迟并使用较多的请求单位数。 因为每个分区都具有针对所有属性的自动索引编制，因此，可以基于索引高效地执行查询。 通过使用并行选项，可以更快地进行使用多个分区的查询。 若要了解有关分区和分区键的详细信息，请参阅[在 Azure Cosmos DB 中进行分区](partitioning-overview.md)。
 
@@ -37,7 +41,7 @@ Azure Cosmos DB 中的查询通常按吞吐量从最快/最高效到较慢/效�
 此外可以使用 SDK 以编程方式获取查询的成本。 要测量任何操作（如创建、更新或删除）的开销，请在使用 REST API 时检查 `x-ms-request-charge` 标头。 如果使用的是 .NET 或 Java SDK，则 `RequestCharge` 属性是获取请求费用的等效属性，并且此属性存在于 ResourceResponse 或 FeedResponse 中。
 
 ```csharp
-// Measure the performance (request units) of writes 
+// Measure the performance (request units) of writes
 ResourceResponse<Document> response = await client.CreateDocumentAsync(collectionSelfLink, myDocument); 
 
 Console.WriteLine("Insert of an item consumed {0} request units", response.RequestCharge); 
@@ -113,4 +117,4 @@ Total Query Execution Time               :   �
 * 详细了解[优化多区域 Azure Cosmos 帐户的成本](optimize-cost-regions.md)
 
 <!-- Not Available on [Azure Cosmos DB reserved capacity](cosmos-db-reserved-capacity.md)-->
-<!-- Update_Description: update meta properties  -->
+<!-- Update_Description: update meta properties, wording update, update link -->

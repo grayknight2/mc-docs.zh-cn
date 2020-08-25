@@ -1,17 +1,19 @@
 ---
-title: 在虚拟机计算节点上运行 Linux - Azure Batch | Azure
+title: 在虚拟机计算节点上运行 Linux
 description: 了解如何处理 Azure Batch 中 Linux 虚拟机池上的并行计算工作负荷。
-ms.topic: article
+ms.topic: how-to
 origin.date: 06/01/2018
-ms.date: 11/26/2018
-ms.author: v-lingwu
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: c7cb01a42095f9b1a603dd4428ff51ad19fe543f
-ms.sourcegitcommit: cbaa1aef101f67bd094f6ad0b4be274bbc2d2537
+ms.date: 08/24/2020
+ms.testscope: no
+ms.testdate: 11/26/2018
+ms.author: v-yeche
+ms.custom: H1Hack27Feb2017, devx-track-python
+ms.openlocfilehash: 4a159218c7d55731920c12fc6593cd9a43e2e9e8
+ms.sourcegitcommit: e633c458126612223fbf7a8853dbf19acc7f0fa5
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/28/2020
-ms.locfileid: "84126777"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88654911"
 ---
 # <a name="provision-linux-compute-nodes-in-batch-pools"></a>在 Batch 池中预配 Linux 计算节点
 
@@ -31,24 +33,24 @@ ms.locfileid: "84126777"
 
 ### <a name="virtual-machine-image-reference"></a>虚拟机映像引用
 
-Batch 服务使用[虚拟机规模集](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md)提供虚拟机配置中的计算节点。 可以指定 [Azure 市场][vm_marketplace]中的一个映像，或者提供一个准备好的自定义映像。 有关自定义映像的更多详细信息，请参阅[使用共享映像库创建池](batch-sig-images.md)。
+Batch 服务使用[虚拟机规模集](../virtual-machine-scale-sets/overview.md)提供虚拟机配置中的计算节点。 可指定 [Azure 市场][vm_marketplace]中的一个映像，或者提供一个准备好的自定义映像。 有关自定义映像的详细信息，请参阅[使用共享映像库创建池](batch-sig-images.md)。
 
 配置虚拟机映像引用时，需指定虚拟机映像的属性。 创建虚拟机映像引用时，需提供以下属性：
 
 | **映像引用属性** | **示例** |
 | --- | --- |
-| Publisher |Canonical |
+| 发布者 |Canonical |
 | 产品/服务 |UbuntuServer |
 | SKU |18.04-LTS |
 | 版本 |最新 |
 
 > [!TIP]
-> 可以在 [Navigate and select Linux virtual machine images in Azure with CLI or PowerShell](../virtual-machines/linux/cli-ps-findimage.md?toc=%2fvirtual-machines%2flinux%2ftoc.json)（使用 CLI 或 PowerShell 在 Azure 中导航和选择 Linux 虚拟机映像）中详细了解这些属性，以及如何列出市场映像。 请注意，目前并非所有市场映像都与 Batch 兼容。 有关详细信息，请参阅 [节点代理 SKU](#node-agent-sku)。
+> 可以在 [Navigate and select Linux virtual machine images in Azure with CLI or PowerShell](../virtual-machines/linux/cli-ps-findimage.md?toc=%2fvirtual-machines%2flinux%2ftoc.json)（使用 CLI 或 PowerShell 在 Azure 中导航和选择 Linux 虚拟机映像）中详细了解这些属性，以及如何列出市场映像。 请注意，目前并非所有市场映像都与 Batch 兼容。 有关详细信息，请参阅[节点代理 SKU](#node-agent-sku)。
 >
 >
 
 ### <a name="node-agent-sku"></a>节点代理 SKU
-Batch 节点代理是一个程序，它在池中的每个节点上运行，并在节点与 Batch 服务之间提供命令和控制接口。 节点代理对于不同操作系统有不同的实现（称为 SKU）。 从根本上讲，在创建虚拟机配置时，需要先指定虚拟机映像引用，并指定要在其上安装映像的代理节点。 通常，每个节点代理 SKU 与多个虚拟机映像兼容。 下面是节点代理 SKU 的几个示例：
+Batch 节点代理是一个程序，它在池中的每个节点上运行，并在节点与 Batch 服务之间提供命令和控制接口。 节点代理对于不同操作系统有不同的实现（称为 SKU）。 从根本上讲，在创建虚拟机配置时，需要先指定虚拟机映像引用，然后指定要在其上安装映像的代理节点。 通常，每个节点代理 SKU 与多个虚拟机映像兼容。 下面是节点代理 SKU 的几个示例：
 
 * batch.node.ubuntu 18.04
 * batch.node.centos 7
@@ -59,10 +61,10 @@ Batch 节点代理是一个程序，它在池中的每个节点上运行，并�
 >
 >
 
-## <a name="create-a-linux-pool-batch-python"></a>创建 Linux 池：Batch Python
-以下代码片段示范如何使用[用于 Python 的 Azure Batch 客户端库][py_batch_package]创建 Ubuntu Server 计算节点池。 有关 Batch Python 模块的参考文档可在“阅读文档”上的 [azure.batch package][py_batch_docs] 包处找到。
+## <a name="create-a-linux-pool-batch-python"></a>创建 Linux 池：批处理 Python
+以下代码片段示范如何使用[用于 Python 的 Azure Batch 客户端库][py_batch_package]创建 Ubuntu Server 计算节点池。 有关 Batch Python 模块的参考文档可在“阅读文档”上的 [azure.batch package][py_batch_docs] 处找到。
 
-此代码片段显式创建 [ImageReference][py_imagereference]，并指定它的每个属性（publisher、offer、SKU、version）。 但是，我们建议在生产代码中使用 [list_node_agent_skus][py_list_supported_images] 方法在运行时从可用映像和节点代理 SKU 组合中做出决定和选择。
+此代码片段显式创建 [ImageReference][py_imagereference]，并指定它的每个属性（publisher、offer、SKU、version）。 但是，我们建议在生产代码中使用 [list_supported_images][py_list_supported_images] 方法在运行时从可用映像和节点代理 SKU 组合中做出决定和选择。
 
 ```python
 # Import the required modules from the
@@ -118,7 +120,7 @@ new_pool.virtual_machine_configuration = vmc
 client.pool.add(new_pool)
 ```
 
-如上所述，建议不要显式创建 [ImageReference][py_imagereference]，而应使用 [list_node_agent_skus][py_list_supported_images] 方法从当前支持的节点代理/市场映像组合中动态进行选择。 以下 Python 代码片段演示如何使用此方法。
+如上所述，建议不要显式创建 [ImageReference][py_imagereference]，而是使用 [list_supported_images][py_list_supported_images] 方法从当前支持的节点代理/市场映像组合中动态选择。 以下 Python 代码片段演示如何使用此方法。
 
 ```python
 # Get the list of supported images from the Batch service
@@ -143,10 +145,10 @@ vmc = batchmodels.VirtualMachineConfiguration(
     node_agent_sku_id=image.node_agent_sku_id)
 ```
 
-## <a name="create-a-linux-pool-batch-net"></a>创建 Linux 池：Batch .NET
+## <a name="create-a-linux-pool-batch-net"></a>创建 Linux 池：批处理 .NET
 以下代码片段示范如何使用 [Batch .NET][nuget_batch_net] 客户端库创建 Ubuntu Server 计算节点池。 可以在 docs.microsoft.com 上找到 [Batch .NET 参考文档][api_net]。
 
-以下代码片段使用 [PoolOperations][net_pool_ops].[ListSupportedImages][net_list_supported_images] 方法从当前支持的市场映像和节点代理 SKU 组合列表中进行选择。 这种做法非常有效，因为支持的组合列表可能随着时间改变。 通常情况下，添加支持的组合。
+以下代码片段使用 [PoolOperations][net_pool_ops].[ListSupportedImages][net_list_supported_images] 方法从当前支持的市场映像和节点代理 SKU 组合列表中做出选择。 这种做法非常有效，因为支持的组合列表可能随着时间改变。 通常情况下，添加支持的组合。
 
 ```csharp
 // Pool settings
@@ -190,7 +192,7 @@ CloudPool pool = batchClient.PoolOperations.CreatePool(
 await pool.CommitAsync();
 ```
 
-尽管上述代码片段使用 [PoolOperations][net_pool_ops].[ListSupportedImages][net_list_supported_images] 方法动态列出了支持的映像和节点代理 SKU 组合并从中做出选择（建议的做法），但也可以显式配置 [ImageReference][net_imagereference]：
+尽管上述代码片段使用了 [PoolOperations][net_pool_ops].[ListSupportedImages][net_list_supported_images] 方法动态列出并从支持的映像和节点代理 SKU 组合中做出选择（建议的做法），但也可以显式配置 [ImageReference][net_imagereference]：
 
 ```csharp
 ImageReference imageReference = new ImageReference(
@@ -201,10 +203,10 @@ ImageReference imageReference = new ImageReference(
 ```
 
 ## <a name="list-of-virtual-machine-images"></a>虚拟机映像列表
-若要获取 Batch 服务及其相应节点代理支持的所有市场虚拟机映像的列表，请利用 [list_supported_images][py_list_supported_images] (Python)、[ListSupportedImages][net_list_supported_images] (Batch .NET) 或所选的各个语言 SDK 中相应的 API。
+若要获取 Batch 服务及其相应节点代理的所有支持的市场虚拟机映像列表，请利用 [list_supported_images][py_list_supported_images] (Python)、[ListSupportedImages][net_list_supported_images] (Batch .NET) 或所选的相应语言 SDK 中的相应 API。
 
 ## <a name="connect-to-linux-nodes-using-ssh"></a>使用 SSH 连接到 Linux 节点
-在开发期间或进行故障排除时，可能会发现需要登录到池中的节点。 与 Windows 计算节点不同，无法使用远程桌面协议 (RDP) 连接到 Linux 节点。 相反，Batch 服务在每个节点上启用 SSH 访问以建立远程连接。
+在开发期间或进行故障排除时，可能会发现需要登录到池中的节点。 不同于 Windows 计算节点，无法使用远程桌面协议 (RDP) 连接到 Linux 节点。 相反，Batch 服务在每个节点上启用 SSH 访问以建立远程连接。
 
 以下 Python 代码片段会在池中的每个节点上创建一个用户（远程连接时需要）。 然后列显每个节点的安全外壳 (SSH) 连接信息。
 
@@ -275,10 +277,10 @@ tvm-1219235766_3-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50002
 tvm-1219235766_4-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50001
 ```
 
-在节点上创建用户时不需要指定密码，而可以指定 SSH 公钥。 在 Python SDK 中，请在 [ComputeNodeUser][py_computenodeuser] 上使用 **ssh_public_key** 参数。 在 .NET 中，请使用 [ComputeNodeUser][net_computenodeuser].[SshPublicKey][net_ssh_key] 属性。
+在节点上创建用户时不需要指定密码，而可以指定 SSH 公钥。 在 Python SDK 中，请在 [ComputeNodeUser][py_computenodeuser] 上使用 ssh_public_key 参数。 在 .NET 中，请使用 [ComputeNodeUser][net_computenodeuser].[SshPublicKey][net_ssh_key] 属性。
 
 ## <a name="pricing"></a>定价
-Azure Batch 构建在 Azure 云服务和 Azure 虚拟机技术基础之上。 Batch 服务本身是免费提供的，这意味着你仅需为 Batch 解决方案使用的计算资源（及其包含的相关费用）付费。 如果选择“云服务配置”，则要根据[云服务定价][cloud_services_pricing]结构付费。 如果选择“虚拟机配置”，则要根据[虚拟机定价][vm_pricing]结构收费。
+Azure Batch 构建在 Azure 云服务和 Azure 虚拟机技术基础之上。 Batch 服务本身是免费提供的，这意味着，只需支付 Batch 解决方案使用的计算资源费用（以及产生的相关费用）。 如果选择“云服务配置”，系统会根据[云服务定价][cloud_services_pricing]结构收费。 如果选择“虚拟机配置”，系统会根据[虚拟机定价][vm_pricing]结构收费。
 
 如果使用[应用程序包](batch-application-packages.md)将应用程序部署到 Batch 节点，系统还会对应用程序包使用的 Azure 存储资源收费。
 
@@ -286,30 +288,31 @@ Azure Batch 构建在 Azure 云服务和 Azure 虚拟机技术基础之上。 Ba
 
 GitHub 上 [azure-batch-samples][github_samples] 存储库中的 [Python 代码示例][github_samples_py]包含演示如何执行常见 Batch 操作（例如创建池、作业和任务）的多个脚本。 Python 示例随附的 [README][github_py_readme] 文件包含有关如何安装所需包的详细信息。
 
-[api_net]: https://msdn.microsoft.com/library/azure/mt348682.aspx
-[api_net_mgmt]: https://msdn.microsoft.com/library/azure/mt463120.aspx
-[api_rest]: https://msdn.microsoft.com/library/azure/dn820158.aspx
+[api_net]: https://docs.azure.cn/dotnet/api/microsoft.azure.batch
+[api_net_mgmt]: https://docs.microsoft.com/dotnet/api/overview/azure/batch
+[api_rest]: https://docs.microsoft.com/rest/api/batchservice/
 [cloud_services_pricing]: https://www.azure.cn/pricing/details/cloud-services/
 [github_py_readme]: https://github.com/Azure/azure-batch-samples/blob/master/Python/Batch/README.md
 [github_samples]: https://github.com/Azure/azure-batch-samples
 [github_samples_py]: https://github.com/Azure/azure-batch-samples/tree/master/Python/Batch
-
+[github_samples_pyclient]: https://github.com/Azure/azure-batch-samples/blob/master/Python/Batch/article_samples/python_tutorial_client.py
 [portal]: https://portal.azure.cn
-[net_cloudpool]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudpool.aspx
-[net_computenodeuser]: /dotnet/api/microsoft.azure.batch.computenodeuser?view=azure-dotnet
-[net_imagereference]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.imagereference.aspx
-[net_list_supported_images]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.pooloperations.listsupportedimages
-[net_pool_ops]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.pooloperations.aspx
-[net_ssh_key]: /dotnet/api/microsoft.azure.batch.computenodeuser.sshpublickey?view=azure-dotnet#Microsoft_Azure_Batch_ComputeNodeUser_SshPublicKey
+[net_cloudpool]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.cloudpool
+[net_computenodeuser]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.computenodeuser?view=azure-dotnet
+[net_imagereference]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.imagereference
+[net_list_supported_images]: https://docs.azure.cn/dotnet/api/microsoft.azure.batch.pooloperations.listsupportedimages
+[net_pool_ops]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.pooloperations
+[net_ssh_key]: https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.computenodeuser.sshpublickey?view=azure-dotnet#Microsoft_Azure_Batch_ComputeNodeUser_SshPublicKey
 [nuget_batch_net]: https://www.nuget.org/packages/Microsoft.Azure.Batch/
-[rest_add_pool]: https://msdn.microsoft.com/library/azure/dn820174.aspx
+[rest_add_pool]: https://docs.microsoft.com/rest/api/batchservice/pool/add
+[py_account_ops]: http://azure-sdk-for-python.readthedocs.org/en/dev/ref/azure.batch.operations.html#azure.batch.operations.AccountOperations
 [py_azure_sdk]: https://pypi.python.org/pypi/azure
 [py_batch_docs]: https://azure.github.io/azure-sdk-for-python/ref/Batch.html
 [py_batch_package]: https://pypi.python.org/pypi/azure-batch
-[py_computenodeuser]: https://docs.microsoft.com/python/api/azure.batch.models.computenodeuser
-[py_imagereference]: https://docs.microsoft.com/python/api/azure.mgmt.batch.models.imagereference
+[py_computenodeuser]: https://docs.microsoft.com/python/api/azure-batch/azure.batch.models.computenodeuser
+[py_imagereference]: https://docs.microsoft.com/python/api/azure-mgmt-batch/azure.mgmt.batch.models.imagereference
 [py_list_supported_images]: https://docs.microsoft.com/python/api/azure-batch/azure.batch.operations.AccountOperations?view=azure-python
-[vm_marketplace]: https://market.azure.cn/marketplace/apps/category/compute?filters=virtual-machine-images&page=1
+[vm_marketplace]: https://market.azure.cn/marketplace/apps/filter?search=compute&filters=virtual-machine-images&page=1
 [vm_pricing]: https://www.azure.cn/pricing/details/virtual-machines/
 
-<!-- Update_Description: wording update -->
+<!-- Update_Description: update meta properties, wording update, update link -->

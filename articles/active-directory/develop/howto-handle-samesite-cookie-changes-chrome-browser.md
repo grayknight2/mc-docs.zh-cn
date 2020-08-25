@@ -8,17 +8,17 @@ manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 04/22/2020
+ms.topic: how-to
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: kkrishna
 ms.custom: aaddev
-ms.openlocfilehash: 3186a99e51ee8ec95bbd5d878ae31e3e7d98b78f
-ms.sourcegitcommit: a4a2521da9b29714aa6b511fc6ba48279b5777c8
+ms.openlocfilehash: 79630bac3b903ab0f860725f9c607b4e44dbcf0e
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82126236"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647478"
 ---
 # <a name="handle-samesite-cookie-changes-in-chrome-browser"></a>在 Chrome 浏览器中处理 SameSite Cookie 更改
 

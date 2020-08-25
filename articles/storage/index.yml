@@ -10,13 +10,13 @@ metadata:
   author: WenJason
   ms.author: v-jay
   origin.date: 05/01/2020
-  ms.date: 06/01/2020
-  ms.openlocfilehash: 509eae6eab1640ac7c452d54cac7c4dc3bdf2c54
-  ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+  ms.date: 08/24/2020
+  ms.openlocfilehash: 778e1bbb7d7dab493f6ba39650b0dcc35132c8ba
+  ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
   ms.translationtype: HT
   ms.contentlocale: zh-CN
-  ms.lasthandoff: 05/29/2020
-  ms.locfileid: "84199807"
+  ms.lasthandoff: 08/23/2020
+  ms.locfileid: "88753360"
 highlightedContent:
   items:
   - title: 核心存储服务简介
@@ -82,6 +82,12 @@ additionalContent:
         text: 表存储与 Cosmos DB 表 API 的比较
       - url: /storage/tables/
         text: 查看更多 >
+  - title: 数据操作
+    items:
+    - title: 脱机批量传输到 Azure
+      links:
+      - url: /databox/data-box-disk-overview
+        text: 传输少于 40 TB 的数据 (Data Box Disk)
     - title: 传输小型数据集（联机）
       links:
       - url: /storage/common/storage-use-azcopy-v10?toc=%2fstorage%2fblobs%2ftoc.json

@@ -5,18 +5,18 @@ description: 使用 Azure 防火墙控制对 Azure 机器学习工作区的访�
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: how-to
+ms.topic: conceptual
 ms.author: aashishb
 author: aashishb
 ms.reviewer: larryfr
-ms.date: 04/27/2020
-ms.custom: tracking-python
-ms.openlocfilehash: c1d4074daf98c3180e1abde7195d619c9a1962d0
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.date: 07/17/2020
+ms.custom: how-to, tracking-python
+ms.openlocfilehash: 0ddb37974680794fe95387f5e029175b3d65c478
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440964"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228241"
 ---
 # <a name="use-workspace-behind-azure-firewall-for-azure-machine-learning"></a>将 Azure 防火墙后的工作区用于 Azure 机器学习
 
@@ -60,8 +60,9 @@ Azure 防火墙可用于控制对 Azure 机器学习工作区和公共 Internet 
 
 | **主机名** | **用途** |
 | ---- | ---- |
-| **anaconda.com** | 在安装 conda 包时使用 |
-| **pypi.org** | 在安装 pip 包时使用 |
+| **anaconda.com** | 用于安装默认包。 |
+| \*.anaconda.org | 用于获取存储库数据。 |
+| **pypi.org** | 用于列出默认索引的依赖项（如果有），索引不会被用户设置覆盖。 如果索引被覆盖，则还必须允许“\*.pythonhosted.org”。 |
 
 ## <a name="r-hosts"></a>R 主机
 

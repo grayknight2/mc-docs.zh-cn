@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: tutorial
 ms.workload: identity
-ms.date: 07/09/2020
+ms.date: 08/19/2020
 ms.author: v-junlch
 ms.reviewer: oldalton
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: eff5dd179e06ce1575b263558605ce0854204e79
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.openlocfilehash: f26f55a7e1e0953cdbf9d11732551f7dea98c25b
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164912"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647542"
 ---
 # <a name="sign-in-users-and-call-the-microsoft-graph-from-an-ios-or-macos-app"></a>从 iOS 或 macOS 应用将用户登录并调用 Microsoft Graph
 
@@ -149,7 +149,7 @@ var webViewParameters : MSALWebviewParameters?
 var currentAccount: MSALAccount?
 ```
 
-需要修改的唯一值是分配给 `kClientID` 作为[应用程序 ID](/active-directory/develop/developer-glossary#application-id-client-id) 的值。 此值是你在本教程开头的步骤中保存的 MSAL 配置数据的一部分，该步骤用于在 Azure 门户中注册应用程序。
+需要修改的唯一值是分配给 `kClientID` 作为[应用程序 ID](./developer-glossary.md#application-id-client-id) 的值。 此值是你在本教程开头的步骤中保存的 MSAL 配置数据的一部分，该步骤用于在 Azure 门户中注册应用程序。
 
 ## <a name="configure-xcode-project-settings"></a>配置 Xcode 项目设置
 
@@ -842,5 +842,5 @@ func acquireTokenInteractively() {
 
 ## <a name="get-help"></a>获取帮助
 
-如果对本教程或 Microsoft 标识平台有疑问，请访问[帮助和支持](/active-directory/develop/developer-support-help-options)。
+如果对本教程或 Microsoft 标识平台有疑问，请访问[帮助和支持](./developer-support-help-options.md)。
 

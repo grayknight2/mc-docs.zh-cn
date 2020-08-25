@@ -5,22 +5,22 @@ author: WenJason
 ms.service: storage
 ms.topic: tutorial
 origin.date: 05/14/2019
-ms.date: 01/06/2020
+ms.date: 08/24/2020
 ms.author: v-jay
 ms.reviewer: seguler
 ms.subservice: common
-ms.openlocfilehash: 054e0b08c029a293af7fb885704aa2a1eba61cac
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 61b2dfb0457abbdc56201ba81f57325e3abc08bb
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75624214"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753389"
 ---
 #  <a name="tutorial-migrate-on-premises-data-to-cloud-storage-with-azcopy"></a>教程：使用 AzCopy 将本地数据迁移到云存储空间
 
 AzCopy 是一个命令行工具，借助该工具，可使用简单命令将数据复制到 Azure Blob 存储、Azure 文件和 Azure 表存储或从其中复制出数据。 这些命令旨在实现最佳性能。 使用 AzCopy，可在文件系统和存储帐户之间或在存储帐户之间复制数据。 AzCopy 可以用来将数据从本地复制到存储帐户。
 
-本教程介绍如何执行下列操作：
+在本教程中，你将了解如何执行以下操作：
 
 > [!div class="checklist"]
 > * 创建存储帐户。 
@@ -124,11 +124,15 @@ azcopy sync "<local-folder-path>" "https://<storage-account-name>.blob.core.chin
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
-    azcopy sync "/mnt/myfiles" "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer?sv=2018-03-28&ss=bfqt&srt=sco&sp=rwdlacup&se=2019-05-30T06:57:40Z&st=2019-05-29T22:57:40Z&spr=https&sig=BXHippZxxx54hQn%2F4tBY%2BE2JHGCTRv52445rtoyqgFBUo%3D" --recursive=true
+```bash
+azcopy sync "/mnt/myfiles" "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer?sv=2018-03-28&ss=bfqt&srt=sco&sp=rwdlacup&se=2019-05-30T06:57:40Z&st=2019-05-29T22:57:40Z&spr=https&sig=BXHippZxxx54hQn%2F4tBY%2BE2JHGCTRv52445rtoyqgFBUo%3D" --recursive=true
+```
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
-    azcopy sync "C:\myFolder" "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer" --recursive=true
+```bash
+azcopy sync "C:\myFolder" "https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer" --recursive=true
+```
 
 ---
 

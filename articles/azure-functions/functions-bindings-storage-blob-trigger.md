@@ -3,14 +3,14 @@ title: 适用于 Azure Functions 的 Azure Blob 存储触发器
 description: 了解如何在 Azure Blob 存储数据更改时运行 Azure 函数。
 author: craigshoemaker
 ms.topic: reference
-ms.date: 07/02/2020
+ms.date: 08/11/2020
 ms.author: v-junlch
-ms.openlocfilehash: 9b74ccfecfdeba694988b4e65a2612423c10fe4e
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.openlocfilehash: ef65d3fcb233687524f2c93c1c55ca75771d9dbd
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945239"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222718"
 ---
 # <a name="azure-blob-storage-trigger-for-azure-functions"></a>适用于 Azure Functions 的 Azure Blob 存储触发器
 
@@ -285,7 +285,7 @@ JavaScript 不支持特性。
 "path": "input/original-{name}",
 ```
 
-如果 Blob 名称为 *original-Blob1.txt*，则函数代码中 `name` 变量的值为 `Blob1`。
+如果 Blob 名称为 *original-Blob1.txt*，则函数代码中 `name` 变量的值为 `Blob1.txt`。
 
 ### <a name="filter-on-file-type"></a>按文件类型筛选
 
@@ -362,7 +362,7 @@ Blob 触发器可在内部使用队列，因此并发函数调用的最大数量
 
 [消耗计划](functions-scale.md#how-the-consumption-plans-work)将虚拟机 (VM) 上的函数应用限制为 1.5 GB 内存。 内存由每个并发执行函数实例和函数运行时本身使用。 如果 blob 触发的函数将整个 blob 加载到内存中，该函数使用的仅用于 blob 的最大内存为 24 * 最大 blob 大小。 例如，包含 3 个由 blob 触发的函数的函数应用和默认设置，其每 VM 最大并发为 3*24 = 72 个函数调用。
 
-JavaScript 和 Java 函数会将整个 blob 加载到内存中，并且如果绑定到 `string`、`Byte[]` 或 POCO，则 C# 函数也会如此。
+JavaScript 和 Java 函数会将整个 blob 加载到内存中，并且如果绑定到 `string` 或 `Byte[]`，则 C# 函数也会如此。
 
 ## <a name="polling"></a>轮询
 

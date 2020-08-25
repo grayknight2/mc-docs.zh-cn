@@ -7,19 +7,19 @@ tags: top-support-issue
 ms.assetid: 2fa5ee6b-51a6-4237-805f-518e6c57d11b
 ms.topic: article
 origin.date: 11/01/2018
-ms.date: 01/13/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 51c82058fed8e7e3bf90eee9ab2b5e081f30a811
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: c6b8d3a913a7d8fad36afd4c1586168ad77fb2ca
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75600468"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227924"
 ---
 # <a name="deployment-faqs-for-web-apps-in-azure"></a>Azure 中 Web 应用的部署常见问题解答
 
-本文对 [Azure 应用服务 Web 应用功能](https://www.azure.cn/home/features/app-service/web-apps/)的部署相关常见问题 (FAQ) 进行了解答。
+本文对 [Azure 应用服务 Web 应用功能](https://azure.microsoft.com/services/app-service/web/)的部署相关常见问题 (FAQ) 进行了解答。
 
 [!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
@@ -34,14 +34,14 @@ ms.locfileid: "75600468"
 
 ## <a name="i-see-an-error-message-when-i-try-to-deploy-from-visual-studio-how-do-i-resolve-this-error"></a>尝试从 Visual Studio 进行部署时，收到了一条错误消息。 如何解决此错误？
 
-如果看到以下消息，则可能使用的是旧版本的 SDK：“在资源组 'YourResourceGroup' 中部署资源 'YourResourceName' 时出错: MissingRegistrationForLocation: 未为 ‘中国北部’ 位置中的资源类型 ‘组件’ 注册订阅。请重新注册此提供程序，以便访问该位置。” 
+如果看到以下消息，则可能使用的是旧版本的 SDK：“在资源组 'YourResourceGroup' 中部署资源 'YourResourceName' 时出错: MissingRegistrationForLocation: 未为‘中国北部’位置中的资源类型‘组件’注册订阅。请重新注册此提供程序，以便访问该位置。”
 
 若要解决此错误，请升级到[最新 SDK](https://azure.microsoft.com/downloads/)。 如果使用的是最新 SDK 但也收到了此消息，请提交支持请求。
 
 ## <a name="how-do-i-deploy-an-aspnet-application-from-visual-studio-to-app-service"></a>如何将 ASP.NET 应用程序从 Visual Studio 部署到应用服务？
 <a id="deployasp"></a>
 
-教程[五分钟内在 Azure 中创建第一个 ASP.NET Web 应用](app-service-web-get-started-dotnet.md)演示如何使用 Visual Studio 将 ASP.NET Web 应用程序部署到应用服务中的 Web 应用。
+教程[五分钟内在 Azure 中创建第一个 ASP.NET Web 应用](quickstart-dotnetcore.md)演示如何使用 Visual Studio 将 ASP.NET Web 应用程序部署到应用服务中的 Web 应用。
 
 ## <a name="what-are-the-different-types-of-deployment-credentials"></a>有哪些不同类型的部署凭据？
 
@@ -54,6 +54,7 @@ ms.locfileid: "75600468"
 ## <a name="how-do-i-resolve-ftp-error-550---there-is-not-enough-space-on-the-disk-when-i-try-to-ftp-my-files"></a>尝试通过 FTP 传输文件时出现“FTP 错误 550 - 磁盘空间不足”，应如何解决？
 
 如果看到此消息，磁盘空间可能即将达到 Web 应用服务计划中的磁盘配额。 可能需要基于磁盘空间需求提升到较高服务层级。 有关定价计划和资源限制的详细信息，请参阅[应用服务定价](https://www.azure.cn/pricing/details/app-service/)。
+
 <!-- ## How do I set up continuous deployment for my App Service web app? -->
 
 <!-- You can set up continuous deployment from several resources, including Azure DevOps, OneDrive, GitHub, Bitbucket, Dropbox, and other Git repositories. These options are available in the portal. [Continuous deployment to App Service](deploy-continuous-deployment.md) is a helpful tutorial that explains how to set up continuous deployment. -->

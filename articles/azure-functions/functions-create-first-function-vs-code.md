@@ -2,15 +2,15 @@
 title: 在 Azure 中使用 Visual Studio Code 创建你的第一个函数
 description: 使用 Visual Studio Code 中的 Azure Functions扩展创建一个简单的 HTTP 触发函数并将其发布到 Azure。
 ms.topic: quickstart
-ms.date: 07/15/2020
+ms.date: 08/11/2020
 ms.custom: mvc, devcenter, seo
 zone_pivot_groups: programming-languages-set-functions
-ms.openlocfilehash: 933b36fb7bcdcd2370de2d128b6f37aedaed9a65
-ms.sourcegitcommit: 403db9004b6e9390f7fd1afddd9e164e5d9cce6a
+ms.openlocfilehash: 18aa6283a546ba1786ad4f880e37723f761160ab
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440525"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222584"
 ---
 # <a name="quickstart-create-a-function-in-azure-using-visual-studio-code"></a>快速入门：在 Azure 中使用 Visual Studio Code 创建函数
 
@@ -37,7 +37,7 @@ ms.locfileid: "86440525"
 ::: zone-end
 ::: zone pivot="programming-language-java"  
 > [!NOTE]
-> 如果 Visual Studio Code 不是首选开发工具，请查看面向使用 [Maven](/azure-functions/functions-create-first-azure-function-azure-cli?pivots=programming-language-java) 和 `IntelliJ IDEA` 的 Java 开发人员的类似教程。
+> 如果 Visual Studio Code 不是首选开发工具，请查看面向使用 [Maven](./functions-create-first-azure-function-azure-cli.md?pivots=programming-language-java)、`Gradle` 和 `IntelliJ IDEA` 的 Java 开发人员的类似教程。
 ::: zone-end  
 
 ## <a name="configure-your-environment"></a>配置环境

@@ -8,17 +8,17 @@ manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 06/29/2020
+ms.topic: how-to
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: kkrishna
 ms.custom: aaddev
-ms.openlocfilehash: 865ce17c46544d34a1da457825eeb43876276067
-ms.sourcegitcommit: 1008ad28745709e8d666f07a90e02a79dbbe2be5
+ms.openlocfilehash: 5c2b67fe6a06ef75b25ccd66776730d6d8a2aab4
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85945332"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647591"
 ---
 # <a name="handle-itp-in-safari-and-other-browsers-where-third-party-cookies-are-blocked"></a>在 Safari 和其他阻止第三方 Cookie 的浏览器中处理 ITP
 
@@ -46,7 +46,7 @@ Apple Safari 提供默认已启用的隐私保护功能，称为[智能跟踪保
 
 SPA 有两个额外的限制：
 
-* [必须将重定向 URI 标记为类型 `spa`](v2-oauth2-auth-code-flow.md#setup-required-for-single-page-apps) 才能在登录终结点上启用 CORS。
+* [必须将重定向 URI 标记为类型 `spa`](v2-oauth2-auth-code-flow.md#redirect-uri-setup-required-for-single-page-apps) 才能在登录终结点上启用 CORS。
 * 通过授权代码流颁发给 `spa` 重定向 URI 的刷新令牌的生存期为 24 小时，而不是 90 天。
 
 ![SPA 应用的代码流](./media/v2-oauth-auth-code-spa/active-directory-oauth-code-spa.png)

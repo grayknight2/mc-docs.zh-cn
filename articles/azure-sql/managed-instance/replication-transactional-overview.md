@@ -11,14 +11,14 @@ ms.topic: conceptual
 author: WenJason
 ms.author: v-jay
 ms.reviewer: carlrab
-origin.date: 02/08/2019
-ms.date: 07/13/2020
-ms.openlocfilehash: 76ed378f4135d27019495cb64f0d5017bf1ffe0f
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+origin.date: 04/20/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: 8f85af08a65b1196ce9e9f9956af8a104e3a9a1b
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227313"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223276"
 ---
 # <a name="transactional-replication-with-azure-sql-managed-instance"></a>使用 Azure SQL 托管实例进行事务性复制
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
@@ -30,8 +30,8 @@ ms.locfileid: "86227313"
 还可以使用事务复制将 Azure SQL 托管实例中发生的更改推送到：
 
 - SQL Server 数据库 - 在本地或在 Azure VM 上
-- Azure SQL 数据库中的单一或共用数据库
-- Azure SQL 托管实例中的单一或共用数据库
+- Azure SQL 数据库中的数据库
+- Azure SQL 托管实例中的实例数据库
 
   > [!NOTE]
   > 若要使用 Azure SQL 托管实例的所有功能，必须使用最新版本的 [SQL Server Management Studio (SSMS)](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms) 和 [SQL Server Data Tools (SSDT)](https://docs.microsoft.com/sql/ssdt/download-sql-server-data-tools-ssdt)。
@@ -105,11 +105,10 @@ Azure SQL 托管实例可以支持成为以下版本的 SQL Server 的订阅服�
 
 ### <a name="compare-data-sync-with-transactional-replication"></a>将数据同步与事务复制进行比较
 
-| | 数据同步 | 事务复制 |
+| 类别 | 数据同步 | 事务复制 |
 |---|---|---|
 | 优点 | - 主动-主动支持<br/>- 在本地和 Azure SQL 数据库之间双向同步 | - 更低的延迟<br/>- 事务一致性<br/>- 迁移后重用现有拓扑 |
 | 缺点 | - 5 分钟或更长的延迟<br/>- 无事务一致性<br/>- 更高的性能影响 | - 无法从 Azure SQL 数据库发布 <br/>- 维护成本高 |
-| | | |
 
 ## <a name="common-configurations"></a>常用配置
 

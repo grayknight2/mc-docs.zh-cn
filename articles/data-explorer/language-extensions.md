@@ -7,17 +7,17 @@ ms.reviewer: orhasban
 ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 04/01/2020
-ms.date: 05/15/2020
-ms.openlocfilehash: f7822ddee9b9df5967a8680d4d457be73f155338
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.date: 08/18/2020
+ms.openlocfilehash: ea418c3dd100e6108c9fa7b9ceefef83b60a1e4d
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83418133"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515970"
 ---
 # <a name="manage-language-extensions-in-your-azure-data-explorer-cluster-preview"></a>管理 Azure 数据资源管理器群集（预览版）中的语言扩展
 
-语言扩展功能允许你使用语言扩展插件将其他语言集成到 Azure 数据资源管理器 KQL 查询中。 当你使用相关脚本运行用户定义函数 (UDF) 时，该脚本会获取表格数据作为其输入，并会生成表格输出。 插件运行时托管在[沙盒](https://docs.microsoft.com/azure/data-explorer/kusto/concepts/sandboxes)中，这是一个运行在群集节点上的独立且安全的环境。 本文介绍如何在 Azure 门户中管理 Azure 数据资源管理器群集中的语言扩展插件。
+语言扩展功能允许你使用语言扩展插件将其他语言集成到 Azure 数据资源管理器 KQL 查询中。 当你使用相关脚本运行用户定义函数 (UDF) 时，该脚本会获取表格数据作为其输入，并会生成表格输出。 插件运行时托管在[沙盒](kusto/concepts/sandboxes.md)中，这是一个运行在群集节点上的独立且安全的环境。 本文介绍如何在 Azure 门户中管理 Azure 数据资源管理器群集中的语言扩展插件。
 
 > [!NOTE]
 > 当前支持的 Azure 数据资源管理器语言扩展为 Python 和 R。
@@ -46,8 +46,8 @@ ms.locfileid: "83418133"
  
 ## <a name="run-language-extension-integrated-queries"></a>运行集成了语言扩展的查询
 
-* 了解如何[运行集成了 Python 的 KQL 查询](https://docs.microsoft.com/azure/data-explorer/kusto/query/pythonplugin)。
-* 了解如何[运行集成了 R 的 KQL 查询](https://docs.microsoft.com/azure/data-explorer/kusto/query/rplugin)。 
+* 了解如何[运行集成了 Python 的 KQL 查询](kusto/query/pythonplugin.md)。
+* 了解如何[运行集成了 R 的 KQL 查询](kusto/query/rplugin.md)。 
 
 ## <a name="disable-language-extensions-on-your-cluster"></a>在群集上禁用语言扩展
 
@@ -65,6 +65,6 @@ ms.locfileid: "83418133"
 
 ## <a name="limitations"></a>限制
 
-* 语言扩展功能不支持[磁盘加密](manage-cluster-security.md)。 
+* 语言扩展功能不支持[磁盘加密](cluster-disk-encryption.md)。 
 * 即使在相关语言的范围内没有查询运行，语言扩展运行时沙盒也会分配磁盘空间。
-若要更详细地了解限制，请参阅[沙盒](https://docs.microsoft.com/azure/data-explorer/kusto/concepts/sandboxes)。
+若要更详细地了解限制，请参阅[沙盒](kusto/concepts/sandboxes.md)。

@@ -4,18 +4,18 @@ description: 了解如何使用 Azure 队列服务创建和删除队列，以及
 author: WenJason
 ms.author: v-jay
 origin.date: 12/08/2016
-ms.date: 07/20/2020
+ms.date: 08/24/2020
 ms.service: storage
 ms.subservice: queues
 ms.topic: how-to
 ms.reviewer: dineshm
 ms.custom: seo-javascript-september2019
-ms.openlocfilehash: 8b08c03a756a57631db47f19c6e3c22ec668c5fe
-ms.sourcegitcommit: 31da682a32dbb41c2da3afb80d39c69b9f9c1bc6
+ms.openlocfilehash: 40005085425dcf9f22a1567f21d0ef74d02f2d0a
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86414598"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753586"
 ---
 # <a name="use-azure-queue-service-to-create-and-delete-queues-from-nodejs"></a>通过 Node.js 使用 Azure 队列服务创建和删除队列
 [!INCLUDE [storage-selector-queue-include](../../../includes/storage-selector-queue-include.md)]
@@ -33,7 +33,7 @@ ms.locfileid: "86414598"
 [!INCLUDE [storage-create-account-include](../../../includes/storage-create-account-include.md)]
 
 ## <a name="create-a-nodejs-application"></a>创建 Node.js 应用程序
-创建一个空的 Node.js 应用程序。 有关创建 Node.js 应用程序的说明，请参阅[在 Azure 应用服务中创建 Node.js Web 应用](../../app-service/app-service-web-get-started-nodejs.md)、[使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务](../../cloud-services/cloud-services-nodejs-develop-deploy-app.md)或 [Visual Studio Code](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial)。
+创建一个空的 Node.js 应用程序。 有关创建 Node.js 应用程序的说明，请参阅[在 Azure 应用服务中创建 Node.js Web 应用](../../app-service/quickstart-nodejs.md)、[使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务](../../cloud-services/cloud-services-nodejs-develop-deploy-app.md)或 [Visual Studio Code](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial)。
 
 ## <a name="configure-your-application-to-access-storage"></a>配置应用程序以访问存储
 若要使用 Azure 存储，需要 Azure Storage SDK for Node.js，其中包括一组便于与存储 REST 服务进行通信的库。
@@ -196,7 +196,7 @@ queueSvc.getMessages('myqueue', function(error, getResults, getResponse){
 queueSvc.getMessages('myqueue', {numOfMessages: 15, visibilityTimeout: 5 * 60}, function(error, results, getResponse){
   if(!error){
     // Messages retrieved
-    for(var index in result){
+    for(var index in results){
       // text is available in result[index].messageText
       var message = results[index];
       queueSvc.deleteMessage(queueName, message.messageId, message.popReceipt, function(error, deleteResponse){
@@ -342,7 +342,7 @@ queueSAS = queueSvc.generateSharedAccessSignature('myqueue', { Id: 'user2' });
 
 [Azure Portal]: https://portal.azure.cn
 
-[在 Azure 应用服务中创建 Node.js Web 应用](../../app-service/app-service-web-get-started-nodejs.md)
+[在 Azure 应用服务中创建 Node.js Web 应用](../../app-service/quickstart-nodejs.md)
 
 [生成 Node.js 应用程序并将其部署到 Azure 云服务](../../cloud-services/cloud-services-nodejs-develop-deploy-app.md)
 

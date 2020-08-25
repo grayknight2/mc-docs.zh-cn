@@ -1,18 +1,18 @@
 ---
-title: Azure Database for MariaDB 驱动程序和管理工具兼容性
+title: 驱动程序和工具兼容性 - Azure Database for MariaDB
 description: 本文介绍与 Azure Database for MariaDB 兼容的 MariaDB 驱动程序和管理工具。
 author: WenJason
 ms.author: v-jay
 ms.service: mariadb
 ms.topic: conceptual
-origin.date: 03/19/2019
-ms.date: 05/27/2019
-ms.openlocfilehash: 7fc99dde477120287adff375a9bee3fcf4c28164
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+origin.date: 3/18/2020
+ms.date: 08/17/2020
+ms.openlocfilehash: b14dfe81b9202077bee9d59c4fea195a07f4dc22
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "66173207"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222862"
 ---
 # <a name="mariadb-drivers-and-management-tools-compatible-with-azure-database-for-mariadb"></a>与 Azure Database for MariaDB 兼容的 MariaDB 驱动程序和管理工具
 
@@ -38,7 +38,7 @@ Java | https://downloads.mariadb.org/connector-java/ | 2.1、2.0、1.6 | 1.5.5 �
 
 兼容性优势也适用于数据库管理工具。 只要数据库操作在用户权限范围内，现有工具应继续与 Azure Database for MariaDB 配合使用。 下表列出了已测试并确认与 Azure Database for MariaDB 10.2 兼容的三种常用数据库管理工具：
 
-| | **MySQL Workbench 6.x 及以上版本** | **Navicat 12** | **PHPMyAdmin 4.x 及以上版本**
+| 操作 | **MySQL Workbench 6.x 及以上版本** | **Navicat 12** | **PHPMyAdmin 4.x 及以上版本**
 ---|---|---|---
 创建、更新、读取、写入、删除 | X | X | X
 SSL 连接 | X | X | X

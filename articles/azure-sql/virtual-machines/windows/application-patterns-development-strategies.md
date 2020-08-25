@@ -1,9 +1,9 @@
 ---
-title: VM 上的 SQL Server 应用程序模式 | Azure
+title: VM 上的 SQL Server 应用程序模式 | Microsoft Docs
 description: 本文介绍 Azure 虚拟机上的 SQL Server 的应用程序模式。 这些模式可帮助解决方案架构师和开发人员奠定良好的应用程序体系结构和设计基础。
 services: virtual-machines-windows
 documentationcenter: na
-author: rockboyfor
+author: WenJason
 editor: ''
 tags: azure-service-management,azure-resource-manager
 ms.assetid: 41863c8d-f3a3-4584-ad86-b95094365e05
@@ -12,17 +12,18 @@ ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 origin.date: 05/31/2017
-ms.date: 07/06/2020
-ms.author: v-yeche
-ms.openlocfilehash: 7b8cc0f841a0018151d56a2d2ce0a3b8d7621322
-ms.sourcegitcommit: 89118b7c897e2d731b87e25641dc0c1bf32acbde
+ms.date: 08/17/2020
+ms.author: v-jay
+ms.openlocfilehash: c0e8804805cd2137d4e4929ade269bc7eb2de7d5
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85946276"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222505"
 ---
 # <a name="application-patterns-and-development-strategies-for-sql-server-on-azure-virtual-machines"></a>Azure 虚拟机中的 SQL Server 的应用程序模式和开发策略
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
+
 [!INCLUDE [learn-about-deployment-models](../../../../includes/learn-about-deployment-models-both-include.md)]
 
 ## <a name="summary"></a>摘要：
@@ -51,21 +52,21 @@ ms.locfileid: "85946276"
 
 开始阅读本文之前，应该掌握有关 SQL Server 和 Azure 的基本概念知识。 有关信息，请参阅 [SQL Server 联机丛书](https://msdn.microsoft.com/library/bb545450.aspx)、[Azure 虚拟机上的 SQL Server](sql-server-on-azure-vm-iaas-what-is-overview.md) 和 [Azure.cn](https://www.azure.cn/)。
 
-本文介绍了几种应用程序模式，它们可能适合简单应用程序，也可能适合非常复杂的企业应用程序。 在详细介绍每种模式前，建议熟悉 Azure 中的可用数据存储服务，例如 [Azure 存储](../../../storage/common/storage-introduction.md)、[Azure SQL 数据库](../../../sql-database/sql-database-technical-overview.md)和 [Azure 虚拟机中的 SQL Server](sql-server-on-azure-vm-iaas-what-is-overview.md)。 要为应用程序做出最好的设计决策，必须明确了解何时使用何种数据存储服务。
+本文介绍了几种应用程序模式，它们可能适合简单应用程序，也可能适合非常复杂的企业应用程序。 在详细介绍每种模式前，建议熟悉 Azure 中的可用数据存储服务，例如 [Azure 存储](../../../storage/common/storage-introduction.md)、[Azure SQL 数据库](../../database/sql-database-paas-overview.md)和 [Azure 虚拟机中的 SQL Server](sql-server-on-azure-vm-iaas-what-is-overview.md)。 要为应用程序做出最好的设计决策，必须明确了解何时使用何种数据存储服务。
 
 ### <a name="choose-sql-server-on-azure-virtual-machines-when"></a>在以下情况下选择 Azure 虚拟机上的 SQL Server：
 
 * 需要在 SQL Server 和 Winodws 上进行控制。 例如，想要控制 SQL Server 版本、特殊修补程序、性能配置等。
 * 需要与 SQL Server 完全兼容，并希望将现有应用程序按现状迁移至 Azure。
 * 希望充分利用 Azure 环境的功能，但 Azure SQL 数据库不支持应用程序需要的全部功能。 这可能包括以下方面：
-
-    * **数据库大小**：在更新这篇文章时，SQL 数据库支持最多包含 1 TB 数据的数据库。 如果应用程序需要 1 TB 以上的数据，但用户不希望实现自定义分片解决方案，则建议在 Azure 虚拟机中使用 SQL Server。 有关最新信息，请参阅[横向扩展 Azure SQL 数据库](/sql-database/sql-database-elastic-scale-introduction)、[基于 DTU 的购买模型](../../../sql-database/sql-database-service-tiers-dtu.md)和[基于 vCore 的购买模型](../../../sql-database/sql-database-service-tiers-vcore.md)（预览版）。
-    * **HIPAA 符合性**：医疗保健客户和独立软件供应商 (ISV) 可能选择 [Azure 虚拟机上的 SQL Server](sql-server-on-azure-vm-iaas-what-is-overview.md) 而不选择 [Azure SQL 数据库](../../../sql-database/sql-database-technical-overview.md)，原因是 Azure 虚拟机上的 SQL Server 已纳入 HIPAA 商业伙伴协议 (BAA)。 有关符合性的信息，请参阅 [Azure 信任中心：符合性](https://www.trustcenter.cn/compliance/)。
+  
+  * **数据库大小**：在更新这篇文章时，SQL 数据库支持最多包含 1 TB 数据的数据库。 如果应用程序需要 1 TB 以上的数据，但用户不希望实现自定义分片解决方案，则建议在 Azure 虚拟机中使用 SQL Server。 有关最新信息，请参阅[横向扩展 Azure SQL 数据库](/sql-database/sql-database-elastic-scale-introduction)、[基于 DTU 的购买模型](../../database/service-tiers-dtu.md)和[基于 vCore 的购买模型](../../database/service-tiers-vcore.md)（预览版）。
+  * **HIPAA 符合性**：医疗保健客户和独立软件供应商 (ISV) 可能选择 [Azure 虚拟机上的 SQL Server](sql-server-on-azure-vm-iaas-what-is-overview.md) 而不选择 [Azure SQL 数据库](../../database/sql-database-paas-overview.md)，原因是 Azure 虚拟机上的 SQL Server 已纳入 HIPAA 商业伙伴协议 (BAA)。 有关符合性的信息，请参阅 [Azure 信任中心：符合性](https://www.trustcenter.cn/compliance/)。
     
         <!--Not Available on [Azure Trust Center: Compliance](https://www.trustcenter.cn/compliance/)-->
     
-    * **实例级功能**：目前，SQL 数据库不支持在数据库外部有效的功能（如链接服务器、代理作业、文件流、Service Broker 等）。 有关详细信息，请参阅 [Azure SQL 数据库指南和限制](/sql-database/sql-database-general-limitations)。
-    
+  * **实例级功能**：目前，SQL 数据库不支持在数据库外部有效的功能（如链接服务器、代理作业、文件流、Service Broker 等）。 有关详细信息，请参阅 [Azure SQL 数据库指南和限制](/sql-database/sql-database-general-limitations)。
+
 ## <a name="1-tier-simple-single-virtual-machine"></a>1 层（简单）：单个虚拟机
 在这种应用程序模式中，将 SQL Server 应用程序和数据库部署到 Azure 中的独立虚拟机上。 同一个虚拟机还包含客户端/Web 应用程序、业务组件、数据访问层级和数据库服务器。 呈现、业务和数据访问代码在逻辑上是分离的，但从物理位置来看是位于单台服务器计算机上。 大多数客户首先使用这种应用程序模式，并通过向系统添加更多 Web 角色或虚拟机向外缩放。
 
@@ -196,7 +197,7 @@ ms.locfileid: "85946276"
 
 ![使用云服务的应用程序模式](./media/application-patterns-development-strategies/IC728013.png)
 
-实现此应用程序模式的另一种方法是使用包含呈现层和业务层组件的整合 Web 角色，如下图所示。 此应用程序模式适用于需要状态设计的应用程序。 由于 Azure 在 Web 角色和辅助角色上提供无状态计算节点，建议实现一个使用以下技术之一存储会话状态的逻辑：[Azure 缓存](/azure-cache-for-redis/)、[Azure 表存储](../../../cosmos-db/table-storage-how-to-use-dotnet.md)或 [Azure SQL 数据库](../../../sql-database/sql-database-technical-overview.md)。
+实现此应用程序模式的另一种方法是使用包含呈现层和业务层组件的整合 Web 角色，如下图所示。 此应用程序模式适用于需要状态设计的应用程序。 由于 Azure 在 Web 角色和辅助角色上提供无状态计算节点，建议实现一个使用以下技术之一存储会话状态的逻辑：[Azure 缓存](/azure-cache-for-redis/)、[Azure 表存储](../../../cosmos-db/table-storage-how-to-use-dotnet.md)或 [Azure SQL 数据库](../../database/sql-database-paas-overview.md)。
 
 ![使用云服务的应用程序模式](./media/application-patterns-development-strategies/IC728014.png)
 
@@ -236,27 +237,27 @@ ms.locfileid: "85946276"
 
 ![N 层应用程序模式](./media/application-patterns-development-strategies/IC728016.png)
 
-在 Azure 中，可以使用 Active Directory 作为组织的独立云目录，也可以将现有本地 Active Directory 与 [Azure Active Directory](/active-directory/) 相集成。 正如图中所示，业务层组件可以访问多个数据源，例如通过专用内部 IP 地址访问 [Azure 中的 SQL Server](sql-server-on-azure-vm-iaas-what-is-overview.md)、通过 [Azure 虚拟网络](../../../virtual-network/virtual-networks-overview.md)访问本地 SQL Server 或使用 .NET Framework 数据提供程序技术访问 [SQL 数据库](../../../sql-database/sql-database-technical-overview.md)。 在此图中，Azure SQL 数据库是一种可选的数据存储服务。
+在 Azure 中，可以使用 Active Directory 作为组织的独立云目录，也可以将现有本地 Active Directory 与 [Azure Active Directory](/active-directory/) 相集成。 正如图中所示，业务层组件可以访问多个数据源，例如通过专用内部 IP 地址访问 [Azure 中的 SQL Server](sql-server-on-azure-vm-iaas-what-is-overview.md)、通过 [Azure 虚拟网络](../../../virtual-network/virtual-networks-overview.md)访问本地 SQL Server 或使用 .NET Framework 数据提供程序技术访问 [SQL 数据库](../../database/sql-database-paas-overview.md)。 在此图中，Azure SQL 数据库是一种可选的数据存储服务。
 
 在 n 层混合应用程序模式中，可以按照指定顺序实现以下工作流：
 
 1. 使用 [Microsoft Assessment and Planning (MAP) Toolkit](https://microsoft.com/map)，识别需要迁移到云的企业数据库应用程序。 MAP 工具包从准备虚拟化的计算机中收集清单和性能数据，提供有关容量和评估计划的建议。
 2. 计划在 Azure 平台中需要的资源和配置，例如存储帐户和虚拟机。
 3. 设置本地企业网络和 [Azure 虚拟网络](../../../virtual-network/virtual-networks-overview.md)之间的网络连接。 若要设置本地企业网络和 Azure 中虚拟机之间的连接，请使用以下两种方法之一：
-
-    1. 通过 Azure 中虚拟机上的公共终结点，在本地和 Azure 之间建立连接。 这种方法提供简单的设置，可在虚拟机中使用 SQL Server 身份验证。 另外，还可以设置网络安全组规则，控制到 VM 的公共流量。 有关详细信息，请参阅[允许通过 Azure 门户对 VM 进行外部访问](../../../virtual-machines/windows/nsg-quickstart-portal.md?toc=%2fvirtual-machines%2fwindows%2ftoc.json)。
-    2. 通过 Azure 虚拟专用网 (VPN) 隧道，在本地和 Azure 之间建立连接。 这种方法允许将域策略缩放到 Azure 中的虚拟机。 此外，可以设置防火墙规则，并在虚拟机中使用 Windows 身份验证。 当前，Azure 支持安全的站点到站点 VPN 和点到站点 VPN 连接：
-
-        * 使用安全的站点到站点连接，可在本地网络和 Azure 中的虚拟网络之间建立网络连接。 建议将本地数据中心环境连接到 Azure。
-        * 使用安全的点到站点连接，可在 Azure 中的虚拟网络和在任何地点运行的各个计算机之间建立网络连接。 建议将它主要用于开发和测试。
-
-        有关如何连接到 Azure 中的 SQL Server 的信息，请参阅[连接到 Azure 上的 SQL Server 虚拟机](ways-to-connect-to-sql.md)。
+   
+   1. 通过 Azure 中虚拟机上的公共终结点，在本地和 Azure 之间建立连接。 这种方法提供简单的设置，可在虚拟机中使用 SQL Server 身份验证。 另外，还可以设置网络安全组规则，控制到 VM 的公共流量。 有关详细信息，请参阅[允许通过 Azure 门户对 VM 进行外部访问](../../../virtual-machines/windows/nsg-quickstart-portal.md?toc=%2fvirtual-machines%2fwindows%2ftoc.json)。
+   2. 通过 Azure 虚拟专用网 (VPN) 隧道，在本地和 Azure 之间建立连接。 这种方法允许将域策略缩放到 Azure 中的虚拟机。 此外，可以设置防火墙规则，并在虚拟机中使用 Windows 身份验证。 当前，Azure 支持安全的站点到站点 VPN 和点到站点 VPN 连接：
+      
+      * 使用安全的站点到站点连接，可在本地网络和 Azure 中的虚拟网络之间建立网络连接。 建议将本地数据中心环境连接到 Azure。
+      * 使用安全的点到站点连接，可在 Azure 中的虚拟网络和在任何地点运行的各个计算机之间建立网络连接。 建议将它主要用于开发和测试。
+      
+      有关如何连接到 Azure 中的 SQL Server 的信息，请参阅[连接到 Azure 上的 SQL Server 虚拟机](ways-to-connect-to-sql.md)。
 4. 设置计划的作业和警报，将本地数据备份到 Azure 中的虚拟机磁盘上。 有关详细信息，请参阅[使用 Azure Blob 存储服务进行 SQL Server 备份和还原](https://msdn.microsoft.com/library/jj919148.aspx)和 [Azure 虚拟机上 SQL Server 的备份和还原](../../../azure-sql/virtual-machines/windows/backup-restore.md)。
 5. 根据应用程序的需要，可以实现以下三个常见方案之一：
-
-    1. 可将 Web 服务器、应用程序服务器和非敏感数据保留在 Azure 中的数据库服务器中，而将敏感数据保留在本地。
-    2. 可将 Web 服务器和应用程序服务器保留在本地，而将数据库服务器保留在 Azure 的虚拟机中。
-    3. 可将数据库服务器、Web 服务器和应用程序服务器保留在本地，而将数据库副本保留在 Azure 的虚拟机中。 这种设置允许本地 Web 服务器或报告应用程序访问 Azure 中的数据库副本。 因此，可以成功地降低本地数据库中的工作负荷。 我们建议在具有很高读取工作负荷的情况下实施此方案，也可将其用于开发目的。 有关在 Azure 中创建数据库副本的信息，请参阅 [Azure 虚拟机上 SQL Server 的高可用性和灾难恢复](business-continuity-high-availability-disaster-recovery-hadr-overview.md)中的“AlwaysOn 可用性组”。
+   
+   1. 可将 Web 服务器、应用程序服务器和非敏感数据保留在 Azure 中的数据库服务器中，而将敏感数据保留在本地。
+   2. 可将 Web 服务器和应用程序服务器保留在本地，而将数据库服务器保留在 Azure 的虚拟机中。
+   3. 可将数据库服务器、Web 服务器和应用程序服务器保留在本地，而将数据库副本保留在 Azure 的虚拟机中。 这种设置允许本地 Web 服务器或报告应用程序访问 Azure 中的数据库副本。 因此，可以成功地降低本地数据库中的工作负荷。 我们建议在具有很高读取工作负荷的情况下实施此方案，也可将其用于开发目的。 有关在 Azure 中创建数据库副本的信息，请参阅 [Azure 虚拟机上 SQL Server 的高可用性和灾难恢复](business-continuity-high-availability-disaster-recovery-hadr-overview.md)中的“AlwaysOn 可用性组”。
 
 ## <a name="comparing-web-development-strategies-in-azure"></a>比较 Azure 中的 Web 开发策略
 若要在 Azure 中实现和部署基于 SQL Server 的多层应用程序，可以使用下述两种编程方法之一：

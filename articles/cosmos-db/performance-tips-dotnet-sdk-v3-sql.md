@@ -4,15 +4,17 @@ description: 了解用于提高 Azure Cosmos DB .NET v3 SDK 性能的客户端�
 author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
-origin.date: 06/23/2020
-ms.date: 07/06/2020
+origin.date: 06/16/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: 52f8fcef52a2a122b9db85feba407a4ce0288c90
-ms.sourcegitcommit: 873e5c5e4156efed505a78d4f5a6e50c494e76d4
+ms.openlocfilehash: c133a6ae31dcf70e0236320443501f1b6a34db78
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86036739"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222469"
 ---
 <!--Verified successfully-->
 <!-- ONLY CHARACTOR CONTENT-->
@@ -93,9 +95,8 @@ Azure Cosmos DB 提供基于 HTTPS 的简单开放 RESTful 编程模型。 此�
 对于 SDK V3，可以在创建 `CosmosClient` 实例时在 `CosmosClientOptions` 中配置连接模式。 请记住，直接模式是默认设置。
 
 ```csharp
-var serviceEndpoint = new Uri("https://contoso.documents.net");
-var authKey = "your authKey from the Azure portal";
-CosmosClient client = new CosmosClient(serviceEndpoint, authKey,
+string connectionString = "<your-account-connection-string>";
+CosmosClient client = new CosmosClient(connectionString,
 new CosmosClientOptions
 {
     ConnectionMode = ConnectionMode.Gateway // ConnectionMode.Direct is the default
@@ -104,13 +105,26 @@ new CosmosClientOptions
 
 由于仅在直接模式下才支持 TCP，如果使用网关模式，则 HTTPS 协议始终用来与网关通信。
 
+:::image type="content" source="./media/performance-tips/connection-policy.png" alt-text="Azure Cosmos DB 连接策略" border="false":::
+
+**临时端口耗尽**
+
+如果实例上的连接量较高或端口使用率较高，请先确认客户端实例是否为单一实例。 换句话说，客户端实例在应用程序生存期内应是唯一的。
+
+当在 TCP 协议上运行时，客户端使用长生存期连接（而非 HTTPS 协议）来优化延迟，后者在处于非活动状态 2 分钟后即终止连接。
+
+在具有稀疏访问且与网关模式访问相比连接计数更高的情况下，可以：
+
+* 将 [CosmosClientOptions.PortReuseMode](https://docs.microsoft.com/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions.portreusemode?view=azure-dotnet) 属性配置为 `PrivatePortPool`（Framework 版本 >= 4.6.1 且 .NET Core 版本 >= 2.0 时有效）：此属性使 SDK 可以针对不同 Azure Cosmos DB 目标终结点使用一小部分临时端口。
+* 配置 [CosmosClientOptions.IdleConnectionTimeout](https://docs.microsoft.com/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions.idletcpconnectiontimeout?view=azure-dotnet) 属性必须大于或等于 10 分钟。 建议值介于 20 分钟到 24 小时之间。
+
 <a name="same-region"></a>
 
 **出于性能考虑，请将客户端并置在同一 Azure 区域中**
 
-如果可能，请将任何调用 Azure Cosmos DB 的应用程序放在 Azure Cosmos DB 数据库所在的区域。 通过大致的比较发现：在同一区域中对 Azure Cosmos DB 的调用可在 1-2 毫秒内完成，而美国西海岸和美国东海岸之间的延迟则大于 50 毫秒。 根据请求采用的路由，各项请求从客户端传递到 Azure 数据中心边界时的此类延迟可能有所不同。 确保调用应用程序位于预配的 Azure Cosmos DB 终结点所在的 Azure 区域即可尽可能降低延迟。 有关可用区域的列表，请参阅 [Azure 区域](https://status.azure.com/status/)。
+如果可能，请将任何调用 Azure Cosmos DB 的应用程序放在 Azure Cosmos DB 数据库所在的区域。 通过大致的比较发现：在同一区域中对 Azure Cosmos DB 的调用可在 1-2 毫秒内完成，而美国西海岸和美国东海岸之间的延迟则大于 50 毫秒。 根据请求采用的路由，各项请求从客户端传递到 Azure 数据中心边界时的此类延迟可能有所不同。 确保调用应用程序位于预配的 Azure Cosmos DB 终结点所在的 Azure 区域即可尽可能降低延迟。 有关可用区域的列表，请参阅 [Azure 区域](https://azure.microsoft.com/regions/#services)。
 
-![Azure Cosmos DB 连接策略](./media/performance-tips/same-region.png)
+:::image type="content" source="./media/performance-tips/same-region.png" alt-text="Azure Cosmos DB 连接策略" border="false":::
 
 <a name="increase-threads"></a>
 **增加线程/任务数目**
@@ -240,9 +254,11 @@ while (queryable.HasMoreResults)
 
 客户端尝试超过为帐户保留的吞吐量时，服务器的性能不会降低，并且不会使用超过保留级别的吞吐量容量。 服务器会提前结束请求并返回 RequestRateTooLarge（HTTP 状态代码 429）错误。 它会返回 [x-ms-retry-after-ms](https://docs.microsoft.com/rest/api/cosmos-db/common-cosmosdb-rest-response-headers) 标头，指示重试该请求之前用户必须等待的时间（以毫秒为单位）。
 
+```xml
     HTTP Status 429,
     Status Line: RequestRateTooLarge
     x-ms-retry-after-ms :100
+```
 
 SDK 全部都会隐式捕获此响应，并遵循服务器指定的 retry-after 标头，并重试请求。 除非多个客户端同时访问帐户，否则下次重试就会成功。
 

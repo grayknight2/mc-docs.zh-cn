@@ -12,12 +12,12 @@ ms.author: v-jay
 ms.reviewer: jrasnik, carlrab
 origin.date: 12/03/2019
 ms.date: 07/13/2020
-ms.openlocfilehash: cb0c007e6e9c05504b29be167a3982b277653a05
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.openlocfilehash: a7b942e320dbcd4c8544776a2bed856e89268245
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86228187"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222843"
 ---
 # <a name="enable-automatic-tuning-in-the-azure-portal-to-monitor-queries-and-improve-workload-performance"></a>在 Azure 门户中启用自动优化以监视查询并提高工作负载性能
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -118,7 +118,7 @@ ALTER DATABASE current SET AUTOMATIC_TUNING (FORCE_LAST_GOOD_PLAN = ON, CREATE_I
 
 ## <a name="permissions"></a>权限
 
-由于自动优化是 Azure 功能，因此若要使用它，需使用 Azure 的内置 RBAC 角色。 若要使用 Azure 门户中的功能，仅使用 SQL 身份验证还不够。
+由于自动调整是 Azure 功能，因此若要使用它，需使用 Azure 的内置角色。 若要使用 Azure 门户中的功能，仅使用 SQL 身份验证还不够。
 
 若要使用自动优化，必须为用户授予权限，最低必需权限是 Azure 的内置 [SQL 数据库参与者](../../role-based-access-control/built-in-roles.md#sql-db-contributor)角色。 也可考虑使用特权较高的角色，例如 SQL Server 参与者、SQL 托管实例参与者、参与者和所有者。
 

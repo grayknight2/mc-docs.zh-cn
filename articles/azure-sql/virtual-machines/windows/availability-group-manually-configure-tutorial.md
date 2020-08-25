@@ -1,9 +1,9 @@
 ---
-title: 教程 - 配置 SQL Server Always On 可用性组
+title: 教程：配置 SQL Server Always On 可用性组
 description: 本教程说明如何在 Azure 虚拟机上创建 SQL Server Always On 可用性组。
 services: virtual-machines
 documentationCenter: na
-author: rockboyfor
+author: WenJason
 editor: monicar
 tags: azure-service-management
 ms.assetid: 08a00342-fee2-4afe-8824-0db1ed4b8fca
@@ -12,15 +12,15 @@ ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 origin.date: 08/30/2018
-ms.date: 07/06/2020
-ms.author: v-yeche
+ms.date: 08/17/2020
+ms.author: v-jay
 ms.custom: seo-lt-2019
-ms.openlocfilehash: c012746feafe8d6a0de5a84054d937d9a3f0d096
-ms.sourcegitcommit: 89118b7c897e2d731b87e25641dc0c1bf32acbde
+ms.openlocfilehash: 7bb8790f08735f64383a90268f504d06a74e84bf
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85946135"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222506"
 ---
 <!--Verified Redirect files-->
 # <a name="tutorial-configure-a-sql-server-availability-group-on-azure-virtual-machines-manually"></a>教程：在 Azure 虚拟机上手动配置 SQL Server 可用性组
@@ -41,15 +41,16 @@ ms.locfileid: "85946135"
 
 下表列出了开始本教程之前需要完成的先决条件：
 
-|  |要求 |说明 |
+| 要求 |说明 |
 |----- |----- |----- |
-|![Square](./media/availability-group-manually-configure-tutorial/square.png) | 两个 SQL Server 实例 | - 位于 Azure 可用性集中 <br/> - 位于单个域中 <br/> - 已安装故障转移群集功能 |
-|![Square](./media/availability-group-manually-configure-tutorial/square.png)| Windows Server | 用于群集见证的文件共享 |  
-|![Square](./media/availability-group-manually-configure-tutorial/square.png)|SQL Server 服务帐户 | 域帐户 |
-|![Square](./media/availability-group-manually-configure-tutorial/square.png)|SQL Server 代理服务帐户 | 域帐户 |  
-|![Square](./media/availability-group-manually-configure-tutorial/square.png)|防火墙端口已打开 | - SQL Server：对于默认实例，为 1433 <br/> - 数据库镜像终结点：5022 或任何可用端口 <br/> - 可用性组负载均衡器 IP 地址运行状况探测：59999 或任何可用端口 <br/> - 群集核心负载均衡器 IP 地址运行状况探测：58888 或任何可用端口 |
-|![Square](./media/availability-group-manually-configure-tutorial/square.png)|添加故障转移群集功能 | 两个 SQL Server 实例都需要此功能 |
-|![Square](./media/availability-group-manually-configure-tutorial/square.png)|安装域帐户 | - 每个 SQL Server 上的本地管理员帐户 <br/> - 每个 SQL Server 实例的 SQL Server sysadmin 固定服务器角色的成员  |
+|![Square](./media/availability-group-manually-configure-tutorial/square.png)   **两个 SQL Server 实例** | - 位于 Azure 可用性集中 <br/> - 位于单个域中 <br/> - 已安装故障转移群集功能 |
+|![Square](./media/availability-group-manually-configure-tutorial/square.png)   **Windows Server** | 用于群集见证的文件共享 |  
+|![Square](./media/availability-group-manually-configure-tutorial/square.png)   **SQL Server 服务帐户** | 域帐户 |
+|![Square](./media/availability-group-manually-configure-tutorial/square.png)   **SQL Server 代理服务帐户** | 域帐户 |  
+|![Square](./media/availability-group-manually-configure-tutorial/square.png)   **防火墙端口已打开** | - SQL Server：对于默认实例，为 1433 <br/> - 数据库镜像终结点：5022 或任何可用端口 <br/> - 可用性组负载均衡器 IP 地址运行状况探测：59999 或任何可用端口 <br/> - 群集核心负载均衡器 IP 地址运行状况探测：58888 或任何可用端口 |
+|![Square](./media/availability-group-manually-configure-tutorial/square.png)   **添加故障转移群集功能** | 两个 SQL Server 实例都需要此功能 |
+|![Square](./media/availability-group-manually-configure-tutorial/square.png)   **安装域帐户** | - 每个 SQL Server 上的本地管理员帐户 <br/> - 每个 SQL Server 实例的 SQL Server sysadmin 固定服务器角色的成员  |
+
 
 开始本教程之前，需要[完成先决条件以便在 Azure 虚拟机中创建 Always On 可用性组](availability-group-manually-configure-prerequisites-tutorial.md)。 如果已满足这些先决条件，可转到 [创建群集](#CreateCluster)。
 
@@ -76,7 +77,7 @@ ms.locfileid: "85946135"
 
 4. 在“创建群集向导”中，使用下表中的设置完成向导的每个页面，创建一个单节点群集：
 
-    | Page | 设置 |
+    | 页 | 设置 |
     | --- | --- |
     | 开始之前 |使用默认值 |
     | 选择服务器 |在“输入服务器名称”中键入第一个 SQL Server 的名称，然后选择“添加” 。 |
@@ -101,8 +102,7 @@ ms.locfileid: "85946135"
 
 4. 在“群集核心资源”部分中，右键单击群集名称，并选择“联机” 。 等到这两个资源均已联机。 当该群集名称资源联机时，它会用新的 Active Directory (AD) 计算机帐户更新域控制器 (DC) 服务器。 稍后使用此 AD 帐户来运行可用性组群集服务。
 
-<a name="addNode"></a>
-### <a name="add-the-other-sql-server-to-cluster"></a>将另一个 SQL Server 添加到群集
+### <a name="add-the-other-sql-server-to-cluster"></a><a name="addNode"></a>将其他 SQL Server 添加到群集
 
 将另一个 SQL Server 添加到群集。
 
@@ -209,8 +209,7 @@ ms.locfileid: "85946135"
 对另一个 SQL Server 重复上述步骤。
 
 <!-----------------
-<a name="endpoint-firewall"></a>
-## Open firewall for the database mirroring endpoint
+## <a name="endpoint-firewall"></a>Open firewall for the database mirroring endpoint
 
 Each instance of SQL Server that participates in an Availability Group requires a database mirroring endpoint. This endpoint is a TCP port for the instance of SQL Server that is used to synchronize the database replicas in the Availability Groups on that instance.
 
@@ -238,8 +237,7 @@ Repeat these steps on the second SQL Server.
 7. 在“对象资源管理器”中，右键单击“数据库”，然后选择“新建数据库”  。
 8. 在“数据库名称”中，键入 MyDB1，然后选择“确定”  。
 
-<a name="backupshare"></a>
-### <a name="create-a-backup-share"></a>创建备份共享
+### <a name="create-a-backup-share"></a><a name="backupshare"></a>创建备份共享
 
 1. 在“服务器管理器”中的第一个 SQL Server 上，选择“工具” 。 打开“计算机管理”。
 
@@ -382,7 +380,7 @@ Azure 负载均衡器可以是标准负载均衡器或基本负载均衡器。 �
     | **虚拟网络** |使用虚拟网络的名称。 |
     | **子网** |使用虚拟机所在的子网的名称。  |
     | **IP 地址分配** |静态 |
-    | **IP 地址** |使用子网中的可用地址。 将该地址用于可用性组侦听程序。 请注意，这不同于群集 IP 地址。  |
+    | IP 地址 |使用子网中的可用地址。 将该地址用于可用性组侦听程序。 请注意，这不同于群集 IP 地址。  |
     | **订阅** |使用虚拟机所在的同一个订阅。 |
     | **位置** |使用虚拟机所在的同一个位置。 |
 
@@ -419,12 +417,12 @@ Azure 负载均衡器可以是标准负载均衡器或基本负载均衡器。 �
 
 1. 对侦听器运行状况探测进行如下设置：
 
-    | 设置 | 说明 | 示例
+    | 设置 | 描述 | 示例
     | --- | --- |---
     | **名称** | 文本 | SQLAlwaysOnEndPointProbe |
-    | **协议** | 选择 TCP | TCP |
+    | 协议 | 选择 TCP | TCP |
     | **端口** | 任何未使用的端口 | 59999 |
-    | **时间间隔** | 尝试探测的间隔时间，以秒为单位 |5 |
+    | 间隔 | 尝试探测的间隔时间，以秒为单位 |5 |
     | **不正常阈值** | 在将虚拟机视为不正常之前，探测必须连续失败的次数。  | 2 |
 
 1. 选择“确定”以设置运行状况探测。
@@ -435,17 +433,17 @@ Azure 负载均衡器可以是标准负载均衡器或基本负载均衡器。 �
 
 1. 对侦听器负载均衡器规则进行如下设置。
 
-    | 设置 | 说明 | 示例
+    | 设置 | 描述 | 示例
     | --- | --- |---
     | **名称** | 文本 | SQLAlwaysOnEndPointListener |
     | **前端 IP 地址** | 选择地址 |使用创建负载均衡器时所创建的地址。 |
-    | **协议** | 选择 TCP |TCP |
+    | 协议 | 选择 TCP |TCP |
     | **端口** | 使用可用性组侦听程序的端口 | 1433 |
     | **后端端口** | 如果为直接服务器返回设置了“浮动 IP”，不会使用此字段 | 1433 |
     | **探测** |为探测指定的名称 | SQLAlwaysOnEndPointProbe |
     | **会话持久性** | 下拉列表 | **无** |
     | **空闲超时** | 将 TCP 连接保持打开的分钟数 | 4 |
-    | **浮动 IP (直接服务器返回)** | |Enabled |
+    | **浮动 IP (直接服务器返回)** | |已启用 |
 
     > [!WARNING]
     > 直接服务器返回是在创建过程中设置的， 无法进行更改。
@@ -463,12 +461,12 @@ WSFC IP 地址也必须在负载均衡器上。
 
 1. 对 WSFC 群集核心 IP 地址运行状况探测进行如下设置：
 
-    | 设置 | 说明 | 示例
+    | 设置 | 描述 | 示例
     | --- | --- |---
     | **名称** | 文本 | WSFCEndPointProbe |
-    | **协议** | 选择 TCP | TCP |
+    | 协议 | 选择 TCP | TCP |
     | **端口** | 任何未使用的端口 | 58888 |
-    | **时间间隔**  | 尝试探测的间隔时间，以秒为单位 |5 |
+    | 间隔  | 尝试探测的间隔时间，以秒为单位 |5 |
     | **不正常阈值** | 在将虚拟机视为不正常之前，探测必须连续失败的次数。  | 2 |
 
 1. 选择“确定”以设置运行状况探测。
@@ -477,17 +475,17 @@ WSFC IP 地址也必须在负载均衡器上。
 
 1. 将群集核心 IP 地址负载均衡规则进行如下设置。
 
-    | 设置 | 说明 | 示例
+    | 设置 | 描述 | 示例
     | --- | --- |---
     | **名称** | 文本 | WSFCEndPoint |
     | **前端 IP 地址** | 选择地址 |使用配置 WSFC IP 地址时所创建的地址。 这不同于侦听器 IP 地址 |
-    | **协议** | 选择 TCP |TCP |
+    | 协议 | 选择 TCP |TCP |
     | **端口** | 使用群集 IP 地址的端口。 这是可用的端口，不用于侦听器探测端口。 | 58888 |
     | **后端端口** | 如果为直接服务器返回设置了“浮动 IP”，不会使用此字段 | 58888 |
     | **探测** |为探测指定的名称 | WSFCEndPointProbe |
     | **会话持久性** | 下拉列表 | **无** |
     | **空闲超时** | 将 TCP 连接保持打开的分钟数 | 4 |
-    | **浮动 IP (直接服务器返回)** | |Enabled |
+    | **浮动 IP (直接服务器返回)** | |已启用 |
 
     > [!WARNING]
     > 直接服务器返回是在创建过程中设置的， 无法进行更改。
@@ -495,8 +493,7 @@ WSFC IP 地址也必须在负载均衡器上。
 
 1. 选择“确定”以设置负载均衡规则。
 
-<a name="configure-listener"></a>
-## <a name="configure-the-listener"></a>配置侦听器
+## <a name="configure-the-listener"></a><a name="configure-listener"></a>配置侦听器
 
 下一步是在故障转移群集上配置可用性组侦听器。
 

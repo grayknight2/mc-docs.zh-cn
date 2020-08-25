@@ -14,13 +14,13 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 origin.date: 03/26/2020
 ms.author: v-yiso
-ms.date: 06/08/2020
-ms.openlocfilehash: 31d1337d07b2863ce4376204f0086570aa51e289
-ms.sourcegitcommit: 091c672fa448b556f4c2c3979e006102d423e9d7
+ms.date: 08/31/2020
+ms.openlocfilehash: 13e0149f76a9cac98a1e3cef7b11092239dad73c
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87162327"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715143"
 ---
 # <a name="router-configuration-samples-to-set-up-and-manage-routing"></a>用于设置和管理路由的路由器配置示例
 本页提供处理 Azure ExpressRoute 时适用于 Cisco IOS-XE 和 Juniper MX 系列路由器的接口与路由配置示例。
@@ -248,6 +248,28 @@ ExpressRoute 接口的最大传输单元 (MTU) 为 1500，即路由器上以太�
         }                                   
     }
 
+### <a name="configure-macsec"></a>配置 MACSec
+对于 MACSec 配置，连接关联密钥 (CAK) 和连接关联密钥名称 (CKN) 必须通过 PowerShell 命令与已配置的值进行匹配。
+
+```console
+    security {
+        macsec {
+            connectivity-association <Connectivity_Association_Name> {
+                cipher-suite gcm-aes-xpn-128;
+                security-mode static-cak;
+                pre-shared-key {
+                    ckn <Connectivity_Association_Key_Name>;
+                    cak <Connectivity_Association_Key>; ## SECRET-DATA
+                }
+            }
+            interfaces {
+                <Interface_Number> {
+                    connectivity-association <Connectivity_Association_Name>;
+                }
+            }
+        }
+    }
+```
 
 ## <a name="next-steps"></a>后续步骤
 有关详细信息，请参阅 [ExpressRoute 常见问题](expressroute-faqs.md) 。

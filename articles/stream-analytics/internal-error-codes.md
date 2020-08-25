@@ -3,15 +3,15 @@ title: 使用 Azure 流分析错误代码进行故障排除
 description: 通过内部错误代码排查 Azure 流分析问题。
 ms.author: v-johya
 author: Johnnytechn
-ms.topic: conceptual
-ms.date: 07/06/2020
+ms.topic: troubleshooting
+ms.date: 08/20/2020
 ms.service: stream-analytics
-ms.openlocfilehash: 7d6018849fa6849172066a7bb9bc773624fdabca
-ms.sourcegitcommit: 9bc3e55f01e0999f05e7b4ebaea95f3ac91d32eb
+ms.openlocfilehash: 67e8c545214eb2fb2042262585ef19aff2d0788c
+ms.sourcegitcommit: 09c7071f4d0d9256b40a6bf700b38c6a25db1b26
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86226207"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715729"
 ---
 # <a name="azure-stream-analytics-internal-error-codes"></a>Azure 流分析内部错误代码
 

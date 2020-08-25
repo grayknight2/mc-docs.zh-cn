@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 10/23/2018
-ms.date: 07/31/2020
-ms.openlocfilehash: 7a93d1c7d6608c4cf5d7ea3177cbb277405a465f
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 1a8ab5df71db0e9727429a85530b4ffa399f0eb4
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509516"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515748"
 ---
 # <a name="cot"></a>cot()
 

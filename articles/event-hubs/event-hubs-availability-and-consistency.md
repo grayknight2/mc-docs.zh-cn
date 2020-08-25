@@ -1,25 +1,16 @@
 ---
-title: 可用性和一致性 - Azure 事件中心 | Azure
+title: 可用性和一致性 - Azure 事件中心 | Microsoft Docs
 description: 如何使用分区为 Azure 事件中心提供最大程度的可用性和一致性。
-services: event-hubs
-documentationcenter: na
-author: ShubhaVijayasarathy
-editor: ''
-ms.assetid: 8f3637a1-bbd7-481e-be49-b3adf9510ba1
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-origin.date: 03/27/2020
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: af749adb5ca537098473edf9b6b2bc80e0eb960b
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 308129fe7b5e7660cdb1373f924178a64b9857ec
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199439"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715316"
 ---
 # <a name="availability-and-consistency-in-event-hubs"></a>事件中心内的可用性和一致性
 
@@ -152,5 +143,5 @@ await producer.SendAsync(data);
 ## <a name="next-steps"></a>后续步骤
 访问以下链接可以了解有关事件中心的详细信息：
 
-* [事件中心服务概述](event-hubs-what-is-event-hubs.md)
+* [事件中心服务概述](./event-hubs-about.md)
 * [创建事件中心](event-hubs-create.md)

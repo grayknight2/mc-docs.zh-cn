@@ -11,12 +11,12 @@ ms.subservice: core
 ms.topic: how-to
 ms.date: 05/20/2020
 ms.custom: seodec18, tracking-python
-ms.openlocfilehash: a83c550efb0db2de47b6a9cded1af4e062fe5a62
-ms.sourcegitcommit: 2bd0be625b21c1422c65f20658fe9f9277f4fd7c
+ms.openlocfilehash: e483c8bc7c5414fa68501b6ef73a214ffb2020c8
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86440966"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228229"
 ---
 # <a name="configure-automated-ml-experiments-in-python"></a>使用 Python 配置自动化 ML 试验
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -59,7 +59,7 @@ ms.locfileid: "86440966"
 [极端随机树](https://scikit-learn.org/stable/modules/ensemble.html#extremely-randomized-trees)* |[极端随机树](https://scikit-learn.org/stable/modules/ensemble.html#extremely-randomized-trees)* |[极端随机树](https://scikit-learn.org/stable/modules/ensemble.html#extremely-randomized-trees)
 [Xgboost](https://xgboost.readthedocs.io/en/latest/parameter.html)* |[Xgboost](https://xgboost.readthedocs.io/en/latest/parameter.html)* | [Xgboost](https://xgboost.readthedocs.io/en/latest/parameter.html)
 [平均感知器分类器](https://docs.microsoft.com/python/api/nimbusml/nimbusml.linear_model.averagedperceptronbinaryclassifier?view=nimbusml-py-latest)|[在线梯度下降回归量](https://docs.microsoft.com/python/api/nimbusml/nimbusml.linear_model.onlinegradientdescentregressor?view=nimbusml-py-latest) |[Auto-ARIMA](https://www.alkaline-ml.com/pmdarima/modules/generated/pmdarima.arima.auto_arima.html#pmdarima.arima.auto_arima)
-[Naive Bayes](https://scikit-learn.org/stable/modules/naive_bayes.html#bernoulli-naive-bayes)* ||[Prophet](https://facebook.github.io/prophet/docs/quick_start.html)
+[Naive Bayes](https://scikit-learn.org/stable/modules/naive_bayes.html#bernoulli-naive-bayes)* |[快速线性回归量](https://docs.microsoft.com/python/api/nimbusml/nimbusml.linear_model.fastlinearregressor?view=nimbusml-py-latest)|[Prophet](https://facebook.github.io/prophet/docs/quick_start.html)
 [随机梯度下降 (SGD)](https://scikit-learn.org/stable/modules/sgd.html#sgd)* ||ForecastTCN
 |[线性 SVM 分类器](https://docs.microsoft.com/python/api/nimbusml/nimbusml.linear_model.linearsvmbinaryclassifier?view=nimbusml-py-latest)*||
 
@@ -129,7 +129,7 @@ automl_config = AutoMLConfig(task = "classification")
 
 ### <a name="custom-validation-dataset"></a>自定义验证数据集
 
-如果随机拆分不可接受，请使用自定义验证数据集（通常是时序数据或不平衡数据）。 可以指定自己的验证数据集。 将会根据指定的验证数据集而不是随机数据集来评估模型。
+如果随机拆分不可接受，请使用自定义验证数据集（通常是时序数据或不平衡数据）。 可以指定自己的验证数据集。 将会根据指定的验证数据集而不是随机数据集来评估模型。 详细了解[如何使用 SDK 配置自定义验证集](how-to-configure-cross-validation-data-splits.md#provide-validation-data)。
 
 ## <a name="compute-to-run-experiment"></a>用于运行试验的计算环境
 
@@ -212,26 +212,26 @@ automl_config = AutoMLConfig(task = "classification")
 时序 `forecasting` 任务要求配置对象中包含其他参数：
 
 1. `time_column_name`：必需的参数，用于在包含有效时序的训练数据中定义列的名称。
-1. `max_horizon`：根据训练数据的周期定义要预测的时长。 例如，如果你有带有每日时间粒度的训练数据，则可以定义训练模型的时长（以天为单位）。
-1. `grain_column_names`：定义训练数据中包含各个时序数据的列名称。 例如，若要按店铺预测特定品牌的销售额，则可以将店铺列和品牌列定义为粒度列。 将为每个颗粒/分组创建单独的时序和预测。 
+1. `forecast_horizon`：定义要预测的未来的时段数。 整数范围以时序频率为单位。 例如，如果训练数据包含每日频率，则可以定义模型的训练时长（以天为单位）。
+1. `time_series_id_column_names`：定义列，用于在多个行具有相同时间戳的数据中对时序进行唯一标识。 例如，如果按商店预测特定品牌的销售，则可将商店和品牌列定义为时序标识符。 将为每个分组创建单独的预测。 如果未定义时序标识符，则假定数据集为一个时序。
 
 有关下面所用设置的示例，请参阅[示例笔记本](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/automated-machine-learning/forecasting-orange-juice-sales/auto-ml-forecasting-orange-juice-sales.ipynb)。
 
 ```python
-# Setting Store and Brand as grains for training.
-grain_column_names = ['Store', 'Brand']
-nseries = data.groupby(grain_column_names).ngroups
+# Setting Store and Brand as time series identifiers for training.
+time_series_id_column_names = ['Store', 'Brand']
+nseries = data.groupby(time_series_id_column_names).ngroups
 
-# View the number of time series data with defined grains
+# View the number of time series data with defined time series identifiers
 print('Data contains {0} individual time-series.'.format(nseries))
 ```
 
 ```python
 time_series_settings = {
     'time_column_name': time_column_name,
-    'grain_column_names': grain_column_names,
+    'time_series_id_column_names': time_series_id_column_names,
     'drop_column_names': ['logQuantity'],
-    'max_horizon': n_test_periods
+    'forecast_horizon': n_test_periods
 }
 
 automl_config = AutoMLConfig(task = 'forecasting',
@@ -433,7 +433,7 @@ best_run, fitted_model = automl_run.get_output()
    |转换|应用于输入特征以生成工程特征的转换列表。|
 ### <a name="scalingnormalization-and-algorithm-with-hyperparameter-values"></a>缩放/规范化以及具有超参数值的算法：
 
-若要了解管道的缩放/规范化和算法/超参数值，请使用 fitted_model.steps。 [详细了解缩放/规范化]()。 下面是示例输出：
+若要了解管道的缩放/规范化和算法/超参数值，请使用 fitted_model.steps。 [详细了解缩放/规范化](how-to-configure-auto-features.md)。 下面是示例输出：
 
 ```
 [('RobustScaler', RobustScaler(copy=True, quantile_range=[10, 90], with_centering=True, with_scaling=True)), ('LogisticRegression', LogisticRegression(C=0.18420699693267145, class_weight='balanced', dual=False, fit_intercept=True, intercept_scaling=1, max_iter=100, multi_class='multinomial', n_jobs=1, penalty='l2', random_state=None, solver='newton-cg', tol=0.0001, verbose=0, warm_start=False))

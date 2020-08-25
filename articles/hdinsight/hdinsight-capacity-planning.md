@@ -8,14 +8,14 @@ ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
 ms.topic: article
-origin.date: 10/15/2019
-ms.date: 04/06/2020
-ms.openlocfilehash: 076a47e6b1f1e022487f196ff28da546e8a51611
-ms.sourcegitcommit: 3de7d92ac955272fd140ec47b3a0a7b1e287ca14
+origin.date: 05/07/2020
+ms.date: 08/31/2020
+ms.openlocfilehash: 3f46a2a9ef316e7fc2874b9dc0068e88ef08dea5
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84723612"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715249"
 ---
 # <a name="capacity-planning-for-hdinsight-clusters"></a>HDInsight 群集的容量规划
 
@@ -78,7 +78,7 @@ Azure 存储具有某些[容量限制](../azure-resource-manager/management/azur
 
 增加工作器节点数会增加额外的计算能力（例如更多核心），这具体取决于群集的类型。 更多节点将增加整个群集支持正在处理的数据的内存中存储所需的总内存。 就像选择 VM 大小和类型一样，适当的群集规模通常是凭经验选择出来的。 使用的是模拟工作负载或 canary 查询。
 
-可以扩展群集来满足峰值负载需求，然后在不再需要这些额外的节点时缩减群集。 有关详细信息，请参阅[缩放 HDInsight 群集](hdinsight-scaling-best-practices.md)。
+你可以横向扩展群集以满足峰值负载需求。 然后在不再需要这些额外的节点时，进行纵向缩减。 通过[自动缩放功能](hdinsight-autoscale-clusters.md)，你可以根据预先确定的指标和时间安排自动缩放群集。 有关手动缩放群集的详细信息，请参阅[缩放 HDInsight 群集](hdinsight-scaling-best-practices.md)。
 
 ### <a name="cluster-lifecycle"></a>群集生命周期
 
@@ -86,7 +86,6 @@ Azure 存储具有某些[容量限制](../azure-resource-manager/management/azur
 
 > [!NOTE]  
 > 删除某个群集时，也会一并删除其默认 Hive 元存储。 若要保留元存储供下一次重新创建群集时使用，可以使用 Azure 数据库或 [Apache Oozie](https://oozie.apache.org/) 等外部元数据存储。
-<!-- see [Using external metadata stores](hdinsight-using-external-metadata-stores.md). -->
 
 ### <a name="isolate-cluster-job-errors"></a>查明群集作业错误
 
@@ -95,39 +94,7 @@ Azure 存储具有某些[容量限制](../azure-resource-manager/management/azur
 
 ## <a name="quotas"></a>配额
 
-确定目标群集 VM 大小、规模和类型之后，请检查订阅的当前配额容量限制。 达到配额限制时，无法再部署新群集。 或者通过添加更多辅助节点来横向扩展现有群集。 唯一存在配额限制的是每个订阅的区域级别的 CPU 核心配额。 
-
-若要检查可用核心数，请执行以下步骤：
-
-1. 登录到 [Azure 门户](https://portal.azure.cn/)。
-2. 导航到 HDInsight 群集的“概述”**** 页。 
-3. 在左侧菜单上，选择“配额限制”****。
-
-   该页将显示正在使用的核心数、可用核心数和核心总数。
-
-如果需要请求增加配额，请执行以下操作：
-
-1. 登录到 [Azure 门户](https://portal.azure.cn/)。
-1. 选择页面左下方的“帮助 + 支持”****。
-1. 选择“新建支持请求”****。
-1. 在“新建支持请求”页面的“基本信息”选项卡下，选择以下选项**** ****：
-   - “问题类型”****：“服务和订阅限制(配额)”****
-   - “订阅”****：想要修改的订阅
-   - “配额类型”****：**HDInsight**
-    
-     ![创建支持请求来增加 HDInsight 核心配额](./media/hdinsight-capacity-planning/hdinsight-quota-support-request.png)
-
-1. 在完成时选择“下一步:**** 解决方案 >>”。
-1. 在“详细信息”页上，输入问题的说明，选择问题的严重性、首选联系方法和其他必需字段****。
-1. 在完成时选择“下一步:**** 查看 + 创建 >>”。
-1. 在“查看 + 创建”选项卡中，选择“创建”。**** ****
-
-> [!NOTE]  
-> 如果需要增加专用区域中的 HDInsight 核心配额，请[提交允许列表请求](https://aka.ms/canaryintwhitelist)。
-
-可以[联系支持部门来请求提高配额](/azure-portal/supportability/resource-manager-core-quotas-request)。
-
-但是，存在一些固定的配额限制，例如，单个 Azure 订阅最多只能有 10,000 个核心。 有关这些限制的详细信息，请参阅 [Azure 订阅和服务限制、配额与约束](/azure-subscription-service-limits)。
+有关管理订阅配额的详细信息，请参阅[要求增加配额](quota-increase-request.md)。
 
 ## <a name="next-steps"></a>后续步骤
 

@@ -6,14 +6,14 @@ documentationcenter: ''
 author: tgore03
 ms.service: cloud-services
 ms.topic: article
-ms.date: 04/26/2020
+ms.date: 08/10/2020
 ms.author: v-junlch
-ms.openlocfilehash: bd7df45438821729af257b4da125b7e914ca09e7
-ms.sourcegitcommit: e3512c5c2bbe61704d5c8cbba74efd56bfe91927
+ms.openlocfilehash: d43007fc03a314a39d4417a942ec1010150a836f
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82267646"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223376"
 ---
 # <a name="how-to-configure-cloud-services"></a>如何配置云服务
 
@@ -48,7 +48,7 @@ ms.locfileid: "82267646"
 
 可将警报添加到云服务。 单击“设置”   > “警报规则”   > “添加警报”  。
 
-![](./media/cloud-services-how-to-configure-portal/cs-alerts.png)
+![“设置”窗格的屏幕截图，其中“警报规则”选项突出显示并以红框标出，“添加警报”选项以红框标出。](./media/cloud-services-how-to-configure-portal/cs-alerts.png)
 
 可以在此处设置警报。 使用“指标”  下拉框，可以针对以下类型的数据设置警报。
 
@@ -58,7 +58,7 @@ ms.locfileid: "82267646"
 * 出网络
 * CPU 百分比
 
-![](./media/cloud-services-how-to-configure-portal/cs-alert-item.png)
+![“添加警报规则”窗格的屏幕截图，其中已设置所有配置选项。](./media/cloud-services-how-to-configure-portal/cs-alert-item.png)
 
 ### <a name="configure-monitoring-from-a-metric-tile"></a>配置从度量值磁贴进行的监视
 

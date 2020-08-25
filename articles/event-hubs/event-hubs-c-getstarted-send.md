@@ -1,27 +1,16 @@
 ---
 title: 快速入门：使用 C 发送事件 - Azure 事件中心
 description: 快速入门：本文提供了创建 C 应用程序的演练，该应用程序用于将事件发送到 Azure 事件中心。
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.workload: na
-ms.tgt_pltfrm: c
-ms.devlang: csharp
 ms.topic: quickstart
-ms.custom: seodec18
-origin.date: 11/05/2019
-ms.date: 05/29/2020
+origin.date: 06/23/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 1a7187cd97a88c5029aa9592d41c3a658212eaed
-ms.sourcegitcommit: be0a8e909fbce6b1b09699a721268f2fc7eb89de
+ms.openlocfilehash: 472b205933de74552e5f5a1c5e17f286818e0302
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84199437"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715315"
 ---
 # <a name="quickstart-send-events-to-azure-event-hubs-using-c"></a>快速入门：使用 C 将事件发送到 Azure 事件中心
 

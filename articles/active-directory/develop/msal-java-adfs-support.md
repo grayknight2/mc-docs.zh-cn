@@ -9,17 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 01/06/2020
+ms.date: 08/18/2020
 ms.author: v-junlch
 ms.reviewer: nacanuma
-ms.custom: aaddev
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: b2320acfd6601515ef44711cd3c6b7c755c28b5c
-ms.sourcegitcommit: b80d236ce3c706abc25bbaa41b0ccddd896e48fc
+ms.custom: aaddev, devx-track-java
+ms.openlocfilehash: 1b0939dece1ca4efb548b55b2600c4c88fb2607f
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81873094"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647701"
 ---
 # <a name="active-directory-federation-services-support-in-msal-for-java"></a>MSAL for Java 中的 Active Directory 联合身份验证服务支持
 
@@ -45,7 +44,7 @@ MSAL for Java 会连接到 Azure AD，后者可将在 Azure AD 中管理的用�
 
 ## <a name="acquire-a-token-via-username-and-password"></a>通过用户名和密码获取令牌
 
-通过将 `ConfidentialClientApplication.AcquireToken()` 或 `PublicClientApplication.AcquireToken()` 与 `IntegratedWindowsAuthenticationParameters` 或 `UsernamePasswordParameters` 配合使用来获取令牌时，MSAL for Java 会让标识提供者根据用户名进行联系。 MSAL for Java 从标识提供者获取 SAML 1.1 令牌，然后将其提供给 Azure AD，后者会返回 JSON Web 令牌 (JWT)。
+通过将 `ConfidentialClientApplication.AcquireToken()` 或 `PublicClientApplication.AcquireToken()` 与 `IntegratedWindowsAuthenticationParameters` 或 `UsernamePasswordParameters` 配合使用来获取令牌时，MSAL for Java 会让标识提供者根据用户名进行联系。 MSAL for Java 从标识提供者处获取 SAML 1.1 令牌，然后将其提供给 Azure AD，后者会返回 JSON Web 令牌 (JWT)。
 
 
 <!-- Update_Description: wording update -->

@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: conceptual
 origin.data: 04/07/2019
 ms.date: 06/09/2020
-ms.openlocfilehash: b81059a51ac4ff0701c396f534803c197f36b99b
-ms.sourcegitcommit: 73697fa9c19a40d235df033400c74741e7d0f3f4
+ms.openlocfilehash: 63e3eeba440e717b9cc164bb005e52ec5d92dfe7
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84574886"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516016"
 ---
 # <a name="time-series-analysis-in-azure-data-explorer"></a>Azure 数据资源管理器中的时序分析
 
@@ -61,10 +61,10 @@ demo_make_series1
 | render timechart 
 ```
 
-- 使用 [`make-series`](https://docs.microsoft.com/azure/data-explorer/kusto/query/make-seriesoperator) 运算符创建由三个时序组成的集，其中：
+- 使用 [`make-series`](/data-explorer/kusto/query/make-seriesoperator) 运算符创建由三个时序组成的集，其中：
     - `num=count()`：流量的时序
     - `range(min_t, max_t, 1h)`：时序是在时间范围（表记录的最旧和最新时间戳）的 1 小时箱中创建的
-    - `default=0`：指定缺失箱的填充方法，以创建正则时序。 或者，使用 [`series_fill_const()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-fill-constfunction)、[`series_fill_forward()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-fill-forwardfunction)、[`series_fill_backward()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-fill-backwardfunction) 和 [`series_fill_linear()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-fill-linearfunction) 进行更改
+    - `default=0`：指定缺失箱的填充方法，以创建正则时序。 或者，使用 [`series_fill_const()`](/data-explorer/kusto/query/series-fill-constfunction)、[`series_fill_forward()`](/data-explorer/kusto/query/series-fill-forwardfunction)、[`series_fill_backward()`](/data-explorer/kusto/query/series-fill-backwardfunction) 和 [`series_fill_linear()`](/data-explorer/kusto/query/series-fill-linearfunction) 进行更改
     - `byOsVer`：由 OS 分区
 - 实际时序数据结构是每个时间箱的聚合值的数值数组。 我们将使用 `render timechart` 进行可视化。
 
@@ -75,14 +75,14 @@ demo_make_series1
 ## <a name="time-series-analysis-functions"></a>时序分析函数
 
 在本部分，我们将执行典型的时序处理函数。
-创建一组时序后，ADX 支持使用[时序文档](https://docs.microsoft.com/azure/data-explorer/kusto/query/machine-learning-and-tsa)中所述的一系列函数（该列表不断扩充）来处理和分析这些时序。 下面将介绍几个用于处理和分析时序的有代表性函数。
+创建一组时序后，ADX 支持使用[时序文档](/data-explorer/kusto/query/machine-learning-and-tsa)中所述的一系列函数（该列表不断扩充）来处理和分析这些时序。 下面将介绍几个用于处理和分析时序的有代表性函数。
 
 ### <a name="filtering"></a>筛选
 
 在信号处理中，筛选是常见的活动，可用于完成时序处理任务（例如，平滑化干扰信号、变化检测）。
 - 有两个泛型筛选函数：
-    - [`series_fir()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-firfunction)：应用 FIR 筛选器。 用于方便计算变化检测中时序的移动平均值和差异。
-    - [`series_iir()`](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-iirfunction)：应用 IIR 筛选器。 用于指数平滑与累计求和。
+    - [`series_fir()`](/data-explorer/kusto/query/series-firfunction)：应用 FIR 筛选器。 用于方便计算变化检测中时序的移动平均值和差异。
+    - [`series_iir()`](/data-explorer/kusto/query/series-iirfunction)：应用 IIR 筛选器。 用于指数平滑与累计求和。
 - 通过将大小为 5 个箱的新移动平均时序（名为 *ma_num*）添加到查询，来 `Extend`（扩展）时序集：
 
 **\[** [**单击以运行查询**](https://dataexplorer.azure.cn/clusters/help/databases/Samples?query=H4sIAAAAAAAAA5WPQavCMBCE7/6KOSYQ4fXgSfobPDx517C2q4bXpLLZQBV/vKkFQTx5WRh25tvZgRUxJK9ooWPuaCAxPcfRR/pnn1kC5wZ35BIjSbjxbDf7EPlXKV6s3a6GmUHTVwya3hkf9tUds1wvEqnEthtLUmPR85HKoO0PxoQXBSFBKJ3YPP9xSyWH5mxxuGKX/1gqlCfl1Neln5EL3R+DmCodhC9MahqHjXVQKbxMW5NScyzQerA7k+gDa1tswzsBAAA=) **\]**
@@ -101,8 +101,8 @@ demo_make_series1
 ### <a name="regression-analysis"></a>回归分析
 
 ADX 支持使用分段线性回归分析来评估时序的趋势。
-- 使用 [series_fit_line()](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-fit-linefunction) 将最佳线条拟合到时序即可实现一般趋势检测。
-- 使用 [series_fit_2lines()](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-fit-2linesfunction) 可以检测相对于基线的趋势变化，这种变化在监视方案中非常有用。
+- 使用 [series_fit_line()](/data-explorer/kusto/query/series-fit-linefunction) 将最佳线条拟合到时序即可实现一般趋势检测。
+- 使用 [series_fit_2lines()](/data-explorer/kusto/query/series-fit-2linesfunction) 可以检测相对于基线的趋势变化，这种变化在监视方案中非常有用。
 
 时序查询中 `series_fit_line()` 和 `series_fit_2lines()` 函数的示例：
 
@@ -138,8 +138,8 @@ demo_series3
 
 ![时序季节性](media/time-series-analysis/time-series-seasonality.png)
 
-- 使用 [series_periods_detect()](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-periods-detectfunction) 自动检测时序中的周期。 
-- 如果知道某个指标应有特定的非重复周期，并且想要验证这些周期是否存在，则使用 [series_periods_validate()](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-periods-validatefunction)。
+- 使用 [series_periods_detect()](/data-explorer/kusto/query/series-periods-detectfunction) 自动检测时序中的周期。 
+- 如果知道某个指标应有特定的非重复周期，并且想要验证这些周期是否存在，则使用 [series_periods_validate()](/data-explorer/kusto/query/series-periods-validatefunction)。
 
 > [!NOTE]
 > 如果特定的非重复周期不存在，则表示出现异常
@@ -163,7 +163,7 @@ demo_series3
 
 ### <a name="element-wise-functions"></a>元素对应的函数
 
-可针对时序执行算术和逻辑运算。 使用 [series_subtract()](https://docs.microsoft.com/azure/data-explorer/kusto/query/series-subtractfunction) 可以计算残差时序（原始指标与平滑化指标之差），并查看剩留信号中的异常：
+可针对时序执行算术和逻辑运算。 使用 [series_subtract()](/data-explorer/kusto/query/series-subtractfunction) 可以计算残差时序（原始指标与平滑化指标之差），并查看剩留信号中的异常：
 
 **\[** [**单击以运行查询**](https://dataexplorer.azure.cn/clusters/help/databases/Samples?query=H4sIAAAAAAAAA5WQQU/DMAyF7/sVT5waqWjrgRPqb+AAgmPltR6LSNLJcdhA+/G4izRAnLhEerbfl2cHVkSfBkUPnfNIgaSZOM5DpDceMovn3OGMXGIk8Z+8jDdPPvKjUjw4d78KC4NO/2LQ6Tfjz/jqjEXeVolUYj/OJWnjMPGOStB+gznhSoFPEEqv3Fz2aWukFt3eYfuBh/zMYlA+KafJmsOCrPRh56Ux2UL4wKRN1+LOtVApXF/37RTOfioUfvpz2arQqBVS2Q7rtc6wa4wlkPLVCLXIqE7DHvcsXOOh73Hz4tM0HzO6zQ1gDOx8UOvZrtayst0Y7z4babkkYQxMyQbGPYnCiGIxTS/fXGpfwk+n7uQBAAA=) **\]**
 

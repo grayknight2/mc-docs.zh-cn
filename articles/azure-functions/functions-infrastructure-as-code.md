@@ -3,14 +3,14 @@ title: 自动将函数应用资源部署到 Azure
 description: 了解如何生成用于部署函数应用的 Azure 资源管理器模板。
 ms.assetid: d20743e3-aab6-442c-a836-9bcea09bfd32
 ms.topic: conceptual
-ms.date: 06/08/2020
+ms.date: 08/12/2020
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 33866d0dd44a57da188591812ad337ec4566c7f0
-ms.sourcegitcommit: f1a76ee3242698123a3d77f44c860db040b48f70
+ms.openlocfilehash: 70091ffa01563200258a1277b46a0ec6fe1b501f
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84563618"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222713"
 ---
 # <a name="automate-resource-deployment-for-your-function-app-in-azure-functions"></a>为 Azure Functions 中的函数应用自动执行资源部署
 
@@ -26,13 +26,17 @@ ms.locfileid: "84563618"
 
 Azure Functions 部署通常包括以下资源：
 
-| 资源                                                                           | 要求 | 语法和属性参考                                                         |   |
-|------------------------------------------------------------------------------------|-------------|-----------------------------------------------------------------------------------------|---|
-| 函数应用                                                                     | 必选    | [Microsoft.Web/sites](https://docs.microsoft.com/azure/templates/microsoft.web/sites)                             |   |
-| [Azure 存储](../storage/index.yml)帐户                                   | 必选    | [Microsoft.Storage/storageAccounts](https://docs.microsoft.com/azure/templates/microsoft.storage/storageaccounts) |   |
-| [托管计划](./functions-scale.md)                                             | 可选<sup>1</sup>    | [Microsoft.Web/serverfarms](https://docs.microsoft.com/azure/templates/microsoft.web/serverfarms)                 |   |
+| 资源                                                                           | 要求 | 语法和属性参考                                                         |
+|------------------------------------------------------------------------------------|-------------|-----------------------------------------------------------------------------------------|
+| 函数应用                                                                     | 必选    | [Microsoft.Web/sites](https://docs.microsoft.com/azure/templates/microsoft.web/sites)                             |
+| [Azure 存储](../storage/index.yml)帐户                                   | 必选    | [Microsoft.Storage/storageAccounts](https://docs.microsoft.com/azure/templates/microsoft.storage/storageaccounts) |
+| [Application Insights](../azure-monitor/app/app-insights-overview.md) 组件 | 可选    | [Microsoft.Insights/components](https://docs.microsoft.com/azure/templates/microsoft.insights/components)         |
+| [托管计划](./functions-scale.md)                                             | 可选<sup>1</sup>    | [Microsoft.Web/serverfarms](https://docs.microsoft.com/azure/templates/microsoft.web/serverfarms)                 |
 
 <sup>1</sup>只有选择在[应用服务计划](../app-service/overview-hosting-plans.md)上运行你的函数应用时，托管计划才是必需的。
+
+> [!TIP]
+> 虽然不是必需的，但强烈建议为应用配置 Application Insights。
 
 <a name="storage"></a>
 ### <a name="storage-account"></a>存储帐户
@@ -52,7 +56,7 @@ Azure Functions 部署通常包括以下资源：
 }
 ```
 
-此外，在站点配置中，必须将属性 `AzureWebJobsStorage` 指定为应用设置。 函数应用应将 `AzureWebJobsDashboard` 指定为应用设置。
+此外，在站点配置中，必须将属性 `AzureWebJobsStorage` 指定为应用设置。 如果函数应用未使用 Application Insights 进行监视，还应将 `AzureWebJobsDashboard` 指定为应用设置。
 
 Azure Functions 运行时使用 `AzureWebJobsStorage` 连接字符串创建内部队列。  未启用 Application Insights 时，运行时使用 `AzureWebJobsDashboard` 连接字符串登录到 Azure 表存储并启动门户中的“监视”选项卡****。
 
@@ -67,6 +71,38 @@ Azure Functions 运行时使用 `AzureWebJobsStorage` 连接字符串创建内�
     {
         "name": "AzureWebJobsDashboard",
         "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=core.chinacloudapi.cn;AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+    }
+]
+```
+
+### <a name="application-insights"></a>Application Insights
+
+建议使用 Application Insights 监视函数应用。 使用类型“Microsoft.Insights/components”和种类“web”定义 Application Insights 资源：
+
+```json
+        {
+            "apiVersion": "2015-05-01",
+            "name": "[variables('appInsightsName')]",
+            "type": "Microsoft.Insights/components",
+            "kind": "web",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('functionAppName'))]": "Resource"
+            },
+            "properties": {
+                "Application_Type": "web",
+                "ApplicationId": "[variables('appInsightsName')]"
+            }
+        },
+```
+
+此外，需要使用 `APPINSIGHTS_INSTRUMENTATIONKEY` 应用程序设置向函数应用提供检测密钥。 此属性在 `siteConfig` 对象的 `appSettings` 集合中指定：
+
+```json
+"appSettings": [
+    {
+        "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+        "value": "[reference(resourceId('microsoft.insights/components/', variables('appInsightsName')), '2015-05-01').InstrumentationKey]"
     }
 ]
 ```
@@ -100,11 +136,11 @@ Azure Functions 运行时使用 `AzureWebJobsStorage` 连接字符串创建内�
 
 函数应用必须包括以下应用程序设置：
 
-| 设置名称                 | 说明                                                                               | 示例值                        |
+| 设置名                 | 说明                                                                               | 示例值                        |
 |------------------------------|-------------------------------------------------------------------------------------------|---------------------------------------|
 | AzureWebJobsStorage          | Functions 运行时用于内部排队的存储帐户的连接字符串 | 请参阅[存储帐户](#storage)       |
 | FUNCTIONS_EXTENSION_VERSION  | Azure Functions 运行时的版本                                                | `~2`                                  |
-| FUNCTIONS_WORKER_RUNTIME     | 要为此应用中的函数使用的语言堆栈                                   | `dotnet`、`node`、`java`              |
+| FUNCTIONS_WORKER_RUNTIME     | 要为此应用中的函数使用的语言堆栈                                   | `dotnet`, `node`, `java`|
 | WEBSITE_NODE_DEFAULT_VERSION | 只有当使用 `node` 语言堆栈时必需，指定要使用的版本              | `10.14.1`                             |
 
 这些属性是在 `siteConfig` 属性中的 `appSettings` 集合中指定的：
@@ -227,7 +263,7 @@ Azure Functions 运行时使用 `AzureWebJobsStorage` 连接字符串创建内�
 
 ## <a name="deploy-on-app-service-plan"></a>在应用服务计划上部署
 
-在应用服务计划中，函数应用在基本和标准 SKU 中的专用 VM 上运行，类似于 Web 应用。 如需详细了解如何使用应用服务计划，请参阅 [Azure 应用服务计划深入概述](../app-service/overview-hosting-plans.md)。
+在应用服务计划中，函数应用在基本、标准和高级 SKU 中的专用 VM 上运行，类似于 Web 应用。 如需详细了解如何使用应用服务计划，请参阅 [Azure 应用服务计划深入概述](../app-service/overview-hosting-plans.md)。
 
 有关 Azure 资源管理器模板示例，请参阅[基于 Azure 应用服务计划的函数应用]。
 
@@ -297,7 +333,7 @@ Azure Functions 运行时使用 `AzureWebJobsStorage` 连接字符串创建内�
 函数应用有许多可用于部署的子资源，包括应用设置和源代码管理选项。 还可以选择删除 **sourcecontrols** 子资源，改用另一个部署选项。
 
 > [!IMPORTANT]
-> 若要使用 Azure 资源管理器成功部署应用程序，了解如何在 Azure 中部署资源尤为重要。 在下面的示例中，通过使用 **siteConfig** 应用顶级配置。 请务必在顶级设置这些配置，因为这些配置会将信息传达给 Functions 运行时和部署引擎。 应用 **sourcecontrols/web** 子资源前，需要顶级信息。 虽然可以在子级别 **config/appSettings** 资源中配置这些设置，但在某些情况下，需要在应用 *config/appSettings* 之前  部署函数应用。 比如在[逻辑应用](../logic-apps/index.yml)中使用函数时，函数是另一资源的依赖项。
+> 若要使用 Azure 资源管理器成功部署应用程序，了解如何在 Azure 中部署资源尤为重要。 在下面的示例中，通过使用 **siteConfig** 应用顶级配置。 请务必在顶级设置这些配置，因为这些配置会将信息传达给 Functions 运行时和部署引擎。 应用 **sourcecontrols/web** 子资源前，需要顶级信息。 虽然可以在子级别 **config/appSettings** 资源中配置这些设置，但在某些情况下，需要在应用 **config/appSettings** 之前部署函数应用。 比如在[逻辑应用](../logic-apps/index.yml)中使用函数时，函数是另一资源的依赖项。
 
 ```json
 {
@@ -398,7 +434,7 @@ Register-AzResourceProvider -ProviderNamespace "microsoft.web"
 Register-AzResourceProvider -ProviderNamespace "microsoft.storage"
 
 # Create a resource group for the function app
-New-AzResourceGroup -Name "MyResourceGroup" -Location 'China North'
+New-AzResourceGroup -Name "MyResourceGroup" -Location 'China North 2'
 
 # Create the parameters for the file, which for this template is the function app name.
 $TemplateParams = @{"appName" = "<function-app-name>"}

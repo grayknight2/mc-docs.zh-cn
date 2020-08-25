@@ -5,14 +5,16 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: conceptual
 origin.date: 04/06/2020
-ms.date: 06/22/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: d3c104b63054a79ab5cb0a7018c0dc75e647fc3a
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.openlocfilehash: 249a3cd54f64c71a45eb4de42a7216c0d9dac2ca
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85098314"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223001"
 ---
 # <a name="consistency-levels-in-azure-cosmos-db"></a>Azure Cosmos DB 中的一致性级别
 
@@ -22,7 +24,7 @@ Azure Cosmos DB 通过某种选择范围来实现数据一致性，而不会走�
 
 借助 Azure Cosmos DB，开发人员可以在一致性范围内从五个明确定义的一致性级别中进行选择。 这些级别包括“非常”、“有限过期”、“会话”、“一致前缀”和“最终”一致性。     这些级别具有明确的定义且非常直观，可用于特定的真实场景。 每个级别[在可用性与性能方面各有利弊](consistency-levels-tradeoffs.md)，并有 SLA 作为保障。 下图以范围区间形式显示了不同的一致性级别。
 
-![范围形式的一致性](./media/consistency-levels/five-consistency-levels.png)
+:::image type="content" source="./media/consistency-levels/five-consistency-levels.png" alt-text="范围形式的一致性" border="false" :::
 
 一致性级别与区域无关，无论在哪个区域为读取和写入操作提供服务、与 Azure Cosmos 帐户关联的区域数量是多少，或者帐户是配置了单个还是多个写入区域，都可以保证所有操作获得这种一致性。
 
@@ -32,7 +34,7 @@ Azure Cosmos DB 通过某种选择范围来实现数据一致性，而不会走�
 
 ## <a name="configure-the-default-consistency-level"></a>配置默认一致性级别
 
-随时都可在 Azure Cosmos DB 帐户中配置默认的一致性级别。 在帐户中配置的默认一致性级别适用于该帐户下的所有 Azure Cosmos 数据库和容器。 针对某个容器或数据库发出的所有读取和查询默认使用指定的一致性级别。 有关详细信息，请参阅如何[配置默认一致性级别](how-to-manage-consistency.md#configure-the-default-consistency-level)。
+随时都可在 Azure Cosmos DB 帐户中配置默认的一致性级别。 在帐户中配置的默认一致性级别适用于该帐户下的所有 Azure Cosmos 数据库和容器。 针对某个容器或数据库发出的所有读取和查询默认使用指定的一致性级别。 有关详细信息，请参阅如何[配置默认一致性级别](how-to-manage-consistency.md#configure-the-default-consistency-level)。 还可以覆盖特定请求的默认一致性级别，若要了解详细信息，请参阅如何[覆盖默认一致性级别](how-to-manage-consistency.md?#override-the-default-consistency-level)一文。
 
 ## <a name="guarantees-associated-with-consistency-levels"></a>与一致性级别关联的保证
 
@@ -44,9 +46,9 @@ Azure Cosmos DB 提供的综合 SLA 可保证 100% 的读取请求满足所选�
 
     下图以乐谱形式演示了非常一致性。 将数据写入“中国北部 2”区域后，当你从其他区域读取这些数据时，将会获得最新的值：
 
-    ![video](media/consistency-levels/strong-consistency.gif)
+  :::image type="content" source="media/consistency-levels/strong-consistency.gif" alt-text="视频":::
 
-- **受限停滞一致性**：保证读取操作遵循一致性前缀保证。 读取操作可以滞后于写入操作最多 K 个项版本（即“更新”）或“T”时间间隔。  换言之，如果选择有限过期，则可以通过两种方式配置“过期”：
+- **受限停滞一致性**：保证读取操作遵循一致性前缀保证。  读取操作可以滞后于写入操作最多“K”个项版本（即“更新”）或“T”时间间隔，以先达到者为准。 换言之，如果选择有限过期，则可以通过两种方式配置“过期”：
 
 - 项的版本数 (*K*)
 - 读取操作可以滞后于写入操作的时间间隔 (*T*)
@@ -62,7 +64,7 @@ Azure Cosmos DB 提供的综合 SLA 可保证 100% 的读取请求满足所选�
 
     预期写入延迟较低，但需要保证全局整体顺序的多区域分布式应用程序经常选择“有限过期”。 有限过期非常适合提供小组协作和共享、股票行情、发布-订阅/排队等功能的应用程序。下图以乐谱形式演示了有限过期一致性。 将数据写入“中国北部 2”区域后，“中国东部 2”和“澳大利亚东部”区域将会根据所配置的最大滞后时间或最大操作数目读取写入的值：
 
-    ![video](media/consistency-levels/bounded-staleness-consistency.gif)
+  :::image type="content" source="media/consistency-levels/bounded-staleness-consistency.gif" alt-text="视频":::
 
 - **会话一致性**：在单个客户端会话中，将保证读取操作遵循一致前缀、单调读取、单调写入、读取写入和读取后写入保证。 这采用单个“写入器”会话，或者多个写入器共享会话令牌。
 
@@ -75,7 +77,7 @@ Azure Cosmos DB 提供的综合 SLA 可保证 100% 的读取请求满足所选�
 
     “会话一致性”是最广泛用于单个区域以及多区域分布式应用程序的一致性级别。 它不仅提供与最终一致性相当的写入延迟、可用性和读取吞吐量，还提供一致性保证，从而满足了编写为在用户上下文中运行的应用程序的需求。 下图以乐谱形式演示了会话一致性。 “中国北部 2 写入器”和“中国北部 2 读取器”正在使用同一个会话（会话 A），因此它们会同时读取相同的数据。 而“澳大利亚东部”区域正在使用“会话 B”，因此，它会稍后才会接收到数据，但接收顺序与写入顺序相同。
 
-    ![video](media/consistency-levels/session-consistency.gif)
+  :::image type="content" source="media/consistency-levels/session-consistency.gif" alt-text="视频":::
 
 - 一致前缀：返回的更新包含所有更新的一些前缀，不带间隔。 一致前缀一致性级别保证读取操作永远不会看到无序写入。
 
@@ -90,12 +92,12 @@ Azure Cosmos DB 提供的综合 SLA 可保证 100% 的读取请求满足所选�
 
     下图以乐谱形式演示了一致前缀一致性。 在所有区域中，读取操作永远不会看到无序写入：
 
-    ![video](media/consistency-levels/consistent-prefix.gif)
+  :::image type="content" source="media/consistency-levels/consistent-prefix.gif" alt-text="视频":::
 
 - **最终一致性**：不保证读取的顺序。 如果缺少任何进一步的写入，则副本最终会收敛。  
 最终一致性是最弱的一致性形式，因为客户端可能会读取比之前读取的值还要旧的值。 最终一致性非常适合不需要任何顺序保证的应用程序。 示例包括推文、点赞或无回复评论的计数。 下图以乐谱形式演示了最终一致性。
 
-    ![video](media/consistency-levels/eventual-consistency.gif)
+  :::image type="content" source="media/consistency-levels/eventual-consistency.gif" alt-text="视频":::
 
 ## <a name="additional-reading"></a>其他阅读材料
 

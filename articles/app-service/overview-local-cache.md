@@ -5,20 +5,20 @@ tags: optional
 ms.assetid: e34d405e-c5d4-46ad-9b26-2a1eda86ce80
 ms.topic: article
 origin.date: 03/04/2016
-ms.date: 05/22/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 436ea729058199e8066f4ffae51609efc362f636
-ms.sourcegitcommit: 981a75a78f8cf74ab5a76f9e6b0dc5978387be4b
+ms.openlocfilehash: 6c49f8c46878c188ba2692798ddeddb208d1b4e8
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83801324"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228259"
 ---
 # <a name="azure-app-service-local-cache-overview"></a>Azure 应用服务本地缓存概述
 
 > [!NOTE]
-> 函数应用不支持本地缓存。
+> 函数应用或 [Linux 上的应用服务](overview.md#app-service-on-linux)不支持本地缓存。
 
 
 Azure 应用服务内容将存储在 Azure 存储中，作为内容共享持续呈现。 此设计旨在兼容各种应用，具有以下特点：  
@@ -38,7 +38,7 @@ Azure 应用服务本地缓存功能允许通过 Web 角色来查看内容。 �
 
 ## <a name="how-the-local-cache-changes-the-behavior-of-app-service"></a>本地缓存如何改变应用服务的行为
 * D:\home 指向本地缓存，它是应用启动时在 VM 实例上创建的。 D:\local 继续指向特定于临时 VM 的存储。
-* 本地缓存包含共享内容存储的 /site 和 /siteextensions 文件夹的一次性副本，分别位于 D:\home\site 和 D:\home\siteextensions。    应用启动时，文件会复制到本地缓存。 默认情况下，每个应用的这两个文件夹的大小限制为 1 GB，但可增至 2 GB。 请注意，随着缓存大小的增加，加载缓存需要的时间也越长。 如果复制的文件超出了本地缓存的大小，应用服务会以无提示方式忽略本地缓存并从远程文件共享读取。
+* 本地缓存包含共享内容存储的 /site 和 /siteextensions 文件夹的一次性副本，分别位于 D:\home\site 和 D:\home\siteextensions。    应用启动时，文件会复制到本地缓存。 默认情况下，每个应用的这两个文件夹的大小限制为 1 GB，但可增至 2 GB。 请注意，随着缓存大小的增加，加载缓存需要的时间也越长。 如果已将本地缓存限制增加到 2 GB，并且复制的文件超过了最大大小 2 GB，则应用服务会在不提示的情况下忽略本地缓存，从远程文件共享读取数据。 如果没有定义限制，或者该限制设置为低于 2 GB 的任何值，而复制的文件超出了该限制，则部署或交换可能会失败并出现错误。
 * 本地缓存是可以读写的。 不过，如果应用移动了虚拟机，或者系统重启了应用，则会放弃所做的任何修改。 如果应用在内容存储中存储了任务关键型数据，请不要使用本地缓存。
 * D:\home\LogFiles 和 D:\home\Data 包含日志文件和应用数据。  两个子文件夹本地存储在 VM 实例上，并定期复制到共享内容存储。 应用可以通过将日志文件和数据写入到这些文件夹来保留它们。 但是，复制到共享内容存储是最大努力，因此由于 VM 实例的突然崩溃，日志文件和数据可能会丢失。
 * [日志流式处理](troubleshoot-diagnostic-logs.md#stream-logs)受最大努力副本的影响。 可以在流式传输的日志中观察到最多一分钟的延迟。
@@ -106,6 +106,9 @@ Azure 应用服务本地缓存功能允许通过 Web 角色来查看内容。 �
 
 ### <a name="i-just-published-new-changes-but-my-app-does-not-seem-to-have-them-why"></a>刚发布的新更改内容似乎并没有在应用上显示出来， 为什么？
 如果应用使用本地缓存，则需重新启动站点才能获取最新更改。 不想将更改发布到生产站点？ 请参阅前述最佳实践部分的槽选项。
+
+> [!NOTE]
+> [从包运行](deploy-run-package.md)部署选项与本地缓存不兼容。
 
 ### <a name="where-are-my-logs"></a>日志在哪里？
 使用本地缓存时，日志和数据文件夹看起来稍有不同。 但是，子文件夹的结构始终是相同的，区别在于子文件夹嵌套在格式为“唯一 VM 标识符”+ 时间戳的子文件夹下。

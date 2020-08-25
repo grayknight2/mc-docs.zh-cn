@@ -4,12 +4,12 @@ ms.service: cost-management-billing
 ms.topic: include
 ms.date: 04/20/2020
 ms.author: v-tawe
-ms.openlocfilehash: 484c3588e41090909e3ff0a7a21a5f061a923059
-ms.sourcegitcommit: d6db729fea7d491d876d491f19ff89ef52384329
+ms.openlocfilehash: dc3c243ba2f358911a5fc79f10f2fd529aedd3dc
+ms.sourcegitcommit: 3cf647177c22b24f76236c57cae19482ead6a283
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82516014"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88753608"
 ---
 | 资源 | 限制 | 注意 |
 | --- | --- | --- | --- |

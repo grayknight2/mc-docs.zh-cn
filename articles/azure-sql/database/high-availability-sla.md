@@ -3,7 +3,7 @@ title: 高可用性
 titleSuffix: Azure SQL Database and SQL Managed Instance
 description: 了解 Azure SQL 数据库和 SQL 托管实例服务的高可用性功能和特性
 services: sql-database
-ms.service: sql-database
+ms.service: sql-db-mi
 ms.subservice: high-availability
 ms.custom: sqldbrb=2
 ms.devlang: ''
@@ -12,13 +12,13 @@ author: WenJason
 ms.author: v-jay
 ms.reviewer: carlrab, sashan
 origin.date: 04/02/2020
-ms.date: 07/13/2020
-ms.openlocfilehash: ce395438c4c3c6b75cdb7d39c820be84635517b2
-ms.sourcegitcommit: fa26665aab1899e35ef7b93ddc3e1631c009dd04
+ms.date: 08/17/2020
+ms.openlocfilehash: 39ad19ddc550e333d6013f2a3ad48511fb9be0a9
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86227207"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88223395"
 ---
 # <a name="high-availability-for-azure-sql-database-and-sql-managed-instance"></a>Azure SQL 数据库和 SQL 托管实例的高可用性
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -80,16 +80,23 @@ SQL 数据库和 SQL 托管实例均在最新稳定版本的 SQL Server 数据�
 
 ## <a name="testing-application-fault-resiliency"></a>测试应用程序的故障复原能力
 
-高可用性是 SQL 数据库和 SQL 托管实例平台的基本功能，其运作对数据库应用程序透明。 不过，我们认识到，你可能需要先测试在计划内或计划外事件期间启动的自动故障转移操作对应用程序的具体影响，然后才会将其部署到生产环境。 可以调用一个特殊的 API 来重启数据库或弹性池，从而触发故障转移。 由于重启操作会干扰系统，其数量过多可能会对平台造成压力，因此每个数据库或弹性池每 30 分钟只能进行一次故障转移调用。 
+高可用性是 SQL 数据库和 SQL 托管实例平台的基本功能，其运作对数据库应用程序透明。 不过，我们认识到，你可能需要先测试在计划内或计划外事件期间启动的自动故障转移操作对应用程序的具体影响，然后才会将其部署到生产环境。 可以通过调用特殊 API 重启数据库或弹性池来手动触发故障转移。 由于重启操作会干扰系统，其数量过多可能会对平台造成压力，因此每个数据库或弹性池每 30 分钟只能进行一次故障转移调用。 
 
-可以使用 REST API 或 PowerShell 启动故障转移。 有关 REST API 的信息，请参阅[数据库故障转移](https://docs.microsoft.com/rest/api/sql/databases(failover)/failover)和[弹性池故障转移](https://docs.microsoft.com/rest/api/sql/elasticpools(failover)/failover)。 有关 PowerShell 的信息，请参阅 [Invoke-AzSqlDatabaseFailover](https://docs.microsoft.com/powershell/module/az.sql/invoke-azsqldatabasefailover) 和 [Invoke-AzSqlElasticPoolFailover](https://docs.microsoft.com/powershell/module/az.sql/invoke-azsqlelasticpoolfailover)。 也可使用 [az rest](/cli/reference-index?view=azure-cli-latest#az-rest) 命令从 Azure CLI 进行 REST API 调用。
+可以使用 PowerShell、REST API 或 Azure CLI 启动故障转移：
+
+|部署类型|PowerShell|REST API| Azure CLI|
+|:---|:---|:---|:---|
+|数据库|[Invoke-AzSqlDatabaseFailover](https://docs.microsoft.com/powershell/module/az.sql/invoke-azsqldatabasefailover)|[数据库故障转移](https://docs.microsoft.com/rest/api/sql/databases(failover)/failover/)|[az rest](/cli/reference-index#az-rest)|
+|弹性池|[Invoke-AzSqlElasticPoolFailover](https://docs.microsoft.com/powershell/module/az.sql/invoke-azsqlelasticpoolfailover)|[弹性池故障转移](https://docs.microsoft.com/rest/api/sql/elasticpools(failover)/failover/)|[az rest](/cli/reference-index#az-rest)|
+|托管实例|[Invoke-AzSqlInstanceFailover](https://docs.microsoft.com/powershell/module/az.sql/Invoke-AzSqlInstanceFailover/)|[托管实例 - 故障转移](https://docs.microsoft.com/powershell/module/az.sql/Invoke-AzSqlInstanceFailover/)|[az sql mi failover](/cli/sql/mi/#az-sql-mi-failover)|
+
 
 > [!IMPORTANT]
-> 目前未为“超大规模”服务层级和托管实例提供故障转移命令。
+> 故障转移命令目前在超大规模服务层级中不可用。
 
 ## <a name="conclusion"></a>结论
 
-Azure SQL 数据库和 Azure SQL 托管实例提供与 Azure 平台深度集成的内置高可用性解决方案。 它依赖于使用 Service Fabric 来执行故障检测和恢复，依赖于 Azure Blob 存储来实现数据保护，并依赖于可用性区域来提高容错能力。 此外，SQL 数据库和 SQL 托管实例利用 SQL Server 实例的 Always On 可用性组技术来执行复制和故障转移。 将这些技术相结合，应用程序可完全实现混合存储模型的优势并支持最严格的 SLA。
+Azure SQL 数据库和 Azure SQL 托管实例提供与 Azure 平台深度集成的内置高可用性解决方案。 它依赖于使用 Service Fabric 来执行故障检测和恢复，依赖于使用 Azure Blob 存储来实现数据保护，并依赖于使用可用性区域来提高容错能力（如文档前文所述，尚不适用于 Azure SQL 托管实例）。 此外，SQL 数据库和 SQL 托管实例利用 SQL Server 实例的 Always On 可用性组技术来执行复制和故障转移。 将这些技术相结合，应用程序可完全实现混合存储模型的优势并支持最严格的 SLA。
 
 ## <a name="next-steps"></a>后续步骤
 

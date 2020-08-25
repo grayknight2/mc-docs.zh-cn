@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 08/11/2019
-ms.date: 07/31/2020
-ms.openlocfilehash: 2ab543a5d654a453b5f83268bf3d64b6c749cc21
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: b704dbbd95b12882e7099f2845f086f11650f9bf
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509537"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516113"
 ---
 # <a name="array_shift_right"></a>array_shift_right()
 

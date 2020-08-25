@@ -11,12 +11,12 @@ author: vaidyas
 ms.reviewer: larryfr
 ms.date: 03/06/2020
 ms.custom: tracking-python
-ms.openlocfilehash: abb1d2b0b978b0ea7c2ecdda27ad2dab485ca17a
-ms.sourcegitcommit: 1c01c98a2a42a7555d756569101a85e3245732fd
+ms.openlocfilehash: 9a3cc6ebe7f7e0d40b4f4d6291c172c0b50dd9e1
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85097538"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228204"
 ---
 # <a name="deploy-a-machine-learning-model-to-azure-functions-preview"></a>将机器学习模型部署到 Azure Functions（预览版）
 [!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
@@ -56,13 +56,14 @@ ms.locfileid: "85097538"
     >
     > 默认情况下，在为函数打包时，输入被视为文本。 如果想使用输入的原始字节（例如用于 Blob 触发器），则应使用 [AMLRequest 接受原始数据](https://docs.microsoft.com/azure/machine-learning/how-to-deploy-and-where#binary-data)。
 
+有关入口脚本的详细信息，请参阅[定义评分代码](/machine-learning/how-to-deploy-and-where#script)
 
-* 依赖项，如运行入口脚本或模型所需的帮助程序脚本或 Python/Conda 包 
+* 依赖项，如运行入口脚本或模型所需的帮助程序脚本或 Python/Conda 包****
 
-这些实体被封装到推理配置中  。 推理配置引用入口脚本和其他依赖项。
+这些实体被封装到推理配置中____。 推理配置引用入口脚本和其他依赖项。
 
 > [!IMPORTANT]
-> 创建用于 Azure Functions 的推理配置时，需要使用 [Environment](https://docs.microsoft.com/python/api/azureml-core/azureml.core.environment%28class%29?view=azure-ml-py) 对象。 请注意，如果要定义自定义环境，需要将版本不低于 1.0.45 的 azureml-defaults 添加为 Pip 依赖项。 此包包含将模型托管为 Web 服务所需的功能。 下面的示例演示如何创建环境对象并将其用于推理配置：
+> 创建用于 Azure Functions 的推理配置时，需要使用 [Environment](https://docs.microsoft.com/python/api/azureml-core/azureml.core.environment%28class%29?view=azure-ml-py) 对象。 请注意，如果要定义自定义环境，必须将版本不低于 1.0.45 的 azureml-defaults 添加为 pip 依赖项。 此包包含将模型作为 Web 服务托管时所需的功能。 下面的示例演示如何创建环境对象并将其用于推理配置：
 >
 > ```python
 > from azureml.core.environment import Environment
@@ -83,7 +84,7 @@ ms.locfileid: "85097538"
 有关推理配置的详细信息，请参阅[使用 Azure 机器学习部署模型](how-to-deploy-and-where.md)。
 
 > [!IMPORTANT]
-> 部署到 Azure Functions 时，无需创建部署配置  。
+> 部署到 Azure Functions 时，无需创建部署配置____。
 
 ## <a name="install-the-sdk-preview-package-for-functions-support"></a>安装 SDK 预览版包以获取函数支持
 
@@ -98,7 +99,7 @@ pip install azureml-contrib-functions
 若想创建要部署到 Azure Functions 的 Docker 映像，请为想应用的触发器使用 [azureml.contrib.functions.package](https://docs.microsoft.com/python/api/azureml-contrib-functions/azureml.contrib.functions?view=azure-ml-py) 或特定包函数。 下面的代码段演示如何通过模型和推理配置生成带有 blob 触发器的新包：
 
 > [!NOTE]
-> 代码段假定 `model` 包含已注册的模型，`inference_config` 包含推理环境的配置。 有关详细信息，请参阅[使用 Azure 机器学习部署模型](how-to-deploy-and-where.md)。
+> 该代码片段假定 `model` 包含已注册的模型，并且 `inference_config` 包含推理环境的配置。 有关详细信息，请参阅[使用 Azure 机器学习部署模型](how-to-deploy-and-where.md)。
 
 ```python
 from azureml.contrib.functions import package
@@ -143,19 +144,19 @@ print(blob.location)
     }
     ```
 
-    保存“用户名”和某个“密码”的值   。
+    保存“用户名”和某个“密码”的值____ ____。
 
-1. 如果还没有用于部署服务的资源组或应用服务计划，可使用以下命令来创建这两项：
+1. 如果你还没有资源组或应用服务计划来部署服务，以下命令将演示如何创建这两项：
 
     ```azurecli
     az group create --name myresourcegroup --location "West Europe"
     az appservice plan create --name myplanname --resource-group myresourcegroup --sku B1 --is-linux
     ```
 
-    此示例使用了“Linux 基本”  定价层级 (`--sku B1`)。
+    此示例使用了“Linux 基本”定价层级 (`--sku B1`)。
 
     > [!IMPORTANT]
-    > Azure 机器学习创建的映像使用 Linux，因此需要使用 `--is-linux` 参数。
+    > Azure 机器学习创建的映像使用 Linux，因此必须使用 `--is-linux` 参数。
 
 1. 创建要用于 Web 作业存储的存储帐户并获取其连接字符串。 将 `<webjobStorage>` 替换为要使用的名称。
 

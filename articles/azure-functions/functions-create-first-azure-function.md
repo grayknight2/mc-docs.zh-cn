@@ -3,22 +3,27 @@ title: 在 Azure 门户中创建第一个函数
 description: 了解如何使用 Azure 门户创建第一个可无服务器执行的 Azure Function。
 ms.assetid: 96cf87b9-8db6-41a8-863a-abb828e3d06d
 ms.topic: how-to
-ms.date: 06/08/2020
+ms.date: 08/11/2020
 ms.custom: mvc, devcenter, cc996988-fb4f-47
-ms.openlocfilehash: ad48b03dda4ab24957af896ae782ae31a56273f9
-ms.sourcegitcommit: f1a76ee3242698123a3d77f44c860db040b48f70
+ms.openlocfilehash: 502a5ac0988c86e8f201c845b9f94a6cede9cbcb
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84563787"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222585"
 ---
 # <a name="create-your-first-function-in-the-azure-portal"></a>在 Azure 门户中创建第一个函数
 
 Azure Functions 用于在无服务器环境中运行代码，无需先创建虚拟机 (VM) 或发布 Web 应用程序。 本文介绍如何使用 Azure Functions 在 Azure 门户中创建 HTTP 触发器函数“hello world”。
 
-如果没有 Azure 订阅，可在开始前创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
+我们建议[在本地开发函数](functions-develop-local.md)，然后发布到 Azure 中的函数应用。  
+通过以下链接之一开始使用所选的本地开发环境和语言：
 
-如果你是 C# 开发人员，则请考虑[在 Visual Studio 2019 中创建第一个函数](functions-create-your-first-function-visual-studio.md)，而不要在门户中这样做。 
+| Visual Studio Code | 终端/命令提示符 | Visual Studio |
+| --- | --- | --- |
+|  &bull;&nbsp;[C# 入门](./functions-create-first-function-vs-code.md?pivots=programming-language-csharp)<br/>&bull;&nbsp;[Java 入门](./functions-create-first-function-vs-code.md?pivots=programming-language-java)<br/>&bull;&nbsp;[JavaScript 入门](./functions-create-first-function-vs-code.md?pivots=programming-language-javascript)<br/>&bull;&nbsp;[PowerShell 入门](./functions-create-first-function-vs-code.md?pivots=programming-language-powershell)|&bull;&nbsp;[C# 入门](./functions-create-first-azure-function-azure-cli.md?pivots=programming-language-csharp)<br/>&bull;&nbsp;[Java 入门](./functions-create-first-azure-function-azure-cli.md?pivots=programming-language-java)<br/>&bull;&nbsp;[JavaScript 入门](./functions-create-first-azure-function-azure-cli.md?pivots=programming-language-javascript)<br/>&bull;&nbsp;[PowerShell 入门](./functions-create-first-azure-function-azure-cli.md?pivots=programming-language-powershell)| [C# 入门](functions-create-your-first-function-visual-studio.md) |
+
+如果没有 Azure 订阅，可在开始前创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial)。
 
 ## <a name="sign-in-to-azure"></a>登录 Azure
 

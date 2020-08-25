@@ -5,14 +5,15 @@ author: sffamily
 ms.service: signalr
 ms.topic: conceptual
 origin.date: 12/11/2019
-ms.date: 01/13/2020
+ms.date: 08/21/2020
 ms.author: v-tawe
-ms.openlocfilehash: 06a3bbb6ca4d46e92f9523c60e721f1f3feb6a92
-ms.sourcegitcommit: 89ca2993f5978cd6dd67195db7c4bdd51a677371
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 7eff3175ad981968a09374d917ff4eb92fe5dda8
+ms.sourcegitcommit: 2e9b16f155455cd5f0641234cfcb304a568765a9
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82588750"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88715278"
 ---
 # <a name="how-to-scale-an-azure-signalr-service-instance"></a>如何缩放 Azure SignalR 服务实例？
 本文介绍如何缩放 Azure SignalR 服务的实例。 有两种方案可用于缩放、纵向扩展和横向扩展。

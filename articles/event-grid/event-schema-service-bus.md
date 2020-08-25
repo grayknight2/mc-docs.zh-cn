@@ -1,18 +1,16 @@
 ---
 title: 充当事件网格源的 Azure 服务总线
 description: 介绍了针对 Azure 事件网格中的服务总线事件提供的属性
-services: event-grid
 author: Johnnytechn
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 05/06/2020
+ms.date: 08/10/2020
 ms.author: v-johya
-ms.openlocfilehash: 9c0279142d3160862453b120ab7706493b12798e
-ms.sourcegitcommit: 81241aa44adbcac0764e2b5eb865b96ae56da6b7
+ms.openlocfilehash: 30bb52585be49b42487f508b5aa096e1454aaaa6
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83001960"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228022"
 ---
 # <a name="azure-service-bus-as-an-event-grid-source"></a>充当事件网格源的 Azure 服务总线
 
@@ -101,8 +99,16 @@ ms.locfileid: "83001960"
 | topicName | string | 包含活动消息的服务总线订阅所属的主题。 如果使用队列，则值为 null。 |
 | subscriptionName | string | 包含活动消息的服务总线订阅。 如果使用队列，则值为 null。 |
 
+## <a name="tutorials-and-how-tos"></a>教程和操作指南
+|标题  |描述  |
+|---------|---------|
+| [教程：Azure 服务总线到 Azure 事件网格集成示例](../service-bus-messaging/service-bus-to-event-grid-integration-example.md?toc=%2fevent-grid%2ftoc.json) | 事件网格将消息从服务总线主题发送到函数应用和逻辑应用。 |
+| [Azure 服务总线到事件网格的集成](../service-bus-messaging/service-bus-to-event-grid-integration-concept.md) | 概述服务总线与事件网格的集成。 |
+
 ## <a name="next-steps"></a>后续步骤
 
 * 有关 Azure 事件网格的简介，请参阅[什么是事件网格？](overview.md)
 * 有关创建 Azure 事件网格订阅的详细信息，请参阅[事件网格订阅架构](subscription-creation-schema.md)。
+* 有关将 Azure 事件网格与服务总线配合使用的详细信息，请参阅[服务总线到事件网格集成概述](../service-bus-messaging/service-bus-to-event-grid-integration-concept.md)。
+* 尝试[通过 Functions 或逻辑应用接收服务总线事件](../service-bus-messaging/service-bus-to-event-grid-integration-example.md?toc=%2fevent-grid%2ftoc.json)。
 

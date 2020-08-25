@@ -8,27 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/13/2020
-ms.date: 08/06/2020
-ms.openlocfilehash: 27c497ec0426eef6c685a27bf87b3e18025bca9b
-ms.sourcegitcommit: 7ceeca89c0f0057610d998b64c000a2bb0a57285
+ms.date: 08/18/2020
+ms.openlocfilehash: 5bcb7b6cd67739a01fe2c3d423867e2da62aec81
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87841730"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88516098"
 ---
 # <a name="pack_all"></a>pack_all()
 
 从表格表达式的所有列创建一个 `dynamic` 对象（属性包）。
 
-**语法**
+> [!NOTE]
+> 不保证返回对象的表示形式在运行之间为字节级兼容。 例如，包中出现的属性可能以不同的顺序出现。
+
+## <a name="syntax"></a>语法
 
 `pack_all()`
 
-**备注**
-
-不保证返回对象的表示形式在运行之间为字节级兼容。 例如，包中出现的属性可能以不同的顺序出现。
-
-**示例**
+## <a name="examples"></a>示例
 
 给定表 SmsMessages 
 
@@ -50,6 +49,7 @@ datatable(SourceNumber:string,TargetNumber:string,CharsCount:long)
 ]
 | extend Packed=pack_all()
 ```
+
 返回：
 
 |TableName |SourceNumber |TargetNumber | Packed

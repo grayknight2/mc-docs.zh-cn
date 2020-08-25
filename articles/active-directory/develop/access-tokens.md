@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 07/08/2020
+ms.date: 08/17/2020
 ms.author: v-junlch
 ms.reviewer: hirsin
 ms.custom: aaddev, identityplatformtop40, fasttrack-edit
-ms.openlocfilehash: 98d3bf5d940b62b502a2f77cd95779ae4f8cb9fe
-ms.sourcegitcommit: 92b9b1387314b60661f5f62db4451c9ff2c49500
+ms.openlocfilehash: 69e0e2e5a19a705262f78961d44d620164e4a6ff
+ms.sourcegitcommit: 7646936d018c4392e1c138d7e541681c4dfd9041
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86164977"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88647571"
 ---
 # <a name="microsoft-identity-platform-access-tokens"></a>Microsoft 标识平台访问令牌
 
@@ -100,7 +100,7 @@ JWT（JSON Web 令牌）拆分成三个部分：
 | `name` | String | 提供一个用户可读值，用于标识令牌使用者。 该值不一定唯一，而且可变，只能用于显示目的。 需要 `profile` 范围才能接收此声明。 |
 | `scp` | 字符串，范围的空格分隔列表 | 应用程序公开的、客户端应用程序已请求（和接收）其许可的范围集。 应用应该验证这些范围是否为应用公开的有效范围，并根据这些范围的值做出授权决策。 仅为[用户令牌](#user-and-application-tokens)包含此值。 |
 | `roles` | 字符串数组、权限列表 | 应用程序公开的、请求方应用程序或用户有权调用的权限集。 对于[应用程序令牌](#user-and-application-tokens)，在执行客户端凭据流（[v1.0](../azuread-dev/v1-oauth2-client-creds-grant-flow.md)、[v2.0](v2-oauth2-client-creds-grant-flow.md)）期间使用此声明代替用户范围。  对于[用户令牌](#user-and-application-tokens)，使用用户在目标应用程序上分配的角色进行填充。 |
-| `wids` | [RoleTemplateID](/active-directory/users-groups-roles/directory-assign-admin-roles#role-template-ids) GUID 的数组 | 表示在[管理员角色页](/active-directory/users-groups-roles/directory-assign-admin-roles#role-template-ids)中的角色部分分配给此用户的租户级角色。  此声明是通过[应用程序清单](reference-app-manifest.md)的 `groupMembershipClaims` 属性按应用程序定义的。  必须将其设置为“All”或“DirectoryRole”。  由于令牌长度方面的原因，它在通过隐式流获取的令牌中可能不存在。 |
+| `wids` | [RoleTemplateID](../users-groups-roles/directory-assign-admin-roles.md#role-template-ids) GUID 的数组 | 表示在[管理员角色页](../users-groups-roles/directory-assign-admin-roles.md#role-template-ids)中的角色部分分配给此用户的租户级角色。  此声明是通过[应用程序清单](reference-app-manifest.md)的 `groupMembershipClaims` 属性按应用程序定义的。  必须将其设置为“All”或“DirectoryRole”。  由于令牌长度方面的原因，它在通过隐式流获取的令牌中可能不存在。 |
 | `groups` | GUID 的 JSON 数组 | 指定表示使用者的组成员身份的对象 ID。 这些值具有唯一性（请参阅对象 ID），可安全地用于管理访问，例如强制要求授权访问资源。 组声明中包含的组通过[应用程序清单](reference-app-manifest.md)的 `groupMembershipClaims` 属性基于每个应用程序进行配置。 值为 null 将排除所有组；值为“SecurityGroup”将只包括 Active Directory 安全组成员身份；值为“All”将包括安全组和 Office 365 通讯组列表。 <br><br>有关将 `groups` 声明与隐式授权一起使用的详细信息，请参阅下文中的 `hasgroups` 声明。 <br>对于其他流，如果用户所在的组数超出了某个限制（对于 SAML，为 150，对于 JWT，为 200），则会将超额声明添加到指向包含该用户的组列表的 Microsoft Graph 终结点的声明源。 |
 | `hasgroups` | 布尔 | 如果存在，始终为 `true`，表示用户至少在一个组中。 如果完整组声明将导致 URI 片段超出 URL 长度限制（当前为 6 个或更多组），则在隐式授权流中用来替代 JWT 的 `groups` 声明。 指示客户端应当使用 Microsoft Graph API 来确定用户的组 (`https://microsoftgraph.chinacloudapi.cn/v1.0/users/{userID}/getMemberObjects`)。 |
 | `groups:src1` | JSON 对象 | 对于长度不受限制（参阅上文中的 `hasgroups`）但对于令牌而言仍然太大的令牌请求，将包括指向用户的完整组列表的链接。 对于 JWT，作为分布式声明；对于 SAML，作为新声明替代 `groups` 声明。 <br><br>JWT 值示例： <br> `"groups":"src1"` <br> `"_claim_sources`: `"src1" : { "endpoint" : "https://microsoftgraph.chinacloudapi.cn/v1.0/users/{userID}/getMemberObjects" }` |
@@ -171,7 +171,7 @@ Microsoft 标识可以通过与应用程序相关的不同方式进行身份验�
 
 若要验证 id_token 或 access_token，应用应该验证该令牌的签名和声明。 若要验证访问令牌，应用还需验证颁发者、受众和签名令牌。 这些需要根据 OpenID 发现文档中的值进行验证。 例如，文档的租户独立版本位于 [https://login.partner.microsoftonline.cn/common/.well-known/openid-configuration](https://login.partner.microsoftonline.cn/common/.well-known/openid-configuration)。
 
-Azure AD 中间件具有验证访问令牌的内置功能，可以浏览我们的[示例](/active-directory/develop/sample-v1-code)，以所选语言进行查找。
+Azure AD 中间件具有验证访问令牌的内置功能，可以浏览我们的[示例](../azuread-dev/sample-v1-code.md)，以所选语言进行查找。
 
 我们提供了库和代码示例，用以演示如何轻松处理令牌验证。 我们还提供了以下信息以帮助用户了解基础过程。 另外还有多个第三方开源库可用于 JWT 验证 - 几乎每个平台和语言都至少有一个选项。 有关 Azure AD 身份验证库和代码示例的详细信息，请参阅 [v1.0 身份验证库](../azuread-dev/active-directory-authentication-libraries.md)和 [v2.0 身份验证库](reference-v2-libraries.md)。
 
@@ -224,13 +224,13 @@ https://login.partner.microsoftonline.cn/common/v2.0/.well-known/openid-configur
 * 使用 `appidacr` 验证调用方客户端的身份验证状态 - 如果不允许公共客户端调用你的 API，则值不应该是 0。
 * 根据以往的 `nonce` 声明列表进行检查，以验证令牌是否未重放。
 * 检查 `tid` 是否与允许调用该 API 的租户相匹配。
-* 使用 `acr` 声明验证已执行 MFA 的用户。 应使用[条件访问](/active-directory/conditional-access/overview)强制实施此步骤。
+* 使用 `acr` 声明验证已执行 MFA 的用户。 应使用[条件访问](../conditional-access/overview.md)强制实施此步骤。
 * 如果在访问令牌中请求了 `roles` 或 `groups` 声明，请验证用户是否在允许执行此操作的组中。
   * 对于使用隐式流检索的令牌，可能需要在 [Microsoft Graph](https://developer.microsoft.com/graph/) 中查询此数据，因为该数据通常很庞大，无法放到令牌中。
 
 ## <a name="user-and-application-tokens"></a>用户和应用程序令牌
 
-应用程序可以为用户（经常讨论的流）或直接从应用程序（通过[客户端凭据流](v1-oauth2-client-creds-grant-flow.md)）接收令牌。 这些仅限应用的令牌表示这种调用来自应用程序，而没有支持它的用户。 这些令牌的处理方式大致相同：
+应用程序可以为用户（经常讨论的流）或直接从应用程序（通过[客户端凭据流](../azuread-dev/v1-oauth2-client-creds-grant-flow.md)）接收令牌。 这些仅限应用的令牌表示这种调用来自应用程序，而没有支持它的用户。 这些令牌的处理方式大致相同：
 
 * 使用 `roles` 查看已向令牌使用者（在本例中为服务主体，而不是用户）授予的权限。
 * 使用 `oid` 或 `sub` 来验证调用服务主体是否是预期的服务主体。
@@ -243,7 +243,6 @@ https://login.partner.microsoftonline.cn/common/v2.0/.well-known/openid-configur
 刷新令牌可能由于不同的原因而随时失效或吊销。 这些原因主要分为两个类别：超时和吊销。
 
 ### <a name="token-timeouts"></a>令牌超时
-
 
 * MaxInactiveTime：如果在 MaxInactiveTime 指定的时间内未使用刷新令牌，刷新令牌将不再有效。
 * MaxSessionAge：如果 MaxAgeSessionMultiFactor 或 MaxAgeSessionSingleFactor 已设置为其默认值（“直到吊销”）以外的值，则在经过 MaxAgeSession* 中设置的时间后，需要重新进行身份验证。

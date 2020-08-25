@@ -5,13 +5,13 @@ author: yegu-ms
 ms.author: v-junlch
 ms.service: cache
 ms.topic: conceptual
-ms.date: 07/10/2020
-ms.openlocfilehash: b86366665af98e3cadd991051bd8c8494a5dd131
-ms.sourcegitcommit: 65a7360bb14b0373e18ec8eaa288ed3ac7b24ef4
+ms.date: 08/10/2020
+ms.openlocfilehash: 1c3361b21848196d3d2b06cd5f550f85f1c00f43
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86219733"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222616"
 ---
 # <a name="azure-cache-for-redis-faq"></a>用于 Redis 的 Azure 缓存常见问题解答
 了解 Azure Redis 缓存的常见问题、模式和最佳做法。
@@ -19,7 +19,6 @@ ms.locfileid: "86219733"
 ## <a name="what-if-my-question-isnt-answered-here"></a>如果未在此处找到相关问题怎么办？
 如果未在此处找到相关问题，请联系我们获取帮助。
 
-* 可在此常见问题解答末尾的评论处发布问题，并与 Azure 缓存团队和其他社区成员就本文进行讨论。
 * 若希望更多的人看到问题，可以将问题发布在[有关 Azure 缓存的 Microsoft Q&A 问题页面](https://docs.microsoft.com/answers/topics/azure-cache-redis.html)并与 Azure 缓存团队和社区的其他成员讨论。
 * 如果想要发出功能请求，可将请求和意见提交到 [Azure Redis 缓存 User Voice](https://feedback.azure.com/forums/169382-cache)。
 
@@ -40,6 +39,7 @@ ms.locfileid: "86219733"
 * [我应使用哪种 Azure Redis 缓存产品/服务和大小？](#what-azure-cache-for-redis-offering-and-size-should-i-use)
 * [Azure Redis 缓存性能](#azure-cache-for-redis-performance)
 * [我应该将缓存放在哪个区域？](#in-what-region-should-i-locate-my-cache)
+* [我的缓存数据位于何处？](#where-do-my-cached-data-reside)
 * [Azure Redis 缓存如何计费？](#how-am-i-billed-for-azure-cache-for-redis)
 
 ## <a name="development-faqs"></a>有关开发的常见问题
@@ -70,10 +70,10 @@ ms.locfileid: "86219733"
 * [客户端为何与缓存断开连接？](#why-was-my-client-disconnected-from-the-cache)
 
 ## <a name="prior-cache-offering-faqs"></a>有关之前缓存产品的常见问题
-* [哪种 Azure 缓存产品适合我？](#which-azure-cache-offering-is-right-for-me)
+* [哪种 Azure 缓存产品适合我？](#which-azure-cache-offerings-is-right-for-me)
 
 ### <a name="what-is-azure-cache-for-redis"></a>什么是 Azure Redis 缓存？
-Azure Redis 缓存基于热门开源软件 [Redis](https://redis.io/)。 这使用户可以访问安全、专用的 Azure Redis 缓存，该缓存由 Microsoft 托管并可从 Azure 内的任何应用程序进行访问。 有关更详细的概述，请参阅 Azure.com 上的 [Azure Redis 缓存](https://www.azure.cn/home/features/cache/)产品页。
+[Azure Cache for Redis](/azure-cache-for-redis/cache-overview) 基于热门开源软件 [Redis](https://redis.io/)。 这使用户可以访问安全、专用的 Azure Redis 缓存，该缓存由 Microsoft 托管并可从 Azure 内的任何应用程序进行访问。 有关更详细的概述，请参阅 [Azure Cache for Redis](https://www.azure.cn/home/features/cache/) 产品页。
 
 ### <a name="how-can-i-get-started-with-azure-cache-for-redis"></a>如何开始使用 Azure Redis 缓存？
 有几种开始使用 Azure Redis 缓存的方法。
@@ -146,10 +146,17 @@ Azure Redis 缓存基于热门开源软件 [Redis](https://redis.io/)。 这使�
 ### <a name="in-what-region-should-i-locate-my-cache"></a>应该将缓存放在哪个区域？
 为了获得最佳性能并最大程度地降低延迟，请在缓存客户端应用程序所在的区域放置 Azure Redis 缓存。
 
+### <a name="where-do-my-cached-data-reside"></a>我的缓存数据位于何处？
+Azure Cache for Redis 将应用程序数据存储在托管缓存的 VM 的 RAM 中，具体取决于层级。 数据全部位于默认选择的 Azure 区域中。 在两种情况下，数据可能会离开某个区域：
+  1. 在缓存上启用持久性后，Azure Cache for Redis 会将数据备份到你拥有的 Azure 存储帐户中。 如果提供的存储帐户恰好位于另一个区域，则数据的副本将存储在该区域。
+  1. 如果设置了异地复制，并且辅助缓存位于其他区域（通常是这种情况），则数据会复制到该区域。
+
+需要显式配置 Azure Cache for Redis 才能使用这些功能。 你还可以完全控制存储帐户或辅助缓存所在的区域。
+
 <a name="cache-billing"></a>
 
 ### <a name="how-am-i-billed-for-azure-cache-for-redis"></a>Azure Redis 缓存如何计费？
-Azure Redis 缓存的定价在[此处](https://www.azure.cn/pricing/details/redis-cache/)。 定价页列出了每小时费率。 缓存按分钟计费，从创建缓存时开始，到删除缓存时为止。 没有提供用于停止或暂停缓存的计费选项。
+Azure Redis 缓存的定价在[此处](https://www.azure.cn/pricing/details/redis-cache/)。 定价页列出每小时和每月费率。 缓存按分钟计费，从创建缓存时开始，到删除缓存时为止。 没有提供用于停止或暂停缓存的计费选项。
 
 <a name="cache-configuration"></a>
 
@@ -194,20 +201,20 @@ Azure Redis 缓存没有本地模拟器，但可以在本地计算机上从 [Red
 
 ```csharp
 private static Lazy<ConnectionMultiplexer>
-      lazyConnection = new Lazy<ConnectionMultiplexer>
-    (() =>
+    lazyConnection = new Lazy<ConnectionMultiplexer> (() =>
     {
-        // Connect to a locally running instance of Redis to simulate a local cache emulator experience.
+        // Connect to a locally running instance of Redis to simulate
+        // a local cache emulator experience.
         return ConnectionMultiplexer.Connect("127.0.0.1:6379");
     });
 
-    public static ConnectionMultiplexer Connection
+public static ConnectionMultiplexer Connection
+{
+    get
     {
-        get
-        {
-            return lazyConnection.Value;
-        }
+        return lazyConnection.Value;
     }
+}
 ```
 
 如果需要，可以选择配置 [redis.conf](https://redis.io/topics/config) 文件，以更好地匹配联机 Azure Redis 缓存的[默认缓存设置](cache-configure.md#default-redis-server-configuration)。
@@ -231,7 +238,7 @@ private static Lazy<ConnectionMultiplexer>
 <a name="cache-reference"></a>
 
 ### <a name="why-doesnt-azure-cache-for-redis-have-an-msdn-class-library-reference-like-some-of-the-other-azure-services"></a>Azure Redis 缓存为何不像某些其他 Azure 服务一样提供 MSDN 类库参考？
-Azure Redis 缓存基于热门的开源 Azure Redis 缓存。 它可以通过各种 [Redis 客户端](https://redis.io/clients) 进行访问，这些客户端适用于许多编程语言。 每个客户端有自身的 API，用于通过 [Redis 命令](https://redis.io/commands)调用 Azure Redis 缓存实例。
+Azure Cache for Redis 基于热门开源内存中数据存储 Redis。 它可以通过各种 [Redis 客户端](https://redis.io/clients) 进行访问，这些客户端适用于许多编程语言。 每个客户端有自身的 API，用于通过 [Redis 命令](https://redis.io/commands)调用 Azure Redis 缓存实例。
 
 由于客户端各不相同，因此 MSDN 上未提供统一的类引用，每个客户端都有自己的参考文档。 除了参考文档以外，还可以参阅多个教程，这些教程介绍了如何通过不同的语言和缓存客户端来开始使用 Azure Redis 缓存。 若要访问这些教程，请参阅[如何使用 Azure Redis 缓存](cache-dotnet-how-to-use-azure-redis-cache.md)以及它在内容列表中的同级文章。
 
@@ -346,11 +353,11 @@ CLR 线程池具有两种类型的线程 -“辅助角色”和“I/O 完成端�
 
 如果我们考虑一个来自 StackExchange.Redis（内部版本 1.0.450 或更高版本）的示例错误消息，会看到它现在会打印 ThreadPool 统计信息（请参阅下面的 IOCP 和辅助角色详细信息）。
 
-```output
-    System.TimeoutException: Timeout performing GET MyKey, inst: 2, mgr: Inactive,
-    queue: 6, qu: 0, qs: 6, qc: 0, wr: 0, wq: 0, in: 0, ar: 0,
-    IOCP: (Busy=6,Free=994,Min=4,Max=1000),
-    WORKER: (Busy=3,Free=997,Min=4,Max=1000)
+```
+System.TimeoutException: Timeout performing GET MyKey, inst: 2, mgr: Inactive,
+queue: 6, qu: 0, qs: 6, qc: 0, wr: 0, wq: 0, in: 0, ar: 0,
+IOCP: (Busy=6,Free=994,Min=4,Max=1000),
+WORKER: (Busy=3,Free=997,Min=4,Max=1000)
 ```
 
 在上面的示例中，可以看到对于 IOCP 线程有 6 个忙碌线程，而系统配置为允许最少 4 个线程。 在这种情况下，客户端可能会遇到两个 500 毫秒延迟，因为 6 > 4。
@@ -365,20 +372,20 @@ CLR 线程池具有两种类型的线程 -“辅助角色”和“I/O 完成端�
 
 * 建议使用 `global.asax.cs` 中的 [ThreadPool.SetMinThreads (...)](https://docs.microsoft.com/dotnet/api/system.threading.threadpool.setminthreads#System_Threading_ThreadPool_SetMinThreads_System_Int32_System_Int32_) 方法，以编程方式更改此设置。 例如：
 
-```cs
-private readonly int minThreads = 200;
-void Application_Start(object sender, EventArgs e)
-{
-    // Code that runs on application startup
-    AreaRegistration.RegisterAllAreas();
-    RouteConfig.RegisterRoutes(RouteTable.Routes);
-    BundleConfig.RegisterBundles(BundleTable.Bundles);
-    ThreadPool.SetMinThreads(minThreads, minThreads);
-}
-```
+    ```csharp
+    private readonly int minThreads = 200;
+    void Application_Start(object sender, EventArgs e)
+    {
+        // Code that runs on application startup
+        AreaRegistration.RegisterAllAreas();
+        RouteConfig.RegisterRoutes(RouteTable.Routes);
+        BundleConfig.RegisterBundles(BundleTable.Bundles);
+        ThreadPool.SetMinThreads(minThreads, minThreads);
+    }
+    ```
 
-  > [!NOTE]
-  > 此 方法指定的值是全局设置，将影响整个 AppDomain。 例如，如果已有 4 核计算机，并想要在运行时将 *minWorkerThreads* 和 *minIoThreads* 设置为 50（每个 CPU），可使用 **ThreadPool.SetMinThreads(200, 200)** 。
+    > [!NOTE]
+    > 此 方法指定的值是全局设置，将影响整个 AppDomain。 例如，如果已有 4 核计算机，并想要在运行时将 *minWorkerThreads* 和 *minIoThreads* 设置为 50（每个 CPU），可使用 **ThreadPool.SetMinThreads(200, 200)** 。
 
 * 也可指定最小线程数设置，方法是在 `Machine.config`（通常位于 `%SystemRoot%\Microsoft.NET\Framework\[versionNumber]\CONFIG\`）中的 `<processModel>` 配置元素下使用 [*minIoThreads* 或 *minWorkerThreads* 配置设置](https://msdn.microsoft.com/library/vstudio/7w2sway1(v=vs.100).aspx)。 **通常不建议以这种方式设置最小线程数，因为它是系统范围的设置。**
 
@@ -434,13 +441,13 @@ Azure Redis 缓存**资源菜单**中还包含了用于对缓存进行监视和�
   * 已达到带宽阈值限制。
   * 占用大量 CPU 的操作花费了太长时间才完成。
 * 服务器端的原因
-  * 在标准缓存产品上，Azure Redis 缓存服务启动了从主节点到辅助节点的故障转移。
+  * 在标准缓存产品上，Azure Cache for Redis 服务启动了从主节点到副本节点的故障转移。
   * Azure 正在修补已部署缓存的实例
     * 原因可能是 Redis 服务器更新或常规 VM 维护。
 
-### <a name="which-azure-cache-offering-is-right-for-me"></a>哪种 Azure 缓存产品适合我？
+### <a name="which-azure-cache-offerings-is-right-for-me"></a>哪种 Azure 缓存产品适合我？
 > [!IMPORTANT]
-> 按照去年的 [公告](https://azure.microsoft.com/blog/azure-managed-cache-and-in-role-cache-services-to-be-retired-on-11-30-2016/)，已于 2016 年 11 月 30 日 **停用** Azure 托管缓存服务和 Azure 角色中缓存服务。 我们建议使用 [Azure Redis 缓存](https://www.azure.cn/home/features/redis-cache/)。 有关迁移的信息，请参阅[从托管缓存服务迁移到 Azure Redis 缓存](cache-migrate-to-redis.md)。
+> 根据 2016 年的[公告](https://azure.microsoft.com/blog/azure-managed-cache-and-in-role-cache-services-to-be-retired-on-11-30-2016/)，Azure 托管缓存服务和 Azure 角色中缓存服务已于 2016 年 11 月 30 日停用。 我们建议使用 [Azure Redis 缓存](https://www.azure.cn/home/features/cache/)。 有关迁移的信息，请参阅[从托管缓存服务迁移到 Azure Redis 缓存](cache-migrate-to-redis.md)。
 >
 >
 

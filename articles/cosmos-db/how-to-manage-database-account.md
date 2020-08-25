@@ -5,14 +5,16 @@ author: rockboyfor
 ms.service: cosmos-db
 ms.topic: how-to
 origin.date: 04/30/2020
-ms.date: 06/22/2020
+ms.date: 08/17/2020
+ms.testscope: no
+ms.testdate: ''
 ms.author: v-yeche
-ms.openlocfilehash: f812995a3f55566b12e0e5aa99fed13df5b5b6ef
-ms.sourcegitcommit: 48b5ae0164f278f2fff626ee60db86802837b0b4
+ms.openlocfilehash: 195424a6be6f2a72e06fe61cef8f3c1569f994ea
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85098491"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222938"
 ---
 <!-- Verify Successfully-->
 # <a name="manage-an-azure-cosmos-account"></a>管理 Azure Cosmos 帐户
@@ -58,7 +60,7 @@ ms.locfileid: "85098491"
 
 1. 若要保存更改，请选择“确定”。****
 
-    ![添加或删除区域菜单](./media/how-to-manage-database-account/add-region.png)
+    :::image type="content" source="./media/how-to-manage-database-account/add-region.png" alt-text="添加或删除区域菜单":::
 
 在单区域写入模式下，不能删除写入区域。 必须先故障转移到另一区域，然后才能删除当前的写入区域。
 
@@ -72,7 +74,7 @@ ms.locfileid: "85098491"
 <a name="add-remove-regions-via-ps"></a>
 ### <a name="azure-powershell"></a>Azure PowerShell
 
-请参阅[使用 Powershell 添加或删除区域](manage-with-powershell.md#update-account)
+请参阅[使用 PowerShell 添加或删除区域](manage-with-powershell.md#update-account)
 
 <a name="configure-multiple-write-regions"></a>
 ## <a name="configure-multiple-write-regions"></a>配置多个写入区域
@@ -82,7 +84,7 @@ ms.locfileid: "85098491"
 
 打开“全局复制数据”选项卡，选择“启用”以启用多区域写入**** ****。 启用多区域写入后，你的帐户当前拥有的所有读取区域将变为读取和写入区域。
 
-![Azure Cosmos 帐户配置多主数据库屏幕快照](./media/how-to-manage-database-account/single-to-multi-master.png)
+:::image type="content" source="./media/how-to-manage-database-account/single-to-multi-master.png" alt-text="Azure Cosmos 帐户配置多主数据库屏幕快照":::
 
 <a name="configure-multiple-write-regions-cli"></a>
 ### <a name="azure-cli"></a>Azure CLI
@@ -92,7 +94,7 @@ ms.locfileid: "85098491"
 <a name="configure-multiple-write-regions-ps"></a>
 ### <a name="azure-powershell"></a>Azure PowerShell
 
-请参阅[使用 Powershell 启用多写入区域](manage-with-powershell.md#multi-master)
+请参阅[使用 PowerShell 启用多写入区域](manage-with-powershell.md#multi-master)
 
 <a name="configure-multiple-write-regions-arm"></a>
 ### <a name="resource-manager-template"></a>Resource Manager 模板
@@ -169,13 +171,13 @@ ms.locfileid: "85098491"
     
 2. 在窗格顶部选择“自动故障转移”。****
 
-    ![“多区域复制数据”菜单](./media/how-to-manage-database-account/replicate-data-globally.png)
+    :::image type="content" source="./media/how-to-manage-database-account/replicate-data-globally.png" alt-text="“多区域复制数据”菜单":::
 
 3. 在“自动故障转移”窗格中，确保将“启用自动故障转移”设置为“开”。**** **** **** 
 
 4. 选择“保存” ****。
 
-    ![自动故障转移门户菜单](./media/how-to-manage-database-account/automatic-failover.png)
+    :::image type="content" source="./media/how-to-manage-database-account/automatic-failover.png" alt-text="自动故障转移门户菜单":::
 
 <a name="enable-automatic-failover-via-cli"></a>
 ### <a name="azure-cli"></a>Azure CLI
@@ -201,7 +203,7 @@ Cosmos 帐户配置为自动故障转移后，可以更改区域的故障转移�
 
 2. 在窗格顶部选择“自动故障转移”。****
 
-    ![“多区域复制数据”菜单](./media/how-to-manage-database-account/replicate-data-globally.png)
+    :::image type="content" source="./media/how-to-manage-database-account/replicate-data-globally.png" alt-text="“多区域复制数据”菜单":::
 
 3. 在“自动故障转移”窗格中，确保将“启用自动故障转移”设置为“开”。**** **** ****
 
@@ -209,7 +211,7 @@ Cosmos 帐户配置为自动故障转移后，可以更改区域的故障转移�
 
 5. 选择“保存” ****。
 
-    ![自动故障转移门户菜单](./media/how-to-manage-database-account/automatic-failover.png)
+    :::image type="content" source="./media/how-to-manage-database-account/automatic-failover.png" alt-text="自动故障转移门户菜单":::
 
 <a name="set-failover-priorities-via-cli"></a>
 ### <a name="azure-cli"></a>Azure CLI
@@ -219,7 +221,7 @@ Cosmos 帐户配置为自动故障转移后，可以更改区域的故障转移�
 <a name="set-failover-priorities-via-ps"></a>
 ### <a name="azure-powershell"></a>Azure PowerShell
 
-请参阅[使用 Powershell 设置故障转移优先级](manage-with-powershell.md#modify-failover-priority)
+请参阅[使用 PowerShell 设置故障转移优先级](manage-with-powershell.md#modify-failover-priority)
 
 <a name="manual-failover"></a>
 ## <a name="perform-manual-failover-on-an-azure-cosmos-account"></a>在 Azure Cosmos 帐户上执行手动故障转移
@@ -241,13 +243,13 @@ Cosmos 帐户配置为自动故障转移后，可以更改区域的故障转移�
     
 2. 在菜单顶部，选择“手动故障转移”。****
 
-    ![“多区域复制数据”菜单](./media/how-to-manage-database-account/replicate-data-globally.png)
+    :::image type="content" source="./media/how-to-manage-database-account/replicate-data-globally.png" alt-text="“多区域复制数据”菜单":::
 
 3. 在“手动故障转移”**** 菜单上，选择你的新写入区域。 选中相应的复选框，以指示你了解此选项会更改你的写入区域。
 
 4. 若要触发故障转移，请选择“确定”。****
 
-    ![手动故障转移门户菜单](./media/how-to-manage-database-account/manual-failover.png)
+    :::image type="content" source="./media/how-to-manage-database-account/manual-failover.png" alt-text="手动故障转移门户菜单":::
 
 <a name="enable-manual-failover-via-cli"></a>
 ### <a name="azure-cli"></a>Azure CLI
@@ -257,7 +259,7 @@ Cosmos 帐户配置为自动故障转移后，可以更改区域的故障转移�
 <a name="enable-manual-failover-via-ps"></a>
 ### <a name="azure-powershell"></a>Azure PowerShell
 
-请参阅[使用 Powershell 触发手动故障转移](manage-with-powershell.md#trigger-manual-failover)
+请参阅[使用 PowerShell 触发手动故障转移](manage-with-powershell.md#trigger-manual-failover)
 
 ## <a name="next-steps"></a>后续步骤
 

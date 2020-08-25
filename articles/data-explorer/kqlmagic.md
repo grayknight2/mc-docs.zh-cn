@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: conceptual
 origin.date: 07/10/2019
 ms.date: 05/09/2020
-ms.openlocfilehash: d015aedfa603727d2a81d6a70a409f1a4961a7d2
-ms.sourcegitcommit: bfbd6694da33f703481386f2a3f16850c4e94bfa
+ms.openlocfilehash: 85d09cccbfcff0101483aeb902c80a66b6b8e695
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83417742"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515689"
 ---
 # <a name="use-a-jupyter-notebook-and-kqlmagic-extension-to-analyze-data-in-azure-data-explorer"></a>使用 Jupyter Notebook 和 kqlmagic 扩展来分析 Azure 数据资源管理器中的数据
 
@@ -53,7 +53,7 @@ Jupyter Notebook 是一种开源 Web 应用程序，可用于创建和共享包�
 
 ## <a name="query-and-visualize"></a>查询和可视化
 
-查询数据使用 [render 运算符](https://docs.microsoft.com/azure/data-explorer/kusto/query/renderoperator)，而可视化数据使用 ploy.ly 库。 此查询和可视化操作提供了使用本机 KQL 的集成体验。 Kqlmagic 支持大多数图表，但是 `timepivot`、`pivotchart` 和 `ladderchart` 除外。 除 `kind`、`ysplit` 和 `accumulate` 之外的所有属性都支持 Render。 
+查询数据使用 [render 运算符](/data-explorer/kusto/query/renderoperator)，而可视化数据使用 ploy.ly 库。 此查询和可视化操作提供了使用本机 KQL 的集成体验。 Kqlmagic 支持大多数图表，但是 `timepivot`、`pivotchart` 和 `ladderchart` 除外。 除 `kind`、`ysplit` 和 `accumulate` 之外的所有属性都支持 Render。 
 
 ### <a name="query-and-render-piechart"></a>查询和呈现饼图
 

@@ -2,38 +2,40 @@
 title: 更新 Azure Cosmos DB 的 Cassandra 密钥空间和表的 RU/秒
 description: 更新 Azure Cosmos DB 的 Cassandra 密钥空间和表的 RU/秒
 author: rockboyfor
-ms.author: v-yeche
 ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
 ms.topic: sample
-origin.date: 09/25/2019
-ms.date: 10/28/2019
-ms.openlocfilehash: 41edeb56ffdcc3582d2593ef1c7478006536b74a
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+origin.date: 07/29/2020
+ms.date: 08/17/2020
+ms.testscope: yes
+ms.testdate: 08/10/2020
+ms.author: v-yeche
+ms.openlocfilehash: af30565bfdecf4bf9e48020a3b93081a24457004
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "72914852"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222641"
 ---
 <!--Verify successfully-->
 # <a name="update-rus-for-a-cassandra-keyspace-and-table-using-azure-cli"></a>使用 Azure CLI 更新 Cassandra 密钥空间和表的 RU/秒
 
 [!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../../../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
-如果选择在本地安装并使用 CLI，本主题需要运行 Azure CLI 2.0.73 版或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
+选择在本地安装并使用 CLI 时，本主题要求运行 Azure CLI 2.9.1 或更高版本。 运行 `az --version` 即可查找版本。 如果需要进行安装或升级，请参阅[安装 Azure CLI](https://docs.azure.cn/cli/install-azure-cli?view=azure-cli-latest)。
 
 ## <a name="sample-script"></a>示例脚本
 
 此脚本创建一个具有共享吞吐量的 Cassandra 密钥空间和一个具有专用吞吐量的 Cassandra 表，并更新该密钥空间和该表的吞吐量。
 
 ```azurecli
-!/bin/bash
+#!/bin/bash
 
 # Sign in the Azure China Cloud
 az cloud set -n AzureChinaCloud
 az login
 
-# Update throughput for Cassandra keyspace and table
+# Throughput operations for a Cassandra keyspace and table
 
 # Generate a unique 10 character alphanumeric string to ensure unique resource names
 uniqueId=$(env LC_CTYPE=C tr -dc 'a-z0-9' < /dev/urandom | fold -w 10 | head -n 1)
@@ -44,24 +46,15 @@ location='chinanorth2'
 accountName="cosmos-$uniqueId" #needs to be lower case
 keySpaceName='keyspace1'
 tableName='table1'
+originalThroughput=400
+updateThroughput=500
 
-# Create a resource group
+# Create a resource group, Cosmos account, keyspace and table
 az group create -n $resourceGroupName -l $location
+az cosmosdb create -n $accountName -g $resourceGroupName --capabilities EnableCassandra
+az cosmosdb cassandra keyspace create -a $accountName -g $resourceGroupName -n $keySpaceName --throughput $originalThroughput
 
-# Create a new Cosmos account for Cassandra API
-az cosmosdb create \
-    -n $accountName \
-    -g $resourceGroupName \
-    --capabilities EnableCassandra
-
-# Create a new Cassandra Keyspace with shared throughput
-az cosmosdb cassandra keyspace create \
-    -a $accountName \
-    -g $resourceGroupName \
-    -n $keySpaceName \
-    --throughput 400
-
-# Define the schema for the Table
+# Define the schema for the table and create the table
 schema=$(cat << EOF 
 {
     "columns": [
@@ -69,40 +62,92 @@ schema=$(cat << EOF
         {"name": "columnB","type": "text"}
     ],
     "partitionKeys": [{"name": "columnA"}]
-}
-EOF
-)
-# Persist schema to json file
+} 
+EOF )
 echo "$schema" > "schema-$uniqueId.json"
-
-# Create a Cassandra table with dedicated throughput
-az cosmosdb cassandra table create \
-    -a $accountName \
-    -g $resourceGroupName \
-    -k $keySpaceName \
-    -n $tableName \
-    --throughput 400 \
-    --schema @schema-$uniqueId.json
-
-# Delete schema file
+az cosmosdb cassandra table create -a $accountName -g $resourceGroupName -k $keySpaceName -n $tableName --throughput $originalThroughput --schema @schema-$uniqueId.json
 rm -f "schema-$uniqueId.json"
 
-read -p 'Press any key to increase Keyspace throughput to 500'
+# Throughput operations for Cassandra API keyspace
+# Read the current throughput
+# Read the minimum throughput
+# Make sure the updated throughput is not less than the minimum
+# Update the throughput
+
+read -p 'Press any key to get current provisioned Keyspace throughput'
+
+az cosmosdb cassandra keyspace throughput show \
+    -a $accountName \
+    -g $resourceGroupName \
+    -n $keySpaceName \
+    --query resource.throughput \
+    -o tsv
+
+read -p 'Press any key to get minimum allowable Keyspace throughput'
+
+minimumThroughput=$(az cosmosdb cassandra keyspace throughput show \
+    -a $accountName \
+    -g $resourceGroupName \
+    -n $keySpaceName \
+    --query resource.minimumThroughput \
+    -o tsv)
+
+echo $minimumThroughput
+
+# Make sure the updated throughput is not less than the minimum allowed throughput
+if [ $updateThroughput -lt $minimumThroughput ]; then
+    updateThroughput=$minimumThroughput
+fi
+
+read -p 'Press any key to update Keyspace throughput'
 
 az cosmosdb cassandra keyspace throughput update \
     -a $accountName \
     -g $resourceGroupName \
     -n $keySpaceName \
-    --throughput 500
+    --throughput $updateThroughput
 
-read -p 'Press any key to increase Table throughput to 500'
+# Throughput operations for Cassandra API table
+# Read the current throughput
+# Read the minimum throughput
+# Make sure the updated throughput is not less than the minimum
+# Update the throughput
+
+read -p 'Press any key to get current provisioned Table throughput'
+
+az cosmosdb cassandra table throughput show \
+    -a $accountName \
+    -g $resourceGroupName \
+    -k $keySpaceName \
+    -n $tableName \
+    --query resource.throughput \
+    -o tsv
+
+read -p 'Press any key to get minimum allowable Table throughput'
+
+minimumThroughput=$(az cosmosdb cassandra table throughput show \
+    -a $accountName \
+    -g $resourceGroupName \
+    -k $keySpaceName \
+    -n $tableName \
+    --query resource.minimumThroughput \
+    -o tsv)
+
+echo $minimumThroughput
+
+# Make sure the updated throughput is not less than the minimum allowed throughput
+if [ $updateThroughput -lt $minimumThroughput ]; then
+    updateThroughput=$minimumThroughput
+fi
+
+read -p 'Press any key to update Table throughput'
 
 az cosmosdb cassandra table throughput update \
     -a $accountName \
     -g $resourceGroupName \
     -k $keySpaceName \
     -n $tableName \
-    --throughput 500
+    --throughput $updateThroughput
 
 ```
 
@@ -134,5 +179,4 @@ az group delete --name $resourceGroupName
 
 可以在 [Azure Cosmos DB CLI GitHub 存储库](https://github.com/Azure-Samples/azure-cli-samples/tree/master/cosmosdb)中找到所有 Azure Cosmos DB CLI 脚本示例。
 
-<!--Update_Description: new articles on cassandra create -->
-<!--New.date: 10/28/2019-->
+<!-- Update_Description: update meta properties, wording update, update link -->

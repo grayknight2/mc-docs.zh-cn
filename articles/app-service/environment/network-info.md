@@ -4,16 +4,16 @@ description: 了解 ASE 网络流量以及如何通过 ASE 设置网络安全组
 author: ccompy
 ms.assetid: 955a4d84-94ca-418d-aa79-b57a5eb8cb85
 ms.topic: article
-origin.date: 01/24/2020
-ms.date: 05/22/2020
+origin.date: 07/27/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: seodec18
-ms.openlocfilehash: 0254602fe5e37cebe9c7c7d2d560136bb1267452
-ms.sourcegitcommit: 981a75a78f8cf74ab5a76f9e6b0dc5978387be4b
+ms.openlocfilehash: 01ca92103de6f6f1b647e6792c9aa56a48144771
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83801338"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228510"
 ---
 # <a name="networking-considerations-for-an-app-service-environment"></a>应用服务环境的网络注意事项 #
 
@@ -89,7 +89,7 @@ ASE 在以下端口上与可通过 Internet 访问的地址通信：
 |-----|------|
 | DNS | 53 |
 | NTP | 123 |
-| CRL、Windows 更新、Azure 服务 | 80/443 |
+| CRL，Windows 更新，Linux 依赖项，Azure 服务 | 80/443 |
 | Azure SQL | 1433 | 
 | 监视 | 12000 |
 
@@ -139,7 +139,7 @@ ASE 具有一些需要注意的 IP 地址。 它们具有以下特点：
 
 ### <a name="app-assigned-ip-addresses"></a>应用分配的 IP 地址 ###
 
-使用外部 ASE 时，可将 IP 地址分配到各个应用。 无法使用 ILB ASE 实现这一点。 若要详细了解如何将应用配置为具有自己的 IP 地址，请参阅[在 Azure 应用服务中使用 SSL 绑定保护自定义 DNS 名称](../configure-ssl-bindings.md)。
+使用外部 ASE 时，可将 IP 地址分配到各个应用。 无法使用 ILB ASE 实现这一点。 若要详细了解如何将应用配置为具有自己的 IP 地址，请参阅[在 Azure 应用服务中使用 TLS/SSL 绑定保护自定义 DNS 名称](../configure-ssl-bindings.md)。
 
 当应用使用其自身的基于 IP 的 SSL 地址时，ASE 将保留两个映射到该 IP 地址的端口。 它们分别用于 HTTP 流量和 HTTPS 流量。 这些端口列在 ASE UI 上的“ IP 地址”部分中。 流量必须能够从 VIP 抵达这些端口，否则无法访问应用。 配置网络安全组 (NSG) 时，请务必牢记此要求。
 
@@ -154,20 +154,23 @@ ASE 具有一些需要注意的 IP 地址。 它们具有以下特点：
 要使 ASE 正常运行，必须在 NSG 中添加允许流量的条目：
 
 **入站**
-* 在端口 454、455 上允许来自 IP 服务标记 AppServiceManagement 的流量
-* 在端口 16001 上允许来自负载均衡器的流量
+* 来自端口 454、455 上 IP 服务标记 AppServiceManagement 的 TCP 流量
+* 来自端口 16001 上负载均衡器的 TCP 流量
 * 在所有端口上允许不同 ASE 子网之间发送的流量
 
 **Outbound**
-* 在端口 123 上允许发往所有 IP 的流量
-* 在端口 80、443 上允许发往所有 IP 的流量
-* 在端口 1433 上允许发往 IP 服务标记 AzureSQL 的流量
-* 在端口 12000 上允许发往所有 IP 的流量
+* 发往端口 53 上所有 IP 的 UDP 流量
+* 发往端口 123 上所有 IP 的 UDP 流量
+* 发往端口 80、443 上所有 IP 的 TCP 流量
+* 发往端口 1433 上 IP 服务标记 AzureSQL 的 TCP 流量
+* 发往端口 12000 上所有 IP 的 TCP 流量
 * 在所有端口上允许发往 ASE 子网的流量
 
-不需要添加 DNS 端口，因为发往 DNS 的流量不受 NSG 规则的影响。 这些端口不包括成功使用应用所需的端口。 常规应用访问端口为：
+这些端口不包括成功使用应用所需的端口。 例如，应用可能需要在端口 3306 上调用 MySQL 服务器。 端口 123 上的网络时间协议 (NTP) 是操作系统使用的时间同步协议。 NTP 终结点不特定于应用服务，可因操作系统而异，并且不是定义完善的地址列表。 若要防止时间同步问题，则需要允许 UDP 流量发送到端口 123 上的所有地址。 端口 12000 的出站 TCP 流量用于系统支持和分析。 终结点是动态的，并且不是一组定义完善的地址。
 
-| 用途 | 端口 |
+常规应用访问端口为：
+
+| 使用 | 端口 |
 |----------|-------------|
 |  HTTP/HTTPS  | 80、443 |
 |  FTP/FTPS    | 21, 990, 10001-10020 |
@@ -178,9 +181,9 @@ ASE 具有一些需要注意的 IP 地址。 它们具有以下特点：
 
 ![入站安全规则][4]
 
-默认规则允许 VNet 中的 IP 与 ASE 子网对话。 另一条默认规则允许负载均衡器（亦称为公共 VIP）与 ASE 通信。 选择“添加”图标旁边的“默认规则”即可查看此规则。   如果在默认规则的前面放置一条拒绝其他任何流量的规则，则会阻止 VIP 与 ASE 之间的流量。 要阻止来自 Vnet 内部的流量，请自行添加规则以允许入站。 使用等效于 AzureLoadBalancer 的源，其目标为“任何”，端口范围为 \*。   由于 ASE 子网将应用 NSG 规则，因此无需指定具体的目标。
+默认规则允许 VNet 中的 IP 与 ASE 子网对话。 另一条默认规则允许负载均衡器（亦称为公共 VIP）与 ASE 通信。 选择“添加”图标旁边的“默认规则”即可查看此规则。******** 如果在默认规则的前面放置一条拒绝其他任何流量的规则，则会阻止 VIP 与 ASE 之间的流量。 要阻止来自 Vnet 内部的流量，请自行添加规则以允许入站。 使用等效于 AzureLoadBalancer 的源，其目标为“任何”，端口范围为 \*。******** 由于 ASE 子网将应用 NSG 规则，因此无需指定具体的目标。
 
-若向应用分配了 IP 地址，请确保端口保持打开。 可在“应用服务环境” > “IP 地址”中查看端口。    
+若向应用分配了 IP 地址，请确保端口保持打开。 可在“应用服务环境” > “IP 地址”中查看端口。   
 
 下列出站规则中显示的所有项均是必需项，最后一项除外。 使用这些端口可以通过网络访问本文前面所述的 ASE 依赖项。 阻止其中的任意一个，ASE 都将停止工作。 列表中的最后一项可让 ASE 与 VNet 中的其他资源通信。
 
@@ -195,13 +198,13 @@ ASE 具有一些需要注意的 IP 地址。 它们具有以下特点：
 在门户中创建 ASE 时，我们还在随 ASE 创建的子网上创建一组路由表。  这些路由只是指示将出站流量直接发送到 Internet。  
 若要手动创建同样的路由，请执行以下步骤：
 
-1. 转到 Azure 门户。 选择“网络” > “路由表”。  
+1. 转到 Azure 门户。 选择“网络” > “路由表”。 
 
 2. 在 Vnet 所在的位置新建一个路由表。
 
-3. 在路由表 UI 中选择“路由” > “添加”。  
+3. 在路由表 UI 中选择“路由” > “添加”。 
 
-4. 将“下一跃点类型”设置为 Internet，将“地址前缀”设置为 0.0.0.0/0。     选择“保存”  。
+4. 将“下一跃点类型”设置为 Internet，将“地址前缀”设置为 0.0.0.0/0。**************** 选择“保存” 。
 
     然后将看到如下内容：
 
@@ -211,6 +214,7 @@ ASE 具有一些需要注意的 IP 地址。 它们具有以下特点：
 
     ![NSG 和路由][7]
 
+<!-- not supported in mc -->
 <!-- ## Service Endpoints ##
 
 Service Endpoints enable you to restrict access to multi-tenant services to a set of Azure virtual networks and subnets. You can read more about Service Endpoints in the [Virtual Network Service Endpoints][serviceendpoints] documentation. 
@@ -231,7 +235,6 @@ When Service Endpoints is enabled on a subnet with an Azure SQL instance, all Az
 [7]: ./media/network_considerations_with_an_app_service_environment/networkase-subnet.png
 [8]: ./media/network_considerations_with_an_app_service_environment/serviceendpoint.png
 
-<!-- [ConfigureSSL]: ../web-sites-purchase-ssl-web-site.md -->
 <!--[Kudu]: https://azure.microsoft.com/resources/videos/super-secret-kudu-debug-console-for-azure-web-sites/-->
 
 <!--Links-->
@@ -247,6 +250,7 @@ When Service Endpoints is enabled on a subnet with an Azure SQL instance, all Az
 [Functions]: ../../azure-functions/index.yml
 [Pricing]: https://www.azure.cn/pricing/details/app-service/
 [ARMOverview]: ../../azure-resource-manager/management/overview.md
+[ConfigureSSL]: ../configure-ss-cert.md
 [ASEWAF]: app-service-app-service-environment-web-application-firewall.md
 [AppGW]: ../../application-gateway/application-gateway-web-application-firewall-overview.md
 [ASEManagement]: ./management-addresses.md

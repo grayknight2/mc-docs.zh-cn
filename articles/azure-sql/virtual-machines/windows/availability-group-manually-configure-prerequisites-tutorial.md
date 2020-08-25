@@ -1,9 +1,9 @@
 ---
-title: 教程 - 可用性组的先决条件
+title: 教程：可用性组先决条件
 description: 本教程展示了如何配置在 Azure 虚拟机中创建 SQL Server AlwaysOn 可用性组的先决条件。
 services: virtual-machines
 documentationCenter: na
-author: rockboyfor
+author: WenJason
 editor: monicar
 tags: azure-service-management
 ms.assetid: c492db4c-3faa-4645-849f-5a1a663be55a
@@ -12,15 +12,15 @@ ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 origin.date: 03/29/2018
-ms.date: 07/06/2020
-ms.author: v-yeche
+ms.date: 08/17/2020
+ms.author: v-jay
 ms.custom: seo-lt-2019
-ms.openlocfilehash: b2ca394d5361ac082ebc40c1e119428a57a424d5
-ms.sourcegitcommit: 89118b7c897e2d731b87e25641dc0c1bf32acbde
+ms.openlocfilehash: 5d99275e5f9a2429793a424c78cb2cecbeec4c3b
+ms.sourcegitcommit: 84606cd16dd026fd66c1ac4afbc89906de0709ad
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85946250"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88222659"
 ---
 <!--Verified the Redirect articles successfully-->
 # <a name="prerequisites-for-creating-always-on-availability-groups-on-sql-server-on-azure-virtual-machines"></a>在 Azure 虚拟机中的 SQL Server 上创建 Always On 可用性组的先决条件
@@ -187,7 +187,7 @@ Azure 返回到门户仪表板，并在创建好新网络时发出通知。
 
 | **字段** | Value |
 | --- | --- |
-| **名称** |第一个域控制器：*ad-primary-dc*。<br />第二个域控制器 *ad-secondary-dc*。 |
+| **名称** |第一个域控制器：*ad-primary-dc*。</br>第二个域控制器 *ad-secondary-dc*。 |
 | **VM 磁盘类型** |SSD |
 | **用户名** |DomainAdmin |
 | **密码** |Contoso!0000 |
@@ -200,7 +200,7 @@ Azure 返回到门户仪表板，并在创建好新网络时发出通知。
 | **子网** |管理员 |
 | **公共 IP 地址** |*与 VM 同名* |
 | **网络安全组** |*与 VM 同名* |
-| **可用性集** |adavailabilityset <br />**容错域**:2 <br />**更新域**:2|
+| **可用性集** |adavailabilityset </br>**容错域**:2 </br>**更新域**:2|
 | **诊断** |已启用 |
 | **诊断存储帐户** |*自动创建* |
 
@@ -331,8 +331,7 @@ Azure 会创建虚拟机。
 
 在 Azure 门户中，在虚拟网络下更改 DNS 服务器，以包含辅助域控制器的 IP 地址。 此设置可实现 DNS 服务冗余。
 
-<a name="DomainAccounts"></a>
-### <a name="configure-the-domain-accounts"></a>配置域帐户
+### <a name="configure-the-domain-accounts"></a><a name="DomainAccounts"></a>配置域帐户
 
 后续步骤将配置 Active Directory 帐户。 下表显示了帐户：
 
@@ -398,9 +397,9 @@ Azure 会创建虚拟机。
 | --- | --- | --- | --- |
 | 选择相应的库项 |**Windows Server 2016 Datacenter** |**Windows Server 2016 上的 SQL Server 2016 SP1 Enterprise** |**Windows Server 2016 上的 SQL Server 2016 SP1 Enterprise** |
 | 虚拟机配置**基本信息** |**名称** = cluster-fsw<br/>**用户名** = DomainAdmin<br/>**密码** = Contoso!0000<br/>**订阅** = 自己的订阅<br/>**资源组** = SQL-HA-RG<br/>**位置** = 你的 Azure 位置 |**名称** = sqlserver-0<br/>**用户名** = DomainAdmin<br/>**密码** = Contoso!0000<br/>**订阅** = 自己的订阅<br/>**资源组** = SQL-HA-RG<br/>**位置** = 你的 Azure 位置 |**名称** = sqlserver-1<br/>**用户名** = DomainAdmin<br/>**密码** = Contoso!0000<br/>**订阅** = 自己的订阅<br/>**资源组** = SQL-HA-RG<br/>**位置** = 你的 Azure 位置 |
-| 虚拟机配置**大小** |大小 = DS1\_V2（1 个 vCPU、3.5GB） |大小 = DS2\_V2（2 个 vCPU、7GB）<br />大小必须支持 SSD 存储（高级磁盘支持。 )) |大小 = DS2\_V2（2 个 vCPU、7GB） |
+| 虚拟机配置**大小** |大小 = DS1\_V2（1 个 vCPU、3.5GB） |大小 = DS2\_V2（2 个 vCPU、7GB）</br>大小必须支持 SSD 存储（高级磁盘支持。 )) |大小 = DS2\_V2（2 个 vCPU、7GB） |
 | 虚拟机配置**设置** |**存储**：使用托管磁盘。<br/>**虚拟网络** = autoHAVNET<br/>**子网** = sqlsubnet(10.1.1.0/24)<br/>**公共 IP 地址**自动生成。<br/>**网络安全组** = 无<br/>**监视诊断** = 已启用<br/>**诊断存储帐户** = 使用自动生成的存储帐户<br/>**可用性集** = sqlAvailabilitySet<br/> |**存储**：使用托管磁盘。<br/>**虚拟网络** = autoHAVNET<br/>**子网** = sqlsubnet(10.1.1.0/24)<br/>**公共 IP 地址**自动生成。<br/>**网络安全组** = 无<br/>**监视诊断** = 已启用<br/>**诊断存储帐户** = 使用自动生成的存储帐户<br/>**可用性集** = sqlAvailabilitySet<br/> |**存储**：使用托管磁盘。<br/>**虚拟网络** = autoHAVNET<br/>**子网** = sqlsubnet(10.1.1.0/24)<br/>**公共 IP 地址**自动生成。<br/>**网络安全组** = 无<br/>**监视诊断** = 已启用<br/>**诊断存储帐户** = 使用自动生成的存储帐户<br/>**可用性集** = sqlAvailabilitySet<br/> |
-| 虚拟机配置 **SQL Server 设置** |不适用 |**SQL 连接** = 专用（虚拟网络内部）<br/>**端口** = 1433<br/>**SQL 身份验证** = 禁用<br/>**存储配置** = 常规<br/>**自动修补** = 星期日 2:00<br/>**自动备份** = 已禁用<br />**Azure 密钥保管库集成** = 已禁用 |**SQL 连接** = 专用（虚拟网络内部）<br/>**端口** = 1433<br/>**SQL 身份验证** = 禁用<br/>**存储配置** = 常规<br/>**自动修补** = 星期日 2:00<br/>**自动备份** = 已禁用<br />**Azure 密钥保管库集成** = 已禁用 |
+| 虚拟机配置 **SQL Server 设置** |不适用 |**SQL 连接** = 专用（虚拟网络内部）<br/>**端口** = 1433<br/>**SQL 身份验证** = 禁用<br/>**存储配置** = 常规<br/>**自动修补** = 星期日 2:00<br/>**自动备份** = 已禁用</br>**Azure 密钥保管库集成** = 已禁用 |**SQL 连接** = 专用（虚拟网络内部）<br/>**端口** = 1433<br/>**SQL 身份验证** = 禁用<br/>**存储配置** = 常规<br/>**自动修补** = 星期日 2:00<br/>**自动备份** = 已禁用</br>**Azure 密钥保管库集成** = 已禁用 |
 
 <br/>
 
@@ -410,8 +409,7 @@ Azure 会创建虚拟机。
 
 预配完三台 VM 后，需将其加入到 **corp.contoso.com** 域中，并向这些计算机授予 CORP\Install 管理权限。
 
-<a name="joinDomain"></a>
-### <a name="join-the-servers-to-the-domain"></a>将服务器加入域
+### <a name="join-the-servers-to-the-domain"></a><a name="joinDomain"></a>将服务器加入域
 
 现可将这些 VM 加入 **corp.contoso.com**。 针对 SQL Server VM 和文件共享见证服务器执行以下步骤：
 
@@ -442,8 +440,7 @@ Azure 会创建虚拟机。
 7. 选择“确定”以关闭“管理员属性”对话框。 
 8. 在 sqlserver-1 和 cluster-fsw 上重复上述步骤。
 
-<a name="setServiceAccount"></a>
-### <a name="set-the-sql-server-service-accounts"></a>设置 SQL Server 服务帐户
+### <a name="set-the-sql-server-service-accounts"></a><a name="setServiceAccount"></a>设置 SQL Server 服务帐户
 
 在每个 SQL Server VM 上设置 SQL Server 服务帐户。 使用配置域帐户时创建的帐户。
 
@@ -499,8 +496,8 @@ Azure 会创建虚拟机。
 <!--Not Available on [Azure SQL VM CLI](availability-group-az-cli-configure.md)-->
 <!--Not Available on [Azure Quickstart Templates](availability-group-quickstart-template-configure.md)-->
 
-<a name="endpoint-firewall"></a>
-## <a name="configure-the-firewall-on-each-sql-server-vm"></a>在每个 SQL Server VM 上配置防火墙
+
+## <a name="configure-the-firewall-on-each-sql-server-vm"></a><a name="endpoint-firewall"></a>在每个 SQL Server VM 上配置防火墙
 
 该解决方案要求在防火墙中打开以下 TCP 端口：
 

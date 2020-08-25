@@ -4,16 +4,16 @@ description: 排查 Azure 应用服务中的间歇性连接错误和相关性能
 author: v-miegge
 manager: barbkess
 ms.topic: troubleshooting
-origin.date: 03/24/2020
-ms.date: 03/30/2020
+origin.date: 07/24/2020
+ms.date: 08/13/2020
 ms.author: v-tawe
 ms.custom: security-recommendations
-ms.openlocfilehash: 13e8bdc7e913f27d8103db99044fb2f6a0b3e4ce
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 2759368f681896a259d023baa2a40b6b207a0510
+ms.sourcegitcommit: 9d9795f8a5b50cd5ccc19d3a2773817836446912
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "80523176"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88228267"
 ---
 # <a name="troubleshooting-intermittent-outbound-connection-errors-in-azure-app-service"></a>排查 Azure 应用服务中的间歇性出站连接错误
 
@@ -39,9 +39,11 @@ ms.locfileid: "80523176"
 
 ## <a name="avoiding-the-problem"></a>避免问题
 
+如果你的目标是一个支持服务终结点的 Azure 服务，则可通过使用[区域 VNet 集成](https://docs.microsoft.com/azure/app-service/web-sites-integrate-with-vnet)和服务终结点或专用终结点来避免 SNAT 端口耗尽问题。 使用区域 VNet 集成并将服务终结点置于集成子网中时，发往这些服务的应用出站流量不会有出站 SNAT 端口限制。 同样，如果使用区域 VNet 集成和专用终结点，则不会有将流量发往该目标的出站 SNAT 端口的问题。 
+
 避免 SNAT 端口问题意味着需要避免对同一主机和端口反复创建新连接。
 
-“Azure 的出站连接”文档的[解决问题部分](https://docs.azure.cn/load-balancer/load-balancer-outbound-connections#problemsolving)介绍了缓解 SNAT 端口耗尽问题的一般策略。  这些策略中的以下策略适用于托管在 Azure 应用服务中的应用和功能。
+“Azure 的出站连接”文档的[解决问题部分](https://docs.azure.cn/load-balancer/load-balancer-outbound-connections#problemsolving)介绍了缓解 SNAT 端口耗尽问题的一般策略。 这些策略中的以下策略适用于托管在 Azure 应用服务中的应用和功能。
 
 ### <a name="modify-the-application-to-use-connection-pooling"></a>修改应用程序以使用连接池
 
@@ -127,13 +129,13 @@ HTTP 连接池
 
 避免超过出站 TCP 限制要更容易一些，因为这些限制是按辅助角色的大小设置的。 可以在[沙盒跨 VM 数字限制 - TCP 连接](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox#cross-vm-numerical-limits)中查看限制
 
-|限制名称|说明|小型 (A1)|中型 (A2)|大型 (A3)|隔离层 (ASE)|
+|限制名称|描述|小型 (A1)|中型 (A2)|大型 (A3)|隔离层 (ASE)|
 |---|---|---|---|---|---|
 |连接|整个 VM 的连接数|1920|3968|8064|16,000|
 
 若要避免超过出站 TCP 限制，可以增大辅助角色的大小，或者横向扩展。
 
-## <a name="troubleshooting"></a>故障排除
+## <a name="troubleshooting"></a>疑难解答
 
 了解两种类型的出站连接限制以及应用的作用后，应该就可以更轻松地进行故障排除。 如果你知道自己的应用对同一存储帐户发出许多调用，可以怀疑达到了 SNAT 限制。 如果应用完全通过 Internet 向终结点发出大量的调用，可以怀疑达到了 VM 限制。
 
@@ -141,9 +143,11 @@ HTTP 连接池
 
 ### <a name="find-snat-port-allocation-information"></a>查找 SNAT 端口分配信息
 
-可以使用[应用服务诊断](https://docs.azure.cn/app-service/overview-diagnostics)查找 SNAT 端口分配信息，并观察应用服务站点的 SNAT 端口分配指标。 若要查找 SNAT 端口分配信息，请执行以下步骤：
+<!-- You can use [App Service Diagnostics](https://docs.azure.cn/app-service/overview-diagnostics) to find SNAT port allocation information, and observe the SNAT ports allocation metric of an App Service site.  -->
 
-1. 若要访问应用服务诊断，请在 [Azure 门户](https://portal.azure.cn/)中导航到你的应用服务 Web 应用或应用服务环境。 在左侧导航栏中，选择“诊断并解决问题”。 
+若要查找 SNAT 端口分配信息，请执行以下步骤：
+
+1. 若要访问应用服务诊断，请在 [Azure 门户](https://portal.azure.cn/)中导航到你的应用服务 Web 应用或应用服务环境。 在左侧导航栏中，选择“诊断并解决问题”。
 2. 选择“可用性和性能”类别
 3. 在该类别下的可用磁贴列表中，选择“SNAT 端口耗尽”磁贴。 做法是将其保持在 128 以下。
 如果确实需要，仍可以开具支持票证，支持工程师会从后端为你提取指标。
@@ -159,13 +163,13 @@ TCP 连接和 SNAT 端口并不直接相关。 任何应用服务站点的“诊
 * TCP 连接限制在辅助角色实例级别发生。 Azure 网络出站负载均衡不使用 TCP 连接指标来限制 SNAT 端口。
 * [沙盒跨 VM 数字限制 - TCP 连接](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox#cross-vm-numerical-limits)中介绍了 TCP 连接限制
 
-|限制名称|说明|小型 (A1)|中型 (A2)|大型 (A3)|隔离层 (ASE)|
+|限制名称|描述|小型 (A1)|中型 (A2)|大型 (A3)|隔离层 (ASE)|
 |---|---|---|---|---|---|
 |连接|整个 VM 的连接数|1920|3968|8064|16,000|
 
 ### <a name="webjobs-and-database-connections"></a>Web 作业和数据库连接
  
-如果 SNAT 端口耗尽，导致 Web 作业无法连接到 Azure SQL 数据库，将不会有任何指标显示每个 Web 应用程序进程打开的连接数。 若要查找有问题的 Web 作业，请将多个 Web 作业移到另一个应用服务计划，以确定情况是否有所改善，或者某个计划中仍有问题。 重复该过程，直到找出有问题的 Web 作业。
+如果 SNAT 端口耗尽，导致 WebJobs 无法连接到 SQL 数据库，则不会有任何指标显示每个 Web 应用程序进程打开的连接数。 若要查找有问题的 Web 作业，请将多个 Web 作业移到另一个应用服务计划，以确定情况是否有所改善，或者某个计划中仍有问题。 重复该过程，直到找出有问题的 Web 作业。
 
 ### <a name="using-snat-ports-sooner"></a>更快地使用 SNAT 端口
 

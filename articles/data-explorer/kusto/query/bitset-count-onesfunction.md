@@ -8,13 +8,13 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 origin.date: 02/22/2020
-ms.date: 07/31/2020
-ms.openlocfilehash: e499b78b491e153f71dc28f5675e94918255acec
-ms.sourcegitcommit: 4e1bc2e9b2a12dbcc05c52db5dbd1ae290aeb18d
+ms.date: 08/18/2020
+ms.openlocfilehash: 08a976c609829f01a4468b4af051e1abcfbd2325
+ms.sourcegitcommit: f4bd97855236f11020f968cfd5fbb0a4e84f9576
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/01/2020
-ms.locfileid: "87509221"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88515739"
 ---
 # <a name="bitset_count_ones"></a>bitset_count_ones()
 
