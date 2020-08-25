@@ -98,11 +98,11 @@ Iometer 使用一个测试文件，该文件存储在运行基准测试的卷上
 
 #### <a name="combined-reads-and-writes-maximum-iops"></a>读写组合最大 IOPS
 
-读写组合最大 IOPS:::image type="content" source="../articles/virtual-machines/linux/media/premium-storage-performance/image9.png" alt-text="":::
+读写组合最大 IOPS:::image type="content" source="../articles/virtual-machines/linux/media/premium-storage-performance/image9.png" alt-text="-":::
 
 #### <a name="combined-reads-and-writes-maximum-throughput"></a>读写组合最大吞吐量
 
-读写组合最大吞吐量:::image type="content" source="../articles/virtual-machines/linux/media/premium-storage-performance/image10.png" alt-text="":::
+读写组合最大吞吐量:::image type="content" source="../articles/virtual-machines/linux/media/premium-storage-performance/image10.png" alt-text="-":::
 
 ### <a name="fio"></a>FIO
 
