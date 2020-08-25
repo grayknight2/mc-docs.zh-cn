@@ -6,17 +6,17 @@ ms.topic: troubleshooting
 ms.author: v-jay
 manager: dcscontentpm
 origin.date: 10/21/2019
-ms.date: 01/06/2020
+ms.date: 08/24/2020
 ms.service: storage
 ms.subservice: common
 services: storage
 tags: ''
-ms.openlocfilehash: 1fee167e552a9d4d635bf20101e65b01fe4efe19
-ms.sourcegitcommit: c1ba5a62f30ac0a3acb337fb77431de6493e6096
+ms.openlocfilehash: 719c23810f037f099894281dd8e9387f85e75663
+ms.sourcegitcommit: ecd6bf9cfec695c4e8d47befade8c462b1917cf0
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "75624371"
+ms.lasthandoff: 08/23/2020
+ms.locfileid: "88753383"
 ---
 # <a name="troubleshoot-latency-using-storage-analytics-logs"></a>使用存储分析日志排查延迟问题
 
@@ -94,11 +94,11 @@ ms.locfileid: "75624371"
 
    * 客户端延迟 = 端到端延迟 – 服务器延迟
 
-          * Example: 8453 – 391 = 8062ms
+        示例：8453 – 391 = 8062ms
 
    下表提供了有关高延迟 OperationType 和 RequestStatus 结果的信息：
 
-   |   |RequestStatus=<br>Success|RequestStatus=<br>(SAS)NetworkError|建议|
+   | Blob 类型 |RequestStatus=<br>成功|RequestStatus=<br>(SAS)NetworkError|建议|
    |---|---|---|---|
    |GetBlob|是|否|[**GetBlob 操作：** RequestStatus = Success](#getblob-operation-requeststatus--success)|
    |GetBlob|否|是|[**GetBlob 操作：** RequestStatus = (SAS)NetworkError](#getblob-operation-requeststatus--sasnetworkerror)|
