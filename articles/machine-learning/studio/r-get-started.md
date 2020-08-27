@@ -1325,7 +1325,8 @@ RStudio 随附了齐备的文档。 下面提供了 RStudio 文档中关键部�
 下面是一些很好的 Internet 资源：
 
 * DataCamp 通过视频课程和编码练习在舒适的浏览器中教授 R。 DataCamp 提供了关于最新的 R 技术和包的互动式课程。 获取免费的[交互式 R 教程](https://www.datacamp.com/courses/introduction-to-r)。
-* Programiz 提供的 [Learn R Programming, The Definitive Guide](https://www.programiz.com/r-programming)（学习 R 编程 - 权威指南）。
+* DataMentor 提供的 [Learn R Programming, The Definitive Guide](https://www.datamentor.io/r-programming/)（学习 R 编程 - 权威指南）。
+* [R CODER](https://r-coder.com/) 详细的R教程和面向初学者的免费R课程。
 * Clarkson 大学的 Kelly Black 编写的快速 [R 教程](https://www.cyclismo.org/tutorial/R/)。
 * [Top R language resources to improve your data skills](https://www.computerworld.com/article/2497464/business-intelligence-60-r-resources-to-improve-your-data-skills.html)（用于改善数据技能的顶级 R 语言资源）中列出了 60 多个 R 资源。
 
